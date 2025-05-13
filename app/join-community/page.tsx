@@ -15,6 +15,7 @@ import {
   ArrowRight,
   MessageCircle,
   FileText,
+  ClipboardCheck,
 } from "lucide-react"
 
 export default function JoinCommunityPage() {
@@ -181,7 +182,7 @@ export default function JoinCommunityPage() {
           <h2 className="font-playfair text-3xl font-bold">Join Us Now</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
             <div className="h-3 bg-primary w-full"></div>
             <CardContent className="p-8">
@@ -217,6 +218,28 @@ export default function JoinCommunityPage() {
               <a href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="w-full rounded-full bg-green-600 hover:bg-green-700 text-white">
                   Join WhatsApp Group <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+            </CardContent>
+          </Card>
+
+          <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            <div className="h-3 bg-amber-500 w-full"></div>
+            <CardContent className="p-8">
+              <div className="h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center mb-6">
+                <ClipboardCheck className="h-8 w-8 text-amber-600" />
+              </div>
+              <h3 className="font-bold text-2xl mb-3">Content Submission Form</h3>
+              <p className="text-gray-600 mb-6">
+                Form for directors, casting agents, or workshop organizers to submit real opportunities.
+              </p>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfekhC6GWHNMsAtwI2Lpht3Yf5DJMtIoGOMPS6akhMY6BVQow/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button size="lg" className="w-full rounded-full bg-amber-600 hover:bg-amber-700 text-white">
+                  Submit Verified Listings <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>
             </CardContent>

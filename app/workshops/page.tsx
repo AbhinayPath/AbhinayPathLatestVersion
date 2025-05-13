@@ -12,6 +12,57 @@ import { Search, MapPin, Calendar, Filter, Clock } from "lucide-react"
 const workshops = [
   {
     id: 1,
+    title: "Educational Theatre National Workshop @ Mysore",
+    trainer: "Rajneesh Bisht",
+    institution: "Indian Institute of Educational Theatre",
+    location: "Mysore",
+    state: "Karnataka",
+    date: "June 23 - July 2, 2025",
+    time: "9:00 AM - 6:00 PM",
+    description:
+      "Step into a transformative journey where theatre meets education! Led by renowned theatre director and writer Rajneesh Bisht, and mentored by the visionary theatre stalwart Prasanna, this 10-day intensive workshop is designed for actors, educators, facilitators, and all those passionate about using theatre as a tool for learning and social change.",
+    image: "/placeholder.svg?height=300&width=500&text=Educational+Theatre",
+    registrationLink: "https://indiantheatrefoundation.org",
+    featured: true,
+    price: "₹16,000 (includes food & accommodation)",
+    contact: "9845605012 / 9448871815",
+  },
+  {
+    id: 2,
+    title: "Diploma in Applied Theatre 2025 - Batch 4",
+    trainer: "Applied Theatre India",
+    institution: "Applied Theatre India",
+    location: "Online",
+    state: "All India",
+    date: "Starting August 15, 2025",
+    time: "Flexible Program",
+    description:
+      "Transform lives through theatre! Join our groundbreaking program that bridges artistry with social impact. Curious about turning passion into purpose? Join our FREE WEBINAR on Sunday 11 May at 11 am to learn about our transformative curriculum.",
+    image: "/placeholder.svg?height=300&width=500&text=Applied+Theatre",
+    registrationLink: "https://education.appliedtheatreindia.com/l/4fc92006ec",
+    featured: true,
+    price: "Contact for details",
+    contact: "Via website",
+  },
+  {
+    id: 3,
+    title: "Acting Workshop with Bollywood Casting Director Shiv Chauhan",
+    trainer: "Shiv Chauhan",
+    institution: "Bangalore Hindi Theatre",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "May 24-25, 2023",
+    time: "10:00 AM - 4:00 PM",
+    description:
+      "Acclaimed Bollywood Casting Director Shiv Chauhan (Stree, Emergency, Aspirants, Kota Factory) is coming to Bangalore to conduct his acting workshop in collaboration with the Bangalore Hindi Theatre community. Use the referral code Amit Aggarwal to avail 5% discount on the course.",
+    image: "/placeholder.svg?height=300&width=500&text=Acting+Workshop",
+    registrationLink: "tel:8076410925",
+    featured: true,
+    price: "Contact for details",
+    contact: "8076410925",
+  },
+  {
+    id: 4,
     title: "Energy Clowning Session",
     trainer: "Rupesh Tillu",
     institution: "Clown Academy",
@@ -23,11 +74,11 @@ const workshops = [
       "Explore the art of clowning and physical comedy in this intensive workshop led by internationally acclaimed clown performer.",
     image: "/placeholder.svg?height=300&width=500&text=Clowning",
     registrationLink: "https://example.com/register",
-    featured: true,
+    featured: false,
     price: "₹5,000",
   },
   {
-    id: 2,
+    id: 5,
     title: "Voice & Speech Masterclass",
     trainer: "Arundhati Nag",
     institution: "Rangashankara",
@@ -39,11 +90,11 @@ const workshops = [
       "Learn voice modulation, projection, and speech techniques for theatrical performances from a theater legend.",
     image: "/placeholder.svg?height=300&width=500&text=Voice Workshop",
     registrationLink: "https://example.com/register",
-    featured: true,
+    featured: false,
     price: "₹3,500",
   },
   {
-    id: 3,
+    id: 6,
     title: "Method Acting Intensive",
     trainer: "Naseeruddin Shah",
     institution: "Motley Theatre Group",
@@ -55,11 +106,11 @@ const workshops = [
       "Deep dive into method acting with one of India's most respected actors in this week-long intensive workshop.",
     image: "/placeholder.svg?height=300&width=500&text=Method Acting",
     registrationLink: "https://example.com/register",
-    featured: true,
+    featured: false,
     price: "₹10,000",
   },
   {
-    id: 4,
+    id: 7,
     title: "Physical Theater Workshop",
     trainer: "Sankar Venkateswaran",
     institution: "Theatre Roots & Wings",
@@ -75,7 +126,7 @@ const workshops = [
     price: "₹4,500",
   },
   {
-    id: 5,
+    id: 8,
     title: "Playwriting Masterclass",
     trainer: "Mahesh Dattani",
     institution: "Writers' Guild",
@@ -91,7 +142,7 @@ const workshops = [
     price: "₹3,000",
   },
   {
-    id: 6,
+    id: 9,
     title: "Improvisation Techniques",
     trainer: "Sheeba Chaddha",
     institution: "Improv Theatre Mumbai",
@@ -105,53 +156,6 @@ const workshops = [
     registrationLink: "https://example.com/register",
     featured: false,
     price: "₹2,500",
-  },
-  {
-    id: 7,
-    title: "Directing for Theater",
-    trainer: "Lillete Dubey",
-    institution: "The Primetime Theatre Company",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "August 5-10, 2023",
-    time: "10:00 AM - 5:00 PM",
-    description:
-      "Comprehensive workshop on theater direction, staging, and working with actors for aspiring directors.",
-    image: "/placeholder.svg?height=300&width=500&text=Directing",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹7,500",
-  },
-  {
-    id: 8,
-    title: "Mask Work Workshop",
-    trainer: "Roysten Abel",
-    institution: "Indian Ensemble",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "August 15-17, 2023",
-    time: "10:00 AM - 4:00 PM",
-    description:
-      "Explore the powerful theatrical tradition of mask work and its application in contemporary performance.",
-    image: "/placeholder.svg?height=300&width=500&text=Mask Work",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹4,000",
-  },
-  {
-    id: 9,
-    title: "Theater Design & Scenography",
-    trainer: "Nissar Allana",
-    institution: "NSD",
-    location: "Delhi",
-    state: "Delhi",
-    date: "August 25-30, 2023",
-    time: "11:00 AM - 5:00 PM",
-    description: "Learn the principles of set design, lighting, and visual storytelling for theatrical productions.",
-    image: "/placeholder.svg?height=300&width=500&text=Scenography",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹6,000",
   },
 ]
 
@@ -249,6 +253,11 @@ export default function WorkshopsPage() {
                     <div className="flex items-center text-sm font-medium">
                       <span className="text-primary">{workshop.price}</span>
                     </div>
+                    {workshop.contact && (
+                      <div className="flex items-center text-sm">
+                        <span className="text-gray-700">Contact: {workshop.contact}</span>
+                      </div>
+                    )}
                   </div>
                   <div className="flex justify-end mt-auto pt-4 border-t">
                     <Link href={workshop.registrationLink} target="_blank">

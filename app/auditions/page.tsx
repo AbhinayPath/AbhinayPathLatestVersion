@@ -12,6 +12,42 @@ import { Search, Filter, Mail } from "lucide-react"
 const auditions = [
   {
     id: 1,
+    title: "BRAND: PROHANCE - Doctors Character",
+    type: "Commercial",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "May 16/19/20, 2023",
+    director: "Cast Me Models",
+    description:
+      "Looking for male and female models who speak really good English for doctor's character. Age: 30-45. Medium: Digital. Usage: Social Media.",
+    company: "Cast Me Models",
+    companyLink: "tel:8867313322",
+    contact: "8867313322",
+    contactType: "phone",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=PROHANCE",
+  },
+  {
+    id: 2,
+    title: "Educational App - Corporate Teacher Character",
+    type: "Corporate",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "Dates to be confirmed",
+    director: "Snowbell Entertainment",
+    description:
+      "Looking for Mumbai based male talents with fluent English for corporate video. Need male as corporate teacher character (35-50 years). Perfect fluent in English. Shoot location - Andheri.",
+    company: "Snowbell Entertainment",
+    companyLink: "https://www.instagram.com/snowbell.entertainment?igsh=dmUwMTVpcnBzOG9z",
+    contact: "9619701974",
+    contactType: "whatsapp",
+    experience: "Intermediate",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Educational+App",
+  },
+  {
+    id: 3,
     title: "Contemporary Play - 'Echoes'",
     type: "Theater",
     location: "Mumbai",
@@ -28,7 +64,7 @@ const auditions = [
     image: "/placeholder.svg?height=300&width=500&text=Echoes",
   },
   {
-    id: 2,
+    id: 4,
     title: "Feature Film - 'The Last Mile'",
     type: "Film",
     location: "Delhi",
@@ -45,7 +81,7 @@ const auditions = [
     image: "/placeholder.svg?height=300&width=500&text=Last Mile",
   },
   {
-    id: 3,
+    id: 5,
     title: "Web Series - 'Urban Tales'",
     type: "Web",
     location: "Bangalore",
@@ -62,7 +98,7 @@ const auditions = [
     image: "/placeholder.svg?height=300&width=500&text=Urban Tales",
   },
   {
-    id: 4,
+    id: 6,
     title: "Period Drama - 'The Forgotten Empire'",
     type: "Theater",
     location: "Kolkata",
@@ -79,7 +115,7 @@ const auditions = [
     image: "/placeholder.svg?height=300&width=500&text=Forgotten Empire",
   },
   {
-    id: 5,
+    id: 7,
     title: "Comedy Film - 'Family Circus'",
     type: "Film",
     location: "Chennai",
@@ -96,7 +132,7 @@ const auditions = [
     image: "/placeholder.svg?height=300&width=500&text=Family Circus",
   },
   {
-    id: 6,
+    id: 8,
     title: "Experimental Theater - 'Fragments'",
     type: "Theater",
     location: "Pune",
@@ -113,7 +149,7 @@ const auditions = [
     image: "/placeholder.svg?height=300&width=500&text=Fragments",
   },
   {
-    id: 7,
+    id: 9,
     title: "Crime Thriller Series - 'Undercover'",
     type: "Web",
     location: "Hyderabad",
@@ -128,40 +164,6 @@ const auditions = [
     experience: "Intermediate",
     verified: true,
     image: "/placeholder.svg?height=300&width=500&text=Undercover",
-  },
-  {
-    id: 8,
-    title: "Children's Play - 'The Magic Forest'",
-    type: "Theater",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "June 25, 2023",
-    director: "Nandita Das",
-    description: "Looking for adult actors for roles in an educational children's theater production.",
-    company: "Little Theatre Group",
-    companyLink: "https://littletheatre.org",
-    contact: "casting@littletheatre.org",
-    contactType: "email",
-    experience: "Beginner",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Magic Forest",
-  },
-  {
-    id: 9,
-    title: "Documentary Series - 'Incredible India'",
-    type: "Film",
-    location: "Goa",
-    state: "Goa",
-    date: "July 1, 2023",
-    director: "Anand Patwardhan",
-    description: "Seeking hosts and presenters for a travel documentary series covering Indian heritage sites.",
-    company: "Discovery India",
-    companyLink: "https://discovery.in",
-    contact: "casting@discovery.in",
-    contactType: "email",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Incredible India",
   },
 ]
 
@@ -362,9 +364,19 @@ export default function AuditionsPage() {
                     <span className="font-medium text-gray-700 w-20">Contact:</span>
                     <div className="flex items-center">
                       <Mail className="h-3 w-3 mr-1 text-primary" />
-                      <a href={`mailto:${audition.contact}`} className="text-primary hover:underline">
-                        {audition.contact}
-                      </a>
+                      {audition.contactType === "email" ? (
+                        <a href={`mailto:${audition.contact}`} className="text-primary hover:underline">
+                          {audition.contact}
+                        </a>
+                      ) : audition.contactType === "whatsapp" ? (
+                        <a href={`https://wa.me/${audition.contact}`} className="text-primary hover:underline">
+                          {audition.contact}
+                        </a>
+                      ) : (
+                        <a href={`tel:${audition.contact}`} className="text-primary hover:underline">
+                          {audition.contact}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -1,9 +1,76 @@
+"use client"
+
+import type React from "react"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Instagram, Linkedin, Send } from "lucide-react"
+import { Mail, Instagram, Linkedin, Send, CheckCircle, AlertCircle } from "lucide-react"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    success?: boolean
+    message?: string
+  }>({})
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus({})
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit form")
+      }
+
+      setSubmitStatus({
+        success: true,
+        message: "Your message has been sent successfully! We will get back to you soon.",
+      })
+
+      // Reset form on success
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      })
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      setSubmitStatus({
+        success: false,
+        message: error instanceof Error ? error.message : "Something went wrong. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="container py-16 md:py-24">
       <div className="max-w-4xl mx-auto">
@@ -15,18 +82,32 @@ export default function ContactPage() {
           </p>
         </div>
 
+        {submitStatus.message && (
+          <Alert
+            className={`mb-8 ${submitStatus.success ? "bg-green-50 text-green-800 border-green-200" : "bg-red-50 text-red-800 border-red-200"}`}
+          >
+            {submitStatus.success ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+            <AlertTitle>{submitStatus.success ? "Success!" : "Error!"}</AlertTitle>
+            <AlertDescription>{submitStatus.message}</AlertDescription>
+          </Alert>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <h2 className="font-playfair text-2xl font-bold mb-6">Get In Touch</h2>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
                   Your Name
                 </label>
                 <Input
                   id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Enter your name"
                   className="rounded-lg border-gray-300 focus:border-[#2D1A54] focus:ring-[#2D1A54]"
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -35,9 +116,13 @@ export default function ContactPage() {
                 </label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
                   className="rounded-lg border-gray-300 focus:border-[#2D1A54] focus:ring-[#2D1A54]"
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -46,8 +131,12 @@ export default function ContactPage() {
                 </label>
                 <Input
                   id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="What is this regarding?"
                   className="rounded-lg border-gray-300 focus:border-[#2D1A54] focus:ring-[#2D1A54]"
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -56,16 +145,21 @@ export default function ContactPage() {
                 </label>
                 <Textarea
                   id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Your message here..."
                   rows={5}
                   className="rounded-lg border-gray-300 focus:border-[#2D1A54] focus:ring-[#2D1A54]"
+                  required
                 />
               </div>
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 className="w-full rounded-lg bg-[#2D1A54] hover:bg-[#231544] text-white py-3 h-auto transition-transform hover:scale-105"
               >
-                Send Message <Send className="ml-2 h-4 w-4" />
+                {isSubmitting ? "Sending..." : "Send Message"} <Send className="ml-2 h-4 w-4" />
               </Button>
             </form>
           </div>
