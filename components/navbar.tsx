@@ -3,11 +3,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -36,7 +38,9 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-base font-medium transition-colors hover:text-[#7E1F2E]"
+              className={`text-base font-medium transition-colors hover:text-[#7E1F2E] ${
+                pathname === item.href ? "text-[#7E1F2E]" : ""
+              }`}
             >
               {item.name}
             </Link>
@@ -69,7 +73,9 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="px-3 py-2 text-base font-medium rounded-md transition-colors hover:bg-gray-100 hover:text-[#7E1F2E]"
+                className={`px-3 py-2 text-base font-medium rounded-md transition-colors hover:bg-gray-100 hover:text-[#7E1F2E] ${
+                  pathname === item.href ? "text-[#7E1F2E] bg-gray-50" : ""
+                }`}
                 onClick={toggleMenu}
               >
                 {item.name}

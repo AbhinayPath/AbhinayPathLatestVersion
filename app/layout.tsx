@@ -1,10 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Playfair_Display as PlayfairDisplay } from "next/font/google"
+import { Suspense } from "react"
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,8 +37,11 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <div className="flex min-h-screen flex-col">
-            <Navbar />
+            <Suspense fallback={<div className="h-16 border-b bg-background/95 backdrop-blur"></div>}>
+              <Navbar />
+            </Suspense>
             <main className="flex-1">{children}</main>
+            <Analytics />
             <Footer />
           </div>
         </ThemeProvider>
