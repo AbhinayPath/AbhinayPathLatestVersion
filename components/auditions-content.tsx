@@ -225,15 +225,16 @@ export default function AuditionsContent() {
           <h2 className="font-playfair text-xl font-bold">Filter Auditions</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="relative">
+          <div className="relative  lg:col-span-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               type="text"
               placeholder="Search by title or description"
-              className="pl-10 rounded-md"
+              className="pl-10 rounded-md w-full"
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
-            />
+          
+          />
           </div>
 
           <Select value={filters.city} onValueChange={(value) => handleFilterChange("city", value)}>

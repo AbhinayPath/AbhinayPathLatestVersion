@@ -17,9 +17,9 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-20">
+        {/* <div className="absolute inset-0 z-0 opacity-20">
           <Image src="/images/hero-bg.png" alt="Stage Background" fill className="object-cover" priority />
-        </div>
+        </div> */}
         <div className="container relative z-10 py-24 md:py-32">
           <div className="max-w-3xl space-y-8">
             <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4">
@@ -70,11 +70,11 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/audition-1.png"
+                  src="/images/audition-1.avif"
                   alt="Find Casting Calls"
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                   <div className="p-4">
                     <div className="bg-[#F5A623] p-2 rounded-full inline-block mb-2">
@@ -103,7 +103,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/workshop-1.png"
+                  src="/images/workshop-1.webp"
                   alt="Skill Up with Workshops"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -135,7 +135,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/institute-prep.png"
+                  src="/images/institute-prep.webp"
                   alt="Prep for Top Institutes"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
