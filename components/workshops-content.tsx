@@ -6,12 +6,87 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, MapPin, Calendar, Filter, Clock } from "lucide-react"
+import { Search, MapPin, Calendar, Filter, Clock, CheckCircle } from "lucide-react"
 
-// Sample workshops data
+// Verified workshops data
 const workshops = [
   {
     id: 1,
+    title: "NSD TIE Summer Workshop (Tripura)",
+    trainer: "NSD (TIE Wing)",
+    institution: "National School of Drama",
+    location: "Tripura",
+    state: "Tripura",
+    date: "17 May – 7 June 2025",
+    time: "9 AM – 2 PM",
+    description:
+      "Organized by NSD (TIE Wing) + SCERT, Govt. of Tripura. Located at Nazrul Kalakshetra + Schools across Tripura. For children aged 8–16 years. Forms available from 10th May – First come, first serve basis.",
+    image: "/placeholder.svg?height=300&width=500&text=NSD+TIE+Workshop",
+    registrationLink: "mailto:nsdtripura@gmail.com",
+    featured: true,
+    price: "Free",
+    contact: "0381-2328797 / 9436511935",
+    email: "nsdtripura@gmail.com",
+    ageGroup: "8–16 years",
+  },
+  {
+    id: 2,
+    title: "NSD 3-Month Theatre-in-Education Certificate Course (Delhi)",
+    trainer: "NSD TIE Company",
+    institution: "National School of Drama",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "2 June – 31 August 2025",
+    time: "Batch 1: 10 AM – 1 PM, Batch 2: 2 PM – 5 PM (Wednesday to Sunday)",
+    description:
+      "Eligibility: Graduate (any stream), Age 21+ (as of May 1, 2025), 3 years theatre or child-focused work, Proficient in Hindi/English, Physically & mentally fit. Application deadline: 25 May 2025, 6 PM.",
+    image: "/placeholder.svg?height=300&width=500&text=NSD+Certificate+Course",
+    registrationLink: "https://nsd.gov.in",
+    featured: true,
+    price: "₹35,000",
+    contact: "011-23389054 / 23031137",
+    email: "nsdtie@gmail.com",
+    eligibility: "Graduate, Age 21+, 3 years experience",
+  },
+  {
+    id: 3,
+    title: "'Anatomy of a Scene' – Acting Workshop (Mumbai)",
+    trainer: "Manas Gupta",
+    institution: "FTII Alumnus",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "1 – 13 June 2025",
+    time: "11 AM – 2 PM",
+    description:
+      "Curated by Manas Gupta (FTII Alumnus). Located at Abhyaas Manch, Aram Nagar, Mumbai. What You'll Learn: Meisner & Uta Hagen Techniques, Scene analysis & improvisation, Final recorded performance, Guest lecture by Himanshu Prajapati (FTII).",
+    image: "/placeholder.svg?height=300&width=500&text=Anatomy+of+a+Scene",
+    registrationLink: "tel:+918652722682",
+    featured: true,
+    price: "Contact for details",
+    contact: "+91 8652722682",
+    instagram: "@anatomy_of_a_scene",
+  },
+  {
+    id: 4,
+    title: "NSD's Certificate Course in Drama-in-Education (Delhi)",
+    trainer: "National School of Drama",
+    institution: "National School of Drama",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "2 June – 31 August 2025",
+    time: "Morning: 10 AM – 1 PM, Afternoon: 2 PM – 5 PM",
+    description:
+      "Located at NSD Premises, Mandi House. Highlights: Practical training in storytelling, improvisation, forum theatre, Actor-Teacher development, Final performance at NSD. Official NSD Program.",
+    image: "/placeholder.svg?height=300&width=500&text=NSD+Drama+in+Education",
+    registrationLink: "https://nsd.gov.in",
+    featured: true,
+    price: "₹35,000",
+    contact: "011-23389054, 23031137",
+    email: "nsdtiegmail.com",
+    tags: "#NSD #VerifiedWorkshop #TheatreEducation #DramaInEducation",
+  },
+  {
+    id: 5,
     title: "Educational Theatre National Workshop @ Mysore",
     trainer: "Rajneesh Bisht",
     institution: "Indian Institute of Educational Theatre",
@@ -28,7 +103,7 @@ const workshops = [
     contact: "9845605012 / 9448871815",
   },
   {
-    id: 2,
+    id: 6,
     title: "Diploma in Applied Theatre 2025 - Batch 4",
     trainer: "Applied Theatre India",
     institution: "Applied Theatre India",
@@ -43,119 +118,6 @@ const workshops = [
     featured: true,
     price: "Contact for details",
     contact: "Via website",
-  },
-  {
-    id: 3,
-    title: "Acting Workshop with Bollywood Casting Director Shiv Chauhan",
-    trainer: "Shiv Chauhan",
-    institution: "Bangalore Hindi Theatre",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "May 24-25, 2023",
-    time: "10:00 AM - 4:00 PM",
-    description:
-      "Acclaimed Bollywood Casting Director Shiv Chauhan (Stree, Emergency, Aspirants, Kota Factory) is coming to Bangalore to conduct his acting workshop in collaboration with the Bangalore Hindi Theatre community. Use the referral code Amit Aggarwal to avail 5% discount on the course.",
-    image: "/placeholder.svg?height=300&width=500&text=Acting+Workshop",
-    registrationLink: "tel:8076410925",
-    featured: true,
-    price: "Contact for details",
-    contact: "8076410925",
-  },
-  {
-    id: 4,
-    title: "Energy Clowning Session",
-    trainer: "Rupesh Tillu",
-    institution: "Clown Academy",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "June 10-12, 2023",
-    time: "10:00 AM - 5:00 PM",
-    description:
-      "Explore the art of clowning and physical comedy in this intensive workshop led by internationally acclaimed clown performer.",
-    image: "/placeholder.svg?height=300&width=500&text=Clowning",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹5,000",
-  },
-  {
-    id: 5,
-    title: "Voice & Speech Masterclass",
-    trainer: "Arundhati Nag",
-    institution: "Rangashankara",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "June 15-16, 2023",
-    time: "11:00 AM - 4:00 PM",
-    description:
-      "Learn voice modulation, projection, and speech techniques for theatrical performances from a theater legend.",
-    image: "/placeholder.svg?height=300&width=500&text=Voice Workshop",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹3,500",
-  },
-  {
-    id: 6,
-    title: "Method Acting Intensive",
-    trainer: "Naseeruddin Shah",
-    institution: "Motley Theatre Group",
-    location: "Delhi",
-    state: "Delhi",
-    date: "June 20-25, 2023",
-    time: "9:00 AM - 6:00 PM",
-    description:
-      "Deep dive into method acting with one of India's most respected actors in this week-long intensive workshop.",
-    image: "/placeholder.svg?height=300&width=500&text=Method Acting",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹10,000",
-  },
-  {
-    id: 7,
-    title: "Physical Theater Workshop",
-    trainer: "Sankar Venkateswaran",
-    institution: "Theatre Roots & Wings",
-    location: "Kochi",
-    state: "Kerala",
-    date: "July 5-8, 2023",
-    time: "10:00 AM - 5:00 PM",
-    description:
-      "Explore movement-based theater techniques and body awareness for performers in this immersive workshop.",
-    image: "/placeholder.svg?height=300&width=500&text=Physical Theater",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹4,500",
-  },
-  {
-    id: 8,
-    title: "Playwriting Masterclass",
-    trainer: "Mahesh Dattani",
-    institution: "Writers' Guild",
-    location: "Chennai",
-    state: "Tamil Nadu",
-    date: "July 12-14, 2023",
-    time: "2:00 PM - 6:00 PM",
-    description:
-      "Learn the craft of playwriting from one of India's most celebrated playwrights in this three-day workshop.",
-    image: "/placeholder.svg?height=300&width=500&text=Playwriting",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹3,000",
-  },
-  {
-    id: 9,
-    title: "Improvisation Techniques",
-    trainer: "Sheeba Chaddha",
-    institution: "Improv Theatre Mumbai",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "July 20-22, 2023",
-    time: "11:00 AM - 4:00 PM",
-    description:
-      "Develop spontaneity and quick thinking through improvisation exercises and games in this fun workshop.",
-    image: "/placeholder.svg?height=300&width=500&text=Improv",
-    registrationLink: "https://example.com/register",
-    featured: false,
-    price: "₹2,500",
   },
 ]
 
@@ -211,67 +173,6 @@ export default function WorkshopsContent() {
           Enhance your skills with workshops and training sessions led by renowned theater professionals.
         </p>
       </div>
-
-      {/* Featured Workshops */}
-      {featuredWorkshops.length > 0 && (
-        <div className="mb-12">
-          <h2 className="font-playfair text-2xl font-bold mb-6">Featured Workshops</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredWorkshops.map((workshop) => (
-              <div key={workshop.id} className="theater-card flex flex-col h-full border-secondary">
-                <div className="relative h-48 w-full">
-                  <div className="absolute top-2 right-2 z-10 bg-secondary text-black text-xs font-bold px-2 py-1 rounded-full">
-                    Featured
-                  </div>
-                  <Image
-                    src={workshop.image || "/placeholder.svg"}
-                    alt={workshop.title}
-                    fill
-                    className="object-cover rounded-t-xl"
-                  />
-                </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="font-playfair text-xl font-bold mb-2">{workshop.title}</h3>
-                  <p className="text-primary font-medium text-sm mb-1">By {workshop.trainer}</p>
-                  <p className="text-gray-500 text-sm mb-3">{workshop.institution}</p>
-                  <div className="flex justify-between items-start mb-3">
-                    <span className="flex items-center text-sm text-gray-500">
-                      <MapPin className="h-3 w-3 mr-1" />
-                      {workshop.location}, {workshop.state}
-                    </span>
-                  </div>
-                  <p className="text-gray-600 mb-4 flex-1">{workshop.description}</p>
-                  <div className="flex flex-col gap-2 mb-4">
-                    <div className="flex items-center text-sm">
-                      <Calendar className="h-3 w-3 mr-1 text-gray-500" />
-                      <span className="text-gray-700">{workshop.date}</span>
-                    </div>
-                    <div className="flex items-center text-sm">
-                      <Clock className="h-3 w-3 mr-1 text-gray-500" />
-                      <span className="text-gray-700">{workshop.time}</span>
-                    </div>
-                    <div className="flex items-center text-sm font-medium">
-                      <span className="text-primary">{workshop.price}</span>
-                    </div>
-                    {workshop.contact && (
-                      <div className="flex items-center text-sm">
-                        <span className="text-gray-700">Contact: {workshop.contact}</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex justify-end mt-auto pt-4 border-t">
-                    <Link href={workshop.registrationLink} target="_blank">
-                      <Button size="sm" className="rounded-full">
-                        Register Now
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Filters */}
       <div className="mb-8 p-6 bg-gray-50 rounded-xl">
@@ -356,70 +257,211 @@ export default function WorkshopsContent() {
         )}
       </div>
 
-      {/* Workshop Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredWorkshops.length > 0 ? (
-          filteredWorkshops.map((workshop) => (
-            <div
-              key={workshop.id}
-              className={`theater-card flex flex-col h-full ${workshop.featured ? "border-secondary" : ""}`}
-            >
-              <div className="relative h-48 w-full">
-                {workshop.featured && (
-                  <div className="absolute top-2 right-2 z-10 bg-secondary text-black text-xs font-bold px-2 py-1 rounded-full">
-                    Featured
+      {/* Featured Workshops */}
+      {featuredWorkshops.length > 0 &&
+        !filters.search &&
+        !filters.city &&
+        !filters.state &&
+        !filters.trainer &&
+        !filters.institution && (
+          <div className="mb-12">
+            <h2 className="font-playfair text-2xl font-bold mb-6">Featured Workshops</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {featuredWorkshops.map((workshop) => (
+                <div key={workshop.id} className="theater-card flex flex-col h-full border-secondary">
+                  <div className="relative h-48 w-full">
+                    <div className="absolute top-2 right-2 z-10 bg-secondary text-black text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
+                      <CheckCircle className="h-3 w-3" />
+                      Featured
+                    </div>
+                    <Image
+                      src={workshop.image || "/placeholder.svg"}
+                      alt={workshop.title}
+                      fill
+                      className="object-cover rounded-t-xl"
+                    />
                   </div>
-                )}
-                <Image
-                  src={workshop.image || "/placeholder.svg"}
-                  alt={workshop.title}
-                  fill
-                  className="object-cover rounded-t-xl"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="font-playfair text-xl font-bold mb-2">{workshop.title}</h3>
-                <p className="text-primary font-medium text-sm mb-1">By {workshop.trainer}</p>
-                <p className="text-gray-500 text-sm mb-3">{workshop.institution}</p>
-                <div className="flex justify-between items-start mb-3">
-                  <span className="flex items-center text-sm text-gray-500">
-                    <MapPin className="h-3 w-3 mr-1" />
-                    {workshop.location}, {workshop.state}
-                  </span>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="font-playfair text-xl font-bold mb-2">{workshop.title}</h3>
+                    <p className="text-primary font-medium text-sm mb-1">By {workshop.trainer}</p>
+                    <p className="text-gray-500 text-sm mb-3">{workshop.institution}</p>
+                    <div className="flex justify-between items-start mb-3">
+                      <span className="flex items-center text-sm text-gray-500">
+                        <MapPin className="h-3 w-3 mr-1" />
+                        {workshop.location}, {workshop.state}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 mb-4 flex-1 line-clamp-3">{workshop.description}</p>
+                    <div className="flex flex-col gap-2 mb-4">
+                      <div className="flex items-center text-sm">
+                        <Calendar className="h-3 w-3 mr-1 text-gray-500" />
+                        <span className="text-gray-700">{workshop.date}</span>
+                      </div>
+                      <div className="flex items-center text-sm">
+                        <Clock className="h-3 w-3 mr-1 text-gray-500" />
+                        <span className="text-gray-700">{workshop.time}</span>
+                      </div>
+                      <div className="flex items-center text-sm font-medium">
+                        <span className="text-primary">{workshop.price}</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-between mt-auto pt-4 border-t">
+                      <Link href={`/workshops/${workshop.id}`}>
+                        <Button variant="outline" size="sm" className="rounded-full">
+                          More Details
+                        </Button>
+                      </Link>
+                      <Link href={workshop.registrationLink} target="_blank">
+                        <Button size="sm" className="rounded-full">
+                          Register Now
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-gray-600 mb-4 flex-1">{workshop.description}</p>
-                <div className="flex flex-col gap-2 mb-4">
-                  <div className="flex items-center text-sm">
-                    <Calendar className="h-3 w-3 mr-1 text-gray-500" />
-                    <span className="text-gray-700">{workshop.date}</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <Clock className="h-3 w-3 mr-1 text-gray-500" />
-                    <span className="text-gray-700">{workshop.time}</span>
-                  </div>
-                  <div className="flex items-center text-sm font-medium">
-                    <span className="text-primary">{workshop.price}</span>
-                  </div>
-                </div>
-                <div className="flex justify-end mt-auto pt-4 border-t">
-                  <Link href={workshop.registrationLink} target="_blank">
-                    <Button size="sm" className="rounded-full">
-                      Register Now
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+              ))}
             </div>
-          ))
-        ) : (
-          <div className="col-span-full text-center py-12">
-            <p className="text-gray-500 mb-4">No workshops match your current filters.</p>
-            <Button onClick={clearFilters} variant="outline" className="rounded-full">
-              Clear Filters
-            </Button>
           </div>
         )}
-      </div>
+
+      {/* Workshop Cards (Filtered) */}
+      {filteredWorkshops.length > 0 &&
+      (filters.search || filters.city || filters.state || filters.trainer || filters.institution) ? (
+        <div>
+          <h2 className="font-playfair text-2xl font-bold mb-6">
+            {filteredWorkshops.length} Workshop{filteredWorkshops.length !== 1 ? "s" : ""} Found
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredWorkshops.map((workshop) => (
+              <div
+                key={workshop.id}
+                className={`theater-card flex flex-col h-full ${workshop.featured ? "border-secondary" : ""}`}
+              >
+                <div className="relative h-48 w-full">
+                  <div className="absolute top-2 right-2 z-10 bg-secondary text-black text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
+                    <CheckCircle className="h-3 w-3" />
+                    Verified
+                  </div>
+                  <Image
+                    src={workshop.image || "/placeholder.svg"}
+                    alt={workshop.title}
+                    fill
+                    className="object-cover rounded-t-xl"
+                  />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className="font-playfair text-xl font-bold mb-2">{workshop.title}</h3>
+                  <p className="text-primary font-medium text-sm mb-1">By {workshop.trainer}</p>
+                  <p className="text-gray-500 text-sm mb-3">{workshop.institution}</p>
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="flex items-center text-sm text-gray-500">
+                      <MapPin className="h-3 w-3 mr-1" />
+                      {workshop.location}, {workshop.state}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mb-4 flex-1 line-clamp-3">{workshop.description}</p>
+                  <div className="flex flex-col gap-2 mb-4">
+                    <div className="flex items-center text-sm">
+                      <Calendar className="h-3 w-3 mr-1 text-gray-500" />
+                      <span className="text-gray-700">{workshop.date}</span>
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <Clock className="h-3 w-3 mr-1 text-gray-500" />
+                      <span className="text-gray-700">{workshop.time}</span>
+                    </div>
+                    <div className="flex items-center text-sm font-medium">
+                      <span className="text-primary">{workshop.price}</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between mt-auto pt-4 border-t">
+                    <Link href={`/workshops/${workshop.id}`}>
+                      <Button variant="outline" size="sm" className="rounded-full">
+                        More Details
+                      </Button>
+                    </Link>
+                    <Link href={workshop.registrationLink} target="_blank">
+                      <Button size="sm" className="rounded-full">
+                        Register Now
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : filters.search !== "" && filteredWorkshops.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500 mb-4">No workshops match your current filters.</p>
+          <Button onClick={clearFilters} variant="outline" className="rounded-full">
+            Clear Filters
+          </Button>
+        </div>
+      ) : null}
+
+      {/* All Workshops (when no filters are applied and no featured section) */}
+      {!filters.search &&
+        !filters.city &&
+        !filters.state &&
+        !filters.trainer &&
+        !filters.institution &&
+        featuredWorkshops.length === 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {workshops.map((workshop) => (
+              <div key={workshop.id} className="theater-card flex flex-col h-full">
+                <div className="relative h-48 w-full">
+                  <div className="absolute top-2 right-2 z-10 bg-secondary text-black text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
+                    <CheckCircle className="h-3 w-3" />
+                    Verified
+                  </div>
+                  <Image
+                    src={workshop.image || "/placeholder.svg"}
+                    alt={workshop.title}
+                    fill
+                    className="object-cover rounded-t-xl"
+                  />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className="font-playfair text-xl font-bold mb-2">{workshop.title}</h3>
+                  <p className="text-primary font-medium text-sm mb-1">By {workshop.trainer}</p>
+                  <p className="text-gray-500 text-sm mb-3">{workshop.institution}</p>
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="flex items-center text-sm text-gray-500">
+                      <MapPin className="h-3 w-3 mr-1" />
+                      {workshop.location}, {workshop.state}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mb-4 flex-1 line-clamp-3">{workshop.description}</p>
+                  <div className="flex flex-col gap-2 mb-4">
+                    <div className="flex items-center text-sm">
+                      <Calendar className="h-3 w-3 mr-1 text-gray-500" />
+                      <span className="text-gray-700">{workshop.date}</span>
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <Clock className="h-3 w-3 mr-1 text-gray-500" />
+                      <span className="text-gray-700">{workshop.time}</span>
+                    </div>
+                    <div className="flex items-center text-sm font-medium">
+                      <span className="text-primary">{workshop.price}</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between mt-auto pt-4 border-t">
+                    <Link href={`/workshops/${workshop.id}`}>
+                      <Button variant="outline" size="sm" className="rounded-full">
+                        More Details
+                      </Button>
+                    </Link>
+                    <Link href={workshop.registrationLink} target="_blank">
+                      <Button size="sm" className="rounded-full">
+                        Register Now
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
     </div>
   )
 }

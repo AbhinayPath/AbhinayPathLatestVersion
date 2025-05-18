@@ -6,164 +6,63 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, Filter, Mail } from "lucide-react"
+import { Search, Filter, MapPin, Calendar } from "lucide-react"
 
-// Sample audition data
+// Verified audition data
 const auditions = [
   {
     id: 1,
-    title: "BRAND: PROHANCE - Doctors Character",
+    title: "PAN-INDIA CASTING CALL – Cement Brand Ad Shoot (Tamil)",
     type: "Commercial",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "May 16/19/20, 2023",
-    director: "Cast Me Models",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "18–25 May 2025",
+    director: "Inorita Productions",
     description:
-      "Looking for male and female models who speak really good English for doctor's character. Age: 30-45. Medium: Digital. Usage: Social Media.",
-    company: "Cast Me Models",
-    companyLink: "tel:8867313322",
-    contact: "8867313322",
-    contactType: "phone",
-    experience: "All Levels",
+      "Brand: Ultratech Cement. Usage: 2 years (TV, Digital, Cinema). Roles: Father (55 yrs), Mother (50 yrs), Tai Ji (60 yrs) – Wife of father's elder brother. Requirements: Fluent in Tamil, Experienced, expressive, natural actors. Immediate audition needed.",
+    company: "Inorita Productions",
+    companyLink: "https://instagram.com/indriyaproductions",
+    contact: "88841 28712",
+    contactType: "whatsapp",
+    experience: "Experienced",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=PROHANCE",
+    image: "/placeholder.svg?height=300&width=500&text=Cement+Ad+Casting",
   },
   {
     id: 2,
-    title: "Educational App - Corporate Teacher Character",
-    type: "Corporate",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "Dates to be confirmed",
-    director: "Snowbell Entertainment",
+    title: "CASTING CALL – Friendship App DVC (Kannada/Malayalam)",
+    type: "Digital",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "16, 17, or 19 May 2025",
+    director: "Inorita Productions",
     description:
-      "Looking for Mumbai based male talents with fluent English for corporate video. Need male as corporate teacher character (35-50 years). Perfect fluent in English. Shoot location - Andheri.",
-    company: "Snowbell Entertainment",
-    companyLink: "https://www.instagram.com/snowbell.entertainment?igsh=dmUwMTVpcnBzOG9z",
-    contact: "9619701974",
+      "Budget: Medium. Roles: 3 Female Artists (20–28 yrs, Fluent in Kannada), 2 Female Artists (20–28 yrs, Fluent in Malayalam). Requirements: Comfortable with western/knee-length/low neckline dresses, Good screen presence.",
+    company: "Inorita Productions",
+    companyLink: "https://instagram.com/indriyaproductions",
+    contact: "88841 28712",
     contactType: "whatsapp",
-    experience: "Intermediate",
+    experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Educational+App",
+    image: "/placeholder.svg?height=300&width=500&text=Friendship+App+DVC",
   },
   {
     id: 3,
-    title: "Contemporary Play - 'Echoes'",
+    title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
     type: "Theater",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "May 15, 2023",
-    director: "Rajat Kapoor",
-    description: "Seeking actors for lead and supporting roles in a contemporary drama exploring urban isolation.",
-    company: "Aadyam Theatre Group",
-    companyLink: "https://instagram.com/aadyamtheatre",
-    contact: "casting@aadyamtheatre.com",
-    contactType: "email",
-    experience: "Intermediate",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Echoes",
-  },
-  {
-    id: 4,
-    title: "Feature Film - 'The Last Mile'",
-    type: "Film",
-    location: "Delhi",
-    state: "Delhi",
-    date: "May 20, 2023",
-    director: "Anurag Kashyap",
-    description: "Casting call for an indie drama set in North India. Multiple roles available.",
-    company: "Phantom Films",
-    companyLink: "https://phantom.film",
-    contact: "casting@phantomfilms.com",
-    contactType: "email",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Last Mile",
-  },
-  {
-    id: 5,
-    title: "Web Series - 'Urban Tales'",
-    type: "Web",
     location: "Bangalore",
     state: "Karnataka",
-    date: "May 25, 2023",
-    director: "Zoya Akhtar",
-    description: "Looking for fresh faces for an anthology series exploring city life stories.",
-    company: "Tiger Baby Films",
-    companyLink: "https://instagram.com/tigerbabyfilms",
-    contact: "casting@tigerbaby.com",
-    contactType: "email",
-    experience: "Beginner",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Urban Tales",
-  },
-  {
-    id: 6,
-    title: "Period Drama - 'The Forgotten Empire'",
-    type: "Theater",
-    location: "Kolkata",
-    state: "West Bengal",
-    date: "June 5, 2023",
-    director: "Feroz Abbas Khan",
-    description: "Casting for a large-scale historical production set in medieval India.",
-    company: "Prithvi Theatre",
-    companyLink: "https://prithvitheatre.org",
-    contact: "casting@prithvitheatre.org",
-    contactType: "email",
-    experience: "Advanced",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Forgotten Empire",
-  },
-  {
-    id: 7,
-    title: "Comedy Film - 'Family Circus'",
-    type: "Film",
-    location: "Chennai",
-    state: "Tamil Nadu",
-    date: "June 10, 2023",
-    director: "Rajkumar Hirani",
-    description: "Seeking actors with strong comedic timing for a family-oriented comedy film.",
-    company: "Vinod Chopra Films",
-    companyLink: "https://vinodchoprafilms.com",
-    contact: "casting@vcf.com",
-    contactType: "email",
-    experience: "Intermediate",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Family Circus",
-  },
-  {
-    id: 8,
-    title: "Experimental Theater - 'Fragments'",
-    type: "Theater",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "June 15, 2023",
-    director: "Anamika Haksar",
-    description: "Seeking performers for an experimental theater piece combining movement and text.",
-    company: "Experimental Theatre Foundation",
-    companyLink: "https://etf.org",
-    contact: "casting@etf.org",
-    contactType: "email",
+    date: "Ongoing",
+    director: "Kalayan Theatre Group",
+    description:
+      "Play Title: Kab Tak Rahein Kunware. Language: Hindi (must read Devanagari). Age Group: 25–35 yrs. Location: Koramangala, Bangalore. Rehearsals: Weekends, then weekday evenings closer to show. Show Dates: August/September 2025.",
+    company: "Kalayan Theatre Group",
+    companyLink: "tel:9663304790",
+    contact: "Amit Aggarwal – 96633 04790",
+    contactType: "phone",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Fragments",
-  },
-  {
-    id: 9,
-    title: "Crime Thriller Series - 'Undercover'",
-    type: "Web",
-    location: "Hyderabad",
-    state: "Telangana",
-    date: "June 20, 2023",
-    director: "Sriram Raghavan",
-    description: "Casting multiple roles for a gritty crime thriller web series.",
-    company: "Applause Entertainment",
-    companyLink: "https://applause.com",
-    contact: "casting@applause.com",
-    contactType: "email",
-    experience: "Intermediate",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Undercover",
+    image: "/placeholder.svg?height=300&width=500&text=Hindi+Comedy+Play",
   },
 ]
 
@@ -336,52 +235,26 @@ export default function AuditionsContent() {
                   <span className="badge-outline">{audition.experience}</span>
                 </div>
                 <h3 className="font-playfair text-xl font-bold mb-2">{audition.title}</h3>
-                <p className="text-gray-600 mb-4 flex-1">{audition.description}</p>
+                <p className="text-gray-600 mb-4 flex-1 line-clamp-3">{audition.description}</p>
 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-3 mb-4">
                   <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Director:</span>
+                    <span className="font-medium text-gray-700 w-20">Production:</span>
                     <span>{audition.director}</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-500">
                     <span className="font-medium text-gray-700 w-20">Location:</span>
-                    <span>
+                    <span className="flex items-center">
+                      <MapPin className="h-3 w-3 mr-1 text-gray-400" />
                       {audition.location}, {audition.state}
                     </span>
                   </div>
                   <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Date:</span>
-                    <span>{audition.date}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Company:</span>
-                    <a
-                      href={audition.companyLink}
-                      className="text-primary hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {audition.company}
-                    </a>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Contact:</span>
-                    <div className="flex items-center">
-                      <Mail className="h-3 w-3 mr-1 text-primary" />
-                      {audition.contactType === "email" ? (
-                        <a href={`mailto:${audition.contact}`} className="text-primary hover:underline">
-                          {audition.contact}
-                        </a>
-                      ) : audition.contactType === "whatsapp" ? (
-                        <a href={`https://wa.me/${audition.contact}`} className="text-primary hover:underline">
-                          {audition.contact}
-                        </a>
-                      ) : (
-                        <a href={`tel:${audition.contact}`} className="text-primary hover:underline">
-                          {audition.contact}
-                        </a>
-                      )}
-                    </div>
+                    <span className="font-medium text-gray-700 w-20">Dates:</span>
+                    <span className="flex items-center">
+                      <Calendar className="h-3 w-3 mr-1 text-gray-400" />
+                      {audition.date}
+                    </span>
                   </div>
                 </div>
 
