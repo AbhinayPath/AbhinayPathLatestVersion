@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Linkedin, MessageSquare } from "lucide-react"
+import { Instagram, Linkedin, PhoneIcon as WhatsApp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function Footer() {
@@ -88,7 +88,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <MessageSquare className="h-5 w-5" />
+                <WhatsApp className="h-5 w-5" />
                 <span className="sr-only">WhatsApp</span>
               </a>
               <a
