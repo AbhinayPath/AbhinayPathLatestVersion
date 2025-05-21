@@ -9,41 +9,7 @@ import WorkshopBanner from "@/components/workshop-banner"
 
 // This would typically come from a database, but for now we'll use the same data
 const workshops = [
-  {
-    id: 1,
-    title: "NSD TIE Summer Workshop (Tripura)",
-    trainer: "NSD (TIE Wing)",
-    institution: "National School of Drama",
-    location: "Tripura",
-    state: "Tripura",
-    date: "17 May – 7 June 2025",
-    time: "9 AM – 2 PM",
-    description:
-      "Organized by NSD (TIE Wing) + SCERT, Govt. of Tripura. Located at Nazrul Kalakshetra + Schools across Tripura. For children aged 8–16 years. Forms available from 10th May – First come, first serve basis.",
-    image: "/placeholder.svg?height=300&width=500&text=NSD+TIE+Workshop",
-    registrationLink: "mailto:nsdtripura@gmail.com",
-    featured: true,
-    price: "Free",
-    contact: "0381-2328797 / 9436511935",
-    email: "nsdtripura@gmail.com",
-    ageGroup: "8–16 years",
-    fullDetails: {
-      organizers: "NSD (TIE Wing) + SCERT, Government of Tripura",
-      venue: "Nazrul Kalakshetra + Various Schools across Tripura",
-      duration: "3 weeks",
-      eligibility: "Children aged 8–16 years",
-      applicationProcess: "Forms available from 10th May – First come, first serve basis",
-      curriculum: [
-        "Introduction to theater games and exercises",
-        "Voice and movement training",
-        "Character development",
-        "Storytelling techniques",
-        "Group performance skills",
-      ],
-      additionalInfo:
-        "This is part of NSD's outreach program to promote theater education among children in Northeast India.",
-    },
-  },
+  
   {
     id: 2,
     title: "NSD 3-Month Theatre-in-Education Certificate Course (Delhi)",
