@@ -519,15 +519,6 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     Email
                   </a>
                 )}
-
-                <a
-                  href={workshop.registrationLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-primary text-white px-3 py-2 rounded-md hover:bg-primary/90 transition-colors text-sm"
-                >
-                  Register Now
-                </a>
               </div>
             </div>
           </div>
