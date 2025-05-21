@@ -21,7 +21,7 @@ export default function Footer() {
               </div>
               <span className="font-playfair text-xl font-bold">AbhinayPath</span>
             </Link>
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-white">
               India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.
             </p>
           </div>
@@ -30,22 +30,25 @@ export default function Footer() {
             <h3 className="font-playfair text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href="/" className="text-sm text-white hover:text-white hover:underline transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href="/about" className="text-sm text-white hover:text-white hover:underline transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/join-community" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/join-community"
+                  className="text-sm text-white hover:text-white hover:underline transition-colors"
+                >
                   Join
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href="/contact" className="text-sm text-white hover:text-white hover:underline transition-colors">
                   Contact
                 </Link>
               </li>
@@ -56,16 +59,16 @@ export default function Footer() {
             <h3 className="font-playfair text-lg font-bold mb-4">Coming Soon</h3>
             <ul className="space-y-2">
               <li>
-                <span className="text-sm text-gray-300">Networking Platform</span>
+                <span className="text-sm text-white">Networking Platform</span>
               </li>
               <li>
-                <span className="text-sm text-gray-300">Backstage Opportunities</span>
+                <span className="text-sm text-white">Backstage Opportunities</span>
               </li>
               <li>
-                <span className="text-sm text-gray-300">Resources Library</span>
+                <span className="text-sm text-white">Resources Library</span>
               </li>
               <li>
-                <span className="text-sm text-gray-300">Artist Profiles</span>
+                <span className="text-sm text-white">Artist Profiles</span>
               </li>
             </ul>
           </div>
@@ -75,7 +78,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a
                 href="https://www.instagram.com/abhinay_path"
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-white hover:text-white hover:opacity-80 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -84,7 +87,7 @@ export default function Footer() {
               </a>
               <a
                 href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp"
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-white hover:text-white hover:opacity-80 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -93,7 +96,7 @@ export default function Footer() {
               </a>
               <a
                 href="https://www.linkedin.com/company/abhinaypath"
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-white hover:text-white hover:opacity-80 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -102,7 +105,7 @@ export default function Footer() {
               </a>
             </div>
             <div className="mt-4">
-              <p className="text-sm text-gray-300">Subscribe to our newsletter</p>
+              <p className="text-sm text-white">Subscribe to our newsletter</p>
               <form className="mt-2 flex">
                 <input
                   type="email"
@@ -121,7 +124,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-gray-700 pt-8 text-center">
-          <p className="text-sm text-gray-300">&copy; {new Date().getFullYear()} AbhinayPath. All rights reserved.</p>
+          <p className="text-sm text-white">&copy; {new Date().getFullYear()} AbhinayPath. All rights reserved.</p>
         </div>
       </div>
     </footer>

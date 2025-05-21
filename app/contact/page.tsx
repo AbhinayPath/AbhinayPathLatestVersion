@@ -92,7 +92,7 @@ export default function ContactPage() {
             Contact Us
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-[#2D1A54] to-[#7E1F2E] mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-800 max-w-2xl mx-auto">
             Have questions or want to connect with us? We'd love to hear from you!
           </p>
         </div>
@@ -116,7 +116,7 @@ export default function ContactPage() {
 
             <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium flex items-center">
+                <label htmlFor="name" className="text-sm font-medium flex items-center text-gray-800">
                   <span className="bg-gray-100 p-1.5 rounded-full mr-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +147,7 @@ export default function ContactPage() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium flex items-center">
+                <label htmlFor="email" className="text-sm font-medium flex items-center text-gray-800">
                   <span className="bg-gray-100 p-1.5 rounded-full mr-2">
                     <Mail className="h-3.5 w-3.5" />
                   </span>
@@ -166,7 +166,7 @@ export default function ContactPage() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium flex items-center">
+                <label htmlFor="subject" className="text-sm font-medium flex items-center text-gray-800">
                   <span className="bg-gray-100 p-1.5 rounded-full mr-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +196,7 @@ export default function ContactPage() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium flex items-center">
+                <label htmlFor="message" className="text-sm font-medium flex items-center text-gray-800">
                   <span className="bg-gray-100 p-1.5 rounded-full mr-2">
                     <MessageSquare className="h-3.5 w-3.5" />
                   </span>
@@ -295,7 +295,7 @@ export default function ContactPage() {
                 <Clock className="h-5 w-5 text-primary mr-2" />
                 <h3 className="font-playfair text-xl font-bold">Response Time</h3>
               </div>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-800 mb-4">
                 We typically respond to all inquiries within 24-48 hours during business days.
               </p>
 
@@ -303,7 +303,7 @@ export default function ContactPage() {
                 <Globe className="h-5 w-5 text-primary mr-2" />
                 <h3 className="font-playfair text-xl font-bold">Follow Us</h3>
               </div>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-800 mb-4">
                 Follow us on social media to stay updated with the latest opportunities and news.
               </p>
               <div className="flex gap-3">

@@ -61,7 +61,7 @@ export default function Home() {
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">
               Your Creative Journey Starts Here
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+            <p className="text-gray-800 max-w-3xl mx-auto text-lg">
               AbhinayPath brings together everything you need to succeed in the creative arts industry.
             </p>
           </div>
@@ -85,7 +85,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Find Casting Calls</h3>
-                <p className="text-gray-600 mb-6 text-lg">
+                <p className="text-gray-800 mb-6 text-lg">
                   Discover verified audition opportunities for theater, film, and web series from trusted production
                   houses.
                 </p>
@@ -118,7 +118,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Skill Up with Workshops</h3>
-                <p className="text-gray-600 mb-6 text-lg">
+                <p className="text-gray-800 mb-6 text-lg">
                   Enhance your craft with workshops and training sessions led by industry professionals and experts.
                 </p>
                 <Link href="/workshops">
@@ -150,7 +150,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Prep for Top Institutes</h3>
-                <p className="text-gray-600 mb-6 text-lg">
+                <p className="text-gray-800 mb-6 text-lg">
                   Get guidance from NSD/FTII alumni for entrance exams to prestigious institutions. Expert mentorship
                   available.
                 </p>
@@ -179,7 +179,7 @@ export default function Home() {
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">
               More Features on the Horizon
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+            <p className="text-gray-800 max-w-3xl mx-auto text-lg">
               We're building additional tools to support your creative journey. Join our beta to get early access.
             </p>
           </div>
@@ -213,7 +213,7 @@ export default function Home() {
               >
                 <div className="text-5xl mb-4">{feature.icon}</div>
                 <h3 className="font-bold text-xl mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-gray-800">{feature.description}</p>
               </div>
             ))}
           </div>
