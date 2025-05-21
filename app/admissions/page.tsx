@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Video, FileText, Calendar, GraduationCap, BookOpen, User, Lightbulb, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import AdmissionsBanner from "@/components/admissions-banner"
 
 export default function AdmissionsPage() {
   const [activeVideoFilter, setActiveVideoFilter] = useState("all")
@@ -229,6 +230,7 @@ export default function AdmissionsPage() {
 
   return (
     <div className="container py-12">
+      <AdmissionsBanner />
       <div className="max-w-3xl mx-auto text-center mb-12">
         <h1 className="font-playfair text-4xl font-bold mb-4">Admissions & Preparation</h1>
         <p className="text-gray-600">
@@ -318,7 +320,7 @@ export default function AdmissionsPage() {
                         </svg>
                       </div>
                     </div>
-                    <Image src={video.image || "/placeholder.svg"} alt={video.title} fill className="object-cover" />
+                    <Image src="/images/acting-school.png" alt={video.title} fill className="object-cover" />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-2">
@@ -407,12 +409,7 @@ export default function AdmissionsPage() {
                   className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
                 >
                   <div className="relative h-48 w-full">
-                    <Image
-                      src={article.image || "/placeholder.svg"}
-                      alt={article.title}
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src="/images/acting-school.png" alt={article.title} fill className="object-cover" />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-2">

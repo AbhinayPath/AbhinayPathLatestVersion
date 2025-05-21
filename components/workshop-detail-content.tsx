@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Calendar, MapPin, Users, Phone, Mail, Clock, GraduationCap, CheckCircle } from "lucide-react"
+import WorkshopBanner from "@/components/workshop-banner"
 
 // This would typically come from a database, but for now we'll use the same data
 const workshops = [
@@ -238,16 +239,29 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
   }, [id])
 
   if (loading) {
-    return <div className="container py-12">Loading workshop details...</div>
+    return (
+      <div className="container py-6 md:py-12">
+        <div className="animate-pulse space-y-4">
+          <div className="h-48 bg-gray-200 rounded-lg"></div>
+          <div className="h-8 w-3/4 bg-gray-200 rounded"></div>
+          <div className="h-6 w-1/2 bg-gray-200 rounded"></div>
+          <div className="space-y-2">
+            <div className="h-4 bg-gray-200 rounded"></div>
+            <div className="h-4 bg-gray-200 rounded"></div>
+            <div className="h-4 w-5/6 bg-gray-200 rounded"></div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   if (!workshop) {
     return (
-      <div className="container py-12 text-center">
+      <div className="container py-6 md:py-12 text-center">
         <h1 className="text-2xl font-bold mb-4">Workshop Not Found</h1>
         <p className="mb-6">The workshop you're looking for doesn't exist or has been removed.</p>
         <Link href="/workshops">
-          <Button>
+          <Button className="rounded-full">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Workshops
           </Button>
@@ -257,15 +271,17 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
   }
 
   return (
-    <div className="container py-12">
-      <Link href="/workshops" className="inline-flex items-center text-primary hover:underline mb-6">
+    <div className="container py-6 md:py-12">
+      <Link href="/workshops" className="inline-flex items-center text-primary hover:underline mb-4 md:mb-6">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Workshops
       </Link>
 
+      <WorkshopBanner />
+
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <div className="relative h-64 w-full">
-          <Image src={workshop.image || "/placeholder.svg"} alt={workshop.title} fill className="object-cover" />
+        <div className="relative h-48 md:h-64 w-full">
+          <Image src="/images/acting-workshop.png" alt={workshop.title} fill className="object-cover" />
           {workshop.featured && (
             <div className="absolute top-4 right-4 bg-secondary text-black px-3 py-1 rounded-full flex items-center">
               <CheckCircle className="h-4 w-4 mr-1" />
@@ -274,24 +290,24 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
           )}
         </div>
 
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           <div className="flex flex-wrap gap-2 mb-4">
             <span className="badge-primary">Workshop</span>
             <span className="badge-outline">{workshop.institution}</span>
           </div>
 
-          <h1 className="font-playfair text-3xl font-bold mb-4">{workshop.title}</h1>
-          <p className="text-primary font-medium mb-6">By {workshop.trainer}</p>
+          <h1 className="font-playfair text-2xl md:text-3xl font-bold mb-2 md:mb-4">{workshop.title}</h1>
+          <p className="text-primary font-medium mb-4 md:mb-6">By {workshop.trainer}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
             <div>
-              <h2 className="font-playfair text-xl font-bold mb-4">Workshop Details</h2>
-              <div className="space-y-4">
+              <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Workshop Details</h2>
+              <div className="space-y-3 md:space-y-4">
                 <div className="flex items-start">
                   <MapPin className="h-5 w-5 mr-2 text-primary mt-0.5" />
                   <div>
                     <p className="font-medium">Location</p>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm md:text-base">
                       {workshop.fullDetails?.venue || `${workshop.location}, ${workshop.state}`}
                     </p>
                   </div>
@@ -301,7 +317,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   <Calendar className="h-5 w-5 mr-2 text-primary mt-0.5" />
                   <div>
                     <p className="font-medium">Dates</p>
-                    <p className="text-gray-600">{workshop.date}</p>
+                    <p className="text-gray-600 text-sm md:text-base">{workshop.date}</p>
                   </div>
                 </div>
 
@@ -309,7 +325,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   <Clock className="h-5 w-5 mr-2 text-primary mt-0.5" />
                   <div>
                     <p className="font-medium">Time</p>
-                    <p className="text-gray-600">{workshop.time}</p>
+                    <p className="text-gray-600 text-sm md:text-base">{workshop.time}</p>
                   </div>
                 </div>
 
@@ -320,7 +336,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                     <div>
                       <p className="font-medium">Fee</p>
-                      <p className="text-gray-600">{workshop.price}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.price}</p>
                     </div>
                   </div>
                 )}
@@ -330,7 +346,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     <Users className="h-5 w-5 mr-2 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Age Group</p>
-                      <p className="text-gray-600">{workshop.ageGroup}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.ageGroup}</p>
                     </div>
                   </div>
                 )}
@@ -340,7 +356,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     <GraduationCap className="h-5 w-5 mr-2 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Eligibility</p>
-                      <p className="text-gray-600">{workshop.eligibility}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.eligibility}</p>
                     </div>
                   </div>
                 )}
@@ -352,7 +368,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                     <div>
                       <p className="font-medium">Duration</p>
-                      <p className="text-gray-600">{workshop.fullDetails.duration}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.duration}</p>
                     </div>
                   </div>
                 )}
@@ -364,7 +380,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                     <div>
                       <p className="font-medium">Format</p>
-                      <p className="text-gray-600">{workshop.fullDetails.format}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.format}</p>
                     </div>
                   </div>
                 )}
@@ -376,7 +392,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                     <div>
                       <p className="font-medium">Organizers</p>
-                      <p className="text-gray-600">{workshop.fullDetails.organizers}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.organizers}</p>
                     </div>
                   </div>
                 )}
@@ -388,7 +404,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                     <div>
                       <p className="font-medium">Includes</p>
-                      <p className="text-gray-600">{workshop.fullDetails.includes}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.includes}</p>
                     </div>
                   </div>
                 )}
@@ -400,7 +416,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                     <div>
                       <p className="font-medium">Upcoming Webinar</p>
-                      <p className="text-gray-600">{workshop.fullDetails.upcomingWebinar}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.upcomingWebinar}</p>
                     </div>
                   </div>
                 )}
@@ -409,9 +425,9 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
 
             <div>
               {workshop.fullDetails?.curriculum && (
-                <div className="mb-6">
-                  <h2 className="font-playfair text-xl font-bold mb-4">Curriculum</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Curriculum</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
                     {workshop.fullDetails.curriculum.map((item: string, index: number) => (
                       <li key={index}>{item}</li>
                     ))}
@@ -420,9 +436,9 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
               )}
 
               {workshop.fullDetails?.eligibilityCriteria && (
-                <div className="mb-6">
-                  <h2 className="font-playfair text-xl font-bold mb-4">Eligibility Criteria</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Eligibility Criteria</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
                     {workshop.fullDetails.eligibilityCriteria.map((item: string, index: number) => (
                       <li key={index}>{item}</li>
                     ))}
@@ -431,9 +447,9 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
               )}
 
               {workshop.fullDetails?.mentors && (
-                <div className="mb-6">
-                  <h2 className="font-playfair text-xl font-bold mb-4">Mentors</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Mentors</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
                     {workshop.fullDetails.mentors.map((item: string, index: number) => (
                       <li key={index}>{item}</li>
                     ))}
@@ -442,9 +458,9 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
               )}
 
               {workshop.fullDetails?.careerOpportunities && (
-                <div className="mb-6">
-                  <h2 className="font-playfair text-xl font-bold mb-4">Career Opportunities</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Career Opportunities</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
                     {workshop.fullDetails.careerOpportunities.map((item: string, index: number) => (
                       <li key={index}>{item}</li>
                     ))}
@@ -453,43 +469,43 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
               )}
 
               {workshop.fullDetails?.takeaways && (
-                <div className="mb-6">
-                  <h2 className="font-playfair text-xl font-bold mb-4">Takeaways</h2>
-                  <p className="text-gray-600">{workshop.fullDetails.takeaways}</p>
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Takeaways</h2>
+                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.takeaways}</p>
                 </div>
               )}
 
               {workshop.fullDetails?.certification && (
-                <div className="mb-6">
-                  <h2 className="font-playfair text-xl font-bold mb-4">Certification</h2>
-                  <p className="text-gray-600">{workshop.fullDetails.certification}</p>
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Certification</h2>
+                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.certification}</p>
                 </div>
               )}
 
               {workshop.fullDetails?.additionalInfo && (
-                <div className="mb-6">
-                  <h2 className="font-playfair text-xl font-bold mb-4">Additional Information</h2>
-                  <p className="text-gray-600">{workshop.fullDetails.additionalInfo}</p>
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Additional Information</h2>
+                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.additionalInfo}</p>
                 </div>
               )}
             </div>
           </div>
 
-          <div className="border-t pt-6">
-            <h2 className="font-playfair text-xl font-bold mb-4">Contact Information</h2>
-            <div className="flex flex-wrap gap-4 items-center">
+          <div className="border-t pt-4 md:pt-6">
+            <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Contact Information</h2>
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
               <div>
                 <p className="font-medium">Institution</p>
-                <p className="text-gray-600">{workshop.institution}</p>
+                <p className="text-gray-600 text-sm md:text-base">{workshop.institution}</p>
               </div>
 
-              <div className="flex gap-3 ml-auto">
+              <div className="flex flex-wrap gap-2 md:ml-auto">
                 {workshop.contact && workshop.contact !== "Via website" && (
                   <a
                     href={`tel:${workshop.contact.replace(/\D/g, "")}`}
-                    className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                    className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
                   >
-                    <Phone className="h-5 w-5" />
+                    <Phone className="h-4 w-4" />
                     Call
                   </a>
                 )}
@@ -497,9 +513,9 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                 {workshop.email && (
                   <a
                     href={`mailto:${workshop.email}`}
-                    className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors"
+                    className="flex items-center gap-2 bg-green-500 text-white px-3 py-2 rounded-md hover:bg-green-600 transition-colors text-sm"
                   >
-                    <Mail className="h-5 w-5" />
+                    <Mail className="h-4 w-4" />
                     Email
                   </a>
                 )}
@@ -508,7 +524,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   href={workshop.registrationLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+                  className="flex items-center gap-2 bg-primary text-white px-3 py-2 rounded-md hover:bg-primary/90 transition-colors text-sm"
                 >
                   Register Now
                 </a>

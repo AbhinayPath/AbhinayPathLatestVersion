@@ -70,7 +70,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/audition-1.png"
+                  src="/images/auditions-stage.png"
                   alt="Find Casting Calls"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -103,7 +103,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/workshop-1.png"
+                  src="/images/acting-workshop.png"
                   alt="Skill Up with Workshops"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -135,7 +135,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/institute-prep.png"
+                  src="/images/acting-school.png"
                   alt="Prep for Top Institutes"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"

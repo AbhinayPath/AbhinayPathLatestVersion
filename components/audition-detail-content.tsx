@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Calendar, MapPin, Users, Phone, Instagram, CheckCircle } from "lucide-react"
+import AuditionBanner from "@/components/audition-banner"
 
 // This would typically come from a database, but for now we'll use the same data
 const auditions = [
@@ -163,9 +164,11 @@ export default function AuditionDetailContent({ id }: { id: number }) {
         Back to Auditions
       </Link>
 
+      <AuditionBanner />
+
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-64 w-full">
-          <Image src={audition.image || "/placeholder.svg"} alt={audition.title} fill className="object-cover" />
+          <Image src="/images/auditions-stage.png" alt={audition.title} fill className="object-cover" />
           {audition.verified && (
             <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full flex items-center">
               <CheckCircle className="h-4 w-4 mr-1" />

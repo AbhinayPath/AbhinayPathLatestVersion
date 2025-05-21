@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Filter, MapPin, Calendar } from "lucide-react"
+import AuditionBanner from "@/components/audition-banner"
 
 // Verified audition data
 const auditions = [
@@ -104,11 +105,13 @@ export default function AuditionsContent() {
       state: "all",
       category: "all",
       experience: "all",
+      city: "all",
     })
   }
 
   return (
     <div className="container py-12">
+      <AuditionBanner />
       <div className="max-w-3xl mx-auto text-center mb-12">
         <h1 className="font-playfair text-4xl font-bold mb-4">Audition Board</h1>
         <p className="text-gray-600">
@@ -213,7 +216,7 @@ export default function AuditionsContent() {
               className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
             >
               <div className="relative h-48 w-full">
-                <Image src={audition.image || "/placeholder.svg"} alt={audition.title} fill className="object-cover" />
+                <Image src="/images/auditions-stage.png" alt={audition.title} fill className="object-cover" />
                 {audition.verified && (
                   <div className="absolute top-2 right-2 badge-verified">
                     <span className="flex items-center">
