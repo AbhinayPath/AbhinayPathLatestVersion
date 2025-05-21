@@ -28,19 +28,6 @@ export default function JoinCommunityPage() {
           <span className="text-sm font-medium">Beta Access</span>
         </div>
 
-        {/* Add the AbhinayPath logo banner */}
-        <div className="mb-6 flex justify-center">
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
-            <Image
-              src="/images/abhinaypath-logo.png"
-              alt="AbhinayPath - Actors, Directors + Creators"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        </div>
-
         <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
           AbhinayPath: Beta Community Hub
         </h1>
