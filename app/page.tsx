@@ -27,7 +27,7 @@ export default function Home() {
               Beta Access Available
             </Badge>
             <h1 className="font-playfair text-5xl md:text-6xl font-bold leading-tight">
-              India's creative platform to discover auditions, workshops & prep support
+              India's first platform to discover auditons,workshops and Mentorship from Acting school Alumini
             </h1>
             <p className="text-xl md:text-2xl opacity-90">
               Connecting actors, directors, and backstage professionals across theatre, film & web.
