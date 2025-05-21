@@ -41,13 +41,19 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
           <CheckCircle className="h-3 w-3" />
           Verified
         </div>
-        <Image
-          src="/images/acting-workshop.png"
-          alt={workshop.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        />
+        <div className="absolute inset-0 bg-gray-200">
+          <Image
+            src="/images/acting-workshop.png"
+            alt={workshop.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            onError={(e) => {
+              // Fallback to a placeholder if image fails to load
+              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
+            }}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70"></div>
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <p className="text-white font-medium text-sm truncate">{workshop.institution}</p>

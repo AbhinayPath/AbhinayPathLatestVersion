@@ -9,7 +9,6 @@ import WorkshopBanner from "@/components/workshop-banner"
 
 // This would typically come from a database, but for now we'll use the same data
 const workshops = [
-  
   {
     id: 2,
     title: "NSD 3-Month Theatre-in-Education Certificate Course (Delhi)",
@@ -247,7 +246,16 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
 
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
-          <Image src="/images/acting-workshop.png" alt={workshop.title} fill className="object-cover" />
+          <Image
+            src="/images/acting-workshop.png"
+            alt={workshop.title}
+            fill
+            className="object-cover"
+            onError={(e) => {
+              // Fallback to a placeholder if image fails to load
+              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
+            }}
+          />
           {workshop.featured && (
             <div className="absolute top-4 right-4 bg-secondary text-black px-3 py-1 rounded-full flex items-center">
               <CheckCircle className="h-4 w-4 mr-1" />
