@@ -32,19 +32,14 @@ export default function JoinCommunityPage() {
           AbhinayPath: Beta Community Hub
         </h1>
         <div className="relative h-64 w-full mb-8 rounded-xl overflow-hidden shadow-xl">
-          <Image src="/images/join-community.png" alt="Creative Community" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-between p-6">
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="relative w-full h-full max-h-48">
-                <Image
-                  src="/images/abhinaypath-logo.png"
-                  alt="AbhinayPath Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </div>
+          <Image
+            src="/images/abhinaypath-logo.png"
+            alt="AbhinayPath Logo"
+            fill
+            className="object-contain bg-white p-4"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
             <div className="w-full text-white text-left">
               <h2 className="text-2xl font-bold mb-2">Welcome!</h2>
               <p className="text-white/90 max-w-2xl">
