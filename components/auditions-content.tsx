@@ -1,180 +1,40 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, Filter, Mail } from "lucide-react"
+import { Search, Filter, Mail, Loader2 } from "lucide-react"
 
-// Sample audition data
-const auditions = [
-  {
-    id: 1,
-    title: "BRAND: PROHANCE - Doctors Character",
-    type: "Commercial",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "May 16/19/20, 2023",
-    director: "Cast Me Models",
-    description:
-      "Looking for male and female models who speak really good English for doctor's character. Age: 30-45. Medium: Digital. Usage: Social Media.",
-    company: "Cast Me Models",
-    companyLink: "tel:8867313322",
-    contact: "8867313322",
-    contactType: "phone",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=PROHANCE",
-  },
-  {
-    id: 2,
-    title: "Educational App - Corporate Teacher Character",
-    type: "Corporate",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "Dates to be confirmed",
-    director: "Snowbell Entertainment",
-    description:
-      "Looking for Mumbai based male talents with fluent English for corporate video. Need male as corporate teacher character (35-50 years). Perfect fluent in English. Shoot location - Andheri.",
-    company: "Snowbell Entertainment",
-    companyLink: "https://www.instagram.com/snowbell.entertainment?igsh=dmUwMTVpcnBzOG9z",
-    contact: "9619701974",
-    contactType: "whatsapp",
-    experience: "Intermediate",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Educational+App",
-  },
-  {
-    id: 3,
-    title: "Contemporary Play - 'Echoes'",
-    type: "Theater",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "May 15, 2023",
-    director: "Rajat Kapoor",
-    description: "Seeking actors for lead and supporting roles in a contemporary drama exploring urban isolation.",
-    company: "Aadyam Theatre Group",
-    companyLink: "https://instagram.com/aadyamtheatre",
-    contact: "casting@aadyamtheatre.com",
-    contactType: "email",
-    experience: "Intermediate",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Echoes",
-  },
-  {
-    id: 4,
-    title: "Feature Film - 'The Last Mile'",
-    type: "Film",
-    location: "Delhi",
-    state: "Delhi",
-    date: "May 20, 2023",
-    director: "Anurag Kashyap",
-    description: "Casting call for an indie drama set in North India. Multiple roles available.",
-    company: "Phantom Films",
-    companyLink: "https://phantom.film",
-    contact: "casting@phantomfilms.com",
-    contactType: "email",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Last Mile",
-  },
-  {
-    id: 5,
-    title: "Web Series - 'Urban Tales'",
-    type: "Web",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "May 25, 2023",
-    director: "Zoya Akhtar",
-    description: "Looking for fresh faces for an anthology series exploring city life stories.",
-    company: "Tiger Baby Films",
-    companyLink: "https://instagram.com/tigerbabyfilms",
-    contact: "casting@tigerbaby.com",
-    contactType: "email",
-    experience: "Beginner",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Urban Tales",
-  },
-  {
-    id: 6,
-    title: "Period Drama - 'The Forgotten Empire'",
-    type: "Theater",
-    location: "Kolkata",
-    state: "West Bengal",
-    date: "June 5, 2023",
-    director: "Feroz Abbas Khan",
-    description: "Casting for a large-scale historical production set in medieval India.",
-    company: "Prithvi Theatre",
-    companyLink: "https://prithvitheatre.org",
-    contact: "casting@prithvitheatre.org",
-    contactType: "email",
-    experience: "Advanced",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Forgotten Empire",
-  },
-  {
-    id: 7,
-    title: "Comedy Film - 'Family Circus'",
-    type: "Film",
-    location: "Chennai",
-    state: "Tamil Nadu",
-    date: "June 10, 2023",
-    director: "Rajkumar Hirani",
-    description: "Seeking actors with strong comedic timing for a family-oriented comedy film.",
-    company: "Vinod Chopra Films",
-    companyLink: "https://vinodchoprafilms.com",
-    contact: "casting@vcf.com",
-    contactType: "email",
-    experience: "Intermediate",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Family Circus",
-  },
-  {
-    id: 8,
-    title: "Experimental Theater - 'Fragments'",
-    type: "Theater",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "June 15, 2023",
-    director: "Anamika Haksar",
-    description: "Seeking performers for an experimental theater piece combining movement and text.",
-    company: "Experimental Theatre Foundation",
-    companyLink: "https://etf.org",
-    contact: "casting@etf.org",
-    contactType: "email",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Fragments",
-  },
-  {
-    id: 9,
-    title: "Crime Thriller Series - 'Undercover'",
-    type: "Web",
-    location: "Hyderabad",
-    state: "Telangana",
-    date: "June 20, 2023",
-    director: "Sriram Raghavan",
-    description: "Casting multiple roles for a gritty crime thriller web series.",
-    company: "Applause Entertainment",
-    companyLink: "https://applause.com",
-    contact: "casting@applause.com",
-    contactType: "email",
-    experience: "Intermediate",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Undercover",
-  },
-]
+// Define interfaces for type safety
+interface Audition {
+  id: string | number
+  title: string
+  type: string
+  location: string
+  state: string
+  date: string
+  description: string
+  experience: string
+  [key: string]: any // For any additional fields
+}
 
-// Get unique states and categories for filters
-const states = [...new Set(auditions.map((audition) => audition.state))].sort()
-const categories = [...new Set(auditions.map((audition) => audition.type))].sort()
-const cities = [...new Set(auditions.map((audition) => audition.location))].sort()
-const experienceLevels = [...new Set(auditions.map((audition) => audition.experience))].sort()
+interface FilterState {
+  search: string
+  city: string
+  state: string
+  category: string
+  experience: string
+}
 
 export default function AuditionsContent() {
-  const [filters, setFilters] = useState({
+  const [auditions, setAuditions] = useState<Audition[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+  
+  const [filters, setFilters] = useState<FilterState>({
     search: "",
     city: "all",
     state: "all",
@@ -182,11 +42,77 @@ export default function AuditionsContent() {
     experience: "all",
   })
 
+  // Get unique values for filters
+  const states = [...new Set(auditions.map((audition) => audition.state))].sort()
+  const categories = [...new Set(auditions.map((audition) => audition.type))].sort()
+  const cities = [...new Set(auditions.map((audition) => audition.location))].sort()
+  const experienceLevels = [...new Set(auditions.map((audition) => audition.experience))].sort()
+
+  // Fetch auditions from API
+  useEffect(() => {
+    const fetchAuditions = async (): Promise<void> => {
+      try {
+        setLoading(true)
+        
+        const response = await fetch('/api/auditions')
+        
+        if (!response.ok) {
+          throw new Error(`API request failed with status: ${response.status}`)
+        }
+        
+        const data = await response.json()
+        
+        // Assuming the API returns an array of auditions directly or in a data property
+        const fetchedAuditions = Array.isArray(data) ? data : data.results || data.data || []
+        
+        setAuditions(fetchedAuditions as Audition[])
+        setError(null)
+      } catch (err) {
+        console.error('Error fetching auditions:', err)
+        setError('Failed to load auditions. Please try again later.')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchAuditions()
+  }, [])
+
+  // Function to create new auditions via the API
+  const createAuditions = async (auditionData: Partial<Audition>[]): Promise<any> => {
+    try {
+      const response = await fetch('/api/auditions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(auditionData),
+      })
+      
+      if (!response.ok) {
+        throw new Error(`API request failed with status: ${response.status}`)
+      }
+      
+      const result = await response.json()
+      console.log('Auditions created:', result)
+      
+      // Refresh the auditions list
+      const updatedResponse = await fetch('/api/auditions')
+      const updatedData = await updatedResponse.json()
+      setAuditions(Array.isArray(updatedData) ? updatedData : updatedData.results || updatedData.data || [] as Audition[])
+      
+      return result
+    } catch (err) {
+      console.error('Error creating auditions:', err)
+      throw err
+    }
+  }
+
   const filteredAuditions = auditions.filter((audition) => {
     return (
       (filters.search === "" ||
         audition.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-        audition.description.toLowerCase().includes(filters.search.toLowerCase())) &&
+        (audition.description && audition.description.toLowerCase().includes(filters.search.toLowerCase()))) &&
       (filters.city === "all" || filters.city === "" || audition.location === filters.city) &&
       (filters.state === "all" || filters.state === "" || audition.state === filters.state) &&
       (filters.category === "all" || filters.category === "" || audition.type === filters.category) &&
@@ -194,11 +120,11 @@ export default function AuditionsContent() {
     )
   })
 
-  const handleFilterChange = (key: string, value: string) => {
+  const handleFilterChange = (key: keyof FilterState, value: string): void => {
     setFilters((prev) => ({ ...prev, [key]: value }))
   }
 
-  const clearFilters = () => {
+  const clearFilters = (): void => {
     setFilters({
       search: "",
       city: "all",
@@ -206,6 +132,33 @@ export default function AuditionsContent() {
       category: "all",
       experience: "all",
     })
+  }
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="container py-24 flex justify-center items-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-gray-600">Loading auditions...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="container py-24 flex justify-center items-center">
+        <div className="text-center max-w-lg">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
+          <p className="text-gray-700 mb-6">{error}</p>
+          <Button onClick={() => window.location.reload()} className="rounded-md">
+            Try Again
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -225,7 +178,7 @@ export default function AuditionsContent() {
           <h2 className="font-playfair text-xl font-bold">Filter Auditions</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="relative  lg:col-span-1">
+          <div className="relative lg:col-span-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               type="text"
@@ -233,11 +186,13 @@ export default function AuditionsContent() {
               className="pl-10 rounded-md w-full"
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
-          
-          />
+            />
           </div>
 
-          <Select value={filters.city} onValueChange={(value) => handleFilterChange("city", value)}>
+          <Select 
+            value={filters.city} 
+            onValueChange={(value: string) => handleFilterChange("city", value)}
+          >
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="City" />
             </SelectTrigger>
@@ -251,7 +206,11 @@ export default function AuditionsContent() {
             </SelectContent>
           </Select>
 
-          <Select value={filters.state} onValueChange={(value) => handleFilterChange("state", value)}>
+          {/* State filter */}
+          <Select 
+            value={filters.state} 
+            onValueChange={(value: string) => handleFilterChange("state", value)}
+          >
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="State" />
             </SelectTrigger>
@@ -265,7 +224,11 @@ export default function AuditionsContent() {
             </SelectContent>
           </Select>
 
-          <Select value={filters.category} onValueChange={(value) => handleFilterChange("category", value)}>
+          {/* Category filter */}
+          <Select 
+            value={filters.category} 
+            onValueChange={(value: string) => handleFilterChange("category", value)}
+          >
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
@@ -279,7 +242,11 @@ export default function AuditionsContent() {
             </SelectContent>
           </Select>
 
-          <Select value={filters.experience} onValueChange={(value) => handleFilterChange("experience", value)}>
+          {/* Experience filter */}
+          <Select 
+            value={filters.experience} 
+            onValueChange={(value: string) => handleFilterChange("experience", value)}
+          >
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="Experience" />
             </SelectTrigger>
@@ -314,85 +281,29 @@ export default function AuditionsContent() {
               key={audition.id}
               className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
             >
-              <div className="relative h-48 w-full">
-                <Image src={audition.image || "/placeholder.svg"} alt={audition.title} fill className="object-cover" />
-                {audition.verified && (
-                  <div className="absolute top-2 right-2 badge-verified">
-                    <span className="flex items-center">
-                      <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Verified
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-3">
-                  <span className="badge-primary">{audition.type}</span>
-                  <span className="badge-outline">{audition.experience}</span>
-                </div>
+              <div className="p-5 flex-grow">
                 <h3 className="font-playfair text-xl font-bold mb-2">{audition.title}</h3>
-                <p className="text-gray-600 mb-4 flex-1">{audition.description}</p>
-
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Director:</span>
-                    <span>{audition.director}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Location:</span>
-                    <span>
-                      {audition.location}, {audition.state}
-                    </span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Date:</span>
-                    <span>{audition.date}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Company:</span>
-                    <a
-                      href={audition.companyLink}
-                      className="text-primary hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {audition.company}
-                    </a>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Contact:</span>
-                    <div className="flex items-center">
-                      <Mail className="h-3 w-3 mr-1 text-primary" />
-                      {audition.contactType === "email" ? (
-                        <a href={`mailto:${audition.contact}`} className="text-primary hover:underline">
-                          {audition.contact}
-                        </a>
-                      ) : audition.contactType === "whatsapp" ? (
-                        <a href={`https://wa.me/${audition.contact}`} className="text-primary hover:underline">
-                          {audition.contact}
-                        </a>
-                      ) : (
-                        <a href={`tel:${audition.contact}`} className="text-primary hover:underline">
-                          {audition.contact}
-                        </a>
-                      )}
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                  <span>{audition.location}, {audition.state}</span>
+                  <span className="block h-1 w-1 rounded-full bg-gray-400"></span>
+                  <span>{audition.date}</span>
                 </div>
-
-                <div className="flex justify-end mt-auto pt-4 border-t">
-                  <Link href={`/auditions/${audition.id}`}>
-                    <Button size="sm" className="rounded-md">
-                      More Details
-                    </Button>
-                  </Link>
+                <p className="text-gray-600 mb-4 line-clamp-3">{audition.description}</p>
+                <div className="flex gap-2 mb-3">
+                  <span className="bg-primary/10 text-primary text-xs py-1 px-2 rounded-full">
+                    {audition.type}
+                  </span>
+                  <span className="bg-gray-100 text-gray-700 text-xs py-1 px-2 rounded-full">
+                    {audition.experience}
+                  </span>
                 </div>
+              </div>
+              <div className="p-5 pt-0 mt-auto">
+                <Link href={`/auditions/${audition.id}`}>
+                  <Button variant="outline" className="w-full rounded-md" size="sm">
+                    View Details
+                  </Button>
+                </Link>
               </div>
             </div>
           ))
@@ -405,6 +316,8 @@ export default function AuditionsContent() {
           </div>
         )}
       </div>
+      
+      
     </div>
   )
 }
