@@ -14,25 +14,6 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 // Verified workshops data
 const workshops = [
   {
-    id: 1,
-    title: "NSD TIE Summer Workshop (Tripura)",
-    trainer: "NSD (TIE Wing)",
-    institution: "National School of Drama",
-    location: "Tripura",
-    state: "Tripura",
-    date: "17 May – 7 June 2025",
-    time: "9 AM – 2 PM",
-    description:
-      "Organized by NSD (TIE Wing) + SCERT, Govt. of Tripura. Located at Nazrul Kalakshetra + Schools across Tripura. For children aged 8–16 years. Forms available from 10th May – First come, first serve basis.",
-    image: "/placeholder.svg?height=300&width=500&text=NSD+TIE+Workshop",
-    registrationLink: "mailto:nsdtripura@gmail.com",
-    featured: true,
-    price: "Free",
-    contact: "0381-2328797 / 9436511935",
-    email: "nsdtripura@gmail.com",
-    ageGroup: "8–16 years",
-  },
-  {
     id: 2,
     title: "NSD 3-Month Theatre-in-Education Certificate Course (Delhi)",
     trainer: "NSD TIE Company",

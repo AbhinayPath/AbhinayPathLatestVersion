@@ -5,10 +5,23 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Video, FileText, Calendar, GraduationCap, BookOpen, User, Lightbulb, Search } from "lucide-react"
+import {
+  Video,
+  FileText,
+  Calendar,
+  BookOpen,
+  User,
+  Lightbulb,
+  Search,
+  Clock,
+  Award,
+  BookmarkCheck,
+  School,
+} from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import AdmissionsBanner from "@/components/admissions-banner"
+import { Card, CardContent } from "@/components/ui/card"
 
 export default function AdmissionsPage() {
   const [activeVideoFilter, setActiveVideoFilter] = useState("all")
@@ -231,8 +244,12 @@ export default function AdmissionsPage() {
   return (
     <div className="container py-12">
       <AdmissionsBanner />
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="font-playfair text-4xl font-bold mb-4">Admissions & Preparation</h1>
+
+      <div className="max-w-3xl mx-auto text-center mb-8">
+        <h1 className="font-playfair text-4xl font-bold mb-3 flex items-center justify-center">
+          <School className="h-8 w-8 mr-3 text-primary" />
+          Admissions & Preparation
+        </h1>
         <p className="text-gray-600">
           Get guidance and resources to prepare for entrance exams to prestigious theater and film institutions.
         </p>
@@ -306,48 +323,48 @@ export default function AdmissionsPage() {
           </div>
 
           {filteredVideos.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideos.map((video, index) => (
-                <div
+                <Card
                   key={index}
-                  className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
+                  className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow h-full"
                 >
-                  <div className="relative h-48 w-full">
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-                      <div className="bg-white bg-opacity-80 rounded-full p-3">
-                        <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="relative h-40 w-full">
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 z-10">
+                      <div className="bg-white bg-opacity-80 rounded-full p-2.5">
+                        <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
                     </div>
                     <Image src="/images/acting-school.png" alt={video.title} fill className="object-cover" />
                   </div>
-                  <div className="p-6 flex-1 flex flex-col">
+                  <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <div className="flex gap-2">
-                        <span className="badge-primary">Video</span>
-                        <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
-                          {video.institution}
-                        </span>
+                      <Badge variant="secondary" className="text-xs">
+                        {video.institution}
+                      </Badge>
+                      <div className="flex items-center text-xs text-gray-500">
+                        <Clock className="h-3 w-3 mr-1" />
+                        {video.duration}
                       </div>
-                      <span className="text-sm text-gray-500">{video.duration}</span>
                     </div>
-                    <h3 className="font-playfair text-xl font-bold mb-2">{video.title}</h3>
-                    <div className="flex items-center mb-3">
-                      <div className="h-8 w-8 rounded-full bg-gray-200 mr-2"></div>
+                    <h3 className="font-playfair text-lg font-bold mb-1 line-clamp-2">{video.title}</h3>
+                    <div className="flex items-center mb-2">
+                      <div className="h-6 w-6 rounded-full bg-gray-200 mr-2"></div>
                       <div>
-                        <p className="text-sm font-medium">{video.presenter}</p>
+                        <p className="text-xs font-medium">{video.presenter}</p>
                         <p className="text-xs text-gray-500">{video.role}</p>
                       </div>
                     </div>
-                    <p className="text-gray-600 mb-4 flex-1">{video.description}</p>
-                    <Link href={video.link} className="mt-auto">
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{video.description}</p>
+                    <Link href={video.link}>
                       <Button size="sm" className="rounded-md w-full">
                         Watch Video
                       </Button>
                     </Link>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           ) : (
@@ -402,41 +419,41 @@ export default function AdmissionsPage() {
           </div>
 
           {filteredArticles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredArticles.map((article, index) => (
-                <div
+                <Card
                   key={index}
-                  className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
+                  className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow h-full"
                 >
-                  <div className="relative h-48 w-full">
+                  <div className="relative h-40 w-full">
                     <Image src="/images/acting-school.png" alt={article.title} fill className="object-cover" />
                   </div>
-                  <div className="p-6 flex-1 flex flex-col">
+                  <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <div className="flex gap-2">
-                        <span className="badge-secondary">Article</span>
-                        <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
-                          {article.institution}
-                        </span>
+                      <Badge variant="outline" className="text-xs">
+                        {article.institution}
+                      </Badge>
+                      <div className="flex items-center text-xs text-gray-500">
+                        <Clock className="h-3 w-3 mr-1" />
+                        {article.readTime}
                       </div>
-                      <span className="text-sm text-gray-500">{article.readTime}</span>
                     </div>
-                    <h3 className="font-playfair text-xl font-bold mb-2">{article.title}</h3>
-                    <div className="flex items-center mb-3">
-                      <div className="h-8 w-8 rounded-full bg-gray-200 mr-2"></div>
+                    <h3 className="font-playfair text-lg font-bold mb-1 line-clamp-2">{article.title}</h3>
+                    <div className="flex items-center mb-2">
+                      <div className="h-6 w-6 rounded-full bg-gray-200 mr-2"></div>
                       <div>
-                        <p className="text-sm font-medium">{article.author}</p>
+                        <p className="text-xs font-medium">{article.author}</p>
                         <p className="text-xs text-gray-500">{article.role}</p>
                       </div>
                     </div>
-                    <p className="text-gray-600 mb-4 flex-1">{article.description}</p>
-                    <Link href={article.link} className="mt-auto">
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{article.description}</p>
+                    <Link href={article.link}>
                       <Button variant="outline" size="sm" className="rounded-md w-full">
                         Read Article
                       </Button>
                     </Link>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           ) : (
@@ -459,31 +476,29 @@ export default function AdmissionsPage() {
 
         {/* Important Dates Tab */}
         <TabsContent value="dates" className="mt-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <GraduationCap className="h-5 w-5 text-primary" />
-              <h2 className="font-playfair text-2xl font-bold">Upcoming Entrance Exams</h2>
-            </div>
-            <p className="text-gray-600 mb-6">
-              Keep track of important application deadlines and exam dates for major theater and film institutions.
-            </p>
-
-            <div className="space-y-6">
-              <div className="border-b pb-6">
-                <h3 className="font-playfair text-xl font-bold mb-4">National School of Drama (NSD)</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Application Timeline</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <Card className="overflow-hidden border-0 shadow-sm">
+              <CardContent className="p-0">
+                <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                  <School className="h-5 w-5 mr-2" />
+                  <h2 className="font-playfair text-xl font-bold">National School of Drama (NSD)</h2>
+                </div>
+                <div className="p-5">
+                  <div className="mb-4">
+                    <h3 className="font-medium text-lg mb-2 flex items-center">
+                      <Calendar className="h-4 w-4 text-primary mr-2" />
+                      Key Dates
+                    </h3>
                     <ul className="space-y-2">
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Start Date</span>
+                      <li className="flex justify-between text-sm border-b pb-2">
+                        <span className="text-gray-600">Application Start</span>
                         <span className="text-gray-900 font-medium">May 15, 2023</span>
                       </li>
-                      <li className="flex justify-between text-sm">
+                      <li className="flex justify-between text-sm border-b pb-2">
                         <span className="text-gray-600">Application Deadline</span>
                         <span className="text-gray-900 font-medium">June 30, 2023</span>
                       </li>
-                      <li className="flex justify-between text-sm">
+                      <li className="flex justify-between text-sm border-b pb-2">
                         <span className="text-gray-600">Written Test</span>
                         <span className="text-gray-900 font-medium">August 5-6, 2023</span>
                       </li>
@@ -493,8 +508,12 @@ export default function AdmissionsPage() {
                       </li>
                     </ul>
                   </div>
-                  <div className="bg-blue-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Preparation Resources</p>
+
+                  <div>
+                    <h3 className="font-medium text-lg mb-2 flex items-center">
+                      <BookmarkCheck className="h-4 w-4 text-primary mr-2" />
+                      Resources
+                    </h3>
                     <ul className="space-y-2">
                       <li className="flex items-start text-sm">
                         <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
@@ -517,23 +536,31 @@ export default function AdmissionsPage() {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </CardContent>
+            </Card>
 
-              <div className="border-b pb-6">
-                <h3 className="font-playfair text-xl font-bold mb-4">Film and Television Institute of India (FTII)</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Application Timeline</p>
+            <Card className="overflow-hidden border-0 shadow-sm">
+              <CardContent className="p-0">
+                <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                  <School className="h-5 w-5 mr-2" />
+                  <h2 className="font-playfair text-xl font-bold">Film and Television Institute (FTII)</h2>
+                </div>
+                <div className="p-5">
+                  <div className="mb-4">
+                    <h3 className="font-medium text-lg mb-2 flex items-center">
+                      <Calendar className="h-4 w-4 text-primary mr-2" />
+                      Key Dates
+                    </h3>
                     <ul className="space-y-2">
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Start Date</span>
+                      <li className="flex justify-between text-sm border-b pb-2">
+                        <span className="text-gray-600">Application Start</span>
                         <span className="text-gray-900 font-medium">June 1, 2023</span>
                       </li>
-                      <li className="flex justify-between text-sm">
+                      <li className="flex justify-between text-sm border-b pb-2">
                         <span className="text-gray-600">Application Deadline</span>
                         <span className="text-gray-900 font-medium">July 15, 2023</span>
                       </li>
-                      <li className="flex justify-between text-sm">
+                      <li className="flex justify-between text-sm border-b pb-2">
                         <span className="text-gray-600">Written Test</span>
                         <span className="text-gray-900 font-medium">August 20, 2023</span>
                       </li>
@@ -543,8 +570,12 @@ export default function AdmissionsPage() {
                       </li>
                     </ul>
                   </div>
-                  <div className="bg-blue-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Preparation Resources</p>
+
+                  <div>
+                    <h3 className="font-medium text-lg mb-2 flex items-center">
+                      <BookmarkCheck className="h-4 w-4 text-primary mr-2" />
+                      Resources
+                    </h3>
                     <ul className="space-y-2">
                       <li className="flex items-start text-sm">
                         <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
@@ -567,25 +598,31 @@ export default function AdmissionsPage() {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </CardContent>
+            </Card>
 
-              <div>
-                <h3 className="font-playfair text-xl font-bold mb-4">
-                  Satyajit Ray Film & Television Institute (SRFTI)
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Application Timeline</p>
+            <Card className="overflow-hidden border-0 shadow-sm">
+              <CardContent className="p-0">
+                <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                  <School className="h-5 w-5 mr-2" />
+                  <h2 className="font-playfair text-xl font-bold">Satyajit Ray Film & TV Institute</h2>
+                </div>
+                <div className="p-5">
+                  <div className="mb-4">
+                    <h3 className="font-medium text-lg mb-2 flex items-center">
+                      <Calendar className="h-4 w-4 text-primary mr-2" />
+                      Key Dates
+                    </h3>
                     <ul className="space-y-2">
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Start Date</span>
+                      <li className="flex justify-between text-sm border-b pb-2">
+                        <span className="text-gray-600">Application Start</span>
                         <span className="text-gray-900 font-medium">June 15, 2023</span>
                       </li>
-                      <li className="flex justify-between text-sm">
+                      <li className="flex justify-between text-sm border-b pb-2">
                         <span className="text-gray-600">Application Deadline</span>
                         <span className="text-gray-900 font-medium">July 31, 2023</span>
                       </li>
-                      <li className="flex justify-between text-sm">
+                      <li className="flex justify-between text-sm border-b pb-2">
                         <span className="text-gray-600">Written Test</span>
                         <span className="text-gray-900 font-medium">August 27, 2023</span>
                       </li>
@@ -595,8 +632,12 @@ export default function AdmissionsPage() {
                       </li>
                     </ul>
                   </div>
-                  <div className="bg-blue-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Preparation Resources</p>
+
+                  <div>
+                    <h3 className="font-medium text-lg mb-2 flex items-center">
+                      <BookmarkCheck className="h-4 w-4 text-primary mr-2" />
+                      Resources
+                    </h3>
                     <ul className="space-y-2">
                       <li className="flex items-start text-sm">
                         <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
@@ -619,75 +660,55 @@ export default function AdmissionsPage() {
                     </ul>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </CardContent>
+            </Card>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="font-playfair text-2xl font-bold">Recommended Study Material</h2>
-            </div>
-            <p className="text-gray-600 mb-6">
-              Essential books and resources to help you prepare for entrance exams and interviews.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "The Empty Space",
-                  author: "Peter Brook",
-                  category: "Theater Theory",
-                  description: "A fundamental text on theater theory that is often referenced in entrance exams.",
-                  link: "#",
-                },
-                {
-                  title: "Stanislavski: An Introduction",
-                  author: "Jean Benedetti",
-                  category: "Acting Technique",
-                  description: "Clear overview of Stanislavski's system, essential for drama school interviews.",
-                  link: "#",
-                },
-                {
-                  title: "The Cambridge Guide to Theatre",
-                  author: "Martin Banham",
-                  category: "Reference",
-                  description: "Comprehensive reference for world theater history and terminology.",
-                  link: "#",
-                },
-                {
-                  title: "Indian Theatre: Traditions of Performance",
-                  author: "Farley P. Richmond",
-                  category: "Indian Theater",
-                  description: "Essential reading on traditional Indian performance forms and history.",
-                  link: "#",
-                },
-                {
-                  title: "The Dramatic World of Vijay Tendulkar",
-                  author: "Arundhati Banerjee",
-                  category: "Modern Indian Drama",
-                  description: "Analysis of one of India's most influential playwrights, often featured in exams.",
-                  link: "#",
-                },
-                {
-                  title: "Film Art: An Introduction",
-                  author: "David Bordwell & Kristin Thompson",
-                  category: "Film Studies",
-                  description: "Fundamental text for understanding film form and analysis for FTII aspirants.",
-                  link: "#",
-                },
-              ].map((book, index) => (
-                <div key={index} className="flex gap-4 p-4 border rounded-md">
-                  <div className="h-24 w-16 bg-gray-100 rounded flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <h3 className="font-medium mb-1">{book.title}</h3>
-                    <p className="text-sm text-gray-500 mb-1">by {book.author}</p>
-                    <span className="badge-outline text-xs mb-2">{book.category}</span>
-                    <p className="text-xs text-gray-600">{book.description}</p>
+            <Card className="overflow-hidden border-0 shadow-sm">
+              <CardContent className="p-0">
+                <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                  <Award className="h-5 w-5 mr-2" />
+                  <h2 className="font-playfair text-xl font-bold">Recommended Study Material</h2>
+                </div>
+                <div className="p-5">
+                  <div className="grid grid-cols-1 gap-4">
+                    {[
+                      {
+                        title: "The Empty Space",
+                        author: "Peter Brook",
+                        category: "Theater Theory",
+                        description: "A fundamental text on theater theory that is often referenced in entrance exams.",
+                      },
+                      {
+                        title: "Stanislavski: An Introduction",
+                        author: "Jean Benedetti",
+                        category: "Acting Technique",
+                        description: "Clear overview of Stanislavski's system, essential for drama school interviews.",
+                      },
+                      {
+                        title: "Indian Theatre: Traditions of Performance",
+                        author: "Farley P. Richmond",
+                        category: "Indian Theater",
+                        description: "Essential reading on traditional Indian performance forms and history.",
+                      },
+                    ].map((book, index) => (
+                      <div key={index} className="flex gap-3 p-3 border rounded-md">
+                        <div className="h-16 w-12 bg-gray-100 rounded flex-shrink-0"></div>
+                        <div className="flex-1">
+                          <h3 className="font-medium text-sm mb-0.5">{book.title}</h3>
+                          <p className="text-xs text-gray-500 mb-0.5">by {book.author}</p>
+                          <span className="inline-block text-xs px-2 py-0.5 bg-gray-100 rounded-full mb-1">
+                            {book.category}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                    <Link href="#" className="text-primary text-sm hover:underline text-center mt-2">
+                      View All Recommended Books →
+                    </Link>
                   </div>
                 </div>
-              ))}
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
