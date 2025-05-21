@@ -33,8 +33,19 @@ export default function JoinCommunityPage() {
         </h1>
         <div className="relative h-64 w-full mb-8 rounded-xl overflow-hidden shadow-xl">
           <Image src="/images/join-community.png" alt="Creative Community" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-            <div className="p-6 text-white text-left">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-between items-center p-6">
+            <div className="w-full flex justify-center mt-4">
+              <div className="relative w-64 h-24">
+                <Image
+                  src="/images/abhinaypath-logo.png"
+                  alt="AbhinayPath Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="w-full text-white text-left">
               <h2 className="text-2xl font-bold mb-2">Welcome!</h2>
               <p className="text-white/90 max-w-2xl">
                 We're building India's first platform for auditions, workshops, and creative careers — across Theater,
