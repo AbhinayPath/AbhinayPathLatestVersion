@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, Filter, ChevronDown, ChevronUp } from "lucide-react"
+import { Search, Filter, ChevronDown, ChevronUp, Star } from "lucide-react"
 import WorkshopBanner from "@/components/workshop-banner"
 import WorkshopCard from "@/components/workshop-card"
 import MobileFilterDrawer from "@/components/mobile-filter-drawer"
@@ -172,13 +172,16 @@ export default function WorkshopsContent() {
   const hasActiveFilters = Object.values(filters).some((value) => value !== "")
 
   return (
-    <div className="container py-6 md:py-12">
+    <div className="container py-8 md:py-16 px-4 sm:px-6">
       <WorkshopBanner />
 
-      <div className="max-w-3xl mx-auto text-center mb-8">
-        <h1 className="font-playfair text-3xl md:text-4xl font-bold mb-3">Workshops & Training</h1>
-        <p className="text-gray-600 text-sm md:text-base">
-          Enhance your skills with workshops and training sessions led by renowned theater professionals.
+      <div className="max-w-3xl mx-auto text-center mb-12">
+        <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-4 text-gray-800">
+          Workshops & <span className="text-primary">Training</span>
+        </h1>
+        <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto">
+          Enhance your skills with professional workshops and training sessions led by renowned theater professionals
+          from across the country.
         </p>
       </div>
 
@@ -291,11 +294,13 @@ export default function WorkshopsContent() {
         </div>
       )}
 
-      {/* Featured Workshops */}
       {featuredWorkshops.length > 0 && !hasActiveFilters && (
-        <div className="mb-10">
-          <h2 className="font-playfair text-xl font-bold mb-4">Featured Workshops</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="mb-16">
+          <div className="flex items-center mb-6">
+            <Star className="h-5 w-5 text-secondary mr-2 fill-secondary" />
+            <h2 className="font-playfair text-2xl font-bold">Featured Workshops</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {featuredWorkshops.slice(0, 2).map((workshop) => (
               <WorkshopCard key={workshop.id} workshop={workshop} />
             ))}
@@ -305,7 +310,7 @@ export default function WorkshopsContent() {
 
       {/* Workshop Cards */}
       {filteredWorkshops.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8">
           {filteredWorkshops.map((workshop) => (
             <WorkshopCard key={workshop.id} workshop={workshop} variant={isMobile ? "compact" : "full"} />
           ))}
