@@ -410,6 +410,198 @@ const workshops = [
       prerequisites: "Bring at least 2 short film ideas to start writing",
     },
   },
+  {
+    id: 11,
+    title: "Fundamentals of Film Direction – FTII Online Course",
+    trainer: "Avinash Roy & Jasmine Kaur Roy",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Online",
+    state: "All India",
+    date: "16–20 June 2025",
+    time: "10:30 AM–12:30 PM & 2:30 PM–4:30 PM (4 hours/day)",
+    description:
+      "A 5-day intensive online course on Film Direction designed for beginners and enthusiasts. Learn about cinematic language, visual storytelling, narrative structure, working with actors, screenplay, mise-en-scène, and montage. Taught by National Award-winning FTII alumni and co-founders of Wanderlust Films.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Film+Direction+Course",
+    registrationLink: "https://ftii.ac.in",
+    featured: true,
+    price: "₹3,900 (Indian Nationals)",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+    fullDetails: {
+      venue: "Online (Google Classroom + Google Meet)",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      medium: "English & Hindi",
+      duration: "5 days (Monday to Friday)",
+      eligibilityCriteria: [
+        "Minimum Age: 18+ as of 01 June 2025",
+        "Minimum Education: 12th pass (10th pass may be considered in exceptional cases)",
+        "Nationality: Indian",
+      ],
+      capacity: "40 seats",
+      courseFee: "₹3,900 (Indian Nationals), ₹11,700 (Foreign/NRI/OCI or Indians residing abroad)",
+      certification: "Digital certificate on successful completion (90% attendance mandatory)",
+      curriculum: [
+        "Introduction to the art and craft of direction",
+        "Understanding cinematic language, visual storytelling, and narrative structure",
+        "Working with actors, screenplay, mise-en-scène, and montage",
+        "Discussions, screenings, and film analysis",
+      ],
+      applicationProcess: [
+        "Last Date to Apply: 29 May 2025, 6 PM IST",
+        "Selection: First-Come-First-Served",
+        "Go to www.onlinesbi.com → Click on 'SBI Collect'",
+        "Search FTII Fees Account under 'Educational Institutions'",
+        "Select: B31 Fundamentals of Film Direction Online",
+        "Fill form → Pay fee → Save receipt",
+      ],
+      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020 – 2558 0085"],
+      aboutInstructor:
+        "Avinash Roy & Jasmine Kaur Roy – National Award-winning FTII alumni and co-founders of Wanderlust Films. Their films like Saanjh and Amoli have won National Awards and featured in international film festivals. Jasmine has also been a Berlinale Talents participant.",
+      techRequirements: [
+        "Desktop/Laptop with minimum 4 GB RAM and webcam",
+        "Stable internet (min 10 Mbps, 5 GB data/day)",
+        "Use of mobile phones not allowed",
+        "Familiarity with Google Meet & Classroom required",
+      ],
+    },
+  },
+  {
+    id: 12,
+    title: "Basic Course in the Art of Screenwriting – FTII Online",
+    trainer: "Vikas Sharma",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Online",
+    state: "All India",
+    date: "16–27 June 2025 (Weekdays only)",
+    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day)",
+    description:
+      "Dive into the core elements of screenwriting for feature films with this weekday-only online course. Learn principles of cinematic storytelling, character development, story structure, premise, theme, and conflict. Taught by seasoned screenwriter and former faculty at FTII & Whistling Woods.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Course",
+    registrationLink:
+      "https://ftii.ac.in/p/ftii-online-1/basic-course-in-the-art-of-feature-film-writing-16-27-june-2025-online",
+    featured: true,
+    price: "₹14,000 (Indian Nationals)",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+    fullDetails: {
+      venue: "Online (Google Classroom + Google Meet)",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      medium: "English & Hindi",
+      duration: "10 days (Weekdays only)",
+      eligibilityCriteria: [
+        "Age: 18+ as on 01 June 2025",
+        "Education: 12th pass (10th pass in exceptional cases)",
+        "Indian Nationals only",
+      ],
+      capacity: "24 participants (Min. 20 required to run the course)",
+      courseFee: "₹14,000 (Indian Nationals), ₹42,000 (Foreign, NRI, OCI, or Indians abroad)",
+      certification: "E-certificate awarded with 90% attendance",
+      curriculum: [
+        "Principles of cinematic storytelling",
+        "Character development & multi-dimensional protagonists",
+        "Story structure, premise, theme, and conflict",
+        "Screenwriting tools through theory, exercises, and feedback",
+      ],
+      applicationProcess: [
+        "Last Date to Apply: 29 May 2025, 6 PM IST",
+        "Visit www.onlinesbi.com → Click on 'SBI Collect'",
+        "Search FTII Fees Account under 'Educational Institutions'",
+        "Select: B02 Basic Course in the Art of Screenwriting",
+        "Fill form → Pay fee → Save receipt",
+      ],
+      contactInfo: ["Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com", "Phone: 020 – 2558 0085"],
+      aboutInstructor:
+        "Vikas Sharma – A seasoned screenwriter and former faculty at FTII & Whistling Woods. Has mentored at leading screenplay fellowships including Asia Society's New Voices Fellowship, Cinestaan India Script Contest, and more.",
+      techRequirements: [
+        "Laptop/Desktop with 4 GB RAM, webcam",
+        "Internet: Min 10 Mbps speed and 5 GB data/day",
+        "Mobile phone not allowed",
+        "Familiarity with Google Meet & Classroom is essential",
+      ],
+    },
+  },
+  {
+    id: 13,
+    title: "Basic Course in Writing Scenes and Dialogues – FTII Weekend Online",
+    trainer: "Vikas Sharma",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Online",
+    state: "All India",
+    date: "14–15 June & 21–22 June 2025 (Weekends only)",
+    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day)",
+    description:
+      "Discover what makes a scene unforgettable and a dialogue iconic in this hands-on writing course. Learn about crafting great dialogue, creating dramatic scenes, and the power of subtext. Ideal for aspiring screenwriters and storytellers who want to level up their scriptwriting game.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Dialogue+Writing+Course",
+    registrationLink: "https://ftii.ac.in",
+    featured: true,
+    price: "₹7,200 (Indian Nationals)",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+    fullDetails: {
+      venue: "Online (Google Classroom + Google Meet)",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      medium: "English & Hindi",
+      duration: "4 days (Weekends only: 14–15 June & 21–22 June 2025)",
+      eligibilityCriteria: [
+        "Age: 18+ (born on or before 31 May 2007)",
+        "Education: 12th pass (10th pass may be considered in exceptional cases)",
+        "Nationality: Indian citizens only",
+      ],
+      capacity: "24 participants (Min. 20 required to run the course)",
+      courseFee: "₹7,200 (Indian Participants), ₹21,600 (Foreign/OCI/NRI or Indians residing abroad)",
+      certification: "E-Certificate awarded upon successful completion with 90% attendance mandatory",
+      curriculum: [
+        "Crafting Great Dialogue:",
+        "What makes a dialogue unforgettable",
+        "Dialogue vs. conversation",
+        "Subtext and the power of 'the unsaid'",
+        "Humour, wit, and spoken action",
+        "Text vs. subtext",
+        "Iconic lines that made history (e.g., 'Mere Paas Maa Hai')",
+        "Creating Dramatic Scenes:",
+        "Structure of an impactful scene",
+        "Types of scenes in screenwriting",
+        "Writing suspense, humour, tension, anticipation",
+        "Plot and character through scene development",
+      ],
+      methodology: [
+        "Writing your own scenes",
+        "Film viewings and analysis",
+        "Interactive exercises and live instruction",
+      ],
+      applicationProcess: [
+        "Last Date to Apply: 29 May 2025, 6 PM IST",
+        "Selection: First-Come-First-Served basis",
+        "Go to www.onlinesbi.com",
+        "Click on 'SB Collect'",
+        "Search FTII Fees Account under 'Educational Institutions'",
+        "Select: B11 Basic C. in Writing Dialogues and Scenes for Screen",
+        "Fill form → Pay fee → Save your payment receipt",
+      ],
+      contactInfo: [
+        "Contact: Mr. Milindkumar Joshi, Assistant Outreach Officer",
+        "Email: info.cfol@ftii.ac.in | ftiioutreach@gmail.com",
+        "Phone: 020 – 2558 0085",
+      ],
+      aboutInstructor:
+        "Vikas Sharma – Professional screenwriter and senior faculty at Whistling Woods International; former faculty at FTII Pune. Mentor at major fellowships including Asia Society's New Voices, Cinestaan India Script Contest, and more.",
+      techRequirements: [
+        "Device: Laptop/Desktop (No mobile phones allowed)",
+        "RAM: 4 GB or more",
+        "Processor: Intel i3/i5 or equivalent",
+        "Webcam + Headphones required",
+        "Internet: Minimum 10 Mbps, 5 GB data/day",
+      ],
+      importantNotes: [
+        "Participants must keep cameras ON and mics OFF during class unless instructed otherwise.",
+        "Failure to keep camera on may lead to expulsion and no refund.",
+        "All communication will be via email. Selected candidates will receive emails and names may be posted on FTII's website.",
+      ],
+    },
+  },
 ]
 
 export default function WorkshopDetailContent({ id }: { id: number }) {
@@ -473,7 +665,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
             className="object-cover"
             onError={(e) => {
               // Fallback to a placeholder if image fails to load
-              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
+              e.currentTarget.src = "/images/acting-workshop.png"
             }}
           />
           {workshop.featured && (
@@ -662,6 +854,22 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                   </div>
                 )}
+
+                {workshop.fullDetails?.techRequirements && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="font-bold">💻</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Technical Requirements</p>
+                      <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
+                        {workshop.fullDetails.techRequirements.map((item: string, index: number) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -726,6 +934,28 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Contact Information</h2>
                   <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
                     {workshop.fullDetails.contactInfo.map((item: string, index: number) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {workshop.fullDetails?.methodology && (
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Methodology</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
+                    {workshop.fullDetails.methodology.map((item: string, index: number) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {workshop.fullDetails?.importantNotes && (
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Important Notes</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
+                    {workshop.fullDetails.importantNotes.map((item: string, index: number) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
