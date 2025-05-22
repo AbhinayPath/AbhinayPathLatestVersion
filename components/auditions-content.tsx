@@ -12,42 +12,6 @@ import AuditionBanner from "@/components/audition-banner"
 // Verified audition data
 const auditions = [
   {
-    id: 1,
-    title: "PAN-INDIA CASTING CALL – Cement Brand Ad Shoot (Tamil)",
-    type: "Commercial",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "18–25 May 2025",
-    director: "Inorita Productions",
-    description:
-      "Brand: Ultratech Cement. Usage: 2 years (TV, Digital, Cinema). Roles: Father (55 yrs), Mother (50 yrs), Tai Ji (60 yrs) – Wife of father's elder brother. Requirements: Fluent in Tamil, Experienced, expressive, natural actors. Immediate audition needed.",
-    company: "Inorita Productions",
-    companyLink: "https://instagram.com/indriyaproductions",
-    contact: "88841 28712",
-    contactType: "whatsapp",
-    experience: "Experienced",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Cement+Ad+Casting",
-  },
-  {
-    id: 2,
-    title: "CASTING CALL – Friendship App DVC (Kannada/Malayalam)",
-    type: "Digital",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "16, 17, or 19 May 2025",
-    director: "Inorita Productions",
-    description:
-      "Budget: Medium. Roles: 3 Female Artists (20–28 yrs, Fluent in Kannada), 2 Female Artists (20–28 yrs, Fluent in Malayalam). Requirements: Comfortable with western/knee-length/low neckline dresses, Good screen presence.",
-    company: "Inorita Productions",
-    companyLink: "https://instagram.com/indriyaproductions",
-    contact: "88841 28712",
-    contactType: "whatsapp",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Friendship+App+DVC",
-  },
-  {
     id: 3,
     title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
     type: "Theater",
@@ -64,6 +28,78 @@ const auditions = [
     experience: "All Levels",
     verified: true,
     image: "/placeholder.svg?height=300&width=500&text=Hindi+Comedy+Play",
+  },
+  {
+    id: 4,
+    title: "CASTING CALL FOR A PLAY CALLED 'ONCE THERE WAS A WAY'",
+    type: "Theater",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "Ongoing",
+    director: "Theater Production",
+    description:
+      "Need artists who are based in Bengaluru (theatre actors). Male actor: age 21-25 (should know how to play a guitar). Male actor: age 30+. Female actor: age 30+. Male actor: age 50+. DM for more details.",
+    company: "Theater Production",
+    companyLink: "tel:+917330684137",
+    contact: "+917330684137",
+    contactType: "phone",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Once+There+Was+A+Way",
+  },
+  {
+    id: 5,
+    title: "Lead Role Actress for Kannada Feature Film - Mute Character",
+    type: "Film",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Ongoing",
+    director: "CINECUBES",
+    description:
+      'We are looking for a lead role actress for our Kannada feature film (language is not a barrier). The character is of a mute girl. So, language is not a barrier. Facial expressions are the most important factors along with the ability to use a mute girl\'s sounds like "bhaaaah...", "mahhh..."',
+    company: "CINECUBES",
+    companyLink: "https://wa.me/919886028205",
+    contact: "+91 9886028205 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Kannada+Feature+Film",
+  },
+  {
+    id: 6,
+    title: "Casting Call for Web Series - 'Digital Nomads'",
+    type: "Web Series",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "June 15-30, 2025",
+    director: "Horizon Studios",
+    description:
+      "Casting for an upcoming web series about a group of digital nomads traveling across India while working remotely. Looking for diverse cast members who can portray tech professionals with different backgrounds and personalities.",
+    company: "Horizon Studios",
+    companyLink: "mailto:casting@horizonstudios.in",
+    contact: "casting@horizonstudios.in",
+    contactType: "email",
+    experience: "Experienced",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Digital+Nomads+Web+Series",
+  },
+  {
+    id: 7,
+    title: "Casting Call for 2-Minute Short Film - Family Drama",
+    type: "Short Film",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "May 26-27, 2025",
+    director: "Independent Filmmaker",
+    description:
+      "Casting for a 2-minute short film shot in Bangalore. Language: Hindi and English (Hinglish). Roles: Gen Z female (17-21), supportive mother (40s-50s), and sarcastic father (40s-50s). This is a PAID opportunity. Apply via WhatsApp specifying the role you're interested in.",
+    company: "Independent Production",
+    companyLink: "https://wa.me/919862853175",
+    contact: "9862853175 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Short+Film+Casting",
   },
 ]
 
@@ -105,7 +141,6 @@ export default function AuditionsContent() {
       state: "all",
       category: "all",
       experience: "all",
-      city: "all",
     })
   }
 
@@ -237,10 +272,9 @@ export default function AuditionsContent() {
                   <span className="badge-primary">{audition.type}</span>
                   <span className="badge-outline">{audition.experience}</span>
                 </div>
-                <h3 className="font-playfair text-xl font-bold mb-2">{audition.title}</h3>
-                <p className="text-gray-600 mb-4 flex-1 line-clamp-3">{audition.description}</p>
+                <h3 className="font-playfair text-xl font-bold mb-4">{audition.title}</h3>
 
-                <div className="space-y-3 mb-4">
+                <div className="space-y-3 mb-4 flex-1">
                   <div className="flex items-center text-sm text-gray-500">
                     <span className="font-medium text-gray-700 w-20">Production:</span>
                     <span>{audition.director}</span>

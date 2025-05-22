@@ -245,7 +245,7 @@ export default function AdmissionsPage() {
     <div className="relative">
       {/* Coming Soon Overlay */}
       <div className="absolute inset-0 bg-black/70 z-50 flex flex-col items-center justify-center text-center px-4">
-        <div className="bg-white rounded-xl p-8 max-w-md shadow-2xl transform transition-all animate-fade-in">
+        <div className="bg-white rounded-xl p-8 max-w-md shadow-2xl transform animate-fade-in">
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <Clock className="h-8 w-8 text-primary" />
           </div>
@@ -736,16 +736,3 @@ export default function AdmissionsPage() {
     </div>
   )
 }
-
-// Add a style tag for the animation
-const style = document.createElement("style")
-style.textContent = `
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-`
-document.head.appendChild(style)

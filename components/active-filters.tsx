@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { X } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface ActiveFiltersProps {
   filters: {
@@ -16,32 +16,52 @@ interface ActiveFiltersProps {
 }
 
 export default function ActiveFilters({ filters, handleFilterChange, clearFilters }: ActiveFiltersProps) {
-  const activeFilters = Object.entries(filters).filter(([_, value]) => value !== "")
+  const activeFilters = Object.entries(filters).filter(([_, value]) => value !== "" && value !== "all")
 
   if (activeFilters.length === 0) return null
 
+  const getFilterLabel = (key: string, value: string) => {
+    switch (key) {
+      case "search":
+        return `Search: ${value}`
+      case "city":
+        return `City: ${value}`
+      case "state":
+        return `State: ${value}`
+      case "trainer":
+        return `Trainer: ${value}`
+      case "institution":
+        return `Institution: ${value}`
+      default:
+        return value
+    }
+  }
+
   return (
-    <div className="mb-4">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-medium">Active Filters:</h3>
-        <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 text-xs">
-          Clear All
-        </Button>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {activeFilters.map(([key, value]) => (
-          <Button
-            key={key}
-            variant="outline"
-            size="sm"
-            onClick={() => handleFilterChange(key, "")}
-            className="h-7 text-xs rounded-full flex items-center gap-1 bg-gray-50"
+    <div className="mb-4 flex flex-wrap gap-2 items-center">
+      {activeFilters.map(([key, value]) => (
+        <div
+          key={key}
+          className="bg-gray-100 text-gray-800 text-xs md:text-sm px-2 py-1 rounded-full flex items-center"
+        >
+          <span className="mr-1 truncate max-w-[150px]">{getFilterLabel(key, value)}</span>
+          <button
+            onClick={() => handleFilterChange(key, key === "search" ? "" : "all")}
+            className="text-gray-500 hover:text-gray-700"
+            aria-label={`Remove ${key} filter`}
           >
-            {key === "search" ? "Search" : key.charAt(0).toUpperCase() + key.slice(1)}: {value}
             <X className="h-3 w-3" />
-          </Button>
-        ))}
-      </div>
+          </button>
+        </div>
+      ))}
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={clearFilters}
+        className="text-xs md:text-sm h-6 px-2 text-gray-500 hover:text-gray-700"
+      >
+        Clear all
+      </Button>
     </div>
   )
 }

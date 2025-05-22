@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, Filter, ChevronDown, ChevronUp, Star } from "lucide-react"
+import { Search, Filter, ChevronDown, ChevronUp, Star, X } from "lucide-react"
 import WorkshopBanner from "@/components/workshop-banner"
 import WorkshopCard from "@/components/workshop-card"
 import MobileFilterDrawer from "@/components/mobile-filter-drawer"
@@ -103,6 +103,85 @@ const workshops = [
     price: "Contact for details",
     contact: "Via website",
   },
+  {
+    id: 7,
+    title: "FTII Workshop in Delhi – Tribute to Raj Kapoor",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "12–13 July 2025",
+    time: "10 AM – 5 PM (with 1–2 PM lunch break)",
+    description:
+      "This 2-day workshop explores the rich legacy of Raj Kapoor through the lens of his iconic song sequences. From Barsaat to Jagte Raho and Awara, relive the Golden Era of Hindi film music and learn about cinematic storytelling through songs.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Workshop",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
+    featured: true,
+    price: "₹1,500",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+  },
+  {
+    id: 8,
+    title: "FTII's Basic Course on Writing for Short Film Fiction – Delhi",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "07–11 July 2025",
+    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
+    description:
+      "A hands-on, foundational course for aspiring screenwriters who want to write short fiction films. Learn from industry experts about film history, storytelling, screenwriting fundamentals, and pitching your ideas effectively. Participants will watch and analyse films, and complete daily writing exercises.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Workshop",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-delhi-07-11-july-2025",
+    featured: true,
+    price: "₹9,000",
+    contact: "020 – 2558 0085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+  },
+  {
+    id: 9,
+    title: "FTII's Basic Course in Appreciating Songs in Guru Dutt Films",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "05–06 July 2025",
+    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
+    description:
+      "To celebrate the birth centenary of the legendary filmmaker Guru Dutt, this special two-day workshop is dedicated to exploring the magic of songs in Guru Dutt's cinema. Explore his cinematic style through timeless songs from classics like Pyaasa, Kagaz Ke Phool, and Sahib Bibi Aur Ghulam.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Guru+Dutt+Workshop",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-delhi-05-06-july-2025",
+    featured: true,
+    price: "₹1,500",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+  },
+  {
+    id: 10,
+    title: "FTII's Foundation Course in Screenplay Writing – Goa",
+    trainer: "Vaidehi Sancheti",
+    institution: "Film and Television Institute of India (FTII) & The Arthouse Film Academy",
+    location: "Arpora",
+    state: "Goa",
+    date: "14–25 June 2025",
+    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
+    description:
+      "A 10-day intensive course for aspiring storytellers in the scenic creative hub of North Goa. Learn to craft your first 10-minute short film screenplay through exercises, feedback, and storytelling sessions. Perfect for beginners with stories to tell. Bring at least 2 short film ideas to start writing.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Goa+Screenplay+Workshop",
+    registrationLink: "https://ftii.ac.in/p/vtwa/foundation-course-in-screenplay-in-goa-14-25-june-2025",
+    featured: true,
+    price: "₹17,500",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+  },
 ]
 
 // Get unique states, cities, and trainers for filters
@@ -121,6 +200,7 @@ export default function WorkshopsContent() {
   })
   const [showDesktopFilters, setShowDesktopFilters] = useState(false)
   const isMobile = useMediaQuery("(max-width: 768px)")
+  const isSmallMobile = useMediaQuery("(max-width: 640px)")
 
   const filteredWorkshops = workshops.filter((workshop) => {
     return (
@@ -153,11 +233,11 @@ export default function WorkshopsContent() {
   const hasActiveFilters = Object.values(filters).some((value) => value !== "")
 
   return (
-    <div className="container py-8 md:py-16 px-4 sm:px-6">
+    <div className="container py-6 md:py-16 px-3 sm:px-6">
       <WorkshopBanner />
 
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-4 text-gray-800">
+      <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+        <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-3 text-gray-800">
           Workshops & <span className="text-primary">Training</span>
         </h1>
         <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto">
@@ -166,9 +246,33 @@ export default function WorkshopsContent() {
         </p>
       </div>
 
-      {/* Mobile Filter Button */}
+      {/* Mobile Search */}
+      {isMobile && (
+        <div className="mb-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Input
+              type="text"
+              placeholder="Search workshops"
+              className="pl-10 rounded-full"
+              value={filters.search}
+              onChange={(e) => handleFilterChange("search", e.target.value)}
+            />
+            {filters.search && (
+              <button
+                className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 hover:text-gray-600"
+                onClick={() => handleFilterChange("search", "")}
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Filter Button and Count */}
       <div className="mb-6 flex justify-between items-center">
-        <h2 className="font-playfair text-xl font-bold">
+        <h2 className="font-playfair text-lg md:text-xl font-bold">
           {hasActiveFilters
             ? `${filteredWorkshops.length} Workshop${filteredWorkshops.length !== 1 ? "s" : ""} Found`
             : "All Workshops"}
@@ -275,13 +379,13 @@ export default function WorkshopsContent() {
         </div>
       )}
 
-      {featuredWorkshops.length > 0 && !hasActiveFilters && (
-        <div className="mb-16">
-          <div className="flex items-center mb-6">
+      {featuredWorkshops.length > 0 && !hasActiveFilters && !isSmallMobile && (
+        <div className="mb-10 md:mb-16">
+          <div className="flex items-center mb-4 md:mb-6">
             <Star className="h-5 w-5 text-secondary mr-2 fill-secondary" />
-            <h2 className="font-playfair text-2xl font-bold">Featured Workshops</h2>
+            <h2 className="font-playfair text-xl md:text-2xl font-bold">Featured Workshops</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
             {featuredWorkshops.slice(0, 2).map((workshop) => (
               <WorkshopCard key={workshop.id} workshop={workshop} />
             ))}
@@ -291,13 +395,13 @@ export default function WorkshopsContent() {
 
       {/* Workshop Cards */}
       {filteredWorkshops.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {filteredWorkshops.map((workshop) => (
             <WorkshopCard key={workshop.id} workshop={workshop} variant={isMobile ? "compact" : "full"} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
+        <div className="text-center py-8 md:py-12 bg-gray-50 rounded-xl">
           <p className="text-gray-500 mb-4">No workshops match your current filters.</p>
           <Button onClick={clearFilters} variant="outline" className="rounded-full">
             Clear Filters

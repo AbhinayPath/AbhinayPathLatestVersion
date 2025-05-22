@@ -190,6 +190,226 @@ const workshops = [
       ],
     },
   },
+  {
+    id: 7,
+    title: "FTII Workshop in Delhi – Tribute to Raj Kapoor",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "12–13 July 2025",
+    time: "10 AM – 5 PM (with 1–2 PM lunch break)",
+    description:
+      "This 2-day workshop explores the rich legacy of Raj Kapoor through the lens of his iconic song sequences. From Barsaat to Jagte Raho and Awara, relive the Golden Era of Hindi film music and learn about cinematic storytelling through songs.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Workshop",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
+    featured: true,
+    price: "₹1,500",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+    fullDetails: {
+      venue: "Triveni Kala Sangam, Mandi House, Delhi",
+      topic: "Basic Course in Appreciating Songs in Raj Kapoor Films (A tribute to the Showman on his birth centenary)",
+      organizer: "FTII Pune, under Centre For Open Learning (CFOL)",
+      eligibilityCriteria: [
+        "Age: 18+ (born on or before 30th June 2007)",
+        "Qualification: 12th pass (10th in exceptional cases)",
+        "Nationality: Indian",
+      ],
+      medium: "Hindi & English",
+      capacity: "70 participants (Min. 56 required to conduct the course)",
+      courseFee: "₹1,500 (Non-refundable for selected participants)",
+      certification: "Given on 90% attendance",
+      applicationProcess: [
+        "Last Date to Apply: 29 May 2025, 6 PM IST",
+        "Selection: First-come, first-served",
+        "Visit SBI Collect",
+        "Search: FTII Fees Account",
+        "Select Payment Category: 01 Appreciating Songs in Raj Kapoor Films",
+        "Fill in details and pay ₹1,500",
+        "Save your payment receipt and reference number",
+      ],
+      contactInfo: [
+        "FTII Queries: Mr. Milind Joshi – 020 25580085 / info.cfol@ftii.ac.in",
+        "Accommodation Support (Outstation): Ms. Mudra Sharma – 99588 31338",
+      ],
+      aboutInstructor:
+        "Dr. Milind Damle – FTII alumnus and Associate Professor, with 20+ years of experience in radio, cinema & television. A decorated filmmaker and researcher, his doctoral work focused on song picturization techniques in Indian cinema.",
+    },
+  },
+  {
+    id: 8,
+    title: "FTII's Basic Course on Writing for Short Film Fiction – Delhi",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "07–11 July 2025",
+    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
+    description:
+      "A hands-on, foundational course for aspiring screenwriters who want to write short fiction films. Learn from industry experts about film history, storytelling, screenwriting fundamentals, and pitching your ideas effectively. Participants will watch and analyse films, and complete daily writing exercises.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Workshop",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-delhi-07-11-july-2025",
+    featured: true,
+    price: "₹9,000",
+    contact: "020 – 2558 0085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+    fullDetails: {
+      venue: "Triveni Kala Sangam, Mandi House, Delhi",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      medium: "English & Hindi",
+      eligibilityCriteria: [
+        "Age: 18+ (born on/before 30 June 2007)",
+        "Qualification: 12th pass (exceptionally 10th pass may be considered)",
+        "Nationality: Indian",
+      ],
+      capacity: "Max 24 participants (Min. 20 required to run the course)",
+      courseFee: "₹9,000 (Excludes food & stay)",
+      certification: "Issued on 90% minimum attendance",
+      curriculum: [
+        "Film history & evolution",
+        "Role of the writer in film production",
+        "Storytelling from life, culture, and society",
+        "Fundamentals of screenwriting",
+        "Writing for films, OTT & short formats",
+        "Screenplay formatting as per global standards",
+        "Pitching your ideas effectively",
+      ],
+      applicationProcess: [
+        "Last Date to Apply: 29 May 2025, 6 PM IST",
+        "Selection: First-Come, First-Served Basis",
+        "Visit: https://www.onlinesbi.sbi/sbicollect/icollecthome.htm",
+        "Search for: FTII Fees Account",
+        "Select Payment Category: O2 Basic Course on Writing for Short Film Fiction",
+        "Fill the application form and pay ₹9,000",
+        "Save your SBI Collect Reference Number for future use",
+      ],
+      contactInfo: [
+        "Email: info.cfol@ftii.ac.in / ftiioutreach@gmail.com",
+        "Phone: 020 – 2558 0085",
+        "For accommodation queries: Ms. Mudra Sharma – 99588 31338",
+      ],
+      aboutInstructor:
+        "Dr. Milind Damle – Associate Professor, FTII. An FTII alumnus (2004 batch), film editor, short film director, and award-winning filmmaker. His Ph.D. research focuses on picturization of songs in Indian cinema.",
+      additionalInfo:
+        "This is your chance to build a strong foundation in screenwriting and connect with one of India's premier film institutions. If you want to write, you must write!",
+    },
+  },
+  {
+    id: 9,
+    title: "FTII's Basic Course in Appreciating Songs in Guru Dutt Films",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "05–06 July 2025",
+    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
+    description:
+      "To celebrate the birth centenary of the legendary filmmaker Guru Dutt, this special two-day workshop is dedicated to exploring the magic of songs in Guru Dutt's cinema. Explore his cinematic style through timeless songs from classics like Pyaasa, Kagaz Ke Phool, and Sahib Bibi Aur Ghulam.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Guru+Dutt+Workshop",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-delhi-05-06-july-2025",
+    featured: true,
+    price: "₹1,500",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+    fullDetails: {
+      venue: "Triveni Auditorium, Triveni Kala Sangam, 205, Tansen Marg, Mandi House, Delhi – 110001",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      medium: "Hindi & English",
+      eligibilityCriteria: [
+        "Age 18+ (as of 1st July 2025)",
+        "Minimum Qualification: 12th pass (10th pass in exceptional cases)",
+        "Nationality: Indian",
+      ],
+      capacity: "Max. 70 participants (Min. 56 required to run the course)",
+      courseFee: "₹1,500",
+      certification: "Certificate of Participation (Minimum 90% attendance required)",
+      curriculum: [
+        "Guru Dutt's cinematic style through his timeless songs",
+        "Song picturization, visuals, and music in films like Pyaasa, Kagaz Ke Phool, and Sahib Bibi Aur Ghulam",
+        "An engaging tribute to the Golden Era of Hindi Cinema through discussion, visuals, and music",
+      ],
+      applicationProcess: [
+        "Last Date to Apply: 29 May 2025, 6 PM IST",
+        "Selection Criteria: First-Come, First-Served",
+        "Go to SBI Collect",
+        "Search: FTII Fees Account",
+        'Select Payment Category: "O1 B.C. in Appreciating Songs in Guru Dutt Films"',
+        "Pay ₹1,500 and keep your payment receipt",
+      ],
+      contactInfo: [
+        "Mr. Milind Joshi – info.cfol@ftii.ac.in | 020-25580085",
+        "Accommodation queries: Ms. Mudra Sharma – 99588 31338",
+      ],
+      aboutInstructor:
+        "Dr. Milind Damle – Associate Professor, FTII | Film Educator | FTII Alumnus | Over 20 years in Radio, TV & Cinema",
+      additionalInfo:
+        "Celebrate the timeless magic of Guru Dutt's cinema — through music, visuals, and storytelling. Join this immersive tribute!",
+    },
+  },
+  {
+    id: 10,
+    title: "FTII's Foundation Course in Screenplay Writing – Goa",
+    trainer: "Vaidehi Sancheti",
+    institution: "Film and Television Institute of India (FTII) & The Arthouse Film Academy",
+    location: "Arpora",
+    state: "Goa",
+    date: "14–25 June 2025",
+    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
+    description:
+      "A 10-day intensive course for aspiring storytellers in the scenic creative hub of North Goa. Learn to craft your first 10-minute short film screenplay through exercises, feedback, and storytelling sessions. Perfect for beginners with stories to tell. Bring at least 2 short film ideas to start writing.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Goa+Screenplay+Workshop",
+    registrationLink: "https://ftii.ac.in/p/vtwa/foundation-course-in-screenplay-in-goa-14-25-june-2025",
+    featured: true,
+    price: "₹17,500",
+    contact: "020 25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass",
+    fullDetails: {
+      venue: "The Arthouse Film Academy, Arpora, North Goa",
+      organizer:
+        "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL) in collaboration with The Arthouse Film Academy, Goa",
+      medium: "English & Hindi",
+      duration: "10 Days",
+      eligibilityCriteria: [
+        "Age: 18 years & above (as on 01 June 2025)",
+        "Education: Minimum 12th pass (10th may be considered in special cases)",
+        "Nationality: Indian",
+      ],
+      capacity: "24 participants (Course will be conducted only if 20 or more enroll)",
+      courseFee: "₹17,500 (Excludes food, accommodation, and travel)",
+      certification:
+        "Joint Certificate of Participation from FTII and The Arthouse Film Academy upon successful completion (with 90% minimum attendance)",
+      curriculum: [
+        "Idea to Screenplay: Understanding structure, character, plot",
+        "Daily writing exercises and screenings",
+        "Learn to analyze films from a writer's lens",
+        "Perfect for beginners with stories to tell",
+      ],
+      applicationProcess: [
+        "Last Date to Apply: 29 May 2025, by 6:00 PM",
+        "Selection: First-Come, First-Served",
+        "Payment Mode: SBI Collect",
+        "No documents needed — just fill in the form and self-declare",
+      ],
+      contactInfo: [
+        "FTII Contact: Mr. Milind Joshi – 020-25580085 / info.cfol@ftii.ac.in",
+        "Arthouse Contact: Ms. Bhavna – 76766 43829 / thearthouseacademy@gmail.com",
+        "Accommodation Support: Ms. Bhavna – 76766 43829 / thearthouseacademy@gmail.com",
+      ],
+      aboutInstructor:
+        "Vaidehi Sancheti – An FTII alumna, poet, and passionate storyteller, Vaidehi Sancheti has conducted screenplay writing workshops at FTII, Whistling Woods, and Living Bridge.",
+      additionalInfo:
+        "Turn your ideas into compelling screenplays under expert mentorship in Goa's creative heartland! Bring at least 2 short film ideas to start writing. Recommended film viewing list will be provided for deeper insight.",
+      prerequisites: "Bring at least 2 short film ideas to start writing",
+    },
+  },
 ]
 
 export default function WorkshopDetailContent({ id }: { id: number }) {
@@ -359,14 +579,14 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   </div>
                 )}
 
-                {workshop.fullDetails?.organizers && (
+                {workshop.fullDetails?.organizer && (
                   <div className="flex items-start">
                     <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
                       <span className="font-bold">🏢</span>
                     </div>
                     <div>
                       <p className="font-medium">Organizers</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.organizers}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.organizer}</p>
                     </div>
                   </div>
                 )}
@@ -391,6 +611,54 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     <div>
                       <p className="font-medium">Upcoming Webinar</p>
                       <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.upcomingWebinar}</p>
+                    </div>
+                  </div>
+                )}
+
+                {workshop.fullDetails?.medium && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="font-bold">🗣️</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Medium</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.medium}</p>
+                    </div>
+                  </div>
+                )}
+
+                {workshop.fullDetails?.capacity && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="font-bold">👥</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Capacity</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.capacity}</p>
+                    </div>
+                  </div>
+                )}
+
+                {workshop.fullDetails?.topic && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="font-bold">📚</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Topic</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.topic}</p>
+                    </div>
+                  </div>
+                )}
+
+                {workshop.fullDetails?.prerequisites && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="font-bold">📋</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Prerequisites</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.prerequisites}</p>
                     </div>
                   </div>
                 )}
@@ -442,6 +710,28 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                 </div>
               )}
 
+              {workshop.fullDetails?.applicationProcess && (
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Application Process</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
+                    {workshop.fullDetails.applicationProcess.map((item: string, index: number) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {workshop.fullDetails?.contactInfo && (
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Contact Information</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
+                    {workshop.fullDetails.contactInfo.map((item: string, index: number) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {workshop.fullDetails?.takeaways && (
                 <div className="mb-5">
                   <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Takeaways</h2>
@@ -453,6 +743,13 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                 <div className="mb-5">
                   <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Certification</h2>
                   <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.certification}</p>
+                </div>
+              )}
+
+              {workshop.fullDetails?.aboutInstructor && (
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">About the Instructor</h2>
+                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.aboutInstructor}</p>
                 </div>
               )}
 

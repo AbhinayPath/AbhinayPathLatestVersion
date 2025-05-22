@@ -20,16 +20,30 @@ export default function Home() {
         <div className="absolute inset-0 z-0 opacity-20">
           <Image src="/images/hero-bg.png" alt="Stage Background" fill className="object-cover" priority />
         </div>
-        <div className="container relative z-10 py-24 md:py-32">
-          <div className="max-w-3xl space-y-8">
+        <div className="container relative z-10 py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="max-w-3xl space-y-4 sm:space-y-6 md:space-y-8 px-2 sm:px-0">
             <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4">
               <Sparkles className="h-3.5 w-3.5 mr-1" />
               Beta Access Available
             </Badge>
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold leading-tight">
-              India's first platform to discover auditons,workshops and Mentorship from Acting school Alumini
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              India&apos;s first platform to discover{" "}
+              <span className="inline md:hidden">
+                <br />
+              </span>
+              auditions,
+              <span className="hidden sm:inline">&nbsp;</span>workshops{" "}
+              <span className="inline md:hidden">
+                <br />
+              </span>
+              and
+              <span className="hidden sm:inline">&nbsp;</span>mentorship from{" "}
+              <span className="inline lg:hidden">
+                <br />
+              </span>
+              acting school alumni
             </h1>
-            <p className="text-xl md:text-2xl opacity-90">
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed">
               Connecting actors, directors, and backstage professionals across theatre, film & web.
             </p>
             <div className="pt-4">
