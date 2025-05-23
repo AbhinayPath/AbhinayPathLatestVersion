@@ -422,7 +422,7 @@ const workshops = [
     description:
       "A 5-day intensive online course on Film Direction designed for beginners and enthusiasts. Learn about cinematic language, visual storytelling, narrative structure, working with actors, screenplay, mise-en-scène, and montage. Taught by National Award-winning FTII alumni and co-founders of Wanderlust Films.",
     image: "/placeholder.svg?height=300&width=500&text=FTII+Film+Direction+Course",
-    registrationLink: "https://ftii.ac.in",
+    registrationLink: "https://ftii.ac.in/p/ftii-online-1/fundamentals-of-film-direction-16-20-june-2025",
     featured: true,
     price: "₹3,900 (Indian Nationals)",
     contact: "020 25580085",
@@ -473,10 +473,10 @@ const workshops = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Online",
     state: "All India",
-    date: "16–27 June 2025 (Weekdays only)",
-    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day)",
+    date: "16–27 June 2025",
+    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day, weekdays only)",
     description:
-      "Dive into the core elements of screenwriting for feature films with this weekday-only online course. Learn principles of cinematic storytelling, character development, story structure, premise, theme, and conflict. Taught by seasoned screenwriter and former faculty at FTII & Whistling Woods.",
+      "Dive into the core elements of screenwriting for feature films with this weekday-only online course. Learn principles of cinematic storytelling, character development, story structure, premise, theme, and conflict through theory, exercises, and feedback. Taught by seasoned screenwriter Vikas Sharma.",
     image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Course",
     registrationLink:
       "https://ftii.ac.in/p/ftii-online-1/basic-course-in-the-art-of-feature-film-writing-16-27-june-2025-online",
@@ -489,13 +489,13 @@ const workshops = [
       venue: "Online (Google Classroom + Google Meet)",
       organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
       medium: "English & Hindi",
-      duration: "10 days (Weekdays only)",
+      duration: "12 days (weekdays only)",
       eligibilityCriteria: [
         "Age: 18+ as on 01 June 2025",
         "Education: 12th pass (10th pass in exceptional cases)",
         "Indian Nationals only",
       ],
-      capacity: "24 participants (Min. 20 required to run the course)",
+      capacity: "24 participants (Course conducted only if 20+ participants register)",
       courseFee: "₹14,000 (Indian Nationals), ₹42,000 (Foreign, NRI, OCI, or Indians abroad)",
       certification: "E-certificate awarded with 90% attendance",
       curriculum: [
@@ -506,10 +506,11 @@ const workshops = [
       ],
       applicationProcess: [
         "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Visit www.onlinesbi.com → Click on 'SBI Collect'",
+        "Visit www.onlinesbi.com → Click on 'SB Collect'",
         "Search FTII Fees Account under 'Educational Institutions'",
         "Select: B02 Basic Course in the Art of Screenwriting",
         "Fill form → Pay fee → Save receipt",
+        "No document submission required",
       ],
       contactInfo: ["Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com", "Phone: 020 – 2558 0085"],
       aboutInstructor:
@@ -520,21 +521,23 @@ const workshops = [
         "Mobile phone not allowed",
         "Familiarity with Google Meet & Classroom is essential",
       ],
+      additionalInfo:
+        "Fees are non-refundable once selected. Course focuses specifically on feature film screenwriting.",
     },
   },
   {
     id: 13,
-    title: "Basic Course in Writing Scenes and Dialogues – FTII Weekend Online",
+    title: "Basic Course in Writing Scenes and Dialogues – FTII Online",
     trainer: "Vikas Sharma",
     institution: "Film and Television Institute of India (FTII)",
     location: "Online",
     state: "All India",
-    date: "14–15 June & 21–22 June 2025 (Weekends only)",
-    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day)",
+    date: "14–22 June 2025",
+    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day, weekends only)",
     description:
-      "Discover what makes a scene unforgettable and a dialogue iconic in this hands-on writing course. Learn about crafting great dialogue, creating dramatic scenes, and the power of subtext. Ideal for aspiring screenwriters and storytellers who want to level up their scriptwriting game.",
+      "Discover what makes a scene unforgettable and a dialogue iconic in this hands-on writing course. Learn about crafting great dialogue, creating dramatic scenes, and the power of subtext. Perfect for aspiring screenwriters who want to level up their scriptwriting skills with a focus on scenes and dialogues.",
     image: "/placeholder.svg?height=300&width=500&text=FTII+Dialogue+Writing+Course",
-    registrationLink: "https://ftii.ac.in",
+    registrationLink: "https://ftii.ac.in/p/ftii-online-1/basic-course-in-writing-scenes-and-dialogues-14-22-june-2025",
     featured: true,
     price: "₹7,200 (Indian Nationals)",
     contact: "020 25580085",
@@ -550,7 +553,7 @@ const workshops = [
         "Education: 12th pass (10th pass may be considered in exceptional cases)",
         "Nationality: Indian citizens only",
       ],
-      capacity: "24 participants (Min. 20 required to run the course)",
+      capacity: "24 participants (Min 20 required for course to run)",
       courseFee: "₹7,200 (Indian Participants), ₹21,600 (Foreign/OCI/NRI or Indians residing abroad)",
       certification: "E-Certificate awarded upon successful completion with 90% attendance mandatory",
       curriculum: [
@@ -558,14 +561,6 @@ const workshops = [
         "What makes a dialogue unforgettable",
         "Dialogue vs. conversation",
         "Subtext and the power of 'the unsaid'",
-        "Humour, wit, and spoken action",
-        "Text vs. subtext",
-        "Iconic lines that made history (e.g., 'Mere Paas Maa Hai')",
-        "Creating Dramatic Scenes:",
-        "Structure of an impactful scene",
-        "Types of scenes in screenwriting",
-        "Writing suspense, humour, tension, anticipation",
-        "Plot and character through scene development",
       ],
       methodology: [
         "Writing your own scenes",
@@ -574,12 +569,12 @@ const workshops = [
       ],
       applicationProcess: [
         "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Selection: First-Come-First-Served basis",
         "Go to www.onlinesbi.com",
         "Click on 'SB Collect'",
         "Search FTII Fees Account under 'Educational Institutions'",
         "Select: B11 Basic C. in Writing Dialogues and Scenes for Screen",
         "Fill form → Pay fee → Save your payment receipt",
+        "No document upload needed. Self-declaration in form is enough.",
       ],
       contactInfo: [
         "Contact: Mr. Milindkumar Joshi, Assistant Outreach Officer",
@@ -594,12 +589,49 @@ const workshops = [
         "Processor: Intel i3/i5 or equivalent",
         "Webcam + Headphones required",
         "Internet: Minimum 10 Mbps, 5 GB data/day",
+        "Platform: Google Classroom + Google Meet",
+        "Browser: Chrome (preferred), Firefox, Safari",
       ],
-      importantNotes: [
-        "Participants must keep cameras ON and mics OFF during class unless instructed otherwise.",
-        "Failure to keep camera on may lead to expulsion and no refund.",
-        "All communication will be via email. Selected candidates will receive emails and names may be posted on FTII's website.",
+      additionalInfo:
+        "Participants must keep cameras ON and mics OFF during class unless instructed otherwise. Failure to keep camera on may lead to expulsion and no refund. All communication will be via email.",
+    },
+  },
+  {
+    id: 14,
+    title: "Sooraj Nambiar's – LOCHANAM: A 3-Day Actor/Dancer Workshop",
+    trainer: "Sooraj Nambiar",
+    institution: "Nrityangana Institute of Performing Arts & Tripudi",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "July 4-6, 2025",
+    time: "10 AM – 1 PM",
+    description:
+      "Discover the unseen potential of your eyes in performance with this unique acting pedagogy rooted in Kutiyattam. Learn to refine your Abhinaya with depth and precision while stimulating imagination and deepening expression.",
+    image: "/placeholder.svg?height=300&width=500&text=Lochanam+Workshop",
+    registrationLink: "https://wa.me/918075413321",
+    featured: true,
+    price: "Contact for details",
+    contact: "8075413321",
+    email: "tripudiws@gmail.com",
+    instagram: "@nrityangana_institute_pa",
+    eligibility: "Actors and dancers",
+    fullDetails: {
+      venue: "Nrityangana, 383/K 'Sumeru', Ground Floor, NTI Layout, Rajiv Gandhi Nagar, Bangalore",
+      organizer: "Nrityangana Institute of Performing Arts in collaboration with Tripudi",
+      duration: "3 days",
+      curriculum: [
+        "Discover the unseen potential of your eyes in performance",
+        "Learn a unique acting pedagogy rooted in Kutiyattam",
+        "Refine your Abhinaya with depth and precision",
+        "Stimulate imagination, deepen expression, and master your craft",
       ],
+      socialMedia: ["Instagram: @nrityangana_institute_pa"],
+      targetAudience: "Actors and dancers interested in deepening their expressive abilities",
+      contactInfo: ["Email: tripudiws@gmail.com", "WhatsApp: 8075413321"],
+      aboutInstructor:
+        "Sooraj Nambiar is a skilled performer and instructor specializing in Kutiyattam techniques and their application to contemporary performance.",
+      additionalInfo:
+        "This workshop focuses on eye movement and expression techniques rooted in the ancient art form of Kutiyattam, offering participants a unique approach to enhancing their performance skills.",
     },
   },
 ]
@@ -665,7 +697,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
             className="object-cover"
             onError={(e) => {
               // Fallback to a placeholder if image fails to load
-              e.currentTarget.src = "/images/acting-workshop.png"
+              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
             }}
           />
           {workshop.featured && (
@@ -854,22 +886,6 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                   </div>
                 )}
-
-                {workshop.fullDetails?.techRequirements && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">💻</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Technical Requirements</p>
-                      <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                        {workshop.fullDetails.techRequirements.map((item: string, index: number) => (
-                          <li key={index}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -879,6 +895,17 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Curriculum</h2>
                   <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
                     {workshop.fullDetails.curriculum.map((item: string, index: number) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {workshop.fullDetails?.methodology && (
+                <div className="mb-5">
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Methodology</h2>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
+                    {workshop.fullDetails.methodology.map((item: string, index: number) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
@@ -940,22 +967,11 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                 </div>
               )}
 
-              {workshop.fullDetails?.methodology && (
+              {workshop.fullDetails?.techRequirements && (
                 <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Methodology</h2>
+                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Technical Requirements</h2>
                   <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.methodology.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.importantNotes && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Important Notes</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.importantNotes.map((item: string, index: number) => (
+                    {workshop.fullDetails.techRequirements.map((item: string, index: number) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
@@ -1003,21 +1019,37 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
               <div className="flex flex-wrap gap-2 md:ml-auto">
                 {workshop.contact && workshop.contact !== "Via website" && (
                   <a
-                    href={`tel:${workshop.contact.replace(/\D/g, "")}`}
-                    className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
+                    href={`https://wa.me/91${workshop.contact.replace(/\D/g, "")}`}
+                    className="flex items-center gap-2 bg-green-500 text-white px-3 py-2 rounded-md hover:bg-green-600 transition-colors text-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Phone className="h-4 w-4" />
-                    Call
+                    WhatsApp
                   </a>
                 )}
 
                 {workshop.email && (
                   <a
                     href={`mailto:${workshop.email}`}
-                    className="flex items-center gap-2 bg-green-500 text-white px-3 py-2 rounded-md hover:bg-green-600 transition-colors text-sm"
+                    className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
                   >
                     <Mail className="h-4 w-4" />
                     Email
+                  </a>
+                )}
+
+                {workshop.instagram && (
+                  <a
+                    href={`https://instagram.com/${workshop.instagram.replace("@", "")}`}
+                    className="flex items-center gap-2 bg-pink-500 text-white px-3 py-2 rounded-md hover:bg-pink-600 transition-colors text-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                    Instagram
                   </a>
                 )}
               </div>
