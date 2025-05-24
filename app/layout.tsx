@@ -32,6 +32,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
@@ -41,10 +43,10 @@ export default function RootLayout({
               <Navbar />
             </Suspense>
             <main className="flex-1">{children}</main>
-            <Analytics />
             <Footer />
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
