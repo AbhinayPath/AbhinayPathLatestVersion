@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -103,20 +103,14 @@ const auditions = [
   },
 ]
 
-interface FilterState {
-  search: string
-  city: string
-  state: string
-  category: string
-  experience: string
-}
+// Get unique states and categories for filters
+const states = [...new Set(auditions.map((audition) => audition.state))].sort()
+const categories = [...new Set(auditions.map((audition) => audition.type))].sort()
+const cities = [...new Set(auditions.map((audition) => audition.location))].sort()
+const experienceLevels = [...new Set(auditions.map((audition) => audition.experience))].sort()
 
 export default function AuditionsContent() {
-  const [auditions, setAuditions] = useState([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  
-  const [filters, setFilters] = useState<FilterState>({
+  const [filters, setFilters] = useState({
     search: "",
     city: "all",
     state: "all",
@@ -124,77 +118,11 @@ export default function AuditionsContent() {
     experience: "all",
   })
 
-  // Get unique values for filters
-  const states = [...new Set(auditions.map((audition) => audition.state))].sort()
-  const categories = [...new Set(auditions.map((audition) => audition.type))].sort()
-  const cities = [...new Set(auditions.map((audition) => audition.location))].sort()
-  const experienceLevels = [...new Set(auditions.map((audition) => audition.experience))].sort()
-
-  // Fetch auditions from API
-  useEffect(() => {
-    const fetchAuditions = async (): Promise<void> => {
-      try {
-        setLoading(true)
-        
-        const response = await fetch('/api/auditions')
-        
-        if (!response.ok) {
-          throw new Error(`API request failed with status: ${response.status}`)
-        }
-        
-        const data = await response.json()
-        
-        // Assuming the API returns an array of auditions directly or in a data property
-        const fetchedAuditions = Array.isArray(data) ? data : data.results || data.data || []
-        
-        setAuditions(fetchedAuditions as Audition[])
-        setError(null)
-      } catch (err) {
-        console.error('Error fetching auditions:', err)
-        setError('Failed to load auditions. Please try again later.')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchAuditions()
-  }, [])
-
-  // Function to create new auditions via the API
-  const createAuditions = async (auditionData: Partial<Audition>[]): Promise<any> => {
-    try {
-      const response = await fetch('/api/auditions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(auditionData),
-      })
-      
-      if (!response.ok) {
-        throw new Error(`API request failed with status: ${response.status}`)
-      }
-      
-      const result = await response.json()
-      console.log('Auditions created:', result)
-      
-      // Refresh the auditions list
-      const updatedResponse = await fetch('/api/auditions')
-      const updatedData = await updatedResponse.json()
-      setAuditions(Array.isArray(updatedData) ? updatedData : updatedData.results || updatedData.data || [] as Audition[])
-      
-      return result
-    } catch (err) {
-      console.error('Error creating auditions:', err)
-      throw err
-    }
-  }
-
   const filteredAuditions = auditions.filter((audition) => {
     return (
       (filters.search === "" ||
         audition.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-        (audition.description && audition.description.toLowerCase().includes(filters.search.toLowerCase()))) &&
+        audition.description.toLowerCase().includes(filters.search.toLowerCase())) &&
       (filters.city === "all" || filters.city === "" || audition.location === filters.city) &&
       (filters.state === "all" || filters.state === "" || audition.state === filters.state) &&
       (filters.category === "all" || filters.category === "" || audition.type === filters.category) &&
@@ -202,11 +130,11 @@ export default function AuditionsContent() {
     )
   })
 
-  const handleFilterChange = (key: keyof FilterState, value: string): void => {
+  const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }))
   }
 
-  const clearFilters = (): void => {
+  const clearFilters = () => {
     setFilters({
       search: "",
       city: "all",
@@ -214,33 +142,6 @@ export default function AuditionsContent() {
       category: "all",
       experience: "all",
     })
-  }
-
-  // Loading state
-  if (loading) {
-    return (
-      <div className="container py-24 flex justify-center items-center">
-        <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-gray-600">Loading auditions...</p>
-        </div>
-      </div>
-    )
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <div className="container py-24 flex justify-center items-center">
-        <div className="text-center max-w-lg">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
-          <p className="text-gray-700 mb-6">{error}</p>
-          <Button onClick={() => window.location.reload()} className="rounded-md">
-            Try Again
-          </Button>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -261,21 +162,18 @@ export default function AuditionsContent() {
           <h2 className="font-playfair text-xl font-bold">Filter Auditions</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="relative lg:col-span-1">
+          <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               type="text"
               placeholder="Search by title or description"
-              className="pl-10 rounded-md w-full"
+              className="pl-10 rounded-md"
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
             />
           </div>
 
-          <Select 
-            value={filters.city} 
-            onValueChange={(value: string) => handleFilterChange("city", value)}
-          >
+          <Select value={filters.city} onValueChange={(value) => handleFilterChange("city", value)}>
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="City" />
             </SelectTrigger>
@@ -289,11 +187,7 @@ export default function AuditionsContent() {
             </SelectContent>
           </Select>
 
-          {/* State filter */}
-          <Select 
-            value={filters.state} 
-            onValueChange={(value: string) => handleFilterChange("state", value)}
-          >
+          <Select value={filters.state} onValueChange={(value) => handleFilterChange("state", value)}>
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="State" />
             </SelectTrigger>
@@ -307,11 +201,7 @@ export default function AuditionsContent() {
             </SelectContent>
           </Select>
 
-          {/* Category filter */}
-          <Select 
-            value={filters.category} 
-            onValueChange={(value: string) => handleFilterChange("category", value)}
-          >
+          <Select value={filters.category} onValueChange={(value) => handleFilterChange("category", value)}>
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
@@ -325,11 +215,7 @@ export default function AuditionsContent() {
             </SelectContent>
           </Select>
 
-          {/* Experience filter */}
-          <Select 
-            value={filters.experience} 
-            onValueChange={(value: string) => handleFilterChange("experience", value)}
-          >
+          <Select value={filters.experience} onValueChange={(value) => handleFilterChange("experience", value)}>
             <SelectTrigger className="rounded-md">
               <SelectValue placeholder="Experience" />
             </SelectTrigger>
@@ -408,22 +294,14 @@ export default function AuditionsContent() {
                     </span>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4 line-clamp-3">{audition.description}</p>
-                <div className="flex gap-2 mb-3">
-                  <span className="bg-primary/10 text-primary text-xs py-1 px-2 rounded-full">
-                    {audition.type}
-                  </span>
-                  <span className="bg-gray-100 text-gray-700 text-xs py-1 px-2 rounded-full">
-                    {audition.experience}
-                  </span>
+
+                <div className="flex justify-end mt-auto pt-4 border-t">
+                  <Link href={`/auditions/${audition.id}`}>
+                    <Button size="sm" className="rounded-md">
+                      More Details
+                    </Button>
+                  </Link>
                 </div>
-              </div>
-              <div className="p-5 pt-0 mt-auto">
-                <Link href={`/auditions/${audition.id}`}>
-                  <Button variant="outline" className="w-full rounded-md" size="sm">
-                    View Details
-                  </Button>
-                </Link>
               </div>
             </div>
           ))
@@ -436,8 +314,6 @@ export default function AuditionsContent() {
           </div>
         )}
       </div>
-      
-      
     </div>
   )
 }

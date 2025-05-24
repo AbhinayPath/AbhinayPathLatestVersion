@@ -86,3 +86,97 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Add this DELETE handler
+export async function DELETE(request: NextRequest) {
+  try {
+    const supabase = getSupabaseServerClient();
+    const { id } = await request.json();
+
+    // Validate if the ID is provided
+    if (!id) {
+      return NextResponse.json(
+        { error: "Missing required field: id" },
+        { status: 400 }
+      );
+    }
+
+    // Delete the audition with the given ID
+    const { error } = await supabase
+      .from("auditions")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error("Supabase delete error:", error);
+      return NextResponse.json(
+        { error: "Failed to delete audition" },
+        { status: 500 }
+      );
+    }
+
+    // Return success response
+    return NextResponse.json({
+      success: true,
+      message: `Audition with ID ${id} deleted successfully`,
+    });
+  } catch (error) {
+    console.error("Error deleting audition:", error);
+    return NextResponse.json(
+      { error: "Failed to delete audition" },
+      { status: 500 }
+    );
+  }
+}
+
+// Add this PUT handler
+export async function PUT(request: NextRequest) {
+  try {
+    const supabase = getSupabaseServerClient();
+    const { id, ...updatedFields } = await request.json();
+
+    // Validate if the ID is provided
+    if (!id) {
+      return NextResponse.json(
+        { error: "Missing required field: id" },
+        { status: 400 }
+      );
+    }
+
+    // Validate if there are fields to update
+    if (Object.keys(updatedFields).length === 0) {
+      return NextResponse.json(
+        { error: "No fields provided to update" },
+        { status: 400 }
+      );
+    }
+
+    // Update the audition with the given ID
+    const { data, error } = await supabase
+      .from("auditions")
+      .update(updatedFields)
+      .eq("id", id)
+      .select();
+
+    if (error) {
+      console.error("Supabase update error:", error);
+      return NextResponse.json(
+        { error: "Failed to update audition" },
+        { status: 500 }
+      );
+    }
+
+    // Return success response
+    return NextResponse.json({
+      success: true,
+      message: `Audition with ID ${id} updated successfully`,
+      data,
+    });
+  } catch (error) {
+    console.error("Error updating audition:", error);
+    return NextResponse.json(
+      { error: "Failed to update audition" },
+      { status: 500 }
+    );
+  }
+}
