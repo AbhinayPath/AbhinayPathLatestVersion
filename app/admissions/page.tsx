@@ -5,9 +5,23 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Video, FileText, Calendar, GraduationCap, BookOpen, User, Lightbulb, Search } from "lucide-react"
+import {
+  Video,
+  FileText,
+  Calendar,
+  BookOpen,
+  User,
+  Lightbulb,
+  Search,
+  Clock,
+  Award,
+  BookmarkCheck,
+  School,
+} from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import AdmissionsBanner from "@/components/admissions-banner"
+import { Card, CardContent } from "@/components/ui/card"
 
 export default function AdmissionsPage() {
   const [activeVideoFilter, setActiveVideoFilter] = useState("all")
@@ -228,472 +242,497 @@ export default function AdmissionsPage() {
   })
 
   return (
-    <div className="container py-12">
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="font-playfair text-4xl font-bold mb-4">Admissions & Preparation</h1>
-        <p className="text-gray-600">
-          Get guidance and resources to prepare for entrance exams to prestigious theater and film institutions.
-        </p>
-      </div>
-
-      {/* Search bar */}
-      <div className="mb-8 relative max-w-md mx-auto">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-        <Input
-          type="text"
-          placeholder="Search by title, presenter, or institution..."
-          className="pl-10 rounded-full"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
-
-      <Tabs defaultValue="videos" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 rounded-md">
-          <TabsTrigger
-            value="videos"
-            className="rounded-md data-[state=active]:bg-primary data-[state=active]:text-white"
-          >
-            <Video className="h-4 w-4 mr-2" /> Video Guides
-          </TabsTrigger>
-          <TabsTrigger
-            value="articles"
-            className="rounded-md data-[state=active]:bg-primary data-[state=active]:text-white"
-          >
-            <FileText className="h-4 w-4 mr-2" /> Articles & Blogs
-          </TabsTrigger>
-          <TabsTrigger
-            value="dates"
-            className="rounded-md data-[state=active]:bg-primary data-[state=active]:text-white"
-          >
-            <Calendar className="h-4 w-4 mr-2" /> Important Dates
-          </TabsTrigger>
-        </TabsList>
-
-        {/* Videos Tab */}
-        <TabsContent value="videos" className="mt-6">
-          <div className="mb-6 flex flex-wrap gap-2 justify-center">
-            <Badge
-              variant={activeVideoFilter === "all" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveVideoFilter("all")}
-            >
-              All Videos
-            </Badge>
-            <Badge
-              variant={activeVideoFilter === "alumni" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveVideoFilter("alumni")}
-            >
-              <User className="h-3 w-3 mr-1" /> Alumni Experiences
-            </Badge>
-            <Badge
-              variant={activeVideoFilter === "tips" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveVideoFilter("tips")}
-            >
-              <Lightbulb className="h-3 w-3 mr-1" /> Application Tips
-            </Badge>
-            <Badge
-              variant={activeVideoFilter === "workshop" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveVideoFilter("workshop")}
-            >
-              <Video className="h-3 w-3 mr-1" /> Workshops
-            </Badge>
+    <div className="relative">
+      {/* Coming Soon Overlay */}
+      <div className="absolute inset-0 bg-black/70 z-50 flex flex-col items-center justify-center text-center px-4">
+        <div className="bg-white rounded-xl p-8 max-w-md shadow-2xl transform animate-fade-in">
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Clock className="h-8 w-8 text-primary" />
           </div>
+          <h2 className="font-playfair text-3xl font-bold mb-2">Coming Soon!</h2>
+          <p className="text-gray-700 mb-6">
+            We're currently working on our Admissions & Preparation resources. Check back soon for comprehensive guides,
+            videos, and important dates for theater and film school admissions.
+          </p>
+          <Link href="/">
+            <Button className="rounded-full">Return to Home</Button>
+          </Link>
+        </div>
+      </div>
 
-          {filteredVideos.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredVideos.map((video, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
-                >
-                  <div className="relative h-48 w-full">
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-                      <div className="bg-white bg-opacity-80 rounded-full p-3">
-                        <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+      <div className="container py-12">
+        <AdmissionsBanner />
+
+        <div className="max-w-3xl mx-auto text-center mb-8">
+          <h1 className="font-playfair text-4xl font-bold mb-3 flex items-center justify-center">
+            <School className="h-8 w-8 mr-3 text-primary" />
+            Admissions & Preparation
+          </h1>
+          <p className="text-gray-600">
+            Get guidance and resources to prepare for entrance exams to prestigious theater and film institutions.
+          </p>
+        </div>
+
+        {/* Search bar */}
+        <div className="mb-8 relative max-w-md mx-auto">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Input
+            type="text"
+            placeholder="Search by title, presenter, or institution..."
+            className="pl-10 rounded-full"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
+        <Tabs defaultValue="videos" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 rounded-md">
+            <TabsTrigger
+              value="videos"
+              className="rounded-md data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              <Video className="h-4 w-4 mr-2" /> Video Guides
+            </TabsTrigger>
+            <TabsTrigger
+              value="articles"
+              className="rounded-md data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              <FileText className="h-4 w-4 mr-2" /> Articles & Blogs
+            </TabsTrigger>
+            <TabsTrigger
+              value="dates"
+              className="rounded-md data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              <Calendar className="h-4 w-4 mr-2" /> Important Dates
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Videos Tab */}
+          <TabsContent value="videos" className="mt-6">
+            <div className="mb-6 flex flex-wrap gap-2 justify-center">
+              <Badge
+                variant={activeVideoFilter === "all" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveVideoFilter("all")}
+              >
+                All Videos
+              </Badge>
+              <Badge
+                variant={activeVideoFilter === "alumni" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveVideoFilter("alumni")}
+              >
+                <User className="h-3 w-3 mr-1" /> Alumni Experiences
+              </Badge>
+              <Badge
+                variant={activeVideoFilter === "tips" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveVideoFilter("tips")}
+              >
+                <Lightbulb className="h-3 w-3 mr-1" /> Application Tips
+              </Badge>
+              <Badge
+                variant={activeVideoFilter === "workshop" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveVideoFilter("workshop")}
+              >
+                <Video className="h-3 w-3 mr-1" /> Workshops
+              </Badge>
+            </div>
+
+            {filteredVideos.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredVideos.map((video, index) => (
+                  <Card
+                    key={index}
+                    className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow h-full"
+                  >
+                    <div className="relative h-40 w-full">
+                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 z-10">
+                        <div className="bg-white bg-opacity-80 rounded-full p-2.5">
+                          <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
                       </div>
+                      <Image src="/images/acting-school.png" alt={video.title} fill className="object-cover" />
                     </div>
-                    <Image src={video.image || "/placeholder.svg"} alt={video.title} fill className="object-cover" />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex gap-2">
-                        <span className="badge-primary">Video</span>
-                        <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
+                    <CardContent className="p-4">
+                      <div className="flex justify-between items-start mb-2">
+                        <Badge variant="secondary" className="text-xs">
                           {video.institution}
-                        </span>
+                        </Badge>
+                        <div className="flex items-center text-xs text-gray-500">
+                          <Clock className="h-3 w-3 mr-1" />
+                          {video.duration}
+                        </div>
                       </div>
-                      <span className="text-sm text-gray-500">{video.duration}</span>
-                    </div>
-                    <h3 className="font-playfair text-xl font-bold mb-2">{video.title}</h3>
-                    <div className="flex items-center mb-3">
-                      <div className="h-8 w-8 rounded-full bg-gray-200 mr-2"></div>
-                      <div>
-                        <p className="text-sm font-medium">{video.presenter}</p>
-                        <p className="text-xs text-gray-500">{video.role}</p>
+                      <h3 className="font-playfair text-lg font-bold mb-1 line-clamp-2">{video.title}</h3>
+                      <div className="flex items-center mb-2">
+                        <div className="h-6 w-6 rounded-full bg-gray-200 mr-2"></div>
+                        <div>
+                          <p className="text-xs font-medium">{video.presenter}</p>
+                          <p className="text-xs text-gray-500">{video.role}</p>
+                        </div>
                       </div>
-                    </div>
-                    <p className="text-gray-600 mb-4 flex-1">{video.description}</p>
-                    <Link href={video.link} className="mt-auto">
-                      <Button size="sm" className="rounded-md w-full">
-                        Watch Video
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500 mb-4">No videos match your current search.</p>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  setActiveVideoFilter("all")
-                  setSearchQuery("")
-                }}
-                className="rounded-full"
-              >
-                Clear Filters
-              </Button>
-            </div>
-          )}
-        </TabsContent>
-
-        {/* Articles Tab */}
-        <TabsContent value="articles" className="mt-6">
-          <div className="mb-6 flex flex-wrap gap-2 justify-center">
-            <Badge
-              variant={activeArticleFilter === "all" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveArticleFilter("all")}
-            >
-              All Articles
-            </Badge>
-            <Badge
-              variant={activeArticleFilter === "alumni" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveArticleFilter("alumni")}
-            >
-              <User className="h-3 w-3 mr-1" /> Student/Alumni Stories
-            </Badge>
-            <Badge
-              variant={activeArticleFilter === "tips" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveArticleFilter("tips")}
-            >
-              <Lightbulb className="h-3 w-3 mr-1" /> Application Tips
-            </Badge>
-            <Badge
-              variant={activeArticleFilter === "resources" ? "default" : "outline"}
-              className="cursor-pointer text-sm py-1.5 px-4"
-              onClick={() => setActiveArticleFilter("resources")}
-            >
-              <BookOpen className="h-3 w-3 mr-1" /> Study Resources
-            </Badge>
-          </div>
-
-          {filteredArticles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredArticles.map((article, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{video.description}</p>
+                      <Link href={video.link}>
+                        <Button size="sm" className="rounded-md w-full">
+                          Watch Video
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500 mb-4">No videos match your current search.</p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setActiveVideoFilter("all")
+                    setSearchQuery("")
+                  }}
+                  className="rounded-full"
                 >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={article.image || "/placeholder.svg"}
-                      alt={article.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex gap-2">
-                        <span className="badge-secondary">Article</span>
-                        <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
-                          {article.institution}
-                        </span>
-                      </div>
-                      <span className="text-sm text-gray-500">{article.readTime}</span>
-                    </div>
-                    <h3 className="font-playfair text-xl font-bold mb-2">{article.title}</h3>
-                    <div className="flex items-center mb-3">
-                      <div className="h-8 w-8 rounded-full bg-gray-200 mr-2"></div>
-                      <div>
-                        <p className="text-sm font-medium">{article.author}</p>
-                        <p className="text-xs text-gray-500">{article.role}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 mb-4 flex-1">{article.description}</p>
-                    <Link href={article.link} className="mt-auto">
-                      <Button variant="outline" size="sm" className="rounded-md w-full">
-                        Read Article
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500 mb-4">No articles match your current search.</p>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  setActiveArticleFilter("all")
-                  setSearchQuery("")
-                }}
-                className="rounded-full"
+                  Clear Filters
+                </Button>
+              </div>
+            )}
+          </TabsContent>
+
+          {/* Articles Tab */}
+          <TabsContent value="articles" className="mt-6">
+            <div className="mb-6 flex flex-wrap gap-2 justify-center">
+              <Badge
+                variant={activeArticleFilter === "all" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveArticleFilter("all")}
               >
-                Clear Filters
-              </Button>
+                All Articles
+              </Badge>
+              <Badge
+                variant={activeArticleFilter === "alumni" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveArticleFilter("alumni")}
+              >
+                <User className="h-3 w-3 mr-1" /> Student/Alumni Stories
+              </Badge>
+              <Badge
+                variant={activeArticleFilter === "tips" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveArticleFilter("tips")}
+              >
+                <Lightbulb className="h-3 w-3 mr-1" /> Application Tips
+              </Badge>
+              <Badge
+                variant={activeArticleFilter === "resources" ? "default" : "outline"}
+                className="cursor-pointer text-sm py-1.5 px-4"
+                onClick={() => setActiveArticleFilter("resources")}
+              >
+                <BookOpen className="h-3 w-3 mr-1" /> Study Resources
+              </Badge>
             </div>
-          )}
-        </TabsContent>
 
-        {/* Important Dates Tab */}
-        <TabsContent value="dates" className="mt-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <GraduationCap className="h-5 w-5 text-primary" />
-              <h2 className="font-playfair text-2xl font-bold">Upcoming Entrance Exams</h2>
-            </div>
-            <p className="text-gray-600 mb-6">
-              Keep track of important application deadlines and exam dates for major theater and film institutions.
-            </p>
-
-            <div className="space-y-6">
-              <div className="border-b pb-6">
-                <h3 className="font-playfair text-xl font-bold mb-4">National School of Drama (NSD)</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Application Timeline</p>
-                    <ul className="space-y-2">
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Start Date</span>
-                        <span className="text-gray-900 font-medium">May 15, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Deadline</span>
-                        <span className="text-gray-900 font-medium">June 30, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Written Test</span>
-                        <span className="text-gray-900 font-medium">August 5-6, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Interview & Practical</span>
-                        <span className="text-gray-900 font-medium">September 10-20, 2023</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bg-blue-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Preparation Resources</p>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-sm">
-                        <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          NSD Syllabus & Pattern Guide
-                        </Link>
-                      </li>
-                      <li className="flex items-start text-sm">
-                        <Video className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          NSD Interview Preparation Video
-                        </Link>
-                      </li>
-                      <li className="flex items-start text-sm">
-                        <FileText className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          Sample Questions & Answers
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+            {filteredArticles.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredArticles.map((article, index) => (
+                  <Card
+                    key={index}
+                    className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow h-full"
+                  >
+                    <div className="relative h-40 w-full">
+                      <Image src="/images/acting-school.png" alt={article.title} fill className="object-cover" />
+                    </div>
+                    <CardContent className="p-4">
+                      <div className="flex justify-between items-start mb-2">
+                        <Badge variant="outline" className="text-xs">
+                          {article.institution}
+                        </Badge>
+                        <div className="flex items-center text-xs text-gray-500">
+                          <Clock className="h-3 w-3 mr-1" />
+                          {article.readTime}
+                        </div>
+                      </div>
+                      <h3 className="font-playfair text-lg font-bold mb-1 line-clamp-2">{article.title}</h3>
+                      <div className="flex items-center mb-2">
+                        <div className="h-6 w-6 rounded-full bg-gray-200 mr-2"></div>
+                        <div>
+                          <p className="text-xs font-medium">{article.author}</p>
+                          <p className="text-xs text-gray-500">{article.role}</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{article.description}</p>
+                      <Link href={article.link}>
+                        <Button variant="outline" size="sm" className="rounded-md w-full">
+                          Read Article
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
-
-              <div className="border-b pb-6">
-                <h3 className="font-playfair text-xl font-bold mb-4">Film and Television Institute of India (FTII)</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Application Timeline</p>
-                    <ul className="space-y-2">
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Start Date</span>
-                        <span className="text-gray-900 font-medium">June 1, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Deadline</span>
-                        <span className="text-gray-900 font-medium">July 15, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Written Test</span>
-                        <span className="text-gray-900 font-medium">August 20, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Interview & Audition</span>
-                        <span className="text-gray-900 font-medium">September 25-30, 2023</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bg-blue-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Preparation Resources</p>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-sm">
-                        <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          FTII Acting Course Guide
-                        </Link>
-                      </li>
-                      <li className="flex items-start text-sm">
-                        <Video className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          Monologue Selection Tips
-                        </Link>
-                      </li>
-                      <li className="flex items-start text-sm">
-                        <FileText className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          Film Analysis Practice Questions
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500 mb-4">No articles match your current search.</p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setActiveArticleFilter("all")
+                    setSearchQuery("")
+                  }}
+                  className="rounded-full"
+                >
+                  Clear Filters
+                </Button>
               </div>
+            )}
+          </TabsContent>
 
-              <div>
-                <h3 className="font-playfair text-xl font-bold mb-4">
-                  Satyajit Ray Film & Television Institute (SRFTI)
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Application Timeline</p>
-                    <ul className="space-y-2">
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Start Date</span>
-                        <span className="text-gray-900 font-medium">June 15, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Application Deadline</span>
-                        <span className="text-gray-900 font-medium">July 31, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Written Test</span>
-                        <span className="text-gray-900 font-medium">August 27, 2023</span>
-                      </li>
-                      <li className="flex justify-between text-sm">
-                        <span className="text-gray-600">Interview & Audition</span>
-                        <span className="text-gray-900 font-medium">October 5-10, 2023</span>
-                      </li>
-                    </ul>
+          {/* Important Dates Tab */}
+          <TabsContent value="dates" className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <Card className="overflow-hidden border-0 shadow-sm">
+                <CardContent className="p-0">
+                  <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                    <School className="h-5 w-5 mr-2" />
+                    <h2 className="font-playfair text-xl font-bold">National School of Drama (NSD)</h2>
                   </div>
-                  <div className="bg-blue-50 p-4 rounded-md">
-                    <p className="font-medium mb-2">Preparation Resources</p>
-                    <ul className="space-y-2">
-                      <li className="flex items-start text-sm">
-                        <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          SRFTI Course Structure Overview
-                        </Link>
-                      </li>
-                      <li className="flex items-start text-sm">
-                        <Video className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          Alumni Interview: SRFTI Experience
-                        </Link>
-                      </li>
-                      <li className="flex items-start text-sm">
-                        <FileText className="h-4 w-4 text-primary mr-2 mt-0.5" />
-                        <Link href="#" className="text-primary hover:underline">
-                          Previous Year Question Papers
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <div className="p-5">
+                    <div className="mb-4">
+                      <h3 className="font-medium text-lg mb-2 flex items-center">
+                        <Calendar className="h-4 w-4 text-primary mr-2" />
+                        Key Dates
+                      </h3>
+                      <ul className="space-y-2">
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Application Start</span>
+                          <span className="text-gray-900 font-medium">May 15, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Application Deadline</span>
+                          <span className="text-gray-900 font-medium">June 30, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Written Test</span>
+                          <span className="text-gray-900 font-medium">August 5-6, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm">
+                          <span className="text-gray-600">Interview & Practical</span>
+                          <span className="text-gray-900 font-medium">September 10-20, 2023</span>
+                        </li>
+                      </ul>
+                    </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="font-playfair text-2xl font-bold">Recommended Study Material</h2>
-            </div>
-            <p className="text-gray-600 mb-6">
-              Essential books and resources to help you prepare for entrance exams and interviews.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "The Empty Space",
-                  author: "Peter Brook",
-                  category: "Theater Theory",
-                  description: "A fundamental text on theater theory that is often referenced in entrance exams.",
-                  link: "#",
-                },
-                {
-                  title: "Stanislavski: An Introduction",
-                  author: "Jean Benedetti",
-                  category: "Acting Technique",
-                  description: "Clear overview of Stanislavski's system, essential for drama school interviews.",
-                  link: "#",
-                },
-                {
-                  title: "The Cambridge Guide to Theatre",
-                  author: "Martin Banham",
-                  category: "Reference",
-                  description: "Comprehensive reference for world theater history and terminology.",
-                  link: "#",
-                },
-                {
-                  title: "Indian Theatre: Traditions of Performance",
-                  author: "Farley P. Richmond",
-                  category: "Indian Theater",
-                  description: "Essential reading on traditional Indian performance forms and history.",
-                  link: "#",
-                },
-                {
-                  title: "The Dramatic World of Vijay Tendulkar",
-                  author: "Arundhati Banerjee",
-                  category: "Modern Indian Drama",
-                  description: "Analysis of one of India's most influential playwrights, often featured in exams.",
-                  link: "#",
-                },
-                {
-                  title: "Film Art: An Introduction",
-                  author: "David Bordwell & Kristin Thompson",
-                  category: "Film Studies",
-                  description: "Fundamental text for understanding film form and analysis for FTII aspirants.",
-                  link: "#",
-                },
-              ].map((book, index) => (
-                <div key={index} className="flex gap-4 p-4 border rounded-md">
-                  <div className="h-24 w-16 bg-gray-100 rounded flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <h3 className="font-medium mb-1">{book.title}</h3>
-                    <p className="text-sm text-gray-500 mb-1">by {book.author}</p>
-                    <span className="badge-outline text-xs mb-2">{book.category}</span>
-                    <p className="text-xs text-gray-600">{book.description}</p>
+                    <div>
+                      <h3 className="font-medium text-lg mb-2 flex items-center">
+                        <BookmarkCheck className="h-4 w-4 text-primary mr-2" />
+                        Resources
+                      </h3>
+                      <ul className="space-y-2">
+                        <li className="flex items-start text-sm">
+                          <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            NSD Syllabus & Pattern Guide
+                          </Link>
+                        </li>
+                        <li className="flex items-start text-sm">
+                          <Video className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            NSD Interview Preparation Video
+                          </Link>
+                        </li>
+                        <li className="flex items-start text-sm">
+                          <FileText className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            Sample Questions & Answers
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              ))}
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden border-0 shadow-sm">
+                <CardContent className="p-0">
+                  <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                    <School className="h-5 w-5 mr-2" />
+                    <h2 className="font-playfair text-xl font-bold">Film and Television Institute (FTII)</h2>
+                  </div>
+                  <div className="p-5">
+                    <div className="mb-4">
+                      <h3 className="font-medium text-lg mb-2 flex items-center">
+                        <Calendar className="h-4 w-4 text-primary mr-2" />
+                        Key Dates
+                      </h3>
+                      <ul className="space-y-2">
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Application Start</span>
+                          <span className="text-gray-900 font-medium">June 1, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Application Deadline</span>
+                          <span className="text-gray-900 font-medium">July 15, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Written Test</span>
+                          <span className="text-gray-900 font-medium">August 20, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm">
+                          <span className="text-gray-600">Interview & Audition</span>
+                          <span className="text-gray-900 font-medium">September 25-30, 2023</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="font-medium text-lg mb-2 flex items-center">
+                        <BookmarkCheck className="h-4 w-4 text-primary mr-2" />
+                        Resources
+                      </h3>
+                      <ul className="space-y-2">
+                        <li className="flex items-start text-sm">
+                          <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            FTII Acting Course Guide
+                          </Link>
+                        </li>
+                        <li className="flex items-start text-sm">
+                          <Video className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            Monologue Selection Tips
+                          </Link>
+                        </li>
+                        <li className="flex items-start text-sm">
+                          <FileText className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            Film Analysis Practice Questions
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden border-0 shadow-sm">
+                <CardContent className="p-0">
+                  <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                    <School className="h-5 w-5 mr-2" />
+                    <h2 className="font-playfair text-xl font-bold">Satyajit Ray Film & TV Institute</h2>
+                  </div>
+                  <div className="p-5">
+                    <div className="mb-4">
+                      <h3 className="font-medium text-lg mb-2 flex items-center">
+                        <Calendar className="h-4 w-4 text-primary mr-2" />
+                        Key Dates
+                      </h3>
+                      <ul className="space-y-2">
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Application Start</span>
+                          <span className="text-gray-900 font-medium">June 15, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Application Deadline</span>
+                          <span className="text-gray-900 font-medium">July 31, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm border-b pb-2">
+                          <span className="text-gray-600">Written Test</span>
+                          <span className="text-gray-900 font-medium">August 27, 2023</span>
+                        </li>
+                        <li className="flex justify-between text-sm">
+                          <span className="text-gray-600">Interview & Audition</span>
+                          <span className="text-gray-900 font-medium">October 5-10, 2023</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="font-medium text-lg mb-2 flex items-center">
+                        <BookmarkCheck className="h-4 w-4 text-primary mr-2" />
+                        Resources
+                      </h3>
+                      <ul className="space-y-2">
+                        <li className="flex items-start text-sm">
+                          <BookOpen className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            SRFTI Course Structure Overview
+                          </Link>
+                        </li>
+                        <li className="flex items-start text-sm">
+                          <Video className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            Alumni Interview: SRFTI Experience
+                          </Link>
+                        </li>
+                        <li className="flex items-start text-sm">
+                          <FileText className="h-4 w-4 text-primary mr-2 mt-0.5" />
+                          <Link href="#" className="text-primary hover:underline">
+                            Previous Year Question Papers
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden border-0 shadow-sm">
+                <CardContent className="p-0">
+                  <div className="bg-[#2D1A54] p-4 text-white flex items-center">
+                    <Award className="h-5 w-5 mr-2" />
+                    <h2 className="font-playfair text-xl font-bold">Recommended Study Material</h2>
+                  </div>
+                  <div className="p-5">
+                    <div className="grid grid-cols-1 gap-4">
+                      {[
+                        {
+                          title: "The Empty Space",
+                          author: "Peter Brook",
+                          category: "Theater Theory",
+                          description:
+                            "A fundamental text on theater theory that is often referenced in entrance exams.",
+                        },
+                        {
+                          title: "Stanislavski: An Introduction",
+                          author: "Jean Benedetti",
+                          category: "Acting Technique",
+                          description:
+                            "Clear overview of Stanislavski's system, essential for drama school interviews.",
+                        },
+                        {
+                          title: "Indian Theatre: Traditions of Performance",
+                          author: "Farley P. Richmond",
+                          category: "Indian Theater",
+                          description: "Essential reading on traditional Indian performance forms and history.",
+                        },
+                      ].map((book, index) => (
+                        <div key={index} className="flex gap-3 p-3 border rounded-md">
+                          <div className="h-16 w-12 bg-gray-100 rounded flex-shrink-0"></div>
+                          <div className="flex-1">
+                            <h3 className="font-medium text-sm mb-0.5">{book.title}</h3>
+                            <p className="text-xs text-gray-500 mb-0.5">by {book.author}</p>
+                            <span className="inline-block text-xs px-2 py-0.5 bg-gray-100 rounded-full mb-1">
+                              {book.category}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                      <Link href="#" className="text-primary text-sm hover:underline text-center mt-2">
+                        View All Recommended Books →
+                      </Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </div>
-        </TabsContent>
-      </Tabs>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   )
 }

@@ -27,13 +27,20 @@ export default function JoinCommunityPage() {
           <Sparkles className="h-4 w-4 inline mr-2" />
           <span className="text-sm font-medium">Beta Access</span>
         </div>
+
         <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
           AbhinayPath: Beta Community Hub
         </h1>
         <div className="relative h-64 w-full mb-8 rounded-xl overflow-hidden shadow-xl">
-          <Image src="/images/join-community.png" alt="Creative Community" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-            <div className="p-6 text-white text-left">
+          <Image
+            src="/images/abhinaypath-logo.png"
+            alt="AbhinayPath Logo"
+            fill
+            className="object-contain bg-white p-4"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
+            <div className="w-full text-white text-left">
               <h2 className="text-2xl font-bold mb-2">Welcome!</h2>
               <p className="text-white/90 max-w-2xl">
                 We're building India's first platform for auditions, workshops, and creative careers — across Theater,
@@ -65,7 +72,7 @@ export default function JoinCommunityPage() {
                 <Search className="h-6 w-6 text-primary" />
               </div>
               <h3 className="font-bold text-xl mb-2">Discover & Post Auditions</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-800">
                 Find casting calls or post your own auditions to connect with the perfect talent.
               </p>
             </CardContent>
@@ -78,7 +85,7 @@ export default function JoinCommunityPage() {
                 <Calendar className="h-6 w-6 text-purple-600" />
               </div>
               <h3 className="font-bold text-xl mb-2">Workshops & Programs</h3>
-              <p className="text-gray-600">Share or join workshops, training sessions, and preparation programs.</p>
+              <p className="text-gray-800">Share or join workshops, training sessions, and preparation programs.</p>
             </CardContent>
           </Card>
 
@@ -89,7 +96,7 @@ export default function JoinCommunityPage() {
                 <Users className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="font-bold text-xl mb-2">Find Collaborators</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-800">
                 Connect with creative professionals for projects, gigs, and collaborations.
               </p>
             </CardContent>
@@ -102,7 +109,7 @@ export default function JoinCommunityPage() {
                 <Megaphone className="h-6 w-6 text-amber-600" />
               </div>
               <h3 className="font-bold text-xl mb-2">Artist-Led Network</h3>
-              <p className="text-gray-600">Build meaningful connections in a community created by and for artists.</p>
+              <p className="text-gray-800">Build meaningful connections in a community created by and for artists.</p>
             </CardContent>
           </Card>
         </div>
@@ -128,7 +135,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Early Access</h3>
-                <p className="text-gray-600">
+                <p className="text-gray-800">
                   Get exclusive access to all features and opportunities before the public launch.
                 </p>
               </div>
@@ -140,7 +147,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Shape the Platform</h3>
-                <p className="text-gray-600">
+                <p className="text-gray-800">
                   Provide feedback that directly influences features and development priorities.
                 </p>
               </div>
@@ -152,7 +159,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Get Featured</h3>
-                <p className="text-gray-600">
+                <p className="text-gray-800">
                   Be highlighted in interviews, creator spotlights, blogs, and promotional materials.
                 </p>
               </div>
@@ -164,7 +171,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Networking Opportunities</h3>
-                <p className="text-gray-600">
+                <p className="text-gray-800">
                   Connect with other artists, creators, and industry professionals in an exclusive community.
                 </p>
               </div>
@@ -190,7 +197,7 @@ export default function JoinCommunityPage() {
                 <FileText className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-bold text-2xl mb-3">Fill the Google Form</h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-800 mb-6">
                 Tell us about yourself, your interests, and how you'd like to contribute to the community.
               </p>
               <a
@@ -212,7 +219,7 @@ export default function JoinCommunityPage() {
                 <MessageCircle className="h-8 w-8 text-green-600" />
               </div>
               <h3 className="font-bold text-2xl mb-3">Join WhatsApp Group</h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-800 mb-6">
                 Connect directly with the community and get instant updates and networking opportunities.
               </p>
               <a href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp" target="_blank" rel="noopener noreferrer">
@@ -230,7 +237,7 @@ export default function JoinCommunityPage() {
                 <ClipboardCheck className="h-8 w-8 text-amber-600" />
               </div>
               <h3 className="font-bold text-2xl mb-3">Content Submission Form</h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-800 mb-6">
                 Form for directors, casting agents, or workshop organizers to submit real opportunities.
               </p>
               <a
@@ -331,7 +338,7 @@ export default function JoinCommunityPage() {
               className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100"
             >
               <h3 className="font-bold text-lg mb-2 text-gray-800">{faq.question}</h3>
-              <p className="text-gray-600">{faq.answer}</p>
+              <p className="text-gray-800">{faq.answer}</p>
             </div>
           ))}
         </div>

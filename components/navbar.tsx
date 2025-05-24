@@ -38,8 +38,8 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`text-base font-medium transition-colors hover:text-[#7E1F2E] ${
-                pathname === item.href ? "text-[#7E1F2E]" : ""
+              className={`text-base font-medium transition-colors hover:text-[#7E1F2E] hover:font-medium ${
+                pathname === item.href ? "text-[#7E1F2E] font-medium" : ""
               }`}
             >
               {item.name}

@@ -19,17 +19,31 @@ export default function Home() {
       <section className="relative bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white overflow-hidden">
         {/* <div className="absolute inset-0 z-0 opacity-20">
           <Image src="/images/hero-bg.png" alt="Stage Background" fill className="object-cover" priority />
-        </div> */}
-        <div className="container relative z-10 py-24 md:py-32">
-          <div className="max-w-3xl space-y-8">
+        </div>
+        <div className="container relative z-10 py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="max-w-3xl space-y-4 sm:space-y-6 md:space-y-8 px-2 sm:px-0">
             <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4">
               <Sparkles className="h-3.5 w-3.5 mr-1" />
               Beta Access Available
             </Badge>
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold leading-tight">
-              India's creative platform to discover auditions, workshops & prep support
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              India&apos;s first platform to discover{" "}
+              <span className="inline md:hidden">
+                <br />
+              </span>
+              auditions,
+              <span className="hidden sm:inline">&nbsp;</span>workshops{" "}
+              <span className="inline md:hidden">
+                <br />
+              </span>
+              and
+              <span className="hidden sm:inline">&nbsp;</span>mentorship from{" "}
+              <span className="inline lg:hidden">
+                <br />
+              </span>
+              acting school alumni
             </h1>
-            <p className="text-xl md:text-2xl opacity-90">
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed">
               Connecting actors, directors, and backstage professionals across theatre, film & web.
             </p>
             <div className="pt-4">
@@ -61,7 +75,7 @@ export default function Home() {
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">
               Your Creative Journey Starts Here
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+            <p className="text-gray-800 max-w-3xl mx-auto text-lg">
               AbhinayPath brings together everything you need to succeed in the creative arts industry.
             </p>
           </div>
@@ -70,7 +84,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/audition-1.avif"
+                  src="/images/auditions-stage.png"
                   alt="Find Casting Calls"
                   fill
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -85,7 +99,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Find Casting Calls</h3>
-                <p className="text-gray-600 mb-6 text-lg">
+                <p className="text-gray-800 mb-6 text-lg">
                   Discover verified audition opportunities for theater, film, and web series from trusted production
                   houses.
                 </p>
@@ -103,7 +117,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/workshop-1.webp"
+                  src="/images/acting-workshop.png"
                   alt="Skill Up with Workshops"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -118,7 +132,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Skill Up with Workshops</h3>
-                <p className="text-gray-600 mb-6 text-lg">
+                <p className="text-gray-800 mb-6 text-lg">
                   Enhance your craft with workshops and training sessions led by industry professionals and experts.
                 </p>
                 <Link href="/workshops">
@@ -135,7 +149,7 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/institute-prep.webp"
+                  src="/images/acting-school.png"
                   alt="Prep for Top Institutes"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -150,7 +164,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Prep for Top Institutes</h3>
-                <p className="text-gray-600 mb-6 text-lg">
+                <p className="text-gray-800 mb-6 text-lg">
                   Get guidance from NSD/FTII alumni for entrance exams to prestigious institutions. Expert mentorship
                   available.
                 </p>
@@ -179,7 +193,7 @@ export default function Home() {
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">
               More Features on the Horizon
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+            <p className="text-gray-800 max-w-3xl mx-auto text-lg">
               We're building additional tools to support your creative journey. Join our beta to get early access.
             </p>
           </div>
@@ -213,7 +227,7 @@ export default function Home() {
               >
                 <div className="text-5xl mb-4">{feature.icon}</div>
                 <h3 className="font-bold text-xl mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-gray-800">{feature.description}</p>
               </div>
             ))}
           </div>
