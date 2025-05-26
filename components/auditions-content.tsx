@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -9,114 +9,36 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, Filter, MapPin, Calendar } from "lucide-react"
 import AuditionBanner from "@/components/audition-banner"
 
-// Verified audition data
-const auditions = [
-  {
-    id: 3,
-    title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
-    type: "Theater",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Ongoing",
-    director: "Kalayan Theatre Group",
-    description:
-      "Play Title: Kab Tak Rahein Kunware. Language: Hindi (must read Devanagari). Age Group: 25–35 yrs. Location: Koramangala, Bangalore. Rehearsals: Weekends, then weekday evenings closer to show. Show Dates: August/September 2025.",
-    company: "Kalayan Theatre Group",
-    companyLink: "tel:9663304790",
-    contact: "Amit Aggarwal – 96633 04790",
-    contactType: "phone",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Hindi+Comedy+Play",
-  },
-  {
-    id: 4,
-    title: "CASTING CALL FOR A PLAY CALLED 'ONCE THERE WAS A WAY'",
-    type: "Theater",
-    location: "Bengaluru",
-    state: "Karnataka",
-    date: "Ongoing",
-    director: "Theater Production",
-    description:
-      "Need artists who are based in Bengaluru (theatre actors). Male actor: age 21-25 (should know how to play a guitar). Male actor: age 30+. Female actor: age 30+. Male actor: age 50+. DM for more details.",
-    company: "Theater Production",
-    companyLink: "tel:+917330684137",
-    contact: "+917330684137",
-    contactType: "phone",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Once+There+Was+A+Way",
-  },
-  {
-    id: 5,
-    title: "Lead Role Actress for Kannada Feature Film - Mute Character",
-    type: "Film",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Ongoing",
-    director: "CINECUBES",
-    description:
-      'We are looking for a lead role actress for our Kannada feature film (language is not a barrier). The character is of a mute girl. So, language is not a barrier. Facial expressions are the most important factors along with the ability to use a mute girl\'s sounds like "bhaaaah...", "mahhh..."',
-    company: "CINECUBES",
-    companyLink: "https://wa.me/919886028205",
-    contact: "+91 9886028205 (WhatsApp)",
-    contactType: "whatsapp",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Kannada+Feature+Film",
-  },
-  {
-    id: 6,
-    title: "Casting Call for Web Series - 'Digital Nomads'",
-    type: "Web Series",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "June 15-30, 2025",
-    director: "Horizon Studios",
-    description:
-      "Casting for an upcoming web series about a group of digital nomads traveling across India while working remotely. Looking for diverse cast members who can portray tech professionals with different backgrounds and personalities.",
-    company: "Horizon Studios",
-    companyLink: "mailto:casting@horizonstudios.in",
-    contact: "casting@horizonstudios.in",
-    contactType: "email",
-    experience: "Experienced",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Digital+Nomads+Web+Series",
-  },
-  {
-    id: 7,
-    title: "Casting Call for 2-Minute Short Film - Family Drama",
-    type: "Short Film",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "May 26-27, 2025",
-    director: "Independent Filmmaker",
-    description:
-      "Casting for a 2-minute short film shot in Bangalore. Language: Hindi and English (Hinglish). Roles: Gen Z female (17-21), supportive mother (40s-50s), and sarcastic father (40s-50s). This is a PAID opportunity. Apply via WhatsApp specifying the role you're interested in.",
-    company: "Independent Production",
-    companyLink: "https://wa.me/919862853175",
-    contact: "9862853175 (WhatsApp)",
-    contactType: "whatsapp",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Short+Film+Casting",
-  },
-]
-
-// Get unique states and categories for filters
-const states = [...new Set(auditions.map((audition) => audition.state))].sort()
-const categories = [...new Set(auditions.map((audition) => audition.type))].sort()
-const cities = [...new Set(auditions.map((audition) => audition.location))].sort()
-const experienceLevels = [...new Set(auditions.map((audition) => audition.experience))].sort()
-
-export default function AuditionsContent() {
+export default function AuditionsContent({initialAuditions}) {
+  const [auditions, setAuditions] = useState(initialAuditions || [])
   const [filters, setFilters] = useState({
+  
     search: "",
     city: "all",
     state: "all",
     category: "all",
     experience: "all",
   })
+
+  console.log("initialAuditions",initialAuditions);
+  console.log("auditions",auditions);
+
+  // useEffect(() => {
+  //   async function fetchAuditions() {
+  //     try {
+  //       const response = await fetch("/api/auditions")
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch auditions")
+  //       }
+  //       const data = await response.json()
+  //       setAuditions(data)
+  //     } catch (error) {
+  //       console.error("Error fetching auditions:", error)
+  //     }
+  //   }
+
+  //   fetchAuditions()
+  // }, [])
 
   const filteredAuditions = auditions.filter((audition) => {
     return (
@@ -143,6 +65,11 @@ export default function AuditionsContent() {
       experience: "all",
     })
   }
+
+  const states = [...new Set(auditions.map((audition) => audition.state))].sort()
+  const categories = [...new Set(auditions.map((audition) => audition.type))].sort()
+  const cities = [...new Set(auditions.map((audition) => audition.location))].sort()
+  const experienceLevels = [...new Set(auditions.map((audition) => audition.experience))].sort()
 
   return (
     <div className="container py-12">
