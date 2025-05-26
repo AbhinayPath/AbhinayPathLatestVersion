@@ -25,26 +25,3 @@ export const getSupabaseServerClient = () => {
 
   return createClient(supabaseUrl, supabaseServiceKey)
 }
-
-
-export async function uploadAuditionImage(file: File) {
-  // Change this line to use getSupabaseBrowserClient instead
-  const supabase = getSupabaseBrowserClient();
-  const fileName = `audition-${Date.now()}-${file.name}`;
-  
-  if (!supabase) {
-    throw new Error("Failed to initialize Supabase client");
-  }
-  const { data, error } = await supabase.storage
-    .from('audition-images')
-    .upload(fileName, file);
-    
-  if (error) throw error;
-  
-  // Get the public URL
-  const { data: publicUrlData } = supabase.storage
-    .from('audition-images')
-    .getPublicUrl(fileName);
-    
-  return publicUrlData.publicUrl;
-}

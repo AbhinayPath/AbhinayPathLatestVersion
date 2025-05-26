@@ -17,7 +17,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white overflow-hidden">
-        {/* <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 z-0 opacity-20">
           <Image src="/images/hero-bg.png" alt="Stage Background" fill className="object-cover" priority />
         </div>
         <div className="container relative z-10 py-16 sm:py-20 md:py-24 lg:py-32">
@@ -87,8 +87,8 @@ export default function Home() {
                   src="/images/auditions-stage.png"
                   alt="Find Casting Calls"
                   fill
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                   <div className="p-4">
                     <div className="bg-[#F5A623] p-2 rounded-full inline-block mb-2">
