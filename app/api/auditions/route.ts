@@ -1,34 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase";
 
-// Helper function to validate service_role key
-function validateServiceRole(request: NextRequest): boolean {
-  const serviceRoleKey = request.headers.get("service_role");
- 
-  if (!serviceRoleKey) {
-    console.error("Missing service_role key in request headers");
-    return false;
-  }
-
-  const expectedKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  console.log("expectedkey",expectedKey);
-  console.log("serviceRoleKey",serviceRoleKey);
-
-  return serviceRoleKey === expectedKey;
-}
-
 // Add this GET handler to your existing file
 export async function GET() {
   try {
     const supabase = getSupabaseServerClient();
-
+    
     // Query auditions from your Supabase database
-    const { data, error } = await supabase.from("auditions").select("*");
+    const { data, error } = await supabase
+      .from("auditions")
+      .select("*");
 
     if (error) {
       console.error("Supabase query error:", error);
       return NextResponse.json(
-        { error: "Failed to fetch auditions" },
+        { error: "Failed to fetch auditions" }, 
         { status: 500 }
       );
     }
@@ -44,19 +30,12 @@ export async function GET() {
   }
 }
 
-// POST handler
+// Your existing POST handler remains unchanged
 export async function POST(request: NextRequest) {
-  if (!validateServiceRole(request)) {
-    return NextResponse.json(
-      { error: "Unauthorized: Invalid service_role key" },
-      { status: 401 }
-    );
-  }
-
   try {
     const supabase = getSupabaseServerClient();
     const auditions = await request.json();
-
+    
     // Validate if input is an array
     if (!Array.isArray(auditions)) {
       return NextResponse.json(
@@ -72,9 +51,9 @@ export async function POST(request: NextRequest) {
     for (const audition of auditions) {
       // Ensure each entry has the required fields
       if (!audition.title || !audition.type || !audition.location) {
-        errors.push({
-          audition,
-          error: "Missing required fields (title, type, or location)",
+        errors.push({ 
+          audition, 
+          error: "Missing required fields (title, type, or location)" 
         });
         continue;
       }
@@ -108,15 +87,8 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// DELETE handler
+// Add this DELETE handler
 export async function DELETE(request: NextRequest) {
-  if (!validateServiceRole(request)) {
-    return NextResponse.json(
-      { error: "Unauthorized: Invalid service_role key" },
-      { status: 401 }
-    );
-  }
-
   try {
     const supabase = getSupabaseServerClient();
     const { id } = await request.json();
@@ -130,7 +102,10 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete the audition with the given ID
-    const { error } = await supabase.from("auditions").delete().eq("id", id);
+    const { error } = await supabase
+      .from("auditions")
+      .delete()
+      .eq("id", id);
 
     if (error) {
       console.error("Supabase delete error:", error);
@@ -154,15 +129,8 @@ export async function DELETE(request: NextRequest) {
   }
 }
 
-// PUT handler
+// Add this PUT handler
 export async function PUT(request: NextRequest) {
-  if (!validateServiceRole(request)) {
-    return NextResponse.json(
-      { error: "Unauthorized: Invalid service_role key" },
-      { status: 401 }
-    );
-  }
-
   try {
     const supabase = getSupabaseServerClient();
     const { id, ...updatedFields } = await request.json();
