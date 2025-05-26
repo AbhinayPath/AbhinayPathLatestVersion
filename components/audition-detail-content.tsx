@@ -1,31 +1,208 @@
 "use client"
 
-import Image from "next/image"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowLeft, CheckCircle, Building, Calendar, Mail, MapPin, MessageSquare, Phone } from "lucide-react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-type Audition = {
-  id: number
-  title: string
-  image?: string
-  verified?: boolean
-  type: string
-  experience: string
-  description: string
-  roles: string[]
-  requirements: string[]
-  applicationProcess: string
-  company: string
-  companyLink: string
-  location: string
-  state: string
-  date: string
-  contactType: "email" | "phone" | "whatsapp"
-  contact: string
-}
+import { ArrowLeft, MapPin, Calendar, Building, Phone, MessageSquare, CheckCircle, Mail } from "lucide-react"
 
-export default function AuditionDetailContent({ audition }: { audition: Audition }) {
-  if (!audition) {
+// This would typically come from an API or database
+const auditions = [
+  {
+    id: 3,
+    title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Ongoing",
+    director: "Kalayan Theatre Group",
+    description:
+      "Play Title: Kab Tak Rahein Kunware. Language: Hindi (must read Devanagari). Age Group: 25–35 yrs. Location: Koramangala, Bangalore. Rehearsals: Weekends, then weekday evenings closer to show. Show Dates: August/September 2025.",
+    company: "Kalayan Theatre Group",
+    companyLink: "tel:9663304790",
+    contact: "Amit Aggarwal – 96633 04790",
+    contactType: "phone",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Must be able to read Hindi in Devanagari script",
+      "Age between 25-35 years",
+      "Available for weekend rehearsals",
+      "Available for weekday evening rehearsals closer to show dates",
+      "Based in or near Koramangala, Bangalore",
+    ],
+    roles: ["Multiple male and female roles available", "Exact character details will be shared during audition"],
+    applicationProcess: "Contact Amit Aggarwal at the provided phone number to schedule an audition slot.",
+  },
+  {
+    id: 4,
+    title: "CASTING CALL FOR A PLAY CALLED 'ONCE THERE WAS A WAY'",
+    type: "Theater",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "Ongoing",
+    director: "Theater Production",
+    description:
+      "Need artists who are based in Bengaluru (theatre actors). Male actor: age 21-25 (should know how to play a guitar). Male actor: age 30+. Female actor: age 30+. Male actor: age 50+. DM for more details.",
+    company: "Theater Production",
+    companyLink: "tel:+917330684137",
+    contact: "+917330684137",
+    contactType: "phone",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Must be based in Bengaluru",
+      "Previous theater experience preferred",
+      "Male actor (21-25) must know how to play guitar",
+      "Available for rehearsals (schedule to be discussed)",
+    ],
+    roles: [
+      "Male actor: age 21-25 (must know how to play guitar)",
+      "Male actor: age 30+",
+      "Female actor: age 30+",
+      "Male actor: age 50+",
+    ],
+    applicationProcess: "Contact the production team at the provided phone number for audition details and scheduling.",
+  },
+  {
+    id: 5,
+    title: "Lead Role Actress for Kannada Feature Film - Mute Character",
+    type: "Film",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Ongoing",
+    director: "CINECUBES",
+    description:
+      'We are looking for a lead role actress for our Kannada feature film (language is not a barrier). The character is of a mute girl. So, language is not a barrier. Facial expressions are the most important factors along with the ability to use a mute girl\'s sounds like "bhaaaah...", "mahhh..."',
+    company: "CINECUBES",
+    companyLink: "https://wa.me/919886028205",
+    contact: "+91 9886028205 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Facial expressions are the most important factor",
+      'Ability to use mute girl\'s sounds like "bhaaaah...", "mahhh..."',
+      "Language is not a barrier (character is mute)",
+      "Screen age: Around 20 years",
+    ],
+    roles: [
+      "Lead role - Mute girl character",
+      "Character description: Innocent, Lot of pain in eyes, A warrior mother with fire in eyes",
+    ],
+    applicationProcess:
+      "Record a video of yourself performing the audition task and WhatsApp to +91 9886028205. Audition task: Scenario where few people are about to harm her 6-month-old baby but she is helpless to stop them. 1) Start by looking into camera (baby) with light smile. 2) Smile turns into laugh indicating she can't do anything. Laugh is not loud but there is intensive pain behind it. 3) Laugh turns into an inside cry with lot of pain in eyes. 4) Laugh turns into a blank expression looking deep into camera. She is trying to hide the pain but eyes are filled with painful tears.",
+  },
+  {
+    id: 6,
+    title: "Casting Call for Web Series - 'Digital Nomads'",
+    type: "Web Series",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "June 15-30, 2025",
+    director: "Horizon Studios",
+    description:
+      "Casting for an upcoming web series about a group of digital nomads traveling across India while working remotely. Looking for diverse cast members who can portray tech professionals with different backgrounds and personalities.",
+    company: "Horizon Studios",
+    companyLink: "mailto:casting@horizonstudios.in",
+    contact: "casting@horizonstudios.in",
+    contactType: "email",
+    experience: "Experienced",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Previous acting experience in web series or films",
+      "Age range: 25-40 years",
+      "Comfortable with technology (will be using laptops/devices on screen)",
+      "Available for a 45-day shoot schedule across multiple locations in India",
+      "Good English communication skills",
+      "Hindi speaking ability preferred but not mandatory",
+    ],
+    roles: [
+      "Lead Role: Software Developer (Male/Female, 28-35 years)",
+      "Lead Role: Digital Marketing Specialist (Female, 25-32 years)",
+      "Supporting Role: UX Designer (Male/Female, 25-35 years)",
+      "Supporting Role: Content Creator/Vlogger (Male/Female, 25-30 years)",
+      "Supporting Role: Startup Founder (Male, 35-40 years)",
+      "Supporting Role: Cybersecurity Expert (Male/Female, 30-40 years)",
+    ],
+    applicationProcess:
+      "Send your updated portfolio, headshots, and a self-tape audition to casting@horizonstudios.in. For the self-tape, please record a 2-minute scene showing your character working remotely in a challenging environment (e.g., poor internet, noisy cafe, etc.) and how they handle the situation. Include your name, contact details, and the role you're applying for in the email subject line.",
+  },
+  {
+    id: 7,
+    title: "Casting Call for 2-Minute Short Film - Family Drama",
+    type: "Short Film",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "May 26-27, 2025",
+    director: "Independent Filmmaker",
+    description:
+      "Casting for a 2-minute short film shot in Bangalore. Language: Hindi and English (Hinglish). Roles: Gen Z female (17-21), supportive mother (40s-50s), and sarcastic father (40s-50s). This is a PAID opportunity. Apply via WhatsApp specifying the role you're interested in.",
+    company: "Independent Production",
+    companyLink: "https://wa.me/919862853175",
+    contact: "9862853175 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Must be comfortable with Hindi and English (Hinglish) dialogue",
+      "Must be available on either May 26th or 27th, 2025 for the shoot",
+      "Must be based in or able to travel to Bangalore",
+      "Previous acting experience is preferred but not mandatory",
+      "Must be comfortable with the filming process and taking direction",
+    ],
+    roles: [
+      "Gen Z Female (17-21 years): Confident, slightly rebellious character with good emotional range. Should be able to portray both vulnerability and strength.",
+      "Supportive Mother (40s-50s): Warm, understanding character who balances traditional values with modern thinking. Requires subtle emotional expressions.",
+      "Sarcastic Father (40s-50s): Witty, slightly stern but loving character. Should have good comic timing and ability to deliver sarcastic lines naturally.",
+    ],
+    applicationProcess:
+      "Send a WhatsApp message to 9862853175 clearly mentioning which role you're applying for. Include your name, age, location, previous acting experience (if any), and a recent photo. Selected candidates will be called for a brief audition. This is a PAID opportunity - compensation details will be discussed during the selection process.",
+  },
+]
+
+export default function AuditionDetailContent({ id }: { id: number }) {
+  const [audition, setAudition] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Simulate API fetch with timeout
+    const timer = setTimeout(() => {
+      const foundAudition = auditions.find((a) => a.id === id)
+      if (foundAudition) {
+        setAudition(foundAudition)
+        setLoading(false)
+      } else {
+        setError("Audition not found")
+        setLoading(false)
+      }
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }, [id])
+
+  if (loading) {
+    return (
+      <div className="container py-12">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded w-3/4 mb-4"></div>
+          <div className="h-4 bg-gray-200 rounded w-1/2 mb-8"></div>
+          <div className="h-64 bg-gray-200 rounded mb-6"></div>
+          <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded w-5/6 mb-6"></div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !audition) {
     return (
       <div className="container py-12">
         <div className="max-w-3xl mx-auto text-center">
@@ -59,6 +236,7 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
                 fill
                 className="object-cover"
                 onError={(e) => {
+                  // Fallback to default image on error
                   const target = e.target as HTMLImageElement
                   target.src = "/images/auditions-stage.png"
                 }}
@@ -86,7 +264,7 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
 
                 <h2 className="text-xl font-semibold mb-3">Roles</h2>
                 <ul className="list-disc pl-5 mb-6">
-                  {audition.roles.map((role, index) => (
+                  {audition.roles.map((role: string, index: number) => (
                     <li key={index} className="text-gray-800 mb-2">
                       {role}
                     </li>
@@ -95,7 +273,7 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
 
                 <h2 className="text-xl font-semibold mb-3">Requirements</h2>
                 <ul className="list-disc pl-5 mb-6">
-                  {audition.requirements.map((req, index) => (
+                  {audition.requirements.map((req: string, index: number) => (
                     <li key={index} className="text-gray-800 mb-2">
                       {req}
                     </li>
