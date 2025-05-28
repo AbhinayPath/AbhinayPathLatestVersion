@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase";
 
+
+console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY);
+
+
 // Helper function to validate service_role key
 function validateServiceRole(request: NextRequest): boolean {
   const serviceRoleKey = request.headers.get("service_role");
@@ -29,7 +35,7 @@ export async function GET() {
       console.error("Supabase query error:", error);
       return NextResponse.json(
         { error: "Failed to fetch auditions" },
-        { status: 500 }
+        { status: 500}
       );
     }
 
