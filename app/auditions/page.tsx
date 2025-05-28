@@ -1,14 +1,15 @@
 import { Suspense } from "react";
 import AuditionsContent from "@/components/auditions-content";
 
-// Fetch data on the server side
+// Enable ISR: regenerate this page every 60 seconds
+export const revalidate = 60;
+
 async function getAuditions() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auditions`, {
-      cache: "no-store", // ensures fresh data on every request
+    // Use relative path instead of absolute with NEXT_PUBLIC_BASE_URL
+    const res = await fetch("http://localhost:3000/api/auditions", {
+      next: { revalidate: 60 },
     });
-
-    
 
     if (!res.ok) {
       console.error("Failed to fetch auditions", res.status, res.statusText);
