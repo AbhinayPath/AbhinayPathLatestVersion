@@ -33,6 +33,7 @@ export default function ContactPage() {
   console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
   console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY);
   
+  console.log("SUPABASE api ROLE KEY:", `${process.env.NEXT_PUBLIC_BASE_URL}/api/auditions`);
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{
