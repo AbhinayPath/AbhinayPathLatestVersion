@@ -4,7 +4,14 @@ import AuditionsContent from "@/components/auditions-content";
 // Fetch data on the server side
 async function getAuditions() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auditions`, {
+    //for localhost
+
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auditions`, {
+    //   cache: "no-store", // ensures fresh data on every request
+    // });
+
+    //for vercel
+    const res = await fetch("/api/auditions", {
       cache: "no-store", // ensures fresh data on every request
     });
 
