@@ -4,16 +4,11 @@ import AuditionsContent from "@/components/auditions-content";
 // Fetch data on the server side
 async function getAuditions() {
   try {
-    //for localhost
-
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auditions`, {
-    //   cache: "no-store", // ensures fresh data on every request
-    // });
-
-    //for vercel
-    const res = await fetch("/api/auditions", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auditions`, {
       cache: "no-store", // ensures fresh data on every request
     });
+
+    
 
     if (!res.ok) {
       console.error("Failed to fetch auditions", res.status, res.statusText);
