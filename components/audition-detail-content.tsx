@@ -25,6 +25,11 @@ type Audition = {
 }
 
 export default function AuditionDetailContent({ audition }: { audition: Audition }) {
+  console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY);
+
+  
   if (!audition) {
     return (
       <div className="container py-12">
