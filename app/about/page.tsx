@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 export default function AboutPage() {
+
+  console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+  console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+  console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY);
+  
   return (
     <div className="container py-16 md:py-24">
       <div className="max-w-4xl mx-auto">
