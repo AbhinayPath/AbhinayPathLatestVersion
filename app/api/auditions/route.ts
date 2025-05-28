@@ -1,8 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseServerClient } from "@/lib/supabase";
 
+import { cookies } from 'next/headers';
+import { createServerClient } from "@supabase/auth-helpers-nextjs";
 
-
+// Server-side Supabase client setup
+function getSupabaseServerClient() {
+  const cookieStore = cookies();
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!, // Use SERVICE_ROLE_KEY if needed for protected queries
+    {
+      cookies: () => cookieStore,
+    }
+  );
+}
 
 // Helper function to validate service_role key
 function validateServiceRole(request: NextRequest): boolean {
