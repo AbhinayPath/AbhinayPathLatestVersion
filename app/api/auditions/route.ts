@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js';
 
 
 console.log("!!!process.env.NEXT_PUBLIC_SUPABASE_URL",process.env.NEXT_PUBLIC_SUPABASE_URL!);
@@ -47,7 +48,10 @@ function validateServiceRole(request: NextRequest): boolean {
 // Add this GET handler to your existing file
 export async function GET() {
   try {
-    const supabase = await getSupabaseServerClient();
+    const supabase =  createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
 
     // Query auditions from your Supabase database
     const { data, error } = await supabase.from("auditions").select("*");
