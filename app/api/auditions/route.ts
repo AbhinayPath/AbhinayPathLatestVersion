@@ -1,16 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { cookies } from 'next/headers';
-import { createServerClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from '@supabase/ssr'
 
+
+console.log("!!!process.env.NEXT_PUBLIC_SUPABASE_URL",process.env.NEXT_PUBLIC_SUPABASE_URL!);
 // Server-side Supabase client setup
-function getSupabaseServerClient() {
-  const cookieStore = cookies();
+export async function getSupabaseServerClient() {
+  const cookieStore = await cookies(); // ✅ await here if needed
+
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!, // Use SERVICE_ROLE_KEY if needed for protected queries
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookies: () => cookieStore,
+      cookies: {
+        get() {
+          return undefined
+        },
+        set() {
+          // setting cookies not supported on server
+        },
+        remove() {
+          // removing cookies not supported on server
+        },
+      },
     }
   );
 }
@@ -34,7 +47,7 @@ function validateServiceRole(request: NextRequest): boolean {
 // Add this GET handler to your existing file
 export async function GET() {
   try {
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClient();
 
     // Query auditions from your Supabase database
     const { data, error } = await supabase.from("auditions").select("*");
@@ -68,7 +81,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClient();
     const auditions = await request.json();
 
     // Validate if input is an array
@@ -132,7 +145,7 @@ export async function DELETE(request: NextRequest) {
   }
 
   try {
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClient();
     const { id } = await request.json();
 
     // Validate if the ID is provided
@@ -178,7 +191,7 @@ export async function PUT(request: NextRequest) {
   }
 
   try {
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClient();
     const { id, ...updatedFields } = await request.json();
 
     // Validate if the ID is provided
