@@ -1,149 +1,241 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from 'next/headers';
-import { createServerClient } from '@supabase/ssr';
 
-// Initialize Supabase server client
-function getSupabaseServerClient() {
-  const cookieStore = cookies();
+import { cookies } from 'next/headers';
+import { createServerClient } from '@supabase/ssr'
+
+
+console.log("!!!process.env.NEXT_PUBLIC_SUPABASE_URL",process.env.NEXT_PUBLIC_SUPABASE_URL!);
+// Server-side Supabase client setup
+export async function getSupabaseServerClient() {
+  const cookieStore = await cookies(); // ✅ await here if needed
+
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookies: () => cookieStore,
+      cookies: {
+        get(name) {
+          return cookieStore.get(name)?.value;
+        },
+        set() {
+          // setting cookies not supported on server
+        },
+        remove() {
+          // removing cookies not supported on server
+        },
+      },
     }
   );
 }
 
-// Validate service role key from headers
+// Helper function to validate service_role key
 function validateServiceRole(request: NextRequest): boolean {
   const serviceRoleKey = request.headers.get("service_role");
-  const expectedKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!serviceRoleKey || serviceRoleKey !== expectedKey) {
-    console.error("Unauthorized: Invalid or missing service_role key");
+ 
+  if (!serviceRoleKey) {
+    console.error("Missing service_role key in request headers");
     return false;
   }
 
-  return true;
+  const expectedKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  console.log("expectedkey",expectedKey);
+  console.log("serviceRoleKey",serviceRoleKey);
+
+  return serviceRoleKey === expectedKey;
 }
 
-// GET handler - Fetch all auditions
+// Add this GET handler to your existing file
 export async function GET() {
   try {
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClient();
+
+    // Query auditions from your Supabase database
     const { data, error } = await supabase.from("auditions").select("*");
 
     if (error) {
       console.error("Supabase query error:", error);
-      return NextResponse.json({ error: "Failed to fetch auditions" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Failed to fetch auditions" },
+        { status: 500}
+      );
     }
 
+    // Return the auditions data as JSON
     return NextResponse.json(data || []);
   } catch (error) {
-    console.error("Server error fetching auditions:", error);
-    return NextResponse.json({ error: "Failed to fetch audition data" }, { status: 500 });
+    console.error("Error fetching audition data:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch audition data" },
+      { status: 500 }
+    );
   }
 }
 
-// POST handler - Insert multiple auditions
+// POST handler
 export async function POST(request: NextRequest) {
   if (!validateServiceRole(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Unauthorized: Invalid service_role key" },
+      { status: 401 }
+    );
   }
 
   try {
     const supabase = getSupabaseServerClient();
     const auditions = await request.json();
 
+    // Validate if input is an array
     if (!Array.isArray(auditions)) {
-      return NextResponse.json({ error: "Input should be an array" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid input, expected an array of auditions" },
+        { status: 400 }
+      );
     }
 
+    // Process each audition entry
     const results = [];
     const errors = [];
 
     for (const audition of auditions) {
-      const { title, type, location } = audition;
-      if (!title || !type || !location) {
-        errors.push({ audition, error: "Missing required fields" });
+      // Ensure each entry has the required fields
+      if (!audition.title || !audition.type || !audition.location) {
+        errors.push({
+          audition,
+          error: "Missing required fields (title, type, or location)",
+        });
         continue;
       }
 
-      const { data, error } = await supabase.from("auditions").insert(audition).select();
-      if (error) errors.push({ audition, error: error.message });
-      else results.push(data);
+      // Insert into the auditions table
+      const { data, error } = await supabase
+        .from("auditions")
+        .insert(audition)
+        .select();
+
+      if (error) {
+        errors.push({ audition, error: error.message });
+      } else {
+        results.push(data);
+      }
     }
 
+    // Return response with results and any errors
     return NextResponse.json({
       success: true,
-      message: `Processed ${auditions.length} entries, ${errors.length} failed.`,
+      message: `Processed ${auditions.length} auditions with ${errors.length} errors`,
       results,
-      errors: errors.length ? errors : null,
+      errors: errors.length > 0 ? errors : null,
     });
   } catch (error) {
-    console.error("Server error in POST:", error);
-    return NextResponse.json({ error: "Failed to process auditions" }, { status: 500 });
+    console.error("Error processing audition data:", error);
+    return NextResponse.json(
+      { error: "Failed to process audition data" },
+      { status: 500 }
+    );
   }
 }
 
-// DELETE handler - Delete an audition by ID
+// DELETE handler
 export async function DELETE(request: NextRequest) {
   if (!validateServiceRole(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Unauthorized: Invalid service_role key" },
+      { status: 401 }
+    );
   }
 
   try {
     const supabase = getSupabaseServerClient();
     const { id } = await request.json();
 
+    // Validate if the ID is provided
     if (!id) {
-      return NextResponse.json({ error: "Missing ID" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required field: id" },
+        { status: 400 }
+      );
     }
 
+    // Delete the audition with the given ID
     const { error } = await supabase.from("auditions").delete().eq("id", id);
+
     if (error) {
-      console.error("Delete error:", error);
-      return NextResponse.json({ error: "Delete failed" }, { status: 500 });
+      console.error("Supabase delete error:", error);
+      return NextResponse.json(
+        { error: "Failed to delete audition" },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json({ success: true, message: `Deleted audition with ID ${id}` });
+    // Return success response
+    return NextResponse.json({
+      success: true,
+      message: `Audition with ID ${id} deleted successfully`,
+    });
   } catch (error) {
-    console.error("Server error in DELETE:", error);
-    return NextResponse.json({ error: "Failed to delete audition" }, { status: 500 });
+    console.error("Error deleting audition:", error);
+    return NextResponse.json(
+      { error: "Failed to delete audition" },
+      { status: 500 }
+    );
   }
 }
 
-// PUT handler - Update an audition by ID
+// PUT handler
 export async function PUT(request: NextRequest) {
   if (!validateServiceRole(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Unauthorized: Invalid service_role key" },
+      { status: 401 }
+    );
   }
 
   try {
     const supabase = getSupabaseServerClient();
-    const { id, ...fieldsToUpdate } = await request.json();
+    const { id, ...updatedFields } = await request.json();
 
+    // Validate if the ID is provided
     if (!id) {
-      return NextResponse.json({ error: "Missing ID" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required field: id" },
+        { status: 400 }
+      );
     }
 
-    if (!Object.keys(fieldsToUpdate).length) {
-      return NextResponse.json({ error: "No fields to update" }, { status: 400 });
+    // Validate if there are fields to update
+    if (Object.keys(updatedFields).length === 0) {
+      return NextResponse.json(
+        { error: "No fields provided to update" },
+        { status: 400 }
+      );
     }
 
-    const { data, error } = await supabase.from("auditions").update(fieldsToUpdate).eq("id", id).select();
+    // Update the audition with the given ID
+    const { data, error } = await supabase
+      .from("auditions")
+      .update(updatedFields)
+      .eq("id", id)
+      .select();
+
     if (error) {
-      console.error("Update error:", error);
-      return NextResponse.json({ error: "Update failed" }, { status: 500 });
+      console.error("Supabase update error:", error);
+      return NextResponse.json(
+        { error: "Failed to update audition" },
+        { status: 500 }
+      );
     }
 
+    // Return success response
     return NextResponse.json({
       success: true,
-      message: `Updated audition with ID ${id}`,
+      message: `Audition with ID ${id} updated successfully`,
       data,
     });
   } catch (error) {
-    console.error("Server error in PUT:", error);
-    return NextResponse.json({ error: "Failed to update audition" }, { status: 500 });
+    console.error("Error updating audition:", error);
+    return NextResponse.json(
+      { error: "Failed to update audition" },
+      { status: 500 }
+    );
   }
 }
