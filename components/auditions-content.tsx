@@ -9,8 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, Filter, MapPin, Calendar } from "lucide-react"
 import AuditionBanner from "@/components/audition-banner"
 
-export default function AuditionsContent({initialAuditions}) {
-  const [auditions, setAuditions] = useState(initialAuditions || [])
+export default function AuditionsContent() {
+  const [auditions, setAuditions] = useState([])
   const [filters, setFilters] = useState({
   
     search: "",
@@ -20,25 +20,24 @@ export default function AuditionsContent({initialAuditions}) {
     experience: "all",
   })
 
-  console.log("initialAuditions",initialAuditions);
-  console.log("auditions",auditions);
+  
 
-  // useEffect(() => {
-  //   async function fetchAuditions() {
-  //     try {
-  //       const response = await fetch("/api/auditions")
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch auditions")
-  //       }
-  //       const data = await response.json()
-  //       setAuditions(data)
-  //     } catch (error) {
-  //       console.error("Error fetching auditions:", error)
-  //     }
-  //   }
+  useEffect(() => {
+    async function fetchAuditions() {
+      try {
+        const response = await fetch("/api/auditions")
+        if (!response.ok) {
+          throw new Error("Failed to fetch auditions")
+        }
+        const data = await response.json()
+        setAuditions(data)
+      } catch (error) {
+        console.error("Error fetching auditions:", error)
+      }
+    }
 
-  //   fetchAuditions()
-  // }, [])
+    fetchAuditions()
+  }, [])
 
   const filteredAuditions = auditions.filter((audition) => {
     return (
