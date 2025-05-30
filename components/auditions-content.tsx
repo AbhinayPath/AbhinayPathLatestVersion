@@ -83,24 +83,6 @@ const auditions = [
     verified: true,
     image: "/placeholder.svg?height=300&width=500&text=Digital+Nomads+Web+Series",
   },
-  {
-    id: 7,
-    title: "Casting Call for 2-Minute Short Film - Family Drama",
-    type: "Short Film",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "May 26-27, 2025",
-    director: "Independent Filmmaker",
-    description:
-      "Casting for a 2-minute short film shot in Bangalore. Language: Hindi and English (Hinglish). Roles: Gen Z female (17-21), supportive mother (40s-50s), and sarcastic father (40s-50s). This is a PAID opportunity. Apply via WhatsApp specifying the role you're interested in.",
-    company: "Independent Production",
-    companyLink: "https://wa.me/919862853175",
-    contact: "9862853175 (WhatsApp)",
-    contactType: "whatsapp",
-    experience: "All Levels",
-    verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Short+Film+Casting",
-  },
 ]
 
 // Get unique states and categories for filters
