@@ -19,20 +19,24 @@ export default function AuditionsContent() {
     category: "all",
     experience: "all",
   })
+  const [loader,setLoader] = useState(true)
 
   
 
   useEffect(() => {
     async function fetchAuditions() {
       try {
+        setLoader(true)
         const response = await fetch("/api/auditions")
         if (!response.ok) {
           throw new Error("Failed to fetch auditions")
         }
         const data = await response.json()
         setAuditions(data)
+        setLoader(false)
       } catch (error) {
         console.error("Error fetching auditions:", error)
+        setLoader(false)
       }
     }
 
@@ -169,7 +173,7 @@ export default function AuditionsContent() {
       </div>
 
       {/* Audition Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {!loader ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredAuditions.length > 0 ? (
           filteredAuditions.map((audition) => (
             <div
@@ -239,7 +243,7 @@ export default function AuditionsContent() {
             </Button>
           </div>
         )}
-      </div>
+      </div> : <div className="text-center py-12">Loading auditions...</div>}
     </div>
   )
 }
