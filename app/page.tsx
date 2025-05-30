@@ -27,21 +27,7 @@ export default function Home() {
               Beta Access Available
             </Badge>
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              India&apos;s first platform to discover{" "}
-              <span className="inline md:hidden">
-                <br />
-              </span>
-              auditions,
-              <span className="hidden sm:inline">&nbsp;</span>workshops{" "}
-              <span className="inline md:hidden">
-                <br />
-              </span>
-              and
-              <span className="hidden sm:inline">&nbsp;</span>mentorship from{" "}
-              <span className="inline lg:hidden">
-                <br />
-              </span>
-              acting school alumni
+              India&apos;s first platform to discover auditions, workshops and mentorship from acting school alumni
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed">
               Connecting actors, directors, and backstage professionals across theatre, film & web.
