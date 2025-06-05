@@ -12,63 +12,34 @@ export default function AboutPage() {
         </div>
 
         <div className="prose prose-lg max-w-none">
-          <p className="text-xl leading-relaxed mb-8">
-            AbhinayPath is India's creative platform for actors, directors, and creators to discover auditions,
-            workshops, and exam prep support — across theatre, film & digital. We're building a trusted space where
-            opportunities meet preparation, with alumni support from NSD, FTII and more.
+          <p className="text-xl leading-relaxed mb-12 text-center">
+            India's trusted platform connecting creative talent with verified auditions, expert workshops, and institute
+            preparation. Backed by NSD and FTII alumni.
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 my-16">
-            <div className="space-y-6">
-              <h2 className="font-playfair text-3xl font-bold">Our Mission</h2>
-              <p className="text-gray-700">
-                To create a trusted ecosystem where creative talent can discover opportunities, enhance their skills,
-                and connect with industry professionals across India's vibrant performing arts landscape.
-              </p>
-            </div>
-            <div className="space-y-6">
-              <h2 className="font-playfair text-3xl font-bold">Our Vision</h2>
-              <p className="text-gray-700">
-                To become the definitive platform that bridges the gap between talent and opportunity in India's
-                theatre, film, and digital entertainment industries.
-              </p>
-            </div>
-          </div>
 
           <div className="bg-[#2D1A54]/5 p-8 rounded-xl my-16">
-            <h2 className="font-playfair text-3xl font-bold mb-6">What We Offer</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-sm">
+              <div className="bg-white p-6 rounded-lg shadow-sm text-center">
                 <div className="text-4xl mb-4">🎭</div>
                 <h3 className="font-bold text-xl mb-3">Verified Auditions</h3>
-                <p className="text-gray-600">
-                  Curated casting calls from trusted production houses across theatre, film, and digital platforms.
-                </p>
+                <p className="text-gray-600">Curated casting calls from trusted production houses.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm">
+              <div className="bg-white p-6 rounded-lg shadow-sm text-center">
                 <div className="text-4xl mb-4">🎓</div>
                 <h3 className="font-bold text-xl mb-3">Expert Workshops</h3>
-                <p className="text-gray-600">
-                  Skill-building sessions led by industry professionals to enhance your craft and performance abilities.
-                </p>
+                <p className="text-gray-600">Skill-building sessions led by industry professionals.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm">
+              <div className="bg-white p-6 rounded-lg shadow-sm text-center">
                 <div className="text-4xl mb-4">📚</div>
                 <h3 className="font-bold text-xl mb-3">Institute Preparation</h3>
-                <p className="text-gray-600">
-                  Guidance and resources for entrance exams to prestigious institutions like NSD and FTII.
-                </p>
+                <p className="text-gray-600">Guidance for NSD and FTII entrance exams.</p>
               </div>
             </div>
           </div>
 
-          <h2 className="font-playfair text-3xl font-bold mb-6">Join Our Community</h2>
-          <p className="text-xl leading-relaxed mb-8">
-            We're currently in beta, building a community of passionate artists and creators. Join us to be part of this
-            journey from the beginning and help shape the future of AbhinayPath.
-          </p>
-
-          <div className="text-center mt-12">
+          <div className="text-center">
+            <h2 className="font-playfair text-3xl font-bold mb-6">Join Our Beta Community</h2>
+            <p className="text-lg mb-8">Be part of India's creative revolution from day one.</p>
             <Link href="/join-community">
               <Button
                 size="lg"

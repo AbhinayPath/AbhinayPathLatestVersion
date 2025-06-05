@@ -43,10 +43,56 @@ export default function JoinCommunityPage() {
             <div className="w-full text-white text-left">
               <h2 className="text-2xl font-bold mb-2">Welcome!</h2>
               <p className="text-white/90 max-w-2xl">
-                We're building India's first platform for auditions, workshops, and creative careers — across Theater,
-                screen, and web. You're invited to be part of it from Day 1.
+                India's first platform for auditions, workshops, and creative careers. Join from Day 1.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Prominent Quick Access Links */}
+      <div className="max-w-4xl mx-auto mb-16">
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+          <h2 className="font-playfair text-2xl font-bold text-center mb-6 text-gray-800">Quick Access</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc2aWoB_w_roGXrMzsXn2BLj3Dao4aNZLOd7p5O1sffeZYJsw/viewform?usp=header"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <div className="bg-primary/5 hover:bg-primary/10 border-2 border-primary/20 hover:border-primary/40 rounded-xl p-4 text-center transition-all duration-200 group-hover:shadow-md">
+                <FileText className="h-8 w-8 text-primary mx-auto mb-2" />
+                <h3 className="font-bold text-lg text-gray-800">Fill Google Form</h3>
+                <p className="text-sm text-gray-600 mt-1">Join the community</p>
+              </div>
+            </a>
+
+            <a
+              href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <div className="bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-xl p-4 text-center transition-all duration-200 group-hover:shadow-md">
+                <MessageCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                <h3 className="font-bold text-lg text-gray-800">Join WhatsApp Group</h3>
+                <p className="text-sm text-gray-600 mt-1">Connect instantly</p>
+              </div>
+            </a>
+
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfekhC6GWHNMsAtwI2Lpht3Yf5DJMtIoGOMPS6akhMY6BVQow/viewform?usp=header"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <div className="bg-amber-50 hover:bg-amber-100 border-2 border-amber-200 hover:border-amber-400 rounded-xl p-4 text-center transition-all duration-200 group-hover:shadow-md">
+                <ClipboardCheck className="h-8 w-8 text-amber-600 mx-auto mb-2" />
+                <h3 className="font-bold text-lg text-gray-800">🎭 Submit a Verified Opportunity</h3>
+                <p className="text-sm text-gray-600 mt-1">Share authentic opportunities</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -61,7 +107,7 @@ export default function JoinCommunityPage() {
         </div>
 
         <p className="text-lg text-gray-700 mb-10 max-w-3xl">
-          A vibrant, artsy platform made for creators, casting professionals, and institutions to:
+          A platform connecting creators, casting professionals, and institutions:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -72,9 +118,7 @@ export default function JoinCommunityPage() {
                 <Search className="h-6 w-6 text-primary" />
               </div>
               <h3 className="font-bold text-xl mb-2">Discover & Post Auditions</h3>
-              <p className="text-gray-800">
-                Find casting calls or post your own auditions to connect with the perfect talent.
-              </p>
+              <p className="text-gray-800">Find casting calls or post auditions to connect with talent.</p>
             </CardContent>
           </Card>
 
@@ -85,7 +129,7 @@ export default function JoinCommunityPage() {
                 <Calendar className="h-6 w-6 text-purple-600" />
               </div>
               <h3 className="font-bold text-xl mb-2">Workshops & Programs</h3>
-              <p className="text-gray-800">Share or join workshops, training sessions, and preparation programs.</p>
+              <p className="text-gray-800">Join workshops, training sessions, and preparation programs.</p>
             </CardContent>
           </Card>
 
@@ -96,9 +140,7 @@ export default function JoinCommunityPage() {
                 <Users className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="font-bold text-xl mb-2">Find Collaborators</h3>
-              <p className="text-gray-800">
-                Connect with creative professionals for projects, gigs, and collaborations.
-              </p>
+              <p className="text-gray-800">Connect with creative professionals for projects and collaborations.</p>
             </CardContent>
           </Card>
 
@@ -109,7 +151,7 @@ export default function JoinCommunityPage() {
                 <Megaphone className="h-6 w-6 text-amber-600" />
               </div>
               <h3 className="font-bold text-xl mb-2">Artist-Led Network</h3>
-              <p className="text-gray-800">Build meaningful connections in a community created by and for artists.</p>
+              <p className="text-gray-800">Build connections in a community created by and for artists.</p>
             </CardContent>
           </Card>
         </div>
@@ -135,9 +177,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Early Access</h3>
-                <p className="text-gray-800">
-                  Get exclusive access to all features and opportunities before the public launch.
-                </p>
+                <p className="text-gray-800">Exclusive access to features before public launch.</p>
               </div>
             </div>
 
@@ -147,9 +187,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Shape the Platform</h3>
-                <p className="text-gray-800">
-                  Provide feedback that directly influences features and development priorities.
-                </p>
+                <p className="text-gray-800">Your feedback directly influences development.</p>
               </div>
             </div>
 
@@ -159,9 +197,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Get Featured</h3>
-                <p className="text-gray-800">
-                  Be highlighted in interviews, creator spotlights, blogs, and promotional materials.
-                </p>
+                <p className="text-gray-800">Be highlighted in interviews, spotlights, and promotions.</p>
               </div>
             </div>
 
@@ -171,9 +207,7 @@ export default function JoinCommunityPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Networking Opportunities</h3>
-                <p className="text-gray-800">
-                  Connect with other artists, creators, and industry professionals in an exclusive community.
-                </p>
+                <p className="text-gray-800">Connect with artists and industry professionals.</p>
               </div>
             </div>
           </div>
@@ -197,9 +231,7 @@ export default function JoinCommunityPage() {
                 <FileText className="h-8 w-8 text-primary" />
               </div>
               <h3 className="font-bold text-2xl mb-3">Fill the Google Form</h3>
-              <p className="text-gray-800 mb-6">
-                Tell us about yourself, your interests, and how you'd like to contribute to the community.
-              </p>
+              <p className="text-gray-800 mb-6">Tell us about yourself and how you'd like to contribute.</p>
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSc2aWoB_w_roGXrMzsXn2BLj3Dao4aNZLOd7p5O1sffeZYJsw/viewform?usp=header"
                 target="_blank"
@@ -219,9 +251,7 @@ export default function JoinCommunityPage() {
                 <MessageCircle className="h-8 w-8 text-green-600" />
               </div>
               <h3 className="font-bold text-2xl mb-3">Join WhatsApp Group</h3>
-              <p className="text-gray-800 mb-6">
-                Connect directly with the community and get instant updates and networking opportunities.
-              </p>
+              <p className="text-gray-800 mb-6">Connect directly with the community for updates and networking.</p>
               <a href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="w-full rounded-full bg-green-600 hover:bg-green-700 text-white">
                   Join WhatsApp Group <ArrowRight className="ml-2 h-4 w-4" />
@@ -236,9 +266,10 @@ export default function JoinCommunityPage() {
               <div className="h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center mb-6">
                 <ClipboardCheck className="h-8 w-8 text-amber-600" />
               </div>
-              <h3 className="font-bold text-2xl mb-3">Content Submission Form</h3>
+              <h3 className="font-bold text-2xl mb-3">🎭 Submit a Verified Opportunity</h3>
               <p className="text-gray-800 mb-6">
-                Form for directors, casting agents, or workshop organizers to submit real opportunities.
+                Are you a director, casting agent, or workshop organizer? Share your authentic opportunity with the
+                AbhinayPath community. Help artists connect with real, meaningful work.
               </p>
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfekhC6GWHNMsAtwI2Lpht3Yf5DJMtIoGOMPS6akhMY6BVQow/viewform?usp=header"
@@ -268,8 +299,7 @@ export default function JoinCommunityPage() {
           </div>
 
           <p className="text-lg text-gray-700 mb-8">
-            We'll be posting real opportunities, interviews, and educational content soon. This is your chance to be a
-            founding member of India's most vibrant creative community.
+            Real opportunities, interviews, and content coming soon. Be a founding member of India's creative community.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
@@ -304,33 +334,29 @@ export default function JoinCommunityPage() {
           {[
             {
               question: "What is AbhinayPath Beta?",
-              answer:
-                "AbhinayPath Beta is the early access version of our platform where we're building India's first comprehensive ecosystem for creative artists across theater, film, and web.",
+              answer: "Early access to our platform building India's creative ecosystem across theater, film, and web.",
             },
             {
               question: "Is it free to join?",
               answer:
-                "Yes, joining the AbhinayPath Beta community is completely free. Early members will also get special benefits when we launch premium features in the future.",
+                "Yes, AbhinayPath Beta is completely free. Early members get special benefits for future premium features.",
             },
             {
               question: "How can I contribute to the community?",
-              answer:
-                "You can share opportunities, participate in discussions, provide feedback on features, and help spread the word about AbhinayPath to fellow artists.",
+              answer: "Share opportunities, participate in discussions, provide feedback, and spread the word.",
             },
             {
               question: "When will the full platform launch?",
-              answer:
-                "We're working on a phased launch approach. Beta members will be the first to know about our official launch date and will get early access to all new features.",
+              answer: "Beta members will be the first to know about our official launch and new features.",
             },
             {
               question: "Can I post my own auditions or workshops?",
               answer:
-                "Yes! We encourage community members to share legitimate opportunities. During the beta, we'll be refining our posting and verification systems.",
+                "Yes! Share legitimate opportunities. We'll be refining our posting and verification systems during the beta.",
             },
             {
               question: "How do I get featured in creator spotlights?",
-              answer:
-                "Active community members with interesting work and stories will be considered for our creator spotlights. You can express your interest when filling out the Google form.",
+              answer: "Active community members will be considered. Express your interest in the Google form.",
             },
           ].map((faq, index) => (
             <div

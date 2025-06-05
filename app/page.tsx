@@ -30,7 +30,7 @@ export default function Home() {
               India&apos;s first platform to discover auditions, workshops and mentorship from acting school alumni
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed">
-              Connecting actors, directors, and backstage professionals across theatre, film & web.
+              Connect. Create. Succeed in Indian entertainment.
             </p>
             <div className="pt-4">
               <Link href="/join-community">
@@ -61,9 +61,7 @@ export default function Home() {
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">
               Your Creative Journey Starts Here
             </h2>
-            <p className="text-gray-800 max-w-3xl mx-auto text-lg">
-              AbhinayPath brings together everything you need to succeed in the creative arts industry.
-            </p>
+            <p className="text-gray-800 max-w-3xl mx-auto text-lg">Everything you need for your creative career.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -86,8 +84,7 @@ export default function Home() {
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Find Casting Calls</h3>
                 <p className="text-gray-800 mb-6 text-lg">
-                  Discover verified audition opportunities for theater, film, and web series from trusted production
-                  houses.
+                  Verified auditions for theater, film, and web from trusted producers.
                 </p>
                 <Link href="/auditions">
                   <Button
@@ -118,9 +115,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Skill Up with Workshops</h3>
-                <p className="text-gray-800 mb-6 text-lg">
-                  Enhance your craft with workshops and training sessions led by industry professionals and experts.
-                </p>
+                <p className="text-gray-800 mb-6 text-lg">Professional workshops and training to enhance your craft.</p>
                 <Link href="/workshops">
                   <Button
                     variant="outline"
@@ -150,10 +145,7 @@ export default function Home() {
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
                 <h3 className="font-playfair text-2xl font-bold mb-3">Prep for Top Institutes</h3>
-                <p className="text-gray-800 mb-6 text-lg">
-                  Get guidance from NSD/FTII alumni for entrance exams to prestigious institutions. Expert mentorship
-                  available.
-                </p>
+                <p className="text-gray-800 mb-6 text-lg">NSD/FTII alumni guidance for entrance exams and auditions.</p>
                 <Link href="/admissions">
                   <Button
                     variant="outline"
@@ -180,7 +172,7 @@ export default function Home() {
               More Features on the Horizon
             </h2>
             <p className="text-gray-800 max-w-3xl mx-auto text-lg">
-              We're building additional tools to support your creative journey. Join our beta to get early access.
+              More tools coming soon. Join beta for early access.
             </p>
           </div>
 
@@ -234,9 +226,7 @@ export default function Home() {
             <h2 className="font-playfair text-4xl md:text-5xl font-bold">
               Ready to Take Your Creative Career to the Next Level?
             </h2>
-            <p className="text-xl opacity-90">
-              Join our community of passionate artists and unlock a world of opportunities.
-            </p>
+            <p className="text-xl opacity-90">Join India's creative community today.</p>
             <div className="pt-6">
               <Link href="/join-community">
                 <Button
