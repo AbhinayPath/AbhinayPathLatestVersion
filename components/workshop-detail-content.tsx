@@ -393,7 +393,7 @@ const workshops = [
         "Perfect for beginners with stories to tell",
       ],
       applicationProcess: [
-        "Last Date to Apply: 29 May 2025, by 6:00 PM",
+        "Last Date to Apply: 29 May 2025, 6 PM IST",
         "Selection: First-Come, First-Served",
         "Payment Mode: SBI Collect",
         "No documents needed — just fill in the form and self-declare",
@@ -401,7 +401,6 @@ const workshops = [
       contactInfo: [
         "FTII Contact: Mr. Milind Joshi – 020-25580085 / info.cfol@ftii.ac.in",
         "Arthouse Contact: Ms. Bhavna – 76766 43829 / thearthouseacademy@gmail.com",
-        "Accommodation Support: Ms. Bhavna – 76766 43829 / thearthouseacademy@gmail.com",
       ],
       aboutInstructor:
         "Vaidehi Sancheti – An FTII alumna, poet, and passionate storyteller, Vaidehi Sancheti has conducted screenplay writing workshops at FTII, Whistling Woods, and Living Bridge.",
@@ -514,10 +513,10 @@ const workshops = [
       ],
       contactInfo: ["Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com", "Phone: 020 – 2558 0085"],
       aboutInstructor:
-        "Vikas Sharma – A seasoned screenwriter and former faculty at FTII & Whistling Woods. Has mentored at leading screenplay fellowships including Asia Society's New Voices Fellowship, Cinestaan India Script Contest, and more.",
+        "Vikas Sharma – A seasoned screenwriter and former faculty at FTII & Whistling Woods. Has mentored at leading screenplay fellowships including Asia Society's New Voices, Cinestaan India Script Contest, and more.",
       techRequirements: [
         "Laptop/Desktop with 4 GB RAM, webcam",
-        "Internet: Min 10 Mbps speed and 5 GB data/day",
+        "Internet: Minimum 10 Mbps, 5 GB data/day",
         "Mobile phone not allowed",
         "Familiarity with Google Meet & Classroom is essential",
       ],
@@ -579,7 +578,6 @@ const workshops = [
       contactInfo: [
         "Contact: Mr. Milindkumar Joshi, Assistant Outreach Officer",
         "Email: info.cfol@ftii.ac.in | ftiioutreach@gmail.com",
-        "Phone: 020 – 2558 0085",
       ],
       aboutInstructor:
         "Vikas Sharma – Professional screenwriter and senior faculty at Whistling Woods International; former faculty at FTII Pune. Mentor at major fellowships including Asia Society's New Voices, Cinestaan India Script Contest, and more.",
@@ -615,23 +613,70 @@ const workshops = [
     email: "tripudiws@gmail.com",
     instagram: "@nrityangana_institute_pa",
     eligibility: "Actors and dancers",
+  },
+  {
+    id: 15,
+    title: "Paradox Studios Support — Performing Arts in Education Mentoring",
+    trainer: "Paradox Studios",
+    institution: "Paradox Studios",
+    location: "Online",
+    state: "All India",
+    date: "Contact for details",
+    time: "Contact for details",
+    description:
+      "Are you a Performing Arts Facilitator facing challenges in your institution? Paradox Studios is offering two free sessions to Performing Arts (Music/Theatre/Dance) teachers/facilitators who are seeking mentorship, support, and solutions.",
+    image: "/placeholder.svg?height=300&width=500&text=Paradox+Studios+Mentoring",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSckunGJ7QNQ3kdbTwUVzLEClkfNbKI_do0kOwxMcYDO0LlAmw/viewform",
+    featured: false,
+    price: "Free",
+    contact: "Via registration form",
+    email: "N/A",
+    eligibility: "Performing Arts (Music/Theatre/Dance) teachers/facilitators",
     fullDetails: {
-      venue: "Nrityangana, 383/K 'Sumeru', Ground Floor, NTI Layout, Rajiv Gandhi Nagar, Bangalore",
-      organizer: "Nrityangana Institute of Performing Arts in collaboration with Tripudi",
-      duration: "3 days",
+      description:
+        "Are you a Performing Arts Facilitator facing challenges in your institution? Paradox Studios is offering two free sessions to Performing Arts (Music/Theatre/Dance) teachers/facilitators who are seeking mentorship, support, and solutions. These sessions are led by our Creative Director with 14+ years of Performing Arts experience, specifically in theatre and music, and a strong background in education.",
+    },
+  },
+  {
+    id: 16,
+    title: "Paradox Studios Support For Actors — English Play Dialogues Coaching",
+    trainer: "Paradox Studios",
+    institution: "Paradox Studios",
+    location: "Online",
+    state: "All India",
+    date: "Contact for details",
+    time: "Contact for details",
+    description:
+      "Auditioning for an English Play? Let's sharpen your dialogue delivery! Paradox Studios is offering two free coaching sessions for actors who are either auditioning for, or currently cast in English plays.",
+    image: "/placeholder.svg?height=300&width=500&text=English+Play+Dialogues+Coaching",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSfwqU9RF-zABbUxNPpN-G4KSBJ8ZV2nDf1tsLp3LsPQuF6e_w/viewform",
+    featured: false,
+    price: "Free",
+    contact: "Via registration form",
+    email: "N/A",
+    eligibility: "Actors auditioning for or cast in English plays",
+    fullDetails: {
+      description:
+        "Paradox Studios Support For Actors — English Play Dialogues Coaching\n\nAuditioning for an English Play? Let's sharpen your dialogue delivery!\n\nParadox Studios is offering two free coaching sessions for actors who are either auditioning for, or currently cast in English plays.\n\nThese sessions are led by our Creative Director — an MA English degree-holder, former HOD of English and a seasoned public speaking coach.\n\nPlease fill this form to help us understand your needs better.",
       curriculum: [
-        "Discover the unseen potential of your eyes in performance",
-        "Learn a unique acting pedagogy rooted in Kutiyattam",
-        "Refine your Abhinaya with depth and precision",
-        "Stimulate imagination, deepen expression, and master your craft",
+        "Dialogue delivery techniques for English plays",
+        "Voice modulation and clarity",
+        "Character-specific speech patterns",
+        "Stage presence and confidence building",
+        "Accent and pronunciation refinement",
       ],
-      socialMedia: ["Instagram: @nrityangana_institute_pa"],
-      targetAudience: "Actors and dancers interested in deepening their expressive abilities",
-      contactInfo: ["Email: tripudiws@gmail.com", "WhatsApp: 8075413321"],
       aboutInstructor:
-        "Sooraj Nambiar is a skilled performer and instructor specializing in Kutiyattam techniques and their application to contemporary performance.",
-      additionalInfo:
-        "This workshop focuses on eye movement and expression techniques rooted in the ancient art form of Kutiyattam, offering participants a unique approach to enhancing their performance skills.",
+        "Our Creative Director holds an MA in English and is a former Head of Department (HOD) of English with extensive experience in academia. As a seasoned public speaking coach, they bring a unique combination of literary expertise and practical performance skills to help actors excel in English theatre.",
+      targetAudience: "Actors who are auditioning for English plays or currently cast in English productions",
+      sessionDetails: "Two free personalized coaching sessions tailored to your specific needs",
+      benefits: [
+        "Improved dialogue delivery and articulation",
+        "Enhanced confidence in English play performances",
+        "Personalized feedback and coaching",
+        "Professional guidance from experienced mentor",
+      ],
     },
   },
 ]
@@ -782,7 +827,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                 {workshop.fullDetails?.duration && (
                   <div className="flex items-start">
                     <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">⏱️</span>
+                      <span className="text-xs">⏱</span>
                     </div>
                     <div>
                       <p className="font-medium">Duration</p>
@@ -790,270 +835,125 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     </div>
                   </div>
                 )}
-
-                {workshop.fullDetails?.format && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">🖥️</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Format</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.format}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.organizer && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">🏢</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Organizers</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.organizer}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.includes && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">✅</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Includes</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.includes}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.upcomingWebinar && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">📺</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Upcoming Webinar</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.upcomingWebinar}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.medium && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">🗣️</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Medium</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.medium}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.capacity && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">👥</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Capacity</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.capacity}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.topic && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">📚</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Topic</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.topic}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.prerequisites && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">📋</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Prerequisites</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.prerequisites}</p>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 
             <div>
-              {workshop.fullDetails?.curriculum && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Curriculum</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.curriculum.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.methodology && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Methodology</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.methodology.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.eligibilityCriteria && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Eligibility Criteria</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.eligibilityCriteria.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.mentors && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Mentors</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.mentors.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.careerOpportunities && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Career Opportunities</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.careerOpportunities.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.applicationProcess && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Application Process</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.applicationProcess.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.contactInfo && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Contact Information</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.contactInfo.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.techRequirements && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Technical Requirements</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.techRequirements.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.takeaways && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Takeaways</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.takeaways}</p>
-                </div>
-              )}
-
-              {workshop.fullDetails?.certification && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Certification</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.certification}</p>
-                </div>
-              )}
-
-              {workshop.fullDetails?.aboutInstructor && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">About the Instructor</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.aboutInstructor}</p>
-                </div>
-              )}
-
-              {workshop.fullDetails?.additionalInfo && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Additional Information</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.additionalInfo}</p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="border-t pt-4 md:pt-6">
-            <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Contact Information</h2>
-            <div className="flex flex-col md:flex-row md:items-center gap-4">
-              <div>
-                <p className="font-medium">Institution</p>
-                <p className="text-gray-600 text-sm md:text-base">{workshop.institution}</p>
-              </div>
-
-              <div className="flex flex-wrap gap-2 md:ml-auto">
-                {workshop.contact && workshop.contact !== "Via website" && (
-                  <a
-                    href={`https://wa.me/91${workshop.contact.replace(/\D/g, "")}`}
-                    className="flex items-center gap-2 bg-green-500 text-white px-3 py-2 rounded-md hover:bg-green-600 transition-colors text-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Phone className="h-4 w-4" />
-                    WhatsApp
-                  </a>
+              <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Contact Information</h2>
+              <div className="space-y-3 md:space-y-4">
+                {workshop.contact && (
+                  <div className="flex items-start">
+                    <Phone className="h-5 w-5 mr-2 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Phone</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.contact}</p>
+                    </div>
+                  </div>
                 )}
 
-                {workshop.email && (
-                  <a
-                    href={`mailto:${workshop.email}`}
-                    className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
-                  >
-                    <Mail className="h-4 w-4" />
-                    Email
-                  </a>
+                {workshop.email && workshop.email !== "N/A" && (
+                  <div className="flex items-start">
+                    <Mail className="h-5 w-5 mr-2 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Email</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.email}</p>
+                    </div>
+                  </div>
                 )}
 
                 {workshop.instagram && (
-                  <a
-                    href={`https://instagram.com/${workshop.instagram.replace("@", "")}`}
-                    className="flex items-center gap-2 bg-pink-500 text-white px-3 py-2 rounded-md hover:bg-pink-600 transition-colors text-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                    Instagram
-                  </a>
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="text-xs">📷</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Instagram</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.instagram}</p>
+                    </div>
+                  </div>
                 )}
               </div>
+
+              <div className="mt-6 md:mt-8">
+                <Button
+                  asChild
+                  className="w-full rounded-full bg-primary hover:bg-primary/90 text-white font-medium py-3"
+                >
+                  <a href={workshop.registrationLink} target="_blank" rel="noopener noreferrer">
+                    Register Now
+                  </a>
+                </Button>
+              </div>
             </div>
+          </div>
+
+          <div className="border-t pt-6 md:pt-8">
+            <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">About This Workshop</h2>
+            <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-6">
+              {workshop.fullDetails?.description || workshop.description}
+            </p>
+
+            {workshop.fullDetails?.curriculum && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">What You'll Learn</h3>
+                <ul className="space-y-2">
+                  {workshop.fullDetails.curriculum.map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="h-5 w-5 mr-2 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {workshop.fullDetails?.eligibilityCriteria && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Eligibility Criteria</h3>
+                <ul className="space-y-2">
+                  {workshop.fullDetails.eligibilityCriteria.map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="h-5 w-5 mr-2 text-blue-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {workshop.fullDetails?.applicationProcess && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Application Process</h3>
+                <ul className="space-y-2">
+                  {workshop.fullDetails.applicationProcess.map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <span className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2 mt-0.5 flex-shrink-0">
+                        {index + 1}
+                      </span>
+                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {workshop.fullDetails?.aboutInstructor && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">About the Instructor</h3>
+                <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+                  {workshop.fullDetails.aboutInstructor}
+                </p>
+              </div>
+            )}
+
+            {workshop.fullDetails?.additionalInfo && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Additional Information</h3>
+                <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+                  {workshop.fullDetails.additionalInfo}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

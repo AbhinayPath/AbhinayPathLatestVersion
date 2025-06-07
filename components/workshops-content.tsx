@@ -260,6 +260,46 @@ const workshops = [
     instagram: "@nrityangana_institute_pa",
     eligibility: "Actors and dancers",
   },
+  {
+    id: 15,
+    title: "Paradox Studios Support — Performing Arts in Education Mentoring",
+    trainer: "Paradox Studios",
+    institution: "Paradox Studios",
+    location: "Online",
+    state: "All India",
+    date: "Contact for details",
+    time: "Contact for details",
+    description:
+      "Are you a Performing Arts Facilitator facing challenges in your institution? Paradox Studios is offering two free sessions to Performing Arts (Music/Theatre/Dance) teachers/facilitators who are seeking mentorship, support, and solutions.",
+    image: "/placeholder.svg?height=300&width=500&text=Paradox+Studios+Mentoring",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSckunGJ7QNQ3kdbTwUVzLEClkfNbKI_do0kOwxMcYDO0LlAmw/viewform",
+    featured: false,
+    price: "Free",
+    contact: "Via registration form",
+    email: "N/A",
+    eligibility: "Performing Arts (Music/Theatre/Dance) teachers/facilitators",
+  },
+  {
+    id: 16,
+    title: "Paradox Studios Support For Actors — English Play Dialogues Coaching",
+    trainer: "Paradox Studios",
+    institution: "Paradox Studios",
+    location: "Online",
+    state: "All India",
+    date: "Contact for details",
+    time: "Contact for details",
+    description:
+      "Auditioning for an English Play? Let's sharpen your dialogue delivery! Paradox Studios is offering two free coaching sessions for actors who are either auditioning for, or currently cast in English plays.",
+    image: "/placeholder.svg?height=300&width=500&text=English+Play+Dialogues+Coaching",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSfwqU9RF-zABbUxNPpN-G4KSBJ8ZV2nDf1tsLp3LsPQuF6e_w/viewform",
+    featured: false,
+    price: "Free",
+    contact: "Via registration form",
+    email: "N/A",
+    eligibility: "Actors auditioning for or cast in English plays",
+  },
 ]
 
 // Get unique states, cities, and trainers for filters
