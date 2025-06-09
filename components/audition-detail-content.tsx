@@ -164,6 +164,41 @@ const auditions = [
     applicationProcess:
       "Send a WhatsApp message to 9862853175 clearly mentioning which role you're applying for. Include your name, age, location, previous acting experience (if any), and a recent photo. Selected candidates will be called for a brief audition. This is a PAID opportunity - compensation details will be discussed during the selection process.",
   },
+  {
+    id: 8,
+    title: "Requirement for Public Speaking Teacher",
+    type: "Teaching",
+    location: "Multiple Schools",
+    state: "Karnataka",
+    date: "Apply by June 27, 2025",
+    director: "Educational Institution",
+    description:
+      "Seeking qualified public speaking teachers for multiple schools in Bangalore. Teaching commitment from July 2025 to February 2026. Classes once a month, 01:30 PM to 04:30 PM for grades 6 & 7 and 8 & 9. Lesson plans and teacher's guide will be provided. This is a paid assignment opportunity open to actors, theatre practitioners, and educators with excellent communication skills.",
+    company: "Educational Institution",
+    companyLink: "https://wa.me/919632220405",
+    contact: "9632220405 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Excellent communication and presentation skills",
+      "Experience in public speaking, acting, or theatre preferred",
+      "Comfortable working with students in grades 6-9",
+      "Available for monthly sessions from July 2025 to February 2026",
+      "Ability to engage and motivate young learners",
+      "Professional attitude and punctuality",
+      "Based in or able to travel to multiple locations in Bangalore",
+    ],
+    roles: [
+      "Public Speaking Teacher for Grades 6 & 7 (01:30 PM to 04:30 PM, once a month)",
+      "Public Speaking Teacher for Grades 8 & 9 (01:30 PM to 04:30 PM, once a month)",
+      "Curriculum delivery using provided lesson plans and teacher's guide",
+      "Student assessment and progress tracking",
+    ],
+    applicationProcess:
+      "Contact via WhatsApp at 9632220405 to express your interest and schedule an interview. Please mention your relevant experience in public speaking, acting, or education. Application deadline: June 27, 2025. This is a paid teaching assignment with opportunities across multiple school locations in Bangalore.",
+  },
 ]
 
 export default function AuditionDetailContent({ id }: { id: number }) {
@@ -253,7 +288,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
               <div className="flex flex-wrap gap-2 mb-4">
                 <span className="badge-primary">{audition.type}</span>
                 <span className="badge-outline">{audition.experience}</span>
-                {audition.id === 7 && <span className="badge-success">Paid</span>}
+                {(audition.id === 7 || audition.id === 8) && <span className="badge-success">Paid</span>}
               </div>
 
               <h1 className="font-playfair text-3xl font-bold mb-4">{audition.title}</h1>
@@ -353,14 +388,16 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 </div>
               </div>
 
-              {audition.id === 7 && (
+              {(audition.id === 7 || audition.id === 8) && (
                 <div className="flex items-start">
                   <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
                     <span className="font-bold">💰</span>
                   </div>
                   <div>
                     <p className="font-medium">Compensation</p>
-                    <p className="text-gray-600">Paid opportunity (details during selection)</p>
+                    <p className="text-gray-600">
+                      {audition.id === 7 ? "Paid opportunity (details during selection)" : "Paid teaching assignment"}
+                    </p>
                   </div>
                 </div>
               )}

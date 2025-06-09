@@ -83,6 +83,24 @@ const auditions = [
     verified: true,
     image: "/placeholder.svg?height=300&width=500&text=Digital+Nomads+Web+Series",
   },
+  {
+    id: 8,
+    title: "Requirement for Public Speaking Teacher",
+    type: "Teaching",
+    location: "Multiple Schools",
+    state: "Karnataka",
+    date: "Apply by June 27, 2025",
+    director: "Educational Institution",
+    description:
+      "Seeking qualified public speaking teachers for multiple schools in Bangalore. Teaching commitment from July 2025 to February 2026. Classes once a month, 01:30 PM to 04:30 PM for grades 6 & 7 and 8 & 9. Lesson plans and teacher's guide will be provided. Paid assignment opportunity for actors, theatre practitioners, and educators.",
+    company: "Educational Institution",
+    companyLink: "https://wa.me/919632220405",
+    contact: "9632220405 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Public+Speaking+Teacher",
+  },
 ]
 
 // Get unique states and categories for filters
