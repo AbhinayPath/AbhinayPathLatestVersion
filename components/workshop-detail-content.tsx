@@ -629,7 +629,7 @@ const workshops = [
     registrationLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSckunGJ7QNQ3kdbTwUVzLEClkfNbKI_do0kOwxMcYDO0LlAmw/viewform",
     featured: false,
-    price: "Free",
+    price: "First two sessions free",
     contact: "Via registration form",
     email: "N/A",
     eligibility: "Performing Arts (Music/Theatre/Dance) teachers/facilitators",
@@ -653,7 +653,7 @@ const workshops = [
     registrationLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSfwqU9RF-zABbUxNPpN-G4KSBJ8ZV2nDf1tsLp3LsPQuF6e_w/viewform",
     featured: false,
-    price: "Free",
+    price: "First two sessions free",
     contact: "Via registration form",
     email: "N/A",
     eligibility: "Actors auditioning for or cast in English plays",
