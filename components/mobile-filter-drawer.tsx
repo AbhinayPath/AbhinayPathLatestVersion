@@ -14,6 +14,7 @@ interface MobileFilterDrawerProps {
     state: string
     trainer: string
     institution: string
+    mode: string // Add mode property
   }
   cities: string[]
   states: string[]
@@ -167,6 +168,22 @@ export default function MobileFilterDrawer({
                     {institution}
                   </SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div>
+            <label htmlFor="mobile-mode" className="text-sm font-medium block mb-1.5">
+              Mode
+            </label>
+            <Select value={filters.mode} onValueChange={(value) => handleFilterChange("mode", value)}>
+              <SelectTrigger id="mobile-mode" className="rounded-full h-10">
+                <SelectValue placeholder="All Modes" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Modes</SelectItem>
+                <SelectItem value="Online">Online</SelectItem>
+                <SelectItem value="Offline">Offline</SelectItem>
               </SelectContent>
             </Select>
           </div>

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Award, Calendar, GraduationCap, Sparkles } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import FeaturedOpportunities from "@/components/featured-opportunities"
 // import { PlausibleAnalytics } from "@/components/analytics"
 // Uncomment and add your domain to enable Plausible Analytics
 // <PlausibleAnalytics domain="yourdomain.com" />
@@ -159,6 +160,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Featured Opportunities Section */}
+      <FeaturedOpportunities />
 
       {/* Coming Soon Section */}
       <section className="py-20 md:py-28 bg-gradient-to-r from-[#2D1A54]/5 to-[#F5A623]/5">

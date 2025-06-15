@@ -10,6 +10,7 @@ interface ActiveFiltersProps {
     state: string
     trainer: string
     institution: string
+    mode: string // Add mode property
   }
   handleFilterChange: (key: string, value: string) => void
   clearFilters: () => void
@@ -32,6 +33,8 @@ export default function ActiveFilters({ filters, handleFilterChange, clearFilter
         return `Trainer: ${value}`
       case "institution":
         return `Institution: ${value}`
+      case "mode":
+        return `Mode: ${value}` // Add mode case
       default:
         return value
     }

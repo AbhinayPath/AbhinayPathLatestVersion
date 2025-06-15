@@ -31,6 +31,7 @@ const workshops = [
     contact: "011-23389054 / 23031137",
     email: "nsdtie@gmail.com",
     eligibility: "Graduate, Age 21+, 3 years experience",
+    mode: "Offline",
   },
   {
     id: 3,
@@ -49,6 +50,7 @@ const workshops = [
     price: "Contact for details",
     contact: "+91 8652722682",
     instagram: "@anatomy_of_a_scene",
+    mode: "Offline",
   },
   {
     id: 4,
@@ -68,6 +70,7 @@ const workshops = [
     contact: "011-23389054, 23031137",
     email: "nsdtiegmail.com",
     tags: "#NSD #VerifiedWorkshop #TheatreEducation #DramaInEducation",
+    mode: "Offline",
   },
   {
     id: 5,
@@ -85,6 +88,7 @@ const workshops = [
     featured: true,
     price: "₹16,000 (includes food & accommodation)",
     contact: "9845605012 / 9448871815",
+    mode: "Offline",
   },
   {
     id: 6,
@@ -102,6 +106,7 @@ const workshops = [
     featured: true,
     price: "Contact for details",
     contact: "Via website",
+    mode: "Online",
   },
   {
     id: 7,
@@ -122,6 +127,7 @@ const workshops = [
     contact: "020 25580085",
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass",
+    mode: "Offline",
   },
   {
     id: 8,
@@ -142,6 +148,7 @@ const workshops = [
     contact: "020 – 2558 0085",
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass",
+    mode: "Offline",
   },
   {
     id: 9,
@@ -162,6 +169,7 @@ const workshops = [
     contact: "020 25580085",
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass",
+    mode: "Offline",
   },
   {
     id: 10,
@@ -181,6 +189,7 @@ const workshops = [
     contact: "020 25580085",
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass",
+    mode: "Offline",
   },
   {
     id: 11,
@@ -200,6 +209,7 @@ const workshops = [
     contact: "020 25580085",
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass",
+    mode: "Online",
   },
   {
     id: 12,
@@ -220,6 +230,7 @@ const workshops = [
     contact: "020 25580085",
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass",
+    mode: "Online",
   },
   {
     id: 13,
@@ -239,6 +250,7 @@ const workshops = [
     contact: "020 25580085",
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass",
+    mode: "Online",
   },
   {
     id: 14,
@@ -259,6 +271,7 @@ const workshops = [
     email: "tripudiws@gmail.com",
     instagram: "@nrityangana_institute_pa",
     eligibility: "Actors and dancers",
+    mode: "Offline",
   },
   {
     id: 15,
@@ -279,6 +292,7 @@ const workshops = [
     contact: "Via registration form",
     email: "N/A",
     eligibility: "Performing Arts (Music/Theatre/Dance) teachers/facilitators",
+    mode: "Online",
   },
   {
     id: 16,
@@ -299,6 +313,7 @@ const workshops = [
     contact: "Via registration form",
     email: "N/A",
     eligibility: "Actors auditioning for or cast in English plays",
+    mode: "Online",
   },
 ]
 
@@ -315,8 +330,9 @@ export default function WorkshopsContent() {
     state: "",
     trainer: "",
     institution: "",
+    mode: "",
   })
-  const [showDesktopFilters, setShowDesktopFilters] = useState(false)
+  const [showDesktopFilters, setShowDesktopFilters] = useState(true)
   const isMobile = useMediaQuery("(max-width: 768px)")
   const isSmallMobile = useMediaQuery("(max-width: 640px)")
 
@@ -328,7 +344,8 @@ export default function WorkshopsContent() {
       (filters.city === "" || workshop.location === filters.city) &&
       (filters.state === "" || workshop.state === filters.state) &&
       (filters.trainer === "" || workshop.trainer === filters.trainer) &&
-      (filters.institution === "" || workshop.institution === filters.institution)
+      (filters.institution === "" || workshop.institution === filters.institution) &&
+      (filters.mode === "" || workshop.mode === filters.mode)
     )
   })
 
@@ -343,6 +360,7 @@ export default function WorkshopsContent() {
       state: "",
       trainer: "",
       institution: "",
+      mode: "",
     })
   }
 
@@ -414,7 +432,7 @@ export default function WorkshopsContent() {
             onClick={() => setShowDesktopFilters(!showDesktopFilters)}
           >
             <Filter className="h-4 w-4" />
-            Filters
+            {showDesktopFilters ? "Hide Filters" : "Show Filters"}
             {showDesktopFilters ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </Button>
         </div>
@@ -426,7 +444,7 @@ export default function WorkshopsContent() {
       {/* Desktop Filters */}
       {showDesktopFilters && (
         <div className="hidden md:block mb-8 p-6 bg-gray-50 rounded-xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
@@ -491,6 +509,17 @@ export default function WorkshopsContent() {
                     {institution}
                   </SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+
+            <Select value={filters.mode} onValueChange={(value) => handleFilterChange("mode", value)}>
+              <SelectTrigger className="rounded-full">
+                <SelectValue placeholder="Mode" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Modes</SelectItem>
+                <SelectItem value="Online">Online</SelectItem>
+                <SelectItem value="Offline">Offline</SelectItem>
               </SelectContent>
             </Select>
           </div>
