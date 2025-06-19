@@ -101,6 +101,24 @@ const auditions = [
     verified: true,
     image: "/placeholder.svg?height=300&width=500&text=Public+Speaking+Teacher",
   },
+  {
+    id: 10,
+    title: "NSD Hiring Theatre Artists (Grade B) - Sanskaar Rang Toli",
+    type: "Job Opportunity",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "Apply: May 24 - June 23, 2025",
+    director: "National School of Drama (NSD)",
+    description:
+      "Sanskaar Rang Toli (TIE Company), NSD, New Delhi is inviting online applications for 5 posts of Theatre Artist Grade B (working with children). Contractual position with competitive salary and growth opportunities.",
+    company: "National School of Drama (NSD)",
+    companyLink: "https://www.nsd.gov.in",
+    contact: "Apply online at www.nsd.gov.in",
+    contactType: "website",
+    experience: "Experienced",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=NSD+Theatre+Artists",
+  },
 ]
 
 // Get unique states and categories for filters
@@ -141,6 +159,8 @@ export default function AuditionsContent() {
       state: "all",
       category: "all",
       experience: "all",
+      state: "all",
+      city: "all",
     })
   }
 

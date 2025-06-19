@@ -199,6 +199,53 @@ const auditions = [
     applicationProcess:
       "Contact via WhatsApp at 9632220405 to express your interest and schedule an interview. Please mention your relevant experience in public speaking, acting, or education. Application deadline: June 27, 2025. This is a paid teaching assignment with opportunities across multiple school locations in Bangalore.",
   },
+  {
+    id: 10,
+    title: "NSD Hiring Theatre Artists (Grade B) - Sanskaar Rang Toli",
+    type: "Job Opportunity",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "Apply: May 24 - June 23, 2025",
+    director: "National School of Drama (NSD)",
+    description:
+      "Sanskaar Rang Toli (TIE Company), NSD, New Delhi is inviting online applications for 5 posts of Theatre Artist Grade B (working with children). This is a prestigious contractual position offering competitive compensation and the opportunity to work in Theatre in Education with one of India's premier drama institutions.",
+    company: "National School of Drama (NSD)",
+    companyLink: "https://www.nsd.gov.in",
+    contact: "Apply online at www.nsd.gov.in",
+    contactType: "website",
+    experience: "Experienced",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    salary: "₹50,000–55,000/month (contractual)",
+    duration: "Initially 1 year, extendable up to 5 years based on performance",
+    numberOfPosts: 5,
+    roleFocus: "Working with children (Theatre in Education - TIE)",
+    applicationOpenDate: "May 24, 2025 (10 AM)",
+    applicationCloseDate: "June 23, 2025 (5 PM)",
+    applicationWebsite: "www.nsd.gov.in",
+    requirements: [
+      "NSD Graduate or Degree/Diploma in Dramatic Arts with 5+ years' acting experience",
+      "Major roles in at least 10 productions",
+      "Proficiency in Hindi language & speech",
+    ],
+    desirableSkills: [
+      "Knowledge of dance, music, regional styles",
+      "Direction experience",
+      "Stagecraft knowledge",
+      "Acting theories understanding",
+    ],
+    specialNotes: [
+      "Applicants from 2024 shortlist need not reapply",
+      "No TA/DA except for SC/ST candidates (as per norms)",
+    ],
+    roles: [
+      "Theatre Artist Grade B - Working with children in Theatre in Education programs",
+      "Conducting educational theatre workshops and performances",
+      "Developing age-appropriate theatrical content for young audiences",
+    ],
+    applicationProcess:
+      "Apply online through the official NSD website at www.nsd.gov.in during the application period from May 24, 2025 (10 AM) to June 23, 2025 (5 PM).",
+  },
 ]
 
 export default function AuditionDetailContent({ id }: { id: number }) {
@@ -297,6 +344,85 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 <h2 className="text-xl font-semibold mb-3">Description</h2>
                 <p className="text-gray-800 mb-6">{audition.description}</p>
 
+                {audition.id === 10 && (
+                  <>
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Position Details</h2>
+                      <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-medium text-gray-700">Salary</p>
+                            <p className="text-gray-800">{audition.salary}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Duration</p>
+                            <p className="text-gray-800">{audition.duration}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Number of Posts</p>
+                            <p className="text-gray-800">{audition.numberOfPosts}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Role Focus</p>
+                            <p className="text-gray-800">{audition.roleFocus}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Eligibility Criteria</h2>
+                      <ul className="list-disc pl-5 mb-6">
+                        {audition.requirements.map((req: string, index: number) => (
+                          <li key={index} className="text-gray-800 mb-2">
+                            {req}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Desirable Skills</h2>
+                      <ul className="list-disc pl-5 mb-6">
+                        {audition.desirableSkills.map((skill: string, index: number) => (
+                          <li key={index} className="text-gray-800 mb-2">
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Application Timeline</h2>
+                      <div className="bg-blue-50 p-4 rounded-lg mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-medium text-gray-700">Application Opens</p>
+                            <p className="text-gray-800">{audition.applicationOpenDate}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Application Closes</p>
+                            <p className="text-gray-800">{audition.applicationCloseDate}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Important Notes</h2>
+                      <div className="bg-yellow-50 p-4 rounded-lg mb-6">
+                        <ul className="list-disc pl-5">
+                          {audition.specialNotes.map((note: string, index: number) => (
+                            <li key={index} className="text-gray-800 mb-2">
+                              {note}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </section>
+                  </>
+                )}
+
                 <h2 className="text-xl font-semibold mb-3">Roles</h2>
                 <ul className="list-disc pl-5 mb-6">
                   {audition.roles.map((role: string, index: number) => (
@@ -352,6 +478,30 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   <p className="text-gray-800">{audition.date}</p>
                 </div>
               </div>
+
+              {audition.salary && (
+                <div className="flex items-start">
+                  <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                    <span className="font-bold">💰</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-700">Salary</p>
+                    <p className="text-gray-800">{audition.salary}</p>
+                  </div>
+                </div>
+              )}
+
+              {audition.duration && (
+                <div className="flex items-start">
+                  <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                    <span className="font-bold">⏱️</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-700">Duration</p>
+                    <p className="text-gray-800">{audition.duration}</p>
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-start">
                 {audition.contactType === "email" ? (
@@ -409,10 +559,12 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                       <Mail className="mr-2 h-4 w-4" />
                     ) : audition.contactType === "whatsapp" ? (
                       <MessageSquare className="mr-2 h-4 w-4" />
+                    ) : audition.id === 10 ? (
+                      <Building className="mr-2 h-4 w-4" />
                     ) : (
                       <Phone className="mr-2 h-4 w-4" />
                     )}
-                    Contact for Audition
+                    {audition.id === 10 ? "Apply at NSD Website" : "Contact for Audition"}
                   </Button>
                 </a>
               </div>
