@@ -210,7 +210,7 @@ const auditions = [
     description:
       "Sanskaar Rang Toli (TIE Company), NSD, New Delhi is inviting online applications for 5 posts of Theatre Artist Grade B (working with children). This is a prestigious contractual position offering competitive compensation and the opportunity to work in Theatre in Education with one of India's premier drama institutions.",
     company: "National School of Drama (NSD)",
-    companyLink: "https://www.nsd.gov.in",
+    companyLink: "https://recruitment.nsd.gov.in/artist/",
     contact: "Apply online at www.nsd.gov.in",
     contactType: "website",
     experience: "Experienced",
@@ -222,7 +222,7 @@ const auditions = [
     roleFocus: "Working with children (Theatre in Education - TIE)",
     applicationOpenDate: "May 24, 2025 (10 AM)",
     applicationCloseDate: "June 23, 2025 (5 PM)",
-    applicationWebsite: "www.nsd.gov.in",
+    applicationWebsite: "recruitment.nsd.gov.in/artist/",
     requirements: [
       "NSD Graduate or Degree/Diploma in Dramatic Arts with 5+ years' acting experience",
       "Major roles in at least 10 productions",
@@ -244,7 +244,7 @@ const auditions = [
       "Developing age-appropriate theatrical content for young audiences",
     ],
     applicationProcess:
-      "Apply online through the official NSD website at www.nsd.gov.in during the application period from May 24, 2025 (10 AM) to June 23, 2025 (5 PM).",
+      "Apply online through the official NSD recruitment portal at https://recruitment.nsd.gov.in/artist/ during the application period from May 24, 2025 (10 AM) to June 23, 2025 (5 PM).",
   },
 ]
 
@@ -503,40 +503,42 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 </div>
               )}
 
-              <div className="flex items-start">
-                {audition.contactType === "email" ? (
-                  <Mail className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
-                ) : (
-                  <Phone className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
-                )}
-                <div>
-                  <p className="font-medium text-gray-700">Contact</p>
+              {audition.id !== 10 && (
+                <div className="flex items-start">
                   {audition.contactType === "email" ? (
-                    <a href={`mailto:${audition.contact}`} className="text-primary hover:underline flex items-center">
-                      {audition.contact}
-                      <span className="ml-1 text-xs bg-blue-500 text-white px-1.5 py-0.5 rounded">Email</span>
-                    </a>
-                  ) : audition.contactType === "whatsapp" ? (
-                    <a
-                      href={`https://wa.me/${audition.contact.replace(/\D/g, "")}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline flex items-center"
-                    >
-                      {audition.contact}
-                      <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded">WhatsApp</span>
-                    </a>
+                    <Mail className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                   ) : (
-                    <a
-                      href={`tel:${audition.contact.replace(/\s/g, "")}`}
-                      className="text-primary hover:underline flex items-center"
-                    >
-                      {audition.contact}
-                      <span className="ml-1 text-xs bg-blue-500 text-white px-1.5 py-0.5 rounded">Call</span>
-                    </a>
+                    <Phone className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                   )}
+                  <div>
+                    <p className="font-medium text-gray-700">Contact</p>
+                    {audition.contactType === "email" ? (
+                      <a href={`mailto:${audition.contact}`} className="text-primary hover:underline flex items-center">
+                        {audition.contact}
+                        <span className="ml-1 text-xs bg-blue-500 text-white px-1.5 py-0.5 rounded">Email</span>
+                      </a>
+                    ) : audition.contactType === "whatsapp" ? (
+                      <a
+                        href={`https://wa.me/${audition.contact.replace(/\D/g, "")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline flex items-center"
+                      >
+                        {audition.contact}
+                        <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded">WhatsApp</span>
+                      </a>
+                    ) : (
+                      <a
+                        href={`tel:${audition.contact.replace(/\s/g, "")}`}
+                        className="text-primary hover:underline flex items-center"
+                      >
+                        {audition.contact}
+                        <span className="ml-1 text-xs bg-blue-500 text-white px-1.5 py-0.5 rounded">Call</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {(audition.id === 7 || audition.id === 8) && (
                 <div className="flex items-start">
