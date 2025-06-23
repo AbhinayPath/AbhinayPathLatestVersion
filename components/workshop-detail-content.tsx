@@ -10,77 +10,6 @@ import WorkshopBanner from "@/components/workshop-banner"
 // This would typically come from a database, but for now we'll use the same data
 const workshops = [
   {
-    id: 2,
-    title: "NSD 3-Month Theatre-in-Education Certificate Course (Delhi)",
-    trainer: "NSD TIE Company",
-    institution: "National School of Drama",
-    location: "New Delhi",
-    state: "Delhi",
-    date: "2 June – 31 August 2025",
-    time: "Batch 1: 10 AM – 1 PM, Batch 2: 2 PM – 5 PM (Wednesday to Sunday)",
-    description:
-      "Eligibility: Graduate (any stream), Age 21+ (as of May 1, 2025), 3 years theatre or child-focused work, Proficient in Hindi/English, Physically & mentally fit. Application deadline: 25 May 2025, 6 PM.",
-    image: "/placeholder.svg?height=300&width=500&text=NSD+Certificate+Course",
-    registrationLink: "https://nsd.gov.in",
-    featured: true,
-    price: "₹35,000",
-    contact: "011-23389054 / 23031137",
-    email: "nsdtie@gmail.com",
-    eligibility: "Graduate, Age 21+, 3 years experience",
-    fullDetails: {
-      venue: "NSD Premises, Mandi House, New Delhi",
-      eligibilityCriteria: [
-        "Graduate degree in any stream",
-        "Minimum age 21 years (as of May 1, 2025)",
-        "At least 3 years of experience in theater or child-focused work",
-        "Proficient in Hindi/English",
-        "Physically and mentally fit",
-      ],
-      applicationDeadline: "25 May 2025, 6 PM",
-      selectionProcess: "Shortlisting based on application + Interview",
-      curriculum: [
-        "Practical training in storytelling",
-        "Improvisation techniques",
-        "Forum theatre methodologies",
-        "Actor-Teacher development",
-        "Final performance at NSD",
-      ],
-      certification: "Official certificate from National School of Drama upon successful completion",
-    },
-  },
-  {
-    id: 3,
-    title: "'Anatomy of a Scene' – Acting Workshop (Mumbai)",
-    trainer: "Manas Gupta",
-    institution: "FTII Alumnus",
-    location: "Mumbai",
-    state: "Maharashtra",
-    date: "1 – 13 June 2025",
-    time: "11 AM – 2 PM",
-    description:
-      "Curated by Manas Gupta (FTII Alumnus). Located at Abhyaas Manch, Aram Nagar, Mumbai. What You'll Learn: Meisner & Uta Hagen Techniques, Scene analysis & improvisation, Final recorded performance, Guest lecture by Himanshu Prajapati (FTII).",
-    image: "/placeholder.svg?height=300&width=500&text=Anatomy+of+a+Scene",
-    registrationLink: "tel:+918652722682",
-    featured: true,
-    price: "Contact for details",
-    contact: "+91 8652722682",
-    instagram: "@anatomy_of_a_scene",
-    fullDetails: {
-      venue: "Abhyaas Manch, Aram Nagar, Mumbai",
-      curriculum: [
-        "Meisner Technique fundamentals",
-        "Uta Hagen's approach to character building",
-        "Scene analysis methodology",
-        "Improvisation exercises",
-        "Final recorded performance",
-      ],
-      specialFeature: "Guest lecture by Himanshu Prajapati (FTII)",
-      batchSize: "Limited to 15 participants",
-      prerequisites: "Basic understanding of acting principles recommended but not required",
-      takeaways: "Participants will receive a recording of their final performance and a certificate of completion",
-    },
-  },
-  {
     id: 4,
     title: "NSD's Certificate Course in Drama-in-Education (Delhi)",
     trainer: "National School of Drama",
@@ -117,38 +46,6 @@ const workshops = [
         "Final performance at NSD",
       ],
       certification: "Official certificate from National School of Drama upon successful completion",
-    },
-  },
-  {
-    id: 5,
-    title: "Educational Theatre National Workshop @ Mysore",
-    trainer: "Rajneesh Bisht",
-    institution: "Indian Institute of Educational Theatre",
-    location: "Mysore",
-    state: "Karnataka",
-    date: "June 23 - July 2, 2025",
-    time: "9:00 AM - 6:00 PM",
-    description:
-      "Step into a transformative journey where theatre meets education! Led by renowned theatre director and writer Rajneesh Bisht, and mentored by the visionary theatre stalwart Prasanna, this 10-day intensive workshop is designed for actors, educators, facilitators, and all those passionate about using theatre as a tool for learning and social change.",
-    image: "/placeholder.svg?height=300&width=500&text=Educational+Theatre",
-    registrationLink: "https://indiantheatrefoundation.org",
-    featured: true,
-    price: "₹16,000 (includes food & accommodation)",
-    contact: "9845605012 / 9448871815",
-    fullDetails: {
-      venue: "Indian Institute of Educational Theatre, Mysore",
-      mentors: ["Rajneesh Bisht - Theatre Director and Writer", "Prasanna - Theatre Stalwart"],
-      duration: "10 days intensive residential program",
-      includes: "Food and accommodation",
-      curriculum: [
-        "Theatre as a pedagogical tool",
-        "Drama-based learning methodologies",
-        "Creating educational theatre productions",
-        "Facilitation techniques for educators",
-        "Community theatre approaches",
-      ],
-      targetAudience: "Actors, educators, facilitators, and those interested in educational theatre",
-      takeaways: "Participants will develop skills to use theatre as a tool for learning and social change",
     },
   },
   {
@@ -200,7 +97,7 @@ const workshops = [
     date: "12–13 July 2025",
     time: "10 AM – 5 PM (with 1–2 PM lunch break)",
     description:
-      "This 2-day workshop explores the rich legacy of Raj Kapoor through the lens of his iconic song sequences. From Barsaat to Jagte Raho and Awara, relive the Golden Era of Hindi film music and learn about cinematic storytelling through songs.",
+      "This 2-day workshop explores the rich legacy of Raj Kapoor through the lens of his iconic song sequences. From Barsaat to Jagte Rho and Awara, relive the Golden Era of Hindi film music and learn about cinematic storytelling through songs.",
     image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Workshop",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
@@ -354,247 +251,6 @@ const workshops = [
     },
   },
   {
-    id: 10,
-    title: "FTII's Foundation Course in Screenplay Writing – Goa",
-    trainer: "Vaidehi Sancheti",
-    institution: "Film and Television Institute of India (FTII) & The Arthouse Film Academy",
-    location: "Arpora",
-    state: "Goa",
-    date: "14–25 June 2025",
-    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
-    description:
-      "A 10-day intensive course for aspiring storytellers in the scenic creative hub of North Goa. Learn to craft your first 10-minute short film screenplay through exercises, feedback, and storytelling sessions. Perfect for beginners with stories to tell. Bring at least 2 short film ideas to start writing.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Goa+Screenplay+Workshop",
-    registrationLink: "https://ftii.ac.in/p/vtwa/foundation-course-in-screenplay-in-goa-14-25-june-2025",
-    featured: true,
-    price: "₹17,500",
-    contact: "020 25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass",
-    fullDetails: {
-      venue: "The Arthouse Film Academy, Arpora, North Goa",
-      organizer:
-        "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL) in collaboration with The Arthouse Film Academy, Goa",
-      medium: "English & Hindi",
-      duration: "10 Days",
-      eligibilityCriteria: [
-        "Age: 18 years & above (as on 01 June 2025)",
-        "Education: Minimum 12th pass (10th may be considered in special cases)",
-        "Nationality: Indian",
-      ],
-      capacity: "24 participants (Course will be conducted only if 20 or more enroll)",
-      courseFee: "₹17,500 (Excludes food, accommodation, and travel)",
-      certification:
-        "Joint Certificate of Participation from FTII and The Arthouse Film Academy upon successful completion (with 90% minimum attendance)",
-      curriculum: [
-        "Idea to Screenplay: Understanding structure, character, plot",
-        "Daily writing exercises and screenings",
-        "Learn to analyze films from a writer's lens",
-        "Perfect for beginners with stories to tell",
-      ],
-      applicationProcess: [
-        "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Selection: First-Come, First-Served",
-        "Payment Mode: SBI Collect",
-        "No documents needed — just fill in the form and self-declare",
-      ],
-      contactInfo: [
-        "FTII Contact: Mr. Milind Joshi – 020-25580085 / info.cfol@ftii.ac.in",
-        "Arthouse Contact: Ms. Bhavna – 76766 43829 / thearthouseacademy@gmail.com",
-      ],
-      aboutInstructor:
-        "Vaidehi Sancheti – An FTII alumna, poet, and passionate storyteller, Vaidehi Sancheti has conducted screenplay writing workshops at FTII, Whistling Woods, and Living Bridge.",
-      additionalInfo:
-        "Turn your ideas into compelling screenplays under expert mentorship in Goa's creative heartland! Bring at least 2 short film ideas to start writing. Recommended film viewing list will be provided for deeper insight.",
-      prerequisites: "Bring at least 2 short film ideas to start writing",
-    },
-  },
-  {
-    id: 11,
-    title: "Fundamentals of Film Direction – FTII Online Course",
-    trainer: "Avinash Roy & Jasmine Kaur Roy",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Online",
-    state: "All India",
-    date: "16–20 June 2025",
-    time: "10:30 AM–12:30 PM & 2:30 PM–4:30 PM (4 hours/day)",
-    description:
-      "A 5-day intensive online course on Film Direction designed for beginners and enthusiasts. Learn about cinematic language, visual storytelling, narrative structure, working with actors, screenplay, mise-en-scène, and montage. Taught by National Award-winning FTII alumni and co-founders of Wanderlust Films.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Film+Direction+Course",
-    registrationLink: "https://ftii.ac.in/p/ftii-online-1/fundamentals-of-film-direction-16-20-june-2025",
-    featured: true,
-    price: "₹3,900 (Indian Nationals)",
-    contact: "020 25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass",
-    fullDetails: {
-      venue: "Online (Google Classroom + Google Meet)",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      medium: "English & Hindi",
-      duration: "5 days (Monday to Friday)",
-      eligibilityCriteria: [
-        "Minimum Age: 18+ as of 01 June 2025",
-        "Minimum Education: 12th pass (10th pass may be considered in exceptional cases)",
-        "Nationality: Indian",
-      ],
-      capacity: "40 seats",
-      courseFee: "₹3,900 (Indian Nationals), ₹11,700 (Foreign/NRI/OCI or Indians residing abroad)",
-      certification: "Digital certificate on successful completion (90% attendance mandatory)",
-      curriculum: [
-        "Introduction to the art and craft of direction",
-        "Understanding cinematic language, visual storytelling, and narrative structure",
-        "Working with actors, screenplay, mise-en-scène, and montage",
-        "Discussions, screenings, and film analysis",
-      ],
-      applicationProcess: [
-        "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Selection: First-Come-First-Served",
-        "Go to www.onlinesbi.com → Click on 'SBI Collect'",
-        "Search FTII Fees Account under 'Educational Institutions'",
-        "Select: B31 Fundamentals of Film Direction Online",
-        "Fill form → Pay fee → Save receipt",
-      ],
-      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020 – 2558 0085"],
-      aboutInstructor:
-        "Avinash Roy & Jasmine Kaur Roy – National Award-winning FTII alumni and co-founders of Wanderlust Films. Their films like Saanjh and Amoli have won National Awards and featured in international film festivals. Jasmine has also been a Berlinale Talents participant.",
-      techRequirements: [
-        "Desktop/Laptop with minimum 4 GB RAM and webcam",
-        "Stable internet (min 10 Mbps, 5 GB data/day)",
-        "Use of mobile phones not allowed",
-        "Familiarity with Google Meet & Classroom required",
-      ],
-    },
-  },
-  {
-    id: 12,
-    title: "Basic Course in the Art of Screenwriting – FTII Online",
-    trainer: "Vikas Sharma",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Online",
-    state: "All India",
-    date: "16–27 June 2025",
-    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day, weekdays only)",
-    description:
-      "Dive into the core elements of screenwriting for feature films with this weekday-only online course. Learn principles of cinematic storytelling, character development, story structure, premise, theme, and conflict through theory, exercises, and feedback. Taught by seasoned screenwriter Vikas Sharma.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Course",
-    registrationLink:
-      "https://ftii.ac.in/p/ftii-online-1/basic-course-in-the-art-of-feature-film-writing-16-27-june-2025-online",
-    featured: true,
-    price: "₹14,000 (Indian Nationals)",
-    contact: "020 25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass",
-    fullDetails: {
-      venue: "Online (Google Classroom + Google Meet)",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      medium: "English & Hindi",
-      duration: "12 days (weekdays only)",
-      eligibilityCriteria: [
-        "Age: 18+ as on 01 June 2025",
-        "Education: 12th pass (10th pass in exceptional cases)",
-        "Indian Nationals only",
-      ],
-      capacity: "24 participants (Course conducted only if 20+ participants register)",
-      courseFee: "₹14,000 (Indian Nationals), ₹42,000 (Foreign, NRI, OCI, or Indians abroad)",
-      certification: "E-certificate awarded with 90% attendance",
-      curriculum: [
-        "Principles of cinematic storytelling",
-        "Character development & multi-dimensional protagonists",
-        "Story structure, premise, theme, and conflict",
-        "Screenwriting tools through theory, exercises, and feedback",
-      ],
-      applicationProcess: [
-        "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Visit www.onlinesbi.com → Click on 'SB Collect'",
-        "Search FTII Fees Account under 'Educational Institutions'",
-        "Select: B02 Basic Course in the Art of Screenwriting",
-        "Fill form → Pay fee → Save receipt",
-        "No document submission required",
-      ],
-      contactInfo: ["Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com", "Phone: 020 – 2558 0085"],
-      aboutInstructor:
-        "Vikas Sharma – A seasoned screenwriter and former faculty at FTII & Whistling Woods. Has mentored at leading screenplay fellowships including Asia Society's New Voices, Cinestaan India Script Contest, and more.",
-      techRequirements: [
-        "Laptop/Desktop with 4 GB RAM, webcam",
-        "Internet: Minimum 10 Mbps, 5 GB data/day",
-        "Mobile phone not allowed",
-        "Familiarity with Google Meet & Classroom is essential",
-      ],
-      additionalInfo:
-        "Fees are non-refundable once selected. Course focuses specifically on feature film screenwriting.",
-    },
-  },
-  {
-    id: 13,
-    title: "Basic Course in Writing Scenes and Dialogues – FTII Online",
-    trainer: "Vikas Sharma",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Online",
-    state: "All India",
-    date: "14–22 June 2025",
-    time: "10 AM–12 PM & 1 PM–3 PM (4 hours/day, weekends only)",
-    description:
-      "Discover what makes a scene unforgettable and a dialogue iconic in this hands-on writing course. Learn about crafting great dialogue, creating dramatic scenes, and the power of subtext. Perfect for aspiring screenwriters who want to level up their scriptwriting skills with a focus on scenes and dialogues.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Dialogue+Writing+Course",
-    registrationLink: "https://ftii.ac.in/p/ftii-online-1/basic-course-in-writing-scenes-and-dialogues-14-22-june-2025",
-    featured: true,
-    price: "₹7,200 (Indian Nationals)",
-    contact: "020 25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass",
-    fullDetails: {
-      venue: "Online (Google Classroom + Google Meet)",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      medium: "English & Hindi",
-      duration: "4 days (Weekends only: 14–15 June & 21–22 June 2025)",
-      eligibilityCriteria: [
-        "Age: 18+ (born on or before 31 May 2007)",
-        "Education: 12th pass (10th pass may be considered in exceptional cases)",
-        "Nationality: Indian citizens only",
-      ],
-      capacity: "24 participants (Min 20 required for course to run)",
-      courseFee: "₹7,200 (Indian Participants), ₹21,600 (Foreign/OCI/NRI or Indians residing abroad)",
-      certification: "E-Certificate awarded upon successful completion with 90% attendance mandatory",
-      curriculum: [
-        "Crafting Great Dialogue:",
-        "What makes a dialogue unforgettable",
-        "Dialogue vs. conversation",
-        "Subtext and the power of 'the unsaid'",
-      ],
-      methodology: [
-        "Writing your own scenes",
-        "Film viewings and analysis",
-        "Interactive exercises and live instruction",
-      ],
-      applicationProcess: [
-        "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Go to www.onlinesbi.com",
-        "Click on 'SB Collect'",
-        "Search FTII Fees Account under 'Educational Institutions'",
-        "Select: B11 Basic C. in Writing Dialogues and Scenes for Screen",
-        "Fill form → Pay fee → Save your payment receipt",
-        "No document upload needed. Self-declaration in form is enough.",
-      ],
-      contactInfo: [
-        "Contact: Mr. Milindkumar Joshi, Assistant Outreach Officer",
-        "Email: info.cfol@ftii.ac.in | ftiioutreach@gmail.com",
-      ],
-      aboutInstructor:
-        "Vikas Sharma – Professional screenwriter and senior faculty at Whistling Woods International; former faculty at FTII Pune. Mentor at major fellowships including Asia Society's New Voices, Cinestaan India Script Contest, and more.",
-      techRequirements: [
-        "Device: Laptop/Desktop (No mobile phones allowed)",
-        "RAM: 4 GB or more",
-        "Processor: Intel i3/i5 or equivalent",
-        "Webcam + Headphones required",
-        "Internet: Minimum 10 Mbps, 5 GB data/day",
-        "Platform: Google Classroom + Google Meet",
-        "Browser: Chrome (preferred), Firefox, Safari",
-      ],
-      additionalInfo:
-        "Participants must keep cameras ON and mics OFF during class unless instructed otherwise. Failure to keep camera on may lead to expulsion and no refund. All communication will be via email.",
-    },
-  },
-  {
     id: 14,
     title: "Sooraj Nambiar's – LOCHANAM: A 3-Day Actor/Dancer Workshop",
     trainer: "Sooraj Nambiar",
@@ -679,6 +335,346 @@ const workshops = [
       ],
     },
   },
+  {
+    id: 17,
+    title: "FTII's Practical Course in Multi-Camera Technical Operations for TV Production",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "14–18 July 2025",
+    time: "9 AM – 6:30 PM",
+    description:
+      "Ever wondered how reality shows, stand-up comedy, or sports events are technically produced? Learn hands-on with professional gear including Multi-Camera Setup, Audio Consoles, Vision Mixers, Lighting Consoles, Teleprompters, Character Generators & more.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Multi+Camera+Workshop",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/introduction-to-multi-camera-technical-operations-for-tv-program-production-14-18-july-2025",
+    featured: true,
+    price: "₹5,000",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass (exceptionally 10th pass)",
+    fullDetails: {
+      venue: "FTII Campus, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "5 days intensive hands-on training",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Education: Minimum 12th pass (exceptionally 10th pass may be considered)",
+        "Nationality: Indian",
+      ],
+      applicationDeadline: "30 June 2025, 6 PM",
+      selectionProcess: "First Come, First Served",
+      courseFee: "₹5,000 only",
+      certification: "FTII Participation Certificate upon successful completion",
+      keyHighlights: [
+        "Work like a real technical crew in a TV studio",
+        "Learn camera, audio, vision mixing, lighting & switching",
+        "Take home a 2–5 min TV show you helped produce",
+        "Get a participation certificate from FTII",
+        "Hostel accommodation available",
+      ],
+      professionalEquipment: [
+        "Multi-Camera Setup",
+        "Audio Consoles",
+        "Vision Mixers",
+        "Lighting Consoles",
+        "Teleprompters",
+        "Character Generators",
+        "Professional TV Studio Equipment",
+      ],
+      curriculum: [
+        "Multi-camera setup and operations",
+        "Audio console operations and sound mixing",
+        "Vision mixing and live switching",
+        "Lighting console operations",
+        "Teleprompter operations",
+        "Character generator usage",
+        "Live TV production workflow",
+        "Technical crew coordination",
+      ],
+      practicalExperience: [
+        "Hands-on training with professional TV equipment",
+        "Real studio environment experience",
+        "Production of a complete 2-5 minute TV show",
+        "Technical crew role simulation",
+        "Live production scenarios",
+      ],
+      accommodation: "Hostel accommodation available on campus",
+      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
+      additionalInfo:
+        "This intensive course provides real-world experience in TV production technical operations. Perfect for those interested in the technical aspects of television production, reality shows, sports broadcasting, and live events.",
+    },
+  },
+  {
+    id: 18,
+    title: "FTII Tribute to the Showman – Basic Course in Appreciating Songs in Raj Kapoor Films",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "12–13 July 2025",
+    time: "10 AM – 5 PM (with 1–2 PM lunch break)",
+    description:
+      "Celebrate Raj Kapoor's centenary with a 2-day workshop by FTII exploring the timeless music and song picturization of his films. Learn the cinematic art behind RK's legendary song sequences with insights from FTII Prof. Dr. Milind Damle – an award-winning filmmaker and film educator.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Centenary",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
+    featured: true,
+    price: "₹1,500",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass (10th in exceptional cases)",
+    fullDetails: {
+      venue: "Triveni Kala Sangam, Delhi",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "2 days intensive workshop",
+      medium: "Hindi & English",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Education: Minimum 12th pass (10th pass in exceptional cases)",
+        "Nationality: Indian",
+      ],
+      applicationDeadline: "27 June 2025, 6 PM",
+      selectionProcess: "First Come, First Served",
+      capacity: "Maximum 70 participants",
+      courseFee: "₹1,500 only",
+      certification: "Certificate on 90% attendance",
+      keyHighlights: [
+        "Learn the cinematic art behind RK's legendary song sequences",
+        "Insights from FTII Prof. Dr. Milind Damle – an award-winning filmmaker and film educator",
+        "Certificate on 90% attendance",
+        "Explore timeless music and song picturization",
+        "Celebrate Raj Kapoor's birth centenary",
+      ],
+      curriculum: [
+        "Raj Kapoor's cinematic legacy and contribution to Indian cinema",
+        "Analysis of iconic song sequences from his films",
+        "Song picturization techniques and visual storytelling",
+        "Music direction and composition in RK films",
+        "Camera work and cinematography in song sequences",
+        "Cultural impact of Raj Kapoor's musical films",
+        "Evolution of song picturization in Indian cinema",
+        "Interactive discussions and film screenings",
+      ],
+      iconicFilmsStudied: [
+        "Barsaat (1949)",
+        "Awara (1951)",
+        "Shree 420 (1955)",
+        "Jagte Raho (1956)",
+        "Sangam (1964)",
+        "Mera Naam Joker (1970)",
+        "Bobby (1973)",
+        "Satyam Shivam Sundaram (1978)",
+      ],
+      aboutInstructor:
+        "Dr. Milind Damle – Associate Professor at FTII, award-winning filmmaker, and film educator with over 20 years of experience in radio, cinema & television. His doctoral research focused on song picturization techniques in Indian cinema, making him the perfect guide for this tribute to the Showman.",
+      specialFeatures: [
+        "Centenary celebration of Raj Kapoor's birth",
+        "Exclusive insights into the Golden Era of Hindi Cinema",
+        "Analysis of timeless songs and their visual treatment",
+        "Understanding the art of song picturization",
+        "Interactive sessions with film screenings",
+      ],
+      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020–25580085"],
+      additionalInfo:
+        "This special workshop celebrates the birth centenary of Raj Kapoor, the Showman of Indian cinema. Participants will gain deep insights into the art of song picturization and the cinematic genius behind some of the most memorable musical sequences in Indian film history.",
+    },
+  },
+  {
+    id: 19,
+    title: "FTII Pune: Basic Course in Smartphone Filmmaking",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "04–08 August 2025",
+    time: "10 AM – 5 PM",
+    description:
+      "Want to learn filmmaking using just your phone? Join this 5-day hands-on course by FTII and start telling your own cinematic stories! Learn creative storytelling, framing, audio & lighting basics guided by FTII experts.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Smartphone+Filmmaking",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-smartphone-filmmaking-in-pune-04-08-august-2025",
+    featured: true,
+    price: "₹7,000",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass (10th in special cases)",
+    fullDetails: {
+      venue: "FTII Campus, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "5 days intensive hands-on course",
+      medium: "Hindi & English",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Education: Minimum 12th pass (10th pass in special cases)",
+        "Nationality: Indian",
+      ],
+      applicationDeadline: "30 June 2025, 6 PM",
+      selectionProcess: "First Come, First Served",
+      capacity: "Limited to 24 participants",
+      courseFee: "₹7,000",
+      certification: "Certificate on completion",
+      keyHighlights: [
+        "Shoot, direct & edit short films using your smartphone",
+        "Learn creative storytelling, framing, audio & lighting basics",
+        "Guided by FTII experts",
+        "Hands-on practical experience",
+        "Create your own cinematic stories",
+      ],
+      curriculum: [
+        "Smartphone filmmaking fundamentals",
+        "Creative storytelling techniques",
+        "Camera framing and composition",
+        "Audio recording and sound design basics",
+        "Lighting techniques for smartphone filming",
+        "Video editing on mobile devices",
+        "Short film production workflow",
+        "Directing and cinematography principles",
+      ],
+      practicalExperience: [
+        "Hands-on smartphone filming sessions",
+        "Complete short film production",
+        "Real-time editing and post-production",
+        "Creative storytelling exercises",
+        "Technical skill development",
+      ],
+      aboutInstructor:
+        "FTII Faculty – Experienced filmmakers and educators from India's premier film institute with expertise in modern filmmaking techniques and smartphone cinematography.",
+      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
+      additionalInfo:
+        "This innovative course democratizes filmmaking by teaching students to create professional-quality content using just their smartphones. Perfect for aspiring filmmakers who want to start their journey with accessible technology.",
+    },
+  },
+  {
+    id: 20,
+    title: "FTII Pune: Basic Course on Writing for Short-Film Fiction",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "18–22 August 2025",
+    time: "10 AM – 5 PM",
+    description:
+      "Hone your storytelling craft in five intensive days with FTII faculty: develop ideas, shape characters, structure plots, and leave with a polished short-film script.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Pune",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-pune-18-22-august-2025",
+    featured: true,
+    price: "₹9,000",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass (10th in special cases)",
+    fullDetails: {
+      venue: "FTII Campus, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "5 days intensive screenwriting course",
+      medium: "Hindi & English",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Education: Minimum 12th pass (10th pass in special cases)",
+        "Nationality: Indian",
+      ],
+      applicationDeadline: "30 June 2025, 6 PM",
+      selectionProcess: "First Come, First Served",
+      capacity: "Limited to 24 participants",
+      courseFee: "₹9,000",
+      certification: "Certificate on completion",
+      keyHighlights: [
+        "Develop compelling story ideas from concept to script",
+        "Learn character development and dialogue writing",
+        "Master plot structure and narrative techniques",
+        "Create a polished short-film script",
+        "Guided by experienced FTII faculty",
+      ],
+      curriculum: [
+        "Story development and idea generation",
+        "Character creation and development",
+        "Plot structure and three-act storytelling",
+        "Dialogue writing techniques",
+        "Screenplay formatting and industry standards",
+        "Visual storytelling for short films",
+        "Script analysis and critique",
+        "Pitching and presentation skills",
+      ],
+      practicalExperience: [
+        "Hands-on script writing exercises",
+        "Character development workshops",
+        "Story structure analysis",
+        "Peer review and feedback sessions",
+        "Complete short-film script creation",
+      ],
+      aboutInstructor:
+        "FTII Faculty – Experienced screenwriters, directors, and film educators from India's premier film institute with expertise in narrative storytelling and screenplay development.",
+      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
+      additionalInfo:
+        "This intensive course provides aspiring screenwriters with the fundamental skills needed to craft compelling short-film narratives. Perfect for those looking to enter the film industry or enhance their storytelling abilities.",
+    },
+  },
+  {
+    id: 21,
+    title: "FTII Pune: Appreciate the Magic of Guru Dutt's Songs",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "09–10 August 2025",
+    time: "10 AM – 5 PM",
+    description:
+      "In tribute to Guru Dutt's birth centenary, this 2-day course dives into the poetic brilliance and cinematic genius of his song picturizations.",
+    image: "/placeholder.svg?height=300&width=500&text=FTII+Guru+Dutt+Pune",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-pune-09-10-august-2025",
+    featured: true,
+    price: "₹1,500",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass (10th in special cases)",
+    fullDetails: {
+      venue: "FTII Campus, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "2 days intensive appreciation course",
+      medium: "Hindi & English",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Education: Minimum 12th pass (10th in special cases)",
+        "Nationality: Indian",
+      ],
+      applicationDeadline: "30 June 2025, 6 PM",
+      selectionProcess: "First Come, First Served",
+      capacity: "Limited to 70 participants",
+      courseFee: "₹1,500",
+      certification: "Certificate on completion",
+      keyHighlights: [
+        "Appreciate the poetic brilliance of Guru Dutt's songs",
+        "Understand the cinematic genius of his song picturizations",
+        "Explore the cultural impact of his films",
+        "Guided by FTII experts",
+        "Hands-on practical experience",
+      ],
+      curriculum: [
+        "Guru Dutt's cinematic style and vision",
+        "Analysis of iconic song sequences from his films",
+        "Song picturization techniques and visual storytelling",
+        "Music direction and composition in Guru Dutt films",
+        "Camera work and cinematography in song sequences",
+        "Cultural impact of Guru Dutt's musical films",
+        "Evolution of song picturization in Indian cinema",
+        "Interactive discussions and film screenings",
+      ],
+      practicalExperience: [
+        "Hands-on appreciation sessions",
+        "Complete song sequence analysis",
+        "Real-time discussions and Q&A",
+        "Creative storytelling exercises",
+        "Technical skill development",
+      ],
+      aboutInstructor:
+        "FTII Faculty – Experienced filmmakers and educators from India's premier film institute with expertise in modern filmmaking techniques and smartphone cinematography.",
+      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
+      additionalInfo:
+        "This course is a tribute to the legendary Guru Dutt, celebrating his birth centenary by exploring the magic of his songs and their cinematic representation.",
+    },
+  },
 ]
 
 export default function WorkshopDetailContent({ id }: { id: number }) {
@@ -757,6 +753,9 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
           <div className="flex flex-wrap gap-2 mb-4">
             <span className="badge-primary">Workshop</span>
             <span className="badge-outline">{workshop.institution}</span>
+            {(workshop.id === 18 || workshop.id === 21) && (
+              <span className="badge-secondary">Centenary Celebration</span>
+            )}
           </div>
 
           <h1 className="font-playfair text-2xl md:text-3xl font-bold mb-2 md:mb-4">{workshop.title}</h1>
@@ -804,12 +803,12 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   </div>
                 )}
 
-                {workshop.ageGroup && (
+                {workshop.capacity && (
                   <div className="flex items-start">
                     <Users className="h-5 w-5 mr-2 text-primary mt-0.5" />
                     <div>
-                      <p className="font-medium">Age Group</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.ageGroup}</p>
+                      <p className="font-medium">Capacity</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.capacity}</p>
                     </div>
                   </div>
                 )}
@@ -824,6 +823,18 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   </div>
                 )}
 
+                {workshop.language && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="text-xs">🗣️</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Language</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.language}</p>
+                    </div>
+                  </div>
+                )}
+
                 {workshop.fullDetails?.duration && (
                   <div className="flex items-start">
                     <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
@@ -832,6 +843,32 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     <div>
                       <p className="font-medium">Duration</p>
                       <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.duration}</p>
+                    </div>
+                  </div>
+                )}
+
+                {workshop.fullDetails?.applicationDeadline && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="text-xs">📅</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Application Deadline</p>
+                      <p className="text-red-600 text-sm md:text-base font-medium">
+                        {workshop.fullDetails.applicationDeadline}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {workshop.certification && (
+                  <div className="flex items-start">
+                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                      <span className="text-xs">🏆</span>
+                    </div>
+                    <div>
+                      <p className="font-medium">Certification</p>
+                      <p className="text-gray-600 text-sm md:text-base">{workshop.certification}</p>
                     </div>
                   </div>
                 )}
@@ -893,13 +930,96 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
               {workshop.fullDetails?.description || workshop.description}
             </p>
 
+            {workshop.fullDetails?.keyHighlights && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Key Highlights</h3>
+                <ul className="space-y-2">
+                  {workshop.fullDetails.keyHighlights.map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="h-5 w-5 mr-2 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {workshop.fullDetails?.iconicFilmsStudied && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Iconic Films to be Studied</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {workshop.fullDetails.iconicFilmsStudied.map((film: string, index: number) => (
+                    <div
+                      key={index}
+                      className="bg-gradient-to-r from-yellow-50 to-orange-50 p-3 rounded-lg border border-yellow-200"
+                    >
+                      <div className="flex items-center">
+                        <div className="h-4 w-4 mr-2 flex items-center justify-center text-yellow-600">
+                          <span className="text-xs">🎬</span>
+                        </div>
+                        <span className="text-gray-700 text-sm font-medium">{film}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {workshop.fullDetails?.specialFeatures && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Special Features</h3>
+                <ul className="space-y-2">
+                  {workshop.fullDetails.specialFeatures.map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <div className="h-5 w-5 mr-2 flex items-center justify-center text-yellow-600 mt-0.5">
+                        <span className="text-xs">⭐</span>
+                      </div>
+                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {workshop.fullDetails?.professionalEquipment && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Professional Equipment You'll Work With</h3>
+                <ul className="space-y-2">
+                  {workshop.fullDetails.professionalEquipment.map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
+                        <span className="text-xs">🎬</span>
+                      </div>
+                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {workshop.fullDetails?.curriculum && (
               <div className="mb-6">
                 <h3 className="font-playfair text-lg font-bold mb-3">What You'll Learn</h3>
                 <ul className="space-y-2">
                   {workshop.fullDetails.curriculum.map((item: string, index: number) => (
                     <li key={index} className="flex items-start">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-600 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="h-5 w-5 mr-2 text-blue-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {workshop.fullDetails?.practicalExperience && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Practical Experience</h3>
+                <ul className="space-y-2">
+                  {workshop.fullDetails.practicalExperience.map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <div className="h-5 w-5 mr-2 flex items-center justify-center text-orange-600 mt-0.5">
+                        <span className="text-xs">⚡</span>
+                      </div>
                       <span className="text-gray-700 text-sm md:text-base">{item}</span>
                     </li>
                   ))}
@@ -925,15 +1045,43 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
               <div className="mb-6">
                 <h3 className="font-playfair text-lg font-bold mb-3">Application Process</h3>
                 <ul className="space-y-2">
-                  {workshop.fullDetails.applicationProcess.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <span className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2 mt-0.5 flex-shrink-0">
-                        {index + 1}
-                      </span>
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
+                  {
+                    // Update the applicationProcess array for workshop ID 18
+                    workshop.id === 18
+                      ? [
+                          "Last Date to Apply: 27 June 2025, 6 PM IST",
+                          "Selection Criteria: First-Come, First-Served",
+                          "Go to SBI Collect",
+                          "Search: FTII Fees Account",
+                          'Select Payment Category: "O1 B.C. in Appreciating Songs in Guru Dutt Films"',
+                          "Pay ₹1,500 and keep your payment receipt",
+                        ].map((item: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <span className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2 mt-0.5 flex-shrink-0">
+                              {index + 1}
+                            </span>
+                            <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                          </li>
+                        ))
+                      : workshop.fullDetails.applicationProcess.map((item: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <span className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2 mt-0.5 flex-shrink-0">
+                              {index + 1}
+                            </span>
+                            <span className="text-gray-700 text-sm md:text-base">{item}</span>
+                          </li>
+                        ))
+                  }
                 </ul>
+              </div>
+            )}
+
+            {workshop.fullDetails?.accommodation && (
+              <div className="mb-6">
+                <h3 className="font-playfair text-lg font-bold mb-3">Accommodation</h3>
+                <p className="text-gray-700 text-sm md:text-base leading-relaxed bg-blue-50 p-4 rounded-lg">
+                  {workshop.fullDetails.accommodation}
+                </p>
               </div>
             )}
 
