@@ -33,6 +33,7 @@ export async function GET() {
       headers: anonHeaders,
     });
 
+    console.log("GET auditions response:", res);
     if (!res.ok) {
       const error = await res.json();
       console.error("GET auditions error:", error);

@@ -1,17 +1,22 @@
-import { createClient } from "@supabase/supabase-js"
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+import { createClient, SupabaseClient } from "@supabase/supabase-js"
 
 // Create a single supabase client for the browser
-const createBrowserClient = () => {
+const createBrowserClient = (): SupabaseClient => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error("Missing Supabase environment variables")
+  }
 
   return createClient(supabaseUrl, supabaseAnonKey)
 }
 
 // Create a singleton instance for client-side
-let browserClient: ReturnType<typeof createClient> | null = null
+let browserClient: SupabaseClient | null = null
 
-export const getSupabaseBrowserClient = () => {
+export const getSupabaseBrowserClient = (): SupabaseClient => {
   if (!browserClient) {
     browserClient = createBrowserClient()
   }
@@ -19,22 +24,21 @@ export const getSupabaseBrowserClient = () => {
 }
 
 // Create a server client (to be used in Server Components or API routes)
-export const getSupabaseServerClient = () => {
+export const getSupabaseServerClient = (): SupabaseClient => {
   const supabaseUrl = process.env.SUPABASE_URL as string
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY as string
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    throw new Error("Missing Supabase server environment variables")
+  }
 
   return createClient(supabaseUrl, supabaseServiceKey)
 }
 
-
 export async function uploadAuditionImage(file: File) {
-  // Change this line to use getSupabaseBrowserClient instead
   const supabase = getSupabaseBrowserClient();
   const fileName = `audition-${Date.now()}-${file.name}`;
   
-  if (!supabase) {
-    throw new Error("Failed to initialize Supabase client");
-  }
   const { data, error } = await supabase.storage
     .from('audition-images')
     .upload(fileName, file);

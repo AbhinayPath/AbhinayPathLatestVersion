@@ -6,6 +6,8 @@ import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import { AuthProvider } from "@/contexts/AuthContext"
+import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
@@ -38,13 +40,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light">
-          <div className="flex min-h-screen flex-col">
-            <Suspense fallback={<div className="h-16 border-b bg-background/95 backdrop-blur"></div>}>
-              <Navbar />
-            </Suspense>
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <AuthProvider>
+            <div className="flex min-h-screen flex-col">
+              <Suspense fallback={<div className="h-16 border-b bg-background/95 backdrop-blur"></div>}>
+                <Navbar />
+              </Suspense>
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
         <Analytics />
       </body>

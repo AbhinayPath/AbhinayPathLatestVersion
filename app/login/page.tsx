@@ -1,113 +1,199 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Facebook, Twitter } from "lucide-react"
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { PasswordInput } from '@/components/ui/password-input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Loader2, CheckCircle, XCircle, Mail, Lock } from 'lucide-react'
+import { toast } from 'sonner'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [rememberMe, setRememberMe] = useState(false)
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const router = useRouter()
+  const { signIn } = useAuth()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+    // Clear errors when user starts typing
+    if (error) setError('')
+    if (success) setSuccess('')
+  }
+
+  const validateForm = () => {
+    if (!formData.email.trim()) {
+      setError('Please enter your email address')
+      return false
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address')
+      return false
+    }
+    
+    if (!formData.password) {
+      setError('Please enter your password')
+      return false
+    }
+    
+    return true
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle login logic here
-    console.log({ email, password, rememberMe })
+    
+    if (!validateForm()) {
+      return
+    }
+    
+    setLoading(true)
+    setError('')
+    setSuccess('')
+
+    try {
+      await signIn(formData.email, formData.password)
+      
+      setSuccess('Login successful! Redirecting...')
+      toast.success('Welcome back!', {
+        description: 'You have been logged in successfully.',
+        duration: 3000,
+      })
+      
+      // Redirect to dashboard or home page
+      setTimeout(() => {
+        router.push('/talent-profile')
+      }, 1000)
+
+    } catch (error: any) {
+      console.error('Login error:', error)
+      const errorMessage = error.message || 'Login failed. Please try again.'
+      setError(errorMessage)
+      toast.error('Login Failed', {
+        description: errorMessage,
+        duration: 5000,
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <div className="container flex items-center justify-center py-16 md:py-24">
-      <div className="mx-auto w-full max-w-md space-y-8">
-        <div className="text-center">
-          <h1 className="font-playfair text-3xl font-bold">Welcome Back</h1>
-          <p className="mt-2 text-gray-600">Sign in to continue your theater journey</p>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 p-4">
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
+          <CardDescription className="text-center">
+            Sign in to your AbhinayPath account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Success Alert */}
+            {success && (
+              <Alert className="border-green-200 bg-green-50">
+                <CheckCircle className="h-4 w-4 text-green-600" />
+                <AlertDescription className="text-green-800">
+                  {success}
+                </AlertDescription>
+              </Alert>
+            )}
 
-        <div className="theater-card p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Error Alert */}
+            {error && (
+              <Alert className="border-red-200 bg-red-50">
+                <XCircle className="h-4 w-4 text-red-600" />
+                <AlertDescription className="text-red-800">
+                  {error}
+                </AlertDescription>
+              </Alert>
+            )}
+
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="rounded-full"
-              />
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="pl-10"
+                  disabled={loading}
+                  required
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <Link href="/forgot-password" className="text-xs text-primary hover:underline">
-                  Forgot password?
-                </Link>
+              <Label htmlFor="password">Password</Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 z-10" />
+                <PasswordInput
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="pl-10"
+                  disabled={loading}
+                  required
+                />
               </div>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="rounded-full"
-              />
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="remember"
-                checked={rememberMe}
-                onCheckedChange={(checked) => setRememberMe(checked as boolean)}
-              />
-              <Label htmlFor="remember" className="text-sm">
-                Remember me
-              </Label>
+            <div className="flex items-center justify-between">
+              <Link 
+                href="/forgot-password" 
+                className="text-sm text-primary hover:underline"
+              >
+                Forgot password?
+              </Link>
             </div>
 
-            <Button type="submit" className="w-full rounded-full">
-              Sign In
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                'Sign In'
+              )}
             </Button>
           </form>
 
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-200"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-white px-2 text-gray-500">Or continue with</span>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <Button variant="outline" className="rounded-full">
-                <Facebook className="mr-2 h-4 w-4" />
-                Facebook
-              </Button>
-              <Button variant="outline" className="rounded-full">
-                <Twitter className="mr-2 h-4 w-4" />
-                Twitter
-              </Button>
-            </div>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-muted-foreground">
+              Don't have an account?{' '}
+              <Link href="/signup" className="font-medium text-primary hover:underline">
+                Create account
+              </Link>
+            </p>
           </div>
-        </div>
-
-        <p className="text-center text-sm text-gray-600">
-          Don't have an account?{" "}
-          <Link href="/signup" className="font-medium text-primary hover:underline">
-            Sign up
-          </Link>
-        </p>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
