@@ -246,6 +246,48 @@ const auditions = [
     applicationProcess:
       "Apply online through the official NSD recruitment portal at https://recruitment.nsd.gov.in/artist/ during the application period from May 24, 2025 (10 AM) to June 23, 2025 (5 PM).",
   },
+  {
+    id: 11,
+    title: "Casting Call — Female Models for Lifestyle Café Shoot",
+    type: "Modeling",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "Shoot: 2nd July 2025",
+    director: "Commercial Production",
+    description:
+      "Looking for female models with a young, attractive, modern look for a lifestyle café shoot at Phoenix Palladium Mall, Lower Parel, Mumbai. Must have a chic and upper-class café vibe. Same-day cash payment of ₹7,000 (conveyance not included). Application deadline: 26th June 2025 (by late evening).",
+    company: "Commercial Production",
+    companyLink: "https://wa.me/918218864140",
+    contact: "8218864140 (WhatsApp - Send portfolio/profile)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Female models only",
+      "Young, attractive, modern look",
+      "Chic and upper-class café vibe",
+      "Available for shoot on 2nd July 2025",
+      "Based in or able to travel to Mumbai",
+      "Professional attitude and punctuality",
+      "Comfortable with lifestyle/commercial modeling",
+    ],
+    roles: [
+      "Female Models for Lifestyle Café Shoot",
+      "Age range: 18-30 years (preferred)",
+      "Look: Modern, chic, upper-class aesthetic",
+      "Setting: Upscale café environment at Phoenix Palladium Mall",
+    ],
+    applicationProcess:
+      "Send your portfolio/profile via WhatsApp to 8218864140. Include recent photos showcasing your modern, chic look suitable for an upscale café setting. Application deadline: 26th June 2025 (by late evening).",
+    shootDetails: {
+      venue: "Phoenix Palladium Mall, Lower Parel, Mumbai",
+      date: "2nd July 2025",
+      payment: "₹7,000 (same-day cash payment)",
+      conveyance: "Not included",
+      applicationDeadline: "26th June 2025 (by late evening)",
+    },
+  },
 ]
 
 export default function AuditionDetailContent({ id }: { id: number }) {

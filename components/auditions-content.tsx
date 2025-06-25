@@ -119,6 +119,24 @@ const auditions = [
     verified: true,
     image: "/placeholder.svg?height=300&width=500&text=NSD+Theatre+Artists",
   },
+  {
+    id: 11,
+    title: "Casting Call — Female Models for Lifestyle Café Shoot",
+    type: "Modeling",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "Shoot: 2nd July 2025",
+    director: "Commercial Production",
+    description:
+      "Looking for female models with a young, attractive, modern look for a lifestyle café shoot at Phoenix Palladium Mall, Lower Parel, Mumbai. Must have a chic and upper-class café vibe. Same-day cash payment of ₹7,000 (conveyance not included). Application deadline: 26th June 2025 (by late evening).",
+    company: "Commercial Production",
+    companyLink: "https://wa.me/918218864140",
+    contact: "8218864140 (WhatsApp - Send portfolio/profile)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Lifestyle+Café+Modeling+Shoot",
+  },
 ]
 
 // Get unique states and categories for filters
