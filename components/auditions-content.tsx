@@ -137,6 +137,24 @@ const auditions = [
     verified: true,
     image: "/placeholder.svg?height=300&width=500&text=Lifestyle+Café+Modeling+Shoot",
   },
+  {
+    id: 12,
+    title: "Audition Call for Bangalore Little Theater",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Sunday, June 29, 2025 at 10:30 AM",
+    director: "Bangalore Little Theatre",
+    description:
+      "Join us for a special reading of our brand-new play 'The Anklet' - a contemporary take on the timeless Tamil epic Silappadikaram. This event is open to actors, backstage crew, and anyone passionate about storytelling. Come discover this fresh interpretation of a classic tale and be part of our theatrical community.",
+    company: "Bangalore Little Theatre",
+    companyLink: "https://forms.gle/ZKvFcqC5qm7UtDeo6",
+    contact: "Register at forms.gle/ZKvFcqC5qm7UtDeo6",
+    contactType: "website",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=The+Anklet+Play+Reading",
+  },
 ]
 
 // Get unique states and categories for filters

@@ -59,7 +59,7 @@ const auditions = [
       "Available for rehearsals (schedule to be discussed)",
     ],
     roles: [
-      "Male actor: age 21-25 (must know how to play guitar)",
+      "Male actor: age 21-25 (must know how to play a guitar)",
       "Male actor: age 30+",
       "Female actor: age 30+",
       "Male actor: age 50+",
@@ -288,6 +288,45 @@ const auditions = [
       applicationDeadline: "26th June 2025 (by late evening)",
     },
   },
+  {
+    id: 12,
+    title: "Audition Call for Bangalore Little Theater",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Sunday, June 29, 2025 at 10:30 AM",
+    director: "Bangalore Little Theatre",
+    description:
+      "Join us for a special reading of our brand-new play 'The Anklet' - a contemporary take on the timeless Tamil epic Silappadikaram. This event is open to actors, backstage crew, and anyone passionate about storytelling. Come discover this fresh interpretation of a classic tale and be part of our theatrical community.",
+    company: "Bangalore Little Theatre",
+    companyLink: "https://forms.gle/ZKvFcqC5qm7UtDeo6",
+    contact: "Register at forms.gle/ZKvFcqC5qm7UtDeo6",
+    contactType: "website",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Open to all theatre lovers and curious individuals",
+      "No prior experience required",
+      "Interest in storytelling and Tamil literature appreciated",
+      "Available on Sunday, June 29, 2025 at 10:30 AM",
+      "Based in or able to travel to Bangalore",
+    ],
+    roles: [
+      "Open to actors interested in contemporary adaptations",
+      "Backstage crew and technical enthusiasts welcome",
+      "Anyone passionate about storytelling and theatre",
+      "Opportunity to be part of a fresh take on Silappadikaram",
+    ],
+    applicationProcess:
+      "Register online at https://forms.gle/ZKvFcqC5qm7UtDeo6 to secure your spot for this special reading event.",
+    eventDetails: {
+      venue: "Alliance Française de Bangalore, Classroom 10",
+      time: "10:30 AM",
+      eventType: "Special Play Reading",
+      openTo: "Actors, backstage crew, and anyone passionate about storytelling",
+    },
+  },
 ]
 
 export default function AuditionDetailContent({ id }: { id: number }) {
@@ -465,6 +504,49 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   </>
                 )}
 
+                {audition.id === 12 && (
+                  <>
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Event Details</h2>
+                      <div className="bg-blue-50 p-4 rounded-lg mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-medium text-gray-700">Venue</p>
+                            <p className="text-gray-800">{audition.eventDetails.venue}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Time</p>
+                            <p className="text-gray-800">{audition.eventDetails.time}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Event Type</p>
+                            <p className="text-gray-800">{audition.eventDetails.eventType}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Open To</p>
+                            <p className="text-gray-800">{audition.eventDetails.openTo}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">About Silappadikaram</h2>
+                      <div className="bg-amber-50 p-4 rounded-lg mb-6">
+                        <p className="text-gray-800 mb-2">
+                          Silappadikaram is one of the five great epics of Tamil literature, written by Ilango Adigal.
+                          This timeless tale of love, justice, and divine retribution has captivated audiences for
+                          centuries.
+                        </p>
+                        <p className="text-gray-800">
+                          Our contemporary adaptation 'The Anklet' brings this classic story to modern audiences,
+                          exploring its themes through a fresh lens while honoring the original's cultural significance.
+                        </p>
+                      </div>
+                    </section>
+                  </>
+                )}
+
                 <h2 className="text-xl font-semibold mb-3">Roles</h2>
                 <ul className="list-disc pl-5 mb-6">
                   {audition.roles.map((role: string, index: number) => (
@@ -549,11 +631,20 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 <div className="flex items-start">
                   {audition.contactType === "email" ? (
                     <Mail className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                  ) : audition.contactType === "whatsapp" ? (
+                    <a
+                      href={`https://wa.me/${audition.contact.replace(/\D/g, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline flex items-center"
+                    >
+                      {audition.contact}
+                      <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded">WhatsApp</span>
+                    </a>
                   ) : (
-                    <Phone className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                    <></>
                   )}
                   <div>
-                    <p className="font-medium text-gray-700">Contact</p>
                     {audition.contactType === "email" ? (
                       <a href={`mailto:${audition.contact}`} className="text-primary hover:underline flex items-center">
                         {audition.contact}
@@ -570,13 +661,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                         <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded">WhatsApp</span>
                       </a>
                     ) : (
-                      <a
-                        href={`tel:${audition.contact.replace(/\s/g, "")}`}
-                        className="text-primary hover:underline flex items-center"
-                      >
-                        {audition.contact}
-                        <span className="ml-1 text-xs bg-blue-500 text-white px-1.5 py-0.5 rounded">Call</span>
-                      </a>
+                      <></>
                     )}
                   </div>
                 </div>
@@ -603,12 +688,18 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                       <Mail className="mr-2 h-4 w-4" />
                     ) : audition.contactType === "whatsapp" ? (
                       <MessageSquare className="mr-2 h-4 w-4" />
+                    ) : audition.contactType === "website" ? (
+                      <Building className="mr-2 h-4 w-4" />
                     ) : audition.id === 10 ? (
                       <Building className="mr-2 h-4 w-4" />
                     ) : (
                       <Phone className="mr-2 h-4 w-4" />
                     )}
-                    {audition.id === 10 ? "Apply at NSD Website" : "Contact for Audition"}
+                    {audition.id === 12
+                      ? "Register for Event"
+                      : audition.id === 10
+                        ? "Apply at NSD Website"
+                        : "Contact for Audition"}
                   </Button>
                 </a>
               </div>
