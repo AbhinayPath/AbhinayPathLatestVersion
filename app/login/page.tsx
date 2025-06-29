@@ -10,7 +10,7 @@ import { PasswordInput } from '@/components/ui/password-input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2, CheckCircle, XCircle, Mail, Lock } from 'lucide-react'
-import { toast } from 'sonner'
+import { toast } from "@/hooks/use-toast"
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function LoginPage() {
@@ -22,7 +22,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const router = useRouter()
-  const { signIn } = useAuth()
+  const { refreshUser } = useAuth()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -57,36 +57,67 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    if (!validateForm()) {
-      return
-    }
-    
     setLoading(true)
-    setError('')
-    setSuccess('')
 
     try {
-      await signIn(formData.email, formData.password)
-      
-      setSuccess('Login successful! Redirecting...')
-      toast.success('Welcome back!', {
-        description: 'You have been logged in successfully.',
-        duration: 3000,
-      })
-      
-      // Redirect to dashboard or home page
-      setTimeout(() => {
-        router.push('/talent-profile')
-      }, 1000)
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // Important for cookies
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Login failed');
+      }
 
-    } catch (error: any) {
-      console.error('Login error:', error)
-      const errorMessage = error.message || 'Login failed. Please try again.'
-      setError(errorMessage)
-      toast.error('Login Failed', {
-        description: errorMessage,
-        duration: 5000,
+      
+      // Get user name from metadata if available
+      const user = result.user || {};
+      const firstName = user?.first_name || '';
+      const lastName = user?.last_name || '';
+      const fullName = user?.full_name || '';
+      let userName = '';
+      if (lastName && firstName) {
+        userName = `${lastName} ${firstName}`.trim();
+      } else if (fullName) {
+        const nameParts = fullName.trim().split(' ');
+        if (nameParts.length >= 2) {
+          const fName = nameParts[0];
+          const lName = nameParts.slice(1).join(' ');
+          userName = `${lName} ${fName}`.trim();
+        } else {
+          userName = fullName;
+        }
+      } else {
+        userName = formData.email?.split('@')[0] || 'there';
+      }
+      toast({
+        title: "Login Successful!",
+        description: `Welcome back, ${userName}! 👋`,
+      });
+
+      await refreshUser()
+      setFormData({ email: "", password: "" })
+
+      setTimeout(() => {
+        toast({
+          title: `Welcome, ${userName}! 👋`,
+          description: "Let's complete your talent profile to start applying for auditions.",
+          duration: 5000,
+        });
+        window.location.href = '/talent-profile';
+      }, 1000);
+
+    } catch (error) {
+      console.error('Error:', error)
+      toast({
+        title: "Login Failed",
+        description: error instanceof Error ? error.message : "Invalid credentials",
+        variant: "destructive",
       })
     } finally {
       setLoading(false)

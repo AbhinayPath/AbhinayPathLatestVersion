@@ -1,7 +1,5 @@
-
-
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseServerClient,getSupabaseBrowserClient } from "@/lib/supabase";
+import { getSupabaseServerClientForRouteHandler } from "@/lib/supabase-server";
 import { cookies } from "next/headers";
 
 // GET - Fetch talent profiles (with optional filters)
@@ -13,7 +11,7 @@ export async function GET(request: NextRequest) {
     const location = searchParams.get('location');
     const published = searchParams.get('published');
 
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClientForRouteHandler();
     let query = supabase.from('talent_profiles').select(`
       *,
       education_records(*),
@@ -46,7 +44,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const { profile, education, experience, training, media } = await request.json();
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClientForRouteHandler();
 
     // Get the authenticated user
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -190,7 +188,7 @@ export async function PUT(request: NextRequest) {
 
    
 
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClientForRouteHandler();
 
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
@@ -377,7 +375,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClientForRouteHandler();
 
     // Get the authenticated user
     const { data: { user }, error: authError } = await supabase.auth.getUser()

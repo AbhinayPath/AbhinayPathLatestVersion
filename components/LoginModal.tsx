@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import { getSupabaseBrowserClient } from "@/lib/supabase"
 import { toast } from "@/hooks/use-toast"
 import { Eye, EyeOff } from "lucide-react"
+import Link from "next/link"
 
 interface LoginModalProps {
   isOpen: boolean
@@ -36,62 +37,59 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     setLoading(true)
 
     try {
-      const supabase = getSupabaseBrowserClient()
-      
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      })
-        debugger
-      if (error) {
-        throw new Error(error.message)
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // Important for cookies
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Login failed');
       }
 
-      // Get user name from metadata in format "lastName firstName"
-      const firstName = data.user?.user_metadata?.first_name || ''
-      const lastName = data.user?.user_metadata?.last_name || ''
-      const fullName = data.user?.user_metadata?.full_name || ''
       
-      let userName = ''
-      
+      // Get user name from metadata if available
+      const user = result.user || {};
+      const firstName = user?.first_name || '';
+      const lastName = user?.last_name || '';
+      const fullName = user?.full_name || '';
+      let userName = '';
       if (lastName && firstName) {
-        // Use "lastName firstName" format
-        userName = `${lastName} ${firstName}`.trim()
+        userName = `${lastName} ${firstName}`.trim();
       } else if (fullName) {
-        // If full_name exists, try to parse it
-        const nameParts = fullName.trim().split(' ')
+        const nameParts = fullName.trim().split(' ');
         if (nameParts.length >= 2) {
-          // Assume first part is first name, rest is last name
-          const fName = nameParts[0]
-          const lName = nameParts.slice(1).join(' ')
-          userName = `${lName} ${fName}`.trim()
+          const fName = nameParts[0];
+          const lName = nameParts.slice(1).join(' ');
+          userName = `${lName} ${fName}`.trim();
         } else {
-          userName = fullName
+          userName = fullName;
         }
       } else {
-        // Fallback to email prefix
-        userName = data.user?.email?.split('@')[0] || 'there'
+        userName = formData.email?.split('@')[0] || 'there';
       }
-
       toast({
         title: "Login Successful!",
         description: `Welcome back, ${userName}! 👋`,
-      })
+      });
 
       await refreshUser()
-      onClose()
       setFormData({ email: "", password: "" })
       setShowPassword(false)
 
-      // Show welcome message and redirect to talent profile
       setTimeout(() => {
         toast({
           title: `Welcome, ${userName}! 👋`,
           description: "Let's complete your talent profile to start applying for auditions.",
           duration: 5000,
-        })
-        router.push('/talent-profile')
-      }, 1000)
+        });
+        window.location.href = '/talent-profile';
+        onClose();
+      }, 1000);
 
     } catch (error) {
       console.error('Error:', error)
@@ -160,6 +158,15 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
+            </div>
+
+            <div className="flex items-center justify-between space-y-2">
+              <Link 
+                href="/forgot-password" 
+                className="text-sm text-primary hover:underline"
+              >
+                Forgot password?
+              </Link>
             </div>
           </div>
 

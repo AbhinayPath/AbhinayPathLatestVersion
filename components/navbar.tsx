@@ -20,7 +20,7 @@ export default function Navbar() {
   const router = useRouter()
   const { user, loading, signOut } = useAuth()
 
-  debugger
+  
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)

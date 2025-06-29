@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseServerClient } from '@/lib/supabase'
+import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getSupabaseServerClient()
+    const supabase = await getSupabaseServerClientForRouteHandler()
     const { data: { user }, error: authError } = await supabase.auth.getUser()
 
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-
+    console.log('🔐 media Authenticated user:',user );
     const formData = await request.formData()
     const file = formData.get('file') as File
     const type = formData.get('type') as string // 'profile', 'headshot', 'portfolio'
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const supabase = getSupabaseServerClient()
+    const supabase = await getSupabaseServerClientForRouteHandler()
     const { data: { user }, error: authError } = await supabase.auth.getUser()
 
     if (authError || !user) {

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -30,6 +32,7 @@ interface BasicInfoStepProps {
 }
 
 export function BasicInfoStep({ profile, onInputChange }: BasicInfoStepProps) {
+  
   return (
     <div className="space-y-6">
       {/* Personal Information */}
@@ -42,7 +45,7 @@ export function BasicInfoStep({ profile, onInputChange }: BasicInfoStepProps) {
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="full_name">Full Name *</Label>
+            <Label htmlFor="full_name"><span style={{color: 'red'}}>*</span> Full Name</Label>
             <Input
               id="full_name"
               value={profile.full_name || ''}
@@ -53,7 +56,7 @@ export function BasicInfoStep({ profile, onInputChange }: BasicInfoStepProps) {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
+            <Label htmlFor="email"><span style={{color: 'red'}}>*</span> Email</Label>
             <Input
               id="email"
               type="email"
@@ -65,7 +68,7 @@ export function BasicInfoStep({ profile, onInputChange }: BasicInfoStepProps) {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
+            <Label htmlFor="phone"><span style={{color: 'red'}}>*</span> Phone Number</Label>
             <Input
               id="phone"
               type="tel"
@@ -123,7 +126,7 @@ export function BasicInfoStep({ profile, onInputChange }: BasicInfoStepProps) {
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="city">City</Label>
+            <Label htmlFor="city"><span style={{color: 'red'}}>*</span> City</Label>
             <Input
               id="city"
               value={profile.city || ''}
@@ -133,7 +136,7 @@ export function BasicInfoStep({ profile, onInputChange }: BasicInfoStepProps) {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="state">State</Label>
+            <Label htmlFor="state"><span style={{color: 'red'}}>*</span> State</Label>
             <Select value={profile.state || ''} onValueChange={(value) => onInputChange('state', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select state" />
@@ -165,7 +168,7 @@ export function BasicInfoStep({ profile, onInputChange }: BasicInfoStepProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            <Label htmlFor="bio">Bio / Introduction</Label>
+            <Label htmlFor="bio"><span style={{color: 'red'}}>*</span> Bio / Introduction</Label>
             <Textarea
               id="bio"
               value={profile.bio || ''}
@@ -196,7 +199,7 @@ export function ProfessionalStep({ profile, onInputChange, onArrayFieldToggle }:
       {/* Experience Level */}
       <Card>
         <CardHeader>
-          <CardTitle>Experience Level</CardTitle>
+          <CardTitle><span style={{color: 'red'}}>*</span> Experience Level</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
@@ -233,7 +236,7 @@ export function ProfessionalStep({ profile, onInputChange, onArrayFieldToggle }:
       {/* Acting Skills */}
       <Card>
         <CardHeader>
-          <CardTitle>Acting Skills</CardTitle>
+          <CardTitle><span style={{color: 'red'}}>*</span> Acting Skills</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -273,7 +276,7 @@ export function ProfessionalStep({ profile, onInputChange, onArrayFieldToggle }:
       {/* Languages */}
       <Card>
         <CardHeader>
-          <CardTitle>Languages</CardTitle>
+          <CardTitle><span style={{color: 'red'}}>*</span> Languages</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -405,7 +408,7 @@ export function EducationStep({
           <CardTitle className="flex items-center justify-between">
             <span className="flex items-center gap-2">
               <Globe className="h-5 w-5" />
-              Education
+              Education *
             </span>
             <Button onClick={onAddEducation} size="sm">
               <Plus className="h-4 w-4 mr-2" />
@@ -435,7 +438,7 @@ export function EducationStep({
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label>Institution *</Label>
+                      <Label htmlFor="institution"><span style={{color: 'red'}}>*</span> Institution</Label>
                       <Input
                         value={edu.institution || ''}
                         onChange={(e) => onUpdateEducation(index, 'institution', e.target.value)}
@@ -444,7 +447,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Degree/Course</Label>
+                      <Label htmlFor="degree"><span style={{color: 'red'}}>*</span> Degree/Course</Label>
                       <Input
                         value={edu.degree || ''}
                         onChange={(e) => onUpdateEducation(index, 'degree', e.target.value)}
@@ -453,7 +456,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Field of Study</Label>
+                      <Label htmlFor="field_of_study">Field of Study</Label>
                       <Input
                         value={edu.field_of_study || ''}
                         onChange={(e) => onUpdateEducation(index, 'field_of_study', e.target.value)}
@@ -462,7 +465,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Start Year</Label>
+                      <Label htmlFor="start_year">Start Year</Label>
                       <Input
                         type="number"
                         value={edu.start_year || ''}
@@ -472,7 +475,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>End Year</Label>
+                      <Label htmlFor="end_year">End Year</Label>
                       <Input
                         type="number"
                         value={edu.end_year || ''}
@@ -533,7 +536,7 @@ export function EducationStep({
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label>Project Title *</Label>
+                      <Label htmlFor="project_title">Project Title *</Label>
                       <Input
                         value={exp.project_title || ''}
                         onChange={(e) => onUpdateExperience(index, 'project_title', e.target.value)}
@@ -542,7 +545,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Project Type</Label>
+                      <Label htmlFor="project_type">Project Type</Label>
                       <Select 
                         value={exp.project_type || ''} 
                         onValueChange={(value) => onUpdateExperience(index, 'project_type', value)}
@@ -559,7 +562,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Role/Character</Label>
+                      <Label htmlFor="role">Role/Character</Label>
                       <Input
                         value={exp.role || ''}
                         onChange={(e) => onUpdateExperience(index, 'role', e.target.value)}
@@ -568,7 +571,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Production Company</Label>
+                      <Label htmlFor="production_company">Production Company</Label>
                       <Input
                         value={exp.production_company || ''}
                         onChange={(e) => onUpdateExperience(index, 'production_company', e.target.value)}
@@ -577,7 +580,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Start Date</Label>
+                      <Label htmlFor="start_date">Start Date</Label>
                       <Input
                         type="date"
                         value={exp.start_date || ''}
@@ -586,7 +589,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>End Date</Label>
+                      <Label htmlFor="end_date">End Date</Label>
                       <Input
                         type="date"
                         value={exp.end_date || ''}
@@ -596,7 +599,7 @@ export function EducationStep({
                   </div>
                   
                   <div className="space-y-2">
-                    <Label>Description</Label>
+                    <Label htmlFor="description">Description</Label>
                     <Textarea
                       value={exp.description || ''}
                       onChange={(e) => onUpdateExperience(index, 'description', e.target.value)}
@@ -647,7 +650,7 @@ export function EducationStep({
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label>Workshop/Course Name *</Label>
+                      <Label htmlFor="workshop_name">Workshop/Course Name *</Label>
                       <Input
                         value={train.workshop_name || ''}
                         onChange={(e) => onUpdateTraining(index, 'workshop_name', e.target.value)}
@@ -656,7 +659,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Instructor/Trainer</Label>
+                      <Label htmlFor="instructor">Instructor/Trainer</Label>
                       <Input
                         value={train.instructor || ''}
                         onChange={(e) => onUpdateTraining(index, 'instructor', e.target.value)}
@@ -665,7 +668,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>Institution/Academy</Label>
+                      <Label htmlFor="institution">Institution/Academy</Label>
                       <Input
                         value={train.institution || ''}
                         onChange={(e) => onUpdateTraining(index, 'institution', e.target.value)}
@@ -676,7 +679,7 @@ export function EducationStep({
            
                     
                     <div className="space-y-2">
-                      <Label>Start Date</Label>
+                      <Label htmlFor="start_date">Start Date</Label>
                       <Input
                         type="date"
                         value={train.start_date || ''}
@@ -685,7 +688,7 @@ export function EducationStep({
                     </div>
                     
                     <div className="space-y-2">
-                      <Label>End Date</Label>
+                      <Label htmlFor="end_date">End Date</Label>
                       <Input
                         type="date"
                         value={train.end_date || ''}
@@ -695,7 +698,7 @@ export function EducationStep({
                   </div>
                   
                   <div className="space-y-2">
-                    <Label>Skills Learned</Label>
+                    <Label htmlFor="skills_learned">Skills Learned</Label>
                     <Input
                       value={(train.skills_learned || []).join(', ')}
                       onChange={(e) => onUpdateTraining(index, 'skills_learned', e.target.value.split(', ').filter(s => s.trim()))}
@@ -772,24 +775,34 @@ export function PortfolioStep({
                 <Camera className="h-8 w-8 text-gray-400" />
               </div>
             )}
-            
             <div className="text-center">
-              <Label htmlFor="profile-image" className="cursor-pointer">
-                <Button variant="outline" disabled={uploading}>
-                  <Upload className="h-4 w-4 mr-2" />
-                  {uploading ? 'Uploading...' : 'Upload Profile Picture'}
-                </Button>
-              </Label>
-              <Input
-                id="profile-image"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => handleFileChange(e, 'profile')}
-              />
-              <p className="text-sm text-gray-500 mt-2">
-                JPG, PNG or WebP. Max size 5MB.
-              </p>
+              {/* Use ref to trigger file input */}
+              {(() => {
+                const inputRef = React.useRef<HTMLInputElement>(null);
+                return (
+                  <>
+                    <Button
+                      variant="outline"
+                      disabled={uploading}
+                      onClick={() => inputRef.current?.click()}
+                    >
+                      <Upload className="h-4 w-4 mr-2" />
+                      {uploading ? 'Uploading...' : 'Upload Profile Picture'}
+                    </Button>
+                    <Input
+                      ref={inputRef}
+                      id="profile-image"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleFileChange(e, 'profile')}
+                    />
+                    <p className="text-sm text-gray-500 mt-2">
+                      JPG, PNG or WebP. Max size 5MB.
+                    </p>
+                  </>
+                );
+              })()}
             </div>
           </div>
         </CardContent>
@@ -1039,7 +1052,7 @@ export function ReviewStep({
         <CardContent className="space-y-4">
           {profile.acting_skills && profile.acting_skills.length > 0 && (
             <div>
-              <Label className="font-medium">Acting Skills</Label>
+              <Label className="font-medium"><span style={{color: 'red'}}>*</span> Acting Skills</Label>
               <div className="flex flex-wrap gap-2 mt-2">
                 {profile.acting_skills.map((skill) => (
                   <Badge key={skill} variant="secondary">{skill}</Badge>
@@ -1061,7 +1074,7 @@ export function ReviewStep({
           
           {profile.languages && profile.languages.length > 0 && (
             <div>
-              <Label className="font-medium">Languages</Label>
+              <Label className="font-medium"><span style={{color: 'red'}}>*</span> Languages</Label>
               <div className="flex flex-wrap gap-2 mt-2">
                 {profile.languages.map((lang) => (
                   <Badge key={lang} variant="secondary">{lang}</Badge>

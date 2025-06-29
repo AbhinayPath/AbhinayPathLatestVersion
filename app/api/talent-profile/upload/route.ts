@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseServerClient } from '@/lib/supabase' // Assuming no custom cookie param is needed
+import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
 
 // POST: Upload file to Supabase Storage
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getSupabaseServerClient() // ✅ No arguments passed
+    const supabase = await getSupabaseServerClientForRouteHandler()
 
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
 // DELETE: Remove file from Supabase Storage
 export async function DELETE(request: NextRequest) {
   try {
-    const supabase = getSupabaseServerClient() // ✅ No arguments passed
+    const supabase = await getSupabaseServerClientForRouteHandler()
 
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {

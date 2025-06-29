@@ -196,17 +196,96 @@ export default function TalentProfileUploadPage() {
       try {
         const response = await fetch('/api/talent-profile')
         if (response.ok) {
-          const data = await response.json()
-          if (data.profile) {
-            setProfile(data.profile)
-            setEducation(data.profile.talent_education || [])
-            setExperience(data.profile.talent_experience || [])
-            setTraining(data.profile.talent_training || [])
-            setProfileImage(data.profile.profile_image_url || '')
-            setHeadshots(data.profile.headshot_urls || [])
-            setPortfolioImages(data.profile.portfolio_images || [])
-            setPortfolioVideos(data.profile.portfolio_videos || [])
-          }
+          const data = ((d) => Array.isArray(d) ? d[0] : d)(await response.json());
+          debugger
+            setProfile({
+              id: data.id,
+              user_id: data.user_id,
+              full_name: data.full_name,
+              email: data.email,
+              phone: data.phone,
+              date_of_birth: data.date_of_birth,
+              gender: data.gender,
+              height: data.height,
+              weight: data.weight,
+              city: data.city,
+              state: data.state,
+              country: data.country,
+              bio: data.bio,
+              experience_level: data.experience_level,
+              years_of_experience: data.years_of_experience,
+              acting_skills: data.acting_skills,
+              dance_styles: data.dance_styles,
+              languages: data.languages,
+              special_skills: data.special_skills,
+              eye_color: data.eye_color,
+              hair_color: data.hair_color,
+              skin_tone: data.skin_tone,
+              body_type: data.body_type,
+              profile_image_url: data.profile_image_url,
+              headshot_urls: data.headshot_urls,
+              portfolio_videos: data.portfolio_videos,
+              portfolio_images: data.portfolio_images,
+              instagram_url: data.instagram_url,
+              youtube_url: data.youtube_url,
+              website_url: data.website_url,
+              imdb_url: data.imdb_url,
+              represented_by: data.represented_by,
+              agent_contact: data.agent_contact,
+              union_memberships: data.union_memberships,
+              available_for_work: data.available_for_work,
+              willing_to_relocate: data.willing_to_relocate,
+              travel_radius: data.travel_radius,
+              preferred_roles: data.preferred_roles,
+              project_types: data.project_types,
+              verified: data.verified,
+              profile_status: data.profile_status,
+              created_at: data.created_at,
+              updated_at: data.updated_at,
+            });
+            setEducation((data.education_records || []).map((e: TalentEducation) => ({
+              id: e.id,
+              profile_id: e.profile_id,
+              institution: e.institution,
+              degree: e.degree,
+              field_of_study: e.field_of_study,
+              start_year: e.start_year,
+              end_year: e.end_year,
+              currently_studying: e.currently_studying,
+              description: e.description,
+              created_at: e.created_at,
+            })));
+            setExperience((data.experience_records || []).map((e: TalentExperience) => ({
+              id: e.id,
+              profile_id: e.profile_id,
+              project_title: e.project_title,
+              project_type: e.project_type,
+              role: e.role,
+              production_company: e.production_company,
+              director: e.director,
+              start_date: e.start_date,
+              end_date: e.end_date,
+              description: e.description,
+              created_at: e.created_at,
+            })));
+            setTraining((data.training_records || []).map((e: TalentTraining) => ({
+              id: e.id,
+              profile_id: e.profile_id,
+              workshop_name: e.workshop_name,
+              instructor: e.instructor,
+              institution: e.institution,
+              start_date: e.start_date,
+              end_date: e.end_date,
+              skills_learned: e.skills_learned,
+              certificate_url: e.certificate_url,
+              description: e.description,
+              created_at: e.created_at,
+            })));
+            setProfileImage(data.profile_image_url || '');
+            setHeadshots(data.headshot_urls || []);
+            setPortfolioImages(data.portfolio_images || []);
+            setPortfolioVideos(data.portfolio_videos || []);
+          
         }
       } catch (error) {
         console.error('Error loading profile:', error)
@@ -215,6 +294,8 @@ export default function TalentProfileUploadPage() {
 
     loadProfile()
   }, [user])
+
+  console.log('Profile:', profile)
 
   const handleInputChange = (field: keyof TalentProfile, value: any) => {
     setProfile(prev => ({ ...prev, [field]: value }))
@@ -294,105 +375,59 @@ export default function TalentProfileUploadPage() {
   }
 
   const handleFileUpload = async (file: File, type: 'profile' | 'headshot' | 'portfolio') => {
-    setUploading(true)
+    setUploading(true);
     try {
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('type', type)
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('type', type);
 
       const response = await fetch('/api/talent-profile/media', {
         method: 'POST',
-        body: formData
-        
-      })
+        body: formData,
+      });
 
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || 'Upload failed')
-      }
-
-      const data = await response.json()
-      
-      if (type === 'profile') {
-        setProfileImage(data.url)
-      } else if (type === 'headshot') {
-        setHeadshots(prev => [...prev, data.url])
-      } else if (type === 'portfolio') {
-        if (file.type.startsWith('video/')) {
-          setPortfolioVideos(prev => [...prev, data.url])
-        } else {
-          setPortfolioImages(prev => [...prev, data.url])
+      if (response.ok) {
+        const data = await response.json();
+        if (type === 'profile') {
+          setProfileImage(data.url);
+        } else if (type === 'headshot') {
+          setHeadshots(prev => [...prev, data.url]);
+        } else if (type === 'portfolio') {
+          if (file.type.startsWith('video/')) {
+            setPortfolioVideos(prev => [...prev, data.url]);
+          } else {
+            setPortfolioImages(prev => [...prev, data.url]);
+          }
         }
-      }
-
-      toast.success('File uploaded successfully!')
-    } catch (error) {
-      console.error('Upload error:', error)
-      toast.error(error instanceof Error ? error.message : 'Upload failed')
-    } finally {
-      setUploading(false)
-    }
-  }
-
-  const saveProfile = async (status: 'draft' | 'published' = 'draft') => {
-    setSaving(true)
-    try {
-      const profileData = {
-        ...profile,
-        profile_image_url: profileImage,
-        headshot_urls: headshots,
-        portfolio_images: portfolioImages,
-        portfolio_videos: portfolioVideos,
-        profile_status: status
-      }
-
-      const payload = {
-        profile: profileData,
-        education,
-        experience,
-        training
-      }
-
-      const response = await fetch('/api/talent-profile', {
-        method: profile.id ? 'PUT' : 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || 'Failed to save profile')
-      }
-
-      const data = await response.json()
-      setProfile(data.profile)
-      
-      toast.success(status === 'published' ? 'Profile published successfully!' : 'Profile saved as draft!')
-      
-      if (status === 'published') {
-        router.push('/profile')
+        toast.success('File uploaded successfully!');
+      } else {
+        const error = await response.json();
+        throw new Error(error.error || 'Upload failed');
       }
     } catch (error) {
-      console.error('Save error:', error)
-      toast.error(error instanceof Error ? error.message : 'Failed to save profile')
+      console.error('Upload error:', error);
+      toast.error(error instanceof Error ? error.message : 'Upload failed');
     } finally {
-      setSaving(false)
+      setUploading(false);
     }
-  }
+  };
 
   const nextStep = () => {
     // Validate current step before proceeding
     const missingFields = validateCurrentStep()
-      debugger
-      if (missingFields.length > 0) {
-        toast.error(`⚠️ Required fields missing: ${missingFields.join(', ')}`, {
-          duration: 5000,
-        })
-        return
-      }
     
+    if (missingFields.length > 0) {
+      toast.error(
+        `Please complete all required fields before proceeding: ${missingFields.join(', ')}`,
+        {
+          description: 'All fields marked with * are mandatory.',
+          duration: 6000,
+          icon: <AlertCircle className="text-red-500" />,
+        }
+      )
+      return
+    }
+
     if (currentStep < STEPS.length) {
       setCurrentStep(currentStep + 1)
     }
@@ -401,6 +436,51 @@ export default function TalentProfileUploadPage() {
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
+    }
+  }
+
+  const saveProfile = async (status: 'draft' | 'published' = 'draft') => {
+    setSaving(true);
+    try {
+      const profileData = {
+        ...profile,
+        profile_image_url: profileImage,
+        headshot_urls: headshots,
+        portfolio_images: portfolioImages,
+        portfolio_videos: portfolioVideos,
+        profile_status: status,
+      };
+      const payload = {
+        profile: profileData,
+        education,
+        experience,
+        training,
+      };
+
+      
+      const response = await fetch('/api/talent-profile', {
+        method: profile?.id ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        credentials: 'include',
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to save profile');
+      }
+      const data = await response.json();
+      setProfile(data.profile);
+      toast.success(status === 'published' ? 'Profile published successfully!' : 'Profile saved as draft!');
+      if (status === 'published') {
+        router.push('/profile');
+      }
+    } catch (error) {
+      console.error('Save error:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to save profile');
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -478,7 +558,7 @@ export default function TalentProfileUploadPage() {
             {/* Step 1: Basic Info */}
             {currentStep === 1 && (
               <BasicInfoStep 
-                profile={profile}
+                profile={profile || {}}
                 onInputChange={handleInputChange}
               />
             )}
@@ -486,7 +566,7 @@ export default function TalentProfileUploadPage() {
             {/* Step 2: Professional */}
             {currentStep === 2 && (
               <ProfessionalStep 
-                profile={profile}
+                profile={profile || {}}
                 onInputChange={handleInputChange}
                 onArrayFieldToggle={handleArrayFieldToggle}
               />
@@ -495,9 +575,9 @@ export default function TalentProfileUploadPage() {
             {/* Step 3: Education */}
             {currentStep === 3 && (
               <EducationStep 
-                education={education}
-                experience={experience}
-                training={training}
+                education={education   || {}}
+                experience={experience || {}}
+                training={training || {}}
                 onAddEducation={addEducation}
                 onUpdateEducation={updateEducation}
                 onRemoveEducation={removeEducation}
@@ -513,10 +593,10 @@ export default function TalentProfileUploadPage() {
             {/* Step 4: Portfolio */}
             {currentStep === 4 && (
               <PortfolioStep 
-                profileImage={profileImage}
-                headshots={headshots}
-                portfolioImages={portfolioImages}
-                portfolioVideos={portfolioVideos}
+                profileImage={profileImage || ''}
+                headshots={headshots || []}
+                portfolioImages={portfolioImages || []}
+                portfolioVideos={portfolioVideos || []}
                 onFileUpload={handleFileUpload}
                 uploading={uploading}
               />
@@ -525,56 +605,54 @@ export default function TalentProfileUploadPage() {
             {/* Step 5: Review */}
             {currentStep === 5 && (
               <ReviewStep 
-                profile={profile}
-                education={education}
-                experience={experience}
-                training={training}
-                profileImage={profileImage}
-                headshots={headshots}
+                profile={profile || {}}
+                education={education || {}}
+                experience={experience || {}}
+                training={training || {}}
+                profileImage={profileImage || ''}
+                headshots={headshots || []}
                 portfolioImages={portfolioImages}
                 portfolioVideos={portfolioVideos}
               />
             )}
-
-            {/* Navigation */}
-            <div className="flex justify-between pt-6 border-t">
+          </CardContent>
+          {/* Navigation */}
+          <div className="flex justify-between pt-6 border-t">
+            <Button 
+              variant="outline" 
+              onClick={prevStep}
+              disabled={currentStep === 1}
+            >
+              Previous
+            </Button>
+            
+            <div className="flex gap-2">
               <Button 
                 variant="outline" 
-                onClick={prevStep}
-                disabled={currentStep === 1}
+                onClick={() => saveProfile('draft')}
+                disabled={saving}
               >
-                Previous
+                <Save className="h-4 w-4 mr-2" />
+                Save Draft
               </Button>
               
-              <div className="flex gap-2">
+              {currentStep === STEPS.length ? (
                 <Button 
-                  variant="outline" 
-                  onClick={() => saveProfile('draft')}
-                  disabled={saving}
+                  onClick={() => saveProfile('published')}
+                  disabled={saving || !profile.full_name}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                 >
-                  <Save className="h-4 w-4 mr-2" />
-                  Save Draft
+                  <Star className="h-4 w-4 mr-2" />
+                  Publish Profile
                 </Button>
-                
-                {currentStep === STEPS.length ? (
-                  <Button 
-                    onClick={() => saveProfile('published')}
-                    disabled={saving || !profile.full_name}
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                  >
-                    <Star className="h-4 w-4 mr-2" />
-                    Publish Profile
-                  </Button>
-                ) : (
-                  <Button onClick={nextStep}>
-                    Next
-                  </Button>
-                )}
-              </div>
+              ) : (
+                <Button onClick={nextStep}>
+                  Next
+                </Button>
+              )}
             </div>
-          </CardContent>
+          </div>
         </Card>
       </div>
     </div>
-  )
-}
+  )}

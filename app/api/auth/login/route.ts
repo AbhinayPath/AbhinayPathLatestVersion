@@ -1,44 +1,29 @@
-import { NextResponse } from "next/server"
-import { getSupabaseServerClient } from "@/lib/supabase"
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  try {
-    const body = await request.json()
-    const { email, password } = body
+  const { email, password } = await request.json();
+  const supabase = createRouteHandlerClient({ cookies });
 
-    // Validate the input
-    if (!email || !password) {
-      return NextResponse.json({ error: "Email and password are required" }, { status: 400 })
-    }
-
-    // Get the Supabase client
-    const supabase = getSupabaseServerClient()
-
-    // Sign in the user
-    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    })
-
-    if (authError) {
-      console.error("Error signing in user:", authError)
-      return NextResponse.json({ 
-        error: "Invalid credentials" 
-      }, { status: 401 })
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: "User signed in successfully",
-      user: {
-        id: authData.user?.id,
-        email: authData.user?.email,
-        name: authData.user?.user_metadata?.full_name,
-        profession: authData.user?.user_metadata?.profession
-      }
-    })
-  } catch (error) {
-    console.error("Error in user login:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) {
+    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
+
+  // Set the session cookie using auth-helpers
+  await supabase.auth.setSession({
+    access_token: data.session.access_token,
+    refresh_token: data.session.refresh_token,
+  });
+
+  return NextResponse.json({
+    success: true,
+    message: "User signed in successfully",
+    user: {
+      id: data.user?.id,
+      email: data.user?.email,
+      // ...other fields
+    },
+  });
 }

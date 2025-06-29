@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseAnonServerClient } from "@/lib/supabase";
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+const supabase = getSupabaseAnonServerClient();
 
 export async function POST(request: NextRequest) {
   let createdUserId: string | null = null;
@@ -218,7 +215,21 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Registration completed successfully');
 
-    return NextResponse.json({
+    // Try to sign in the user to get tokens after registration
+    let sessionData = null;
+    try {
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      if (!signInError) {
+        sessionData = signInData.session;
+      }
+    } catch (e) {
+      // Ignore sign-in error, just don't set cookies
+    }
+
+    const response = NextResponse.json({
       success: true,
       message: "Account created successfully! Welcome to AbhinayPath!",
       user: {
@@ -231,6 +242,26 @@ export async function POST(request: NextRequest) {
         profile: profileData,
       },
     }, { status: 201 });
+
+    if (sessionData?.access_token) {
+      response.cookies.set('access_token', sessionData.access_token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7 // 7 days
+      });
+    }
+    if (sessionData?.refresh_token) {
+      response.cookies.set('refresh_token', sessionData.refresh_token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 30 // 30 days
+      });
+    }
+    return response;
 
   } catch (error) {
     console.error("❌ Registration error:", error);
