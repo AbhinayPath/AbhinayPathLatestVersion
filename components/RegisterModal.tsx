@@ -60,12 +60,11 @@ export default function RegisterModal({ isOpen, onClose, mode = 'register', init
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
+    const supabase = getSupabaseBrowserClient();
 
     try {
-      const supabase = getSupabaseBrowserClient()
-      
       if (mode === 'register') {
         // Registration flow
         const response = await fetch('/api/auth/register', {
@@ -78,36 +77,46 @@ export default function RegisterModal({ isOpen, onClose, mode = 'register', init
             password: formData.password,
             profession: formData.profession,
           }),
-        })
+        });
 
-        const result = await response.json()
-
+        const result = await response.json();
+        debugger
         if (!response.ok) {
-          throw new Error(result.error || 'Registration failed')
+          toast({
+            title: "Registration Error",
+            description: result?.message || result?.error || 'Registration failed',
+            variant: "destructive",
+          });
+          throw new Error(result.error || 'Registration failed');
         }
 
         // Sign in the user after registration
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
-        })
+        });
 
         if (signInError) {
-          throw new Error('Registration successful but login failed. Please try logging in.')
+          toast({
+            title: "Login Error",
+            description: 'Registration successful but login failed. Please try logging in.',
+            variant: "destructive",
+          });
+          throw new Error('Registration successful but login failed. Please try logging in.');
         }
 
         // Create user name in format "lastName firstName"
-        const userName = `${formData.lastName} ${formData.firstName}`.trim() || 
-                        data.user?.email?.split('@')[0] || 
-                        'there'
+        const userName = `${formData.lastName} ${formData.firstName}`.trim() ||
+          data.user?.email?.split('@')[0] ||
+          'there';
 
         toast({
           title: "Registration Successful!",
           description: `Welcome to AbhinayPath, ${userName}! 👋`,
-        })
+        });
 
-        await refreshUser()
-        onClose()
+        await refreshUser();
+        onClose();
 
         // Show welcome message and redirect to talent profile
         setTimeout(() => {
@@ -115,43 +124,46 @@ export default function RegisterModal({ isOpen, onClose, mode = 'register', init
             title: `Welcome, ${userName}! 👋`,
             description: "Let's complete your talent profile to start applying for auditions.",
             duration: 5000,
-          })
-          router.push('/talent-profile')
-        }, 1000)
-
+          });
+          router.push('/talent-profile');
+        }, 1000);
       } else {
         // Edit profile flow
         const { error } = await supabase.auth.updateUser({
           data: {
             first_name: formData.firstName,
             last_name: formData.lastName,
-            profession: formData.profession
-          }
-        })
+            profession: formData.profession,
+          },
+        });
 
         if (error) {
-          throw new Error(error.message)
+          toast({
+            title: "Profile Update Error",
+            description: error.message,
+            variant: "destructive",
+          });
+          throw new Error(error.message);
         }
 
         toast({
           title: "Profile Updated!",
           description: "Your profile has been updated successfully.",
-        })
-
-        await refreshUser()
-        onClose()
+        });
+        await refreshUser();
+        onClose();
       }
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error:', error);
       toast({
         title: "Error",
         description: error instanceof Error ? error.message : "An error occurred",
         variant: "destructive",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleCancel = () => {
     onClose()

@@ -10,8 +10,28 @@ import { Menu, X, User, LogOut, Edit } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
 import RegisterModal from "@/components/RegisterModal"
 import LoginModal from "@/components/LoginModal"
+import { NavbarProfilePercentage } from "@/components/navbar-profile-percentage"
+import { getProfileCompletion } from "@/components/profileCompletionUtils"
 
 export default function Navbar() {
+  // TODO: Replace this mockProfileData with real profile data from context/store/API
+  const mockProfileData = {
+    profile: {
+      full_name: 'Demo User',
+      email: 'demo@user.com',
+      city: 'Mumbai',
+      state: 'Maharashtra',
+      bio: 'Actor',
+      acting_skills: ['Acting'],
+      languages: ['Hindi'],
+      experience_level: 'Beginner' as 'Beginner',
+    },
+    education: [{ institution: 'NSD', degree: 'BFA' }],
+    experience: [{ project_title: 'Movie' }],
+    training: [{ workshop_name: 'Workshop' }],
+    headshots: [],
+  };
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
@@ -82,13 +102,10 @@ export default function Navbar() {
               {user ? (
                 <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
                   <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="rounded-full w-10 h-10 bg-[#7E1F2E] text-white hover:bg-[#6a1a27]"
-                    >
-                      {getUserInitial()}
-                    </Button>
+                    <div className="cursor-pointer">
+                      {/* TODO: Replace mockProfileData with real data from context/store/API */}
+                      <NavbarProfilePercentage profileData={mockProfileData} user={user} />
+                    </div>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={handleEditProfile}>

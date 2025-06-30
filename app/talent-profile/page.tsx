@@ -473,9 +473,7 @@ export default function TalentProfileUploadPage() {
       const data = await response.json();
       setProfile(data.profile);
       toast.success(status === 'published' ? 'Profile published successfully!' : 'Profile saved as draft!');
-      if (status === 'published') {
-        router.push('/profile');
-      }
+     
     } catch (error) {
       console.error('Save error:', error);
       toast.error(error instanceof Error ? error.message : 'Failed to save profile');
@@ -639,7 +637,7 @@ export default function TalentProfileUploadPage() {
               {currentStep === STEPS.length ? (
                 <Button 
                   onClick={() => saveProfile('published')}
-                  disabled={saving || !profile.full_name}
+                  disabled={saving }
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                 >
                   <Star className="h-4 w-4 mr-2" />

@@ -24,12 +24,84 @@ type Audition = {
   contact: string
 }
 
-export default function AuditionDetailContent({ audition }: { audition: Audition }) {
-  console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
-console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY);
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase-browser"
+import { toast } from "@/components/ui/use-toast"
 
-  
+export default function AuditionDetailContent({ audition }: { audition: Audition }) {
+  const [hasAlreadyApplied, setHasAlreadyApplied] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const checkAlreadyApplied = async () => {
+      try {
+        // use singleton
+// const supabase = getSupabaseBrowserClient()
+        const user = await supabase.auth.getUser()
+        const userId = user?.data?.user?.id
+        if (!userId) return
+        const { data: existing } = await supabase
+          .from("audition_applications")
+          .select("id")
+          .eq("user_id", userId)
+          .eq("audition_id", audition.id)
+          .maybeSingle()
+        if (existing) setHasAlreadyApplied(true)
+      } catch (err) {
+        // Optionally handle error
+      }
+    }
+    checkAlreadyApplied()
+  }, [audition.id])
+
+  const handleApply = async () => {
+    debugger
+    setLoading(true)
+    try {
+      // use singleton
+// const supabase = getSupabaseBrowserClient()
+      const user = await supabase.auth.getUser()
+      const userId = user?.data?.user?.id
+      if (!userId) {
+        toast({ title: "Please login to apply.", variant: "destructive" })
+        setLoading(false)
+        return
+      }
+      // Prevent duplicate applications
+      const { data: existing } = await supabase
+        .from("audition_applications")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("audition_id", audition.id)
+        .maybeSingle()
+      if (existing) {
+        toast({ title: "You’ve already applied.", variant: "destructive" })
+        setHasAlreadyApplied(true)
+        setLoading(false)
+        return
+      }
+      const { error } = await supabase.from("audition_applications").insert({
+        user_id: userId,
+        audition_id: audition.id,
+        height: null,
+        weight: null,
+        skin_tone: null,
+        video_url: null,
+        additional_info: { appliedWith: "quick_apply" },
+      })
+      if (error) {
+        toast({ title: "Failed to apply. Try again.", variant: "destructive" })
+      } else {
+        toast({ title: "Successfully applied!", variant: "default" })
+        setHasAlreadyApplied(true)
+      }
+    } catch (err) {
+      toast({ title: "Failed to apply. Try again.", variant: "destructive" })
+    } finally {
+      setLoading(false)
+    }
+  }
+
   if (!audition) {
     return (
       <div className="container py-12">
@@ -193,18 +265,13 @@ console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY)
               )}
 
               <div className="pt-4 mt-4 border-t border-gray-200">
-                <a href={audition.companyLink} target="_blank" rel="noopener noreferrer" className="w-full">
-                  <Button className="w-full rounded-md">
-                    {audition.contactType === "email" ? (
-                      <Mail className="mr-2 h-4 w-4" />
-                    ) : audition.contactType === "whatsapp" ? (
-                      <MessageSquare className="mr-2 h-4 w-4" />
-                    ) : (
-                      <Phone className="mr-2 h-4 w-4" />
-                    )}
-                    Contact for Audition
+                {!hasAlreadyApplied ? (
+                  <Button className="w-full rounded-md" onClick={handleApply} disabled={loading}>
+                    {loading ? "Applying..." : "Apply Now"}
                   </Button>
-                </a>
+                ) : (
+                  <p className="text-green-600 font-medium text-center">You’ve already applied</p>
+                )}
               </div>
             </div>
           </div>

@@ -5,283 +5,158 @@ const supabase = getSupabaseAnonServerClient();
 
 export async function POST(request: NextRequest) {
   let createdUserId: string | null = null;
-  
+
   try {
-    const { firstName, lastName, email, password, profession, name } = await request.json();
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      profession,
+      name,
+    } = await request.json();
 
-    // Handle both old format (name) and new format (firstName, lastName)
-    let finalFirstName: string;
-    let finalLastName: string;
+    // Name normalization
+    let finalFirstName = firstName?.trim() || "";
+    let finalLastName = lastName?.trim() || "";
 
-    if (firstName && lastName) {
-      // New format from RegisterModal
-      finalFirstName = firstName.trim();
-      finalLastName = lastName.trim();
-    } else if (name) {
-      // Old format from signup page
-      const nameParts = name.trim().split(" ");
-      finalFirstName = nameParts[0] || "";
-      finalLastName = nameParts.slice(1).join(" ") || "";
-    } else {
+    if (!finalFirstName && name) {
+      const parts = name.trim().split(" ");
+      finalFirstName = parts[0] || "";
+      finalLastName = parts.slice(1).join(" ") || "";
+    }
+
+    if (!finalFirstName || !email || !password) {
       return NextResponse.json(
-        { 
+        {
           error: "Missing required fields",
-          message: "First name and last name are required",
-          success: false
+          message: "First name, email, and password are required",
+          success: false,
         },
         { status: 400 }
       );
     }
 
-    // Validate input
-    if (!email || !password || !finalFirstName) {
-      return NextResponse.json(
-        { 
-          error: "Missing required fields",
-          message: "Email, password, and first name are required",
-          success: false
-        },
-        { status: 400 }
-      );
-    }
-
-    // Validate email format
+    // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { 
+        {
           error: "Invalid email format",
           message: "Please provide a valid email address",
-          success: false
+          success: false,
         },
         { status: 400 }
       );
     }
 
-    // Validate password length
+    // Password length validation
     if (password.length < 6) {
       return NextResponse.json(
-        { 
+        {
           error: "Password too short",
           message: "Password must be at least 6 characters long",
-          success: false
+          success: false,
         },
         { status: 400 }
       );
     }
 
-    console.log('🔄 Starting user registration process...');
-
-    // Step 1: Create user in Supabase Auth
-    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+    // ✅ Register user with public signUp
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      email_confirm: true,
-      user_metadata: {
-        first_name: finalFirstName,
-        last_name: finalLastName,
-        full_name: `${finalFirstName} ${finalLastName}`.trim(),
-        profession: profession || null
+      options: {
+        data: {
+          first_name: finalFirstName,
+          last_name: finalLastName,
+          full_name: `${finalFirstName} ${finalLastName}`.trim(),
+          profession: profession || null,
+        }
       }
     });
 
-    if (authError) {
-      console.error("❌ Auth error:", authError);
-      
-      let errorMessage = "Failed to create account";
-      if (authError.message.includes("already registered")) {
-        errorMessage = "An account with this email already exists";
-      } else if (authError.message.includes("password")) {
-        errorMessage = "Password does not meet requirements";
+    if (signUpError) {
+      let message = "Failed to create account";
+      if (signUpError.message.includes("already registered")) {
+        message = "An account with this email already exists";
+      } else if (signUpError.message.includes("password")) {
+        message = "Password does not meet requirements";
       }
-      
+      console.log("signUpError", signUpError);
       return NextResponse.json(
-        { 
-          error: authError.message,
-          message: errorMessage,
-          success: false
+        {
+          error: signUpError.message,
+          message,
+          success: false,
         },
         { status: 400 }
       );
     }
 
-    if (!authData.user) {
+    if (!signUpData.user) {
       return NextResponse.json(
-        { 
+        {
           error: "User creation failed",
           message: "Failed to create user account",
-          success: false
+          success: false,
         },
         { status: 500 }
       );
     }
 
-    // Store the user ID for potential cleanup
-    createdUserId = authData.user.id;
-    console.log('✅ Auth user created:', createdUserId);
-
-    console.log('🔄 Creating talent profile...');
-
-    // Step 2: Create talent profile with correct column names
+    // ✅ Create talent profile
     const { data: profileData, error: profileError } = await supabase
       .from("talent_profiles")
       .insert({
-        user_id: authData.user.id,
+        user_id: signUpData.user.id,
         first_name: finalFirstName,
         last_name: finalLastName,
-        email: email,
+        email,
         published: false,
         profile_completion_percentage: 10,
       })
       .select()
       .single();
-
+      console.log("signUpData", signUpData);
+    console.log("profileData", profileData);
+    console.log("profileError", profileError);
+    
     if (profileError) {
-      console.error("❌ Error creating talent profile:", profileError);
-      
-      // CRITICAL: Clean up the auth user since profile creation failed
-      console.log('🔄 Cleaning up auth user due to profile creation failure...');
-      
-      try {
-        const { error: deleteError } = await supabase.auth.admin.deleteUser(createdUserId);
-        
-        if (deleteError) {
-          console.error("❌ Failed to cleanup auth user:", deleteError);
-          return NextResponse.json(
-            { 
-              error: "Critical error: User created but profile failed and cleanup failed",
-              message: "Please contact support immediately",
-              success: false,
-              criticalError: true,
-              userId: createdUserId
-            },
-            { status: 500 }
-          );
-        } else {
-          console.log('✅ Successfully cleaned up auth user');
-        }
-      } catch (cleanupError) {
-        console.error("❌ Exception during cleanup:", cleanupError);
-        return NextResponse.json(
-          { 
-            error: "Critical error during cleanup",
-            message: "Please contact support immediately",
-            success: false,
-            criticalError: true,
-            userId: createdUserId
-          },
-          { status: 500 }
-        );
-      }
-
       return NextResponse.json(
-        { 
+        {
           error: "Profile creation failed",
-          message: "Failed to create user profile. Please try again.",
+          message: "User created, but failed to create profile.",
           success: false,
-          details: profileError.message
+          details: profileError.message,
         },
         { status: 500 }
       );
     }
 
-    console.log('✅ Talent profile created successfully');
-
-    // Step 3: Verify both user and profile exist
-    const { data: verifyUser } = await supabase.auth.admin.getUserById(authData.user.id);
-    const { data: verifyProfile } = await supabase
-      .from("talent_profiles")
-      .select("id")
-      .eq("user_id", authData.user.id)
-      .single();
-
-    if (!verifyUser.user || !verifyProfile) {
-      console.error("❌ Verification failed - data inconsistency detected");
-      
-      // Attempt cleanup
-      if (verifyUser.user) {
-        await supabase.auth.admin.deleteUser(authData.user.id);
-      }
-      
-      return NextResponse.json(
-        { 
-          error: "Data inconsistency detected",
-          message: "Registration failed. Please try again.",
-          success: false
-        },
-        { status: 500 }
-      );
-    }
-
-    console.log('✅ Registration completed successfully');
-
-    // Try to sign in the user to get tokens after registration
-    let sessionData = null;
-    try {
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-      if (!signInError) {
-        sessionData = signInData.session;
-      }
-    } catch (e) {
-      // Ignore sign-in error, just don't set cookies
-    }
-
-    const response = NextResponse.json({
-      success: true,
-      message: "Account created successfully! Welcome to AbhinayPath!",
-      user: {
-        id: authData.user.id,
-        email: authData.user.email,
-        firstName: finalFirstName,
-        lastName: finalLastName,
-        fullName: `${finalFirstName} ${finalLastName}`.trim(),
-        profession: profession || null,
-        profile: profileData,
-      },
-    }, { status: 201 });
-
-    if (sessionData?.access_token) {
-      response.cookies.set('access_token', sessionData.access_token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7 // 7 days
-      });
-    }
-    if (sessionData?.refresh_token) {
-      response.cookies.set('refresh_token', sessionData.refresh_token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 60 * 60 * 24 * 30 // 30 days
-      });
-    }
-    return response;
-
-  } catch (error) {
-    console.error("❌ Registration error:", error);
-    
-    // If we created a user but something went wrong, clean it up
-    if (createdUserId) {
-      console.log('🔄 Cleaning up auth user due to exception...');
-      try {
-        await supabase.auth.admin.deleteUser(createdUserId);
-        console.log('✅ Successfully cleaned up auth user after exception');
-      } catch (cleanupError) {
-        console.error("❌ Failed to cleanup auth user after exception:", cleanupError);
-      }
-    }
-    
     return NextResponse.json(
-      { 
+      {
+        success: true,
+        message: "Account created successfully! Please check your email to confirm your account.",
+        user: {
+          id: signUpData.user.id,
+          email,
+          firstName: finalFirstName,
+          lastName: finalLastName,
+          fullName: `${finalFirstName} ${finalLastName}`.trim(),
+          profession: profession || null,
+          profile: profileData,
+        },
+      },
+      { status: 201 }
+    );
+  } catch (error: any) {
+    console.error("❌ Registration error:", error);
+    return NextResponse.json(
+      {
         error: "Internal server error",
         message: "Something went wrong. Please try again.",
-        success: false
+        success: false,
       },
       { status: 500 }
     );
