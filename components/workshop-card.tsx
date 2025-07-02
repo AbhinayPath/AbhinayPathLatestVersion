@@ -18,6 +18,7 @@ interface WorkshopCardProps {
     price: string
     featured?: boolean
     registrationLink: string
+    image?: string
   }
   variant?: "compact" | "full"
 }
@@ -25,6 +26,18 @@ interface WorkshopCardProps {
 export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCardProps) {
   const isCompact = variant === "compact"
   const isMobile = useMediaQuery("(max-width: 640px)")
+
+  // Determine the correct image source based on institution
+  const getImageSource = () => {
+    if (workshop.institution === "Paradox Studios") {
+      return "/images/paradox-studios-logo.png"
+    }
+    // Use the workshop's image property or fallback to acting-workshop.png
+    return workshop.image || "/images/acting-workshop.png"
+  }
+
+  const imageSrc = getImageSource()
+  const isParadoxStudios = workshop.institution === "Paradox Studios"
 
   return (
     <div
@@ -43,21 +56,26 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
           <CheckCircle className="h-3 w-3" />
           Verified
         </div>
-        <div className="absolute inset-0 bg-gray-200">
+        <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : "bg-gray-200"}`}>
           <Image
-            src="/images/acting-workshop.png"
+            src={imageSrc || "/placeholder.svg"}
             alt={workshop.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className={`transition-transform duration-500 group-hover:scale-105 ${
+              isParadoxStudios ? "object-contain p-6" : "object-cover"
+            }`}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={workshop.featured}
             onError={(e) => {
               // Fallback to a placeholder if image fails to load
-              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
+              const target = e.target as HTMLImageElement
+              target.src = "/placeholder.svg?height=300&width=500&text=Workshop+Image"
             }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div
+          className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+        ></div>
         <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
           <p className="text-white font-medium text-sm truncate">{workshop.institution}</p>
           <h3 className="font-playfair text-xl font-bold text-white line-clamp-2 flex items-center">
@@ -106,7 +124,7 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
 
         <div className="flex justify-between pt-3 border-t border-gray-100">
           <Link href={`/workshops/${workshop.id}`} className="flex-1 mr-2">
-            <Button variant="outline" size="sm" className="w-full rounded-full text-sm h-9 font-medium">
+            <Button variant="outline" size="sm" className="w-full rounded-full text-sm h-9 font-medium bg-transparent">
               Details
             </Button>
           </Link>

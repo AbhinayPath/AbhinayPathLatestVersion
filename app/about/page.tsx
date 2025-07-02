@@ -7,7 +7,7 @@ export default function AboutPage() {
     <div className="container py-16 md:py-24">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12 text-center">
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">About AbhinayPath</h1>
+          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">About Abhinayपथ</h1>
           <div className="w-24 h-1 bg-gradient-to-r from-[#2D1A54] to-[#7E1F2E] mx-auto"></div>
         </div>
 

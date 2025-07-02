@@ -20,7 +20,7 @@ const workshops = [
     time: "Morning: 10 AM – 1 PM, Afternoon: 2 PM – 5 PM",
     description:
       "Located at NSD Premises, Mandi House. Highlights: Practical training in storytelling, improvisation, forum theatre, Actor-Teacher development, Final performance at NSD. Official NSD Program.",
-    image: "/placeholder.svg?height=300&width=500&text=NSD+Drama+in+Education",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://nsd.gov.in",
     featured: true,
     price: "₹35,000",
@@ -59,7 +59,7 @@ const workshops = [
     time: "Flexible Program",
     description:
       "Transform lives through theatre! Join our groundbreaking program that bridges artistry with social impact. Curious about turning passion into purpose? Join our FREE WEBINAR on Sunday 11 May at 11 am to learn about our transformative curriculum.",
-    image: "/placeholder.svg?height=300&width=500&text=Applied+Theatre",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://education.appliedtheatreindia.com/l/4fc92006ec",
     featured: true,
     price: "Contact for details",
@@ -98,7 +98,7 @@ const workshops = [
     time: "10 AM – 5 PM (with 1–2 PM lunch break)",
     description:
       "This 2-day workshop explores the rich legacy of Raj Kapoor through the lens of his iconic song sequences. From Barsaat to Jagte Rho and Awara, relive the Golden Era of Hindi film music and learn about cinematic storytelling through songs.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
     featured: true,
@@ -147,7 +147,7 @@ const workshops = [
     time: "10 AM – 5 PM (Lunch: 1–2 PM)",
     description:
       "A hands-on, foundational course for aspiring screenwriters who want to write short fiction films. Learn from industry experts about film history, storytelling, screenwriting fundamentals, and pitching your ideas effectively. Participants will watch and analyse films, and complete daily writing exercises.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-delhi-07-11-july-2025",
     featured: true,
@@ -207,7 +207,7 @@ const workshops = [
     time: "10 AM – 5 PM (Lunch: 1–2 PM)",
     description:
       "To celebrate the birth centenary of the legendary filmmaker Guru Dutt, this special two-day workshop is dedicated to exploring the magic of songs in Guru Dutt's cinema. Explore his cinematic style through timeless songs from classics like Pyaasa, Kagaz Ke Phool, and Sahib Bibi Aur Ghulam.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Guru+Dutt+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-delhi-05-06-july-2025",
     featured: true,
@@ -261,7 +261,7 @@ const workshops = [
     time: "10 AM – 1 PM",
     description:
       "Discover the unseen potential of your eyes in performance with this unique acting pedagogy rooted in Kutiyattam. Learn to refine your Abhinaya with depth and precision while stimulating imagination and deepening expression.",
-    image: "/placeholder.svg?height=300&width=500&text=Lochanam+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://wa.me/918075413321",
     featured: true,
     price: "Contact for details",
@@ -281,7 +281,7 @@ const workshops = [
     time: "Contact for details",
     description:
       "Are you a Performing Arts Facilitator facing challenges in your institution? Paradox Studios is offering two free sessions to Performing Arts (Music/Theatre/Dance) teachers/facilitators who are seeking mentorship, support, and solutions.",
-    image: "/placeholder.svg?height=300&width=500&text=Paradox+Studios+Mentoring",
+    image: "/images/paradox-studios-logo.png",
     registrationLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSckunGJ7QNQ3kdbTwUVzLEClkfNbKI_do0kOwxMcYDO0LlAmw/viewform",
     featured: false,
@@ -305,7 +305,7 @@ const workshops = [
     time: "Contact for details",
     description:
       "Auditioning for an English Play? Let's sharpen your dialogue delivery! Paradox Studios is offering two free coaching sessions for actors who are either auditioning for, or currently cast in English plays.",
-    image: "/placeholder.svg?height=300&width=500&text=English+Play+Dialogues+Coaching",
+    image: "/images/paradox-studios-logo.png",
     registrationLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSfwqU9RF-zABbUxNPpN-G4KSBJ8ZV2nDf1tsLp3LsPQuF6e_w/viewform",
     featured: false,
@@ -346,7 +346,7 @@ const workshops = [
     time: "9 AM – 6:30 PM",
     description:
       "Ever wondered how reality shows, stand-up comedy, or sports events are technically produced? Learn hands-on with professional gear including Multi-Camera Setup, Audio Consoles, Vision Mixers, Lighting Consoles, Teleprompters, Character Generators & more.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Multi+Camera+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/introduction-to-multi-camera-technical-operations-for-tv-program-production-14-18-july-2025",
     featured: true,
@@ -417,7 +417,7 @@ const workshops = [
     time: "10 AM – 5 PM (with 1–2 PM lunch break)",
     description:
       "Celebrate Raj Kapoor's centenary with a 2-day workshop by FTII exploring the timeless music and song picturization of his films. Learn the cinematic art behind RK's legendary song sequences with insights from FTII Prof. Dr. Milind Damle – an award-winning filmmaker and film educator.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Centenary",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
     featured: true,
@@ -492,7 +492,7 @@ const workshops = [
     time: "10 AM – 5 PM",
     description:
       "Want to learn filmmaking using just your phone? Join this 5-day hands-on course by FTII and start telling your own cinematic stories! Learn creative storytelling, framing, audio & lighting basics guided by FTII experts.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Smartphone+Filmmaking",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-smartphone-filmmaking-in-pune-04-08-august-2025",
     featured: true,
     price: "₹7,000",
@@ -556,7 +556,7 @@ const workshops = [
     time: "10 AM – 5 PM",
     description:
       "Hone your storytelling craft in five intensive days with FTII faculty: develop ideas, shape characters, structure plots, and leave with a polished short-film script.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Pune",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-pune-18-22-august-2025",
     featured: true,
@@ -621,7 +621,7 @@ const workshops = [
     time: "10 AM – 5 PM",
     description:
       "In tribute to Guru Dutt's birth centenary, this 2-day course dives into the poetic brilliance and cinematic genius of his song picturizations.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Guru+Dutt+Pune",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-pune-09-10-august-2025",
     featured: true,
@@ -636,7 +636,7 @@ const workshops = [
       medium: "Hindi & English",
       eligibilityCriteria: [
         "Age: 18+ years",
-        "Education: Minimum 12th pass (10th in special cases)",
+        "Education: Minimum 12th pass (10th pass in special cases)",
         "Nationality: Indian",
       ],
       applicationDeadline: "30 June 2025, 6 PM",
@@ -720,6 +720,17 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
     )
   }
 
+  // Determine the correct image source for detail page
+  const getDetailImageSource = () => {
+    if (workshop.institution === "Paradox Studios") {
+      return "/images/paradox-studios-logo.png"
+    }
+    return workshop.image || "/images/acting-workshop.png"
+  }
+
+  const detailImageSrc = getDetailImageSource()
+  const isParadoxStudios = workshop.institution === "Paradox Studios"
+
   return (
     <div className="container py-6 md:py-12">
       <Link href="/workshops" className="inline-flex items-center text-primary hover:underline mb-4 md:mb-6">
@@ -731,377 +742,164 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
 
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
-          <Image
-            src="/images/acting-workshop.png"
-            alt={workshop.title}
-            fill
-            className="object-cover"
-            onError={(e) => {
-              // Fallback to a placeholder if image fails to load
-              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
-            }}
-          />
-          {workshop.featured && (
-            <div className="absolute top-4 right-4 bg-secondary text-black px-3 py-1 rounded-full flex items-center">
-              <CheckCircle className="h-4 w-4 mr-1" />
-              Featured Workshop
-            </div>
-          )}
+          <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : "bg-gray-200"}`}>
+            <Image
+              src={detailImageSrc || "/placeholder.svg"}
+              alt={workshop.title}
+              fill
+              className={`${isParadoxStudios ? "object-contain p-6" : "object-cover"}`}
+              sizes="100vw"
+              priority
+              onError={(e) => {
+                const target = e.target as HTMLImageElement
+                target.src = "/placeholder.svg?height=400&width=800&text=Workshop+Image"
+              }}
+            />
+          </div>
+          <div
+            className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+          ></div>
+          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-primary text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
+            <CheckCircle className="h-4 w-4" />
+            Verified Workshop
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
+            <p className="text-sm md:text-base font-medium mb-2">{workshop.institution}</p>
+            <h1 className="font-playfair text-2xl md:text-4xl font-bold leading-tight">{workshop.title}</h1>
+          </div>
         </div>
 
         <div className="p-4 md:p-8">
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="badge-primary">Workshop</span>
-            <span className="badge-outline">{workshop.institution}</span>
-            {(workshop.id === 18 || workshop.id === 21) && (
-              <span className="badge-secondary">Centenary Celebration</span>
-            )}
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              <div>
+                <h2 className="font-playfair text-xl md:text-2xl font-bold mb-4">About This Workshop</h2>
+                <p className="text-gray-700 leading-relaxed">{workshop.description}</p>
+              </div>
 
-          <h1 className="font-playfair text-2xl md:text-3xl font-bold mb-2 md:mb-4">{workshop.title}</h1>
-          <p className="text-primary font-medium mb-4 md:mb-6">By {workshop.trainer}</p>
+              {workshop.fullDetails && (
+                <div className="space-y-6">
+                  {workshop.fullDetails.curriculum && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Curriculum</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.curriculum.map((item: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
-            <div>
-              <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Workshop Details</h2>
-              <div className="space-y-3 md:space-y-4">
-                <div className="flex items-start">
-                  <MapPin className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                  <div>
-                    <p className="font-medium">Location</p>
-                    <p className="text-gray-600 text-sm md:text-base">
-                      {workshop.fullDetails?.venue || `${workshop.location}, ${workshop.state}`}
-                    </p>
-                  </div>
+                  {workshop.fullDetails.eligibilityCriteria && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Eligibility Criteria</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.eligibilityCriteria.map((criteria: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <GraduationCap className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{criteria}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {workshop.fullDetails.keyHighlights && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Key Highlights</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.keyHighlights.map((highlight: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-secondary mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
+              )}
+            </div>
 
-                <div className="flex items-start">
-                  <Calendar className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                  <div>
-                    <p className="font-medium">Dates</p>
-                    <p className="text-gray-600 text-sm md:text-base">{workshop.date}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <Clock className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                  <div>
-                    <p className="font-medium">Time</p>
-                    <p className="text-gray-600 text-sm md:text-base">{workshop.time}</p>
-                  </div>
-                </div>
-
-                {workshop.price && (
+            <div className="space-y-6">
+              <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
+                <h3 className="font-playfair text-lg md:text-xl font-bold mb-4">Workshop Details</h3>
+                <div className="space-y-4">
                   <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">₹</span>
-                    </div>
+                    <Calendar className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Fee</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.price}</p>
+                      <p className="font-medium text-gray-900">Date</p>
+                      <p className="text-gray-700">{workshop.date}</p>
                     </div>
                   </div>
-                )}
-
-                {workshop.capacity && (
                   <div className="flex items-start">
-                    <Users className="h-5 w-5 mr-2 text-primary mt-0.5" />
+                    <Clock className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Capacity</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.capacity}</p>
+                      <p className="font-medium text-gray-900">Time</p>
+                      <p className="text-gray-700">{workshop.time}</p>
                     </div>
                   </div>
-                )}
-
-                {workshop.eligibility && (
                   <div className="flex items-start">
-                    <GraduationCap className="h-5 w-5 mr-2 text-primary mt-0.5" />
+                    <MapPin className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Eligibility</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.eligibility}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.language && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="text-xs">🗣️</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Language</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.language}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.duration && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="text-xs">⏱</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Duration</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.duration}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.applicationDeadline && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="text-xs">📅</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Application Deadline</p>
-                      <p className="text-red-600 text-sm md:text-base font-medium">
-                        {workshop.fullDetails.applicationDeadline}
+                      <p className="font-medium text-gray-900">Location</p>
+                      <p className="text-gray-700">
+                        {workshop.location}, {workshop.state}
                       </p>
                     </div>
                   </div>
-                )}
-
-                {workshop.certification && (
                   <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="text-xs">🏆</span>
-                    </div>
+                    <Users className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Certification</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.certification}</p>
+                      <p className="font-medium text-gray-900">Trainer</p>
+                      <p className="text-gray-700">{workshop.trainer}</p>
                     </div>
                   </div>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Contact Information</h2>
-              <div className="space-y-3 md:space-y-4">
-                {workshop.contact && (
-                  <div className="flex items-start">
-                    <Phone className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Phone</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.contact}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.email && workshop.email !== "N/A" && (
-                  <div className="flex items-start">
-                    <Mail className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Email</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.email}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.instagram && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="text-xs">📷</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Instagram</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.instagram}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-6 md:mt-8">
-                <Button
-                  asChild
-                  className="w-full rounded-full bg-primary hover:bg-primary/90 text-white font-medium py-3"
-                >
-                  <a href={workshop.registrationLink} target="_blank" rel="noopener noreferrer">
-                    Register Now
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t pt-6 md:pt-8">
-            <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">About This Workshop</h2>
-            <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-6">
-              {workshop.fullDetails?.description || workshop.description}
-            </p>
-
-            {workshop.fullDetails?.keyHighlights && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Key Highlights</h3>
-                <ul className="space-y-2">
-                  {workshop.fullDetails.keyHighlights.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle className="h-5 w-5 mr-2 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {workshop.fullDetails?.iconicFilmsStudied && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Iconic Films to be Studied</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {workshop.fullDetails.iconicFilmsStudied.map((film: string, index: number) => (
-                    <div
-                      key={index}
-                      className="bg-gradient-to-r from-yellow-50 to-orange-50 p-3 rounded-lg border border-yellow-200"
-                    >
-                      <div className="flex items-center">
-                        <div className="h-4 w-4 mr-2 flex items-center justify-center text-yellow-600">
-                          <span className="text-xs">🎬</span>
-                        </div>
-                        <span className="text-gray-700 text-sm font-medium">{film}</span>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
-            )}
 
-            {workshop.fullDetails?.specialFeatures && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Special Features</h3>
-                <ul className="space-y-2">
-                  {workshop.fullDetails.specialFeatures.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <div className="h-5 w-5 mr-2 flex items-center justify-center text-yellow-600 mt-0.5">
-                        <span className="text-xs">⭐</span>
+              <div className="bg-primary/5 p-4 md:p-6 rounded-lg">
+                <div className="text-center mb-4">
+                  <p className="text-2xl md:text-3xl font-bold text-primary">{workshop.price}</p>
+                  <p className="text-gray-600">Workshop Fee</p>
+                </div>
+                <Link href={workshop.registrationLink} target="_blank" className="block">
+                  <Button
+                    size="lg"
+                    className={`w-full rounded-full font-medium ${
+                      isParadoxStudios
+                        ? "bg-green-600 hover:bg-green-700 text-white"
+                        : "bg-primary hover:bg-primary/90 text-white"
+                    }`}
+                  >
+                    {isParadoxStudios ? "Apply for Free Sessions" : "Register Now"}
+                  </Button>
+                </Link>
+              </div>
+
+              {(workshop.contact || workshop.email) && (
+                <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
+                  <h3 className="font-playfair text-lg font-bold mb-4">Contact Information</h3>
+                  <div className="space-y-3">
+                    {workshop.contact && (
+                      <div className="flex items-center">
+                        <Phone className="h-4 w-4 text-primary mr-3 flex-shrink-0" />
+                        <span className="text-gray-700">{workshop.contact}</span>
                       </div>
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {workshop.fullDetails?.professionalEquipment && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Professional Equipment You'll Work With</h3>
-                <ul className="space-y-2">
-                  {workshop.fullDetails.professionalEquipment.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                        <span className="text-xs">🎬</span>
+                    )}
+                    {workshop.email && workshop.email !== "N/A" && (
+                      <div className="flex items-center">
+                        <Mail className="h-4 w-4 text-primary mr-3 flex-shrink-0" />
+                        <span className="text-gray-700">{workshop.email}</span>
                       </div>
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {workshop.fullDetails?.curriculum && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">What You'll Learn</h3>
-                <ul className="space-y-2">
-                  {workshop.fullDetails.curriculum.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle className="h-5 w-5 mr-2 text-blue-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {workshop.fullDetails?.practicalExperience && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Practical Experience</h3>
-                <ul className="space-y-2">
-                  {workshop.fullDetails.practicalExperience.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <div className="h-5 w-5 mr-2 flex items-center justify-center text-orange-600 mt-0.5">
-                        <span className="text-xs">⚡</span>
-                      </div>
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {workshop.fullDetails?.eligibilityCriteria && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Eligibility Criteria</h3>
-                <ul className="space-y-2">
-                  {workshop.fullDetails.eligibilityCriteria.map((item: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle className="h-5 w-5 mr-2 text-blue-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {workshop.fullDetails?.applicationProcess && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Application Process</h3>
-                <ul className="space-y-2">
-                  {
-                    // Update the applicationProcess array for workshop ID 18
-                    workshop.id === 18
-                      ? [
-                          "Last Date to Apply: 27 June 2025, 6 PM IST",
-                          "Selection Criteria: First-Come, First-Served",
-                          "Go to SBI Collect",
-                          "Search: FTII Fees Account",
-                          'Select Payment Category: "O1 B.C. in Appreciating Songs in Guru Dutt Films"',
-                          "Pay ₹1,500 and keep your payment receipt",
-                        ].map((item: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2 mt-0.5 flex-shrink-0">
-                              {index + 1}
-                            </span>
-                            <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                          </li>
-                        ))
-                      : workshop.fullDetails.applicationProcess.map((item: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2 mt-0.5 flex-shrink-0">
-                              {index + 1}
-                            </span>
-                            <span className="text-gray-700 text-sm md:text-base">{item}</span>
-                          </li>
-                        ))
-                  }
-                </ul>
-              </div>
-            )}
-
-            {workshop.fullDetails?.accommodation && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Accommodation</h3>
-                <p className="text-gray-700 text-sm md:text-base leading-relaxed bg-blue-50 p-4 rounded-lg">
-                  {workshop.fullDetails.accommodation}
-                </p>
-              </div>
-            )}
-
-            {workshop.fullDetails?.aboutInstructor && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">About the Instructor</h3>
-                <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-                  {workshop.fullDetails.aboutInstructor}
-                </p>
-              </div>
-            )}
-
-            {workshop.fullDetails?.additionalInfo && (
-              <div className="mb-6">
-                <h3 className="font-playfair text-lg font-bold mb-3">Additional Information</h3>
-                <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-                  {workshop.fullDetails.additionalInfo}
-                </p>
-              </div>
-            )}
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

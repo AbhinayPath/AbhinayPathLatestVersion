@@ -28,9 +28,8 @@ export default function JoinCommunityPage() {
           <span className="text-sm font-medium">Beta Access</span>
         </div>
 
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-          AbhinayPath: Beta Community Hub
-        </h1>
+        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparentalight text-violet-600">
+          Abhinayपथ: Beta Community Hub    </h1>
         <div className="relative h-64 w-full mb-8 rounded-xl overflow-hidden shadow-xl">
           <Image
             src="/images/abhinaypath-logo.png"
@@ -103,7 +102,7 @@ export default function JoinCommunityPage() {
           <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
             <Rocket className="h-5 w-5 text-primary" />
           </div>
-          <h2 className="font-playfair text-3xl font-bold">What is AbhinayPath?</h2>
+          <h2 className="font-playfair text-3xl font-bold">What is Abhinayपथ?</h2>
         </div>
 
         <p className="text-lg text-gray-700 mb-10 max-w-3xl">

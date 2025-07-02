@@ -24,7 +24,7 @@ const workshops = [
     time: "Morning: 10 AM – 1 PM, Afternoon: 2 PM – 5 PM",
     description:
       "Located at NSD Premises, Mandi House. Highlights: Practical training in storytelling, improvisation, forum theatre, Actor-Teacher development, Final performance at NSD. Official NSD Program.",
-    image: "/placeholder.svg?height=300&width=500&text=NSD+Drama+in+Education",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://nsd.gov.in",
     featured: true,
     price: "₹35,000",
@@ -44,7 +44,7 @@ const workshops = [
     time: "Flexible Program",
     description:
       "Transform lives through theatre! Join our groundbreaking program that bridges artistry with social impact. Curious about turning passion into purpose? Join our FREE WEBINAR on Sunday 11 May at 11 am to learn about our transformative curriculum.",
-    image: "/placeholder.svg?height=300&width=500&text=Applied+Theatre",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://education.appliedtheatreindia.com/l/4fc92006ec",
     featured: true,
     price: "Contact for details",
@@ -62,7 +62,7 @@ const workshops = [
     time: "10 AM – 5 PM (with 1–2 PM lunch break)",
     description:
       "This 2-day workshop explores the rich legacy of Raj Kapoor through the lens of his iconic song sequences. From Barsaat to Jagte Raho and Awara, relive the Golden Era of Hindi film music and learn about cinematic storytelling through songs.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
     featured: true,
@@ -83,7 +83,7 @@ const workshops = [
     time: "10 AM – 5 PM (Lunch: 1–2 PM)",
     description:
       "A hands-on, foundational course for aspiring screenwriters who want to write short fiction films. Learn from industry experts about film history, storytelling, screenwriting fundamentals, and pitching your ideas effectively. Participants will watch and analyse films, and complete daily writing exercises.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-delhi-07-11-july-2025",
     featured: true,
@@ -104,7 +104,7 @@ const workshops = [
     time: "10 AM – 5 PM (Lunch: 1–2 PM)",
     description:
       "To celebrate the birth centenary of the legendary filmmaker Guru Dutt, this special two-day workshop is dedicated to exploring the magic of songs in Guru Dutt's cinema. Explore his cinematic style through timeless songs from classics like Pyaasa, Kagaz Ke Phool, and Sahib Bibi Aur Ghulam.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Guru+Dutt+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-delhi-05-06-july-2025",
     featured: true,
@@ -125,7 +125,7 @@ const workshops = [
     time: "10 AM – 1 PM",
     description:
       "Discover the unseen potential of your eyes in performance with this unique acting pedagogy rooted in Kutiyattam. Learn to refine your Abhinaya with depth and precision while stimulating imagination and deepening expression.",
-    image: "/placeholder.svg?height=300&width=500&text=Lochanam+Workshop",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://wa.me/918075413321",
     featured: true,
     price: "Contact for details",
@@ -146,7 +146,7 @@ const workshops = [
     time: "Contact for details",
     description:
       "Are you a Performing Arts Facilitator facing challenges in your institution? Paradox Studios is offering two free sessions to Performing Arts (Music/Theatre/Dance) teachers/facilitators who are seeking mentorship, support, and solutions.",
-    image: "/placeholder.svg?height=300&width=500&text=Paradox+Studios+Mentoring",
+    image: "/images/paradox-studios-logo.png",
     registrationLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSckunGJ7QNQ3kdbTwUVzLEClkfNbKI_do0kOwxMcYDO0LlAmw/viewform",
     featured: false,
@@ -167,7 +167,7 @@ const workshops = [
     time: "Contact for details",
     description:
       "Auditioning for an English Play? Let's sharpen your dialogue delivery! Paradox Studios is offering two free coaching sessions for actors who are either auditioning for, or currently cast in English plays.",
-    image: "/placeholder.svg?height=300&width=500&text=English+Play+Dialogues+Coaching",
+    image: "/images/paradox-studios-logo.png",
     registrationLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSfwqU9RF-zABbUxNPpN-G4KSBJ8ZV2nDf1tsLp3LsPQuF6e_w/viewform",
     featured: false,
@@ -188,7 +188,7 @@ const workshops = [
     time: "9 AM – 6:30 PM",
     description:
       "Ever wondered how reality shows, stand-up comedy, or sports events are technically produced? Learn hands-on with professional gear including Multi-Camera Setup, Audio Consoles, Vision Mixers, Lighting Consoles, Teleprompters, Character Generators & more. Work like a real technical crew in a TV studio and take home a 2–5 min TV show you helped produce.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Multi+Camera+TV+Production",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/introduction-to-multi-camera-technical-operations-for-tv-program-production-14-18-july-2025",
     featured: true,
@@ -218,7 +218,7 @@ const workshops = [
     time: "10 AM – 5 PM (with 1–2 PM lunch break)",
     description:
       "Celebrate Raj Kapoor's centenary with a 2-day workshop by FTII exploring the timeless music and song picturization of his films. Learn the cinematic art behind RK's legendary song sequences with insights from FTII Prof. Dr. Milind Damle – an award-winning filmmaker and film educator.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Raj+Kapoor+Centenary",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
     featured: true,
@@ -244,7 +244,7 @@ const workshops = [
     time: "10 AM – 5 PM",
     description:
       "Want to learn filmmaking using just your phone? Join this 5-day hands-on course by FTII and start telling your own cinematic stories! Learn creative storytelling, framing, audio & lighting basics guided by FTII experts.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Smartphone+Filmmaking",
+    image: "/images/acting-workshop.png",
     registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-smartphone-filmmaking-in-pune-04-08-august-2025",
     featured: true,
     price: "₹7,000",
@@ -269,7 +269,7 @@ const workshops = [
     time: "10 AM – 5 PM",
     description:
       "Hone your storytelling craft in five intensive days with FTII faculty: develop ideas, shape characters, structure plots, and leave with a polished short-film script.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Screenwriting+Pune",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-pune-18-22-august-2025",
     featured: true,
@@ -295,7 +295,7 @@ const workshops = [
     time: "10 AM – 5 PM",
     description:
       "In tribute to Guru Dutt's birth centenary, this 2-day course dives into the poetic brilliance and cinematic genius of his song picturizations.",
-    image: "/placeholder.svg?height=300&width=500&text=FTII+Guru+Dutt+Pune",
+    image: "/images/acting-workshop.png",
     registrationLink:
       "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-pune-09-10-august-2025",
     featured: true,
@@ -423,7 +423,7 @@ export default function WorkshopsContent() {
           {/* Desktop Filter Toggle */}
           <Button
             variant="outline"
-            className="hidden md:flex items-center gap-2 rounded-full"
+            className="hidden md:flex items-center gap-2 rounded-full bg-transparent"
             onClick={() => setShowDesktopFilters(!showDesktopFilters)}
           >
             <Filter className="h-4 w-4" />
@@ -545,7 +545,7 @@ export default function WorkshopsContent() {
       ) : (
         <div className="text-center py-8 md:py-12 bg-gray-50 rounded-xl">
           <p className="text-gray-500 mb-4">No workshops match your current filters.</p>
-          <Button onClick={clearFilters} variant="outline" className="rounded-full">
+          <Button onClick={clearFilters} variant="outline" className="rounded-full bg-transparent">
             Clear Filters
           </Button>
         </div>

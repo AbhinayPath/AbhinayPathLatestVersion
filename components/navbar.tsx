@@ -29,7 +29,7 @@ export default function Navbar() {
           <div className="relative h-10 w-10">
             <Image src="/images/logo.png" alt="AbhinayPath Logo" width={40} height={40} className="object-contain" />
           </div>
-          <span className="font-playfair text-2xl font-bold text-[#7E1F2E]">AbhinayPath</span>
+          <span className="font-playfair text-2xl font-bold text-[#7E1F2E]">Abhinayपथ</span>
         </Link>
 
         {/* Desktop Navigation */}

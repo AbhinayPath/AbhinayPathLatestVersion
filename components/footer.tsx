@@ -19,7 +19,7 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-              <span className="font-playfair text-xl font-bold">AbhinayPath</span>
+              <span className="font-playfair text-xl font-bold">Abhinayपथ</span>
             </Link>
             <p className="text-sm text-white">
               India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.
