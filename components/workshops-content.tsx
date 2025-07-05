@@ -365,7 +365,7 @@ export default function WorkshopsContent() {
 
   return (
     <div className="container py-6 md:py-16 px-3 sm:px-6">
-      <WorkshopBanner />
+      
 
       <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
         <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-3 text-gray-800">

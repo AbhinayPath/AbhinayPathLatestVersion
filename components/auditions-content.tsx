@@ -12,6 +12,54 @@ import AuditionBanner from "@/components/audition-banner"
 // Verified audition data
 const auditions = [
   {
+    id: 1,
+    title: "Casting Call – Female Lead for Feature Film",
+    type: "Film",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "Ongoing",
+    director: "Feature Film Production",
+    description:
+      "We are casting for the female lead role of Meera in an upcoming Hindi/Hinglish feature film. Meera is sunshine wrapped in silence — a gentle soul, observant and deeply emotional, quietly in love with the male lead, Aryan. She speaks more through her eyes than words.",
+    company: "Feature Film Production",
+    companyLink: "https://wa.me/917375962175",
+    contact: "7375962175 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/placeholder.svg?height=300&width=500&text=Female+Lead+Meera",
+    requirements: [
+      "Female actress aged 21-27 years",
+      "Expressive eyes and natural grace",
+      "Strong emotional depth",
+      "Ability to portray silent love and inner conflict with subtlety",
+      "Comfortable with Hindi/Hinglish dialogue",
+      "Professional attitude and commitment to the role",
+    ],
+    roles: [
+      "Meera - Female Lead Character",
+      "Age range: 21-27 years",
+      "Character traits: Gentle soul, observant, deeply emotional",
+      "Key characteristic: Speaks more through eyes than words",
+      "Romantic subplot: Quietly in love with male lead Aryan",
+    ],
+    applicationProcess:
+      "Contact via WhatsApp at 7375962175 for audition details. Please include your portfolio, recent headshots, and a brief introduction about yourself.",
+    characterDetails: {
+      name: "Meera",
+      ageRange: "21-27 years",
+      languages: "Hindi/Hinglish",
+      description:
+        "Meera is sunshine wrapped in silence — a gentle soul, observant and deeply emotional, quietly in love with the male lead, Aryan. She speaks more through her eyes than words.",
+      lookingFor: [
+        "Expressive eyes",
+        "Natural grace",
+        "Strong emotional depth",
+        "Ability to portray silent love and inner conflict with subtlety",
+      ],
+    },
+  },
+  {
     id: 3,
     title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
     type: "Theater",
@@ -195,8 +243,6 @@ export default function AuditionsContent() {
       state: "all",
       category: "all",
       experience: "all",
-      state: "all",
-      city: "all",
     })
   }
 
@@ -291,7 +337,7 @@ export default function AuditionsContent() {
           filters.category !== "all" ||
           filters.experience !== "all") && (
           <div className="mt-4 flex justify-end">
-            <Button variant="outline" size="sm" onClick={clearFilters} className="rounded-md">
+            <Button variant="outline" size="sm" onClick={clearFilters} className="rounded-md bg-transparent">
               Clear Filters
             </Button>
           </div>
@@ -304,7 +350,9 @@ export default function AuditionsContent() {
           filteredAuditions.map((audition) => (
             <div
               key={audition.id}
-              className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
+              className={`bg-white rounded-lg border overflow-hidden flex flex-col h-full card-hover ${
+                audition.id === 1 ? "border-primary/30 shadow-lg" : "border-gray-200"
+              }`}
             >
               <div className="relative h-48 w-full">
                 <Image src="/images/auditions-stage.png" alt={audition.title} fill className="object-cover" />
@@ -322,6 +370,11 @@ export default function AuditionsContent() {
                     </span>
                   </div>
                 )}
+                {audition.id === 1 && (
+                  <div className="absolute top-2 left-2 bg-primary text-white text-xs font-medium px-2 py-1 rounded-full">
+                    🎬 Film Lead
+                  </div>
+                )}
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-3">
@@ -329,6 +382,48 @@ export default function AuditionsContent() {
                   <span className="badge-outline">{audition.experience}</span>
                 </div>
                 <h3 className="font-playfair text-xl font-bold mb-4">{audition.title}</h3>
+
+                {/* Special character info for Meera casting */}
+                {audition.id === 1 && audition.characterDetails && (
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
+                    <h4 className="font-semibold text-primary mb-2 flex items-center">
+                      🎭 Character: {audition.characterDetails.name}
+                    </h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                      <div>
+                        <span className="font-medium text-gray-700">Age:</span>
+                        <span className="ml-1 text-gray-800">{audition.characterDetails.ageRange}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Language:</span>
+                        <span className="ml-1 text-gray-800">{audition.characterDetails.languages}</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-700 mb-3 italic">"{audition.characterDetails.description}"</p>
+                    <div className="mb-3">
+                      <p className="font-medium text-gray-700 text-sm mb-1">✨ Looking for:</p>
+                      <div className="grid grid-cols-2 gap-1 text-xs text-gray-600">
+                        {audition.characterDetails.lookingFor.map((item: string, index: number) => (
+                          <div key={index} className="flex items-center">
+                            <span className="text-primary mr-1">•</span>
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-green-600">📞 WhatsApp: 7375962175</span>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition-colors"
+                      >
+                        Quick Apply
+                      </a>
+                    </div>
+                  </div>
+                )}
 
                 <div className="space-y-3 mb-4 flex-1">
                   <div className="flex items-center text-sm text-gray-500">
@@ -364,7 +459,7 @@ export default function AuditionsContent() {
         ) : (
           <div className="col-span-full text-center py-12">
             <p className="text-gray-500 mb-4">No auditions match your current filters.</p>
-            <Button onClick={clearFilters} variant="outline" className="rounded-md">
+            <Button onClick={clearFilters} variant="outline" className="rounded-md bg-transparent">
               Clear Filters
             </Button>
           </div>

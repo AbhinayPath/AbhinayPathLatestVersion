@@ -9,6 +9,69 @@ import { ArrowLeft, MapPin, Calendar, Building, Phone, MessageSquare, CheckCircl
 // This would typically come from an API or database
 const auditions = [
   {
+    id: 1,
+    title: "Casting Call – Female Lead for Feature Film",
+    type: "Film",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "Ongoing",
+    director: "Feature Film Production",
+    description:
+      "We are casting for the female lead role of Meera in an upcoming Hindi/Hinglish feature film. Meera is sunshine wrapped in silence — a gentle soul, observant and deeply emotional, quietly in love with the male lead, Aryan. She speaks more through her eyes than words.",
+    company: "Feature Film Production",
+    companyLink: "https://wa.me/917375962175",
+    contact: "7375962175 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Female actress aged 21-27 years",
+      "Expressive eyes and natural grace",
+      "Strong emotional depth",
+      "Ability to portray silent love and inner conflict with subtlety",
+      "Comfortable with Hindi/Hinglish dialogue",
+      "Professional attitude and commitment to the role",
+    ],
+    roles: [
+      "Meera - Female Lead Character",
+      "Age range: 21-27 years",
+      "Character traits: Gentle soul, observant, deeply emotional",
+      "Key characteristic: Speaks more through eyes than words",
+      "Romantic subplot: Quietly in love with male lead Aryan",
+    ],
+    applicationProcess:
+      "Contact via WhatsApp at 7375962175 for audition details. Please include your portfolio, recent headshots, and a brief introduction about yourself.",
+    characterDetails: {
+      name: "Meera",
+      ageRange: "21-27 years",
+      languages: "Hindi/Hinglish",
+      description:
+        "Meera is sunshine wrapped in silence — a gentle soul, observant and deeply emotional, quietly in love with the male lead, Aryan. She speaks more through her eyes than words.",
+      traits: [
+        "Expressive eyes that convey deep emotion",
+        "Natural grace in movement and demeanor",
+        "Strong emotional depth and range",
+        "Ability to portray silent love with subtlety",
+        "Observant and introspective personality",
+        "Gentle soul with inner strength",
+      ],
+      keySkills: [
+        "Silent acting and emotional expression",
+        "Conveying complex emotions through facial expressions",
+        "Subtle portrayal of unrequited or quiet love",
+        "Natural on-screen presence",
+        "Hindi/Hinglish dialogue delivery",
+      ],
+      lookingFor: [
+        "Expressive eyes",
+        "Natural grace",
+        "Strong emotional depth",
+        "Ability to portray silent love and inner conflict with subtlety",
+      ],
+    },
+  },
+  {
     id: 3,
     title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
     type: "Theater",
@@ -370,7 +433,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
       <div className="container py-12">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="font-playfair text-3xl font-bold mb-4">Audition Not Found</h1>
-          <p className="text-gray-600 mb-6">The audition you're looking for doesn't exist or has been removed.</p>
+          <p className="text-gray-600 mb-6">The audition you\'re looking for doesn\'t exist or has been removed.</p>
           <Link href="/auditions">
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -410,6 +473,11 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   Verified Audition
                 </div>
               )}
+              {audition.id === 1 && (
+                <div className="absolute top-4 left-4 bg-primary text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                  🎬 Film Lead Role
+                </div>
+              )}
             </div>
 
             <div className="p-6">
@@ -417,6 +485,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 <span className="badge-primary">{audition.type}</span>
                 <span className="badge-outline">{audition.experience}</span>
                 {(audition.id === 7 || audition.id === 8) && <span className="badge-success">Paid</span>}
+                {audition.id === 1 && <span className="badge-success">Open Now</span>}
               </div>
 
               <h1 className="font-playfair text-3xl font-bold mb-4">{audition.title}</h1>
@@ -424,6 +493,82 @@ export default function AuditionDetailContent({ id }: { id: number }) {
               <div className="prose max-w-none">
                 <h2 className="text-xl font-semibold mb-3">Description</h2>
                 <p className="text-gray-800 mb-6">{audition.description}</p>
+
+                {/* Character Details Section for Meera casting */}
+                {audition.characterDetails && (
+                  <section>
+                    <h2 className="text-xl font-semibold mb-3">🎭 Character Information</h2>
+                    <div className="bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg p-6 mb-6">
+                      <h3 className="text-lg font-semibold text-primary mb-4 flex items-center">
+                        Character: {audition.characterDetails.name}
+                      </h3>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div className="bg-white rounded-lg p-4 border">
+                          <p className="font-medium text-gray-700 mb-1">Age Range</p>
+                          <p className="text-lg font-semibold text-primary">{audition.characterDetails.ageRange}</p>
+                        </div>
+                        <div className="bg-white rounded-lg p-4 border">
+                          <p className="font-medium text-gray-700 mb-1">Languages</p>
+                          <p className="text-lg font-semibold text-primary">{audition.characterDetails.languages}</p>
+                        </div>
+                        <div className="bg-white rounded-lg p-4 border">
+                          <p className="font-medium text-gray-700 mb-1">Contact</p>
+                          <p className="text-lg font-semibold text-green-600">📞 WhatsApp: 7375962175</p>
+                        </div>
+                      </div>
+
+                      <div className="mb-6">
+                        <h4 className="font-medium text-gray-700 mb-3">Character Description</h4>
+                        <div className="bg-white rounded-lg p-4 border">
+                          <p className="text-gray-800 italic">"{audition.characterDetails.description}"</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-white rounded-lg p-4 border mb-6">
+                        <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+                          ✨ We are looking for an actor with:
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {audition.characterDetails.lookingFor.map((item: string, index: number) => (
+                            <div key={index} className="text-gray-700 flex items-center">
+                              <span className="text-primary mr-2">•</span>
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {audition.characterDetails.traits && (
+                        <div className="bg-white rounded-lg p-4 border mb-6">
+                          <h4 className="font-medium text-gray-700 mb-3">Character Traits</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {audition.characterDetails.traits.map((trait: string, index: number) => (
+                              <div key={index} className="text-gray-700 flex items-center">
+                                <span className="text-primary mr-2">•</span>
+                                {trait}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {audition.characterDetails.keySkills && (
+                        <div className="bg-white rounded-lg p-4 border">
+                          <h4 className="font-medium text-gray-700 mb-3">🎬 Key Skills Required</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {audition.characterDetails.keySkills.map((skill: string, index: number) => (
+                              <div key={index} className="text-gray-700 flex items-center">
+                                <span className="text-primary mr-2">•</span>
+                                {skill}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </section>
+                )}
 
                 {audition.id === 10 && (
                   <>
@@ -539,8 +684,9 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                           centuries.
                         </p>
                         <p className="text-gray-800">
-                          Our contemporary adaptation 'The Anklet' brings this classic story to modern audiences,
-                          exploring its themes through a fresh lens while honoring the original's cultural significance.
+                          Our contemporary adaptation \'The Anklet\' brings this classic story to modern audiences,
+                          exploring its themes through a fresh lens while honoring the original\'s cultural
+                          significance.
                         </p>
                       </div>
                     </section>
@@ -627,45 +773,21 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 </div>
               )}
 
-              {audition.id !== 10 && (
-                <div className="flex items-start">
-                  {audition.contactType === "email" ? (
-                    <Mail className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
-                  ) : audition.contactType === "whatsapp" ? (
-                    <a
-                      href={`https://wa.me/${audition.contact.replace(/\D/g, "")}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline flex items-center"
-                    >
-                      {audition.contact}
-                      <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded">WhatsApp</span>
-                    </a>
-                  ) : (
-                    <></>
-                  )}
-                  <div>
-                    {audition.contactType === "email" ? (
-                      <a href={`mailto:${audition.contact}`} className="text-primary hover:underline flex items-center">
-                        {audition.contact}
-                        <span className="ml-1 text-xs bg-blue-500 text-white px-1.5 py-0.5 rounded">Email</span>
-                      </a>
-                    ) : audition.contactType === "whatsapp" ? (
-                      <a
-                        href={`https://wa.me/${audition.contact.replace(/\D/g, "")}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline flex items-center"
-                      >
-                        {audition.contact}
-                        <span className="ml-1 text-xs bg-green-500 text-white px-1.5 py-0.5 rounded">WhatsApp</span>
-                      </a>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
+              <div className="flex items-start">
+                {audition.contactType === "email" ? (
+                  <Mail className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                ) : audition.contactType === "whatsapp" ? (
+                  <MessageSquare className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                ) : audition.contactType === "website" ? (
+                  <Building className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                ) : (
+                  <Phone className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                )}
+                <div>
+                  <p className="font-medium text-gray-700">Contact</p>
+                  <p className="text-gray-800">{audition.contact}</p>
                 </div>
-              )}
+              </div>
 
               {(audition.id === 7 || audition.id === 8) && (
                 <div className="flex items-start">
@@ -680,30 +802,51 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   </div>
                 </div>
               )}
+            </div>
 
-              <div className="pt-4 mt-4 border-t border-gray-200">
-                <a href={audition.companyLink} target="_blank" rel="noopener noreferrer" className="w-full">
-                  <Button className="w-full rounded-md">
-                    {audition.contactType === "email" ? (
-                      <Mail className="mr-2 h-4 w-4" />
-                    ) : audition.contactType === "whatsapp" ? (
-                      <MessageSquare className="mr-2 h-4 w-4" />
-                    ) : audition.contactType === "website" ? (
-                      <Building className="mr-2 h-4 w-4" />
-                    ) : audition.id === 10 ? (
-                      <Building className="mr-2 h-4 w-4" />
-                    ) : (
-                      <Phone className="mr-2 h-4 w-4" />
-                    )}
-                    {audition.id === 12
-                      ? "Register for Event"
-                      : audition.id === 10
-                        ? "Apply at NSD Website"
-                        : "Contact for Audition"}
-                  </Button>
+            {/* Quick Contact for Meera casting */}
+            {audition.id === 1 && (
+              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <h3 className="font-semibold text-green-800 mb-2">📞 Quick Contact</h3>
+                <p className="text-green-700 text-sm mb-3">For immediate queries about the Meera character role</p>
+                <a
+                  href={audition.companyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
+                >
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  WhatsApp: 7375962175
                 </a>
               </div>
+            )}
+
+            <div className="mt-6 pt-6 border-t">
+              <a href={audition.companyLink} target="_blank" rel="noopener noreferrer">
+                <Button className="w-full rounded-md">
+                  {audition.contactType === "whatsapp" && <MessageSquare className="mr-2 h-4 w-4" />}
+                  {audition.contactType === "email" && <Mail className="mr-2 h-4 w-4" />}
+                  {audition.contactType === "phone" && <Phone className="mr-2 h-4 w-4" />}
+                  {audition.contactType === "website" && <Building className="mr-2 h-4 w-4" />}
+                  {audition.contactType === "whatsapp"
+                    ? "Contact via WhatsApp"
+                    : audition.contactType === "email"
+                      ? "Send Email"
+                      : audition.contactType === "phone"
+                        ? "Call Now"
+                        : audition.contactType === "website"
+                          ? "Visit Website"
+                          : "Contact for Audition"}
+                </Button>
+              </a>
             </div>
+
+            {audition.verified && (
+              <div className="mt-4 flex items-center text-sm text-green-600">
+                <CheckCircle className="h-4 w-4 mr-2" />
+                Verified Audition
+              </div>
+            )}
           </div>
         </div>
       </div>
