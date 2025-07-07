@@ -7,7 +7,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/contexts/AuthContext"
-import { Toaster } from '@/components/ui/sonner'
+import { Toaster } from '@/components/ui/toaster'
 import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
