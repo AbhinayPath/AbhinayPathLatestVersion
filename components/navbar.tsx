@@ -32,6 +32,8 @@ export default function Navbar() {
     headshots: [],
   };
 
+  debugger
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
@@ -40,8 +42,10 @@ export default function Navbar() {
   const router = useRouter()
   const { user, loading, signOut } = useAuth()
 
-  
-  
+
+
+
+  console.log("user", user, "loading", loading)
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
@@ -56,12 +60,27 @@ export default function Navbar() {
     router.push("/talent-profile")
   }
 
-  const navItems = [
+  type NavItem = { name: string; href: string };
+
+  const navItems: NavItem[] = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Join", href: "/join-community" },
     { name: "Contact", href: "/contact" },
-  ]
+  ];
+
+  // Add Dashboard for casting directors
+
+  const navItemsWithDashboard: NavItem[] =
+    user && user.user_metadata?.profession?.toLowerCase() === "director"
+      ? [
+          ...navItems,
+          { name: "Dashboard", href: "/casting" },
+        ]
+      : navItems;
+
+        console.log("navItemsWithDashboard",navItemsWithDashboard)
+
 
   const getUserInitial = () => {
     if (user?.user_metadata?.full_name) {
@@ -70,6 +89,7 @@ export default function Navbar() {
     return user?.email?.charAt(0).toUpperCase() || "U"
   }
 
+  debugger
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 items-center justify-between">
@@ -82,7 +102,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => (
+          {navItemsWithDashboard.map((item: NavItem) => (
             <Link
               key={item.name}
               href={item.href}
@@ -97,55 +117,53 @@ export default function Navbar() {
 
         {/* Auth Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-          
-            <>
-              {user ? (
-                <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
-                  <DropdownMenuTrigger asChild>
-                    <div className="cursor-pointer">
-                      {/* TODO: Replace mockProfileData with real data from context/store/API */}
-                      <NavbarProfilePercentage profileData={mockProfileData} user={user} />
-                    </div>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={handleEditProfile}>
-                      <Edit className="mr-2 h-4 w-4" />
-                      Edit Talent Profile
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleLogout}>
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <>
+          <>
+            {user ? (
+              <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+                <DropdownMenuTrigger asChild>
+                  <div className="cursor-pointer">
+                    {/* TODO: Replace mockProfileData with real data from context/store/API */}
+                    <NavbarProfilePercentage profileData={mockProfileData} user={user} />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleEditProfile}>
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit Talent Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Button
+                  variant="ghost"
+                  onClick={() => setShowLoginModal(true)}
+                  className="text-[#7E1F2E] hover:text-[#6a1a27]"
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowRegisterModal(true)}
+                  className="rounded-full"
+                >
+                  Register
+                </Button>
+                <Link href="/join-community">
                   <Button
-                    variant="ghost"
-                    onClick={() => setShowLoginModal(true)}
-                    className="text-[#7E1F2E] hover:text-[#6a1a27]"
+                    size="default"
+                    className="rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-4 py-2 h-auto text-sm font-medium transition-transform hover:scale-105"
                   >
-                    Login
+                    Join Beta Community
                   </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => setShowRegisterModal(true)}
-                    className="rounded-full"
-                  >
-                    Register
-                  </Button>
-                  <Link href="/join-community">
-                    <Button
-                      size="default"
-                      className="rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-4 py-2 h-auto text-sm font-medium transition-transform hover:scale-105"
-                    >
-                      Join Beta Community
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </>
-          
+                </Link>
+              </>
+            )}
+          </>
         </div>
 
         {/* Mobile Menu Button */}

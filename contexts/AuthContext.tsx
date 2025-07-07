@@ -139,7 +139,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signOut = async () => {
+  // Helper to clear all cookies for the current domain
+const clearAllCookies = () => {
+  document.cookie.split(';').forEach((c) => {
+    document.cookie = c
+      .replace(/^ +/, '')
+      .replace(/=.*/, '=;expires=' + new Date(0).toUTCString() + ';path=/');
+  });
+};
+
+const signOut = async () => {
     try {
       setLoading(true);
       const supabase = getSupabaseBrowserClient();
@@ -150,6 +159,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         throw new Error('Failed to sign out');
       }
 
+      clearAllCookies();
       setUser(null);
       console.log('Sign out successful');
     } catch (error) {
@@ -160,6 +170,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  
   const value: AuthContextType = {
     user,
     loading,

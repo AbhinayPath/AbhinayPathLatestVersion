@@ -80,7 +80,7 @@ export default function RegisterModal({ isOpen, onClose, mode = 'register', init
         });
 
         const result = await response.json();
-        debugger
+        
         if (!response.ok) {
           toast({
             title: "Registration Error",
@@ -97,13 +97,23 @@ export default function RegisterModal({ isOpen, onClose, mode = 'register', init
         });
 
         if (signInError) {
-          toast({
-            title: "Login Error",
-            description: 'Registration successful but login failed. Please try logging in.',
-            variant: "destructive",
-          });
-          throw new Error('Registration successful but login failed. Please try logging in.');
-        }
+  console.log("signin", signInError);
+  if (signInError.code === "email_not_confirmed") {
+    toast({
+      title: "Email Not Confirmed",
+      description: "Please check your email inbox and verify your email address before logging in.",
+      variant: "destructive",
+    });
+    throw new Error('Email not confirmed. Please verify your email address.');
+  } else {
+    toast({
+      title: "Login Error",
+      description: "Registration successful but login failed. Please try logging in.",
+      variant: "destructive",
+    });
+    throw new Error('Registration successful but login failed. Please try logging in.');
+  }
+}
 
         // Create user name in format "lastName firstName"
         const userName = `${formData.lastName} ${formData.firstName}`.trim() ||

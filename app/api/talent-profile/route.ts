@@ -5,38 +5,42 @@ import { cookies } from "next/headers";
 // GET - Fetch talent profiles (with optional filters)
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('userId');
-    const skills = searchParams.get('skills');
-    const location = searchParams.get('location');
-    const published = searchParams.get('published');
-
     const supabase = await getSupabaseServerClientForRouteHandler();
-    let query = supabase.from('talent_profiles').select(`
-      *,
-      education_records(*),
-      experience_records(*),
-      training_records(*),
-      media_files(*)
-    `);
 
-    // Apply filters
-    if (userId) query = query.eq('user_id', userId);
-    if (published === 'true') query = query.eq('published', true);
-    if (location) query = query.ilike('location', `%${location}%`);
-    if (skills) query = query.contains('skills', [skills]);
+    // Get the authenticated user
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      console.error('GET /api/talent-profile: Unauthorized', authError);
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
-    const { data, error } = await query.order('created_at', { ascending: false });
+    // Fetch the talent profile for the user
+    const { data, error } = await supabase
+      .from('talent_profiles')
+      .select(`
+        *,
+        education_records(*),
+        experience_records(*),
+        training_records(*),
+        media_files(*)
+      `)
+      .eq('user_id', user.id)
+      .single(); // Use single() to get one record or null
 
     if (error) {
-      console.error('Error fetching talent profiles:', error);
+        if (error.code === 'PGRST116') {
+            // This code means no rows were found, which is not necessarily an error.
+            // It could mean the user hasn't created a profile yet.
+            return NextResponse.json(null, { status: 200 });
+        }
+      console.error('Error fetching talent profile:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error('GET talent profiles failed:', error);
-    return NextResponse.json({ error: 'Failed to fetch talent profiles' }, { status: 500 });
+    console.error('GET talent profile failed:', error);
+    return NextResponse.json({ error: 'Failed to fetch talent profile' }, { status: 500 });
   }
 }
 
