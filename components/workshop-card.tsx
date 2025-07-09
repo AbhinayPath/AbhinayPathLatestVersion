@@ -32,12 +32,16 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
     if (workshop.institution === "Paradox Studios") {
       return "/images/paradox-studios-logo.png"
     }
+    if (workshop.institution === "Indian Institute of Educational Theatre (IIET)") {
+      return "/images/iiet-logo.png"
+    }
     // Use the workshop's image property or fallback to acting-workshop.png
     return workshop.image || "/images/acting-workshop.png"
   }
 
   const imageSrc = getImageSource()
   const isParadoxStudios = workshop.institution === "Paradox Studios"
+  const isIIET = workshop.institution === "Indian Institute of Educational Theatre (IIET)"
 
   return (
     <div
@@ -56,13 +60,13 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
           <CheckCircle className="h-3 w-3" />
           Verified
         </div>
-        <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : "bg-gray-200"}`}>
+        <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-200"}`}>
           <Image
             src={imageSrc || "/placeholder.svg"}
             alt={workshop.title}
             fill
             className={`transition-transform duration-500 group-hover:scale-105 ${
-              isParadoxStudios ? "object-contain p-6" : "object-cover"
+              isParadoxStudios ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"
             }`}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={workshop.featured}
@@ -74,7 +78,7 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
           />
         </div>
         <div
-          className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+          className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
         ></div>
         <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
           <p className="text-white font-medium text-sm truncate">{workshop.institution}</p>

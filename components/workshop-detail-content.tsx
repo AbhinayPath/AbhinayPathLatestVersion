@@ -5,10 +5,59 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Calendar, MapPin, Users, Phone, Mail, Clock, GraduationCap, CheckCircle } from "lucide-react"
-import WorkshopBanner from "@/components/workshop-banner"
 
-// This would typically come from a database, but for now we'll use the same data
+// Workshop data
 const workshops = [
+  {
+    id: 1,
+    title: "Introduction to Stopmotion Animation with Vaibhav Kumaresh",
+    trainer: "Vaibhav Kumaresh",
+    institution: "Indian Institute of Educational Theatre (IIET)",
+    location: "Mysuru",
+    state: "Karnataka",
+    date: "3-Day Hands-on Workshop",
+    time: "10 AM – 5 PM daily",
+    description:
+      "Discover the magical world of stopmotion animation! Learn how to bring everyday objects to life using simple tools and your smartphone. Explore the fundamentals of timing, spacing, and the creative use of space and movement — all guided by acclaimed animator Vaibhav Kumaresh.",
+    image: "/images/iiet-logo.png",
+    registrationLink: "https://wa.me/919845605012",
+    featured: true,
+    price: "₹3,000 (General), ₹2,500 (Students)",
+    contact: "9845605012 / 9448871815",
+    email: "Contact via WhatsApp",
+    venue: "IIET Hardwick School Premises, JLB Road, Mysuru",
+    includes: "Simple lunch for all participants",
+    fullDetails: {
+      venue: "Indian Institute of Educational Theatre (IIET) Hardwick School Premises, JLB Road, Mysuru",
+      duration: "3-Day Hands-on Workshop",
+      timing: "10 AM – 5 PM daily",
+      curriculum: [
+        "Basics of stopmotion animation",
+        "How to animate using objects around you",
+        "Hands-on practice and live demos",
+        "Create your own animated clip using just your smartphone",
+      ],
+      keyHighlights: [
+        "Learn from acclaimed animator Vaibhav Kumaresh",
+        "Hands-on practice with everyday objects",
+        "Create your own animated clip",
+        "Simple lunch included for all participants",
+        "Use just your smartphone - no expensive equipment needed",
+      ],
+      aboutInstructor:
+        "Vaibhav Kumaresh is an acclaimed animator known for his innovative work in stopmotion animation. With years of experience in bringing inanimate objects to life, he specializes in teaching the fundamentals of timing, spacing, and creative movement.",
+      whatYoullLearn: [
+        "Fundamentals of timing and spacing in animation",
+        "Creative use of space and movement",
+        "Smartphone animation techniques",
+        "Object animation principles",
+        "Live demonstration techniques",
+      ],
+      targetAudience: "Perfect for beginners and anyone interested in animation, filmmaking, or creative storytelling",
+      materialsProvided: "All basic materials provided, participants need to bring their smartphones",
+      certification: "Certificate of participation upon completion",
+    },
+  },
   {
     id: 4,
     title: "NSD's Certificate Course in Drama-in-Education (Delhi)",
@@ -26,7 +75,6 @@ const workshops = [
     price: "₹35,000",
     contact: "011-23389054, 23031137",
     email: "nsdtiegmail.com",
-    tags: "#NSD #VerifiedWorkshop #TheatreEducation #DramaInEducation",
     fullDetails: {
       venue: "NSD Premises, Mandi House, New Delhi",
       eligibilityCriteria: [
@@ -237,7 +285,7 @@ const workshops = [
         "Selection Criteria: First-Come, First-Served",
         "Go to SBI Collect",
         "Search: FTII Fees Account",
-        'Select Payment Category: "O1 B.C. in Appreciating Songs in Guru Dutt Films"',
+        "Select Payment Category: O1 B.C. in Appreciating Songs in Guru Dutt Films",
         "Pay ₹1,500 and keep your payment receipt",
       ],
       contactInfo: [
@@ -677,12 +725,15 @@ const workshops = [
   },
 ]
 
-export default function WorkshopDetailContent({ id }: { id: number }) {
+interface WorkshopDetailContentProps {
+  id: number
+}
+
+export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
   const [workshop, setWorkshop] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // In a real app, this would be an API call
     const foundWorkshop = workshops.find((w) => w.id === id)
     setWorkshop(foundWorkshop)
     setLoading(false)
@@ -709,7 +760,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
     return (
       <div className="container py-6 md:py-12 text-center">
         <h1 className="text-2xl font-bold mb-4">Workshop Not Found</h1>
-        <p className="mb-6">The workshop you're looking for doesn't exist or has been removed.</p>
+        <p className="mb-6">The workshop you are looking for does not exist or has been removed.</p>
         <Link href="/workshops">
           <Button className="rounded-full">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -720,16 +771,19 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
     )
   }
 
-  // Determine the correct image source for detail page
   const getDetailImageSource = () => {
     if (workshop.institution === "Paradox Studios") {
       return "/images/paradox-studios-logo.png"
+    }
+    if (workshop.institution === "Indian Institute of Educational Theatre (IIET)") {
+      return "/images/iiet-logo.png"
     }
     return workshop.image || "/images/acting-workshop.png"
   }
 
   const detailImageSrc = getDetailImageSource()
   const isParadoxStudios = workshop.institution === "Paradox Studios"
+  const isIIET = workshop.institution === "Indian Institute of Educational Theatre (IIET)"
 
   return (
     <div className="container py-6 md:py-12">
@@ -738,16 +792,14 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
         Back to Workshops
       </Link>
 
-      <WorkshopBanner />
-
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
-          <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : "bg-gray-200"}`}>
+          <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : "bg-gray-900"}`}>
             <Image
               src={detailImageSrc || "/placeholder.svg"}
               alt={workshop.title}
               fill
-              className={`${isParadoxStudios ? "object-contain p-6" : "object-cover"}`}
+              className={`${isParadoxStudios ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"}`}
               sizes="100vw"
               priority
               onError={(e) => {
@@ -757,7 +809,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
             />
           </div>
           <div
-            className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+            className={`absolute inset-0 ${isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
           ></div>
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-primary text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
             <CheckCircle className="h-4 w-4" />
@@ -779,9 +831,25 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
 
               {workshop.fullDetails && (
                 <div className="space-y-6">
+                  {workshop.id === 1 && workshop.fullDetails.whatYoullLearn && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">What You'll Learn</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.whatYoullLearn.map((item: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                   {workshop.fullDetails.curriculum && (
                     <div>
-                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Curriculum</h3>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">
+                        {workshop.id === 1 ? "Workshop Curriculum" : "Curriculum"}
+                      </h3>
                       <ul className="space-y-2">
                         {workshop.fullDetails.curriculum.map((item: string, index: number) => (
                           <li key={index} className="flex items-start">
@@ -820,6 +888,30 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                       </ul>
                     </div>
                   )}
+
+                  {workshop.id === 1 && workshop.fullDetails.aboutInstructor && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">About the Instructor</h3>
+                      <p className="text-gray-700 leading-relaxed">{workshop.fullDetails.aboutInstructor}</p>
+                    </div>
+                  )}
+
+                  {workshop.id === 1 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {workshop.fullDetails.materialsProvided && (
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Materials Provided</h4>
+                          <p className="text-gray-700 text-sm">{workshop.fullDetails.materialsProvided}</p>
+                        </div>
+                      )}
+                      {workshop.fullDetails.certification && (
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Certification</h4>
+                          <p className="text-gray-700 text-sm">{workshop.fullDetails.certification}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -849,6 +941,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                       <p className="text-gray-700">
                         {workshop.location}, {workshop.state}
                       </p>
+                      {workshop.venue && <p className="text-gray-600 text-sm mt-1">{workshop.venue}</p>}
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -865,6 +958,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                 <div className="text-center mb-4">
                   <p className="text-2xl md:text-3xl font-bold text-primary">{workshop.price}</p>
                   <p className="text-gray-600">Workshop Fee</p>
+                  {workshop.includes && <p className="text-sm text-gray-600 mt-2">Includes: {workshop.includes}</p>}
                 </div>
                 <Link href={workshop.registrationLink} target="_blank" className="block">
                   <Button
@@ -872,10 +966,12 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                     className={`w-full rounded-full font-medium ${
                       isParadoxStudios
                         ? "bg-green-600 hover:bg-green-700 text-white"
-                        : "bg-primary hover:bg-primary/90 text-white"
+                        : isIIET
+                          ? "bg-blue-600 hover:bg-blue-700 text-white"
+                          : "bg-primary hover:bg-primary/90 text-white"
                     }`}
                   >
-                    {isParadoxStudios ? "Apply for Free Sessions" : "Register Now"}
+                    {isParadoxStudios ? "Apply for Free Sessions" : isIIET ? "Register via WhatsApp" : "Register Now"}
                   </Button>
                 </Link>
               </div>
@@ -890,7 +986,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                         <span className="text-gray-700">{workshop.contact}</span>
                       </div>
                     )}
-                    {workshop.email && workshop.email !== "N/A" && (
+                    {workshop.email && workshop.email !== "N/A" && workshop.email !== "Contact via WhatsApp" && (
                       <div className="flex items-center">
                         <Mail className="h-4 w-4 text-primary mr-3 flex-shrink-0" />
                         <span className="text-gray-700">{workshop.email}</span>

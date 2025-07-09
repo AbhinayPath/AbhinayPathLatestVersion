@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Filter, ChevronDown, ChevronUp, Star, X } from "lucide-react"
-import WorkshopBanner from "@/components/workshop-banner"
 import WorkshopCard from "@/components/workshop-card"
 import MobileFilterDrawer from "@/components/mobile-filter-drawer"
 import ActiveFilters from "@/components/active-filters"
@@ -13,6 +12,33 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 
 // Verified workshops data
 const workshops = [
+  {
+    id: 1,
+    title: "Introduction to Stopmotion Animation with Vaibhav Kumaresh",
+    trainer: "Vaibhav Kumaresh",
+    institution: "Indian Institute of Educational Theatre (IIET)",
+    location: "Mysuru",
+    state: "Karnataka",
+    date: "3-Day Hands-on Workshop",
+    time: "10 AM – 5 PM daily",
+    description:
+      "Discover the magical world of stopmotion animation! Learn how to bring everyday objects to life using simple tools and your smartphone. Explore the fundamentals of timing, spacing, and the creative use of space and movement — all guided by acclaimed animator Vaibhav Kumaresh.",
+    image: "/images/iiet-logo.png",
+    registrationLink: "https://wa.me/919845605012",
+    featured: true,
+    price: "₹3,000 (General), ₹2,500 (Students)",
+    contact: "9845605012 / 9448871815",
+    email: "Contact via WhatsApp",
+    venue: "IIET Hardwick School Premises, JLB Road, Mysuru",
+    includes: "Simple lunch for all participants",
+    learningOutcomes: [
+      "Basics of stopmotion animation",
+      "How to animate using objects around you",
+      "Hands-on practice and live demos",
+      "Create your own animated clip using just your smartphone",
+    ],
+    mode: "Offline",
+  },
   {
     id: 4,
     title: "NSD's Certificate Course in Drama-in-Education (Delhi)",
@@ -365,8 +391,6 @@ export default function WorkshopsContent() {
 
   return (
     <div className="container py-6 md:py-16 px-3 sm:px-6">
-      
-
       <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
         <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-3 text-gray-800">
           Workshops & <span className="text-primary">Training</span>
