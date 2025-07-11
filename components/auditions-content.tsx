@@ -60,6 +60,60 @@ const auditions = [
     },
   },
   {
+    id: 2,
+    title: "Old Japanese Katana Master - Independent Short Film",
+    type: "Film",
+    location: "Madanapalle",
+    state: "Andhra Pradesh",
+    date: "July 17-21, 2025",
+    director: "OMASTA Studios",
+    description:
+      "Seeking an experienced actor to portray an Old Japanese Katana Master in an independent historical/action drama short film. The character is a Japanese master from the 10th century who embodies wisdom, discipline, and ancient warrior traditions.",
+    company: "OMASTA Studios",
+    companyLink: "https://docs.google.com/forms/d/e/1FAIpQLScD87sHcLCU1Nh4bIyLNQU5ZZPpIEb2Q_WWusEod9-BxrkmvA/viewform",
+    contact: "6281055355 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "Experienced",
+    verified: true,
+    image: "/images/omasta-studios-logo.jpeg",
+    requirements: [
+      "Male actor aged 55-70 years",
+      "Calm and wise presence",
+      "Willingness to wear beard and wig (provided by team)",
+      "Preference for artists of Northeast Indian origin with East Asian features",
+      "Experience in character roles",
+      "Comfortable with historical/period drama",
+    ],
+    roles: [
+      "Old Japanese Katana Master - Lead Character",
+      "Age range: 55-70 years",
+      "Character traits: Wise, calm, experienced warrior from 10th century",
+      "Physical requirements: Beard and wig (costume provided)",
+      "Preferred ethnicity: Northeast Indian origin with East Asian features",
+    ],
+    applicationProcess:
+      "Fill out the casting form at the provided Google Forms link and contact via WhatsApp at 6281055355 for any queries. Include your portfolio and recent headshots.",
+    characterDetails: {
+      name: "Japanese Katana Master",
+      ageRange: "55-70 years",
+      genre: "Historical/Action Drama",
+      description:
+        "An experienced Japanese Katana Master from the 10th century with decades of martial arts wisdom. The character embodies tranquility, discipline, and ancient warrior traditions.",
+      lookingFor: [
+        "Calm and wise demeanor",
+        "Physical presence suitable for a martial arts master",
+        "East Asian facial features (preferably Northeast Indian origin)",
+        "Comfort with traditional costume elements",
+      ],
+    },
+    shootDetails: {
+      location: "Madanapalle, Andhra Pradesh",
+      dates: "July 17 to July 21, 2025",
+      duration: "5 days",
+      genre: "Historical/Action Drama",
+    },
+  },
+  {
     id: 3,
     title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
     type: "Theater",
@@ -351,11 +405,20 @@ export default function AuditionsContent() {
             <div
               key={audition.id}
               className={`bg-white rounded-lg border overflow-hidden flex flex-col h-full card-hover ${
-                audition.id === 1 ? "border-primary/30 shadow-lg" : "border-gray-200"
+                audition.id === 1
+                  ? "border-primary/30 shadow-lg"
+                  : audition.id === 2
+                    ? "border-orange-300 shadow-lg"
+                    : "border-gray-200"
               }`}
             >
               <div className="relative h-48 w-full">
-                <Image src="/images/auditions-stage.png" alt={audition.title} fill className="object-cover" />
+                <Image
+                  src={audition.id === 2 ? audition.image : "/images/auditions-stage.png"}
+                  alt={audition.title}
+                  fill
+                  className="object-cover"
+                />
                 {audition.verified && (
                   <div className="absolute top-2 right-2 badge-verified">
                     <span className="flex items-center">
@@ -373,6 +436,11 @@ export default function AuditionsContent() {
                 {audition.id === 1 && (
                   <div className="absolute top-2 left-2 bg-primary text-white text-xs font-medium px-2 py-1 rounded-full">
                     🎬 Film Lead
+                  </div>
+                )}
+                {audition.id === 2 && (
+                  <div className="absolute top-2 left-2 bg-orange-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                    ⚔️ Action Drama
                   </div>
                 )}
               </div>
@@ -420,6 +488,45 @@ export default function AuditionsContent() {
                         className="text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition-colors"
                       >
                         Quick Apply
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* Special character info for Katana Master casting */}
+                {audition.id === 2 && audition.characterDetails && audition.shootDetails && (
+                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+                    <h4 className="font-semibold text-orange-700 mb-2 flex items-center">
+                      ⚔️ Character: {audition.characterDetails.name}
+                    </h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                      <div>
+                        <span className="font-medium text-gray-700">Age:</span>
+                        <span className="ml-1 text-gray-800">{audition.characterDetails.ageRange}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Genre:</span>
+                        <span className="ml-1 text-gray-800">{audition.characterDetails.genre}</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-700 mb-3 italic">"{audition.characterDetails.description}"</p>
+                    <div className="mb-3">
+                      <p className="font-medium text-gray-700 text-sm mb-1">🎯 Shoot Details:</p>
+                      <div className="text-xs text-gray-600 space-y-1">
+                        <div>📍 Location: {audition.shootDetails.location}</div>
+                        <div>📅 Dates: {audition.shootDetails.dates}</div>
+                        <div>⏱️ Duration: {audition.shootDetails.duration}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-green-600">📞 WhatsApp: 6281055355</span>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-orange-600 text-white px-2 py-1 rounded hover:bg-orange-700 transition-colors"
+                      >
+                        Apply Now
                       </a>
                     </div>
                   </div>

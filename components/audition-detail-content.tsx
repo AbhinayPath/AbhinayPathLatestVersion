@@ -4,7 +4,17 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, MapPin, Calendar, Building, Phone, MessageSquare, CheckCircle, Mail } from "lucide-react"
+import {
+  ArrowLeft,
+  MapPin,
+  Calendar,
+  Building,
+  Phone,
+  MessageSquare,
+  CheckCircle,
+  Mail,
+  ExternalLink,
+} from "lucide-react"
 
 // This would typically come from an API or database
 const auditions = [
@@ -69,6 +79,93 @@ const auditions = [
         "Strong emotional depth",
         "Ability to portray silent love and inner conflict with subtlety",
       ],
+    },
+  },
+  {
+    id: 2,
+    title: "Old Japanese Katana Master - Independent Short Film",
+    type: "Film",
+    location: "Madanapalle",
+    state: "Andhra Pradesh",
+    date: "July 17-21, 2025",
+    director: "OMASTA Studios",
+    description:
+      "Seeking an experienced actor to portray an Old Japanese Katana Master in an independent historical/action drama short film. The character is a Japanese master from the 10th century who embodies wisdom, discipline, and ancient warrior traditions.",
+    company: "OMASTA Studios",
+    companyLink: "https://docs.google.com/forms/d/e/1FAIpQLScD87sHcLCU1Nh4bIyLNQU5ZZPpIEb2Q_WWusEod9-BxrkmvA/viewform",
+    contact: "6281055355 (WhatsApp)",
+    contactType: "form",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/omasta-studios-logo.jpeg",
+    projectTitle: "Independent Short Film",
+    genre: "Historical / Action Drama",
+    role: "Old Japanese Katana Master",
+    ageRange: "55-70",
+    shootLocation: "Madanapalle, Andhra Pradesh",
+    shootDates: "July 17 to July 21, 2025",
+    whatsappContact: "6281055355",
+    googleFormLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLScD87sHcLCU1Nh4bIyLNQU5ZZPpIEb2Q_WWusEod9-BxrkmvA/viewform",
+    requirements: [
+      "Male actor aged 55-70 years",
+      "Calm, wise presence essential",
+      "Willingness to wear beard and wig (provided by production team)",
+      "Preference for actors of Northeast Indian origin with East Asian features",
+      "Ability to portray ancient Japanese warrior/master character",
+      "Professional attitude and commitment to the role",
+      "Available for full shoot schedule (July 17-21, 2025)",
+    ],
+    roles: [
+      "Old Japanese Katana Master - Lead Character",
+      "Age range: 55-70 years",
+      "Character background: Japanese master from the 10th century",
+      "Key traits: Calm, wise, authoritative presence",
+      "Physical requirements: Comfortable wearing period costume, beard, and wig",
+      "Cultural preference: Northeast Indian origin with East Asian features",
+    ],
+    applicationProcess:
+      "Fill out the casting form at the provided Google Form link. For any queries or additional information, contact via WhatsApp at 6281055355. Please include your portfolio, recent headshots, and relevant experience in your application.",
+    characterDetails: {
+      name: "Old Japanese Katana Master",
+      ageRange: "55-70 years",
+      period: "10th Century Japan",
+      description:
+        "A wise and experienced Japanese katana master from the 10th century. This character embodies the traditional values of honor, discipline, and martial expertise. The role requires an actor who can convey deep wisdom and authority through their presence.",
+      traits: [
+        "Calm and composed demeanor",
+        "Wise and authoritative presence",
+        "Deep understanding of martial arts philosophy",
+        "Traditional Japanese values and honor code",
+        "Mentor-like qualities",
+        "Strong physical presence despite advanced age",
+      ],
+      keySkills: [
+        "Ability to portray ancient wisdom and experience",
+        "Comfortable with period costume and makeup",
+        "Strong screen presence and authority",
+        "Ability to convey emotion through subtle expressions",
+        "Physical capability for basic action sequences",
+      ],
+      lookingFor: [
+        "Calm, wise presence",
+        "Northeast Indian origin with East Asian features (preferred)",
+        "Willingness to wear beard and wig",
+        "Professional commitment to the role",
+      ],
+      physicalRequirements: [
+        "Comfortable wearing traditional Japanese costume",
+        "Willingness to wear provided beard and wig",
+        "Ability to handle basic prop work (katana)",
+        "Physical stamina for 5-day shoot schedule",
+      ],
+    },
+    shootDetails: {
+      location: "Madanapalle, Andhra Pradesh",
+      dates: "July 17 to July 21, 2025",
+      duration: "5 days",
+      genre: "Historical / Action Drama",
+      format: "Independent Short Film",
     },
   },
   {
@@ -454,7 +551,9 @@ export default function AuditionDetailContent({ id }: { id: number }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div
+            className={`bg-white rounded-lg border overflow-hidden ${audition.id === 2 ? "border-orange-200" : "border-gray-200"}`}
+          >
             <div className="relative h-64 w-full">
               <Image
                 src={audition.image || "/placeholder.svg"}
@@ -478,11 +577,18 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   🎬 Film Lead Role
                 </div>
               )}
+              {audition.id === 2 && (
+                <div className="absolute top-4 left-4 bg-orange-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                  ⚔️ Action Drama
+                </div>
+              )}
             </div>
 
             <div className="p-6">
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="badge-primary">{audition.type}</span>
+                <span className={`badge-primary ${audition.id === 2 ? "bg-orange-100 text-orange-800" : ""}`}>
+                  {audition.type}
+                </span>
                 <span className="badge-outline">{audition.experience}</span>
                 {(audition.id === 7 || audition.id === 8) && <span className="badge-success">Paid</span>}
                 {audition.id === 1 && <span className="badge-success">Open Now</span>}
@@ -568,6 +674,208 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                       )}
                     </div>
                   </section>
+                )}
+
+                {/* Special section for OMASTA Studios audition */}
+                {audition.id === 2 && (
+                  <>
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">🎬 Project Information</h2>
+                      <div className="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-6 mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <p className="font-medium text-gray-700 mb-1">Project Title</p>
+                            <p className="text-lg font-semibold text-orange-800">{audition.projectTitle}</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <p className="font-medium text-gray-700 mb-1">Genre</p>
+                            <p className="text-lg font-semibold text-orange-800">{audition.genre}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">⚔️ Character Information</h2>
+                      <div className="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-6 mb-6">
+                        <h3 className="text-lg font-semibold text-orange-800 mb-4 flex items-center">
+                          Character: {audition.characterDetails.name}
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <p className="font-medium text-gray-700 mb-1">Age Range</p>
+                            <p className="text-lg font-semibold text-orange-800">
+                              {audition.characterDetails.ageRange}
+                            </p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <p className="font-medium text-gray-700 mb-1">Time Period</p>
+                            <p className="text-lg font-semibold text-orange-800">{audition.characterDetails.period}</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <p className="font-medium text-gray-700 mb-1">Contact</p>
+                            <p className="text-lg font-semibold text-green-600">
+                              📱 WhatsApp: {audition.whatsappContact}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="mb-6">
+                          <h4 className="font-medium text-gray-700 mb-3">Character Description</h4>
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <p className="text-gray-800 italic">"{audition.characterDetails.description}"</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-4 border border-orange-200 mb-6">
+                          <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+                            ✨ We are looking for an actor with:
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {audition.characterDetails.lookingFor.map((item: string, index: number) => (
+                              <div key={index} className="text-gray-700 flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-4 border border-orange-200 mb-6">
+                          <h4 className="font-medium text-gray-700 mb-3">Character Traits</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {audition.characterDetails.traits.map((trait: string, index: number) => (
+                              <div key={index} className="text-gray-700 flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                {trait}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-4 border border-orange-200 mb-6">
+                          <h4 className="font-medium text-gray-700 mb-3">🎬 Key Skills Required</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {audition.characterDetails.keySkills.map((skill: string, index: number) => (
+                              <div key={index} className="text-gray-700 flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                {skill}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-4 border border-orange-200">
+                          <h4 className="font-medium text-gray-700 mb-3">Physical Requirements</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {audition.characterDetails.physicalRequirements.map((req: string, index: number) => (
+                              <div key={index} className="text-gray-700 flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                {req}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">🎥 Shoot Details</h2>
+                      <div className="bg-orange-50 p-4 rounded-lg mb-6 border border-orange-200">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-medium text-gray-700">Location</p>
+                            <p className="text-gray-800">{audition.shootDetails.location}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Dates</p>
+                            <p className="text-gray-800">{audition.shootDetails.dates}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Duration</p>
+                            <p className="text-gray-800">{audition.shootDetails.duration}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Format</p>
+                            <p className="text-gray-800">{audition.shootDetails.format}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">📋 Application Instructions</h2>
+                      <div className="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-6">
+                        <div className="space-y-4">
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <h4 className="font-semibold text-orange-800 mb-2 flex items-center">
+                              📝 Step 1: Fill the Google Form
+                            </h4>
+                            <p className="text-gray-700 mb-3">
+                              Complete the casting application form with all required details including your portfolio
+                              and headshots.
+                            </p>
+                            <a
+                              href={audition.googleFormLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium"
+                            >
+                              <ExternalLink className="h-4 w-4 mr-2" />
+                              Open Application Form
+                            </a>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <h4 className="font-semibold text-orange-800 mb-2 flex items-center">
+                              💬 Step 2: Contact for Queries
+                            </h4>
+                            <p className="text-gray-700 mb-3">
+                              For any questions or additional information about the role, contact us via WhatsApp.
+                            </p>
+                            <a
+                              href={`https://wa.me/${audition.whatsappContact}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
+                            >
+                              <MessageSquare className="h-4 w-4 mr-2" />
+                              WhatsApp: {audition.whatsappContact}
+                            </a>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-4 border border-orange-200">
+                            <h4 className="font-semibold text-orange-800 mb-2">
+                              📋 What to Include in Your Application:
+                            </h4>
+                            <ul className="text-gray-700 space-y-1">
+                              <li className="flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                Recent headshots and portfolio
+                              </li>
+                              <li className="flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                Previous acting experience (if any)
+                              </li>
+                              <li className="flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                Availability for shoot dates (July 17-21, 2025)
+                              </li>
+                              <li className="flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                Brief introduction about yourself
+                              </li>
+                              <li className="flex items-center">
+                                <span className="text-orange-600 mr-2">•</span>
+                                Contact information
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </>
                 )}
 
                 {audition.id === 10 && (
@@ -821,7 +1129,84 @@ export default function AuditionDetailContent({ id }: { id: number }) {
               </div>
             )}
 
-            <div className="mt-6 pt-6 border-t">
+            {/* Special notice for OMASTA Studios */}
+            {audition.id === 2 && (
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                <h4 className="font-medium text-orange-800 mb-2 flex items-center">⚔️ Special Requirements</h4>
+                <ul className="text-sm text-orange-700 space-y-1">
+                  <li className="flex items-start">
+                    <span className="text-orange-600 mr-2 mt-0.5">•</span>
+                    Calm, wise presence
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-orange-600 mr-2 mt-0.5">•</span>
+                    Willingness to wear beard and wig (provided)
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-orange-600 mr-2 mt-0.5">•</span>
+                    Preference for Northeast Indian origin with East Asian features
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {/* Apply Button */}
+            <div className="space-y-3">
+              {audition.id === 2 ? (
+                <>
+                  <a href={audition.googleFormLink} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Apply via Google Form
+                    </Button>
+                  </a>
+                  <a
+                    href={`https://wa.me/${audition.whatsappContact}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <Button
+                      variant="outline"
+                      className="w-full border-orange-200 text-orange-700 hover:bg-orange-50 bg-transparent"
+                    >
+                      <MessageSquare className="h-4 w-4 mr-2" />
+                      WhatsApp for Queries
+                    </Button>
+                  </a>
+                </>
+              ) : audition.contactType === "whatsapp" ? (
+                <a href={audition.companyLink} target="_blank" rel="noopener noreferrer" className="block">
+                  <Button className="w-full">
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Apply via WhatsApp
+                  </Button>
+                </a>
+              ) : audition.contactType === "phone" ? (
+                <a href={audition.companyLink} className="block">
+                  <Button className="w-full">
+                    <Phone className="h-4 w-4 mr-2" />
+                    Call to Apply
+                  </Button>
+                </a>
+              ) : audition.contactType === "email" ? (
+                <a href={audition.companyLink} className="block">
+                  <Button className="w-full">
+                    <Mail className="h-4 w-4 mr-2" />
+                    Email to Apply
+                  </Button>
+                </a>
+              ) : (
+                <a href={audition.companyLink} target="_blank" rel="noopener noreferrer" className="block">
+                  <Button className="w-full">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Apply Online
+                  </Button>
+                </a>
+              )}
+            </div>
+
+            <div className="mt-4 pt-6 border-t">
               <a href={audition.companyLink} target="_blank" rel="noopener noreferrer">
                 <Button className="w-full rounded-md">
                   {audition.contactType === "whatsapp" && <MessageSquare className="mr-2 h-4 w-4" />}
