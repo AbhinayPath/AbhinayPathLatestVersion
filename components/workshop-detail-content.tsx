@@ -136,169 +136,6 @@ const workshops = [
     },
   },
   {
-    id: 7,
-    title: "FTII Workshop in Delhi – Tribute to Raj Kapoor",
-    trainer: "Dr. Milind Damle",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "New Delhi",
-    state: "Delhi",
-    date: "12–13 July 2025",
-    time: "10 AM – 5 PM (with 1–2 PM lunch break)",
-    description:
-      "This 2-day workshop explores the rich legacy of Raj Kapoor through the lens of his iconic song sequences. From Barsaat to Jagte Rho and Awara, relive the Golden Era of Hindi film music and learn about cinematic storytelling through songs.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
-    featured: true,
-    price: "₹1,500",
-    contact: "020 25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass",
-    fullDetails: {
-      venue: "Triveni Kala Sangam, Mandi House, Delhi",
-      topic: "Basic Course in Appreciating Songs in Raj Kapoor Films (A tribute to the Showman on his birth centenary)",
-      organizer: "FTII Pune, under Centre For Open Learning (CFOL)",
-      eligibilityCriteria: [
-        "Age: 18+ (born on or before 30th June 2007)",
-        "Qualification: 12th pass (10th in exceptional cases)",
-        "Nationality: Indian",
-      ],
-      medium: "Hindi & English",
-      capacity: "70 participants (Min. 56 required to conduct the course)",
-      courseFee: "₹1,500 (Non-refundable for selected participants)",
-      certification: "Given on 90% attendance",
-      applicationProcess: [
-        "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Selection: First-come, first-served",
-        "Visit SBI Collect",
-        "Search: FTII Fees Account",
-        "Select Payment Category: 01 Appreciating Songs in Raj Kapoor Films",
-        "Fill in details and pay ₹1,500",
-        "Save your payment receipt and reference number",
-      ],
-      contactInfo: [
-        "FTII Queries: Mr. Milind Joshi – 020 25580085 / info.cfol@ftii.ac.in",
-        "Accommodation Support (Outstation): Ms. Mudra Sharma – 99588 31338",
-      ],
-      aboutInstructor:
-        "Dr. Milind Damle – FTII alumnus and Associate Professor, with 20+ years of experience in radio, cinema & television. A decorated filmmaker and researcher, his doctoral work focused on song picturization techniques in Indian cinema.",
-    },
-  },
-  {
-    id: 8,
-    title: "FTII's Basic Course on Writing for Short Film Fiction – Delhi",
-    trainer: "Dr. Milind Damle",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "New Delhi",
-    state: "Delhi",
-    date: "07–11 July 2025",
-    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
-    description:
-      "A hands-on, foundational course for aspiring screenwriters who want to write short fiction films. Learn from industry experts about film history, storytelling, screenwriting fundamentals, and pitching your ideas effectively. Participants will watch and analyse films, and complete daily writing exercises.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://ftii.ac.in/p/vtwa/basic-course-on-writing-for-short-film-fiction-in-delhi-07-11-july-2025",
-    featured: true,
-    price: "₹9,000",
-    contact: "020 – 2558 0085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass",
-    fullDetails: {
-      venue: "Triveni Kala Sangam, Mandi House, Delhi",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      medium: "English & Hindi",
-      eligibilityCriteria: [
-        "Age: 18+ (born on/before 30 June 2007)",
-        "Qualification: 12th pass (exceptionally 10th pass may be considered)",
-        "Nationality: Indian",
-      ],
-      capacity: "Max 24 participants (Min. 20 required to run the course)",
-      courseFee: "₹9,000 (Excludes food & stay)",
-      certification: "Issued on 90% minimum attendance",
-      curriculum: [
-        "Film history & evolution",
-        "Role of the writer in film production",
-        "Storytelling from life, culture, and society",
-        "Fundamentals of screenwriting",
-        "Writing for films, OTT & short formats",
-        "Screenplay formatting as per global standards",
-        "Pitching your ideas effectively",
-      ],
-      applicationProcess: [
-        "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Selection: First-Come, First-Served Basis",
-        "Visit: https://www.onlinesbi.sbi/sbicollect/icollecthome.htm",
-        "Search for: FTII Fees Account",
-        "Select Payment Category: O2 Basic Course on Writing for Short Film Fiction",
-        "Fill the application form and pay ₹9,000",
-        "Save your SBI Collect Reference Number for future use",
-      ],
-      contactInfo: [
-        "Email: info.cfol@ftii.ac.in / ftiioutreach@gmail.com",
-        "Phone: 020 – 2558 0085",
-        "For accommodation queries: Ms. Mudra Sharma – 99588 31338",
-      ],
-      aboutInstructor:
-        "Dr. Milind Damle – Associate Professor, FTII. An FTII alumnus (2004 batch), film editor, short film director, and award-winning filmmaker. His Ph.D. research focuses on picturization of songs in Indian cinema.",
-      additionalInfo:
-        "This is your chance to build a strong foundation in screenwriting and connect with one of India's premier film institutions. If you want to write, you must write!",
-    },
-  },
-  {
-    id: 9,
-    title: "FTII's Basic Course in Appreciating Songs in Guru Dutt Films",
-    trainer: "Dr. Milind Damle",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "New Delhi",
-    state: "Delhi",
-    date: "05–06 July 2025",
-    time: "10 AM – 5 PM (Lunch: 1–2 PM)",
-    description:
-      "To celebrate the birth centenary of the legendary filmmaker Guru Dutt, this special two-day workshop is dedicated to exploring the magic of songs in Guru Dutt's cinema. Explore his cinematic style through timeless songs from classics like Pyaasa, Kagaz Ke Phool, and Sahib Bibi Aur Ghulam.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-guru-dutt-films-in-delhi-05-06-july-2025",
-    featured: true,
-    price: "₹1,500",
-    contact: "020 25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass",
-    fullDetails: {
-      venue: "Triveni Auditorium, Triveni Kala Sangam, 205, Tansen Marg, Mandi House, Delhi – 110001",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      medium: "Hindi & English",
-      eligibilityCriteria: [
-        "Age 18+ (as of 1st July 2025)",
-        "Minimum Qualification: 12th pass (10th pass in exceptional cases)",
-        "Nationality: Indian",
-      ],
-      capacity: "Max. 70 participants (Min. 56 required to run the course)",
-      courseFee: "₹1,500",
-      certification: "Certificate of Participation (Minimum 90% attendance required)",
-      curriculum: [
-        "Guru Dutt's cinematic style through his timeless songs",
-        "Song picturization, visuals, and music in films like Pyaasa, Kagaz Ke Phool, and Sahib Bibi Aur Ghulam",
-        "An engaging tribute to the Golden Era of Hindi Cinema through discussion, visuals, and music",
-      ],
-      applicationProcess: [
-        "Last Date to Apply: 29 May 2025, 6 PM IST",
-        "Selection Criteria: First-Come, First-Served",
-        "Go to SBI Collect",
-        "Search: FTII Fees Account",
-        "Select Payment Category: O1 B.C. in Appreciating Songs in Guru Dutt Films",
-        "Pay ₹1,500 and keep your payment receipt",
-      ],
-      contactInfo: [
-        "Mr. Milind Joshi – info.cfol@ftii.ac.in | 020-25580085",
-        "Accommodation queries: Ms. Mudra Sharma – 99588 31338",
-      ],
-      aboutInstructor:
-        "Dr. Milind Damle – Associate Professor, FTII | Film Educator | FTII Alumnus | Over 20 years in Radio, TV & Cinema",
-      additionalInfo:
-        "Celebrate the timeless magic of Guru Dutt's cinema — through music, visuals, and storytelling. Join this immersive tribute!",
-    },
-  },
-  {
     id: 14,
     title: "Sooraj Nambiar's – LOCHANAM: A 3-Day Actor/Dancer Workshop",
     trainer: "Sooraj Nambiar",
@@ -381,216 +218,6 @@ const workshops = [
         "Personalized feedback and coaching",
         "Professional guidance from experienced mentor",
       ],
-    },
-  },
-  {
-    id: 17,
-    title: "FTII's Practical Course in Multi-Camera Technical Operations for TV Production",
-    trainer: "FTII Faculty",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "14–18 July 2025",
-    time: "9 AM – 6:30 PM",
-    description:
-      "Ever wondered how reality shows, stand-up comedy, or sports events are technically produced? Learn hands-on with professional gear including Multi-Camera Setup, Audio Consoles, Vision Mixers, Lighting Consoles, Teleprompters, Character Generators & more.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://ftii.ac.in/p/vtwa/introduction-to-multi-camera-technical-operations-for-tv-program-production-14-18-july-2025",
-    featured: true,
-    price: "₹5,000",
-    contact: "020-25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass (exceptionally 10th pass)",
-    fullDetails: {
-      venue: "FTII Campus, Pune",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      duration: "5 days intensive hands-on training",
-      eligibilityCriteria: [
-        "Age: 18+ years",
-        "Education: Minimum 12th pass (exceptionally 10th pass may be considered)",
-        "Nationality: Indian",
-      ],
-      applicationDeadline: "30 June 2025, 6 PM",
-      selectionProcess: "First Come, First Served",
-      courseFee: "₹5,000 only",
-      certification: "FTII Participation Certificate upon successful completion",
-      keyHighlights: [
-        "Work like a real technical crew in a TV studio",
-        "Learn camera, audio, vision mixing, lighting & switching",
-        "Take home a 2–5 min TV show you helped produce",
-        "Get a participation certificate from FTII",
-        "Hostel accommodation available",
-      ],
-      professionalEquipment: [
-        "Multi-Camera Setup",
-        "Audio Consoles",
-        "Vision Mixers",
-        "Lighting Consoles",
-        "Teleprompters",
-        "Character Generators",
-        "Professional TV Studio Equipment",
-      ],
-      curriculum: [
-        "Multi-camera setup and operations",
-        "Audio console operations and sound mixing",
-        "Vision mixing and live switching",
-        "Lighting console operations",
-        "Teleprompter operations",
-        "Character generator usage",
-        "Live TV production workflow",
-        "Technical crew coordination",
-      ],
-      practicalExperience: [
-        "Hands-on training with professional TV equipment",
-        "Real studio environment experience",
-        "Production of a complete 2-5 minute TV show",
-        "Technical crew role simulation",
-        "Live production scenarios",
-      ],
-      accommodation: "Hostel accommodation available on campus",
-      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
-      additionalInfo:
-        "This intensive course provides real-world experience in TV production technical operations. Perfect for those interested in the technical aspects of television production, reality shows, sports broadcasting, and live events.",
-    },
-  },
-  {
-    id: 18,
-    title: "FTII Tribute to the Showman – Basic Course in Appreciating Songs in Raj Kapoor Films",
-    trainer: "Dr. Milind Damle",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "New Delhi",
-    state: "Delhi",
-    date: "12–13 July 2025",
-    time: "10 AM – 5 PM (with 1–2 PM lunch break)",
-    description:
-      "Celebrate Raj Kapoor's centenary with a 2-day workshop by FTII exploring the timeless music and song picturization of his films. Learn the cinematic art behind RK's legendary song sequences with insights from FTII Prof. Dr. Milind Damle – an award-winning filmmaker and film educator.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
-    featured: true,
-    price: "₹1,500",
-    contact: "020–25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass (10th in exceptional cases)",
-    fullDetails: {
-      venue: "Triveni Kala Sangam, Delhi",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      duration: "2 days intensive workshop",
-      medium: "Hindi & English",
-      eligibilityCriteria: [
-        "Age: 18+ years",
-        "Education: Minimum 12th pass (10th pass in exceptional cases)",
-        "Nationality: Indian",
-      ],
-      applicationDeadline: "27 June 2025, 6 PM",
-      selectionProcess: "First Come, First Served",
-      capacity: "Maximum 70 participants",
-      courseFee: "₹1,500 only",
-      certification: "Certificate on 90% attendance",
-      keyHighlights: [
-        "Learn the cinematic art behind RK's legendary song sequences",
-        "Insights from FTII Prof. Dr. Milind Damle – an award-winning filmmaker and film educator",
-        "Certificate on 90% attendance",
-        "Explore timeless music and song picturization",
-        "Celebrate Raj Kapoor's birth centenary",
-      ],
-      curriculum: [
-        "Raj Kapoor's cinematic legacy and contribution to Indian cinema",
-        "Analysis of iconic song sequences from his films",
-        "Song picturization techniques and visual storytelling",
-        "Music direction and composition in RK films",
-        "Camera work and cinematography in song sequences",
-        "Cultural impact of Raj Kapoor's musical films",
-        "Evolution of song picturization in Indian cinema",
-        "Interactive discussions and film screenings",
-      ],
-      iconicFilmsStudied: [
-        "Barsaat (1949)",
-        "Awara (1951)",
-        "Shree 420 (1955)",
-        "Jagte Raho (1956)",
-        "Sangam (1964)",
-        "Mera Naam Joker (1970)",
-        "Bobby (1973)",
-        "Satyam Shivam Sundaram (1978)",
-      ],
-      aboutInstructor:
-        "Dr. Milind Damle – Associate Professor at FTII, award-winning filmmaker, and film educator with over 20 years of experience in radio, cinema & television. His doctoral research focused on song picturization techniques in Indian cinema, making him the perfect guide for this tribute to the Showman.",
-      specialFeatures: [
-        "Centenary celebration of Raj Kapoor's birth",
-        "Exclusive insights into the Golden Era of Hindi Cinema",
-        "Analysis of timeless songs and their visual treatment",
-        "Understanding the art of song picturization",
-        "Interactive sessions with film screenings",
-      ],
-      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020–25580085"],
-      additionalInfo:
-        "This special workshop celebrates the birth centenary of Raj Kapoor, the Showman of Indian cinema. Participants will gain deep insights into the art of song picturization and the cinematic genius behind some of the most memorable musical sequences in Indian film history.",
-    },
-  },
-  {
-    id: 19,
-    title: "FTII Pune: Basic Course in Smartphone Filmmaking",
-    trainer: "FTII Faculty",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "04–08 August 2025",
-    time: "10 AM – 5 PM",
-    description:
-      "Want to learn filmmaking using just your phone? Join this 5-day hands-on course by FTII and start telling your own cinematic stories! Learn creative storytelling, framing, audio & lighting basics guided by FTII experts.",
-    image: "/images/acting-workshop.png",
-    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-smartphone-filmmaking-in-pune-04-08-august-2025",
-    featured: true,
-    price: "₹7,000",
-    contact: "020-25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, 12th pass (10th in special cases)",
-    fullDetails: {
-      venue: "FTII Campus, Pune",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      duration: "5 days intensive hands-on course",
-      medium: "Hindi & English",
-      eligibilityCriteria: [
-        "Age: 18+ years",
-        "Education: Minimum 12th pass (10th pass in special cases)",
-        "Nationality: Indian",
-      ],
-      applicationDeadline: "30 June 2025, 6 PM",
-      selectionProcess: "First Come, First Served",
-      capacity: "Limited to 24 participants",
-      courseFee: "₹7,000",
-      certification: "Certificate on completion",
-      keyHighlights: [
-        "Shoot, direct & edit short films using your smartphone",
-        "Learn creative storytelling, framing, audio & lighting basics",
-        "Guided by FTII experts",
-        "Hands-on practical experience",
-        "Create your own cinematic stories",
-      ],
-      curriculum: [
-        "Smartphone filmmaking fundamentals",
-        "Creative storytelling techniques",
-        "Camera framing and composition",
-        "Audio recording and sound design basics",
-        "Lighting techniques for smartphone filming",
-        "Video editing on mobile devices",
-        "Short film production workflow",
-        "Directing and cinematography principles",
-      ],
-      practicalExperience: [
-        "Hands-on smartphone filming sessions",
-        "Complete short film production",
-        "Real-time editing and post-production",
-        "Creative storytelling exercises",
-        "Technical skill development",
-      ],
-      aboutInstructor:
-        "FTII Faculty – Experienced filmmakers and educators from India's premier film institute with expertise in modern filmmaking techniques and smartphone cinematography.",
-      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
-      additionalInfo:
-        "This innovative course democratizes filmmaking by teaching students to create professional-quality content using just their smartphones. Perfect for aspiring filmmakers who want to start their journey with accessible technology.",
     },
   },
   {
@@ -723,6 +350,148 @@ const workshops = [
         "This course is a tribute to the legendary Guru Dutt, celebrating his birth centenary by exploring the magic of his songs and their cinematic representation.",
     },
   },
+  {
+    id: 22,
+    title: "FTII Online Course: Creating Films & Audio-Visual Content using AI",
+    trainer: "Dr. Alwin Anuse",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Online",
+    state: "All India",
+    date: "18–22 August 2025",
+    time: "10:30 AM – 12:30 PM & 2:30 PM – 4:30 PM",
+    description:
+      "🎬 Learn to create films and audio-visual content using Artificial Intelligence! This comprehensive online course by FTII covers AI tools and techniques for modern filmmaking. Perfect for aspiring filmmakers looking to integrate AI into their creative process.",
+    image: "/images/acting-workshop.png",
+    registrationLink:
+      "https://ftii.ac.in/p/ftii-online-1/basic-course-on-creating-films-audio-visual-contents-using-artificial-intelligence-ai-18-22-august-2025-online",
+    featured: true,
+    price: "₹9,000",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass, Basic computer literacy mandatory",
+    fullDetails: {
+      venue: "Online (Google Classroom & Google Meet)",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "5 Days (20 Hours)",
+      medium: "English & Hindi",
+      mode: "Online",
+      eligibilityCriteria: [
+        "Age: 18 years and above (as on 01 August 2025)",
+        "Education: 12th pass (exceptionally 10th pass may be considered)",
+        "Basic computer literacy is mandatory",
+        "Laptop/Desktop required (mobile not allowed)",
+      ],
+      applicationDeadline: "04 August 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "Maximum 22 participants (Minimum 18 required)",
+      courseFee: "₹9,000 (non-refundable for selected participants)",
+      certification: "FTII Certificate upon successful completion",
+      keyHighlights: [
+        "Learn AI tools and techniques for filmmaking",
+        "Create films and audio-visual content using AI",
+        "Online interactive sessions via Google Meet",
+        "Hands-on practical training",
+        "Certificate from India's premier film institute",
+      ],
+      curriculum: [
+        "Introduction to AI in filmmaking",
+        "AI tools for video production",
+        "Audio-visual content creation using AI",
+        "Practical applications in film production",
+        "AI-assisted editing and post-production",
+        "Future of AI in cinema",
+      ],
+      aboutInstructor:
+        "Dr. Alwin Anuse – Associate Professor, TV Engineering Department, FTII. An AI and filmmaking expert with 20+ years' experience, published research, 2 patents, and vast academic and industry credentials.",
+      technicalRequirements: [
+        "Laptop or Desktop computer (mandatory)",
+        "Stable internet connection",
+        "Google account for classroom access",
+        "Basic computer literacy",
+      ],
+      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
+      additionalInfo:
+        "This cutting-edge course introduces filmmakers to the revolutionary world of AI-powered content creation. Learn how to leverage artificial intelligence tools to enhance your filmmaking process and create compelling audio-visual content.",
+    },
+  },
+  {
+    id: 23,
+    title: "Introduction to Multi-Camera Technical Operations for TV Program Production",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "08–12 September 2025",
+    time: "9:00 AM – 6:30 PM (with 1:00–1:30 PM lunch break)",
+    description:
+      "Ever wondered how multi-camera TV shows like Indian Idol, The Kapil Sharma Show, or live sports broadcasts are actually shot and produced? This hands-on, practical Short Term Training Programme takes you behind the scenes of television production. Learn how engineers manage camera feeds, mix audio, insert live graphics, control lighting, and switch between sources to create seamless broadcast experiences.",
+    image: "/images/acting-workshop.png",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/introduction-to-multi-camera-technical-operations-for-tv-program-production-08-12-september-2025",
+    featured: true,
+    price: "₹5,000 (+ ₹1,800 for optional hostel accommodation)",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+, 12th pass (10th in special cases)",
+    venue: "TV Engineering Dept., FTII Main Campus, Law College Road, Pune – 411004",
+    includes: "Recorded 2-5 minute TV program + Participation certificate",
+    fullDetails: {
+      venue: "TV Engineering Dept., FTII Main Campus, Law College Road, Pune – 411004",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "One week (5 days) - 45 hours total",
+      medium: "English & Hindi",
+      eligibilityCriteria: [
+        "Age: 18+ (as of 01 Sept 2025)",
+        "Education: HSC (12th Pass); in special cases, 10th Pass may be considered",
+        "Nationality: Indian",
+      ],
+      applicationDeadline: "20 August 2025, by 6:00 PM",
+      selectionProcess: "First-Come-First-Served",
+      capacity: "Maximum 20 participants (Minimum 16 required)",
+      courseFee: "₹5,000 (Non-refundable for selected participants)",
+      hostelAccommodation: "₹1,800 for 6 days (Triple sharing, Kothrud campus – 5 km from FTII)",
+      certification: "Certificate upon successful completion, with minimum 90% attendance required",
+      keyHighlights: [
+        "Hands-on usage of professional TV equipment",
+        "Learn multi-camera operations in a professional TV studio",
+        "Teamwork and leadership in a live production environment",
+        "Technical direction and role-specific functions",
+        "Receive a recorded 2–5 minute TV program you helped produce",
+        "Participation certificate from FTII",
+      ],
+      curriculum: [
+        "Basics of multi-camera operations in a professional TV studio",
+        "Hands-on usage of equipment: Cameras, Vision Mixer, Audio Console, Lighting Console, CCU, Character Generator",
+        "Teamwork and leadership in a live production environment",
+        "Technical direction and role-specific functions: Cameraperson, VM Engineer, Audio Engineer, etc.",
+      ],
+      professionalEquipment: [
+        "Multi-Camera Setup",
+        "Vision Mixer",
+        "Audio Console",
+        "Lighting Console",
+        "CCU (Camera Control Unit)",
+        "Character Generator",
+        "Professional TV Studio Equipment",
+      ],
+      practicalExperience: [
+        "Hands-on training with professional TV equipment",
+        "Real studio environment experience",
+        "Production of a complete 2-5 minute TV show",
+        "Technical crew role simulation",
+        "Live production scenarios",
+      ],
+      aboutInstructor:
+        "FTII Faculty – Experienced television production professionals and educators from India's premier film institute with expertise in multi-camera operations and TV production.",
+      contactInfo: [
+        "Mr. Milind Joshi - Assistant Outreach Officer",
+        "Email: info.cfol@ftii.ac.in",
+        "Phone: 020 – 25580085",
+      ],
+      additionalInfo:
+        "This intensive course provides real-world experience in TV production technical operations. Perfect for those interested in the technical aspects of television production, reality shows, sports broadcasting, and live events. All communication will be via email only. List of selected participants will be published on FTII website.",
+    },
+  },
 ]
 
 interface WorkshopDetailContentProps {
@@ -828,6 +597,32 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                 <h2 className="font-playfair text-xl md:text-2xl font-bold mb-4">About This Workshop</h2>
                 <p className="text-gray-700 leading-relaxed">{workshop.description}</p>
               </div>
+
+              {(workshop.id === 20 || workshop.id === 21 || workshop.id === 22 || workshop.id === 23) && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-blue-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fillRule="evenodd"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-blue-800">Privacy & Attribution Notice</h3>
+                      <div className="mt-2 text-sm text-blue-700">
+                        <p>
+                          🔒 Note: This listing is shared for educational purposes only. All credits and copyrights
+                          belong to FTII. AbhinayPath does not collect or share your data for this post. For application
+                          and details, always refer to the official FTII website.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {workshop.fullDetails && (
                 <div className="space-y-6">
@@ -986,7 +781,7 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                         <span className="text-gray-700">{workshop.contact}</span>
                       </div>
                     )}
-                    {workshop.email && workshop.email !== "N/A" && workshop.email !== "Contact via WhatsApp" && (
+                    {workshop.email && workshop.email !== "N/A" && (
                       <div className="flex items-center">
                         <Mail className="h-4 w-4 text-primary mr-3 flex-shrink-0" />
                         <span className="text-gray-700">{workshop.email}</span>
