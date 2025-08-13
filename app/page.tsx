@@ -90,7 +90,7 @@ export default function Home() {
                 <Link href="/auditions">
                   <Button
                     variant="outline"
-                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all"
+                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all bg-transparent"
                   >
                     Explore Auditions <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
@@ -120,7 +120,7 @@ export default function Home() {
                 <Link href="/workshops">
                   <Button
                     variant="outline"
-                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all"
+                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all bg-transparent"
                   >
                     Browse Workshops <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
@@ -131,8 +131,8 @@ export default function Home() {
             <Card className="h-full hover:shadow-xl transition-all border-2 border-gray-100 hover:border-[#2D1A54]/20 overflow-hidden group rounded-xl transform transition-transform hover:-translate-y-2">
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
-                  src="/images/acting-school.png"
-                  alt="Prep for Top Institutes"
+                  src="/images/mentorship-hero.png"
+                  alt="1-on-1 Actor Mentorship"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -145,14 +145,17 @@ export default function Home() {
                 </div>
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
-                <h3 className="font-playfair text-2xl font-bold mb-3">Prep for Top Institutes</h3>
-                <p className="text-gray-800 mb-6 text-lg">NSD/FTII alumni guidance for entrance exams and auditions.</p>
+                <h3 className="font-playfair text-2xl font-bold mb-3">1-on-1 Actor Mentorship</h3>
+                <p className="text-gray-800 mb-6 text-lg">
+                  Learn directly from experienced theatre professionals — NSD, FTII, and other renowned alumni — through
+                  personalised guidance sessions.
+                </p>
                 <Link href="/admissions">
                   <Button
                     variant="outline"
-                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all"
+                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all bg-transparent"
                   >
-                    Get Preparation Help <ArrowRight className="ml-1 h-4 w-4" />
+                    Apply for Mentorship <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>

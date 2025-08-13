@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: "AbhinayPath - Platform for Creative Artists",
   description:
     "India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.",
-    generator: 'v0.dev'
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
