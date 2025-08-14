@@ -30,6 +30,13 @@ export default function SagnikMentorshipPage() {
     setExpandedSection(expandedSection === section ? null : section)
   }
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   const achievements = [
     {
       icon: <GraduationCap className="h-5 w-5" />,
@@ -64,7 +71,7 @@ export default function SagnikMentorshipPage() {
     {
       icon: <Mic className="h-5 w-5" />,
       title: "Guest Faculty",
-      description: "Shri Ram College, Delhi",
+      description: "Shri Ram Centre for performing arts",
       color: "text-indigo-600",
     },
   ]
@@ -142,6 +149,7 @@ export default function SagnikMentorshipPage() {
                   variant="outline"
                   size="lg"
                   className="border-orange-600 text-orange-600 hover:bg-orange-50 bg-transparent"
+                  onClick={() => scrollToSection("about-mentor")}
                 >
                   <MessageCircle className="mr-2 h-4 w-4" />
                   Learn More
@@ -160,7 +168,7 @@ export default function SagnikMentorshipPage() {
       </section>
 
       {/* About the Mentor Section */}
-      <section className="py-16 px-4 bg-white">
+      <section id="about-mentor" className="py-16 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="font-playfair text-4xl font-bold text-gray-900 mb-4">About the Mentor</h2>
@@ -242,7 +250,7 @@ export default function SagnikMentorshipPage() {
       </section>
 
       {/* Why This Mentorship Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section id="why-mentorship" className="py-16 px-4 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="font-playfair text-4xl font-bold text-gray-900 mb-4">Why This Mentorship?</h2>
@@ -312,7 +320,7 @@ export default function SagnikMentorshipPage() {
       </section>
 
       {/* Mentorship Structure */}
-      <section className="py-16 px-4 bg-white">
+      <section id="mentorship-structure" className="py-16 px-4 bg-white">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="font-playfair text-4xl font-bold text-gray-900 mb-4">Mentorship Structure</h2>
@@ -388,7 +396,7 @@ export default function SagnikMentorshipPage() {
       </section>
 
       {/* Who Is This For */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section id="target-audience" className="py-16 px-4 bg-gray-50">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="font-playfair text-4xl font-bold text-gray-900 mb-4">Who Is This For?</h2>
