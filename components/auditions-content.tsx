@@ -27,7 +27,7 @@ const auditions = [
     contactType: "whatsapp",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Female+Lead+Meera",
+    image: "/images/auditions-stage.png",
     requirements: [
       "Female actress aged 21-27 years",
       "Expressive eyes and natural grace",
@@ -129,7 +129,7 @@ const auditions = [
     contactType: "phone",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Hindi+Comedy+Play",
+    image: "/images/auditions-stage.png",
   },
   {
     id: 4,
@@ -147,7 +147,7 @@ const auditions = [
     contactType: "phone",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Once+There+Was+A+Way",
+    image: "/images/auditions-stage.png",
   },
   {
     id: 5,
@@ -165,7 +165,7 @@ const auditions = [
     contactType: "whatsapp",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Kannada+Feature+Film",
+    image: "/images/auditions-stage.png",
   },
   {
     id: 6,
@@ -183,7 +183,53 @@ const auditions = [
     contactType: "email",
     experience: "Experienced",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Digital+Nomads+Web+Series",
+    image: "/images/auditions-stage.png",
+  },
+  {
+    id: 7,
+    title: "Casting Call – Maithili Play",
+    type: "Theater",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "Apply by 22 August 2025",
+    director: "Broken Wall Bridge Theatre Group",
+    description:
+      "A 50-minute Hindi play featuring 10 characters. Video audition required - choose any two roles, record dialogues, upload to Google Drive and submit form. Male actors must perform all dialogues provided as only two male characters are listed.",
+    company: "Broken Wall Bridge Theatre Group",
+    companyLink: "https://docs.google.com/forms/d/e/1FAIpQLSdUM6apfL5XZ3X3YRf0AcNEWm59kyuRZ92qgIMRVG1B96m8Vw/viewform",
+    contact: "Ashish - 8788132835",
+    contactType: "form",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Choose any two roles that resonate with you",
+      "Male actors: perform all dialogues provided (only two male characters listed)",
+      "Record a video performing the dialogues",
+      "Upload video to Google Drive and make it shareable",
+      "Submit audition form with video link",
+      "Must be comfortable with Hindi language",
+    ],
+    roles: [
+      "Maithili (Female, Age 48) - Submissive, Assertive, Ecstatic moods",
+      "Sunita (Female, Age 45) - Bossy, Angry moods",
+      "Asha (Female, Age 60) - Submissive mood",
+      "Shama (Female, Age 60) - Pretentious mood",
+      "Suraj (Male, Age 20) - Submissive, Hopeful, Assertive moods",
+      "Groom (Male, Age 27) - Uninterested, Angry moods",
+    ],
+    applicationProcess:
+      "Download/Read character dialogues, choose roles, record video audition, upload to Google Drive, and submit form with shareable link. Selected candidates will be invited for play reading session.",
+    characterDetails: {
+      playTitle: "Maithili",
+      duration: "50 minutes",
+      totalCharacters: 10,
+      language: "Hindi",
+      videoAudition: true,
+      deadline: "22 August 2025",
+      description:
+        "A Hindi play exploring various character dynamics and emotions through compelling dialogues and situations.",
+    },
   },
   {
     id: 8,
@@ -201,7 +247,7 @@ const auditions = [
     contactType: "whatsapp",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Public+Speaking+Teacher",
+    image: "/images/auditions-stage.png",
   },
   {
     id: 10,
@@ -219,7 +265,7 @@ const auditions = [
     contactType: "website",
     experience: "Experienced",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=NSD+Theatre+Artists",
+    image: "/images/auditions-stage.png",
   },
   {
     id: 11,
@@ -237,7 +283,7 @@ const auditions = [
     contactType: "whatsapp",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=Lifestyle+Café+Modeling+Shoot",
+    image: "/images/auditions-stage.png",
   },
   {
     id: 12,
@@ -255,7 +301,7 @@ const auditions = [
     contactType: "website",
     experience: "All Levels",
     verified: true,
-    image: "/placeholder.svg?height=300&width=500&text=The+Anklet+Play+Reading",
+    image: "/images/auditions-stage.png",
   },
 ]
 
@@ -409,15 +455,22 @@ export default function AuditionsContent() {
                   ? "border-primary/30 shadow-lg"
                   : audition.id === 2
                     ? "border-orange-300 shadow-lg"
-                    : "border-gray-200"
+                    : audition.id === 7
+                      ? "border-purple-300 shadow-lg"
+                      : "border-gray-200"
               }`}
             >
               <div className="relative h-48 w-full">
                 <Image
-                  src={audition.id === 2 ? audition.image : "/images/auditions-stage.png"}
+                  src={audition.image || "/placeholder.svg"}
                   alt={audition.title}
                   fill
                   className="object-cover"
+                  onError={(e) => {
+                    // Fallback to default image on error
+                    const target = e.target as HTMLImageElement
+                    target.src = "/images/auditions-stage.png"
+                  }}
                 />
                 {audition.verified && (
                   <div className="absolute top-2 right-2 badge-verified">
@@ -443,10 +496,17 @@ export default function AuditionsContent() {
                     ⚔️ Action Drama
                   </div>
                 )}
+                {audition.id === 7 && (
+                  <div className="absolute top-2 left-2 bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                    🎭 Video Audition
+                  </div>
+                )}
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-3">
-                  <span className="badge-primary">{audition.type}</span>
+                  <span className={`badge-primary ${audition.id === 7 ? "bg-purple-100 text-purple-800" : ""}`}>
+                    {audition.type}
+                  </span>
                   <span className="badge-outline">{audition.experience}</span>
                 </div>
                 <h3 className="font-playfair text-xl font-bold mb-4">{audition.title}</h3>
@@ -525,6 +585,56 @@ export default function AuditionsContent() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs bg-orange-600 text-white px-2 py-1 rounded hover:bg-orange-700 transition-colors"
+                      >
+                        Apply Now
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* Special character info for Maithili casting */}
+                {audition.id === 7 && audition.characterDetails && (
+                  <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+                    <h4 className="font-semibold text-purple-700 mb-2 flex items-center">
+                      🎭 Play: {audition.characterDetails.playTitle}
+                    </h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                      <div>
+                        <span className="font-medium text-gray-700">Duration:</span>
+                        <span className="ml-1 text-gray-800">{audition.characterDetails.duration}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Language:</span>
+                        <span className="ml-1 text-gray-800">{audition.characterDetails.language}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Characters:</span>
+                        <span className="ml-1 text-gray-800">{audition.characterDetails.totalCharacters}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Deadline:</span>
+                        <span className="ml-1 text-gray-800 font-semibold text-red-600">
+                          {audition.characterDetails.deadline}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-700 mb-3 italic">"{audition.characterDetails.description}"</p>
+                    <div className="mb-3">
+                      <p className="font-medium text-gray-700 text-sm mb-1">🎬 Video Audition Process:</p>
+                      <div className="text-xs text-gray-600 space-y-1">
+                        <div>• Choose any 2 roles (males: perform all dialogues)</div>
+                        <div>• Record video performing dialogues</div>
+                        <div>• Upload to Google Drive & make shareable</div>
+                        <div>• Submit form with video link</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-green-600">📞 Contact: Ashish - 8788132835</span>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-purple-600 text-white px-2 py-1 rounded hover:bg-purple-700 transition-colors"
                       >
                         Apply Now
                       </a>

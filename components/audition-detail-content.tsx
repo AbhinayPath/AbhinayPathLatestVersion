@@ -294,35 +294,149 @@ const auditions = [
   },
   {
     id: 7,
-    title: "Casting Call for 2-Minute Short Film - Family Drama",
-    type: "Short Film",
-    location: "Bangalore",
+    title: "Casting Call – Maithili Play",
+    type: "Theater",
+    location: "Bengaluru",
     state: "Karnataka",
-    date: "May 26-27, 2025",
-    director: "Independent Filmmaker",
+    date: "Apply by 22 August 2025",
+    director: "Broken Wall Bridge Theatre Group",
     description:
-      "Casting for a 2-minute short film shot in Bangalore. Language: Hindi and English (Hinglish). Roles: Gen Z female (17-21), supportive mother (40s-50s), and sarcastic father (40s-50s). This is a PAID opportunity. Apply via WhatsApp specifying the role you're interested in.",
-    company: "Independent Production",
-    companyLink: "https://wa.me/919862853175",
-    contact: "9862853175 (WhatsApp)",
-    contactType: "whatsapp",
+      "Play Title: Maithili. Duration: 50 minutes. Characters: 10. Language: Hindi. Video audition required - choose any two roles, record dialogues, upload to Google Drive and submit form. Selected candidates will be invited for play reading session.",
+    company: "Broken Wall Bridge Theatre Group",
+    companyLink: "https://docs.google.com/forms/d/e/1FAIpQLSdUM6apfL5XZ3X3YRf0AcNEWm59kyuRZ92qgIMRVG1B96m8Vw/viewform",
+    contact: "Ashish - 8788132835",
+    contactType: "form",
     experience: "All Levels",
     verified: true,
     image: "/images/auditions-stage.png",
+    playTitle: "Maithili",
+    duration: "50 minutes",
+    totalCharacters: 10,
+    language: "Hindi",
+    videoAudition: true,
+    applicationDeadline: "22 August 2025",
     requirements: [
-      "Must be comfortable with Hindi and English (Hinglish) dialogue",
-      "Must be available on either May 26th or 27th, 2025 for the shoot",
-      "Must be based in or able to travel to Bangalore",
-      "Previous acting experience is preferred but not mandatory",
-      "Must be comfortable with the filming process and taking direction",
+      "Choose any two roles that resonate with you",
+      "Male actors: perform all dialogues provided (only two male characters listed)",
+      "Record a video performing the dialogues",
+      "Upload the video to Google Drive and make it shareable",
+      "Submit the audition form with video link",
+      "Based in or able to travel to Bengaluru",
     ],
     roles: [
-      "Gen Z Female (17-21 years): Confident, slightly rebellious character with good emotional range. Should be able to portray both vulnerability and strength.",
-      "Supportive Mother (40s-50s): Warm, understanding character who balances traditional values with modern thinking. Requires subtle emotional expressions.",
-      "Sarcastic Father (40s-50s): Witty, slightly stern but loving character. Should have good comic timing and ability to deliver sarcastic lines naturally.",
+      "Maithili (Female, Age 48) - Submissive, Assertive, Ecstatic moods",
+      "Sunita (Female, Age 45) - Bossy, Angry moods",
+      "Asha (Female, Age 60) - Submissive mood",
+      "Shama (Female, Age 60) - Pretentious mood",
+      "Suraj (Male, Age 20) - Submissive, Hopeful, Assertive moods",
+      "Groom (Male, Age 27) - Uninterested, Angry moods",
     ],
     applicationProcess:
-      "Send a WhatsApp message to 9862853175 clearly mentioning which role you're applying for. Include your name, age, location, previous acting experience (if any), and a recent photo. Selected candidates will be called for a brief audition. This is a PAID opportunity - compensation details will be discussed during the selection process.",
+      "Fill the audition form at https://docs.google.com/forms/d/e/1FAIpQLSdUM6apfL5XZ3X3YRf0AcNEWm59kyuRZ92qgIMRVG1B96m8Vw/viewform. For any doubts, contact Ashish at 8788132835. Selected candidates will be invited for a play reading session.",
+    characterDetails: {
+      femaleRoles: [
+        {
+          name: "Maithili",
+          age: 48,
+          moods: ["Submissive", "Assertive", "Ecstatic"],
+          dialogues: [
+            {
+              mood: "Ecstatic",
+              text: "My Goodness, kitne saaalon baad kisi apne se mil rahi hu. Batao, cake, muffin, pastry ya coffee. Kya loge tum?",
+            },
+            {
+              mood: "Submissive",
+              text: "Dekhiye, main aapse kuchh kehna chahti hu.",
+            },
+            {
+              mood: "Assertive",
+              text: "Mere niji jeevanm par tippani karne ka aapko koi adhikaar nahi hain.",
+            },
+          ],
+        },
+        {
+          name: "Sunita",
+          age: 45,
+          moods: ["Bossy", "Angry"],
+          dialogues: [
+            {
+              mood: "Angry",
+              text: "Apni galti chupaane ke liye ek buzurg vyakti par ungli uthate hue tumhe sharam nahi aai? Huh, mein toh bhool hi gayi, ki tum nihayti besharam ho.",
+            },
+          ],
+        },
+        {
+          name: "Asha",
+          age: 60,
+          moods: ["Submissive"],
+          dialogues: [
+            {
+              mood: "Pleading",
+              text: "Nahi nahi, kucch toh hal niklega. Aap jara shant ho jaiye.",
+            },
+          ],
+        },
+        {
+          name: "Shama",
+          age: 60,
+          moods: ["Pretentious"],
+          dialogues: [
+            {
+              mood: "Pretentious",
+              text: "Dekhiye, hum toh bade progressive hain.",
+            },
+            {
+              mood: "Pretentious",
+              text: "Wah Ashaji, beti ko vilaayat kya bhej diya, uski toh soch hi wahan ki ho gai. Arre, humare bacche bhi padhe likhe hain, America mein naukri karte hain, lekin ghar ke sanskaar nahi bhule.",
+            },
+          ],
+        },
+      ],
+      maleRoles: [
+        {
+          name: "Suraj",
+          age: 20,
+          moods: ["Submissive", "Hopeful", "Assertive"],
+          dialogues: [
+            {
+              mood: "Blushing",
+              text: "Ma, aapki aur papa ki bhi toh love marriage hui thi. Toh mujhe ijazat hogi hi.",
+            },
+            {
+              mood: "Assertive",
+              text: "kya chote kabhi sahi nahi ho sakte? Kya bade kabhi galat nahi ho sakte?",
+            },
+          ],
+        },
+        {
+          name: "Groom",
+          age: 27,
+          moods: ["Uninterested", "Angry"],
+          dialogues: [
+            {
+              mood: "Angry, Irritated",
+              text: "Maa, papa, bahar aaiye, hume der ho rahi hain. Hume ab chalna chahiye.",
+            },
+          ],
+        },
+      ],
+    },
+    auditionInstructions: [
+      "Download/Read Character Dialogues",
+      "Choose any two roles that resonate with you",
+      "Male actors: perform all dialogues provided (only two male characters listed)",
+      "Record a video performing the dialogues",
+      "Upload the video to your Google Drive and make it shareable",
+      "Put the video link in the audition form",
+      "Fill the Audition Form",
+      "Selected candidates will be invited for a play reading session",
+    ],
+    importantNotes: [
+      "The ages mentioned are for the character, not the actor",
+      "Last Date to Submit: 22 August 2025",
+      "Next Step (if selected): Play reading session invitation",
+      "Brief character information should be provided in the form",
+    ],
   },
   {
     id: 8,
@@ -530,7 +644,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
       <div className="container py-12">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="font-playfair text-3xl font-bold mb-4">Audition Not Found</h1>
-          <p className="text-gray-600 mb-6">The audition you\'re looking for doesn\'t exist or has been removed.</p>
+          <p className="text-gray-600 mb-6">The audition you're looking for doesn't exist or has been removed.</p>
           <Link href="/auditions">
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -552,11 +666,13 @@ export default function AuditionDetailContent({ id }: { id: number }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div
-            className={`bg-white rounded-lg border overflow-hidden ${audition.id === 2 ? "border-orange-200" : "border-gray-200"}`}
+            className={`bg-white rounded-lg border overflow-hidden ${
+              audition.id === 2 ? "border-orange-200" : audition.id === 7 ? "border-purple-200" : "border-gray-200"
+            }`}
           >
             <div className="relative h-64 w-full">
               <Image
-                src={audition.image || "/placeholder.svg"}
+                src={audition.image || "/images/auditions-stage.png"}
                 alt={audition.title}
                 fill
                 className="object-cover"
@@ -582,16 +698,30 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   ⚔️ Action Drama
                 </div>
               )}
+              {audition.id === 7 && (
+                <div className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                  🎭 Theater Play
+                </div>
+              )}
             </div>
 
             <div className="p-6">
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className={`badge-primary ${audition.id === 2 ? "bg-orange-100 text-orange-800" : ""}`}>
+                <span
+                  className={`badge-primary ${
+                    audition.id === 2
+                      ? "bg-orange-100 text-orange-800"
+                      : audition.id === 7
+                        ? "bg-purple-100 text-purple-800"
+                        : ""
+                  }`}
+                >
                   {audition.type}
                 </span>
                 <span className="badge-outline">{audition.experience}</span>
-                {(audition.id === 7 || audition.id === 8) && <span className="badge-success">Paid</span>}
+                {audition.id === 8 && <span className="badge-success">Paid</span>}
                 {audition.id === 1 && <span className="badge-success">Open Now</span>}
+                {audition.videoAudition && <span className="badge-secondary">Video Audition</span>}
               </div>
 
               <h1 className="font-playfair text-3xl font-bold mb-4">{audition.title}</h1>
@@ -600,8 +730,227 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 <h2 className="text-xl font-semibold mb-3">Description</h2>
                 <p className="text-gray-800 mb-6">{audition.description}</p>
 
-                {/* Character Details Section for Meera casting */}
-                {audition.characterDetails && (
+                {/* Special section for Maithili play audition */}
+                {audition.id === 7 && (
+                  <>
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">🎭 Play Information</h2>
+                      <div className="bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6 mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div className="bg-white rounded-lg p-4 border border-purple-200">
+                            <p className="font-medium text-gray-700 mb-1">Play Title</p>
+                            <p className="text-lg font-semibold text-purple-800">{audition.playTitle}</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border border-purple-200">
+                            <p className="font-medium text-gray-700 mb-1">Duration</p>
+                            <p className="text-lg font-semibold text-purple-800">{audition.duration}</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border border-purple-200">
+                            <p className="font-medium text-gray-700 mb-1">Total Characters</p>
+                            <p className="text-lg font-semibold text-purple-800">{audition.totalCharacters}</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border border-purple-200">
+                            <p className="font-medium text-gray-700 mb-1">Language</p>
+                            <p className="text-lg font-semibold text-purple-800">{audition.language}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">🎬 Audition Process</h2>
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-6">
+                        <div className="space-y-4">
+                          {audition.auditionInstructions.map((instruction: string, index: number) => (
+                            <div key={index} className="bg-white rounded-lg p-4 border border-purple-200">
+                              <div className="flex items-start">
+                                <span className="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
+                                  {index + 1}
+                                </span>
+                                <p className="text-gray-700">{instruction}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">👥 Character Roles & Dialogues</h2>
+
+                      {/* Female Roles */}
+                      <div className="mb-8">
+                        <h3 className="text-lg font-semibold text-purple-800 mb-4">Female Roles</h3>
+                        <div className="space-y-6">
+                          {audition.characterDetails.femaleRoles.map((character: any, index: number) => (
+                            <div
+                              key={index}
+                              className="bg-gradient-to-r from-pink-50 to-purple-50 border border-purple-200 rounded-lg p-6"
+                            >
+                              <div className="flex items-center justify-between mb-4">
+                                <h4 className="text-lg font-semibold text-purple-800">{character.name}</h4>
+                                <div className="flex items-center space-x-2">
+                                  <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
+                                    Age: {character.age}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="mb-4">
+                                <p className="font-medium text-gray-700 mb-2">Character Moods:</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {character.moods.map((mood: string, moodIndex: number) => (
+                                    <span
+                                      key={moodIndex}
+                                      className="bg-purple-200 text-purple-800 px-2 py-1 rounded text-sm"
+                                    >
+                                      {mood}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div>
+                                <p className="font-medium text-gray-700 mb-3">Sample Dialogues:</p>
+                                <div className="space-y-3">
+                                  {character.dialogues.map((dialogue: any, dialogueIndex: number) => (
+                                    <div
+                                      key={dialogueIndex}
+                                      className="bg-white rounded-lg p-4 border border-purple-200"
+                                    >
+                                      <div className="flex items-center mb-2">
+                                        <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs font-medium mr-2">
+                                          {dialogue.mood}
+                                        </span>
+                                      </div>
+                                      <p className="text-gray-800 italic">"{dialogue.text}"</p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Male Roles */}
+                      <div className="mb-8">
+                        <h3 className="text-lg font-semibold text-purple-800 mb-4">Male Roles</h3>
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                          <p className="text-blue-800 text-sm font-medium">
+                            📝 Note for Male Actors: Perform all dialogues provided as only two male characters are
+                            listed.
+                          </p>
+                        </div>
+                        <div className="space-y-6">
+                          {audition.characterDetails.maleRoles.map((character: any, index: number) => (
+                            <div
+                              key={index}
+                              className="bg-gradient-to-r from-blue-50 to-purple-50 border border-purple-200 rounded-lg p-6"
+                            >
+                              <div className="flex items-center justify-between mb-4">
+                                <h4 className="text-lg font-semibold text-purple-800">{character.name}</h4>
+                                <div className="flex items-center space-x-2">
+                                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                                    Age: {character.age}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="mb-4">
+                                <p className="font-medium text-gray-700 mb-2">Character Moods:</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {character.moods.map((mood: string, moodIndex: number) => (
+                                    <span
+                                      key={moodIndex}
+                                      className="bg-blue-200 text-blue-800 px-2 py-1 rounded text-sm"
+                                    >
+                                      {mood}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div>
+                                <p className="font-medium text-gray-700 mb-3">Sample Dialogues:</p>
+                                <div className="space-y-3">
+                                  {character.dialogues.map((dialogue: any, dialogueIndex: number) => (
+                                    <div key={dialogueIndex} className="bg-white rounded-lg p-4 border border-blue-200">
+                                      <div className="flex items-center mb-2">
+                                        <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium mr-2">
+                                          {dialogue.mood}
+                                        </span>
+                                      </div>
+                                      <p className="text-gray-800 italic">"{dialogue.text}"</p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">📋 Important Notes</h2>
+                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
+                        <ul className="space-y-2">
+                          {audition.importantNotes.map((note: string, index: number) => (
+                            <li key={index} className="flex items-start">
+                              <span className="text-yellow-600 mr-2 mt-1">•</span>
+                              <span className="text-gray-800">{note}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">📝 Application Instructions</h2>
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-6">
+                        <div className="space-y-4">
+                          <div className="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 className="font-semibold text-purple-800 mb-2 flex items-center">
+                              📝 Step 1: Fill the Audition Form
+                            </h4>
+                            <p className="text-gray-700 mb-3">
+                              Complete the audition form with all required details including your video link.
+                            </p>
+                            <a
+                              href={audition.companyLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium"
+                            >
+                              <ExternalLink className="h-4 w-4 mr-2" />
+                              Open Audition Form
+                            </a>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-4 border border-purple-200">
+                            <h4 className="font-semibold text-purple-800 mb-2 flex items-center">
+                              💬 Step 2: Contact for Queries
+                            </h4>
+                            <p className="text-gray-700 mb-3">
+                              For any doubts or additional information about the audition process.
+                            </p>
+                            <a
+                              href={`tel:${audition.contact.split(" - ")[1]}`}
+                              className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
+                            >
+                              <Phone className="h-4 w-4 mr-2" />
+                              {audition.contact}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </>
+                )}
+
+                {/* Character Details Section for other auditions */}
+                {audition.characterDetails && audition.id !== 7 && (
                   <section>
                     <h2 className="text-xl font-semibold mb-3">🎭 Character Information</h2>
                     <div className="bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg p-6 mb-6">
@@ -992,35 +1341,38 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                           centuries.
                         </p>
                         <p className="text-gray-800">
-                          Our contemporary adaptation \'The Anklet\' brings this classic story to modern audiences,
-                          exploring its themes through a fresh lens while honoring the original\'s cultural
-                          significance.
+                          Our contemporary adaptation 'The Anklet' brings this classic story to modern audiences,
+                          exploring its themes through a fresh lens while honoring the original's cultural significance.
                         </p>
                       </div>
                     </section>
                   </>
                 )}
 
-                <h2 className="text-xl font-semibold mb-3">Roles</h2>
-                <ul className="list-disc pl-5 mb-6">
-                  {audition.roles.map((role: string, index: number) => (
-                    <li key={index} className="text-gray-800 mb-2">
-                      {role}
-                    </li>
-                  ))}
-                </ul>
+                {audition.id !== 7 && (
+                  <>
+                    <h2 className="text-xl font-semibold mb-3">Roles</h2>
+                    <ul className="list-disc pl-5 mb-6">
+                      {audition.roles.map((role: string, index: number) => (
+                        <li key={index} className="text-gray-800 mb-2">
+                          {role}
+                        </li>
+                      ))}
+                    </ul>
 
-                <h2 className="text-xl font-semibold mb-3">Requirements</h2>
-                <ul className="list-disc pl-5 mb-6">
-                  {audition.requirements.map((req: string, index: number) => (
-                    <li key={index} className="text-gray-800 mb-2">
-                      {req}
-                    </li>
-                  ))}
-                </ul>
+                    <h2 className="text-xl font-semibold mb-3">Requirements</h2>
+                    <ul className="list-disc pl-5 mb-6">
+                      {audition.requirements.map((req: string, index: number) => (
+                        <li key={index} className="text-gray-800 mb-2">
+                          {req}
+                        </li>
+                      ))}
+                    </ul>
 
-                <h2 className="text-xl font-semibold mb-3">How to Apply</h2>
-                <p className="text-gray-800 mb-6">{audition.applicationProcess}</p>
+                    <h2 className="text-xl font-semibold mb-3">How to Apply</h2>
+                    <p className="text-gray-800 mb-6">{audition.applicationProcess}</p>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -1088,6 +1440,8 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   <MessageSquare className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                 ) : audition.contactType === "website" ? (
                   <Building className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                ) : audition.contactType === "form" ? (
+                  <ExternalLink className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                 ) : (
                   <Phone className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                 )}
@@ -1097,16 +1451,24 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 </div>
               </div>
 
-              {(audition.id === 7 || audition.id === 8) && (
+              {audition.id === 8 && (
                 <div className="flex items-start">
                   <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
                     <span className="font-bold">💰</span>
                   </div>
                   <div>
                     <p className="font-medium">Compensation</p>
-                    <p className="text-gray-600">
-                      {audition.id === 7 ? "Paid opportunity (details during selection)" : "Paid teaching assignment"}
-                    </p>
+                    <p className="text-gray-600">Paid teaching assignment</p>
+                  </div>
+                </div>
+              )}
+
+              {audition.applicationDeadline && (
+                <div className="flex items-start">
+                  <Calendar className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
+                  <div>
+                    <p className="font-medium text-gray-700">Application Deadline</p>
+                    <p className="text-gray-800 font-semibold text-red-600">{audition.applicationDeadline}</p>
                   </div>
                 </div>
               )}
@@ -1131,7 +1493,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
 
             {/* Special notice for OMASTA Studios */}
             {audition.id === 2 && (
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
                 <h4 className="font-medium text-orange-800 mb-2 flex items-center">⚔️ Special Requirements</h4>
                 <ul className="text-sm text-orange-700 space-y-1">
                   <li className="flex items-start">
@@ -1150,8 +1512,33 @@ export default function AuditionDetailContent({ id }: { id: number }) {
               </div>
             )}
 
+            {/* Special notice for Maithili play */}
+            {audition.id === 7 && (
+              <div className="mt-6 bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <h4 className="font-medium text-purple-800 mb-2 flex items-center">🎭 Video Audition Requirements</h4>
+                <ul className="text-sm text-purple-700 space-y-1">
+                  <li className="flex items-start">
+                    <span className="text-purple-600 mr-2 mt-0.5">•</span>
+                    Choose any 2 roles
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-600 mr-2 mt-0.5">•</span>
+                    Record video dialogues
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-600 mr-2 mt-0.5">•</span>
+                    Upload to Google Drive
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-purple-600 mr-2 mt-0.5">•</span>
+                    Submit form with video link
+                  </li>
+                </ul>
+              </div>
+            )}
+
             {/* Apply Button */}
-            <div className="space-y-3">
+            <div className="mt-6 space-y-3">
               {audition.id === 2 ? (
                 <>
                   <a href={audition.googleFormLink} target="_blank" rel="noopener noreferrer" className="block">
@@ -1172,6 +1559,24 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                     >
                       <MessageSquare className="h-4 w-4 mr-2" />
                       WhatsApp for Queries
+                    </Button>
+                  </a>
+                </>
+              ) : audition.id === 7 ? (
+                <>
+                  <a href={audition.companyLink} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Fill Audition Form
+                    </Button>
+                  </a>
+                  <a href={`tel:${audition.contact.split(" - ")[1]}`} className="block">
+                    <Button
+                      variant="outline"
+                      className="w-full border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      Call for Queries
                     </Button>
                   </a>
                 </>
@@ -1213,6 +1618,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   {audition.contactType === "email" && <Mail className="mr-2 h-4 w-4" />}
                   {audition.contactType === "phone" && <Phone className="mr-2 h-4 w-4" />}
                   {audition.contactType === "website" && <Building className="mr-2 h-4 w-4" />}
+                  {audition.contactType === "form" && <ExternalLink className="mr-2 h-4 w-4" />}
                   {audition.contactType === "whatsapp"
                     ? "Contact via WhatsApp"
                     : audition.contactType === "email"
@@ -1221,7 +1627,9 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                         ? "Call Now"
                         : audition.contactType === "website"
                           ? "Visit Website"
-                          : "Contact for Audition"}
+                          : audition.contactType === "form"
+                            ? "Fill Application Form"
+                            : "Contact for Audition"}
                 </Button>
               </a>
             </div>
