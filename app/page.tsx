@@ -25,23 +25,44 @@ export default function Home() {
           <div className="max-w-3xl space-y-4 sm:space-y-6 md:space-y-8 px-2 sm:px-0">
             <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4">
               <Sparkles className="h-3.5 w-3.5 mr-1" />
-              Beta Access Available
+              Abhinayपथ Community Access
             </Badge>
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              India&apos;s first platform to discover auditions, workshops and mentorship from acting school alumni
+              The actor&apos;s trusted hub for verified auditions & workshops
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed">
-              Connect. Create. Succeed in Indian entertainment.
+              Auditions, workshops, and mentorship you can trust.
             </p>
-            <div className="pt-4">
-              <Link href="/join-community">
-                <Button
-                  size="lg"
-                  className="rounded-full bg-[#F5A623] text-[#2D1A54] hover:bg-[#e69b1e] text-lg px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
-                >
-                  Join Beta Community <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+            <div className="pt-4 space-y-4">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/auditions" className="flex-1">
+                  <Button
+                    size="lg"
+                    className="w-full rounded-full bg-[#F5A623] text-[#2D1A54] hover:bg-[#e69b1e] text-lg px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
+                  >
+                    View Auditions <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="/workshops" className="flex-1">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full rounded-full border-2 border-white text-white hover:bg-white hover:text-[#2D1A54] text-lg px-8 py-6 h-auto font-medium transition-all bg-transparent"
+                  >
+                    Browse Workshops <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+              <div className="text-center">
+                <Link href="/join-community">
+                  <Button
+                    variant="ghost"
+                    className="text-white/80 hover:text-white hover:bg-white/10 rounded-full px-6 py-2 text-base font-medium transition-all"
+                  >
+                    Join Abhinayपथ Community
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -173,13 +194,13 @@ export default function Home() {
           <div className="text-center mb-16">
             <Badge className="bg-[#2D1A54]/10 text-[#2D1A54] hover:bg-[#2D1A54]/20 mb-4">
               <Sparkles className="h-3.5 w-3.5 mr-1" />
-              Coming Soon
+              More Features Coming
             </Badge>
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">
               More Features on the Horizon
             </h2>
             <p className="text-gray-800 max-w-3xl mx-auto text-lg">
-              More tools coming soon. Join beta for early access.
+              More tools coming soon. Join Abhinayपथ for early access.
             </p>
           </div>
 
@@ -228,7 +249,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4">
               <Sparkles className="h-3.5 w-3.5 mr-1" />
-              Limited Beta Access
+              Limited Community Access
             </Badge>
             <h2 className="font-playfair text-4xl md:text-5xl font-bold">
               Ready to Take Your Creative Career to the Next Level?
@@ -240,7 +261,7 @@ export default function Home() {
                   size="lg"
                   className="rounded-full bg-[#F5A623] text-[#2D1A54] hover:bg-[#e69b1e] text-lg px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
                 >
-                  Join AbhinayPath Beta <ArrowRight className="ml-2 h-5 w-5" />
+                  Join Abhinayपथ Community <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
             </div>

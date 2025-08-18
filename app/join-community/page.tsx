@@ -25,11 +25,12 @@ export default function JoinCommunityPage() {
       <div className="max-w-4xl mx-auto text-center mb-16">
         <div className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
           <Sparkles className="h-4 w-4 inline mr-2" />
-          <span className="text-sm font-medium">Beta Access</span>
+          <span className="text-sm font-medium">Abhinayपथ Community Access</span>
         </div>
 
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparentalight text-violet-600">
-          Abhinayपथ: Beta Community Hub    </h1>
+        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent light text-violet-600">
+          Abhinayपथ: Community Hub{" "}
+        </h1>
         <div className="relative h-64 w-full mb-8 rounded-xl overflow-hidden shadow-xl">
           <Image
             src="/images/abhinaypath-logo.png"
@@ -166,7 +167,7 @@ export default function JoinCommunityPage() {
             <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
               <Lightbulb className="h-5 w-5 text-primary" />
             </div>
-            <h2 className="font-playfair text-3xl font-bold">Why Join the Beta Community?</h2>
+            <h2 className="font-playfair text-3xl font-bold">Why Join the Abhinayपथ Community?</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -312,7 +313,7 @@ export default function JoinCommunityPage() {
               </Button>
             </a>
             <Link href="/">
-              <Button variant="outline" size="lg" className="rounded-full">
+              <Button variant="outline" size="lg" className="rounded-full bg-transparent">
                 Explore the Platform
               </Button>
             </Link>
@@ -332,13 +333,13 @@ export default function JoinCommunityPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {[
             {
-              question: "What is AbhinayPath Beta?",
+              question: "What is the Abhinayपथ Community?",
               answer: "Early access to our platform building India's creative ecosystem across theater, film, and web.",
             },
             {
               question: "Is it free to join?",
               answer:
-                "Yes, AbhinayPath Beta is completely free. Early members get special benefits for future premium features.",
+                "Yes, the Abhinayपथ Community is completely free. Early members get special benefits for future premium features.",
             },
             {
               question: "How can I contribute to the community?",
@@ -346,12 +347,12 @@ export default function JoinCommunityPage() {
             },
             {
               question: "When will the full platform launch?",
-              answer: "Beta members will be the first to know about our official launch and new features.",
+              answer: "Community members will be the first to know about our official launch and new features.",
             },
             {
               question: "Can I post my own auditions or workshops?",
               answer:
-                "Yes! Share legitimate opportunities. We'll be refining our posting and verification systems during the beta.",
+                "Yes! Share legitimate opportunities. We'll be refining our posting and verification systems during the community phase.",
             },
             {
               question: "How do I get featured in creator spotlights?",

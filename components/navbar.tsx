@@ -84,7 +84,7 @@ export default function Navbar() {
             <div className="pt-4 border-t mt-2">
               <Link href="/join-community" onClick={toggleMenu}>
                 <Button className="w-full rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white py-5 h-auto text-base">
-                  Join Beta Community
+                  Join Abhinayपथ Community  
                 </Button>
               </Link>
             </div>
