@@ -276,6 +276,31 @@ const workshops = [
     duration: "2 days (Weekend Workshop)",
     includes: "Complete improv training + performance techniques",
   },
+  {
+    id: 31,
+    title: "Educational Theatre National Workshop – IIET, Mysore",
+    trainer: "Rajneesh Bisht",
+    institution: "Indian Institute of Educational Theatre (IIET)",
+    location: "Mysore",
+    state: "Karnataka",
+    date: "6 – 15 October 2025",
+    time: "Full day sessions",
+    description:
+      "🎭 A comprehensive 10-day workshop for actors & educators by renowned theatre director Rajneesh Bisht. Develop acting skills, confidence & teamwork through improvisation, empathy & communication training. Learn theatre as a tool for student growth and innovative classroom management strategies.",
+    image: "/images/iiet-logo.png",
+    registrationLink: "https://www.indiantheatrefoundation.org/theatre-in-education-workshop/",
+    featured: true,
+    price: "₹16,000 (includes accommodation + 2 meals/day)",
+    contact: "Via registration link",
+    email: "Via IIET website",
+    eligibility: "Open to actors and educators",
+    mode: "Offline",
+    venue: "Indian Institute of Educational Theatre, Hardwicke School, JLB Road, Mysore",
+    accommodation: "Youth Hostel, Saraswathipuram, Mysore",
+    duration: "10 days",
+    includes: "Accommodation + 2 meals/day + Tea/Coffee + Workshop materials",
+    instagramLink: "https://www.instagram.com/iietmysuru?igsh=NHdqZ2FsdmEwdTZ3",
+  },
 ]
 
 // Get unique states, cities, and trainers for filters
@@ -284,7 +309,7 @@ const cities = [...new Set(workshops.map((workshop) => workshop.location))].sort
 const trainers = [...new Set(workshops.map((workshop) => workshop.trainer))].sort()
 const institutions = [...new Set(workshops.map((workshop) => workshop.institution))].sort()
 
-export default function WorkshopsContent() {
+function WorkshopsContent() {
   const [filters, setFilters] = useState({
     search: "",
     city: "",
@@ -517,3 +542,5 @@ export default function WorkshopsContent() {
     </div>
   )
 }
+
+export default WorkshopsContent

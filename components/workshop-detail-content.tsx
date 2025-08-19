@@ -843,13 +843,137 @@ const workshops = [
         "This intensive weekend workshop is designed for anyone ready to explore the liberating world of improvisational theatre. Whether you're a complete beginner or a trained actor, you'll discover improv as a fresh creative medium that breaks conventional habits and opens new pathways to authentic performance. The workshop emphasizes collaborative creation, spontaneity, and the unique freedom that comes from unscripted performance.",
     },
   },
+  {
+    id: 31,
+    title: "Educational Theatre National Workshop – IIET, Mysore",
+    trainer: "Rajneesh Bisht",
+    institution: "Indian Institute of Educational Theatre (IIET)",
+    location: "Mysore",
+    state: "Karnataka",
+    date: "6 – 15 October 2025",
+    time: "Full day sessions",
+    description:
+      "🎭 A comprehensive 10-day workshop for actors & educators by renowned theatre director Rajneesh Bisht. Develop acting skills, confidence & teamwork through improvisation, empathy & communication training. Learn theatre as a tool for student growth and innovative classroom management strategies.",
+    image: "/images/iiet-logo.png",
+    registrationLink: "https://www.indiantheatrefoundation.org/theatre-in-education-workshop/",
+    featured: true,
+    price: "₹16,000 (includes accommodation + 2 meals/day)",
+    contact: "Via registration link",
+    email: "Via IIET website",
+    eligibility: "Open to actors and educators",
+    venue: "Indian Institute of Educational Theatre, Hardwicke School, JLB Road, Mysore",
+    includes: "Accommodation + 2 meals/day + Tea/Coffee + Workshop materials",
+    fullDetails: {
+      venue: "Indian Institute of Educational Theatre, Hardwicke School, JLB Road, Mysore",
+      organizer: "Indian Institute of Educational Theatre (IIET), Mysore",
+      duration: "10 days",
+      medium: "English & Hindi",
+      courseDirector: "Rajneesh Bisht (Renowned Theatre Director & Writer)",
+      accommodation: "Youth Hostel, Saraswathipuram, Mysore",
+      eligibilityCriteria: [
+        "Open to actors seeking to develop their craft",
+        "Educators interested in theatre-based teaching methods",
+        "Theatre enthusiasts wanting to learn educational applications",
+        "No prior theatre experience required for educators",
+        "Commitment to attend all 10 days of the workshop",
+      ],
+      courseFee: "₹16,000 (includes accommodation + 2 meals/day for 10 days)",
+      certification: "IIET Certificate upon successful completion",
+      keyHighlights: [
+        "Comprehensive 10-day intensive workshop",
+        "Led by renowned theatre director Rajneesh Bisht",
+        "Dual focus: acting skills + educational theatre techniques",
+        "Special 3-day acting sessions by Prasanna Sir",
+        "Theatre as a tool for student growth and development",
+        "Innovative classroom management through theatre practices",
+        "Improvisation, empathy & communication training",
+        "Self-expression and audience connection techniques",
+        "Accommodation and meals included in fee",
+        "Separate dorms for men and women",
+      ],
+      curriculum: [
+        "Fundamentals of acting and performance",
+        "Theatre techniques for confidence building",
+        "Improvisation and spontaneous performance",
+        "Empathy development through role-playing",
+        "Communication skills enhancement",
+        "Self-expression and creative freedom",
+        "Audience connection and engagement techniques",
+        "Theatre as an educational tool",
+        "Classroom management through drama",
+        "Innovative teaching strategies using theatre",
+        "Student engagement through performance",
+        "Creative learning methodologies",
+      ],
+      practicalExperience: [
+        "Hands-on acting workshops and exercises",
+        "Improvisation sessions and group activities",
+        "Educational theatre demonstrations",
+        "Classroom simulation using theatre techniques",
+        "Performance practice and feedback sessions",
+        "Collaborative learning through group work",
+      ],
+      learningOutcomes: [
+        "Enhanced acting skills and stage confidence",
+        "Improved teamwork and collaboration abilities",
+        "Advanced improvisation and spontaneous performance skills",
+        "Better empathy and communication capabilities",
+        "Effective self-expression techniques",
+        "Strong audience connection and engagement skills",
+        "Understanding of theatre as educational methodology",
+        "Innovative classroom management strategies",
+        "Creative approaches to student engagement",
+        "Practical skills for implementing theatre in education",
+      ],
+      aboutInstructor:
+        "Rajneesh Bisht – Renowned Theatre Director & Writer with extensive experience in both performance and educational theatre. Known for innovative approaches to theatre education and student engagement. Expert in combining traditional acting techniques with modern educational methodologies. Prasanna Sir will conduct special 3-day acting sessions, bringing additional expertise in performance training.",
+      accommodationDetails: [
+        "Stay at Youth Hostel, Saraswathipuram, Mysore",
+        "Separate dormitories for men and women",
+        "Breakfast provided at Youth Hostel",
+        "Lunch provided at IIET venue",
+        "Dinner to be managed individually by participants",
+        "Tea/Coffee served in morning and during sessions",
+        "Transport cost from hostel to venue borne by participants",
+      ],
+      workshopPolicies: [
+        "Smoking and alcohol strictly prohibited",
+        "Attendance required for all 10 days",
+        "Participants responsible for hostel to venue transport",
+        "Professional conduct expected at all times",
+        "Active participation encouraged in all sessions",
+      ],
+      uniqueExperience: [
+        "Learn from renowned theatre director Rajneesh Bisht",
+        "Special acting sessions by expert Prasanna Sir",
+        "Comprehensive approach covering both acting and education",
+        "Immersive 10-day intensive experience",
+        "Historic Mysore location with rich cultural heritage",
+        "Combination of traditional and modern theatre techniques",
+      ],
+      targetAudience: [
+        "Aspiring and professional actors",
+        "Teachers and educators",
+        "Theatre enthusiasts and practitioners",
+        "Students interested in performance arts",
+        "Anyone interested in theatre-based education",
+      ],
+      contactInfo: [
+        "Registration: https://www.indiantheatrefoundation.org/theatre-in-education-workshop/",
+        "Instagram: @iietmysuru",
+        "Website: https://www.instagram.com/iietmysuru?igsh=NHdqZ2FsdmEwdTZ3",
+      ],
+      additionalInfo:
+        "This comprehensive workshop offers a unique opportunity to learn from renowned theatre professionals while exploring the intersection of performance and education. The program is designed to benefit both actors seeking to enhance their craft and educators looking to incorporate theatre techniques into their teaching practice. The inclusive fee covers accommodation and meals, making it accessible for participants from various backgrounds.",
+    },
+  },
 ]
 
 interface WorkshopDetailContentProps {
   id: number
 }
 
-export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
+function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
   const [workshop, setWorkshop] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
@@ -895,11 +1019,15 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
     if (workshop.institution === "Paradox Studios") {
       return "/images/paradox-studios-logo.png"
     }
+    if (workshop.institution === "Indian Institute of Educational Theatre (IIET)") {
+      return "/images/iiet-logo.png"
+    }
     return workshop.image || "/images/acting-workshop.png"
   }
 
   const detailImageSrc = getDetailImageSource()
   const isParadoxStudios = workshop.institution === "Paradox Studios"
+  const isIIET = workshop.institution === "Indian Institute of Educational Theatre (IIET)"
 
   return (
     <div className="container py-6 md:py-12">
@@ -910,12 +1038,12 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
 
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
-          <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : "bg-gray-900"}`}>
+          <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-900"}`}>
             <Image
               src={detailImageSrc || "/placeholder.svg"}
               alt={workshop.title}
               fill
-              className={`${isParadoxStudios ? "object-contain p-6" : "object-cover"}`}
+              className={`${isParadoxStudios ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"}`}
               sizes="100vw"
               priority
               onError={(e) => {
@@ -925,7 +1053,7 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
             />
           </div>
           <div
-            className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+            className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
           ></div>
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-primary text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
             <CheckCircle className="h-4 w-4" />
@@ -936,6 +1064,15 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
               {workshop.id === 30 ? (
                 <Link
                   href="https://www.instagram.com/whit.eboard?igsh=MTQxZmF1MGsxcHk5NA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-200 underline transition-colors"
+                >
+                  {workshop.institution}
+                </Link>
+              ) : workshop.id === 31 ? (
+                <Link
+                  href="https://www.instagram.com/iietmysuru?igsh=NHdqZ2FsdmEwdTZ3"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-blue-200 underline transition-colors"
@@ -1022,7 +1159,7 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                       <svg className="h-5 w-5 text-green-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
-                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z"
                           clipRule="evenodd"
                         />
                       </svg>
@@ -1035,6 +1172,33 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                           belong to White Board Theatre Group. AbhinayPath does not collect or share your data for this
                           post. For application and details, always refer to the official White Board Theatre Group
                           channels.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {workshop.id === 31 && (
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-purple-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fillRule="evenodd"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-purple-800">Privacy & Attribution Notice</h3>
+                      <div className="mt-2 text-sm text-purple-700">
+                        <p>
+                          🔒 Note: This listing is shared for educational purposes only. All credits and copyrights
+                          belong to Indian Institute of Educational Theatre (IIET). AbhinayPath does not collect or
+                          share your data for this post. For application and details, always refer to the official IIET
+                          website and registration link.
                         </p>
                       </div>
                     </div>
@@ -1150,7 +1314,8 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                     workshop.id === 27 ||
                     workshop.id === 28 ||
                     workshop.id === 29 ||
-                    workshop.id === 30) &&
+                    workshop.id === 30 ||
+                    workshop.id === 31) &&
                     workshop.fullDetails.aboutInstructor && (
                       <div>
                         <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">
@@ -1208,6 +1373,34 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                     </div>
                   )}
 
+                  {workshop.fullDetails.accommodationDetails && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Accommodation Details</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.accommodationDetails.map((detail: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {workshop.fullDetails.workshopPolicies && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Workshop Policies</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.workshopPolicies.map((policy: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{policy}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                   {(workshop.id === 23 ||
                     workshop.id === 24 ||
                     workshop.id === 25 ||
@@ -1215,7 +1408,8 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                     workshop.id === 27 ||
                     workshop.id === 28 ||
                     workshop.id === 29 ||
-                    workshop.id === 30) && (
+                    workshop.id === 30 ||
+                    workshop.id === 31) && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {workshop.fullDetails.applicationDeadline && (
                         <div>
@@ -1272,7 +1466,8 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
                         workshop.id === 26 ||
                         workshop.id === 27 ||
                         workshop.id === 28 ||
-                        workshop.id === 30
+                        workshop.id === 30 ||
+                        workshop.id === 31
                           ? "Course Director"
                           : workshop.id === 29
                             ? "Program"
@@ -1338,3 +1533,5 @@ export default function WorkshopDetailContent({ id }: WorkshopDetailContentProps
     </div>
   )
 }
+
+export default WorkshopDetailContent
