@@ -169,33 +169,6 @@ const auditions = [
     },
   },
   {
-    id: 3,
-    title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
-    type: "Theater",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Ongoing",
-    director: "Kalayan Theatre Group",
-    description:
-      "Play Title: Kab Tak Rahein Kunware. Language: Hindi (must read Devanagari). Age Group: 25–35 yrs. Location: Koramangala, Bangalore. Rehearsals: Weekends, then weekday evenings closer to show. Show Dates: August/September 2025.",
-    company: "Kalayan Theatre Group",
-    companyLink: "tel:9663304790",
-    contact: "Amit Aggarwal – 96633 04790",
-    contactType: "phone",
-    experience: "All Levels",
-    verified: true,
-    image: "/images/auditions-stage.png",
-    requirements: [
-      "Must be able to read Hindi in Devanagari script",
-      "Age between 25-35 years",
-      "Available for weekend rehearsals",
-      "Available for weekday evening rehearsals closer to show dates",
-      "Based in or near Koramangala, Bangalore",
-    ],
-    roles: ["Multiple male and female roles available", "Exact character details will be shared during audition"],
-    applicationProcess: "Contact Amit Aggarwal at the provided phone number to schedule an audition slot.",
-  },
-  {
     id: 4,
     title: "CASTING CALL FOR A PLAY CALLED 'ONCE THERE WAS A WAY'",
     type: "Theater",
@@ -225,36 +198,6 @@ const auditions = [
       "Male actor: age 50+",
     ],
     applicationProcess: "Contact the production team at the provided phone number for audition details and scheduling.",
-  },
-  {
-    id: 5,
-    title: "Lead Role Actress for Kannada Feature Film - Mute Character",
-    type: "Film",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Ongoing",
-    director: "CINECUBES",
-    description:
-      'We are looking for a lead role actress for our Kannada feature film (language is not a barrier). The character is of a mute girl. So, language is not a barrier. Facial expressions are the most important factors along with the ability to use a mute girl\'s sounds like "bhaaaah...", "mahhh..."',
-    company: "CINECUBES",
-    companyLink: "https://wa.me/919886028205",
-    contact: "+91 9886028205 (WhatsApp)",
-    contactType: "whatsapp",
-    experience: "All Levels",
-    verified: true,
-    image: "/images/auditions-stage.png",
-    requirements: [
-      "Facial expressions are the most important factor",
-      'Ability to use mute girl\'s sounds like "bhaaaah...", "mahhh..."',
-      "Language is not a barrier (character is mute)",
-      "Screen age: Around 20 years",
-    ],
-    roles: [
-      "Lead role - Mute girl character",
-      "Character description: Innocent, Lot of pain in eyes, A warrior mother with fire in eyes",
-    ],
-    applicationProcess:
-      "Record a video of yourself performing the audition task and WhatsApp to +91 9886028205. Audition task: Scenario where few people are about to harm her 6-month-old baby but she is helpless to stop them. 1) Start by looking into camera (baby) with light smile. 2) Smile turns into laugh indicating she can't do anything. Laugh is not loud but there is intensive pain behind it. 3) Laugh turns into an inside cry with lot of pain in eyes. 4) Laugh turns into a blank expression looking deep into camera. She is trying to hide the pain but eyes are filled with painful tears.",
   },
   {
     id: 6,
@@ -303,6 +246,7 @@ const auditions = [
     description:
       "Play Title: Maithili. Duration: 50 minutes. Characters: 10. Language: Hindi. Video audition required - choose any two roles, record dialogues, upload to Google Drive and submit form. Selected candidates will be invited for play reading session.",
     company: "Broken Wall Bridge Theatre Group",
+    companyInstagram: "https://www.instagram.com/brokenwallbridge?igsh=bGp1MG5rbXEwZG01",
     companyLink: "https://docs.google.com/forms/d/e/1FAIpQLSdUM6apfL5XZ3X3YRf0AcNEWm59kyuRZ92qgIMRVG1B96m8Vw/viewform",
     contact: "Ashish - 8788132835",
     contactType: "form",
@@ -560,45 +504,6 @@ const auditions = [
       payment: "₹7,000 (same-day cash payment)",
       conveyance: "Not included",
       applicationDeadline: "26th June 2025 (by late evening)",
-    },
-  },
-  {
-    id: 12,
-    title: "Audition Call for Bangalore Little Theater",
-    type: "Theater",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Sunday, June 29, 2025 at 10:30 AM",
-    director: "Bangalore Little Theatre",
-    description:
-      "Join us for a special reading of our brand-new play 'The Anklet' - a contemporary take on the timeless Tamil epic Silappadikaram. This event is open to actors, backstage crew, and anyone passionate about storytelling. Come discover this fresh interpretation of a classic tale and be part of our theatrical community.",
-    company: "Bangalore Little Theatre",
-    companyLink: "https://forms.gle/ZKvFcqC5qm7UtDeo6",
-    contact: "Register at forms.gle/ZKvFcqC5qm7UtDeo6",
-    contactType: "website",
-    experience: "All Levels",
-    verified: true,
-    image: "/images/auditions-stage.png",
-    requirements: [
-      "Open to all theatre lovers and curious individuals",
-      "No prior experience required",
-      "Interest in storytelling and Tamil literature appreciated",
-      "Available on Sunday, June 29, 2025 at 10:30 AM",
-      "Based in or able to travel to Bangalore",
-    ],
-    roles: [
-      "Open to actors interested in contemporary adaptations",
-      "Backstage crew and technical enthusiasts welcome",
-      "Anyone passionate about storytelling and theatre",
-      "Opportunity to be part of a fresh take on Silappadikaram",
-    ],
-    applicationProcess:
-      "Register online at https://forms.gle/ZKvFcqC5qm7UtDeo6 to secure your spot for this special reading event.",
-    eventDetails: {
-      venue: "Alliance Française de Bangalore, Classroom 10",
-      time: "10:30 AM",
-      eventType: "Special Play Reading",
-      openTo: "Actors, backstage crew, and anyone passionate about storytelling",
     },
   },
 ]
@@ -1306,49 +1211,6 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   </>
                 )}
 
-                {audition.id === 12 && (
-                  <>
-                    <section>
-                      <h2 className="text-xl font-semibold mb-3">Event Details</h2>
-                      <div className="bg-blue-50 p-4 rounded-lg mb-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <p className="font-medium text-gray-700">Venue</p>
-                            <p className="text-gray-800">{audition.eventDetails.venue}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-700">Time</p>
-                            <p className="text-gray-800">{audition.eventDetails.time}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-700">Event Type</p>
-                            <p className="text-gray-800">{audition.eventDetails.eventType}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-700">Open To</p>
-                            <p className="text-gray-800">{audition.eventDetails.openTo}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-
-                    <section>
-                      <h2 className="text-xl font-semibold mb-3">About Silappadikaram</h2>
-                      <div className="bg-amber-50 p-4 rounded-lg mb-6">
-                        <p className="text-gray-800 mb-2">
-                          Silappadikaram is one of the five great epics of Tamil literature, written by Ilango Adigal.
-                          This timeless tale of love, justice, and divine retribution has captivated audiences for
-                          centuries.
-                        </p>
-                        <p className="text-gray-800">
-                          Our contemporary adaptation 'The Anklet' brings this classic story to modern audiences,
-                          exploring its themes through a fresh lens while honoring the original's cultural significance.
-                        </p>
-                      </div>
-                    </section>
-                  </>
-                )}
-
                 {audition.id !== 7 && (
                   <>
                     <h2 className="text-xl font-semibold mb-3">Roles</h2>
@@ -1387,7 +1249,18 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 <Building className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                 <div>
                   <p className="font-medium text-gray-700">Production Company</p>
-                  <p className="text-gray-800">{audition.company}</p>
+                  {audition.id === 7 && audition.companyInstagram ? (
+                    <a
+                      href={audition.companyInstagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 hover:underline transition-colors font-medium"
+                    >
+                      {audition.company}
+                    </a>
+                  ) : (
+                    <p className="text-gray-800">{audition.company}</p>
+                  )}
                 </div>
               </div>
 

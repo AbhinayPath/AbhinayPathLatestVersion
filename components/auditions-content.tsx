@@ -114,24 +114,6 @@ const auditions = [
     },
   },
   {
-    id: 3,
-    title: "Audition for Hindi Comedy Play – Kalayan Theatre Group",
-    type: "Theater",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Ongoing",
-    director: "Kalayan Theatre Group",
-    description:
-      "Play Title: Kab Tak Rahein Kunware. Language: Hindi (must read Devanagari). Age Group: 25–35 yrs. Location: Koramangala, Bangalore. Rehearsals: Weekends, then weekday evenings closer to show. Show Dates: August/September 2025.",
-    company: "Kalayan Theatre Group",
-    companyLink: "tel:9663304790",
-    contact: "Amit Aggarwal – 96633 04790",
-    contactType: "phone",
-    experience: "All Levels",
-    verified: true,
-    image: "/images/auditions-stage.png",
-  },
-  {
     id: 4,
     title: "CASTING CALL FOR A PLAY CALLED 'ONCE THERE WAS A WAY'",
     type: "Theater",
@@ -145,24 +127,6 @@ const auditions = [
     companyLink: "tel:+917330684137",
     contact: "+917330684137",
     contactType: "phone",
-    experience: "All Levels",
-    verified: true,
-    image: "/images/auditions-stage.png",
-  },
-  {
-    id: 5,
-    title: "Lead Role Actress for Kannada Feature Film - Mute Character",
-    type: "Film",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Ongoing",
-    director: "CINECUBES",
-    description:
-      'We are looking for a lead role actress for our Kannada feature film (language is not a barrier). The character is of a mute girl. So, language is not a barrier. Facial expressions are the most important factors along with the ability to use a mute girl\'s sounds like "bhaaaah...", "mahhh..."',
-    company: "CINECUBES",
-    companyLink: "https://wa.me/919886028205",
-    contact: "+91 9886028205 (WhatsApp)",
-    contactType: "whatsapp",
     experience: "All Levels",
     verified: true,
     image: "/images/auditions-stage.png",
@@ -196,7 +160,7 @@ const auditions = [
     description:
       "A 50-minute Hindi play featuring 10 characters. Video audition required - choose any two roles, record dialogues, upload to Google Drive and submit form. Male actors must perform all dialogues provided as only two male characters are listed.",
     company: "Broken Wall Bridge Theatre Group",
-    companyLink: "https://docs.google.com/forms/d/e/1FAIpQLSdUM6apfL5XZ3X3YRf0AcNEWm59kyuRZ92qgIMRVG1B96m8Vw/viewform",
+    companyInstagram: "https://www.instagram.com/brokenwallbridge?igsh=bGp1MG5rbXEwZG01",
     contact: "Ashish - 8788132835",
     contactType: "form",
     experience: "All Levels",
@@ -281,24 +245,6 @@ const auditions = [
     companyLink: "https://wa.me/918218864140",
     contact: "8218864140 (WhatsApp - Send portfolio/profile)",
     contactType: "whatsapp",
-    experience: "All Levels",
-    verified: true,
-    image: "/images/auditions-stage.png",
-  },
-  {
-    id: 12,
-    title: "Audition Call for Bangalore Little Theater",
-    type: "Theater",
-    location: "Bangalore",
-    state: "Karnataka",
-    date: "Sunday, June 29, 2025 at 10:30 AM",
-    director: "Bangalore Little Theatre",
-    description:
-      "Join us for a special reading of our brand-new play 'The Anklet' - a contemporary take on the timeless Tamil epic Silappadikaram. This event is open to actors, backstage crew, and anyone passionate about storytelling. Come discover this fresh interpretation of a classic tale and be part of our theatrical community.",
-    company: "Bangalore Little Theatre",
-    companyLink: "https://forms.gle/ZKvFcqC5qm7UtDeo6",
-    contact: "Register at forms.gle/ZKvFcqC5qm7UtDeo6",
-    contactType: "website",
     experience: "All Levels",
     verified: true,
     image: "/images/auditions-stage.png",
@@ -645,7 +591,18 @@ export default function AuditionsContent() {
                 <div className="space-y-3 mb-4 flex-1">
                   <div className="flex items-center text-sm text-gray-500">
                     <span className="font-medium text-gray-700 w-20">Production:</span>
-                    <span>{audition.director}</span>
+                    {audition.id === 7 ? (
+                      <a
+                        href={audition.companyInstagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:text-primary/80 hover:underline transition-colors"
+                      >
+                        {audition.director}
+                      </a>
+                    ) : (
+                      <span>{audition.director}</span>
+                    )}
                   </div>
                   <div className="flex items-center text-sm text-gray-500">
                     <span className="font-medium text-gray-700 w-20">Location:</span>
