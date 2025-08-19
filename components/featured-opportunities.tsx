@@ -10,77 +10,75 @@ import { Calendar, MapPin, Star, ArrowRight, Clock } from "lucide-react"
 // Featured workshops data - subset of the most important opportunities
 const featuredOpportunities = [
   {
-    id: 2,
-    title: "NSD Theatre-in-Education Certificate Course",
+    id: 31,
+    title: "Educational Theatre National Workshop",
     shortDescription:
-      "3-month intensive program by National School of Drama focusing on educational theatre techniques and actor-teacher development.",
-    trainer: "NSD TIE Company",
-    institution: "National School of Drama",
-    location: "New Delhi",
-    state: "Delhi",
-    date: "2 June – 31 August 2025",
-    time: "10 AM – 1 PM / 2 PM – 5 PM",
-    price: "₹35,000",
-    registrationLink: "https://nsd.gov.in",
-    featured: true,
-    category: "Certificate Course",
-    duration: "3 months",
-    image: "/images/acting-workshop.png",
-  },
-  {
-    id: 3,
-    title: "Anatomy of a Scene - Acting Workshop",
-    shortDescription:
-      "Master Meisner & Uta Hagen techniques with FTII alumnus. Includes scene analysis, improvisation, and recorded performance.",
-    trainer: "Manas Gupta",
-    institution: "FTII Alumnus",
+      "Comprehensive 5-day workshop on educational theatre techniques, drama in education, and creative pedagogy by IIET.",
+    trainer: "IIET Faculty",
+    institution: "Indian Institute of Educational Theatre",
     location: "Mumbai",
     state: "Maharashtra",
-    date: "1 – 13 June 2025",
-    time: "11 AM – 2 PM",
-    price: "Contact for details",
-    registrationLink: "tel:+918652722682",
+    date: "15-19 March 2025",
+    time: "10 AM - 5 PM",
+    price: "₹8,500",
+    registrationLink: "https://www.instagram.com/iiet_mumbai/",
+    featured: true,
+    category: "Educational Theatre",
+    duration: "5 days",
+    image: "/images/iiet-logo.png",
+  },
+  {
+    id: 1,
+    title: "Advanced Acting Masterclass",
+    shortDescription:
+      "Intensive masterclass covering method acting, character development, and scene work with industry professionals.",
+    trainer: "Rajesh Kumar",
+    institution: "Mumbai Theatre Academy",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "20-25 March 2025",
+    time: "2 PM - 6 PM",
+    price: "₹12,000",
+    registrationLink: "#",
     featured: true,
     category: "Acting Workshop",
-    duration: "13 days",
+    duration: "6 days",
     image: "/images/acting-workshop.png",
   },
   {
-    id: 7,
-    title: "FTII Tribute to Raj Kapoor Workshop",
+    id: 4,
+    title: "Theatre Direction Workshop",
     shortDescription:
-      "Explore Raj Kapoor's cinematic legacy through iconic song sequences. Learn storytelling through the Golden Era of Hindi cinema.",
-    trainer: "Dr. Milind Damle",
-    institution: "Film and Television Institute of India",
+      "Learn the fundamentals of theatre direction, script analysis, and working with actors in this comprehensive workshop.",
+    trainer: "Priya Sharma",
+    institution: "Delhi Theatre Collective",
     location: "New Delhi",
     state: "Delhi",
-    date: "12–13 July 2025",
-    time: "10 AM – 5 PM",
-    price: "₹1,500",
-    registrationLink:
-      "https://ftii.ac.in/p/vtwa/basic-course-in-appreciating-songs-in-raj-kapoor-films-in-delhi-12-13-july-2025",
+    date: "1-10 April 2025",
+    time: "11 AM - 3 PM",
+    price: "₹15,000",
+    registrationLink: "#",
     featured: true,
-    category: "Film Appreciation",
-    duration: "2 days",
+    category: "Direction",
+    duration: "10 days",
     image: "/images/acting-workshop.png",
   },
   {
-    id: 12,
-    title: "FTII Screenwriting Course - Online",
+    id: 5,
+    title: "Voice and Diction for Actors",
     shortDescription:
-      "Master feature film screenwriting with core elements of storytelling, character development, and story structure.",
-    trainer: "Vikas Sharma",
-    institution: "Film and Television Institute of India",
-    location: "Online",
-    state: "All India",
-    date: "16–27 June 2025",
-    time: "10 AM–12 PM & 1 PM–3 PM",
-    price: "₹14,000",
-    registrationLink:
-      "https://ftii.ac.in/p/ftii-online-1/basic-course-in-the-art-of-feature-film-writing-16-27-june-2025-online",
+      "Master voice projection, articulation, and speech techniques essential for stage and screen performance.",
+    trainer: "Dr. Meera Joshi",
+    institution: "Vocal Arts Institute",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "5-12 April 2025",
+    time: "10 AM - 1 PM",
+    price: "₹7,500",
+    registrationLink: "#",
     featured: true,
-    category: "Screenwriting",
-    duration: "10 days",
+    category: "Voice Training",
+    duration: "8 days",
     image: "/images/acting-workshop.png",
   },
 ]
@@ -184,7 +182,7 @@ export default function FeaturedOpportunities() {
                   <Link href={`/workshops/${opportunity.id}`} className="flex-1">
                     <Button
                       variant="outline"
-                      className="w-full rounded-full border-2 border-gray-200 hover:border-primary hover:text-primary transition-all font-medium"
+                      className="w-full rounded-full border-2 border-gray-200 hover:border-primary hover:text-primary transition-all font-medium bg-transparent"
                     >
                       View Details
                     </Button>
@@ -207,7 +205,7 @@ export default function FeaturedOpportunities() {
             <Button
               size="lg"
               variant="outline"
-              className="rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all px-8 py-6 h-auto font-medium group"
+              className="rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all px-8 py-6 h-auto font-medium group bg-transparent"
             >
               View All Workshops
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
