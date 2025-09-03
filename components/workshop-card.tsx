@@ -19,6 +19,7 @@ interface WorkshopCardProps {
     featured?: boolean
     registrationLink: string
     image?: string
+    highlights?: string[]
   }
   variant?: "compact" | "full"
 }
@@ -35,6 +36,9 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
     if (workshop.institution === "Indian Institute of Educational Theatre (IIET)") {
       return "/images/iiet-logo.png"
     }
+    if (workshop.institution === "Threads & Tales") {
+      return "/images/threads-tales-logo.png"
+    }
     // Use the workshop's image property or fallback to acting-workshop.png
     return workshop.image || "/images/acting-workshop.png"
   }
@@ -42,6 +46,7 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
   const imageSrc = getImageSource()
   const isParadoxStudios = workshop.institution === "Paradox Studios"
   const isIIET = workshop.institution === "Indian Institute of Educational Theatre (IIET)"
+  const isThreadsTales = workshop.institution === "Threads & Tales"
 
   return (
     <div
@@ -60,13 +65,15 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
           <CheckCircle className="h-3 w-3" />
           Verified
         </div>
-        <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-200"}`}>
+        <div
+          className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-200"}`}
+        >
           <Image
             src={imageSrc || "/placeholder.svg"}
             alt={workshop.title}
             fill
             className={`transition-transform duration-500 group-hover:scale-105 ${
-              isParadoxStudios ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"
+              isParadoxStudios || isThreadsTales ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"
             }`}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={workshop.featured}
@@ -78,7 +85,7 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
           />
         </div>
         <div
-          className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+          className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
         ></div>
         <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
           <p className="text-white font-medium text-sm truncate">{workshop.institution}</p>
@@ -108,6 +115,16 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
           </span>
         </div>
 
+        {workshop.highlights && (
+          <div className="flex flex-wrap gap-1 mb-3">
+            {workshop.highlights.slice(0, 3).map((highlight, index) => (
+              <span key={index} className="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">
+                {highlight}
+              </span>
+            ))}
+          </div>
+        )}
+
         {!isCompact && !isMobile && (
           <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-2 leading-relaxed">{workshop.description}</p>
         )}
@@ -133,8 +150,13 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
             </Button>
           </Link>
           <Link href={workshop.registrationLink} target="_blank" className="flex-1">
-            <Button size="sm" className="w-full rounded-full text-sm h-9 font-medium">
-              Register
+            <Button
+              size="sm"
+              className={`w-full rounded-full text-sm h-9 font-medium ${
+                isThreadsTales ? "bg-teal-600 hover:bg-teal-700 text-white" : ""
+              }`}
+            >
+              {isThreadsTales ? "WhatsApp" : "Register"}
             </Button>
           </Link>
         </div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Calendar, MapPin, Users, Phone, Mail, Clock, GraduationCap, CheckCircle } from "lucide-react"
+import { ArrowLeft, Calendar, MapPin, GraduationCap, CheckCircle, Clock } from "lucide-react"
 
 // Workshop data
 const workshops = [
@@ -967,6 +967,104 @@ const workshops = [
         "This comprehensive workshop offers a unique opportunity to learn from renowned theatre professionals while exploring the intersection of performance and education. The program is designed to benefit both actors seeking to enhance their craft and educators looking to incorporate theatre techniques into their teaching practice. The inclusive fee covers accommodation and meals, making it accessible for participants from various backgrounds.",
     },
   },
+  {
+    id: 32,
+    title: "🎭 Workshop: Introduction to Playback Theatre",
+    trainer: "Threads & Tales",
+    institution: "Threads & Tales",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "September 13–14",
+    time: "10:00 a.m. – 6:00 p.m.",
+    description:
+      "🎭 Discover the transformative power of Playback Theatre! This immersive workshop focuses on Stories, Connection, Improvisation, and Creative Expression. Learn to create spontaneous theatre from real-life stories shared by audience members. Perfect for actors, storytellers, and anyone interested in the intersection of theatre and human connection.",
+    image: "/images/threads-tales-logo.png",
+    registrationLink: "https://wa.me/919886294444",
+    featured: true,
+    price: "₹5,500 (including lunch)",
+    contact: "WhatsApp 9886294444",
+    email: "Contact via WhatsApp",
+    eligibility: "Open to all - beginners and experienced performers welcome",
+    venue: "Bhandutvas, Domlur, Bengaluru",
+    includes: "Workshop materials + Lunch both days",
+    highlights: ["Stories", "Connection", "Improvisation", "Creative Expression"],
+    fullDetails: {
+      venue: "Bhandutvas, Domlur, Bengaluru",
+      organizer: "Threads & Tales",
+      duration: "2 days",
+      medium: "English",
+      courseDirector: "Threads & Tales Team",
+      accommodation: "Not provided",
+      eligibilityCriteria: [
+        "Open to all",
+        "No prior theatre experience required",
+        "Suitable for beginners and experienced performers",
+      ],
+      courseFee: "₹5,500 (including lunch both days)",
+      certification: "Certificate of participation",
+      keyHighlights: [
+        "Introduction to Playback Theatre methodology",
+        "Stories as the foundation of performance",
+        "Building authentic connections through theatre",
+        "Improvisation techniques and spontaneous performance",
+        "Creative expression through movement and voice",
+        "Audience interaction and community building",
+        "Therapeutic aspects of storytelling",
+        "Ensemble work and collaboration",
+      ],
+      curriculum: [
+        "Fundamentals of Playback Theatre",
+        "The art of listening to stories",
+        "Spontaneous improvisation techniques",
+        "Movement and gesture in storytelling",
+        "Voice and sound in Playback Theatre",
+        "Creating safe spaces for sharing",
+        "Ensemble building and trust exercises",
+        "Performance techniques for real stories",
+      ],
+      practicalExperience: [
+        "Hands-on Playback Theatre exercises",
+        "Story sharing and listening practice",
+        "Improvisation based on real stories",
+        "Movement and voice workshops",
+        "Group performance sessions",
+        "Feedback and reflection circles",
+      ],
+      learningOutcomes: [
+        "Understanding of Playback Theatre principles",
+        "Enhanced listening and empathy skills",
+        "Improved improvisation abilities",
+        "Better storytelling and performance skills",
+        "Increased confidence in spontaneous expression",
+        "Deeper appreciation for human stories and connection",
+      ],
+      aboutInstructor:
+        "Threads & Tales is a theatre collective dedicated to exploring the intersection of storytelling, community, and performance. They specialize in Playback Theatre and other forms of interactive, community-based theatre.",
+      accommodationDetails: ["Accommodation not provided", "Participants need to arrange their own stay"],
+      workshopPolicies: [
+        "Punctuality expected for all sessions",
+        "Active participation encouraged",
+        "Respectful listening during story sharing",
+        "Mobile phones to be kept on silent during sessions",
+      ],
+      uniqueExperience: [
+        "Learn the unique art form of Playback Theatre",
+        "Experience the power of spontaneous storytelling",
+        "Connect with fellow participants through shared stories",
+        "Develop skills in improvisation and creative expression",
+      ],
+      targetAudience: [
+        "Actors and theatre practitioners",
+        "Storytellers and writers",
+        "Counselors and therapists",
+        "Community workers and facilitators",
+        "Anyone interested in human stories and connection",
+      ],
+      contactInfo: ["WhatsApp: 9886294444", "Registration and details via WhatsApp only"],
+      additionalInfo:
+        "This workshop offers a unique opportunity to learn Playback Theatre, a form of improvisational theatre where audience members share personal stories that are then spontaneously enacted by performers. The workshop emphasizes the therapeutic and community-building aspects of storytelling through theatre.",
+    },
+  },
 ]
 
 interface WorkshopDetailContentProps {
@@ -1022,12 +1120,16 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
     if (workshop.institution === "Indian Institute of Educational Theatre (IIET)") {
       return "/images/iiet-logo.png"
     }
+    if (workshop.institution === "Threads & Tales") {
+      return "/images/threads-tales-logo.png"
+    }
     return workshop.image || "/images/acting-workshop.png"
   }
 
   const detailImageSrc = getDetailImageSource()
   const isParadoxStudios = workshop.institution === "Paradox Studios"
   const isIIET = workshop.institution === "Indian Institute of Educational Theatre (IIET)"
+  const isThreadsTales = workshop.institution === "Threads & Tales"
 
   return (
     <div className="container py-6 md:py-12">
@@ -1038,12 +1140,14 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
 
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
-          <div className={`absolute inset-0 ${isParadoxStudios ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-900"}`}>
+          <div
+            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-900"}`}
+          >
             <Image
               src={detailImageSrc || "/placeholder.svg"}
               alt={workshop.title}
               fill
-              className={`${isParadoxStudios ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"}`}
+              className={`${isParadoxStudios || isThreadsTales ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"}`}
               sizes="100vw"
               priority
               onError={(e) => {
@@ -1053,7 +1157,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
             />
           </div>
           <div
-            className={`absolute inset-0 ${isParadoxStudios ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
           ></div>
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-primary text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
             <CheckCircle className="h-4 w-4" />
@@ -1079,6 +1183,8 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                 >
                   {workshop.institution}
                 </Link>
+              ) : workshop.id === 32 ? (
+                <span className="text-white">{workshop.institution}</span>
               ) : (
                 workshop.institution
               )}
@@ -1107,7 +1213,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                       <svg className="h-5 w-5 text-blue-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
-                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z"
                           clipRule="evenodd"
                         />
                       </svg>
@@ -1133,7 +1239,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                       <svg className="h-5 w-5 text-orange-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
-                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z"
                           clipRule="evenodd"
                         />
                       </svg>
@@ -1186,7 +1292,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                       <svg className="h-5 w-5 text-purple-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
-                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z"
                           clipRule="evenodd"
                         />
                       </svg>
@@ -1202,6 +1308,48 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                         </p>
                       </div>
                     </div>
+                  </div>
+                </div>
+              )}
+
+              {workshop.id === 32 && (
+                <div className="bg-teal-50 border border-teal-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-teal-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fillRule="evenodd"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-teal-800">Privacy & Attribution Notice</h3>
+                      <div className="mt-2 text-sm text-teal-700">
+                        <p>
+                          🔒 Note: This listing is shared for educational purposes only. All credits and copyrights
+                          belong to Threads & Tales. AbhinayPath does not collect or share your data for this post. For
+                          registration and details, contact via WhatsApp as provided.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {workshop.highlights && (
+                <div>
+                  <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Workshop Highlights</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {workshop.highlights.map((highlight: string, index: number) => (
+                      <span
+                        key={index}
+                        className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                      >
+                        {highlight}
+                      </span>
+                    ))}
                   </div>
                 </div>
               )}
@@ -1315,7 +1463,8 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 28 ||
                     workshop.id === 29 ||
                     workshop.id === 30 ||
-                    workshop.id === 31) &&
+                    workshop.id === 31 ||
+                    workshop.id === 32) &&
                     workshop.fullDetails.aboutInstructor && (
                       <div>
                         <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">
@@ -1323,7 +1472,9 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                             ? "About the Program"
                             : workshop.id === 30
                               ? "About the Theatre Group"
-                              : "About the Course Director"}
+                              : workshop.id === 32
+                                ? "About Threads & Tales"
+                                : "About the Course Director"}
                         </h3>
                         {workshop.id === 30 ? (
                           <p className="text-gray-700 leading-relaxed">
@@ -1409,7 +1560,8 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 28 ||
                     workshop.id === 29 ||
                     workshop.id === 30 ||
-                    workshop.id === 31) && (
+                    workshop.id === 31 ||
+                    workshop.id === 32) && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {workshop.fullDetails.applicationDeadline && (
                         <div>
@@ -1458,7 +1610,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <Users className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                    <GraduationCap className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-medium text-gray-900">
                         {workshop.id === 24 ||
@@ -1467,8 +1619,9 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                         workshop.id === 27 ||
                         workshop.id === 28 ||
                         workshop.id === 30 ||
-                        workshop.id === 31
-                          ? "Course Director"
+                        workshop.id === 31 ||
+                        workshop.id === 32
+                          ? "Organizer"
                           : workshop.id === 29
                             ? "Program"
                             : "Trainer"}
@@ -1495,14 +1648,18 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                           ? "bg-orange-600 hover:bg-orange-700 text-white"
                           : workshop.id === 30
                             ? "bg-green-600 hover:bg-green-700 text-white"
-                            : "bg-primary hover:bg-primary/90 text-white"
+                            : isThreadsTales
+                              ? "bg-teal-600 hover:bg-teal-700 text-white"
+                              : "bg-primary hover:bg-primary/90 text-white"
                     }`}
                   >
                     {isParadoxStudios
                       ? "Apply for Free Sessions"
                       : workshop.id === 29
                         ? "Apply Online"
-                        : "Register Now"}
+                        : isThreadsTales
+                          ? "Contact via WhatsApp"
+                          : "Register Now"}
                   </Button>
                 </Link>
               </div>
@@ -1513,13 +1670,26 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                   <div className="space-y-3">
                     {workshop.contact && (
                       <div className="flex items-center">
-                        <Phone className="h-4 w-4 text-primary mr-3 flex-shrink-0" />
+                        <svg
+                          className="h-4 w-4 text-primary mr-3 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
                         <span className="text-gray-700">{workshop.contact}</span>
                       </div>
                     )}
                     {workshop.email && workshop.email !== "N/A" && (
                       <div className="flex items-center">
-                        <Mail className="h-4 w-4 text-primary mr-3 flex-shrink-0" />
+                        <svg
+                          className="h-4 w-4 text-primary mr-3 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
                         <span className="text-gray-700">{workshop.email}</span>
                       </div>
                     )}

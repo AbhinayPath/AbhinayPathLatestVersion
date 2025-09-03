@@ -301,6 +301,30 @@ const workshops = [
     includes: "Accommodation + 2 meals/day + Tea/Coffee + Workshop materials",
     instagramLink: "https://www.instagram.com/iietmysuru?igsh=NHdqZ2FsdmEwdTZ3",
   },
+  {
+    id: 32,
+    title: "🎭 Workshop: Introduction to Playback Theatre",
+    trainer: "Threads & Tales",
+    institution: "Threads & Tales",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "September 13–14",
+    time: "10:00 a.m. – 6:00 p.m.",
+    description:
+      "🎭 Discover the transformative power of Playback Theatre! This immersive workshop focuses on Stories, Connection, Improvisation, and Creative Expression. Learn to create spontaneous theatre from real-life stories shared by audience members. Perfect for actors, storytellers, and anyone interested in the intersection of theatre and human connection.",
+    image: "/images/threads-tales-logo.png",
+    registrationLink: "https://wa.me/919886294444",
+    featured: true,
+    price: "₹5,500 (including lunch)",
+    contact: "WhatsApp 9886294444",
+    email: "Contact via WhatsApp",
+    eligibility: "Open to all - beginners and experienced performers welcome",
+    mode: "Offline",
+    venue: "Bhandutvas, Domlur, Bengaluru",
+    duration: "2 days (Weekend Workshop)",
+    includes: "Workshop materials + Lunch both days",
+    highlights: ["Stories", "Connection", "Improvisation", "Creative Expression"],
+  },
 ]
 
 // Get unique states, cities, and trainers for filters
