@@ -506,6 +506,69 @@ const auditions = [
       applicationDeadline: "26th June 2025 (by late evening)",
     },
   },
+  {
+    id: 12,
+    title: "NSD Sikkim Centre - Artist Recruitment for Repertory Company",
+    type: "Job Opportunity",
+    location: "Gangtok",
+    state: "Sikkim",
+    date: "Apply by 21 September 2025 (5:00 PM)",
+    director: "National School of Drama (NSD) Sikkim Centre",
+    description:
+      "National School of Drama (NSD) Sikkim Centre is recruiting 6 artists for their Repertory Company. This is an excellent opportunity to work with one of India's premier theatre institutions in the beautiful state of Sikkim. The selected candidates will be part of a prestigious repertory company and contribute to the rich theatrical heritage of the region.",
+    company: "National School of Drama (NSD) Sikkim Centre",
+    companyLink: "mailto:nsdcampofficesikkim@gmail.com",
+    contact: "nsdcampofficesikkim@gmail.com | 03592-201010",
+    contactType: "email",
+    experience: "Experienced",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    salary: "₹40,000/month",
+    numberOfPosts: 6,
+    ageLimit: "20-35 years",
+    applicationDeadline: "21 September 2025 (5:00 PM)",
+    landlineContact: "03592-201010 / 291415",
+    timings: "10:00 a.m. – 6:00 p.m. (Monday to Friday)",
+    websiteInfo: "https://sikkim.nsd.gov.in/sikkim_rec_adv.pdf",
+    requirements: [
+      "Graduation from any recognized university",
+      "One-Year Residential Certificate Course in Dramatic Arts from NSD Sikkim Centre or any other recognized theatre training institute",
+      "Experience of participating in at least 10 important productions in Hindi or any Indian language, performing major roles",
+      "Age limit: 20-35 years",
+      "Must be available for full-time employment in Gangtok, Sikkim",
+    ],
+    desirableQualifications: [
+      "Minimum 3 years' working experience in theatre",
+      "Knowledge of dance, music, and allied art",
+      "Experience in direction of play/stage craft",
+      "Knowledge of one or two regional languages/dialects",
+      "Knowledge of acting theories and styles",
+    ],
+    roles: [
+      "Artist in Repertory Company - 6 positions available",
+      "Salary: ₹40,000 per month",
+      "Age range: 20-35 years",
+      "Location: Gangtok, Sikkim",
+      "Full-time employment with NSD Sikkim Centre",
+    ],
+    applicationProcess:
+      "Send a written application addressed to the Centre Director, NSD Sikkim. Email your complete application to nsdcampofficesikkim@gmail.com on or before 21.09.2025 (5:00 p.m.). Include all required documents as mentioned in the requirements.",
+    applicationRequirements: [
+      "Written application addressed to Centre Director, NSD Sikkim",
+      "One recent passport-size photograph",
+      "Self-attested copies of educational qualification certificates",
+      "10th certificate (self-attested copy)",
+      "Latest caste certificate (if applicable, self-attested)",
+      "Address proof (self-attested copy)",
+      "Theatre experience proof/certificates",
+    ],
+    importantNotes: [
+      "Already employed candidates should apply through proper channel",
+      "No TA/DA & accommodation will be provided for audition/interview",
+      "SC/ST candidates will be reimbursed 3-tier non-AC railway fare (shortest route) on submission of railway/bus ticket",
+      "Office timings for queries: 10:00 a.m. – 6:00 p.m. (Monday to Friday)",
+    ],
+  },
 ]
 
 export default function AuditionDetailContent({ id }: { id: number }) {
@@ -1206,6 +1269,116 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                             </li>
                           ))}
                         </ul>
+                      </div>
+                    </section>
+                  </>
+                )}
+
+                {audition.id === 12 && (
+                  <>
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Position Details</h2>
+                      <div className="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-medium text-gray-700">Salary</p>
+                            <p className="text-gray-800">{audition.salary}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Number of Posts</p>
+                            <p className="text-gray-800">{audition.numberOfPosts}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Age Limit</p>
+                            <p className="text-gray-800">{audition.ageLimit}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Location</p>
+                            <p className="text-gray-800">Gangtok, Sikkim</p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Essential Qualifications</h2>
+                      <ul className="list-disc pl-5 mb-6">
+                        {audition.requirements.map((req: string, index: number) => (
+                          <li key={index} className="text-gray-800 mb-2">
+                            {req}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Desirable Qualifications</h2>
+                      <ul className="list-disc pl-5 mb-6">
+                        {audition.desirableQualifications.map((skill: string, index: number) => (
+                          <li key={index} className="text-gray-800 mb-2">
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Application Requirements</h2>
+                      <div className="bg-green-50 p-4 rounded-lg mb-6 border border-green-200">
+                        <p className="text-green-800 font-medium mb-3">
+                          Documents to be attached with your application:
+                        </p>
+                        <ul className="list-disc pl-5">
+                          {audition.applicationRequirements.map((req: string, index: number) => (
+                            <li key={index} className="text-green-700 mb-2">
+                              {req}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Important Information</h2>
+                      <div className="bg-yellow-50 p-4 rounded-lg mb-6 border border-yellow-200">
+                        <ul className="list-disc pl-5">
+                          {audition.importantNotes.map((note: string, index: number) => (
+                            <li key={index} className="text-yellow-800 mb-2">
+                              {note}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">Contact Information</h2>
+                      <div className="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                        <div className="space-y-3">
+                          <div>
+                            <p className="font-medium text-gray-700">Email</p>
+                            <p className="text-blue-600">{audition.contact.split(" | ")[0]}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Landline</p>
+                            <p className="text-gray-800">{audition.landlineContact}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Office Timings</p>
+                            <p className="text-gray-800">{audition.timings}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">More Information</p>
+                            <a
+                              href={audition.websiteInfo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 hover:underline"
+                            >
+                              View Official Notification (PDF)
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </section>
                   </>

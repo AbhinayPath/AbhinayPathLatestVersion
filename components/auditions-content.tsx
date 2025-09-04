@@ -249,6 +249,69 @@ const auditions = [
     verified: true,
     image: "/images/auditions-stage.png",
   },
+  {
+    id: 12,
+    title: "NSD Sikkim Centre - Artist Recruitment for Repertory Company",
+    type: "Job Opportunity",
+    location: "Gangtok",
+    state: "Sikkim",
+    date: "Apply by 21 September 2025 (5:00 PM)",
+    director: "National School of Drama (NSD) Sikkim Centre",
+    description:
+      "National School of Drama (NSD) Sikkim Centre is recruiting 6 artists for their Repertory Company. This is an excellent opportunity to work with one of India's premier theatre institutions in the beautiful state of Sikkim.",
+    company: "National School of Drama (NSD) Sikkim Centre",
+    companyLink: "mailto:nsdcampofficesikkim@gmail.com",
+    contact: "nsdcampofficesikkim@gmail.com | 03592-201010",
+    contactType: "email",
+    experience: "Experienced",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    salary: "₹40,000/month",
+    numberOfPosts: 6,
+    ageLimit: "20-35 years",
+    applicationDeadline: "21 September 2025 (5:00 PM)",
+    landlineContact: "03592-201010 / 291415",
+    timings: "10:00 a.m. – 6:00 p.m. (Monday to Friday)",
+    websiteInfo: "https://sikkim.nsd.gov.in/sikkim_rec_adv.pdf",
+    requirements: [
+      "Graduation from any recognized university",
+      "One-Year Residential Certificate Course in Dramatic Arts from NSD Sikkim Centre or any other recognized theatre training institute",
+      "Experience of participating in at least 10 important productions in Hindi or any Indian language, performing major roles",
+      "Age limit: 20-35 years",
+      "Must be available for full-time employment in Gangtok, Sikkim",
+    ],
+    desirableQualifications: [
+      "Minimum 3 years' working experience in theatre",
+      "Knowledge of dance, music, and allied art",
+      "Experience in direction of play/stage craft",
+      "Knowledge of one or two regional languages/dialects",
+      "Knowledge of acting theories and styles",
+    ],
+    roles: [
+      "Artist in Repertory Company - 6 positions available",
+      "Salary: ₹40,000 per month",
+      "Age range: 20-35 years",
+      "Location: Gangtok, Sikkim",
+      "Full-time employment with NSD Sikkim Centre",
+    ],
+    applicationProcess:
+      "Send a written application addressed to the Centre Director, NSD Sikkim. Email your complete application to nsdcampofficesikkim@gmail.com on or before 21.09.2025 (5:00 p.m.). Include all required documents as mentioned in the requirements.",
+    applicationRequirements: [
+      "Written application addressed to Centre Director, NSD Sikkim",
+      "One recent passport-size photograph",
+      "Self-attested copies of educational qualification certificates",
+      "10th certificate (self-attested copy)",
+      "Latest caste certificate (if applicable, self-attested)",
+      "Address proof (self-attested copy)",
+      "Theatre experience proof/certificates",
+    ],
+    importantNotes: [
+      "Already employed candidates should apply through proper channel",
+      "No TA/DA & accommodation will be provided for audition/interview",
+      "SC/ST candidates will be reimbursed 3-tier non-AC railway fare (shortest route) on submission of railway/bus ticket",
+      "Office timings for queries: 10:00 a.m. – 6:00 p.m. (Monday to Friday)",
+    ],
+  },
 ]
 
 // Get unique states and categories for filters
@@ -403,7 +466,9 @@ export default function AuditionsContent() {
                     ? "border-orange-300 shadow-lg"
                     : audition.id === 7
                       ? "border-purple-300 shadow-lg"
-                      : "border-gray-200"
+                      : audition.id === 12
+                        ? "border-green-300 shadow-lg"
+                        : "border-gray-200"
               }`}
             >
               <div className="relative h-48 w-full">
@@ -445,6 +510,11 @@ export default function AuditionsContent() {
                 {audition.id === 7 && (
                   <div className="absolute top-2 left-2 bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded-full">
                     🎭 Video Audition
+                  </div>
+                )}
+                {audition.id === 12 && (
+                  <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                    🎭 Repertory Company
                   </div>
                 )}
               </div>
@@ -581,6 +651,69 @@ export default function AuditionsContent() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs bg-purple-600 text-white px-2 py-1 rounded hover:bg-purple-700 transition-colors"
+                      >
+                        Apply Now
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* Special character info for NSD Sikkim Centre casting */}
+                {audition.id === 12 && audition.roles && (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                    <h4 className="font-semibold text-green-700 mb-2 flex items-center">
+                      🎭 Repertory Company: {audition.roles[0]}
+                    </h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                      <div>
+                        <span className="font-medium text-gray-700">Salary:</span>
+                        <span className="ml-1 text-gray-800">{audition.salary}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Number of Posts:</span>
+                        <span className="ml-1 text-gray-800">{audition.numberOfPosts}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Age Limit:</span>
+                        <span className="ml-1 text-gray-800">{audition.ageLimit}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Application Deadline:</span>
+                        <span className="ml-1 text-gray-800 font-semibold text-red-600">
+                          {audition.applicationDeadline}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-700 mb-3 italic">"{audition.description}"</p>
+                    <div className="mb-3">
+                      <p className="font-medium text-gray-700 text-sm mb-1">📝 Application Requirements:</p>
+                      <div className="text-xs text-gray-600 space-y-1">
+                        {audition.applicationRequirements.map((item: string, index: number) => (
+                          <div key={index} className="flex items-center">
+                            <span className="text-green-600 mr-1">•</span>
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <p className="font-medium text-gray-700 text-sm mb-1">📢 Important Notes:</p>
+                      <div className="text-xs text-gray-600 space-y-1">
+                        {audition.importantNotes.map((item: string, index: number) => (
+                          <div key={index} className="flex items-center">
+                            <span className="text-green-600 mr-1">•</span>
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-green-600">📞 Contact: {audition.contact}</span>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition-colors"
                       >
                         Apply Now
                       </a>
