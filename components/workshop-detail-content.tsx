@@ -1,13 +1,121 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, Calendar, MapPin, GraduationCap, CheckCircle, Clock } from "lucide-react"
-
 // Workshop data
 const workshops = [
+  {
+    id: 33,
+    title: "NSD's One-Year Acting Course – Mumbai",
+    trainer: "NSD Faculty",
+    institution: "National School of Drama (NSD)",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "15th October 2025",
+    time: "Monday–Friday, 8 AM to 6 PM",
+    description:
+      "🎭 Comprehensive one-year full-time acting course by NSD Mumbai. Learn directly from renowned industry professionals with intensive, practical training for camera acting. Perfect for beginners and aspiring professionals in films, TV, and web series. Two intensive semesters with step-by-step learning and professional guidance.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://nsd.gov.in/delhi/index.php/admission-notice-mumbai-2025/",
+    featured: true,
+    price: "₹5,00,000 (Full Course) or ₹3,00,000 per semester",
+    contact: "011-23389402 / 23387916",
+    email: "Via NSD website",
+    eligibility: "12th Pass, Age 18+",
+    venue: "602 Durga Chambers, Andheri West, Mumbai",
+    includes: "Professional industry training + NSD Certificate + Real-world preparation",
+    fullDetails: {
+      description:
+        "🎭 Comprehensive one-year full-time acting course by NSD Mumbai. Learn directly from renowned industry professionals with intensive, practical training for camera acting. Perfect for beginners and aspiring professionals in films, TV, and web series. Two intensive semesters with step-by-step learning and professional guidance.",
+      venue: "602 Durga Chambers, Andheri West, Mumbai",
+      organizer: "National School of Drama (NSD), Mumbai",
+      duration: "1 Year (Full-Time) - 1440 hours total",
+      medium: "Hindi & English",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Education: 12th Pass (mandatory)",
+        "Nationality: Indian",
+        "Mandatory audition (Online/Offline)",
+        "Commitment to full-time course attendance",
+      ],
+      applicationDeadline: "1st October 2025",
+      auditionDate: "10th October 2025",
+      courseBegins: "15th October 2025 (Mumbai)",
+      selectionProcess: "Online/Offline Audition (mandatory)",
+      capacity: "Limited seats available",
+      courseFee: "Semester 1: ₹3,00,000, Semester 2: ₹3,00,000, Full Course: ₹5,00,000",
+      certification: "NSD Certificate upon successful completion",
+      keyHighlights: [
+        "Learn directly from renowned industry professionals",
+        "Intensive, practical training for camera acting",
+        "Perfect for beginners and aspiring professionals in films, TV, and web series",
+        "Two intensive semesters with step-by-step learning",
+        "Professional guidance throughout the course",
+        "Real-world preparation for film, TV, and web acting",
+        "Full-time comprehensive program",
+        "Industry-oriented training in Semester 2",
+        "Foundation training in Semester 1",
+        "Extended hours possible for intensive learning",
+      ],
+      curriculum: [
+        "Foundation Training (Semester 1 - 720 hours)",
+        "Industry-Oriented Training (Semester 2 - 720 hours)",
+        "Camera acting techniques and methods",
+        "Professional acting skills development",
+        "Film and television acting preparation",
+        "Web series acting training",
+        "Character development and analysis",
+        "Voice and diction training",
+        "Movement and body language",
+        "Script analysis and interpretation",
+        "Improvisation techniques",
+        "Industry practices and professional conduct",
+      ],
+      courseStructure: [
+        "Semester 1 (6 Months): Foundation Training - 720 hours",
+        "Semester 2 (6 Months): Industry-Oriented Training - 720 hours",
+        "Monday to Friday schedule: 8 AM to 6 PM",
+        "Extended hours possible for intensive sessions",
+        "Step-by-step learning progression",
+        "Professional guidance throughout",
+      ],
+      learningOutcomes: [
+        "Professional camera acting skills",
+        "Confidence in film, TV, and web series acting",
+        "Understanding of industry practices and standards",
+        "Character development and portrayal abilities",
+        "Professional networking within the industry",
+        "Real-world acting experience and preparation",
+        "Industry-ready performance skills",
+        "Professional conduct and ethics in entertainment industry",
+      ],
+      aboutInstructor:
+        "NSD Faculty – Experienced acting professionals and educators from India's premier drama institution with extensive expertise in theatre, film, television, and web series acting. The faculty brings both academic excellence and practical industry experience to provide comprehensive training.",
+      whyChooseNSD: [
+        "Learn directly from renowned industry professionals",
+        "Intensive, practical training for camera acting",
+        "Perfect for beginners and aspiring professionals",
+        "Comprehensive curriculum covering films, TV, and web series",
+        "India's most prestigious drama institution",
+        "Industry connections and networking opportunities",
+        "Professional certification and recognition",
+        "Real-world preparation and practical experience",
+      ],
+      targetAudience: [
+        "Beginners interested in professional acting",
+        "Aspiring film and television actors",
+        "Web series acting enthusiasts",
+        "Students seeking comprehensive acting training",
+        "Career changers entering the entertainment industry",
+        "Anyone passionate about camera acting",
+      ],
+      contactInfo: [
+        "Phone: 011-23389402 / 23387916",
+        "Registration: https://nsd.gov.in/delhi/index.php/admission-notice-mumbai-2025/",
+        "National School of Drama, Mumbai",
+      ],
+      additionalInfo:
+        "This comprehensive one-year full-time acting course is designed to prepare students for professional careers in films, television, and web series. The program combines foundational training with industry-oriented practical experience, ensuring graduates are ready for real-world acting opportunities. With NSD's prestigious reputation and experienced faculty, this course provides unparalleled training in camera acting.",
+    },
+  },
   {
     id: 15,
     title: "Paradox Studios Support — Performing Arts in Education Mentoring",
@@ -1067,6 +1175,12 @@ const workshops = [
   },
 ]
 
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft, Calendar, MapPin, GraduationCap, CheckCircle, Clock } from "lucide-react"
+
 interface WorkshopDetailContentProps {
   id: number
 }
@@ -1130,6 +1244,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
   const isParadoxStudios = workshop.institution === "Paradox Studios"
   const isIIET = workshop.institution === "Indian Institute of Educational Theatre (IIET)"
   const isThreadsTales = workshop.institution === "Threads & Tales"
+  const isNSD = workshop.institution === "National School of Drama (NSD)"
 
   return (
     <div className="container py-6 md:py-12">
@@ -1141,13 +1256,13 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
           <div
-            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-900"}`}
+            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-white" : isIIET ? "bg-gray-900" : isNSD ? "bg-gradient-to-br from-orange-100 to-red-100" : "bg-gray-900"}`}
           >
             <Image
               src={detailImageSrc || "/placeholder.svg"}
               alt={workshop.title}
               fill
-              className={`${isParadoxStudios || isThreadsTales ? "object-contain p-6" : isIIET ? "object-contain p-8" : "object-cover"}`}
+              className={`${isParadoxStudios || isThreadsTales ? "object-contain p-6" : isIIET ? "object-contain p-8" : isNSD ? "object-cover" : "object-cover"}`}
               sizes="100vw"
               priority
               onError={(e) => {
@@ -1157,7 +1272,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
             />
           </div>
           <div
-            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : isNSD ? "bg-gradient-to-t from-black/70 via-black/30 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
           ></div>
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-primary text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
             <CheckCircle className="h-4 w-4" />
@@ -1185,6 +1300,15 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                 </Link>
               ) : workshop.id === 32 ? (
                 <span className="text-white">{workshop.institution}</span>
+              ) : workshop.id === 33 ? (
+                <Link
+                  href="https://nsd.gov.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-orange-200 underline transition-colors"
+                >
+                  {workshop.institution}
+                </Link>
               ) : (
                 workshop.institution
               )}
@@ -1213,7 +1337,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                       <svg className="h-5 w-5 text-blue-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
-                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
                           clipRule="evenodd"
                         />
                       </svg>
@@ -1338,6 +1462,32 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                 </div>
               )}
 
+              {workshop.id === 33 && (
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-orange-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fillRule="evenodd"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 616 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-orange-800">Privacy & Attribution Notice</h3>
+                      <div className="mt-2 text-sm text-orange-700">
+                        <p>
+                          🔒 Note: This listing is shared for educational purposes only. All credits and copyrights
+                          belong to National School of Drama (NSD). AbhinayPath does not collect or share your data for
+                          this post. For application and details, always refer to the official NSD website.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {workshop.highlights && (
                 <div>
                   <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Workshop Highlights</h3>
@@ -1366,6 +1516,34 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                           <li key={index} className="flex items-start">
                             <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
                             <span className="text-gray-700">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {workshop.fullDetails.courseStructure && workshop.id === 33 && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Course Structure</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.courseStructure.map((item: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-orange-500 mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {workshop.fullDetails.whyChooseNSD && workshop.id === 33 && (
+                    <div>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Why Choose NSD Mumbai?</h3>
+                      <ul className="space-y-2">
+                        {workshop.fullDetails.whyChooseNSD.map((reason: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <CheckCircle className="h-5 w-5 text-secondary mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{reason}</span>
                           </li>
                         ))}
                       </ul>
@@ -1464,7 +1642,8 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 29 ||
                     workshop.id === 30 ||
                     workshop.id === 31 ||
-                    workshop.id === 32) &&
+                    workshop.id === 32 ||
+                    workshop.id === 33) &&
                     workshop.fullDetails.aboutInstructor && (
                       <div>
                         <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">
@@ -1474,7 +1653,9 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                               ? "About the Theatre Group"
                               : workshop.id === 32
                                 ? "About Threads & Tales"
-                                : "About the Course Director"}
+                                : workshop.id === 33
+                                  ? "About NSD Faculty"
+                                  : "About the Course Director"}
                         </h3>
                         {workshop.id === 30 ? (
                           <p className="text-gray-700 leading-relaxed">
@@ -1532,6 +1713,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                           <li key={index} className="flex items-start">
                             <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                             <span className="text-gray-700">{detail}</span>
+                            <span className="text-gray-700">{detail}</span>
                           </li>
                         ))}
                       </ul>
@@ -1561,12 +1743,25 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 29 ||
                     workshop.id === 30 ||
                     workshop.id === 31 ||
-                    workshop.id === 32) && (
+                    workshop.id === 32 ||
+                    workshop.id === 33) && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {workshop.fullDetails.applicationDeadline && (
                         <div>
                           <h4 className="font-semibold text-gray-800 mb-2">Application Deadline</h4>
                           <p className="text-gray-700 text-sm">{workshop.fullDetails.applicationDeadline}</p>
+                        </div>
+                      )}
+                      {workshop.fullDetails.auditionDate && workshop.id === 33 && (
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Audition Date</h4>
+                          <p className="text-gray-700 text-sm">{workshop.fullDetails.auditionDate}</p>
+                        </div>
+                      )}
+                      {workshop.fullDetails.courseBegins && workshop.id === 33 && (
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Course Begins</h4>
+                          <p className="text-gray-700 text-sm">{workshop.fullDetails.courseBegins}</p>
                         </div>
                       )}
                       {workshop.fullDetails.certification && (
@@ -1620,7 +1815,8 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                         workshop.id === 28 ||
                         workshop.id === 30 ||
                         workshop.id === 31 ||
-                        workshop.id === 32
+                        workshop.id === 32 ||
+                        workshop.id === 33
                           ? "Organizer"
                           : workshop.id === 29
                             ? "Program"
@@ -1648,18 +1844,22 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                           ? "bg-orange-600 hover:bg-orange-700 text-white"
                           : workshop.id === 30
                             ? "bg-green-600 hover:bg-green-700 text-white"
-                            : isThreadsTales
-                              ? "bg-teal-600 hover:bg-teal-700 text-white"
-                              : "bg-primary hover:bg-primary/90 text-white"
+                            : workshop.id === 33
+                              ? "bg-orange-600 hover:bg-orange-700 text-white"
+                              : isThreadsTales
+                                ? "bg-teal-600 hover:bg-teal-700 text-white"
+                                : "bg-primary hover:bg-primary/90 text-white"
                     }`}
                   >
                     {isParadoxStudios
                       ? "Apply for Free Sessions"
                       : workshop.id === 29
                         ? "Apply Online"
-                        : isThreadsTales
-                          ? "Contact via WhatsApp"
-                          : "Register Now"}
+                        : workshop.id === 33
+                          ? "Apply Now"
+                          : isThreadsTales
+                            ? "Contact via WhatsApp"
+                            : "Register Now"}
                   </Button>
                 </Link>
               </div>
