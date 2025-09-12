@@ -17,8 +17,11 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Home", href: "/" },
+    { name: "Auditions", href: "/auditions" },
+    { name: "Workshops", href: "/workshops" },
+    { name: "Events", href: "/events" },
+    { name: "Admissions", href: "/admissions" },
     { name: "About", href: "/about" },
-    { name: "Join", href: "/join-community" },
     { name: "Contact", href: "/contact" },
   ]
 
@@ -84,7 +87,7 @@ export default function Navbar() {
             <div className="pt-4 border-t mt-2">
               <Link href="/join-community" onClick={toggleMenu}>
                 <Button className="w-full rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white py-5 h-auto text-base">
-                  Join Abhinayपथ Community  
+                  Join Abhinayपथ Community
                 </Button>
               </Link>
             </div>
