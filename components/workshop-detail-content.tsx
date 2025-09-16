@@ -370,7 +370,7 @@ const workshops = [
     title: "FTII Pune: Exploring an Indian Classic – Guide (Diamond Jubilee Appreciation)",
     trainer: "Dr. Milind Damle",
     institution: "Film and Television Institute of India (FTII)",
-    location: "Chittorgarh",
+    location: "Chittorgarh & Udaipur",
     state: "Rajasthan",
     date: "03–07 November 2025",
     time: "10 AM – 6 PM (with travel/rest breaks)",
@@ -385,69 +385,101 @@ const workshops = [
     email: "info.cfol@ftii.ac.in",
     eligibility: "Age 18+, 12th pass (10th in exceptional cases)",
     venue: "Mewar University, Chittorgarh + Iconic shooting locations in Udaipur & Chittorgarh",
+    highlights: [
+      "Film Location Tours",
+      "Literary Analysis",
+      "Cinematic Appreciation",
+      "Cultural Tourism",
+      "Diamond Jubilee Celebration",
+    ],
     fullDetails: {
-      venue: "Mewar University, Chittorgarh + Iconic shooting locations in Udaipur & Chittorgarh",
-      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
-      duration: "5 Days",
-      medium: "English & Hindi",
-      courseDirector: "Dr. Milind Damle",
+      venue: "Mewar University campus & select shooting locations in Chittorgarh & Udaipur",
+      organizer:
+        "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL) in collaboration with Mewar University",
+      duration: "5 Days (03–07 November 2025)",
+      medium: "Hindi & English",
+      courseDirector:
+        "Dr. Milind Damle (Associate Professor, FTII, film editor & filmmaker with 20+ years' experience)",
       eligibilityCriteria: [
         "Age: 18+ years",
         "Education: Minimum 12th pass (10th pass in exceptional cases)",
         "Nationality: Indian",
         "Interest in Indian cinema and literature",
+        "Passion for film appreciation and cultural exploration",
       ],
-      applicationDeadline: "31 August 2025, 6:00 PM IST",
+      applicationDeadline: "18 October 2025, 6:00 PM IST",
       selectionProcess: "First-Come, First-Served basis",
       capacity: "Maximum 25 participants (Minimum 20 required)",
-      courseFee: "₹10,000 (Non-refundable for selected participants)",
-      accommodation: "₹150/day (Triple sharing at University mess)",
-      meals: "₹150/day at University mess",
-      certification: "FTII Certificate upon successful completion",
+      courseFee: "₹10,000 (includes transport & entry fees; excludes meals & stay)",
+      accommodation: "₹150/day (Triple sharing at University hostel)",
+      meals: "₹150/day (University mess facility)",
+      certification: "FTII participation certificate (90% attendance required)",
       keyHighlights: [
-        "Visit iconic Guide shooting locations in Udaipur & Chittorgarh",
-        "Analysis of R.K. Narayan's novel 'The Guide' vs. film adaptation",
+        "Visit & explore iconic Guide shooting locations in Chittorgarh & Udaipur",
+        "Deep dive into R.K. Narayan's novel 'The Guide' and its cinematic adaptation",
         "Compare Hindi & English versions of Guide",
-        "Song & scene appreciation (Piya Tose Naina Lage Re, Kaaton Se Khinch Ke Aanchal & more)",
-        "Screening of both Hindi & English versions",
-        "Walk where Waheeda ji danced, S.D. Burman composed, and Vijay Anand called 'Action!'",
-        "Diamond Jubilee celebration of this Indian cinema classic",
+        "Song appreciation & analysis of legendary S.D. Burman compositions",
+        "Study Vijay Anand's direction techniques and cinematic vision",
+        "Screenings of Guide (both Hindi & English versions)",
+        "Walk where Waheeda Rehman danced and legendary scenes were filmed",
+        "Diamond Jubilee celebration of this timeless Indian cinema classic",
+        "Expert-guided analysis and cultural context exploration",
+        "Immersive experience combining literature, cinema, and travel",
       ],
       curriculum: [
         "Literary analysis of R.K. Narayan's novel 'The Guide'",
-        "Film adaptation study and comparison",
-        "Comparative analysis of Hindi and English versions",
-        "Song appreciation and musical analysis",
+        "Film adaptation study and comparative analysis",
+        "Detailed comparison of Hindi and English versions",
+        "Song appreciation and musical analysis of S.D. Burman's compositions",
         "Scene-by-scene breakdown of iconic sequences",
-        "Location visits to original shooting spots",
+        "Location visits to original shooting spots in Udaipur & Chittorgarh",
         "Cinematography and direction techniques study",
         "Cultural impact and legacy of the film",
+        "Vijay Anand's directorial approach and filmmaking philosophy",
+        "Historical context of 1960s Indian cinema",
       ],
       locationVisits: [
         "Iconic shooting locations in Udaipur",
-        "Historic sites in Chittorgarh",
-        "Places where legendary scenes were filmed",
-        "Locations of famous song sequences",
-        "Heritage sites featured in the movie",
+        "Historic sites and palaces in Chittorgarh",
+        "Places where legendary dance sequences were filmed",
+        "Locations of famous song sequences like 'Piya Tose Naina Lage Re'",
+        "Heritage sites and temples featured in the movie",
+        "Mewar University campus exploration",
+        "Cultural landmarks that served as backdrops",
       ],
       filmScreenings: [
         "Complete Hindi version of Guide (1965)",
         "English version of Guide",
-        "Behind-the-scenes footage (if available)",
-        "Documentary materials on the making",
+        "Behind-the-scenes footage and making documentaries",
+        "Song sequences analysis and appreciation sessions",
+        "Comparative screening sessions",
+      ],
+      learningOutcomes: [
+        "Deep understanding of literature-to-film adaptation process",
+        "Appreciation of classic Indian cinema techniques and storytelling",
+        "Knowledge of film location significance in cinematic narrative",
+        "Understanding of cross-cultural film production (Hindi & English versions)",
+        "Insight into legendary filmmaker Vijay Anand's methods and vision",
+        "Cultural and historical context of 1960s Indian cinema",
+        "Enhanced film appreciation and critical analysis skills",
       ],
       aboutInstructor:
-        "Dr. Milind Damle – Course Director and film scholar with extensive expertise in Indian cinema, literature adaptation, and film appreciation. Expert in analyzing the intersection of literature and cinema.",
+        "Dr. Milind Damle – Associate Professor at FTII with over 20 years of experience as a film editor and filmmaker. Course Director and film scholar with extensive expertise in Indian cinema, literature adaptation, and film appreciation. Expert in analyzing the intersection of literature and cinema with deep knowledge of classic Indian films and their cultural significance.",
       uniqueExperience: [
-        "Once-in-a-lifetime opportunity to visit original shooting locations",
-        "Immersive experience combining literature, cinema, and travel",
-        "Diamond Jubilee celebration of a cinema classic",
-        "Expert-guided analysis and appreciation",
+        "Once-in-a-lifetime opportunity to visit original Guide shooting locations",
+        "Immersive experience combining literature, cinema, and cultural tourism",
+        "Diamond Jubilee celebration of an Indian cinema classic",
+        "Expert-guided analysis and appreciation sessions",
         "Cultural and historical context exploration",
+        "Walk in the footsteps of legendary artists like Waheeda Rehman",
+        "Experience the magic of iconic film locations firsthand",
       ],
-      contactInfo: ["Email: info.cfol@ftii.ac.in", "Phone: 020-25580085"],
+      contactInfo: [
+        "Rajesh Kumar Saini, Director, Theatre Film & Television, Mewar University – rajeshsaini@mewaruniversity.co.in | 9634712424",
+        "Milindkumar Joshi, Asst. Outreach Officer, FTII – info.cfol@ftii.ac.in | 020-25580085",
+      ],
       additionalInfo:
-        "This unique workshop combines film appreciation, literary analysis, and cultural tourism. Participants will gain deep insights into one of Indian cinema's most celebrated films while experiencing the actual locations where movie magic was created. Perfect for film enthusiasts, literature lovers, and cultural explorers.",
+        "This unique workshop celebrates the Diamond Jubilee of the iconic film 'Guide' by combining film appreciation, literary analysis, and cultural tourism. Participants will gain deep insights into one of Indian cinema's most celebrated films while experiencing the actual locations where movie magic was created. Perfect for film enthusiasts, literature lovers, and cultural explorers seeking an immersive cinematic experience.",
     },
   },
   {
@@ -1173,6 +1205,424 @@ const workshops = [
         "This workshop offers a unique opportunity to learn Playback Theatre, a form of improvisational theatre where audience members share personal stories that are then spontaneously enacted by performers. The workshop emphasizes the therapeutic and community-building aspects of storytelling through theatre.",
     },
   },
+  {
+    id: 34,
+    title: "FTII Pune: Basic Acting Workshop for Children",
+    trainer: "Megh Varn Pant",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "18–26 October 2025",
+    time: "Morning: 9:30 AM – 12:30 PM (Ages 8–13), Afternoon: 2:00 PM – 5:00 PM (Ages 13–17)",
+    description:
+      "🎭 A special on-campus acting workshop exclusively for children at FTII! Learn theatre games, improvisation, storytelling, Navrasas, voice training, monologue work, and audition techniques. Led by FTII alumnus and experienced acting coach Megh Varn Pant with 18+ years of teaching experience.",
+    image: "/images/acting-workshop.png",
+    registrationLink:
+      "https://ftii.ac.in/p/courses-for-children/basic-acting-workshop-for-children-in-pune-18-26-october-2025-1",
+    featured: true,
+    price: "₹9,000 (excludes meals)",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+    eligibility: "Children aged 8-17, minimum 3rd std. pass (2nd std. in exceptional cases)",
+    venue: "FTII's Vijay Tendulkar Writers' Academy Campus, Pune",
+    includes: "Theatre games, improvisation, storytelling, voice training, monologue work, audition techniques",
+    highlights: [
+      "Children's Acting",
+      "Theatre Games",
+      "Improvisation",
+      "Storytelling",
+      "Voice Training",
+      "Audition Techniques",
+    ],
+    fullDetails: {
+      venue: "FTII's Vijay Tendulkar Writers' Academy Campus, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "9 days (18–26 October 2025, including Saturdays & Sundays)",
+      medium: "English & Hindi",
+      courseDirector: "Megh Varn Pant (FTII alumnus 2004–06, actor & coach with 18+ years of teaching experience)",
+      eligibilityCriteria: [
+        "Age: 8-17 years (two separate batches)",
+        "Education: Minimum 3rd standard pass (2nd standard in exceptional cases)",
+        "Nationality: Indian",
+        "Interest in acting and performance arts",
+        "Commitment to attend all sessions for certification",
+      ],
+      applicationDeadline: "30 September 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "25 per batch (Minimum 20 required per batch to run)",
+      courseFee: "₹9,000 (excludes meals, non-refundable for selected participants)",
+      certification: "FTII & CFOL participation certificate (90% attendance required)",
+      batchDetails: [
+        "Morning Batch: 9:30 AM – 12:30 PM (Ages 8–13)",
+        "Afternoon Batch: 2:00 PM – 5:00 PM (Ages 13–17)",
+      ],
+      keyHighlights: [
+        "Special on-campus acting workshop exclusively for children",
+        "Theatre games & improvisation techniques",
+        "Story writing & storytelling skills development",
+        "Navrasas (nine emotions) & imagination building",
+        "Relaxation, concentration & voice training",
+        "Monologue & scene work practice",
+        "Audition techniques & camera practice",
+        "Guided movement & music-based imagination exercises",
+        "Personality development through acting",
+        "Led by experienced FTII alumnus and acting coach",
+        "Sanford Meisner Technique practitioner as instructor",
+      ],
+      curriculum: [
+        "Theatre games and creative play",
+        "Improvisation techniques for children",
+        "Story writing and creative storytelling",
+        "Navrasas (nine emotions) exploration and expression",
+        "Imagination building exercises",
+        "Relaxation and concentration techniques",
+        "Voice training and speech development",
+        "Monologue preparation and performance",
+        "Scene work and character development",
+        "Audition techniques and preparation",
+        "Camera practice and on-screen acting basics",
+        "Guided movement and physical expression",
+        "Music-based imagination and creativity exercises",
+        "Personality development through performance",
+        "Confidence building through acting",
+      ],
+      practicalExperience: [
+        "Hands-on theatre games and creative exercises",
+        "Individual monologue preparation and performance",
+        "Group scene work and collaborative acting",
+        "Camera practice sessions for screen acting",
+        "Improvisation exercises and spontaneous performance",
+        "Voice and movement workshops",
+        "Audition simulation and technique practice",
+      ],
+      learningOutcomes: [
+        "Enhanced creativity and imagination",
+        "Improved confidence and self-expression",
+        "Better communication and presentation skills",
+        "Understanding of basic acting techniques",
+        "Experience with both stage and camera acting",
+        "Development of emotional expression through Navrasas",
+        "Stronger concentration and focus abilities",
+        "Improved voice projection and clarity",
+        "Basic audition and performance skills",
+        "Enhanced personality development",
+        "Creative storytelling abilities",
+      ],
+      aboutInstructor:
+        "Megh Varn Pant – FTII alumnus (2004–06) with over 18 years of teaching experience in acting. A practitioner of the renowned Sanford Meisner Technique, he has worked in 20+ films and numerous advertisements. As an experienced actor and coach, he regularly trains actors for film and television, bringing both practical industry experience and proven teaching methodologies to guide young aspiring performers.",
+      instructorExperience: [
+        "FTII alumnus (2004–06) with formal training in acting",
+        "18+ years of dedicated teaching experience",
+        "Practitioner of Sanford Meisner Technique",
+        "Worked in 20+ films across various roles",
+        "Extensive experience in television advertisements",
+        "Regular trainer for professional actors in film & television",
+        "Specialized expertise in children's acting education",
+      ],
+      uniqueExperience: [
+        "Exclusive on-campus workshop at prestigious FTII",
+        "Age-appropriate batches for optimal learning",
+        "Comprehensive curriculum covering all aspects of acting",
+        "Combination of traditional theatre and modern screen acting",
+        "Expert guidance from industry-experienced instructor",
+        "Focus on personality development alongside acting skills",
+        "Hands-on camera practice for screen acting preparation",
+      ],
+      targetAudience: [
+        "Children aged 8-13 years (morning batch)",
+        "Teenagers aged 13-17 years (afternoon batch)",
+        "Young aspiring actors and performers",
+        "Children interested in creative expression",
+        "Students seeking confidence building through arts",
+        "Parents looking for quality acting education for their children",
+      ],
+      workshopPolicies: [
+        "Non-residential program - participants arrange own accommodation and meals",
+        "90% attendance required for certification",
+        "Age-appropriate batch allocation strictly followed",
+        "Professional conduct expected from all participants",
+        "Active participation encouraged in all sessions",
+        "Parents/guardians responsible for drop-off and pick-up",
+      ],
+      contactInfo: [
+        "Mr. Milindkumar Joshi - Assistant Outreach Officer, FTII",
+        "Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+        "Phone: 020–25580085 (working days, office hours only)",
+      ],
+      additionalInfo:
+        "This special children's acting workshop at FTII provides young aspiring performers with professional-level training in a nurturing, age-appropriate environment. The program combines traditional theatre techniques with modern screen acting skills, ensuring comprehensive development. With separate batches for different age groups and expert instruction from an experienced FTII alumnus, this workshop offers an exceptional opportunity for children to explore their creative potential and build confidence through the art of acting.",
+    },
+  },
+  {
+    id: 35,
+    title: "FTII Pune: ABCD of AI for Content Creation – Powered by Your Own Creativity",
+    trainer: "Dr. Alwin Anuse",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "21–24 October 2025",
+    time: "Morning: 10 AM – 1 PM (Ages 13–17), Afternoon: 2:30 PM – 5:30 PM (Ages 13–17)",
+    description:
+      "🤖 A unique 4-day on-campus course for children that blends creativity + AI tools in a fun and engaging way! Learn the ABCD framework: Awareness, Brain-first thinking, Creativity with AI support, and Design Thinking. Perfect for young minds to explore AI responsibly while keeping imagination and emotions first.",
+    image: "/images/acting-workshop.png",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/abcd-of-ai-for-content-creation-for-children-powered-by-own-creativity-in-pune-21-24-october-2025",
+    featured: true,
+    price: "₹4,500 (excludes meals)",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Children aged 13-17, minimum 5th std. pass",
+    venue: "FTII's Vijay Tendulkar Writers' Academy, Kothrud, Pune",
+    includes: "AI creativity tools training + FTII Certificate + group projects",
+    highlights: [
+      "AI Awareness",
+      "Creative Thinking",
+      "Content Creation",
+      "Design Thinking",
+      "Group Projects",
+      "Responsible AI Use",
+    ],
+    fullDetails: {
+      venue: "FTII's Vijay Tendulkar Writers' Academy, Kothrud, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "4 days (21–24 October 2025)",
+      medium: "Hindi & English",
+      courseDirector:
+        "Dr. Alwin Anuse (Associate Professor, FTII with 20+ years experience, 2 patents, AI systems expert)",
+      eligibilityCriteria: [
+        "Age: 13-17 years (as of 1 October 2025)",
+        "Education: Minimum 5th standard pass",
+        "Nationality: Indian",
+        "Interest in creativity and technology",
+        "Commitment to attend all sessions for certification",
+      ],
+      applicationDeadline: "03 October 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "20 per batch (Minimum 20 required per batch, 4 seats reserved for FTII staff children)",
+      courseFee: "₹4,500 (excludes meals, non-refundable for selected participants)",
+      certification: "FTII participation certificate (90% attendance mandatory)",
+      batchDetails: ["Morning Batch: 10 AM – 1 PM (Ages 13–17)", "Afternoon Batch: 2:30 PM – 5:30 PM (Ages 13–17)"],
+      keyHighlights: [
+        "Unique ABCD framework for AI learning",
+        "A = Awareness – Spot AI in daily life (games, apps, media)",
+        "B = Brain – Keep imagination & emotions first",
+        "C = Creativity – Use AI to support text, image, sound & video projects",
+        "D = Design Thinking – Collaborate, ideate & showcase group projects",
+        "No coding or heavy AI algorithms required",
+        "Focus on storytelling, design, teamwork, and responsible AI use",
+        "Hands-on projects with AI creativity tools",
+        "Expert guidance from AI systems specialist",
+        "Fun and engaging learning environment",
+      ],
+      curriculum: [
+        "AI Awareness: Understanding AI in daily life and media",
+        "Brain-first thinking: Keeping human creativity at the center",
+        "Creative AI applications for text generation and editing",
+        "Image creation and manipulation using AI tools",
+        "Sound and audio projects with AI assistance",
+        "Video content creation with AI support",
+        "Design thinking methodology and collaboration",
+        "Group ideation and creative problem-solving",
+        "Responsible AI use and ethical considerations",
+        "Storytelling enhanced by AI tools",
+        "Project showcase and presentation skills",
+      ],
+      practicalExperience: [
+        "Hands-on work with AI creativity tools",
+        "Text, image, sound, and video project creation",
+        "Collaborative group projects and ideation sessions",
+        "Design thinking workshops and exercises",
+        "Creative storytelling with AI assistance",
+        "Project presentation and showcase",
+      ],
+      learningOutcomes: [
+        "Understanding of AI applications in creative fields",
+        "Ability to use AI tools responsibly for content creation",
+        "Enhanced creativity and imagination skills",
+        "Improved collaboration and teamwork abilities",
+        "Design thinking and problem-solving skills",
+        "Confidence in presenting creative projects",
+        "Awareness of ethical AI use and limitations",
+        "Storytelling skills enhanced by technology",
+      ],
+      aboutInstructor:
+        "Dr. Alwin Anuse – Associate Professor at FTII with over 20 years of experience in AI systems, signal processing, and creative applications of AI. He holds 2 patents and has extensive expertise in bridging technology with storytelling. Dr. Anuse has taught at UG/PG/PhD levels, published in reputed journals, and specializes in making complex AI concepts accessible and engaging for young learners.",
+      instructorExperience: [
+        "20+ years of experience in AI systems and signal processing",
+        "Associate Professor at India's premier film institute",
+        "Holder of 2 patents in AI and technology applications",
+        "Expert in creative applications of AI for storytelling",
+        "Extensive teaching experience at UG/PG/PhD levels",
+        "Published researcher in reputed academic journals",
+        "Specialist in making AI accessible to young learners",
+      ],
+      coursePhilosophy: [
+        "Human creativity and imagination come first",
+        "AI as a supportive tool, not a replacement for human creativity",
+        "Focus on responsible and ethical AI use",
+        "Emphasis on collaboration and teamwork",
+        "Learning through fun and engaging activities",
+        "Building confidence in technology use",
+      ],
+      whatThisCourseIsNot: [
+        "❌ No coding or heavy AI algorithms",
+        "❌ Not a filmmaking or data science course",
+        "❌ No replacing human imagination with machines",
+        "✅ Focus is on storytelling, design, teamwork, and responsible AI use",
+      ],
+      uniqueExperience: [
+        "First-of-its-kind AI creativity course for children at FTII",
+        "ABCD framework designed specifically for young learners",
+        "Balance between technology and human creativity",
+        "Hands-on experience with cutting-edge AI tools",
+        "Expert guidance from AI systems specialist",
+        "Focus on responsible and ethical AI use",
+        "Collaborative learning environment",
+      ],
+      targetAudience: [
+        "Children aged 13-17 years interested in creativity and technology",
+        "Young minds curious about AI applications",
+        "Students interested in content creation",
+        "Children who enjoy collaborative projects",
+        "Young learners interested in storytelling and design",
+      ],
+      contactInfo: [
+        "Mr. Milindkumar Joshi - Assistant Outreach Officer, FTII",
+        "Email: info.cfol@ftii.ac.in",
+        "Phone: 020–25580085",
+      ],
+      additionalInfo:
+        "This innovative course introduces children to the world of AI in a responsible and creative way. The ABCD framework ensures that human creativity remains at the center while exploring how AI can support and enhance creative projects. Perfect for young minds who are curious about technology but want to maintain their imaginative and emotional intelligence as the driving force behind their creative work.",
+    },
+  },
+  {
+    id: 36,
+    title: "FTII Nanded: Basic Course in Filmmaking",
+    trainer: "Ritesh Taksande",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Nanded",
+    state: "Maharashtra",
+    date: "06–10 October 2025",
+    time: "10 AM – 6 PM (lunch: 1:30–2 PM)",
+    description:
+      "🎬 Step into the world of cinema with FTII's comprehensive 5-day filmmaking course in collaboration with SRTM University, Nanded! This beginner-friendly program covers the complete filmmaking journey from idea to screen. Work in groups to create your own short film under guidance of award-winning filmmaker Ritesh Taksande with 15+ years of experience in animation, VFX & live-action.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-film-making-srtmu-nanded-06-10-october-2025",
+    featured: true,
+    price: "₹5,000 (excludes meals & stay)",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Age 18+ (as of 1 Oct 2025), 12th pass (10th pass may be considered)",
+    venue: "School of Media Studies, SRTM University Campus, Nanded",
+    includes: "Complete filmmaking training + Group short film creation + FTII-SRTM joint certificate",
+    highlights: [
+      "Complete Filmmaking Journey",
+      "Hands-on Short Film Creation",
+      "Award-winning Instructor",
+      "Group Collaboration",
+      "Industry Experience",
+      "Film Showcase",
+    ],
+    fullDetails: {
+      venue: "School of Media Studies, SRTM University Campus, Nanded",
+      organizer:
+        "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL) in collaboration with Swami Ramanand Teerth Marathwada University (SRTM University, Nanded)",
+      duration: "5 days (06–10 October 2025)",
+      medium: "Hindi & English",
+      courseDirector:
+        "Ritesh Taksande (Award-winning filmmaker & educator with 15+ years of experience across animation, VFX & live-action)",
+      eligibilityCriteria: [
+        "Age: 18+ years (as of 1 October 2025)",
+        "Education: 12th pass (10th pass may be considered in exceptional cases)",
+        "Nationality: Indian",
+        "Interest in filmmaking and cinema",
+        "No prior filmmaking experience required - perfect for beginners",
+      ],
+      applicationDeadline: "18 September 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "30 participants (Minimum 24 required)",
+      courseFee: "₹5,000 (excludes meals & stay, non-refundable for selected participants)",
+      certification: "FTII–SRTM joint certificate (90% attendance required)",
+      accommodation: "Limited hostel available (₹1500, twin sharing, 5–10 Oct; pay directly on arrival)",
+      meals: "Available in University canteen (~₹100 per meal)",
+      keyHighlights: [
+        "Complete filmmaking journey from idea to screen",
+        "Beginner-friendly program with hands-on approach",
+        "Work in groups to create your own short film",
+        "Learn from award-winning filmmaker with 15+ years experience",
+        "Covers animation, VFX & live-action techniques",
+        "Industry projects experience (Disney's Planes 2, Little Krishna, Shaktimaan)",
+        "Day-wise structured learning approach",
+        "Film showcase on final day",
+        "Joint certification from FTII and SRTM University",
+        "Networking opportunity with fellow aspiring filmmakers",
+      ],
+      curriculum: [
+        "Day 1 – Pre-Production: Script writing, storyboarding, casting & location scouting",
+        "Day 2 – Cinematography: Camera basics, framing, lighting & sound essentials",
+        "Day 3 – Production: On-set etiquette, directing actors, blocking & shooting practice",
+        "Day 4 – Editing: Rough cut assembly, continuity, pacing, adding sound & music",
+        "Day 5 – Post Production: Colour grading, sound mixing, exporting & film showcase",
+      ],
+      practicalExperience: [
+        "Hands-on script writing and storyboarding",
+        "Camera operation and cinematography practice",
+        "Live shooting with professional equipment",
+        "Complete post-production workflow",
+        "Group collaboration in film creation",
+        "Film showcase and presentation",
+      ],
+      learningOutcomes: [
+        "Understanding of complete filmmaking process",
+        "Practical skills in pre-production, production, and post-production",
+        "Experience in script writing and storyboarding",
+        "Camera operation and cinematography knowledge",
+        "Editing and post-production skills",
+        "Team collaboration and project management",
+        "Completed short film to showcase skills",
+        "Industry-ready knowledge of filmmaking techniques",
+        "Confidence to pursue independent filmmaking projects",
+        "Network with fellow aspiring filmmakers",
+      ],
+      aboutInstructor:
+        "Ritesh Taksande – Award-winning filmmaker and educator with over 15 years of experience across animation, VFX, and live-action filmmaking. He has worked on major industry projects including Disney's Planes 2, Little Krishna, and Shaktimaan. As an experienced filmmaker and educator, he brings both creative vision and practical industry knowledge to guide students through the complete filmmaking process from concept to screen. He has also trained aspiring filmmakers through My First Film Organisation and served as Senior Manager – Film Production at NFDC.",
+      instructorExperience: [
+        "15+ years of experience in filmmaking across multiple mediums",
+        "Award-winning filmmaker with industry recognition",
+        "Worked on Disney's Planes 2 (major international project)",
+        "Experience with popular Indian productions like Little Krishna",
+        "Contributed to iconic series like Shaktimaan",
+        "Expert in animation, VFX, and live-action techniques",
+        "Proven educator with hands-on teaching approach",
+        "Industry connections and practical filmmaking knowledge",
+        "Trained aspiring filmmakers through My First Film Organisation",
+        "Senior Manager – Film Production at NFDC",
+      ],
+      uniqueExperience: [
+        "Learn from filmmaker with Disney and major industry experience",
+        "Collaboration between prestigious FTII and SRTM University",
+        "Complete filmmaking journey in just 5 intensive days",
+        "Hands-on approach with immediate practical application",
+        "Group collaboration fostering teamwork and networking",
+        "Film showcase providing platform to present work",
+        "Joint certification from two respected institutions",
+      ],
+      targetAudience: [
+        "Beginners interested in filmmaking",
+        "Aspiring directors and cinematographers",
+        "Students exploring cinema as a career",
+        "Creative professionals seeking filmmaking skills",
+        "Anyone passionate about visual storytelling",
+        "Film enthusiasts wanting hands-on experience",
+      ],
+      contactInfo: [
+        "Dr. Rajendra Gonarkar, SRTM University – rajendragonarkar@srtmun.ac.in | 9890619274",
+        "Mr. Milind Joshi, FTII – info.cfol@ftii.ac.in | 020–25580085",
+      ],
+      additionalInfo:
+        "This intensive 5-day course provides a comprehensive introduction to filmmaking, perfect for beginners looking to step into the world of cinema. The program combines theoretical knowledge with extensive hands-on practice, ensuring participants gain both understanding and practical skills in all aspects of filmmaking. The collaboration between FTII and SRTM University provides a unique learning environment that bridges academic excellence with creative innovation. Participants will leave with a completed short film and the confidence to pursue their filmmaking aspirations.",
+    },
+  },
 ]
 
 import { useState, useEffect } from "react"
@@ -1237,6 +1687,9 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
     if (workshop.institution === "Threads & Tales") {
       return "/images/threads-tales-logo.png"
     }
+    if (workshop.institution === "Threads & Tales") {
+      return "/images/threads-tales-logo.png"
+    }
     return workshop.image || "/images/acting-workshop.png"
   }
 
@@ -1245,6 +1698,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
   const isIIET = workshop.institution === "Indian Institute of Educational Theatre (IIET)"
   const isThreadsTales = workshop.institution === "Threads & Tales"
   const isNSD = workshop.institution === "National School of Drama (NSD)"
+  const isFTII = workshop.institution === "Film and Television Institute of India (FTII)"
 
   return (
     <div className="container py-6 md:py-12">
@@ -1256,13 +1710,13 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
           <div
-            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-white" : isIIET ? "bg-gray-900" : isNSD ? "bg-gradient-to-br from-orange-100 to-red-100" : "bg-gray-900"}`}
+            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-white" : isIIET ? "bg-gray-900" : isNSD ? "bg-gradient-to-br from-orange-100 to-red-100" : isFTII ? "bg-gradient-to-br from-blue-100 to-indigo-100" : "bg-gray-900"}`}
           >
             <Image
               src={detailImageSrc || "/placeholder.svg"}
               alt={workshop.title}
               fill
-              className={`${isParadoxStudios || isThreadsTales ? "object-contain p-6" : isIIET ? "object-contain p-8" : isNSD ? "object-cover" : "object-cover"}`}
+              className={`${isParadoxStudios || isThreadsTales ? "object-contain p-6" : isIIET ? "object-contain p-8" : isNSD || isFTII ? "object-cover" : "object-cover"}`}
               sizes="100vw"
               priority
               onError={(e) => {
@@ -1272,7 +1726,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
             />
           </div>
           <div
-            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : isNSD ? "bg-gradient-to-t from-black/70 via-black/30 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
+            className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-gradient-to-t from-black/60 via-transparent to-transparent" : isIIET ? "bg-gradient-to-t from-black/80 via-black/40 to-transparent" : isNSD ? "bg-gradient-to-t from-black/70 via-black/30 to-transparent" : isFTII ? "bg-gradient-to-t from-black/70 via-black/30 to-transparent" : "bg-gradient-to-t from-black/80 via-black/30 to-transparent"}`}
           ></div>
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-primary text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
             <CheckCircle className="h-4 w-4" />
@@ -1309,6 +1763,15 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                 >
                   {workshop.institution}
                 </Link>
+              ) : isFTII ? (
+                <Link
+                  href="https://ftii.ac.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-200 underline transition-colors"
+                >
+                  {workshop.institution}
+                </Link>
               ) : (
                 workshop.institution
               )}
@@ -1330,7 +1793,10 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                 workshop.id === 25 ||
                 workshop.id === 26 ||
                 workshop.id === 27 ||
-                workshop.id === 28) && (
+                workshop.id === 28 ||
+                workshop.id === 34 ||
+                workshop.id === 35 ||
+                workshop.id === 36) && (
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
@@ -1634,7 +2100,8 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     </div>
                   )}
 
-                  {(workshop.id === 24 ||
+                  {(workshop.id === 23 ||
+                    workshop.id === 24 ||
                     workshop.id === 25 ||
                     workshop.id === 26 ||
                     workshop.id === 27 ||
@@ -1643,7 +2110,10 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 30 ||
                     workshop.id === 31 ||
                     workshop.id === 32 ||
-                    workshop.id === 33) &&
+                    workshop.id === 33 ||
+                    workshop.id === 34 ||
+                    workshop.id === 35 ||
+                    workshop.id === 36) &&
                     workshop.fullDetails.aboutInstructor && (
                       <div>
                         <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">
@@ -1655,7 +2125,13 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                                 ? "About Threads & Tales"
                                 : workshop.id === 33
                                   ? "About NSD Faculty"
-                                  : "About the Course Director"}
+                                  : workshop.id === 34
+                                    ? "About the Course Director"
+                                    : workshop.id === 35
+                                      ? "About the Course Director"
+                                      : workshop.id === 36
+                                        ? "About the Course Director"
+                                        : "About the Course Director"}
                         </h3>
                         {workshop.id === 30 ? (
                           <p className="text-gray-700 leading-relaxed">
@@ -1677,27 +2153,13 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                       </div>
                     )}
 
-                  {workshop.fullDetails.technicalRequirements && (
+                  {workshop.fullDetails.instructorExperience && (workshop.id === 34 || workshop.id === 36) && (
                     <div>
-                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Technical Requirements</h3>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Instructor Experience</h3>
                       <ul className="space-y-2">
-                        {workshop.fullDetails.technicalRequirements.map((requirement: string, index: number) => (
+                        {workshop.fullDetails.instructorExperience.map((experience: string, index: number) => (
                           <li key={index} className="flex items-start">
                             <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700">{requirement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {workshop.fullDetails.uniqueExperience && (
-                    <div>
-                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Unique Experience</h3>
-                      <ul className="space-y-2">
-                        {workshop.fullDetails.uniqueExperience.map((experience: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <CheckCircle className="h-5 w-5 text-secondary mr-3 mt-0.5 flex-shrink-0" />
                             <span className="text-gray-700">{experience}</span>
                           </li>
                         ))}
@@ -1705,35 +2167,19 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     </div>
                   )}
 
-                  {workshop.fullDetails.accommodationDetails && (
+                  {workshop.fullDetails.batchDetails && (workshop.id === 34 || workshop.id === 35) && (
                     <div>
-                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Accommodation Details</h3>
+                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Batch Details</h3>
                       <ul className="space-y-2">
-                        {workshop.fullDetails.accommodationDetails.map((detail: string, index: number) => (
+                        {workshop.fullDetails.batchDetails.map((batch: string, index: number) => (
                           <li key={index} className="flex items-start">
-                            <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700">{detail}</span>
-                            <span className="text-gray-700">{detail}</span>
+                            <Clock className="h-5 w-5 text-secondary mr-3 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{batch}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                   )}
-
-                  {workshop.fullDetails.workshopPolicies && (
-                    <div>
-                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Workshop Policies</h3>
-                      <ul className="space-y-2">
-                        {workshop.fullDetails.workshopPolicies.map((policy: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <CheckCircle className="h-5 w-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700">{policy}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
                   {(workshop.id === 23 ||
                     workshop.id === 24 ||
                     workshop.id === 25 ||
@@ -1744,7 +2190,10 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 30 ||
                     workshop.id === 31 ||
                     workshop.id === 32 ||
-                    workshop.id === 33) && (
+                    workshop.id === 33 ||
+                    workshop.id === 34 ||
+                    workshop.id === 35 ||
+                    workshop.id === 36) && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {workshop.fullDetails.applicationDeadline && (
                         <div>
@@ -1816,7 +2265,10 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                         workshop.id === 30 ||
                         workshop.id === 31 ||
                         workshop.id === 32 ||
-                        workshop.id === 33
+                        workshop.id === 33 ||
+                        workshop.id === 34 ||
+                        workshop.id === 35 ||
+                        workshop.id === 36
                           ? "Organizer"
                           : workshop.id === 29
                             ? "Program"
@@ -1846,9 +2298,11 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                             ? "bg-green-600 hover:bg-green-700 text-white"
                             : workshop.id === 33
                               ? "bg-orange-600 hover:bg-orange-700 text-white"
-                              : isThreadsTales
-                                ? "bg-teal-600 hover:bg-teal-700 text-white"
-                                : "bg-primary hover:bg-primary/90 text-white"
+                              : workshop.id === 34 || workshop.id === 35 || workshop.id === 36
+                                ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                : isThreadsTales
+                                  ? "bg-teal-600 hover:bg-teal-700 text-white"
+                                  : "bg-primary hover:bg-primary/90 text-white"
                     }`}
                   >
                     {isParadoxStudios
@@ -1857,9 +2311,11 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                         ? "Apply Online"
                         : workshop.id === 33
                           ? "Apply Now"
-                          : isThreadsTales
-                            ? "Contact via WhatsApp"
-                            : "Register Now"}
+                          : workshop.id === 36
+                            ? "Register Now"
+                            : isThreadsTales
+                              ? "Contact via WhatsApp"
+                              : "Register Now"}
                   </Button>
                 </Link>
               </div>
