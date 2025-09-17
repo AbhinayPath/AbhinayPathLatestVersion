@@ -41,7 +41,7 @@ const events: Event[] = [
   {
     id: "gorakhpur-rang-mahotsav-2025",
     title: "3rd Gorakhpur Rang Mahotsav 2025 – National Theatre Festival",
-    organizer: "Aashay Theatre Group, Gorakhpur",
+    organizer: "Abhiyan Theatre Group, Gorakhpur",
     dates: "11th to 15th October 2025",
     competitionDates: "6th October – 10th October 2025",
     lastSubmissionDate: "5th October 2025",
@@ -66,7 +66,7 @@ const events: Event[] = [
     contact: {
       phones: ["+91 7897591044", "+91 6390027730"],
       website: "www.nationaltheatrefestival.in",
-      instagram: "@nationaltheatrefestival",
+      instagram: "@nationaltheatrefest",
     },
     eligibility: "Open entry for all organizations",
   },
@@ -139,9 +139,9 @@ export default function EventsPage() {
             <Info className="h-4 w-4 text-blue-600" />
             <AlertDescription className="text-blue-800 leading-relaxed">
               <strong>Privacy & Attribution Notice:</strong> This event information is shared for educational and
-              promotional purposes. All details are sourced from official announcements by Aashay Theatre Group,
-              Gorakhpur. All credits and copyrights belong to Aashay Theatre Group. For the most current information and
-              official registration, please visit their official website or contact them directly. Abhinayपथ is not
+              promotional purposes. All details are sourced from official announcements by Abhiyan Theatre Group,
+              Gorakhpur. All credits and copyrights belong to Abhiyan Theatre Group. For the most current information
+              and official registration, please visit their official website or contact them directly. Abhinayपथ is not
               affiliated with the organizers and does not collect or share your data for this post and serves only as an
               information platform.
             </AlertDescription>
