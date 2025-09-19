@@ -3,7 +3,21 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Calendar, MapPin, Clock, ExternalLink, Star, Trophy, Phone, Globe, Instagram, Award, Info } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  Calendar,
+  MapPin,
+  Clock,
+  ExternalLink,
+  Star,
+  Trophy,
+  Phone,
+  Globe,
+  Instagram,
+  Award,
+  Info,
+  Theater,
+} from "lucide-react"
 import Link from "next/link"
 
 interface Event {
@@ -35,6 +49,17 @@ interface Event {
     instagram: string
   }
   eligibility: string
+}
+
+interface BangalorePlay {
+  id: string
+  title: string
+  venue: string
+  date: string
+  language: string
+  category: "English" | "Hindi" | "Kannada" | "Special"
+  bookingUrl: string
+  description?: string
 }
 
 const events: Event[] = [
@@ -72,6 +97,173 @@ const events: Event[] = [
   },
 ]
 
+const bangalorePlays: BangalorePlay[] = [
+  // English Plays
+  {
+    id: "external-affairs",
+    title: "External Affairs",
+    venue: "Ranga Shankara",
+    date: "21st September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/external-affairs/ET00405814",
+    description: "A compelling drama exploring diplomatic relationships and personal conflicts.",
+  },
+  {
+    id: "and-then-there-were-none",
+    title: "And Then There Were None",
+    venue: "Samarthanam Auditorium",
+    date: "20th September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/and-then-there-were-none/ET00436758",
+    description: "Agatha Christie's classic mystery thriller brought to life on stage.",
+  },
+  {
+    id: "reunion",
+    title: "Reunion",
+    venue: "Bangalore International Centre",
+    date: "20th September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/reunion/ET00457337",
+    description: "A heartwarming story about old friends reconnecting after years apart.",
+  },
+  {
+    id: "tiki-taka",
+    title: "Tiki-Taka",
+    venue: "Ranga Shankara",
+    date: "20th September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/tiki-taka/ET00447946",
+    description: "A dynamic play inspired by football tactics and life strategies.",
+  },
+  {
+    id: "madness-of-science",
+    title: "Madness of Science",
+    venue: "Curiouscity Science Center",
+    date: "20th September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/madness-of-science-by-the-science-circus/ET00461491",
+    description: "An entertaining blend of science experiments and theatrical performance.",
+  },
+  {
+    id: "tale-of-tall-girl",
+    title: "Tale of a Tall Girl",
+    venue: "Qutum Studio",
+    date: "20th September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/open-mic-night/ET00439182",
+    description: "A coming-of-age story about self-acceptance and finding your place in the world.",
+  },
+  {
+    id: "tragically-lonesome-vampire",
+    title: "The Tragically Lonesome Vigilante Vampire",
+    venue: "Shoonya Centre of Arts and Somatic Practices",
+    date: "20th September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/the-tragically-lonesome-vigilante-vampire/ET00460932",
+    description: "A darkly comedic tale of a vampire struggling with modern life and loneliness.",
+  },
+  {
+    id: "akvarious-25-years",
+    title: "Akvarious 25 Years Celebration",
+    venue: "Multiple Venues, Ranga Shankara",
+    date: "19th September",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/akvarious-25-years-celebration/ET00441774",
+    description: "A special celebration marking 25 years of Akvarious theatre group's journey.",
+  },
+  // Hindi Plays
+  {
+    id: "waiting-for-naseer",
+    title: "Waiting for Naseer",
+    venue: "The Comedy Theatre, Indiranagar",
+    date: "20th September",
+    language: "Hindi",
+    category: "Hindi",
+    bookingUrl: "https://in.bookmyshow.com/plays/waiting-for-naseer/ET00460155",
+    description: "A witty comedy about anticipation, expectations, and the art of waiting.",
+  },
+  {
+    id: "contractions",
+    title: "Contractions",
+    venue: "The Comedy Theatre, Indiranagar",
+    date: "21st September",
+    language: "Hindi",
+    category: "Hindi",
+    bookingUrl: "https://in.bookmyshow.com/plays/contractions/ET00460664",
+    description: "A sharp, satirical look at corporate culture and workplace dynamics.",
+  },
+  // Kannada Plays
+  {
+    id: "maayaa-dweepa",
+    title: "Maayaa Dweepa",
+    venue: "Kalagrama",
+    date: "21st September",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/maayaa-dweepa/ET00462369",
+    description: "A mystical journey through an island of illusions and self-discovery.",
+  },
+  {
+    id: "baybadki",
+    title: "BAYBADKI",
+    venue: "Dr.C Ashwath Kala Bhavana",
+    date: "21st September",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/baybadki-comedy-drama/ET00448592",
+    description: "A comedy-drama exploring family relationships and generational conflicts.",
+  },
+  {
+    id: "home-rule-kailasam",
+    title: "Home Rule & Kannadakkobane Kailasam",
+    venue: "Dr.C Ashwath Kala Bhavana",
+    date: "20th September",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/home-rule-kannadakkobane-kailasam/ET00444016",
+    description: "A tribute to Kannada literature and the freedom struggle through theatrical storytelling.",
+  },
+  {
+    id: "anumanada-avanthara",
+    title: "ANUMANADA AVANTHARA",
+    venue: "Dr.C Ashwath Kala Bhavana",
+    date: "21st September",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/anumanada-avanthara-comedy-drama/ET00458921",
+    description: "A comedy-drama about unexpected adventures and life's surprising turns.",
+  },
+  // Special/Multilingual Plays
+  {
+    id: "anthithottam",
+    title: "Anthithottam – The Final Act",
+    venue: "Jagriti Theatre",
+    date: "20th September",
+    language: "French/Malayalam",
+    category: "Special",
+    bookingUrl: "https://in.bookmyshow.com/plays/anthithottam-the-last-act/ET00460217",
+    description: "A bilingual theatrical experience exploring themes of finality and new beginnings.",
+  },
+  {
+    id: "divine-devis",
+    title: "Divine Devis",
+    venue: "Namma Ashram",
+    date: "20th September",
+    language: "Multilingual",
+    category: "Special",
+    bookingUrl: "https://in.bookmyshow.com/plays/divine-devis/ET00461626",
+    description: "A celebration of feminine divinity through dance, music, and storytelling.",
+  },
+]
+
 export default function EventsPage() {
   const event = events[0] // Single event
 
@@ -86,6 +278,8 @@ export default function EventsPage() {
       English: "bg-blue-100 text-blue-800",
       Bengali: "bg-green-100 text-green-800",
       "Hindi + English": "bg-purple-100 text-purple-800",
+      "French/Malayalam": "bg-indigo-100 text-indigo-800",
+      Multilingual: "bg-pink-100 text-pink-800",
     }
     return colors[language] || "bg-gray-100 text-gray-800"
   }
@@ -98,6 +292,52 @@ export default function EventsPage() {
     return colors[category] || "bg-gray-100 text-gray-800"
   }
 
+  const englishPlays = bangalorePlays.filter((play) => play.category === "English")
+  const hindiPlays = bangalorePlays.filter((play) => play.category === "Hindi")
+  const kannadaPlays = bangalorePlays.filter((play) => play.category === "Kannada")
+  const specialPlays = bangalorePlays.filter((play) => play.category === "Special")
+
+  const PlayCard = ({ play }: { play: BangalorePlay }) => (
+    <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 h-full flex flex-col">
+      <CardHeader className="pb-3 flex-shrink-0">
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <CardTitle className="text-base sm:text-lg font-bold group-hover:text-[#7E1F2E] transition-colors line-clamp-2 leading-tight">
+            {play.title}
+          </CardTitle>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-3 flex-grow flex flex-col">
+        <div className="flex flex-wrap gap-1.5">
+          <Badge className={`${getLanguageColor(play.language)} text-xs`}>{play.language}</Badge>
+        </div>
+
+        <div className="space-y-2 text-xs sm:text-sm text-gray-600 flex-grow">
+          <div className="flex items-center gap-2">
+            <Calendar className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
+            <span>{play.date}</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <MapPin className="h-3 w-3 sm:h-4 sm:w-4 shrink-0 mt-0.5" />
+            <span className="line-clamp-2 leading-tight">{play.venue}</span>
+          </div>
+        </div>
+
+        {play.description && (
+          <p className="text-xs sm:text-sm text-gray-600 line-clamp-3 leading-relaxed">{play.description}</p>
+        )}
+
+        <div className="pt-2 mt-auto">
+          <Link href={play.bookingUrl} target="_blank" rel="noopener noreferrer">
+            <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-xs sm:text-sm py-2 sm:py-2.5">
+              Book Tickets
+              <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
+            </Button>
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
+  )
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -105,10 +345,10 @@ export default function EventsPage() {
         <div className="container px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              National Theatre Festival
+              Theatre Events & Festivals
             </h1>
             <p className="text-base sm:text-lg lg:text-xl opacity-90 mb-6 sm:mb-8 px-4">
-              Join the prestigious 3rd Gorakhpur Rang Mahotsav 2025 and showcase your theatrical talent
+              Discover national festivals and weekend theatre performances in Bangalore
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center max-w-2xl mx-auto">
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
@@ -116,16 +356,16 @@ export default function EventsPage() {
                 <div className="text-xs sm:text-sm opacity-80">Days Festival</div>
               </div>
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">₹8.6K</div>
-                <div className="text-xs sm:text-sm opacity-80">Total Prizes</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">{bangalorePlays.length}+</div>
+                <div className="text-xs sm:text-sm opacity-80">Weekend Shows</div>
               </div>
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">12</div>
-                <div className="text-xs sm:text-sm opacity-80">Max Team Size</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">4</div>
+                <div className="text-xs sm:text-sm opacity-80">Languages</div>
               </div>
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
                 <div className="text-xl sm:text-2xl lg:text-3xl font-bold">₹500</div>
-                <div className="text-xs sm:text-sm opacity-80">Entry Fee</div>
+                <div className="text-xs sm:text-sm opacity-80">Festival Entry</div>
               </div>
             </div>
           </div>
@@ -149,10 +389,89 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Bangalore Theatre Events Section */}
+      <section className="py-8 sm:py-12 bg-white">
+        <div className="container px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8 sm:mb-12">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Theater className="h-6 w-6 sm:h-8 sm:w-8 text-[#7E1F2E]" />
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-playfair text-gray-800">
+                  Bangalore Theatre Events
+                </h2>
+              </div>
+              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                Discover this weekend's exciting theatre performances across Bangalore in multiple languages
+              </p>
+            </div>
+
+            <Tabs defaultValue="english" className="w-full">
+              <div className="overflow-x-auto mb-6 sm:mb-8">
+                <TabsList className="grid w-full grid-cols-4 min-w-[400px] sm:min-w-0">
+                  <TabsTrigger value="english" className="text-xs sm:text-sm px-2 sm:px-4">
+                    English ({englishPlays.length})
+                  </TabsTrigger>
+                  <TabsTrigger value="hindi" className="text-xs sm:text-sm px-2 sm:px-4">
+                    Hindi ({hindiPlays.length})
+                  </TabsTrigger>
+                  <TabsTrigger value="kannada" className="text-xs sm:text-sm px-2 sm:px-4">
+                    Kannada ({kannadaPlays.length})
+                  </TabsTrigger>
+                  <TabsTrigger value="special" className="text-xs sm:text-sm px-2 sm:px-4">
+                    Special ({specialPlays.length})
+                  </TabsTrigger>
+                </TabsList>
+              </div>
+
+              <TabsContent value="english" className="mt-6 sm:mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {englishPlays.map((play) => (
+                    <PlayCard key={play.id} play={play} />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="hindi" className="mt-6 sm:mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {hindiPlays.map((play) => (
+                    <PlayCard key={play.id} play={play} />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="kannada" className="mt-6 sm:mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {kannadaPlays.map((play) => (
+                    <PlayCard key={play.id} play={play} />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="special" className="mt-6 sm:mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {specialPlays.map((play) => (
+                    <PlayCard key={play.id} play={play} />
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </div>
+      </section>
+
       {/* Main Event Section */}
       <section className="py-8 sm:py-12">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold font-playfair text-gray-800 mb-4">
+                National Theatre Festival
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600">
+                Join the prestigious 3rd Gorakhpur Rang Mahotsav 2025
+              </p>
+            </div>
+
             {/* Main Event Card */}
             <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 mb-8">
               <CardHeader className="pb-4">
@@ -326,10 +645,10 @@ export default function EventsPage() {
       <section className="py-12 sm:py-16 bg-gradient-to-r from-[#7E1F2E] to-[#A02A3A] text-white">
         <div className="container px-4 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 font-playfair">
-            Ready to Showcase Your Talent?
+            Ready to Experience Theatre?
           </h2>
           <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto px-4">
-            Don't miss this opportunity to participate in one of India's premier theatre festivals. Register before{" "}
+            Book your tickets for this weekend's shows or register for the national festival before{" "}
             {event.lastSubmissionDate}!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -338,7 +657,7 @@ export default function EventsPage() {
                 size="lg"
                 className="bg-white text-[#7E1F2E] hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full font-medium"
               >
-                Register Now
+                Register for Festival
               </Button>
             </Link>
             <Link href="/join-community">
