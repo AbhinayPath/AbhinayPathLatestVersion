@@ -17,6 +17,7 @@ import {
   Award,
   Info,
   Theater,
+  Mail,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -47,8 +48,10 @@ interface Event {
     phones: string[]
     website: string
     instagram: string
+    email?: string
   }
   eligibility: string
+  additionalInfo?: string[]
 }
 
 interface BangalorePlay {
@@ -64,6 +67,46 @@ interface BangalorePlay {
 
 const events: Event[] = [
   {
+    id: "bharat-rang-mahotsav-2026",
+    title: "25th Bharat Rang Mahotsav 2026 – International Theatre Festival of India",
+    organizer: "National School of Drama (NSD), New Delhi",
+    dates: "January–February 2026",
+    competitionDates: "January–February 2026",
+    lastSubmissionDate: "26th September 2025",
+    venue: "Delhi & other cities in India and abroad",
+    language: "Multilingual",
+    category: "Festival",
+    type: "Theatre",
+    registrationUrl: "https://brmapplication.nsd.gov.in/",
+    description:
+      "The world's largest theatre festival celebrating 25 years of international theatrical excellence. This prestigious festival brings together drama institutions, theatre companies, and directors from India and abroad to showcase the finest in contemporary theatre across multiple venues and cities.",
+    featured: true,
+    specialEvent: "25th Edition - Silver Jubilee Celebration",
+    topic: "International Theatre Excellence & Cultural Exchange",
+    groupSize: "Theatre Companies & Institutions",
+    registrationFee: "₹250 (India & SAARC) | ₹500 (Others)",
+    prizes: {
+      first: "International Recognition",
+      second: "Global Platform",
+      third: "Cultural Exchange",
+    },
+    contact: {
+      phones: [],
+      website: "www.nsd.gov.in",
+      instagram: "@nsd_delhi",
+      email: "festivalcell@gmail.com",
+    },
+    eligibility:
+      "Drama Institutions, Theatre Companies & Theatre Directors (India & abroad). Only plays previously performed for the public with minimum 60 minutes duration.",
+    additionalInfo: [
+      "Productions can be submitted under 10 categories",
+      "Only plays previously performed for the public are eligible",
+      "Minimum duration: 60 minutes",
+      "Offline submissions will not be accepted",
+      "NSD reserves the right to change or cancel the festival schedule",
+    ],
+  },
+  {
     id: "gorakhpur-rang-mahotsav-2025",
     title: "3rd Gorakhpur Rang Mahotsav 2025 – National Theatre Festival",
     organizer: "Abhiyan Theatre Group, Gorakhpur",
@@ -78,7 +121,7 @@ const events: Event[] = [
       "https://surveyheart.com/form/68c17c6071e428b25f8045bd?fbclid=PAVERTVgM3eatleHRuA2FlbQIxMAABp7q-Ss95hd9qOoUm-wd2UzJYzd-X_SBuo3gKNxPL-QRAC9KtNH86REvFUjbW_aem_Haq5gk4kNuUv7nZU_xHG5g",
     description:
       "A prestigious national theatre festival celebrating the art of theatre with competitions, performances, and cultural exchange.",
-    featured: true,
+    featured: false,
     specialEvent: "Nukkad Natak Pratiyogita (Street Play Competition)",
     topic: "Influence of Social Media (सोशल मीडिया का प्रभाव)",
     groupSize: "8 to 12 participants in a group",
@@ -195,11 +238,8 @@ const bangalorePlays: BangalorePlay[] = [
 ]
 
 export default function EventsPage() {
-  const event = events[0] // Single event
-
-  const formatDateRange = (dateString: string) => {
-    return dateString
-  }
+  const bharatRangEvent = events[0] // Bharat Rang Mahotsav 2026
+  const gorakhpurEvent = events[1] // Gorakhpur Rang Mahotsav 2025
 
   const getLanguageColor = (language: string) => {
     const colors: { [key: string]: string } = {
@@ -282,20 +322,20 @@ export default function EventsPage() {
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center max-w-2xl mx-auto">
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">5</div>
-                <div className="text-xs sm:text-sm opacity-80">Days Festival</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">25th</div>
+                <div className="text-xs sm:text-sm opacity-80">BRM Edition</div>
               </div>
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
                 <div className="text-xl sm:text-2xl lg:text-3xl font-bold">{bangalorePlays.length}+</div>
                 <div className="text-xs sm:text-sm opacity-80">Weekend Shows</div>
               </div>
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">4</div>
-                <div className="text-xs sm:text-sm opacity-80">Languages</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">Global</div>
+                <div className="text-xs sm:text-sm opacity-80">Participation</div>
               </div>
               <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">₹500</div>
-                <div className="text-xs sm:text-sm opacity-80">Festival Entry</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">₹250</div>
+                <div className="text-xs sm:text-sm opacity-80">BRM Entry</div>
               </div>
             </div>
           </div>
@@ -305,15 +345,23 @@ export default function EventsPage() {
       {/* Privacy & Attribution Notice */}
       <section className="py-6 bg-blue-50 border-b">
         <div className="container px-4">
-          <Alert className="max-w-4xl mx-auto border-blue-200 bg-blue-50">
+          <Alert className="max-w-4xl mx-auto border-blue-200 bg-blue-50 mb-4">
             <Info className="h-4 w-4 text-blue-600" />
             <AlertDescription className="text-blue-800 leading-relaxed">
-              <strong>Privacy & Attribution Notice:</strong> This event information is shared for educational and
-              promotional purposes. All details are sourced from official announcements by Abhiyan Theatre Group,
-              Gorakhpur. All credits and copyrights belong to Abhiyan Theatre Group. For the most current information
-              and official registration, please visit their official website or contact them directly. Abhinayपथ is not
-              affiliated with the organizers and does not collect or share your data for this post and serves only as an
-              information platform.
+              <strong>Privacy & Data Handling Notice:</strong> This event information is shared for educational and
+              promotional purposes. For Bharat Rang Mahotsav 2026, all application data is handled directly by the
+              National School of Drama (NSD) through their official portal. For Gorakhpur Rang Mahotsav, data is managed
+              by Abhiyan Theatre Group. Abhinayपथ does not collect, store, or process any personal data related to these
+              events and serves only as an information platform.
+            </AlertDescription>
+          </Alert>
+          <Alert className="max-w-4xl mx-auto border-orange-200 bg-orange-50">
+            <Award className="h-4 w-4 text-orange-600" />
+            <AlertDescription className="text-orange-800 leading-relaxed">
+              <strong>Attribution Notice:</strong> All festival details are sourced from official announcements by the
+              National School of Drama (NSD) and Abhiyan Theatre Group. All credits and copyrights belong to their
+              respective organizers. For the most current information and official applications, please visit their
+              official websites or contact them directly.
             </AlertDescription>
           </Alert>
         </div>
@@ -389,184 +437,358 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Main Event Section */}
+      {/* Major Theatre Festivals Section */}
       <section className="py-8 sm:py-12">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold font-playfair text-gray-800 mb-4">
-                National Theatre Festival
+                Major Theatre Festivals
               </h2>
               <p className="text-base sm:text-lg text-gray-600">
-                Join the prestigious 3rd Gorakhpur Rang Mahotsav 2025
+                Discover prestigious national and international theatre festivals
               </p>
             </div>
 
-            {/* Main Event Card */}
-            <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 mb-8">
-              <CardHeader className="pb-4">
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold group-hover:text-[#7E1F2E] transition-colors font-playfair">
-                    {event.title}
-                  </CardTitle>
-                  {event.featured && (
-                    <Badge className="bg-[#7E1F2E] text-white shrink-0">
-                      <Star className="h-4 w-4 mr-1" />
-                      Featured
-                    </Badge>
-                  )}
-                </div>
-                <p className="text-lg text-gray-600 mb-4">
-                  Organized by: <strong>{event.organizer}</strong>
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className={`${getLanguageColor(event.language)}`}>{event.language}</Badge>
-                  <Badge className={`${getCategoryColor(event.category)}`}>{event.category}</Badge>
-                  <Badge variant="outline">{event.type}</Badge>
-                </div>
-              </CardHeader>
+            <Tabs defaultValue="bharat-rang" className="w-full">
+              <div className="overflow-x-auto mb-6 sm:mb-8">
+                <TabsList className="grid w-full grid-cols-2 min-w-[400px] sm:min-w-0">
+                  <TabsTrigger value="bharat-rang" className="text-xs sm:text-sm px-2 sm:px-4">
+                    Bharat Rang Mahotsav 2026
+                  </TabsTrigger>
+                  <TabsTrigger value="gorakhpur-rang" className="text-xs sm:text-sm px-2 sm:px-4">
+                    Gorakhpur Rang Mahotsav 2025
+                  </TabsTrigger>
+                </TabsList>
+              </div>
 
-              <CardContent className="space-y-6">
-                {/* Event Description */}
-                <p className="text-gray-700 text-base sm:text-lg leading-relaxed">{event.description}</p>
+              <TabsContent value="bharat-rang" className="mt-6 sm:mt-8">
+                {/* Bharat Rang Mahotsav Card */}
+                <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 mb-8">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold group-hover:text-[#7E1F2E] transition-colors font-playfair">
+                        {bharatRangEvent.title}
+                      </CardTitle>
+                      {bharatRangEvent.featured && (
+                        <Badge className="bg-[#7E1F2E] text-white shrink-0">
+                          <Star className="h-4 w-4 mr-1" />
+                          Featured
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-lg text-gray-600 mb-4">
+                      Organized by: <strong>{bharatRangEvent.organizer}</strong>
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-purple-100 text-purple-800">{bharatRangEvent.language}</Badge>
+                      <Badge className={`${getCategoryColor(bharatRangEvent.category)}`}>
+                        {bharatRangEvent.category}
+                      </Badge>
+                      <Badge variant="outline">{bharatRangEvent.type}</Badge>
+                      <Badge className="bg-gold-100 text-gold-800">World's Largest</Badge>
+                    </div>
+                  </CardHeader>
 
-                {/* Special Event Highlight */}
-                <div className="bg-gradient-to-r from-orange-50 to-red-50 p-4 sm:p-6 rounded-lg border border-orange-200">
-                  <h3 className="text-lg sm:text-xl font-bold text-orange-800 mb-2 flex items-center">
-                    <Award className="h-5 w-5 mr-2" />
-                    Special Event
-                  </h3>
-                  <p className="text-orange-700 font-semibold text-base sm:text-lg mb-2">{event.specialEvent}</p>
-                  <p className="text-orange-600">
-                    <strong>Topic:</strong> {event.topic}
-                  </p>
-                </div>
+                  <CardContent className="space-y-6">
+                    {/* Event Description */}
+                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">{bharatRangEvent.description}</p>
 
-                {/* Event Details Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  {/* Dates & Venue */}
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Event Details</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <Calendar className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                        <div>
-                          <p className="font-medium">Festival Dates</p>
-                          <p className="text-gray-600">{event.dates}</p>
+                    {/* Special Event Highlight */}
+                    <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-4 sm:p-6 rounded-lg border border-purple-200">
+                      <h3 className="text-lg sm:text-xl font-bold text-purple-800 mb-2 flex items-center">
+                        <Award className="h-5 w-5 mr-2" />
+                        Special Milestone
+                      </h3>
+                      <p className="text-purple-700 font-semibold text-base sm:text-lg mb-2">
+                        {bharatRangEvent.specialEvent}
+                      </p>
+                      <p className="text-purple-600">
+                        <strong>Focus:</strong> {bharatRangEvent.topic}
+                      </p>
+                    </div>
+
+                    {/* Event Details Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                      {/* Dates & Venue */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Festival Details</h3>
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-3">
+                            <Calendar className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-medium">Festival Dates</p>
+                              <p className="text-gray-600">{bharatRangEvent.dates}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <MapPin className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-medium">Locations</p>
+                              <p className="text-gray-600">{bharatRangEvent.venue}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <Globe className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-medium">Website</p>
+                              <p className="text-gray-600">{bharatRangEvent.contact.website}</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-start gap-3">
-                        <Clock className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                        <div>
-                          <p className="font-medium">Competition Dates</p>
-                          <p className="text-gray-600">{event.competitionDates}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <MapPin className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                        <div>
-                          <p className="font-medium">Location</p>
-                          <p className="text-gray-600">{event.venue}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Registration & Eligibility */}
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Registration Info</h3>
-                    <div className="space-y-3">
-                      <div>
-                        <p className="font-medium">Registration Fee</p>
-                        <p className="text-gray-600 text-lg font-semibold text-[#7E1F2E]">{event.registrationFee}</p>
-                      </div>
-                      <div>
-                        <p className="font-medium">Group Size</p>
-                        <p className="text-gray-600">{event.groupSize}</p>
-                      </div>
-                      <div>
-                        <p className="font-medium">Eligibility</p>
-                        <p className="text-gray-600">{event.eligibility}</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-red-600">Last Date of Submission</p>
-                        <p className="text-red-700 font-semibold">{event.lastSubmissionDate}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Prizes Section */}
-                <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 sm:p-6 rounded-lg border border-yellow-200">
-                  <h3 className="text-lg sm:text-xl font-bold text-yellow-800 mb-4 flex items-center">
-                    <Trophy className="h-5 w-5 mr-2" />
-                    Cash Prizes
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="text-center p-3 bg-yellow-100 rounded-lg">
-                      <div className="text-2xl font-bold text-yellow-700 mb-1">🥇</div>
-                      <div className="font-semibold text-yellow-800">1st Prize</div>
-                      <div className="text-yellow-700">{event.prizes.first}</div>
-                    </div>
-                    <div className="text-center p-3 bg-gray-100 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-700 mb-1">🥈</div>
-                      <div className="font-semibold text-gray-800">2nd Prize</div>
-                      <div className="text-gray-700">{event.prizes.second}</div>
-                    </div>
-                    <div className="text-center p-3 bg-orange-100 rounded-lg">
-                      <div className="text-2xl font-bold text-orange-700 mb-1">🥉</div>
-                      <div className="font-semibold text-orange-800">3rd Prize</div>
-                      <div className="text-orange-700">{event.prizes.third}</div>
-                    </div>
-                  </div>
-                  <p className="text-center text-yellow-700 mt-4 font-medium">
-                    + Participation Certificate for all participants
-                  </p>
-                </div>
-
-                {/* Contact Information */}
-                <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Contact Information</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="flex items-center gap-3">
-                      <Phone className="h-5 w-5 text-[#7E1F2E]" />
-                      <div>
-                        <p className="font-medium">Phone</p>
-                        <div className="text-sm text-gray-600">
-                          {event.contact.phones.map((phone, index) => (
-                            <p key={index}>{phone}</p>
-                          ))}
+                      {/* Application & Eligibility */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Application Info</h3>
+                        <div className="space-y-3">
+                          <div>
+                            <p className="font-medium">Application Fee</p>
+                            <p className="text-gray-600 text-sm font-semibold text-[#7E1F2E]">
+                              {bharatRangEvent.registrationFee}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="font-medium">Participants</p>
+                            <p className="text-gray-600">{bharatRangEvent.groupSize}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-red-600">Application Deadline</p>
+                            <p className="text-red-700 font-semibold">{bharatRangEvent.lastSubmissionDate}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium">Contact</p>
+                            <p className="text-gray-600 text-sm">{bharatRangEvent.contact.email}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Globe className="h-5 w-5 text-[#7E1F2E]" />
-                      <div>
-                        <p className="font-medium">Website</p>
-                        <p className="text-sm text-gray-600">{event.contact.website}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Instagram className="h-5 w-5 text-[#7E1F2E]" />
-                      <div>
-                        <p className="font-medium">Instagram</p>
-                        <p className="text-sm text-gray-600">{event.contact.instagram}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Registration Button */}
-                <div className="pt-4">
-                  <Link href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-lg py-6 rounded-lg font-semibold">
-                      Register Now - {event.registrationFee}
-                      <ExternalLink className="h-5 w-5 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+                    {/* Eligibility & Requirements Section */}
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 sm:p-6 rounded-lg border border-green-200">
+                      <h3 className="text-lg sm:text-xl font-bold text-green-800 mb-4 flex items-center">
+                        <Award className="h-5 w-5 mr-2" />
+                        Eligibility & Requirements
+                      </h3>
+                      <div className="space-y-2 text-green-700">
+                        <p>• {bharatRangEvent.eligibility}</p>
+                        {bharatRangEvent.additionalInfo?.map((info, index) => (
+                          <p key={index}>• {info}</p>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Contact Information */}
+                    <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Contact Information</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="flex items-center gap-3">
+                          <Mail className="h-5 w-5 text-[#7E1F2E]" />
+                          <div>
+                            <p className="font-medium">Email</p>
+                            <p className="text-sm text-gray-600">{bharatRangEvent.contact.email}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Globe className="h-5 w-5 text-[#7E1F2E]" />
+                          <div>
+                            <p className="font-medium">Website</p>
+                            <p className="text-sm text-gray-600">{bharatRangEvent.contact.website}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Instagram className="h-5 w-5 text-[#7E1F2E]" />
+                          <div>
+                            <p className="font-medium">Instagram</p>
+                            <p className="text-sm text-gray-600">{bharatRangEvent.contact.instagram}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Application Button */}
+                    <div className="pt-4">
+                      <Link href={bharatRangEvent.registrationUrl} target="_blank" rel="noopener noreferrer">
+                        <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-lg py-6 rounded-lg font-semibold">
+                          Apply Now - {bharatRangEvent.registrationFee}
+                          <ExternalLink className="h-5 w-5 ml-2" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="gorakhpur-rang" className="mt-6 sm:mt-8">
+                {/* Gorakhpur Rang Mahotsav Card */}
+                <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 mb-8">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold group-hover:text-[#7E1F2E] transition-colors font-playfair">
+                        {gorakhpurEvent.title}
+                      </CardTitle>
+                    </div>
+                    <p className="text-lg text-gray-600 mb-4">
+                      Organized by: <strong>{gorakhpurEvent.organizer}</strong>
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className={`${getLanguageColor(gorakhpurEvent.language)}`}>
+                        {gorakhpurEvent.language}
+                      </Badge>
+                      <Badge className={`${getCategoryColor(gorakhpurEvent.category)}`}>
+                        {gorakhpurEvent.category}
+                      </Badge>
+                      <Badge variant="outline">{gorakhpurEvent.type}</Badge>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="space-y-6">
+                    {/* Event Description */}
+                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">{gorakhpurEvent.description}</p>
+
+                    {/* Special Event Highlight */}
+                    <div className="bg-gradient-to-r from-orange-50 to-red-50 p-4 sm:p-6 rounded-lg border border-orange-200">
+                      <h3 className="text-lg sm:text-xl font-bold text-orange-800 mb-2 flex items-center">
+                        <Award className="h-5 w-5 mr-2" />
+                        Special Event
+                      </h3>
+                      <p className="text-orange-700 font-semibold text-base sm:text-lg mb-2">
+                        {gorakhpurEvent.specialEvent}
+                      </p>
+                      <p className="text-orange-600">
+                        <strong>Topic:</strong> {gorakhpurEvent.topic}
+                      </p>
+                    </div>
+
+                    {/* Event Details Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                      {/* Dates & Venue */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Event Details</h3>
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-3">
+                            <Calendar className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-medium">Festival Dates</p>
+                              <p className="text-gray-600">{gorakhpurEvent.dates}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <Clock className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-medium">Competition Dates</p>
+                              <p className="text-gray-600">{gorakhpurEvent.competitionDates}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <MapPin className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-medium">Location</p>
+                              <p className="text-gray-600">{gorakhpurEvent.venue}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Registration & Eligibility */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Registration Info</h3>
+                        <div className="space-y-3">
+                          <div>
+                            <p className="font-medium">Registration Fee</p>
+                            <p className="text-gray-600 text-lg font-semibold text-[#7E1F2E]">
+                              {gorakhpurEvent.registrationFee}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="font-medium">Group Size</p>
+                            <p className="text-gray-600">{gorakhpurEvent.groupSize}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium">Eligibility</p>
+                            <p className="text-gray-600">{gorakhpurEvent.eligibility}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-red-600">Last Date of Submission</p>
+                            <p className="text-red-700 font-semibold">{gorakhpurEvent.lastSubmissionDate}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Prizes Section */}
+                    <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 sm:p-6 rounded-lg border border-yellow-200">
+                      <h3 className="text-lg sm:text-xl font-bold text-yellow-800 mb-4 flex items-center">
+                        <Trophy className="h-5 w-5 mr-2" />
+                        Cash Prizes
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="text-center p-3 bg-yellow-100 rounded-lg">
+                          <div className="text-2xl font-bold text-yellow-700 mb-1">🥇</div>
+                          <div className="font-semibold text-yellow-800">1st Prize</div>
+                          <div className="text-yellow-700">{gorakhpurEvent.prizes.first}</div>
+                        </div>
+                        <div className="text-center p-3 bg-gray-100 rounded-lg">
+                          <div className="text-2xl font-bold text-gray-700 mb-1">🥈</div>
+                          <div className="font-semibold text-gray-800">2nd Prize</div>
+                          <div className="text-gray-700">{gorakhpurEvent.prizes.second}</div>
+                        </div>
+                        <div className="text-center p-3 bg-orange-100 rounded-lg">
+                          <div className="text-2xl font-bold text-orange-700 mb-1">🥉</div>
+                          <div className="font-semibold text-orange-800">3rd Prize</div>
+                          <div className="text-orange-700">{gorakhpurEvent.prizes.third}</div>
+                        </div>
+                      </div>
+                      <p className="text-center text-yellow-700 mt-4 font-medium">
+                        + Participation Certificate for all participants
+                      </p>
+                    </div>
+
+                    {/* Contact Information */}
+                    <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Contact Information</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="flex items-center gap-3">
+                          <Phone className="h-5 w-5 text-[#7E1F2E]" />
+                          <div>
+                            <p className="font-medium">Phone</p>
+                            <div className="text-sm text-gray-600">
+                              {gorakhpurEvent.contact.phones.map((phone, index) => (
+                                <p key={index}>{phone}</p>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Globe className="h-5 w-5 text-[#7E1F2E]" />
+                          <div>
+                            <p className="font-medium">Website</p>
+                            <p className="text-sm text-gray-600">{gorakhpurEvent.contact.website}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Instagram className="h-5 w-5 text-[#7E1F2E]" />
+                          <div>
+                            <p className="font-medium">Instagram</p>
+                            <p className="text-sm text-gray-600">{gorakhpurEvent.contact.instagram}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Registration Button */}
+                    <div className="pt-4">
+                      <Link href={gorakhpurEvent.registrationUrl} target="_blank" rel="noopener noreferrer">
+                        <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-lg py-6 rounded-lg font-semibold">
+                          Register Now - {gorakhpurEvent.registrationFee}
+                          <ExternalLink className="h-5 w-5 ml-2" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </section>
@@ -574,20 +796,20 @@ export default function EventsPage() {
       {/* CTA Section */}
       <section className="py-12 sm:py-16 bg-gradient-to-r from-[#7E1F2E] to-[#A02A3A] text-white">
         <div className="container px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 font-playfair">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-playfair">
             Ready to Experience Theatre?
           </h2>
           <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto px-4">
-            Book your tickets for this weekend's shows or register for the national festival before{" "}
-            {event.lastSubmissionDate}!
+            Book your tickets for this weekend's shows or apply for prestigious theatre festivals. Don't miss the
+            application deadline for Bharat Rang Mahotsav 2026 on {bharatRangEvent.lastSubmissionDate}!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+            <Link href={bharatRangEvent.registrationUrl} target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="bg-white text-[#7E1F2E] hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full font-medium"
               >
-                Register for Festival
+                Apply to BRM 2026
               </Button>
             </Link>
             <Link href="/join-community">
