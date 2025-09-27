@@ -12,6 +12,58 @@ import AuditionBanner from "@/components/audition-banner"
 // Verified audition data
 const auditions = [
   {
+    id: 13,
+    title: "Casting Call for Theater Actors/Clowns and Production Team",
+    type: "Theater",
+    location: "Location TBD",
+    state: "India",
+    date: "Rehearsals: October 2025, Shows: November 2025",
+    director: "44 Clown Company",
+    description:
+      "We are seeking talented theater actors with clowning experience for a short, device-based theater performance as part of an upcoming Children's Theater Festival. This is a paid project that promises to be both rewarding and fun!",
+    company: "44 Clown Company",
+    companyLink: "mailto:44clowncompany@gmail.com",
+    contact: "44clowncompany@gmail.com",
+    contactType: "email",
+    experience: "Experienced",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Full-time theater artists only",
+      "Available for rehearsals throughout October 2025",
+      "Available for performances in November 2025",
+      "Passion for engaging with young audiences",
+      "Experience in clowning or children's theater preferred",
+      "Production personnel: Experience in managing production and sound for live performances",
+      "Technical skills: Capable of overseeing technical aspects of the play",
+    ],
+    roles: [
+      "Theater Actors/Clowns - Full-time theater artists with clowning experience",
+      "Production Personnel - Experienced in managing production and sound for live performances",
+      "Technical Skills - Capable of overseeing technical aspects of the play",
+      "Children's Theater Focus - Must have passion for engaging with young audiences",
+    ],
+    applicationProcess:
+      "If you are passionate about theater and eager to contribute to this magical project, please send your profile to 44clowncompany@gmail.com.",
+    festivalDetails: {
+      name: "Children's Theater Festival",
+      type: "Device-based theater performance",
+      duration: "Short performance",
+      compensation: "Paid project",
+      rehearsalPeriod: "October 2025",
+      performancePeriod: "November 2025",
+      description:
+        "A magical project focused on engaging young audiences through innovative device-based theater performance.",
+    },
+    specialRequirements: [
+      "Full-time theater artists only",
+      "Clowning experience preferred",
+      "Experience with children's audiences",
+      "Production and sound management skills (for production roles)",
+      "Technical theater experience (for production roles)",
+    ],
+  },
+  {
     id: 1,
     title: "Casting Call – Female Lead for Feature Film",
     type: "Film",
@@ -468,7 +520,9 @@ export default function AuditionsContent() {
                       ? "border-purple-300 shadow-lg"
                       : audition.id === 12
                         ? "border-green-300 shadow-lg"
-                        : "border-gray-200"
+                        : audition.id === 13
+                          ? "border-blue-300 shadow-lg"
+                          : "border-gray-200"
               }`}
             >
               <div className="relative h-48 w-full">
@@ -517,10 +571,17 @@ export default function AuditionsContent() {
                     🎭 Repertory Company
                   </div>
                 )}
+                {audition.id === 13 && (
+                  <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                    🎪 Children's Festival
+                  </div>
+                )}
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-3">
-                  <span className={`badge-primary ${audition.id === 7 ? "bg-purple-100 text-purple-800" : ""}`}>
+                  <span
+                    className={`badge-primary ${audition.id === 7 ? "bg-purple-100 text-purple-800" : audition.id === 13 ? "bg-blue-100 text-blue-800" : ""}`}
+                  >
                     {audition.type}
                   </span>
                   <span className="badge-outline">{audition.experience}</span>
@@ -716,6 +777,56 @@ export default function AuditionsContent() {
                         className="text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition-colors"
                       >
                         Apply Now
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* Special info for Children's Theater Festival casting */}
+                {audition.id === 13 && audition.festivalDetails && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <h4 className="font-semibold text-blue-700 mb-2 flex items-center">
+                      🎪 Festival: {audition.festivalDetails.name}
+                    </h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                      <div>
+                        <span className="font-medium text-gray-700">Type:</span>
+                        <span className="ml-1 text-gray-800">{audition.festivalDetails.type}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Compensation:</span>
+                        <span className="ml-1 text-gray-800">{audition.festivalDetails.compensation}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Rehearsals:</span>
+                        <span className="ml-1 text-gray-800">{audition.festivalDetails.rehearsalPeriod}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700">Shows:</span>
+                        <span className="ml-1 text-gray-800">{audition.festivalDetails.performancePeriod}</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-700 mb-3 italic">"{audition.description}"</p>
+                    <div className="mb-3">
+                      <p className="font-medium text-gray-700 text-sm mb-1">🎭 Special Requirements:</p>
+                      <div className="text-xs text-gray-600 space-y-1">
+                        {audition.specialRequirements.map((req: string, index: number) => (
+                          <div key={index} className="flex items-center">
+                            <span className="text-blue-600 mr-1">•</span>
+                            {req}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-green-600">📧 Email: 44clowncompany@gmail.com</span>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 transition-colors"
+                      >
+                        Send Profile
                       </a>
                     </div>
                   </div>
