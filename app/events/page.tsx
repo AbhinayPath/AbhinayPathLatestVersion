@@ -72,7 +72,7 @@ const events: Event[] = [
     organizer: "National School of Drama (NSD), New Delhi",
     dates: "January–February 2026",
     competitionDates: "January–February 2026",
-    lastSubmissionDate: "26th September 2025",
+    lastSubmissionDate: "25th October 2025 till 12:00 Midnight",
     venue: "Delhi & other cities in India and abroad",
     language: "Multilingual",
     category: "Festival",
@@ -801,7 +801,8 @@ export default function EventsPage() {
           </h2>
           <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto px-4">
             Book your tickets for this weekend's shows or apply for prestigious theatre festivals. Don't miss the
-            application deadline for Bharat Rang Mahotsav 2026 on {bharatRangEvent.lastSubmissionDate}!
+            application deadline for Bharat Rang Mahotsav 2026 till 12:00 Midnight on{" "}
+            {bharatRangEvent.lastSubmissionDate.split(" till ")[0]}!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href={bharatRangEvent.registrationUrl} target="_blank" rel="noopener noreferrer">
