@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -17,7 +15,7 @@ import { Eye, EyeOff } from "lucide-react"
 interface RegisterModalProps {
   isOpen: boolean
   onClose: () => void
-  mode?: "register" | "edit"
+  mode?: 'register' | 'edit'
   initialData?: {
     firstName: string
     lastName: string
@@ -26,7 +24,7 @@ interface RegisterModalProps {
   }
 }
 
-export default function RegisterModal({ isOpen, onClose, mode = "register", initialData }: RegisterModalProps) {
+export default function RegisterModal({ isOpen, onClose, mode = 'register', initialData }: RegisterModalProps) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -39,6 +37,7 @@ export default function RegisterModal({ isOpen, onClose, mode = "register", init
   const { refreshUser } = useAuth()
   const router = useRouter()
 
+  // Reset form data when modal opens or initialData changes
   useEffect(() => {
     if (isOpen) {
       setFormData({
@@ -61,15 +60,16 @@ export default function RegisterModal({ isOpen, onClose, mode = "register", init
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    const supabase = getSupabaseBrowserClient()
+    e.preventDefault();
+    setLoading(true);
+    const supabase = getSupabaseBrowserClient();
 
     try {
-      if (mode === "register") {
-        const response = await fetch("/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+      if (mode === 'register') {
+        // Registration flow
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             firstName: formData.firstName,
             lastName: formData.lastName,
@@ -77,103 +77,100 @@ export default function RegisterModal({ isOpen, onClose, mode = "register", init
             password: formData.password,
             profession: formData.profession,
           }),
-        })
+        });
 
-        const result = await response.json()
-
+        const result = await response.json();
+        debugger
         if (!response.ok) {
           toast({
             title: "Registration Error",
-            description: result?.message || result?.error || "Registration failed",
+            description: result?.message || result?.error || 'Registration failed',
             variant: "destructive",
-          })
-          throw new Error(result.error || "Registration failed")
+          });
+          throw new Error(result.error || 'Registration failed');
         }
 
+        // Sign in the user after registration
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
-        })
+        });
 
         if (signInError) {
           toast({
             title: "Login Error",
-            description: "Registration successful but login failed. Please try logging in.",
+            description: 'Registration successful but login failed. Please try logging in.',
             variant: "destructive",
-          })
-          throw new Error("Registration successful but login failed. Please try logging in.")
+          });
+          throw new Error('Registration successful but login failed. Please try logging in.');
         }
 
-        const userName =
-          `${formData.lastName} ${formData.firstName}`.trim() || data.user?.email?.split("@")[0] || "there"
+        // Create user name in format "lastName firstName"
+        const userName = `${formData.lastName} ${formData.firstName}`.trim() ||
+          data.user?.email?.split('@')[0] ||
+          'there';
 
         toast({
           title: "Registration Successful!",
           description: `Welcome to AbhinayPath, ${userName}! 👋`,
-        })
+        });
 
-        await refreshUser()
-        onClose()
+        await refreshUser();
+        onClose();
 
+        // Show welcome message and redirect to talent profile
         setTimeout(() => {
-          if (formData.profession === "Artist") {
-            toast({
-              title: `Welcome, ${userName}! 👋`,
-              description: "Let's complete your talent profile to start applying for auditions.",
-              duration: 5000,
-            })
-            router.push("/talent-profile")
-          } else if (formData.profession === "Organization") {
-            toast({
-              title: `Welcome, ${userName}! 👋`,
-              description: "Let's set up your organization profile to start posting opportunities.",
-              duration: 5000,
-            })
-            router.push("/organization-profile")
-          }
-        }, 1000)
+          toast({
+            title: `Welcome, ${userName}! 👋`,
+            description: "Let's complete your talent profile to start applying for auditions.",
+            duration: 5000,
+          });
+          router.push('/talent-profile');
+        }, 1000);
       } else {
+        // Edit profile flow
         const { error } = await supabase.auth.updateUser({
           data: {
             first_name: formData.firstName,
             last_name: formData.lastName,
             profession: formData.profession,
           },
-        })
+        });
 
         if (error) {
           toast({
             title: "Profile Update Error",
             description: error.message,
             variant: "destructive",
-          })
-          throw new Error(error.message)
+          });
+          throw new Error(error.message);
         }
 
         toast({
           title: "Profile Updated!",
           description: "Your profile has been updated successfully.",
-        })
-        await refreshUser()
-        onClose()
+        });
+        await refreshUser();
+        onClose();
       }
     } catch (error) {
-      console.error("Error:", error)
+      console.error('Error:', error);
       toast({
         title: "Error",
         description: error instanceof Error ? error.message : "An error occurred",
         variant: "destructive",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleCancel = () => {
     onClose()
   }
 
   const handleClose = () => {
+    // Reset form when closing
     setFormData({
       firstName: "",
       lastName: "",
@@ -190,11 +187,14 @@ export default function RegisterModal({ isOpen, onClose, mode = "register", init
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{mode === "register" ? "Register for AbhinayPath" : "Edit Profile"}</DialogTitle>
+          <DialogTitle>
+            {mode === 'register' ? 'Register for AbhinayPath' : 'Edit Profile'}
+          </DialogTitle>
           <DialogDescription>
-            {mode === "register"
-              ? "Create your account to join the AbhinayPath community and access exclusive opportunities."
-              : "Update your profile information and preferences."}
+            {mode === 'register' 
+              ? 'Create your account to join the AbhinayPath community and access exclusive opportunities.'
+              : 'Update your profile information and preferences.'
+            }
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -211,7 +211,7 @@ export default function RegisterModal({ isOpen, onClose, mode = "register", init
                 placeholder="Enter your first name"
               />
             </div>
-
+            
             <div className="space-y-2">
               <Label htmlFor="lastName">Last Name</Label>
               <Input
@@ -235,12 +235,12 @@ export default function RegisterModal({ isOpen, onClose, mode = "register", init
               value={formData.email}
               onChange={handleChange}
               required
-              disabled={mode === "edit"}
+              disabled={mode === 'edit'}
               placeholder="Enter your email address"
             />
           </div>
 
-          {mode === "register" && (
+          {mode === 'register' && (
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
@@ -268,28 +268,32 @@ export default function RegisterModal({ isOpen, onClose, mode = "register", init
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="profession">I am a/an</Label>
+            <Label htmlFor="profession">Profession</Label>
             <Select value={formData.profession} onValueChange={handleProfessionChange}>
               <SelectTrigger>
-                <SelectValue placeholder="Select your role" />
+                <SelectValue placeholder="Select your profession" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Artist">Artist / Performer</SelectItem>
-                <SelectItem value="Organization">Organization / Production House</SelectItem>
+                <SelectItem value="Director">Director</SelectItem>
+                <SelectItem value="Artist">Artist</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="flex gap-3 pt-4">
-            <Button type="submit" disabled={loading} className="flex-1">
-              {loading ? "Processing..." : mode === "register" ? "Register" : "Update"}
+            <Button
+              type="submit"
+              disabled={loading}
+              className="flex-1"
+            >
+              {loading ? "Processing..." : (mode === 'register' ? "Register" : "Update")}
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={handleCancel}
               disabled={loading}
-              className="flex-1 bg-transparent"
+              className="flex-1"
             >
               Cancel
             </Button>

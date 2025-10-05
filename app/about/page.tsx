@@ -3,24 +3,23 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 export default function AboutPage() {
+  console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL)
+  console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+  console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY)
 
-  console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
-  console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-  console.log("SUPABASE SERVICE ROLE KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY);
-  
   return (
     <div className="container py-16 md:py-24">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12 text-center">
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">About AbhinayPath</h1>
+          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">About Abhinayपथ</h1>
           <div className="w-24 h-1 bg-gradient-to-r from-[#2D1A54] to-[#7E1F2E] mx-auto"></div>
         </div>
 
         <div className="prose prose-lg max-w-none">
           <p className="text-xl leading-relaxed mb-8">
-            AbhinayPath is India's creative platform for actors, directors, and creators to discover auditions,
-            workshops, and exam prep support — across theatre, film & digital. We're building a trusted space where
-            opportunities meet preparation, with alumni support from NSD, FTII and more.
+            Abhinayपथ is India's creative platform for actors, directors, and creators to discover auditions, workshops,
+            and exam prep support — across theatre, film & digital. We're building a trusted space where opportunities
+            meet preparation, with alumni support from NSD, FTII and more.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 my-16">
@@ -70,7 +69,7 @@ export default function AboutPage() {
           <h2 className="font-playfair text-3xl font-bold mb-6">Join Our Community</h2>
           <p className="text-xl leading-relaxed mb-8">
             We're currently in beta, building a community of passionate artists and creators. Join us to be part of this
-            journey from the beginning and help shape the future of AbhinayPath.
+            journey from the beginning and help shape the future of Abhinayपथ.
           </p>
 
           <div className="text-center mt-12">

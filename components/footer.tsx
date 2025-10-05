@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Linkedin, PhoneIcon as WhatsApp } from "lucide-react"
+import { Instagram, Linkedin, WheatIcon as WhatsApp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function Footer() {
@@ -11,15 +11,9 @@ export default function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
               <div className="relative h-10 w-10 bg-white rounded-md p-1">
-                <Image
-                  src="/images/logo.png"
-                  alt="AbhinayPath Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
+                <Image src="/images/logo.png" alt="Abhinayपथ Logo" width={40} height={40} className="object-contain" />
               </div>
-              <span className="font-playfair text-xl font-bold">AbhinayPath</span>
+              <span className="font-playfair text-xl font-bold">Abhinayपथ</span>
             </Link>
             <p className="text-sm text-white">
               India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.
@@ -124,7 +118,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-gray-700 pt-8 text-center">
-          <p className="text-sm text-white">&copy; {new Date().getFullYear()} AbhinayPath. All rights reserved.</p>
+          <p className="text-sm text-white">&copy; {new Date().getFullYear()} Abhinayपथ. All rights reserved.</p>
         </div>
       </div>
     </footer>
