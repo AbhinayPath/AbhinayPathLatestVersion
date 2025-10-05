@@ -1,55 +1,55 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { Inter, Playfair_Display as PlayfairDisplay } from "next/font/google"
-import { Suspense } from "react"
 import "./globals.css"
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
+import type { Metadata } from "next"
+import { Inter, Playfair_Display } from "next/font/google"
+import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
-import { AuthProvider } from "@/contexts/AuthContext"
 import { Toaster } from "@/components/ui/sonner"
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@/components/analytics"
+import { AuthProvider } from "@/contexts/AuthContext"
+import { Suspense } from "react"
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
   variable: "--font-inter",
+  display: "swap",
 })
 
-const playfair = PlayfairDisplay({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  display: "swap",
   variable: "--font-playfair",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "Abhinayपथ - Platform for Creative Artists",
-  description:
-    "India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.",
-  generator: "v0.dev",
+  title: "Abhinayपथ - Theatre and Film Opportunities Platform",
+  description: "Discover auditions, workshops, and networking opportunities in the performing arts industry",
+  keywords: "theatre, auditions, workshops, performing arts, acting, film, casting",
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <div className="flex min-h-screen flex-col">
-              <Suspense fallback={<div className="h-16 border-b bg-background/95 backdrop-blur"></div>}>
+            <Suspense fallback={<div>Loading...</div>}>
+              <div className="flex flex-col min-h-screen">
                 <Navbar />
-              </Suspense>
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <Toaster />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+              <Toaster />
+              <Analytics />
+            </Suspense>
           </AuthProvider>
         </ThemeProvider>
-        <Analytics />
       </body>
     </html>
   )
