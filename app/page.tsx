@@ -4,20 +4,13 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Award, Calendar, GraduationCap, Sparkles } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-// import { PlausibleAnalytics } from "@/components/analytics"
-// Uncomment and add your domain to enable Plausible Analytics
-// <PlausibleAnalytics domain="yourdomain.com" />
-
-// import { PostHogAnalytics } from "@/components/analytics"
-// Uncomment and add your API key to enable PostHog Analytics
-// <PostHogAnalytics apiKey="your-api-key" />
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white overflow-hidden">
-        {/* <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 z-0 opacity-20">
           <Image src="/images/hero-bg.png" alt="Stage Background" fill className="object-cover" priority />
         </div>
         <div className="container relative z-10 py-16 sm:py-20 md:py-24 lg:py-32">
@@ -76,7 +69,7 @@ export default function Home() {
               Your Creative Journey Starts Here
             </h2>
             <p className="text-gray-800 max-w-3xl mx-auto text-lg">
-              AbhinayPath brings together everything you need to succeed in the creative arts industry.
+              Abhinayपथ brings together everything you need to succeed in the creative arts industry.
             </p>
           </div>
 
@@ -88,7 +81,7 @@ export default function Home() {
                   alt="Find Casting Calls"
                   fill
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                   <div className="p-4">
                     <div className="bg-[#F5A623] p-2 rounded-full inline-block mb-2">
@@ -106,7 +99,7 @@ export default function Home() {
                 <Link href="/auditions">
                   <Button
                     variant="outline"
-                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all"
+                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all bg-transparent"
                   >
                     Explore Auditions <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
@@ -138,7 +131,7 @@ export default function Home() {
                 <Link href="/workshops">
                   <Button
                     variant="outline"
-                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all"
+                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all bg-transparent"
                   >
                     Browse Workshops <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
@@ -171,7 +164,7 @@ export default function Home() {
                 <Link href="/admissions">
                   <Button
                     variant="outline"
-                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all"
+                    className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all bg-transparent"
                   >
                     Get Preparation Help <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
@@ -257,7 +250,7 @@ export default function Home() {
                   size="lg"
                   className="rounded-full bg-[#F5A623] text-[#2D1A54] hover:bg-[#e69b1e] text-lg px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
                 >
-                  Join AbhinayPath Beta <ArrowRight className="ml-2 h-5 w-5" />
+                  Join Abhinayपथ Beta <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
             </div>

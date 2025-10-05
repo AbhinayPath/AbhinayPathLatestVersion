@@ -1,233 +1,223 @@
 "use client"
 
-import * as React from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, ChevronDown, User, LogOut } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Menu, X, LogOut, Edit } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
-import { LoginModal } from "./LoginModal"
-import { RegisterModal } from "./RegisterModal"
-import { NavbarProfilePercentage } from "./navbar-profile-percentage"
+import RegisterModal from "@/components/RegisterModal"
+import LoginModal from "@/components/LoginModal"
+import { NavbarProfilePercentage } from "@/components/navbar-profile-percentage"
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const [showLogin, setShowLogin] = React.useState(false)
-  const [showRegister, setShowRegister] = React.useState(false)
-  const { user, logout } = useAuth()
-
-  const handleLogout = async () => {
-    await logout()
+  // TODO: Replace this mockProfileData with real profile data from context/store/API
+  const mockProfileData = {
+    profile: {
+      full_name: "Demo User",
+      email: "demo@user.com",
+      city: "Mumbai",
+      state: "Maharashtra",
+      bio: "Actor",
+      acting_skills: ["Acting"],
+      languages: ["Hindi"],
+      experience_level: "Beginner" as const,
+    },
+    education: [{ institution: "NSD", degree: "BFA" }],
+    experience: [{ project_title: "Movie" }],
+    training: [{ workshop_name: "Workshop" }],
+    headshots: [],
   }
 
-  return (
-    <>
-      <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4">
-          <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
-              <Image
-                src="/images/abhinaypath-logo.png"
-                alt="Abhinayपथ Logo"
-                width={40}
-                height={40}
-                className="h-10 w-auto"
-              />
-              <span className="text-xl font-bold text-primary">Abhinayपथ</span>
-            </Link>
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showRegisterModal, setShowRegisterModal] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
+  const { user, loading, signOut } = useAuth()
 
-            {/* Desktop Navigation */}
-            <div className="hidden items-center space-x-6 md:flex">
-              <Link href="/auditions" className="text-sm font-medium transition-colors hover:text-primary">
-                Auditions
-              </Link>
-              <Link href="/workshops" className="text-sm font-medium transition-colors hover:text-primary">
-                Workshops
-              </Link>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-sm font-medium transition-colors hover:text-primary">
-                  Resources <ChevronDown className="ml-1 h-4 w-4" />
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const handleLogout = async () => {
+    setDropdownOpen(false)
+    await signOut()
+  }
+
+  const handleEditProfile = () => {
+    setDropdownOpen(false)
+    router.push("/talent-profile")
+  }
+
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Join", href: "/join-community" },
+    { name: "Contact", href: "/contact" },
+  ]
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
+      <div className="container flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="relative h-10 w-10">
+            <Image src="/images/logo.png" alt="Abhinayपथ Logo" width={40} height={40} className="object-contain" />
+          </div>
+          <span className="font-playfair text-2xl font-bold text-[#7E1F2E]">Abhinayपथ</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`text-base font-medium transition-colors hover:text-[#7E1F2E] hover:font-medium ${
+                pathname === item.href ? "text-[#7E1F2E] font-medium" : ""
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Auth Buttons */}
+        <div className="hidden lg:flex items-center gap-4">
+          <>
+            {user ? (
+              <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+                <DropdownMenuTrigger asChild>
+                  <div className="cursor-pointer">
+                    {/* TODO: Replace mockProfileData with real data from context/store/API */}
+                    <NavbarProfilePercentage profileData={mockProfileData} user={user} />
+                  </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild>
-                    <Link href="/admissions">Institute Prep</Link>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleEditProfile}>
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit Talent Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/recruitment">Jobs & Internships</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/resources">Articles & Guides</Link>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Link href="/networking" className="text-sm font-medium transition-colors hover:text-primary">
-                Community
-              </Link>
-              <Link href="/talent-directory" className="text-sm font-medium transition-colors hover:text-primary">
-                Talent Directory
-              </Link>
-            </div>
+            ) : (
+              <>
+                <Button
+                  variant="ghost"
+                  onClick={() => setShowLoginModal(true)}
+                  className="text-[#7E1F2E] hover:text-[#6a1a27]"
+                >
+                  Login
+                </Button>
+                <Button variant="outline" onClick={() => setShowRegisterModal(true)} className="rounded-full">
+                  Register
+                </Button>
+                <Link href="/join-community">
+                  <Button
+                    size="default"
+                    className="rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-4 py-2 h-auto text-sm font-medium transition-transform hover:scale-105"
+                  >
+                    Join Beta Community
+                  </Button>
+                </Link>
+              </>
+            )}
+          </>
+        </div>
 
-            {/* Auth Buttons / User Menu */}
-            <div className="hidden items-center space-x-4 md:flex">
+        {/* Mobile Menu Button */}
+        <button className="lg:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="lg:hidden border-t">
+          <div className="container py-4 flex flex-col gap-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`px-3 py-2 text-base font-medium rounded-md transition-colors hover:bg-gray-100 hover:text-[#7E1F2E] ${
+                  pathname === item.href ? "text-[#7E1F2E] bg-gray-50" : ""
+                }`}
+                onClick={toggleMenu}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="pt-4 border-t mt-2">
               {user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center gap-2">
-                      <User className="h-4 w-4" />
-                      <span className="max-w-[150px] truncate">{user.email}</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
-                    <div className="px-2 py-1.5">
-                      <p className="text-sm font-medium">{user.email}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {user.user_metadata?.role === "artist" ? "Artist" : "Director"}
-                      </p>
-                    </div>
-                    <DropdownMenuItem asChild>
-                      <Link href="/talent-profile" className="w-full">
-                        <User className="mr-2 h-4 w-4" />
-                        My Profile
-                      </Link>
-                    </DropdownMenuItem>
-                    <NavbarProfilePercentage />
-                    <DropdownMenuItem onClick={handleLogout} className="text-red-600">
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <div className="space-y-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      router.push("/talent-profile")
+                      toggleMenu()
+                    }}
+                    className="w-full"
+                  >
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit Talent Profile
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      handleLogout()
+                      toggleMenu()
+                    }}
+                    className="w-full"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </Button>
+                </div>
               ) : (
-                <>
-                  <Button variant="ghost" onClick={() => setShowLogin(true)}>
+                <div className="space-y-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setShowLoginModal(true)
+                      toggleMenu()
+                    }}
+                    className="w-full"
+                  >
                     Login
                   </Button>
-                  <Button onClick={() => setShowRegister(true)}>Sign Up</Button>
-                </>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setShowRegisterModal(true)
+                      toggleMenu()
+                    }}
+                    className="w-full"
+                  >
+                    Register
+                  </Button>
+                  <Link href="/join-community" onClick={toggleMenu}>
+                    <Button className="w-full rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white py-5 h-auto text-base">
+                      Join Beta Community
+                    </Button>
+                  </Link>
+                </div>
               )}
             </div>
-
-            {/* Mobile Menu */}
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon">
-                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col space-y-4 mt-8">
-                  <Link
-                    href="/auditions"
-                    className="text-lg font-medium transition-colors hover:text-primary"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Auditions
-                  </Link>
-                  <Link
-                    href="/workshops"
-                    className="text-lg font-medium transition-colors hover:text-primary"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Workshops
-                  </Link>
-                  <div className="space-y-2">
-                    <p className="text-lg font-medium">Resources</p>
-                    <div className="ml-4 space-y-2">
-                      <Link
-                        href="/admissions"
-                        className="block text-base transition-colors hover:text-primary"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Institute Prep
-                      </Link>
-                      <Link
-                        href="/recruitment"
-                        className="block text-base transition-colors hover:text-primary"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Jobs & Internships
-                      </Link>
-                      <Link
-                        href="/resources"
-                        className="block text-base transition-colors hover:text-primary"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Articles & Guides
-                      </Link>
-                    </div>
-                  </div>
-                  <Link
-                    href="/networking"
-                    className="text-lg font-medium transition-colors hover:text-primary"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Community
-                  </Link>
-                  <Link
-                    href="/talent-directory"
-                    className="text-lg font-medium transition-colors hover:text-primary"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Talent Directory
-                  </Link>
-                  <div className="border-t pt-4">
-                    {user ? (
-                      <>
-                        <div className="mb-4 rounded-lg bg-muted p-3">
-                          <p className="font-medium">{user.email}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {user.user_metadata?.role === "artist" ? "Artist" : "Director"}
-                          </p>
-                        </div>
-                        <Link href="/talent-profile" onClick={() => setIsOpen(false)}>
-                          <Button variant="outline" className="w-full mb-2 bg-transparent">
-                            <User className="mr-2 h-4 w-4" />
-                            My Profile
-                          </Button>
-                        </Link>
-                        <Button variant="destructive" className="w-full" onClick={handleLogout}>
-                          <LogOut className="mr-2 h-4 w-4" />
-                          Logout
-                        </Button>
-                      </>
-                    ) : (
-                      <>
-                        <Button
-                          variant="outline"
-                          className="w-full mb-2 bg-transparent"
-                          onClick={() => {
-                            setIsOpen(false)
-                            setShowLogin(true)
-                          }}
-                        >
-                          Login
-                        </Button>
-                        <Button
-                          className="w-full"
-                          onClick={() => {
-                            setIsOpen(false)
-                            setShowRegister(true)
-                          }}
-                        >
-                          Sign Up
-                        </Button>
-                      </>
-                    )}
-                  </div>
-                </nav>
-              </SheetContent>
-            </Sheet>
           </div>
         </div>
-      </nav>
+      )}
 
-      <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
-      <RegisterModal open={showRegister} onClose={() => setShowRegister(false)} />
-    </>
+      {/* Modals */}
+      <RegisterModal isOpen={showRegisterModal} onClose={() => setShowRegisterModal(false)} mode="register" />
+
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+    </header>
   )
 }

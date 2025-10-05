@@ -1,145 +1,181 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="border-t bg-background">
+    <footer className="bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand Section */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/images/abhinaypath-logo.png"
+                src="/images/logo.png"
                 alt="Abhinayपथ Logo"
                 width={40}
                 height={40}
-                className="h-10 w-auto"
+                className="h-10 w-auto brightness-0 invert"
               />
-              <span className="text-xl font-bold text-primary">Abhinayपथ</span>
+              <span className="text-2xl font-bold font-playfair">Abhinayपथ</span>
             </Link>
-            <p className="text-sm text-muted-foreground">
-              India's premier platform connecting creative artists with opportunities across theatre, film, and web.
+            <p className="text-sm text-gray-300 leading-relaxed">
+              India's premier platform for discovering auditions, workshops, and career opportunities in theatre, film,
+              and web series.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Facebook className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
-                <Twitter className="h-5 w-5" />
-              </Link>
-              <Link
-                href="https://www.instagram.com/abhinaypath/"
+              <a
+                href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary"
+                className="hover:text-[#F5A623] transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F5A623] transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a
+                href="https://instagram.com/abhinaypath"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F5A623] transition-colors"
+                aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F5A623] transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F5A623] transition-colors"
+                aria-label="YouTube"
+              >
                 <Youtube className="h-5 w-5" />
-              </Link>
+              </a>
             </div>
           </div>
 
-          {/* Opportunities */}
+          {/* Quick Links */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold">Opportunities</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-lg font-semibold mb-4 font-playfair">Quick Links</h3>
+            <ul className="space-y-2">
               <li>
-                <Link href="/auditions" className="text-muted-foreground hover:text-primary">
-                  Auditions & Casting
+                <Link href="/auditions" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  Auditions
                 </Link>
               </li>
               <li>
-                <Link href="/workshops" className="text-muted-foreground hover:text-primary">
-                  Workshops & Training
+                <Link href="/workshops" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  Workshops
                 </Link>
               </li>
               <li>
-                <Link href="/recruitment" className="text-muted-foreground hover:text-primary">
-                  Jobs & Internships
-                </Link>
-              </li>
-              <li>
-                <Link href="/admissions" className="text-muted-foreground hover:text-primary">
+                <Link href="/admissions" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
                   Institute Prep
+                </Link>
+              </li>
+              <li>
+                <Link href="/recruitment" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  Jobs & Opportunities
+                </Link>
+              </li>
+              <li>
+                <Link href="/networking" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  Community
+                </Link>
+              </li>
+              <li>
+                <Link href="/resources" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  Resources
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Community */}
+          {/* About */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold">Community</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-lg font-semibold mb-4 font-playfair">About</h3>
+            <ul className="space-y-2">
               <li>
-                <Link href="/networking" className="text-muted-foreground hover:text-primary">
-                  Networking Events
+                <Link href="/about" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link href="/talent-directory" className="text-muted-foreground hover:text-primary">
+                <Link href="/contact" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/join-community" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                  Join Beta
+                </Link>
+              </li>
+              <li>
+                <Link href="/talent-directory" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
                   Talent Directory
                 </Link>
               </li>
               <li>
-                <Link href="/resources" className="text-muted-foreground hover:text-primary">
-                  Resources & Articles
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary">
-                  About Us
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold">Support</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary">
+                <Link href="/privacy" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary">
+                <Link href="/terms" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
                   Terms of Service
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 font-playfair">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start space-x-3 text-sm text-gray-300">
+                <Mail className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                <a href="mailto:hello@abhinaypath.com" className="hover:text-[#F5A623] transition-colors">
+                  hello@abhinaypath.com
+                </a>
+              </li>
+              <li className="flex items-start space-x-3 text-sm text-gray-300">
+                <Phone className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                <a href="tel:+919876543210" className="hover:text-[#F5A623] transition-colors">
+                  +91 98765 43210
+                </a>
+              </li>
+              <li className="flex items-start space-x-3 text-sm text-gray-300">
+                <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                <span>Mumbai, Maharashtra, India</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Abhinayपथ. All rights reserved.</p>
-          <p className="mt-2">
-            Made with ❤️ for the creative community of India | Generated by{" "}
-            <a
-              href="https://v0.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-primary hover:underline"
-            >
-              v0.dev
-            </a>
+        {/* Bottom Bar */}
+        <div className="border-t border-white/20 mt-8 pt-8 text-center">
+          <p className="text-sm text-gray-300">
+            &copy; {currentYear} Abhinayपथ. All rights reserved. | Empowering artists across India.
           </p>
         </div>
       </div>
