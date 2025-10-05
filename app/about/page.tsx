@@ -1,133 +1,114 @@
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Award, Users, Target, Heart } from "lucide-react"
 import Link from "next/link"
-import { Users, Target, Heart, Award } from "lucide-react"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
-      <section className="relative py-20 bg-gradient-to-br from-primary/5 via-white to-secondary/5">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 font-playfair">About Abhinayपथ</h1>
-            <p className="text-lg text-gray-700 mb-8">
-              Abhinayपथ is India's premier platform connecting talented artists with opportunities in theatre, film, and
-              performing arts. We bridge the gap between aspiring artists and industry professionals through a
-              comprehensive ecosystem of auditions, workshops, and networking events.
-            </p>
-          </div>
-        </div>
-      </section>
+    <div className="container mx-auto px-4 py-12">
+      {/* Hero Section */}
+      <div className="mb-16 text-center">
+        <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">About Abhinayपथ</h1>
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          India's premier platform connecting creative artists with opportunities across theatre, film, and web.
+        </p>
+      </div>
 
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6 font-playfair">Our Mission</h2>
-              <p className="text-gray-700 mb-4">
-                At Abhinayपथ, we believe every artist deserves a chance to showcase their talent. Our mission is to
-                democratize access to performing arts opportunities and create a vibrant community where creativity
-                thrives.
+      {/* Mission Section */}
+      <div className="mb-16">
+        <Card>
+          <CardContent className="p-8">
+            <div className="flex items-start gap-4">
+              <Target className="mt-1 h-8 w-8 flex-shrink-0 text-primary" />
+              <div>
+                <h2 className="mb-4 text-2xl font-bold">Our Mission</h2>
+                <p className="text-muted-foreground">
+                  Abhinayपथ was created to bridge the gap between talented artists and the opportunities they deserve.
+                  We believe that every artist should have access to quality auditions, workshops, and resources to grow
+                  their craft and build a sustainable career in the performing arts.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Values Section */}
+      <div className="mb-16">
+        <h2 className="mb-8 text-center text-3xl font-bold">Our Core Values</h2>
+        <div className="grid gap-6 md:grid-cols-3">
+          <Card>
+            <CardContent className="p-6">
+              <Users className="mb-4 h-10 w-10 text-primary" />
+              <h3 className="mb-2 text-xl font-semibold">Community First</h3>
+              <p className="text-muted-foreground">
+                We prioritize building a supportive community where artists can connect, collaborate, and grow together.
               </p>
-              <p className="text-gray-700 mb-6">
-                We're building a platform that not only connects artists with opportunities but also provides the
-                resources, guidance, and support needed to build successful careers in the performing arts industry.
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <Award className="mb-4 h-10 w-10 text-primary" />
+              <h3 className="mb-2 text-xl font-semibold">Quality & Authenticity</h3>
+              <p className="text-muted-foreground">
+                We verify all opportunities to ensure artists connect with legitimate casting calls and workshops.
               </p>
-              <Link href="/signup">
-                <Button size="lg">Join Our Community</Button>
-              </Link>
-            </div>
-            <div className="relative h-[400px] rounded-lg overflow-hidden">
-              <Image src="/images/community.png" alt="Abhinayपथ Community" fill className="object-cover" />
-            </div>
-          </div>
-        </div>
-      </section>
+            </CardContent>
+          </Card>
 
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 font-playfair">Our Core Values</h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <Users className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Community</h3>
-              <p className="text-gray-600">Building a supportive network of artists and professionals</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <Target className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Opportunity</h3>
-              <p className="text-gray-600">Creating pathways for artists to discover and grow</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <Heart className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Passion</h3>
-              <p className="text-gray-600">Celebrating the art and dedication of performers</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <Award className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Excellence</h3>
-              <p className="text-gray-600">Maintaining high standards in everything we do</p>
-            </div>
-          </div>
+          <Card>
+            <CardContent className="p-6">
+              <Heart className="mb-4 h-10 w-10 text-primary" />
+              <h3 className="mb-2 text-xl font-semibold">Artist Empowerment</h3>
+              <p className="text-muted-foreground">
+                We provide tools and resources that empower artists to take control of their careers and succeed.
+              </p>
+            </CardContent>
+          </Card>
         </div>
-      </section>
+      </div>
 
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6 font-playfair">Our Story</h2>
-            <p className="text-gray-700 mb-4">
-              Abhinayपथ was born from a simple observation: talented artists often struggle to find the right
-              opportunities, while production houses and casting directors face challenges in discovering fresh talent.
-              We set out to solve this problem by creating a centralized platform that serves both sides of the
-              performing arts ecosystem.
-            </p>
-            <p className="text-gray-700 mb-4">
-              Since our inception, we've helped thousands of artists connect with opportunities ranging from theatre
-              productions to film auditions, from professional workshops to industry networking events. Our platform has
-              become a trusted resource for both emerging talents and established professionals.
-            </p>
-            <p className="text-gray-700">
-              Today, Abhinayपथ continues to grow as India's leading performing arts platform, constantly evolving to
-              meet the needs of our vibrant community of artists, directors, producers, and arts enthusiasts.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Story Section */}
+      <div className="mb-16">
+        <Card>
+          <CardContent className="p-8">
+            <h2 className="mb-4 text-2xl font-bold">Our Story</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>
+                Abhinayपथ (meaning "the path of performance" in Hindi) was founded by a group of theatre enthusiasts and
+                tech professionals who experienced firsthand the challenges artists face in finding legitimate
+                opportunities.
+              </p>
+              <p>
+                What started as a simple WhatsApp group for sharing audition information has evolved into a
+                comprehensive platform that serves thousands of artists across India. We've connected artists with
+                opportunities in theatre productions, films, web series, and major OTT platforms.
+              </p>
+              <p>
+                Today, Abhinayपथ continues to grow, adding new features and partnerships to better serve the creative
+                community. Our goal is to become the go-to platform for every performing artist in India.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6 font-playfair">Ready to Start Your Journey?</h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of artists who have already discovered their path through Abhinayपथ. Whether you're an actor,
-            director, or arts enthusiast, there's a place for you here.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/signup">
-              <Button size="lg" variant="secondary">
-                Create Account
-              </Button>
-            </Link>
-            <Link href="/auditions">
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
-              >
-                Browse Opportunities
-              </Button>
-            </Link>
-          </div>
+      {/* CTA Section */}
+      <div className="text-center">
+        <h2 className="mb-4 text-2xl font-bold">Join Our Community</h2>
+        <p className="mb-6 text-muted-foreground">
+          Be part of a growing network of creative professionals and discover your next opportunity.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button asChild size="lg">
+            <Link href="/signup">Create Account</Link>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <Link href="/contact">Contact Us</Link>
+          </Button>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
