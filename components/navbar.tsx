@@ -5,32 +5,36 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Menu, X, User, LogOut, Edit } from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu"
+import { Menu, X, LogOut, Edit, Film, GraduationCap } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
 import RegisterModal from "@/components/RegisterModal"
 import LoginModal from "@/components/LoginModal"
 import { NavbarProfilePercentage } from "@/components/navbar-profile-percentage"
-import { getProfileCompletion } from "@/components/profileCompletionUtils"
 
 export default function Navbar() {
-  // TODO: Replace this mockProfileData with real profile data from context/store/API
   const mockProfileData = {
     profile: {
-      full_name: 'Demo User',
-      email: 'demo@user.com',
-      city: 'Mumbai',
-      state: 'Maharashtra',
-      bio: 'Actor',
-      acting_skills: ['Acting'],
-      languages: ['Hindi'],
-      experience_level: 'Beginner' as 'Beginner',
+      full_name: "Demo User",
+      email: "demo@user.com",
+      city: "Mumbai",
+      state: "Maharashtra",
+      bio: "Actor",
+      acting_skills: ["Acting"],
+      languages: ["Hindi"],
+      experience_level: "Beginner" as const,
     },
-    education: [{ institution: 'NSD', degree: 'BFA' }],
-    experience: [{ project_title: 'Movie' }],
-    training: [{ workshop_name: 'Workshop' }],
+    education: [{ institution: "NSD", degree: "BFA" }],
+    experience: [{ project_title: "Movie" }],
+    training: [{ workshop_name: "Workshop" }],
     headshots: [],
-  };
+  }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
@@ -40,8 +44,9 @@ export default function Navbar() {
   const router = useRouter()
   const { user, loading, signOut } = useAuth()
 
-  
-  
+  // Check if user is an organization
+  const isOrganization = user?.user_metadata?.profession === "Organization"
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
@@ -53,7 +58,11 @@ export default function Navbar() {
 
   const handleEditProfile = () => {
     setDropdownOpen(false)
-    router.push("/talent-profile")
+    if (isOrganization) {
+      router.push("/organization-profile")
+    } else {
+      router.push("/talent-profile")
+    }
   }
 
   const navItems = [
@@ -62,13 +71,6 @@ export default function Navbar() {
     { name: "Join", href: "/join-community" },
     { name: "Contact", href: "/contact" },
   ]
-
-  const getUserInitial = () => {
-    if (user?.user_metadata?.full_name) {
-      return user.user_metadata.full_name.charAt(0).toUpperCase()
-    }
-    return user?.email?.charAt(0).toUpperCase() || "U"
-  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
@@ -80,7 +82,6 @@ export default function Navbar() {
           <span className="font-playfair text-2xl font-bold text-[#7E1F2E]">AbhinayPath</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
@@ -95,66 +96,70 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Auth Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-          
+          {user ? (
+            <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+              <DropdownMenuTrigger asChild>
+                <div className="cursor-pointer">
+                  <NavbarProfilePercentage profileData={mockProfileData} user={user} />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem onClick={handleEditProfile}>
+                  <Edit className="mr-2 h-4 w-4" />
+                  Edit {isOrganization ? "Organization" : "Talent"} Profile
+                </DropdownMenuItem>
+
+                {isOrganization && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => router.push("/post-audition")}>
+                      <Film className="mr-2 h-4 w-4" />
+                      Post Audition / Casting
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push("/post-workshop")}>
+                      <GraduationCap className="mr-2 h-4 w-4" />
+                      Post Workshop
+                    </DropdownMenuItem>
+                  </>
+                )}
+
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
             <>
-              {user ? (
-                <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
-                  <DropdownMenuTrigger asChild>
-                    <div className="cursor-pointer">
-                      {/* TODO: Replace mockProfileData with real data from context/store/API */}
-                      <NavbarProfilePercentage profileData={mockProfileData} user={user} />
-                    </div>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={handleEditProfile}>
-                      <Edit className="mr-2 h-4 w-4" />
-                      Edit Talent Profile
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleLogout}>
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <>
-                  <Button
-                    variant="ghost"
-                    onClick={() => setShowLoginModal(true)}
-                    className="text-[#7E1F2E] hover:text-[#6a1a27]"
-                  >
-                    Login
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => setShowRegisterModal(true)}
-                    className="rounded-full"
-                  >
-                    Register
-                  </Button>
-                  <Link href="/join-community">
-                    <Button
-                      size="default"
-                      className="rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-4 py-2 h-auto text-sm font-medium transition-transform hover:scale-105"
-                    >
-                      Join Beta Community
-                    </Button>
-                  </Link>
-                </>
-              )}
+              <Button
+                variant="ghost"
+                onClick={() => setShowLoginModal(true)}
+                className="text-[#7E1F2E] hover:text-[#6a1a27]"
+              >
+                Login
+              </Button>
+              <Button variant="outline" onClick={() => setShowRegisterModal(true)} className="rounded-full">
+                Register
+              </Button>
+              <Link href="/join-community">
+                <Button
+                  size="default"
+                  className="rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-4 py-2 h-auto text-sm font-medium transition-transform hover:scale-105"
+                >
+                  Join Beta Community
+                </Button>
+              </Link>
             </>
-          
+          )}
         </div>
 
-        {/* Mobile Menu Button */}
         <button className="lg:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden border-t">
           <div className="container py-4 flex flex-col gap-4">
@@ -176,14 +181,42 @@ export default function Navbar() {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      router.push('/talent-profile')
+                      handleEditProfile()
                       toggleMenu()
                     }}
                     className="w-full"
                   >
                     <Edit className="mr-2 h-4 w-4" />
-                    Edit Talent Profile
+                    Edit Profile
                   </Button>
+
+                  {isOrganization && (
+                    <>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          router.push("/post-audition")
+                          toggleMenu()
+                        }}
+                        className="w-full"
+                      >
+                        <Film className="mr-2 h-4 w-4" />
+                        Post Audition
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          router.push("/post-workshop")
+                          toggleMenu()
+                        }}
+                        className="w-full"
+                      >
+                        <GraduationCap className="mr-2 h-4 w-4" />
+                        Post Workshop
+                      </Button>
+                    </>
+                  )}
+
                   <Button
                     variant="outline"
                     onClick={() => {
@@ -230,17 +263,9 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Modals */}
-      <RegisterModal
-        isOpen={showRegisterModal}
-        onClose={() => setShowRegisterModal(false)}
-        mode="register"
-      />
+      <RegisterModal isOpen={showRegisterModal} onClose={() => setShowRegisterModal(false)} mode="register" />
 
-      <LoginModal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-      />
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </header>
   )
 }
