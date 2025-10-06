@@ -1,9 +1,10 @@
 "use client"
-import { Button } from "@/components/ui/button"
-import { Link } from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+
 import { useState } from "react"
+import Link from "next/link"
 import Image from "next/image"
+import { usePathname, useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Menu, X, LogOut, Edit, Plus } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
@@ -59,13 +60,6 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ]
 
-  const getUserInitial = () => {
-    if (user?.user_metadata?.full_name) {
-      return user.user_metadata.full_name.charAt(0).toUpperCase()
-    }
-    return user?.email?.charAt(0).toUpperCase() || "U"
-  }
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 items-center justify-between">
@@ -98,7 +92,7 @@ export default function Navbar() {
               <Link href="/post-opportunity">
                 <Button
                   size="sm"
-                  className="rounded-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-md transition-all hover:shadow-lg"
+                  className="rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg"
                 >
                   <Plus className="h-4 w-4 mr-1" />
                   Post Opportunity
@@ -173,7 +167,7 @@ export default function Navbar() {
               {user ? (
                 <div className="space-y-2">
                   <Link href="/post-opportunity" onClick={toggleMenu}>
-                    <Button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white">
+                    <Button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
                       <Plus className="mr-2 h-4 w-4" />
                       Post Opportunity
                     </Button>
