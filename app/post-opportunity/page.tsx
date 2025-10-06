@@ -1,20 +1,42 @@
 "use client"
 
-import { useState } from "react"
-import { format } from "date-fns"
-import { CalendarIcon, MapPin, Globe, ChevronDown, ChevronUp, ImageIcon, Video, AlertCircle } from "lucide-react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Switch } from "@/components/ui/switch"
+import { Separator } from "@/components/ui/separator"
+import { Badge } from "@/components/ui/badge"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Progress } from "@/components/ui/progress"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Badge } from "@/components/ui/badge"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { toast } from "@/components/ui/use-toast"
+import {
+  CalendarIcon,
+  ChevronDown,
+  ChevronUp,
+  MapPin,
+  Video,
+  Users,
+  Briefcase,
+  Camera,
+  Info,
+  Globe,
+  Clock,
+  DollarSign,
+  Eye,
+  CheckCircle2,
+} from "lucide-react"
+import { format } from "date-fns"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 interface FormData {
   title: string
@@ -26,22 +48,22 @@ interface FormData {
   platform: string
   description: string
   applicationMethod: "platform" | "whatsapp" | "email" | "external"
-  contactInfo: string
+  contact: string
   rolesNeeded: string
   gender: string
   ageMin: string
   ageMax: string
   languages: string[]
   experience: string
-  feeType: string
+  payType: string
   amount: string
   visibility: "public" | "unlisted"
   requestPhotos: boolean
-  photoHelper: string
+  photoHelperText: string
   requestVideos: boolean
-  videoHelper: string
-  consentGenuine: boolean
-  consentTerms: boolean
+  videoHelperText: string
+  consent1: boolean
+  consent2: boolean
 }
 
 const LANGUAGES = [
@@ -50,9 +72,9 @@ const LANGUAGES = [
   "Marathi",
   "Tamil",
   "Telugu",
+  "Kannada",
   "Bengali",
   "Gujarati",
-  "Kannada",
   "Malayalam",
   "Punjabi",
 ]
@@ -68,763 +90,793 @@ export default function PostOpportunityPage() {
     platform: "",
     description: "",
     applicationMethod: "platform",
-    contactInfo: "",
+    contact: "",
     rolesNeeded: "",
     gender: "any",
     ageMin: "",
     ageMax: "",
     languages: [],
     experience: "",
-    feeType: "not-specified",
+    payType: "not-specified",
     amount: "",
     visibility: "public",
     requestPhotos: false,
-    photoHelper: "",
+    photoHelperText: "",
     requestVideos: false,
-    videoHelper: "",
-    consentGenuine: false,
-    consentTerms: false,
+    videoHelperText: "",
+    consent1: false,
+    consent2: false,
   })
 
   const [advancedOpen, setAdvancedOpen] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)
   const [applyFlowOpen, setApplyFlowOpen] = useState(false)
+  const [progress, setProgress] = useState(0)
 
-  const updateField = (field: keyof FormData, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+  const requiredFields = [
+    formData.title,
+    formData.type,
+    formData.deadline,
+    formData.locationMode === "city" ? formData.city : true,
+    formData.description,
+    formData.consent1,
+    formData.consent2,
+  ]
+
+  const conditionalFields = [formData.payType === "stipend" || formData.payType === "paid" ? formData.amount : true]
+
+  useEffect(() => {
+    const allRequired = [...requiredFields, ...conditionalFields]
+    const filled = allRequired.filter(Boolean).length
+    setProgress((filled / allRequired.length) * 100)
+  }, [formData])
+
+  const isFormValid = () => {
+    return (
+      requiredFields.every(Boolean) &&
+      conditionalFields.every(Boolean) &&
+      (!formData.ageMin || !formData.ageMax || Number(formData.ageMin) <= Number(formData.ageMax))
+    )
   }
-
-  const toggleLanguage = (lang: string) => {
-    setFormData((prev) => {
-      const languages = prev.languages.includes(lang)
-        ? prev.languages.filter((l) => l !== lang)
-        : prev.languages.length < 4
-          ? [...prev.languages, lang]
-          : prev.languages
-      return { ...prev, languages }
-    })
-  }
-
-  // Calculate form completion
-  const requiredFields = {
-    title: !!formData.title,
-    type: !!formData.type,
-    deadline: !!formData.deadline,
-    location: formData.locationMode === "city" ? !!formData.city : true,
-    description: !!formData.description,
-    amount: formData.feeType === "stipend" || formData.feeType === "paid" ? !!formData.amount : true,
-    ageRange:
-      formData.ageMin && formData.ageMax
-        ? Number.parseInt(formData.ageMin) <= Number.parseInt(formData.ageMax)
-        : !formData.ageMin && !formData.ageMax,
-    consents: formData.consentGenuine && formData.consentTerms,
-  }
-
-  const completionPercentage = Math.round(
-    (Object.values(requiredFields).filter(Boolean).length / Object.values(requiredFields).length) * 100,
-  )
-  const canPublish = Object.values(requiredFields).every(Boolean)
 
   const handlePublish = () => {
-    if (canPublish) {
-      // TODO: API call
-      alert("Published successfully! ✓")
+    if (isFormValid()) {
+      toast({
+        title: "Published Successfully! 🎉",
+        description: "You can edit this opportunity anytime.",
+      })
     }
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Header */}
-      <div className="border-b bg-white/80 backdrop-blur-sm sticky top-16 z-40">
-        <div className="container py-6">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#7E1F2E]/10 flex items-center justify-center">
-                <span className="text-[#7E1F2E] font-semibold text-sm">AP</span>
-              </div>
-              <h1 className="text-2xl font-semibold text-gray-900">Post Opportunity</h1>
-            </div>
-            <span className="text-sm text-gray-500">All times IST</span>
-          </div>
-          <p className="text-gray-600 text-sm">Keep it crisp. Artists love clarity.</p>
+  const toggleLanguage = (lang: string) => {
+    if (formData.languages.includes(lang)) {
+      setFormData({
+        ...formData,
+        languages: formData.languages.filter((l) => l !== lang),
+      })
+    } else if (formData.languages.length < 4) {
+      setFormData({
+        ...formData,
+        languages: [...formData.languages, lang],
+      })
+    }
+  }
 
-          {/* Progress indicator */}
-          <div className="mt-4">
-            <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[#7E1F2E] transition-all duration-500 ease-out"
-                style={{ width: `${completionPercentage}%` }}
-              />
+  const getLocationDisplay = () => {
+    if (formData.locationMode === "online") {
+      return formData.platform ? `Online (${formData.platform})` : "Online"
+    }
+    return formData.city || "Location TBD"
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50/50 to-white">
+      {/* Header */}
+      <div className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+        <div className="container py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center text-white font-bold text-sm">
+                AP
+              </div>
+              <div>
+                <h1 className="font-playfair text-2xl font-bold text-gray-900">Post Opportunity</h1>
+                <p className="text-sm text-gray-500">Keep it crisp. Artists love clarity.</p>
+              </div>
             </div>
+            <div className="text-right">
+              <Badge variant="outline" className="text-xs">
+                <Clock className="h-3 w-3 mr-1" />
+                All times IST
+              </Badge>
+            </div>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="mt-4">
+            <Progress value={progress} className="h-1.5" />
+            <p className="text-xs text-gray-500 mt-1.5">{Math.round(progress)}% complete</p>
           </div>
         </div>
       </div>
 
       <div className="container py-8">
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-[1fr_400px] gap-8">
           {/* Left Column - Form */}
           <div className="space-y-6">
             {/* Core Section */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6 hover:shadow-md transition-shadow">
-              <div className="flex items-center gap-2 text-gray-900 font-medium">
-                <div className="w-1 h-5 bg-[#7E1F2E] rounded-full" />
-                Core Details
-              </div>
-
-              {/* Title */}
-              <div className="space-y-2">
-                <Label htmlFor="title">
-                  Title <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="title"
-                  placeholder="e.g., Lead Actor for Hamlet"
-                  value={formData.title}
-                  onChange={(e) => updateField("title", e.target.value)}
-                  className="rounded-xl"
-                />
-              </div>
-
-              {/* Type */}
-              <div className="space-y-2">
-                <Label htmlFor="type">
-                  Type <span className="text-red-500">*</span>
-                </Label>
-                <Select value={formData.type} onValueChange={(value) => updateField("type", value)}>
-                  <SelectTrigger className="rounded-xl">
-                    <SelectValue placeholder="Select opportunity type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="theatre">Theatre Play</SelectItem>
-                    <SelectItem value="short-film">Short Film</SelectItem>
-                    <SelectItem value="feature-film">Feature Film</SelectItem>
-                    <SelectItem value="ad">Advertisement</SelectItem>
-                    <SelectItem value="backstage">Backstage Role</SelectItem>
-                    <SelectItem value="job">Job Opening</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Deadline */}
-              <div className="space-y-2">
-                <Label>
-                  Application Deadline <span className="text-red-500">*</span>
-                </Label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        "w-full justify-start text-left font-normal rounded-xl",
-                        !formData.deadline && "text-muted-foreground",
-                      )}
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {formData.deadline ? format(formData.deadline, "PPP") : "Pick a date"}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={formData.deadline}
-                      onSelect={(date) => updateField("deadline", date)}
-                      disabled={(date) => date < new Date()}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-
-              {/* Location Mode */}
-              <div className="space-y-3">
-                <Label>Location Mode</Label>
-                <div className="flex gap-2">
-                  <Button
-                    type="button"
-                    variant={formData.locationMode === "city" ? "default" : "outline"}
-                    className="flex-1 rounded-xl"
-                    onClick={() => updateField("locationMode", "city")}
-                  >
-                    <MapPin className="mr-2 h-4 w-4" />
-                    City
-                  </Button>
-                  <Button
-                    type="button"
-                    variant={formData.locationMode === "online" ? "default" : "outline"}
-                    className="flex-1 rounded-xl"
-                    onClick={() => updateField("locationMode", "online")}
-                  >
-                    <Globe className="mr-2 h-4 w-4" />
-                    Online
-                  </Button>
-                </div>
-              </div>
-
-              {/* Conditional Location Fields */}
-              {formData.locationMode === "city" ? (
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="city">
-                      City <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="city"
-                      placeholder="Mumbai"
-                      value={formData.city}
-                      onChange={(e) => updateField("city", e.target.value)}
-                      className="rounded-xl"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="venue">Venue (optional)</Label>
-                    <Input
-                      id="venue"
-                      placeholder="Theatre name"
-                      value={formData.venue}
-                      onChange={(e) => updateField("venue", e.target.value)}
-                      className="rounded-xl"
-                    />
-                  </div>
-                </div>
-              ) : (
+            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Briefcase className="h-5 w-5 text-purple-600" />
+                  Core Details
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="platform">Platform (optional)</Label>
+                  <Label htmlFor="title">Title *</Label>
                   <Input
-                    id="platform"
-                    placeholder="Zoom, Google Meet, etc."
-                    value={formData.platform}
-                    onChange={(e) => updateField("platform", e.target.value)}
+                    id="title"
+                    placeholder="e.g., Lead Actor for Theatre Play"
+                    value={formData.title}
+                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     className="rounded-xl"
                   />
                 </div>
-              )}
 
-              {/* Description */}
-              <div className="space-y-2">
-                <Label htmlFor="description">
-                  Description <span className="text-red-500">*</span>
-                </Label>
-                <Textarea
-                  id="description"
-                  placeholder="What to prepare, key dates, audition flow..."
-                  value={formData.description}
-                  onChange={(e) => updateField("description", e.target.value)}
-                  className="rounded-xl min-h-[120px] resize-none"
-                />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="type">Type *</Label>
+                  <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
+                    <SelectTrigger id="type" className="rounded-xl">
+                      <SelectValue placeholder="Select opportunity type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="theatre">Theatre Play</SelectItem>
+                      <SelectItem value="short-film">Short Film</SelectItem>
+                      <SelectItem value="feature-film">Feature Film</SelectItem>
+                      <SelectItem value="ad">Advertisement</SelectItem>
+                      <SelectItem value="backstage">Backstage Role</SelectItem>
+                      <SelectItem value="job">Job</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              {/* Application Method */}
-              <div className="space-y-3">
-                <Label>Application Method</Label>
-                <RadioGroup
-                  value={formData.applicationMethod}
-                  onValueChange={(value: any) => updateField("applicationMethod", value)}
-                  className="space-y-2"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="platform" id="platform-apply" />
-                    <Label htmlFor="platform-apply" className="font-normal cursor-pointer">
-                      Quick Apply on Abhinayपथ (Recommended)
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="whatsapp" id="whatsapp-apply" />
-                    <Label htmlFor="whatsapp-apply" className="font-normal cursor-pointer">
-                      WhatsApp
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="email" id="email-apply" />
-                    <Label htmlFor="email-apply" className="font-normal cursor-pointer">
-                      Email
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="external" id="external-apply" />
-                    <Label htmlFor="external-apply" className="font-normal cursor-pointer">
-                      External Form
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
+                <div className="space-y-2">
+                  <Label>Deadline *</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal rounded-xl",
+                          !formData.deadline && "text-muted-foreground",
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {formData.deadline ? format(formData.deadline, "PPP") : "Pick a date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        selected={formData.deadline}
+                        onSelect={(date) => setFormData({ ...formData, deadline: date })}
+                        disabled={(date) => date < new Date()}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
 
-              {/* Optional Contact */}
-              {formData.applicationMethod !== "platform" && (
+                <Separator />
+
                 <div className="space-y-3">
-                  <button
-                    type="button"
-                    onClick={() => setContactOpen(!contactOpen)}
-                    className="flex items-center justify-between w-full text-sm text-gray-700 hover:text-gray-900 transition-colors"
+                  <Label>Location Mode *</Label>
+                  <div className="flex gap-4">
+                    <Button
+                      type="button"
+                      variant={formData.locationMode === "city" ? "default" : "outline"}
+                      onClick={() => setFormData({ ...formData, locationMode: "city" })}
+                      className="flex-1 rounded-xl"
+                    >
+                      <MapPin className="h-4 w-4 mr-2" />
+                      City
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={formData.locationMode === "online" ? "default" : "outline"}
+                      onClick={() => setFormData({ ...formData, locationMode: "online" })}
+                      className="flex-1 rounded-xl"
+                    >
+                      <Video className="h-4 w-4 mr-2" />
+                      Online
+                    </Button>
+                  </div>
+                </div>
+
+                {formData.locationMode === "city" ? (
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="city">City *</Label>
+                      <Input
+                        id="city"
+                        placeholder="e.g., Mumbai"
+                        value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                        className="rounded-xl"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="venue">Venue (Optional)</Label>
+                      <Input
+                        id="venue"
+                        placeholder="e.g., Prithvi Theatre"
+                        value={formData.venue}
+                        onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
+                        className="rounded-xl"
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <div className="space-y-2">
+                    <Label htmlFor="platform">Platform (Optional)</Label>
+                    <Input
+                      id="platform"
+                      placeholder="e.g., Zoom, Google Meet"
+                      value={formData.platform}
+                      onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
+                      className="rounded-xl"
+                    />
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="description">Description *</Label>
+                  <Textarea
+                    id="description"
+                    placeholder="What to prepare, key dates, audition flow..."
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    className="rounded-xl min-h-[120px]"
+                  />
+                  <p className="text-xs text-gray-500">What to prepare, key dates, audition flow</p>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                  <Label>Application Method *</Label>
+                  <RadioGroup
+                    value={formData.applicationMethod}
+                    onValueChange={(value: any) => setFormData({ ...formData, applicationMethod: value })}
                   >
-                    <span>Contact Information (optional)</span>
-                    {contactOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                  </button>
-                  {contactOpen && (
-                    <div className="space-y-2 pt-2 animate-in slide-in-from-top-2">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="platform" id="platform-method" />
+                      <Label htmlFor="platform-method" className="font-normal cursor-pointer">
+                        Quick Apply on Abhinayपथ (Recommended)
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="whatsapp" id="whatsapp-method" />
+                      <Label htmlFor="whatsapp-method" className="font-normal cursor-pointer">
+                        WhatsApp
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="email" id="email-method" />
+                      <Label htmlFor="email-method" className="font-normal cursor-pointer">
+                        Email
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="external" id="external-method" />
+                      <Label htmlFor="external-method" className="font-normal cursor-pointer">
+                        External Form
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {formData.applicationMethod !== "platform" && (
+                  <Collapsible open={contactOpen} onOpenChange={setContactOpen}>
+                    <CollapsibleTrigger asChild>
+                      <Button variant="ghost" className="w-full justify-between rounded-xl">
+                        <span className="text-sm">Contact Details</span>
+                        {contactOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                      </Button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pt-3">
                       <Input
                         placeholder={
                           formData.applicationMethod === "whatsapp"
-                            ? "+91 98765 43210"
+                            ? "WhatsApp number (with country code)"
                             : formData.applicationMethod === "email"
-                              ? "casting@example.com"
-                              : "https://forms.google.com/..."
+                              ? "Email address"
+                              : "Form URL"
                         }
-                        value={formData.contactInfo}
-                        onChange={(e) => updateField("contactInfo", e.target.value)}
+                        value={formData.contact}
+                        onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
                         className="rounded-xl"
                       />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Advanced Section */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4 hover:shadow-md transition-shadow">
-              <button
-                type="button"
-                onClick={() => setAdvancedOpen(!advancedOpen)}
-                className="flex items-center justify-between w-full text-gray-900 font-medium"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-1 h-5 bg-[#7E1F2E] rounded-full" />
-                  Advanced Details
-                </div>
-                {advancedOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
-              </button>
+            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
+                <CardHeader>
+                  <CollapsibleTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-between p-0 hover:bg-transparent">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Users className="h-5 w-5 text-purple-600" />
+                        Advanced Details (Optional)
+                      </CardTitle>
+                      {advancedOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                    </Button>
+                  </CollapsibleTrigger>
+                </CardHeader>
+                <CollapsibleContent>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="roles">Roles Needed</Label>
+                      <Input
+                        id="roles"
+                        placeholder="e.g., 2 Female (20-25), 1 Male (30-40)"
+                        value={formData.rolesNeeded}
+                        onChange={(e) => setFormData({ ...formData, rolesNeeded: e.target.value })}
+                        className="rounded-xl"
+                      />
+                    </div>
 
-              {advancedOpen && (
-                <div className="space-y-6 pt-2 animate-in slide-in-from-top-4">
-                  {/* Roles Needed */}
-                  <div className="space-y-2">
-                    <Label htmlFor="roles">Roles Needed</Label>
-                    <Input
-                      id="roles"
-                      placeholder="e.g., 2 Female (20-25), 1 Male (30-40)"
-                      value={formData.rolesNeeded}
-                      onChange={(e) => updateField("rolesNeeded", e.target.value)}
-                      className="rounded-xl"
-                    />
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="gender">Gender Preference</Label>
+                      <Select
+                        value={formData.gender}
+                        onValueChange={(value) => setFormData({ ...formData, gender: value })}
+                      >
+                        <SelectTrigger id="gender" className="rounded-xl">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="any">Any</SelectItem>
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                  {/* Gender Preference */}
-                  <div className="space-y-2">
-                    <Label htmlFor="gender">Gender Preference</Label>
-                    <Select value={formData.gender} onValueChange={(value) => updateField("gender", value)}>
-                      <SelectTrigger className="rounded-xl">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="any">Any</SelectItem>
-                        <SelectItem value="male">Male</SelectItem>
-                        <SelectItem value="female">Female</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                        <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Age Range */}
-                  <div className="space-y-2">
-                    <Label>Age Range</Label>
                     <div className="grid grid-cols-2 gap-4">
-                      <Input
-                        type="number"
-                        placeholder="Min"
-                        value={formData.ageMin}
-                        onChange={(e) => updateField("ageMin", e.target.value)}
-                        className="rounded-xl"
-                      />
-                      <Input
-                        type="number"
-                        placeholder="Max"
-                        value={formData.ageMax}
-                        onChange={(e) => updateField("ageMax", e.target.value)}
-                        className="rounded-xl"
-                      />
-                    </div>
-                    {formData.ageMin &&
-                      formData.ageMax &&
-                      Number.parseInt(formData.ageMin) > Number.parseInt(formData.ageMax) && (
-                        <p className="text-xs text-red-500 flex items-center gap-1">
-                          <AlertCircle className="h-3 w-3" />
-                          Min age must be less than or equal to max age
-                        </p>
-                      )}
-                  </div>
-
-                  {/* Languages */}
-                  <div className="space-y-2">
-                    <Label>Languages (max 4)</Label>
-                    <div className="flex flex-wrap gap-2">
-                      {LANGUAGES.map((lang) => (
-                        <button
-                          key={lang}
-                          type="button"
-                          onClick={() => toggleLanguage(lang)}
-                          className={cn(
-                            "px-3 py-1.5 rounded-full text-sm font-medium transition-all",
-                            formData.languages.includes(lang)
-                              ? "bg-[#7E1F2E] text-white"
-                              : "bg-gray-100 text-gray-700 hover:bg-gray-200",
-                          )}
-                          disabled={!formData.languages.includes(lang) && formData.languages.length >= 4}
-                        >
-                          {lang}
-                        </button>
-                      ))}
-                    </div>
-                    <p className="text-xs text-gray-500">{formData.languages.length} / 4 selected</p>
-                  </div>
-
-                  {/* Experience */}
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Experience Level</Label>
-                    <Select value={formData.experience} onValueChange={(value) => updateField("experience", value)}>
-                      <SelectTrigger className="rounded-xl">
-                        <SelectValue placeholder="Select experience level" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="beginner">Beginner</SelectItem>
-                        <SelectItem value="intermediate">Intermediate</SelectItem>
-                        <SelectItem value="professional">Professional</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Fee/Pay */}
-                  <div className="space-y-3">
-                    <Label htmlFor="fee">Fee / Pay</Label>
-                    <Select value={formData.feeType} onValueChange={(value) => updateField("feeType", value)}>
-                      <SelectTrigger className="rounded-xl">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="not-specified">Not specified</SelectItem>
-                        <SelectItem value="free">Free</SelectItem>
-                        <SelectItem value="stipend">Stipend</SelectItem>
-                        <SelectItem value="paid">Paid</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {(formData.feeType === "stipend" || formData.feeType === "paid") && (
-                      <div className="space-y-2 animate-in slide-in-from-top-2">
-                        <Label htmlFor="amount">
-                          Amount (₹) <span className="text-red-500">*</span>
-                        </Label>
+                      <div className="space-y-2">
+                        <Label htmlFor="age-min">Age Range (Min)</Label>
                         <Input
-                          id="amount"
+                          id="age-min"
                           type="number"
-                          placeholder="5000"
-                          value={formData.amount}
-                          onChange={(e) => updateField("amount", e.target.value)}
+                          placeholder="18"
+                          value={formData.ageMin}
+                          onChange={(e) => setFormData({ ...formData, ageMin: e.target.value })}
                           className="rounded-xl"
                         />
                       </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="age-max">Age Range (Max)</Label>
+                        <Input
+                          id="age-max"
+                          type="number"
+                          placeholder="35"
+                          value={formData.ageMax}
+                          onChange={(e) => setFormData({ ...formData, ageMax: e.target.value })}
+                          className="rounded-xl"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Languages (Max 4)</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {LANGUAGES.map((lang) => (
+                          <Badge
+                            key={lang}
+                            variant={formData.languages.includes(lang) ? "default" : "outline"}
+                            className="cursor-pointer rounded-full px-3 py-1 transition-all hover:scale-105"
+                            onClick={() => toggleLanguage(lang)}
+                          >
+                            {lang}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="experience">Experience Level</Label>
+                      <Select
+                        value={formData.experience}
+                        onValueChange={(value) => setFormData({ ...formData, experience: value })}
+                      >
+                        <SelectTrigger id="experience" className="rounded-xl">
+                          <SelectValue placeholder="Select experience level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="beginner">Beginner</SelectItem>
+                          <SelectItem value="intermediate">Intermediate</SelectItem>
+                          <SelectItem value="professional">Professional</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="pay-type">Fee / Pay</Label>
+                      <Select
+                        value={formData.payType}
+                        onValueChange={(value) => setFormData({ ...formData, payType: value })}
+                      >
+                        <SelectTrigger id="pay-type" className="rounded-xl">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="not-specified">Not specified</SelectItem>
+                          <SelectItem value="free">Free</SelectItem>
+                          <SelectItem value="stipend">Stipend</SelectItem>
+                          <SelectItem value="paid">Paid</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {(formData.payType === "stipend" || formData.payType === "paid") && (
+                      <div className="space-y-2">
+                        <Label htmlFor="amount">Amount *</Label>
+                        <div className="relative">
+                          <DollarSign className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                          <Input
+                            id="amount"
+                            type="number"
+                            placeholder="Enter amount in ₹"
+                            value={formData.amount}
+                            onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                            className="pl-10 rounded-xl"
+                          />
+                        </div>
+                      </div>
                     )}
+
+                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                      <div className="space-y-0.5">
+                        <Label htmlFor="visibility" className="text-base">
+                          Visibility
+                        </Label>
+                        <p className="text-sm text-gray-500">
+                          {formData.visibility === "public" ? "Anyone can find this" : "Only via direct link"}
+                        </p>
+                      </div>
+                      <Switch
+                        id="visibility"
+                        checked={formData.visibility === "public"}
+                        onCheckedChange={(checked) =>
+                          setFormData({ ...formData, visibility: checked ? "public" : "unlisted" })
+                        }
+                      />
+                    </div>
+                  </CardContent>
+                </CollapsibleContent>
+              </Collapsible>
+            </Card>
+
+            {/* Media Request Section */}
+            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Camera className="h-5 w-5 text-purple-600" />
+                  Media Request (Optional)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-xl">
+                    <Checkbox
+                      id="request-photos"
+                      checked={formData.requestPhotos}
+                      onCheckedChange={(checked) => setFormData({ ...formData, requestPhotos: checked as boolean })}
+                    />
+                    <div className="flex-1 space-y-2">
+                      <Label htmlFor="request-photos" className="cursor-pointer font-normal">
+                        Request Photos
+                      </Label>
+                      <p className="text-xs text-gray-500">
+                        JPG/PNG/WebP up to 5MB each. Ask for 1 headshot + 1 full body.
+                      </p>
+                      {formData.requestPhotos && (
+                        <Input
+                          placeholder="Helper text (optional)"
+                          value={formData.photoHelperText}
+                          onChange={(e) => setFormData({ ...formData, photoHelperText: e.target.value })}
+                          className="mt-2 rounded-xl text-sm"
+                        />
+                      )}
+                    </div>
                   </div>
 
-                  {/* Visibility */}
-                  <div className="space-y-3">
-                    <Label>Visibility</Label>
-                    <div className="flex gap-2">
-                      <Button
-                        type="button"
-                        variant={formData.visibility === "public" ? "default" : "outline"}
-                        className="flex-1 rounded-xl"
-                        onClick={() => updateField("visibility", "public")}
-                      >
-                        Public
-                      </Button>
-                      <Button
-                        type="button"
-                        variant={formData.visibility === "unlisted" ? "default" : "outline"}
-                        className="flex-1 rounded-xl"
-                        onClick={() => updateField("visibility", "unlisted")}
-                      >
-                        Unlisted
-                      </Button>
+                  <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-xl">
+                    <Checkbox
+                      id="request-videos"
+                      checked={formData.requestVideos}
+                      onCheckedChange={(checked) => setFormData({ ...formData, requestVideos: checked as boolean })}
+                    />
+                    <div className="flex-1 space-y-2">
+                      <Label htmlFor="request-videos" className="cursor-pointer font-normal">
+                        Request Video Links
+                      </Label>
+                      <p className="text-xs text-gray-500">1-min monologue link (YouTube/Vimeo/Drive; shareable).</p>
+                      {formData.requestVideos && (
+                        <Input
+                          placeholder="Helper text (optional)"
+                          value={formData.videoHelperText}
+                          onChange={(e) => setFormData({ ...formData, videoHelperText: e.target.value })}
+                          className="mt-2 rounded-xl text-sm"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
-
-            {/* Media Request Section */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4 hover:shadow-md transition-shadow">
-              <div className="flex items-center gap-2 text-gray-900 font-medium">
-                <div className="w-1 h-5 bg-[#7E1F2E] rounded-full" />
-                Media Request (Optional)
-              </div>
-
-              {/* Request Photos */}
-              <div className="space-y-3">
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="request-photos"
-                    checked={formData.requestPhotos}
-                    onCheckedChange={(checked: boolean) => updateField("requestPhotos", checked)}
-                  />
-                  <Label htmlFor="request-photos" className="font-normal cursor-pointer flex items-center gap-2">
-                    <ImageIcon className="h-4 w-4 text-gray-500" />
-                    Request Photos
-                  </Label>
-                </div>
-                {formData.requestPhotos && (
-                  <div className="ml-6 space-y-2 animate-in slide-in-from-top-2">
-                    <Input
-                      placeholder="Helper text (e.g., 1 headshot + 1 full body)"
-                      value={formData.photoHelper}
-                      onChange={(e) => updateField("photoHelper", e.target.value)}
-                      className="rounded-xl"
-                    />
-                    <p className="text-xs text-gray-500">
-                      💡 JPG/PNG/WebP up to 5MB each. Ask for 1 headshot + 1 full body.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Request Videos */}
-              <div className="space-y-3">
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="request-videos"
-                    checked={formData.requestVideos}
-                    onCheckedChange={(checked: boolean) => updateField("requestVideos", checked)}
-                  />
-                  <Label htmlFor="request-videos" className="font-normal cursor-pointer flex items-center gap-2">
-                    <Video className="h-4 w-4 text-gray-500" />
-                    Request Video Links
-                  </Label>
-                </div>
-                {formData.requestVideos && (
-                  <div className="ml-6 space-y-2 animate-in slide-in-from-top-2">
-                    <Input
-                      placeholder="Helper text (e.g., 1-min monologue)"
-                      value={formData.videoHelper}
-                      onChange={(e) => updateField("videoHelper", e.target.value)}
-                      className="rounded-xl"
-                    />
-                    <p className="text-xs text-gray-500">💡 1-min monologue link (YouTube/Vimeo/Drive; shareable).</p>
-                  </div>
-                )}
-              </div>
-
-              {!formData.requestPhotos && !formData.requestVideos && (
-                <p className="text-sm text-gray-400 italic">No media requested.</p>
-              )}
-            </div>
+              </CardContent>
+            </Card>
 
             {/* Consent Section */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4 hover:shadow-md transition-shadow">
-              <div className="flex items-center gap-2 text-gray-900 font-medium">
-                <div className="w-1 h-5 bg-[#7E1F2E] rounded-full" />
-                Consent & Agreements
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start space-x-2">
+            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <CheckCircle2 className="h-5 w-5 text-purple-600" />
+                  Consent
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start space-x-3">
                   <Checkbox
-                    id="consent-genuine"
-                    checked={formData.consentGenuine}
-                    onCheckedChange={(checked: boolean) => updateField("consentGenuine", checked)}
-                    className="mt-1"
+                    id="consent1"
+                    checked={formData.consent1}
+                    onCheckedChange={(checked) => setFormData({ ...formData, consent1: checked as boolean })}
                   />
-                  <Label htmlFor="consent-genuine" className="font-normal cursor-pointer leading-relaxed">
+                  <Label htmlFor="consent1" className="cursor-pointer font-normal leading-relaxed">
                     I confirm that all details provided are genuine and that I have the right to conduct this
                     casting/workshop.
                   </Label>
                 </div>
 
-                <div className="flex items-start space-x-2">
+                <div className="flex items-start space-x-3">
                   <Checkbox
-                    id="consent-terms"
-                    checked={formData.consentTerms}
-                    onCheckedChange={(checked: boolean) => updateField("consentTerms", checked)}
-                    className="mt-1"
+                    id="consent2"
+                    checked={formData.consent2}
+                    onCheckedChange={(checked) => setFormData({ ...formData, consent2: checked as boolean })}
                   />
-                  <Label htmlFor="consent-terms" className="font-normal cursor-pointer leading-relaxed">
+                  <Label htmlFor="consent2" className="cursor-pointer font-normal leading-relaxed">
                     I agree to Abhinayपथ's{" "}
-                    <a href="/terms" className="text-[#7E1F2E] underline">
+                    <Link href="/terms" className="text-purple-600 hover:underline">
                       Terms
-                    </a>{" "}
+                    </Link>{" "}
                     &{" "}
-                    <a href="/privacy" className="text-[#7E1F2E] underline">
+                    <Link href="/privacy" className="text-purple-600 hover:underline">
                       Privacy Policy
-                    </a>
+                    </Link>
                     .
                   </Label>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
             {/* CTAs */}
-            <div className="flex gap-3">
+            <div className="flex gap-4 pb-8">
+              <Button
+                size="lg"
+                onClick={handlePublish}
+                disabled={!isFormValid()}
+                className="flex-1 rounded-xl bg-gradient-to-r from-purple-600 to-red-600 hover:from-purple-700 hover:to-red-700 text-white font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              >
+                Publish Opportunity
+              </Button>
               <Sheet open={applyFlowOpen} onOpenChange={setApplyFlowOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className="flex-1 rounded-xl bg-transparent">
+                  <Button size="lg" variant="outline" className="rounded-xl bg-transparent">
+                    <Eye className="h-4 w-4 mr-2" />
                     Preview Apply Flow
                   </Button>
                 </SheetTrigger>
-                <SheetContent className="sm:max-w-md">
+                <SheetContent className="sm:max-w-lg overflow-y-auto">
                   <SheetHeader>
-                    <SheetTitle>Artist Application Experience</SheetTitle>
+                    <SheetTitle>Artist Application View</SheetTitle>
                   </SheetHeader>
-                  <div className="space-y-6 mt-6">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-900">
-                      Your Abhinayपथ profile will be shared with the organiser.
+                  <div className="mt-6 space-y-6">
+                    <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                      <p className="text-sm text-blue-800">
+                        <Info className="h-4 w-4 inline mr-2" />
+                        Your Abhinayपथ profile will be shared with the organiser.
+                      </p>
                     </div>
 
                     {formData.requestPhotos && (
                       <div className="space-y-3">
                         <Label>Upload Photos</Label>
                         <div className="grid grid-cols-2 gap-3">
-                          {[1, 2, 3].map((i) => (
-                            <div
-                              key={i}
-                              className="aspect-square border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center hover:border-[#7E1F2E] transition-colors cursor-pointer"
-                            >
-                              <ImageIcon className="h-8 w-8 text-gray-400" />
-                            </div>
-                          ))}
+                          <div className="h-32 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center bg-gray-50">
+                            <Camera className="h-8 w-8 text-gray-400" />
+                          </div>
+                          <div className="h-32 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center bg-gray-50">
+                            <Camera className="h-8 w-8 text-gray-400" />
+                          </div>
                         </div>
+                        {formData.photoHelperText && (
+                          <p className="text-xs text-gray-600">{formData.photoHelperText}</p>
+                        )}
                       </div>
                     )}
 
                     {formData.requestVideos && (
                       <div className="space-y-3">
                         <Label>Video Links</Label>
-                        <div className="space-y-2">
-                          {[1, 2, 3].map((i) => (
-                            <Input key={i} placeholder={`Video link ${i}`} className="rounded-xl" />
-                          ))}
-                        </div>
+                        <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-xl" />
+                        <Input placeholder="Additional link (optional)" className="rounded-xl" />
+                        {formData.videoHelperText && (
+                          <p className="text-xs text-gray-600">{formData.videoHelperText}</p>
+                        )}
                       </div>
                     )}
 
-                    <Button className="w-full rounded-xl" disabled={!formData.requestPhotos && !formData.requestVideos}>
+                    <Button
+                      size="lg"
+                      className="w-full rounded-xl"
+                      disabled={formData.requestPhotos || formData.requestVideos}
+                    >
                       Submit Application
                     </Button>
+
+                    {(formData.requestPhotos || formData.requestVideos) && (
+                      <p className="text-xs text-center text-gray-500">Complete required media uploads to submit</p>
+                    )}
                   </div>
                 </SheetContent>
               </Sheet>
-
-              <Button
-                onClick={handlePublish}
-                disabled={!canPublish}
-                className="flex-1 rounded-xl bg-[#7E1F2E] hover:bg-[#6a1a27] disabled:opacity-50"
-              >
-                Publish Opportunity
-              </Button>
             </div>
           </div>
 
           {/* Right Column - Live Preview */}
-          <div className="sticky top-32">
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 space-y-4">
-              <div className="flex items-center justify-between text-sm text-gray-500">
-                <span>
-                  {formData.type ? formData.type.replace("-", " ").toUpperCase() : "TYPE"} •{" "}
-                  {formData.locationMode === "city" ? formData.city || "CITY" : "ONLINE"}
-                </span>
-                <Badge variant="outline" className="rounded-full">
-                  {formData.visibility === "public" ? "Public" : "Unlisted"}
-                </Badge>
-              </div>
-
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {formData.title || "Your opportunity title will appear here"}
-              </h2>
-
-              <div className="flex items-center gap-4 text-sm text-gray-600">
-                <div className="flex items-center gap-1">
-                  <CalendarIcon className="h-4 w-4" />
-                  Deadline: {formData.deadline ? format(formData.deadline, "PPP") : "Not set"}
+          <div className="lg:sticky lg:top-24 h-fit">
+            <Card className="border-gray-200 shadow-lg overflow-hidden">
+              <div className="bg-gradient-to-br from-purple-600/10 to-red-600/10 p-4 border-b">
+                <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                  <Badge variant="secondary" className="rounded-full">
+                    {formData.type || "Type"}
+                  </Badge>
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    {formData.locationMode === "online" ? (
+                      <Video className="h-3.5 w-3.5" />
+                    ) : (
+                      <MapPin className="h-3.5 w-3.5" />
+                    )}
+                    {getLocationDisplay()}
+                  </span>
                 </div>
-                <div className="flex items-center gap-1">
-                  {formData.locationMode === "city" ? (
-                    <>
-                      <MapPin className="h-4 w-4" />
-                      {formData.city || "City"}
-                      {formData.venue && ` • ${formData.venue}`}
-                    </>
-                  ) : (
-                    <>
-                      <Globe className="h-4 w-4" />
-                      {formData.platform || "Online"}
-                    </>
-                  )}
+                <h3 className="font-playfair text-xl font-bold text-gray-900 mb-1">
+                  {formData.title || "Opportunity Title"}
+                </h3>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <CalendarIcon className="h-3.5 w-3.5" />
+                  <span>Deadline: {formData.deadline ? format(formData.deadline, "PPP") : "Not set"}</span>
                 </div>
               </div>
 
-              <div className="border-t pt-4">
-                <p className="text-gray-700 whitespace-pre-wrap">
-                  {formData.description || "Description will appear here..."}
-                </p>
-              </div>
+              <CardContent className="p-6 space-y-4">
+                <div>
+                  <h4 className="font-semibold text-sm text-gray-900 mb-2">Description</h4>
+                  <p className="text-sm text-gray-600 line-clamp-4">
+                    {formData.description || "Description will appear here..."}
+                  </p>
+                </div>
 
-              {(formData.rolesNeeded ||
-                formData.gender !== "any" ||
-                formData.ageMin ||
-                formData.languages.length > 0 ||
-                formData.experience) && (
-                <div className="border-t pt-4 space-y-2">
-                  <h3 className="font-medium text-gray-900">Requirements</h3>
-                  <div className="space-y-1 text-sm text-gray-600">
-                    {formData.rolesNeeded && <p>Roles: {formData.rolesNeeded}</p>}
-                    {formData.gender !== "any" && (
-                      <p>Gender: {formData.gender.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())}</p>
-                    )}
-                    {(formData.ageMin || formData.ageMax) && (
-                      <p>
-                        Age: {formData.ageMin || "Any"} - {formData.ageMax || "Any"}
-                      </p>
-                    )}
-                    {formData.languages.length > 0 && <p>Languages: {formData.languages.join(", ")}</p>}
-                    {formData.experience && (
-                      <p>Experience: {formData.experience.charAt(0).toUpperCase() + formData.experience.slice(1)}</p>
-                    )}
+                {(formData.rolesNeeded ||
+                  formData.gender !== "any" ||
+                  formData.ageMin ||
+                  formData.languages.length > 0 ||
+                  formData.experience) && <Separator />}
+
+                {(formData.rolesNeeded ||
+                  formData.gender !== "any" ||
+                  formData.ageMin ||
+                  formData.languages.length > 0 ||
+                  formData.experience) && (
+                  <div>
+                    <h4 className="font-semibold text-sm text-gray-900 mb-3">Requirements</h4>
+                    <div className="space-y-2 text-sm">
+                      {formData.rolesNeeded && (
+                        <div className="flex gap-2">
+                          <span className="text-gray-500 min-w-20">Roles:</span>
+                          <span className="text-gray-900">{formData.rolesNeeded}</span>
+                        </div>
+                      )}
+                      {formData.gender !== "any" && (
+                        <div className="flex gap-2">
+                          <span className="text-gray-500 min-w-20">Gender:</span>
+                          <span className="text-gray-900 capitalize">{formData.gender}</span>
+                        </div>
+                      )}
+                      {(formData.ageMin || formData.ageMax) && (
+                        <div className="flex gap-2">
+                          <span className="text-gray-500 min-w-20">Age:</span>
+                          <span className="text-gray-900">
+                            {formData.ageMin || "Any"} - {formData.ageMax || "Any"}
+                          </span>
+                        </div>
+                      )}
+                      {formData.languages.length > 0 && (
+                        <div className="flex gap-2">
+                          <span className="text-gray-500 min-w-20">Languages:</span>
+                          <span className="text-gray-900">{formData.languages.join(", ")}</span>
+                        </div>
+                      )}
+                      {formData.experience && (
+                        <div className="flex gap-2">
+                          <span className="text-gray-500 min-w-20">Experience:</span>
+                          <span className="text-gray-900 capitalize">{formData.experience}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                )}
+
+                <Separator />
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500 mb-1">Compensation</p>
+                    <p className="font-semibold text-gray-900">
+                      {formData.payType === "not-specified"
+                        ? "Not specified"
+                        : formData.payType === "free"
+                          ? "Free"
+                          : formData.amount
+                            ? `₹${formData.amount}`
+                            : "To be decided"}
+                    </p>
+                  </div>
+                  <Badge variant={formData.visibility === "public" ? "default" : "secondary"} className="rounded-full">
+                    <Globe className="h-3 w-3 mr-1" />
+                    {formData.visibility === "public" ? "Public" : "Unlisted"}
+                  </Badge>
                 </div>
-              )}
 
-              <div className="border-t pt-4">
-                <p className="text-sm text-gray-600">
-                  <span className="font-medium text-gray-900">Compensation:</span>{" "}
-                  {formData.feeType === "not-specified"
-                    ? "Not specified"
-                    : formData.feeType === "free"
-                      ? "Free"
-                      : formData.feeType === "stipend"
-                        ? `Stipend: ₹${formData.amount || "TBD"}`
-                        : `Paid: ₹${formData.amount || "TBD"}`}
-                </p>
-              </div>
-
-              <Button className="w-full rounded-xl bg-[#7E1F2E] hover:bg-[#6a1a27]">
-                {formData.applicationMethod === "platform" ? "Apply on Abhinayपथ" : "Contact / External"}
-              </Button>
-            </div>
+                <Button className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-red-600 hover:from-purple-700 hover:to-red-700 text-white">
+                  {formData.applicationMethod === "platform"
+                    ? "Apply on Abhinayपथ"
+                    : formData.applicationMethod === "whatsapp"
+                      ? "Contact via WhatsApp"
+                      : formData.applicationMethod === "email"
+                        ? "Apply via Email"
+                        : "Apply via External Form"}
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="border-t bg-white py-8 mt-12">
-        <div className="container text-center space-y-2">
+      <footer className="border-t bg-white/80 backdrop-blur-sm py-6 mt-12">
+        <div className="container text-center">
           <p className="text-sm text-gray-600">© Abhinayपथ • Minimal form, maximal clarity.</p>
-          <div className="flex items-center justify-center gap-4 text-xs text-gray-500">
-            <a href="/privacy" className="hover:text-[#7E1F2E] transition-colors">
+          <div className="flex items-center justify-center gap-4 mt-2 text-xs text-gray-500">
+            <Link href="/privacy" className="hover:text-purple-600 transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <span>•</span>
-            <a href="/terms" className="hover:text-[#7E1F2E] transition-colors">
+            <Link href="/terms" className="hover:text-purple-600 transition-colors">
               Terms
-            </a>
+            </Link>
             <span>•</span>
-            <a href="/report" className="hover:text-[#7E1F2E] transition-colors">
+            <Link href="/report" className="hover:text-purple-600 transition-colors">
               Report Misuse
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
