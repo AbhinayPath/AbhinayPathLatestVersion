@@ -1,733 +1,768 @@
 "use client"
 
-import { Calendar } from "@/components/ui/calendar"
-
 import { useState } from "react"
-import { CalendarIcon, ChevronDown, Globe, MapPin, Sparkles, Upload, X, Eye } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Badge } from "@/components/ui/badge"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { format } from "date-fns"
+import { Card, CardContent } from "@/components/ui/card"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
+import { ChevronDown, ChevronUp, MapPin, Globe, Calendar, Briefcase, Users, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Separator } from "@/components/ui/separator"
-
-const opportunityTypes = [
-  { label: "Theatre Play", value: "theatre" },
-  { label: "Short Film", value: "short-film" },
-  { label: "Feature Film", value: "feature-film" },
-  { label: "Advertisement", value: "ad" },
-  { label: "Backstage Role", value: "backstage" },
-  { label: "Job Opening", value: "job" },
-]
-
-const LANGUAGES = [
-  "Hindi",
-  "English",
-  "Marathi",
-  "Tamil",
-  "Telugu",
-  "Bengali",
-  "Gujarati",
-  "Kannada",
-  "Malayalam",
-  "Punjabi",
-]
-
-const genderOptions = [
-  { label: "Any", value: "any" },
-  { label: "Male", value: "male" },
-  { label: "Female", value: "female" },
-  { label: "Other", value: "other" },
-  { label: "Prefer not to say", value: "prefer-not-to-say" },
-]
-
-const experienceLevels = [
-  { label: "Beginner", value: "beginner" },
-  { label: "Intermediate", value: "intermediate" },
-  { label: "Professional", value: "professional" },
-]
-
-const feeOptions = [
-  { label: "Not specified", value: "not-specified" },
-  { label: "Free / Volunteer", value: "free" },
-  { label: "Stipend", value: "stipend" },
-  { label: "Paid", value: "paid" },
-]
 
 export default function PostOpportunityPage() {
-  const [formData, setFormData] = useState({
-    title: "",
-    type: "",
-    deadline: undefined as Date | undefined,
-    locationMode: "city" as "city" | "online",
-    city: "",
-    venue: "",
-    platform: "",
-    description: "",
-    applicationMethod: "quick" as "quick" | "contact",
-    contactType: "" as "whatsapp" | "email" | "form" | "",
-    contactValue: "",
-    rolesNeeded: "",
-    gender: "any",
-    ageMin: "",
-    ageMax: "",
-    selectedLanguages: [] as string[],
-    experience: "",
-    feeType: "not-specified",
-    feeAmount: "",
-    visibility: "public" as "public" | "unlisted",
-    requestPhotos: false,
-    photoHelper: "",
-    requestVideos: false,
-    videoHelper: "",
-  })
-
   const [advancedOpen, setAdvancedOpen] = useState(false)
-  const [contactDetailsOpen, setContactDetailsOpen] = useState(false)
   const [previewOpen, setPreviewOpen] = useState(false)
+  const [contactOpen, setContactOpen] = useState(false)
 
-  const updateField = (field: keyof typeof formData, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+  // Core fields
+  const [title, setTitle] = useState("")
+  const [type, setType] = useState("")
+  const [deadline, setDeadline] = useState("")
+  const [locationMode, setLocationMode] = useState<"city" | "online">("city")
+  const [city, setCity] = useState("")
+  const [venue, setVenue] = useState("")
+  const [platform, setPlatform] = useState("")
+  const [description, setDescription] = useState("")
+  const [applicationMethod, setApplicationMethod] = useState("quick")
+  const [whatsapp, setWhatsapp] = useState("")
+  const [email, setEmail] = useState("")
+  const [formUrl, setFormUrl] = useState("")
 
-  const toggleLanguage = (lang: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      selectedLanguages: prev.selectedLanguages.includes(lang)
-        ? prev.selectedLanguages.filter((l) => l !== lang)
-        : prev.selectedLanguages.length < 4
-          ? [...prev.selectedLanguages, lang]
-          : prev.selectedLanguages,
-    }))
-  }
+  // Advanced fields
+  const [roles, setRoles] = useState("")
+  const [gender, setGender] = useState("")
+  const [ageMin, setAgeMin] = useState("")
+  const [ageMax, setAgeMax] = useState("")
+  const [languages, setLanguages] = useState<string[]>([])
+  const [languageInput, setLanguageInput] = useState("")
+  const [experience, setExperience] = useState("")
+  const [fee, setFee] = useState("")
+  const [amount, setAmount] = useState("")
+  const [visibility, setVisibility] = useState("public")
 
-  const isFormValid =
-    formData.title.trim() !== "" &&
-    formData.type !== "" &&
-    formData.deadline !== undefined &&
-    formData.description.trim() !== "" &&
-    (formData.locationMode === "online" ? formData.platform.trim() !== "" : formData.city.trim() !== "")
+  // Media request
+  const [requestPhotos, setRequestPhotos] = useState(false)
+  const [photoHelper, setPhotoHelper] = useState("")
+  const [requestVideos, setRequestVideos] = useState(false)
+  const [videoHelper, setVideoHelper] = useState("")
 
-  const handlePublish = () => {
-    if (isFormValid) {
-      alert("Opportunity published successfully!")
-      // TODO: Implement actual publish logic
+  const addLanguage = () => {
+    if (languageInput && languages.length < 4 && !languages.includes(languageInput)) {
+      setLanguages([...languages, languageInput])
+      setLanguageInput("")
     }
   }
 
+  const removeLanguage = (lang: string) => {
+    setLanguages(languages.filter((l) => l !== lang))
+  }
+
+  const isFormValid = () => {
+    return (
+      title.trim() !== "" &&
+      type !== "" &&
+      deadline !== "" &&
+      (locationMode === "city" ? city.trim() !== "" && venue.trim() !== "" : platform.trim() !== "") &&
+      description.trim() !== ""
+    )
+  }
+
+  const handlePublish = () => {
+    if (isFormValid()) {
+      alert("Opportunity published successfully!")
+      // Add actual publish logic here
+    }
+  }
+
+  const opportunityTypes = [
+    { label: "Theatre Play", value: "theatre" },
+    { label: "Short Film", value: "short-film" },
+    { label: "Feature Film", value: "feature-film" },
+    { label: "Advertisement", value: "ad" },
+    { label: "Backstage Role", value: "backstage" },
+    { label: "Job Opening", value: "job" },
+  ]
+
+  const genderOptions = [
+    { label: "Any", value: "any" },
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
+    { label: "Prefer not to say", value: "prefer-not-to-say" },
+  ]
+
+  const experienceLevels = [
+    { label: "Beginner", value: "beginner" },
+    { label: "Intermediate", value: "intermediate" },
+    { label: "Professional", value: "professional" },
+  ]
+
+  const feeOptions = [
+    { label: "Not specified", value: "not-specified" },
+    { label: "Free / Volunteer", value: "free" },
+    { label: "Stipend", value: "stipend" },
+    { label: "Paid", value: "paid" },
+  ]
+
   return (
-    <div className="min-h-screen bg-white py-12">
-      <div className="container max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-8">
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-12 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Form Section */}
-          <div className="space-y-6">
+          <div className="lg:col-span-2 space-y-8">
+            {/* Header */}
             <div className="space-y-2">
               <h1 className="text-3xl font-light tracking-tight text-gray-900">Post an Opportunity</h1>
-              <p className="text-gray-600">Share your casting call or job opening with the community.</p>
+              <p className="text-gray-500">Share your casting call or job opening with the Abhinayपथ community</p>
             </div>
 
             {/* Core Section */}
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-6">
-              <h2 className="text-lg font-medium text-gray-900">Core Details</h2>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="title">Opportunity Title *</Label>
-                  <Input
-                    id="title"
-                    placeholder="e.g., Lead Role in Theatre Play"
-                    value={formData.title}
-                    onChange={(e) => updateField("title", e.target.value)}
-                    className="rounded-xl mt-1"
-                  />
+            <Card className="border-gray-100 shadow-sm rounded-2xl">
+              <CardContent className="p-8 space-y-6">
+                <div className="space-y-1.5">
+                  <h2 className="text-lg font-medium text-gray-900">Core Details</h2>
+                  <p className="text-sm text-gray-500">Essential information about your opportunity</p>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="type">Type *</Label>
-                  <Select value={formData.type} onValueChange={(val) => updateField("type", val)}>
-                    <SelectTrigger className="rounded-xl mt-1">
-                      <SelectValue placeholder="Select opportunity type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {opportunityTypes.map((type) => (
-                        <SelectItem key={type.value} value={type.value}>
-                          {type.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Application Deadline *</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-full justify-start text-left font-normal rounded-xl mt-1",
-                          !formData.deadline && "text-muted-foreground",
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {formData.deadline ? format(formData.deadline, "PPP") : <span>Pick a date</span>}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={formData.deadline}
-                        onSelect={(date) => updateField("deadline", date)}
-                        disabled={(date) => date < new Date()}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Location Mode *</Label>
-                  <div className="flex gap-2 mt-2">
-                    <Button
-                      type="button"
-                      variant={formData.locationMode === "city" ? "default" : "outline"}
-                      className="flex-1 rounded-xl"
-                      onClick={() => updateField("locationMode", "city")}
-                    >
-                      <MapPin className="mr-2 h-4 w-4" />
-                      City
-                    </Button>
-                    <Button
-                      type="button"
-                      variant={formData.locationMode === "online" ? "default" : "outline"}
-                      className="flex-1 rounded-xl"
-                      onClick={() => updateField("locationMode", "online")}
-                    >
-                      <Globe className="mr-2 h-4 w-4" />
-                      Online
-                    </Button>
-                  </div>
-                </div>
-
-                {formData.locationMode === "city" ? (
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="city">City *</Label>
-                      <Input
-                        id="city"
-                        placeholder="Mumbai"
-                        value={formData.city}
-                        onChange={(e) => updateField("city", e.target.value)}
-                        className="rounded-xl mt-1"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="venue">Venue (Optional)</Label>
-                      <Input
-                        id="venue"
-                        placeholder="Prithvi Theatre"
-                        value={formData.venue}
-                        onChange={(e) => updateField("venue", e.target.value)}
-                        className="rounded-xl mt-1"
-                      />
-                    </div>
-                  </div>
-                ) : (
+                <div className="space-y-5">
+                  {/* Title */}
                   <div className="space-y-2">
-                    <Label htmlFor="platform">Platform *</Label>
+                    <Label htmlFor="title" className="text-sm font-medium text-gray-700">
+                      Title *
+                    </Label>
                     <Input
-                      id="platform"
-                      placeholder="Zoom, Google Meet, etc."
-                      value={formData.platform}
-                      onChange={(e) => updateField("platform", e.target.value)}
-                      className="rounded-xl mt-1"
+                      id="title"
+                      placeholder="e.g., Lead Actor for Historical Drama"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
                     />
                   </div>
-                )}
 
-                <div className="space-y-2">
-                  <Label htmlFor="description">Description *</Label>
-                  <Textarea
-                    id="description"
-                    placeholder="Describe the opportunity, requirements, and what you're looking for..."
-                    value={formData.description}
-                    onChange={(e) => updateField("description", e.target.value)}
-                    className="rounded-xl min-h-[120px] resize-none mt-1"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Application Method</Label>
-                  <div className="space-y-3 mt-2">
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id="quick-apply"
-                        name="applicationMethod"
-                        checked={formData.applicationMethod === "quick"}
-                        onChange={() => updateField("applicationMethod", "quick")}
-                        className="h-4 w-4"
-                      />
-                      <Label htmlFor="quick-apply" className="font-normal cursor-pointer">
-                        Quick Apply on Abhinayपथ (Recommended)
+                  {/* Type & Deadline */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="type" className="text-sm font-medium text-gray-700">
+                        Type *
                       </Label>
+                      <Select value={type} onValueChange={setType}>
+                        <SelectTrigger className="rounded-xl border-gray-200">
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {opportunityTypes.map((t) => (
+                            <SelectItem key={t.value} value={t.value}>
+                              {t.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id="contact-apply"
-                        name="applicationMethod"
-                        checked={formData.applicationMethod === "contact"}
-                        onChange={() => updateField("applicationMethod", "contact")}
-                        className="h-4 w-4"
-                      />
-                      <Label htmlFor="contact-apply" className="font-normal cursor-pointer">
-                        External Contact
+
+                    <div className="space-y-2">
+                      <Label htmlFor="deadline" className="text-sm font-medium text-gray-700">
+                        Deadline *
                       </Label>
+                      <Input
+                        id="deadline"
+                        type="date"
+                        value={deadline}
+                        onChange={(e) => setDeadline(e.target.value)}
+                        min={new Date().toISOString().split("T")[0]}
+                        className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
                     </div>
                   </div>
-                </div>
 
-                {formData.applicationMethod === "contact" && (
-                  <Collapsible open={contactDetailsOpen} onOpenChange={setContactDetailsOpen}>
-                    <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                      <span className="text-sm font-medium">Contact Details</span>
-                      <ChevronDown className={cn("h-4 w-4 transition-transform", contactDetailsOpen && "rotate-180")} />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pt-4 space-y-4">
+                  {/* Location Mode */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-700">Location Mode *</Label>
+                    <div className="flex gap-4">
+                      <button
+                        type="button"
+                        onClick={() => setLocationMode("city")}
+                        className={cn(
+                          "flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 transition-all",
+                          locationMode === "city"
+                            ? "border-gray-900 bg-gray-50 text-gray-900"
+                            : "border-gray-200 text-gray-600 hover:border-gray-300",
+                        )}
+                      >
+                        <MapPin className="w-4 h-4" />
+                        City
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setLocationMode("online")}
+                        className={cn(
+                          "flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 transition-all",
+                          locationMode === "online"
+                            ? "border-gray-900 bg-gray-50 text-gray-900"
+                            : "border-gray-200 text-gray-600 hover:border-gray-300",
+                        )}
+                      >
+                        <Globe className="w-4 h-4" />
+                        Online
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* City & Venue / Platform */}
+                  {locationMode === "city" ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="contactType">Contact Type</Label>
-                        <Select value={formData.contactType} onValueChange={(val) => updateField("contactType", val)}>
-                          <SelectTrigger className="rounded-xl mt-1">
-                            <SelectValue placeholder="Select type" />
+                        <Label htmlFor="city" className="text-sm font-medium text-gray-700">
+                          City *
+                        </Label>
+                        <Input
+                          id="city"
+                          placeholder="e.g., Mumbai"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="venue" className="text-sm font-medium text-gray-700">
+                          Venue *
+                        </Label>
+                        <Input
+                          id="venue"
+                          placeholder="e.g., Prithvi Theatre"
+                          value={venue}
+                          onChange={(e) => setVenue(e.target.value)}
+                          className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <Label htmlFor="platform" className="text-sm font-medium text-gray-700">
+                        Platform *
+                      </Label>
+                      <Input
+                        id="platform"
+                        placeholder="e.g., Zoom, Google Meet"
+                        value={platform}
+                        onChange={(e) => setPlatform(e.target.value)}
+                        className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
+                    </div>
+                  )}
+
+                  {/* Description */}
+                  <div className="space-y-2">
+                    <Label htmlFor="description" className="text-sm font-medium text-gray-700">
+                      Description *
+                    </Label>
+                    <Textarea
+                      id="description"
+                      placeholder="Describe the opportunity, requirements, and what you're looking for..."
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      rows={6}
+                      className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0 resize-none"
+                    />
+                  </div>
+
+                  {/* Application Method */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-700">Application Method</Label>
+                    <div className="space-y-2">
+                      <label className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="application"
+                          value="quick"
+                          checked={applicationMethod === "quick"}
+                          onChange={(e) => setApplicationMethod(e.target.value)}
+                          className="w-4 h-4 text-gray-900 focus:ring-gray-400"
+                        />
+                        <span className="text-sm text-gray-700">Quick Apply on Abhinayपथ (Recommended)</span>
+                      </label>
+                      <label className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="application"
+                          value="contact"
+                          checked={applicationMethod === "contact"}
+                          onChange={(e) => setApplicationMethod(e.target.value)}
+                          className="w-4 h-4 text-gray-900 focus:ring-gray-400"
+                        />
+                        <span className="text-sm text-gray-700">Provide contact details</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Contact Details (Collapsible) */}
+                  {applicationMethod === "contact" && (
+                    <div className="space-y-4 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setContactOpen(!contactOpen)}
+                        className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+                      >
+                        {contactOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        Optional Contact Information
+                      </button>
+
+                      {contactOpen && (
+                        <div className="space-y-4 pl-6 border-l-2 border-gray-100">
+                          <div className="space-y-2">
+                            <Label htmlFor="whatsapp" className="text-sm font-medium text-gray-700">
+                              WhatsApp Number
+                            </Label>
+                            <Input
+                              id="whatsapp"
+                              placeholder="+91 98765 43210"
+                              value={whatsapp}
+                              onChange={(e) => setWhatsapp(e.target.value)}
+                              className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                              Email Address
+                            </Label>
+                            <Input
+                              id="email"
+                              type="email"
+                              placeholder="casting@example.com"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="formUrl" className="text-sm font-medium text-gray-700">
+                              Application Form URL
+                            </Label>
+                            <Input
+                              id="formUrl"
+                              placeholder="https://forms.google.com/..."
+                              value={formUrl}
+                              onChange={(e) => setFormUrl(e.target.value)}
+                              className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Advanced Section */}
+            <Card className="border-gray-100 shadow-sm rounded-2xl">
+              <CardContent className="p-8">
+                <button
+                  type="button"
+                  onClick={() => setAdvancedOpen(!advancedOpen)}
+                  className="flex items-center justify-between w-full group"
+                >
+                  <div className="space-y-1.5 text-left">
+                    <h2 className="text-lg font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                      Advanced Filters
+                    </h2>
+                    <p className="text-sm text-gray-500">Optional details to refine your search</p>
+                  </div>
+                  {advancedOpen ? (
+                    <ChevronUp className="w-5 h-5 text-gray-400" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-gray-400" />
+                  )}
+                </button>
+
+                {advancedOpen && (
+                  <div className="mt-6 space-y-5 pt-6 border-t border-gray-100">
+                    {/* Roles */}
+                    <div className="space-y-2">
+                      <Label htmlFor="roles" className="text-sm font-medium text-gray-700">
+                        Roles Needed
+                      </Label>
+                      <Input
+                        id="roles"
+                        placeholder="e.g., Lead Actor, Supporting Actress, Cinematographer"
+                        value={roles}
+                        onChange={(e) => setRoles(e.target.value)}
+                        className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
+                    </div>
+
+                    {/* Gender & Experience */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="gender" className="text-sm font-medium text-gray-700">
+                          Gender Preference
+                        </Label>
+                        <Select value={gender} onValueChange={setGender}>
+                          <SelectTrigger className="rounded-xl border-gray-200">
+                            <SelectValue placeholder="Any" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="whatsapp">WhatsApp</SelectItem>
-                            <SelectItem value="email">Email</SelectItem>
-                            <SelectItem value="form">Form URL</SelectItem>
+                            {genderOptions.map((g) => (
+                              <SelectItem key={g.value} value={g.value}>
+                                {g.label}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </div>
-                      {formData.contactType === "whatsapp" && (
-                        <div className="space-y-2">
-                          <Label htmlFor="contactValue">WhatsApp Number</Label>
-                          <Input
-                            id="contactValue"
-                            placeholder="+91 98765 43210"
-                            value={formData.contactValue}
-                            onChange={(e) => updateField("contactValue", e.target.value)}
-                            className="rounded-xl mt-1"
-                          />
-                        </div>
-                      )}
-                      {formData.contactType === "email" && (
-                        <div className="space-y-2">
-                          <Label htmlFor="contactValue">Email Address</Label>
-                          <Input
-                            id="contactValue"
-                            type="email"
-                            placeholder="contact@example.com"
-                            value={formData.contactValue}
-                            onChange={(e) => updateField("contactValue", e.target.value)}
-                            className="rounded-xl mt-1"
-                          />
-                        </div>
-                      )}
-                      {formData.contactType === "form" && (
-                        <div className="space-y-2">
-                          <Label htmlFor="contactValue">Form URL</Label>
-                          <Input
-                            id="contactValue"
-                            type="url"
-                            placeholder="https://forms.google.com/..."
-                            value={formData.contactValue}
-                            onChange={(e) => updateField("contactValue", e.target.value)}
-                            className="rounded-xl mt-1"
-                          />
-                        </div>
-                      )}
-                    </CollapsibleContent>
-                  </Collapsible>
-                )}
-              </div>
-            </div>
 
-            {/* Advanced Section */}
-            <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
-              <CollapsibleTrigger className="flex items-center justify-between w-full p-6 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <span className="font-medium">Advanced Options</span>
-                <ChevronDown className={cn("h-5 w-5 transition-transform", advancedOpen && "rotate-180")} />
-              </CollapsibleTrigger>
-              <CollapsibleContent className="mt-4">
-                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="rolesNeeded">Roles Needed</Label>
-                    <Input
-                      id="rolesNeeded"
-                      placeholder="e.g., Lead Actor, Supporting Role"
-                      value={formData.rolesNeeded}
-                      onChange={(e) => updateField("rolesNeeded", e.target.value)}
-                      className="rounded-xl mt-1"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="gender">Gender Preference</Label>
-                    <Select value={formData.gender} onValueChange={(val) => updateField("gender", val)}>
-                      <SelectTrigger className="rounded-xl mt-1">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {genderOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Age Range</Label>
-                    <div className="grid grid-cols-2 gap-4">
-                      <Input
-                        placeholder="Min"
-                        type="number"
-                        value={formData.ageMin}
-                        onChange={(e) => updateField("ageMin", e.target.value)}
-                        className="rounded-xl mt-1"
-                      />
-                      <Input
-                        placeholder="Max"
-                        type="number"
-                        value={formData.ageMax}
-                        onChange={(e) => updateField("ageMax", e.target.value)}
-                        className="rounded-xl mt-1"
-                      />
+                      <div className="space-y-2">
+                        <Label htmlFor="experience" className="text-sm font-medium text-gray-700">
+                          Experience Level
+                        </Label>
+                        <Select value={experience} onValueChange={setExperience}>
+                          <SelectTrigger className="rounded-xl border-gray-200">
+                            <SelectValue placeholder="Any level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {experienceLevels.map((e) => (
+                              <SelectItem key={e.value} value={e.value}>
+                                {e.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label>Languages (max 4)</Label>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {LANGUAGES.map((lang) => (
-                        <Button
-                          key={lang}
-                          type="button"
-                          variant={formData.selectedLanguages.includes(lang) ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => toggleLanguage(lang)}
-                          disabled={
-                            !formData.selectedLanguages.includes(lang) && formData.selectedLanguages.length >= 4
-                          }
-                          className="rounded-full"
-                        >
-                          {lang}
-                          {formData.selectedLanguages.includes(lang) && <X className="ml-1 h-3 w-3" />}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Experience Level</Label>
-                    <Select value={formData.experience} onValueChange={(val) => updateField("experience", val)}>
-                      <SelectTrigger className="rounded-xl mt-1">
-                        <SelectValue placeholder="Select level" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {experienceLevels.map((level) => (
-                          <SelectItem key={level.value} value={level.value}>
-                            {level.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="feeType">Fee / Pay</Label>
-                    <Select value={formData.feeType} onValueChange={(val) => updateField("feeType", val)}>
-                      <SelectTrigger className="rounded-xl mt-1">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {feeOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {(formData.feeType === "stipend" || formData.feeType === "paid") && (
+                    {/* Age Range */}
                     <div className="space-y-2">
-                      <Label htmlFor="feeAmount">Amount (₹)</Label>
-                      <Input
-                        id="feeAmount"
-                        type="number"
-                        placeholder="5000"
-                        value={formData.feeAmount}
-                        onChange={(e) => updateField("feeAmount", e.target.value)}
-                        className="rounded-xl mt-1"
-                      />
+                      <Label className="text-sm font-medium text-gray-700">Age Range</Label>
+                      <div className="grid grid-cols-2 gap-4">
+                        <Input
+                          placeholder="Min age"
+                          type="number"
+                          value={ageMin}
+                          onChange={(e) => setAgeMin(e.target.value)}
+                          className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                        />
+                        <Input
+                          placeholder="Max age"
+                          type="number"
+                          value={ageMax}
+                          onChange={(e) => setAgeMax(e.target.value)}
+                          className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                        />
+                      </div>
                     </div>
-                  )}
 
-                  <div className="space-y-2">
-                    <Label>Visibility</Label>
-                    <div className="flex gap-2 mt-2">
-                      <Button
-                        type="button"
-                        variant={formData.visibility === "public" ? "default" : "outline"}
-                        className="flex-1 rounded-xl"
-                        onClick={() => updateField("visibility", "public")}
-                      >
-                        Public
-                      </Button>
-                      <Button
-                        type="button"
-                        variant={formData.visibility === "unlisted" ? "default" : "outline"}
-                        className="flex-1 rounded-xl"
-                        onClick={() => updateField("visibility", "unlisted")}
-                      >
-                        Unlisted
-                      </Button>
+                    {/* Languages */}
+                    <div className="space-y-2">
+                      <Label htmlFor="language" className="text-sm font-medium text-gray-700">
+                        Languages (max 4)
+                      </Label>
+                      <div className="flex gap-2">
+                        <Input
+                          id="language"
+                          placeholder="Add a language"
+                          value={languageInput}
+                          onChange={(e) => setLanguageInput(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === "Enter") {
+                              e.preventDefault()
+                              addLanguage()
+                            }
+                          }}
+                          disabled={languages.length >= 4}
+                          className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                        />
+                        <Button
+                          type="button"
+                          onClick={addLanguage}
+                          disabled={languages.length >= 4 || !languageInput}
+                          variant="outline"
+                          className="rounded-xl"
+                        >
+                          Add
+                        </Button>
+                      </div>
+                      {languages.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {languages.map((lang) => (
+                            <span
+                              key={lang}
+                              className="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                            >
+                              {lang}
+                              <button
+                                type="button"
+                                onClick={() => removeLanguage(lang)}
+                                className="hover:text-gray-900"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Fee / Pay */}
+                    <div className="space-y-2">
+                      <Label htmlFor="fee" className="text-sm font-medium text-gray-700">
+                        Fee / Pay
+                      </Label>
+                      <Select value={fee} onValueChange={setFee}>
+                        <SelectTrigger className="rounded-xl border-gray-200">
+                          <SelectValue placeholder="Not specified" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {feeOptions.map((f) => (
+                            <SelectItem key={f.value} value={f.value}>
+                              {f.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {(fee === "stipend" || fee === "paid") && (
+                      <div className="space-y-2">
+                        <Label htmlFor="amount" className="text-sm font-medium text-gray-700">
+                          Amount (₹)
+                        </Label>
+                        <Input
+                          id="amount"
+                          placeholder="e.g., 5000"
+                          value={amount}
+                          onChange={(e) => setAmount(e.target.value)}
+                          className="rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                        />
+                      </div>
+                    )}
+
+                    {/* Visibility */}
+                    <div className="space-y-3">
+                      <Label className="text-sm font-medium text-gray-700">Visibility</Label>
+                      <div className="flex gap-4">
+                        <button
+                          type="button"
+                          onClick={() => setVisibility("public")}
+                          className={cn(
+                            "flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 transition-all",
+                            visibility === "public"
+                              ? "border-gray-900 bg-gray-50 text-gray-900"
+                              : "border-gray-200 text-gray-600 hover:border-gray-300",
+                          )}
+                        >
+                          <Users className="w-4 h-4" />
+                          Public
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setVisibility("unlisted")}
+                          className={cn(
+                            "flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 transition-all",
+                            visibility === "unlisted"
+                              ? "border-gray-900 bg-gray-50 text-gray-900"
+                              : "border-gray-200 text-gray-600 hover:border-gray-300",
+                          )}
+                        >
+                          Unlisted
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Media Request Section */}
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-6">
-              <h3 className="font-medium text-gray-900">Media Request (Optional)</h3>
-
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="requestPhotos"
-                    checked={formData.requestPhotos}
-                    onCheckedChange={(checked) => updateField("requestPhotos", checked)}
-                    className="mt-1"
-                  />
-                  <div className="space-y-2 flex-1">
-                    <Label htmlFor="requestPhotos" className="cursor-pointer font-normal">
-                      Request Photos
-                    </Label>
-                    {formData.requestPhotos && (
-                      <Input
-                        placeholder="e.g., Recent headshots, portfolio photos"
-                        value={formData.photoHelper}
-                        onChange={(e) => updateField("photoHelper", e.target.value)}
-                        className="rounded-xl text-sm mt-2"
-                      />
-                    )}
-                  </div>
+            <Card className="border-gray-100 shadow-sm rounded-2xl">
+              <CardContent className="p-8 space-y-6">
+                <div className="space-y-1.5">
+                  <h2 className="text-lg font-medium text-gray-900">Media Request</h2>
+                  <p className="text-sm text-gray-500">Optional: Request specific media from applicants</p>
                 </div>
 
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="requestVideos"
-                    checked={formData.requestVideos}
-                    onCheckedChange={(checked) => updateField("requestVideos", checked)}
-                    className="mt-1"
-                  />
-                  <div className="space-y-2 flex-1">
-                    <Label htmlFor="requestVideos" className="cursor-pointer font-normal">
-                      Request Video Links
-                    </Label>
-                    {formData.requestVideos && (
-                      <Input
-                        placeholder="e.g., Performance reel, audition tape"
-                        value={formData.videoHelper}
-                        onChange={(e) => updateField("videoHelper", e.target.value)}
-                        className="rounded-xl text-sm mt-2"
+                <div className="space-y-5">
+                  {/* Request Photos */}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                        id="requestPhotos"
+                        checked={requestPhotos}
+                        onCheckedChange={(checked) => setRequestPhotos(checked as boolean)}
                       />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <div className="flex gap-4">
-              <Sheet open={previewOpen} onOpenChange={setPreviewOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="outline" className="flex-1 rounded-xl bg-transparent" disabled={!isFormValid}>
-                    <Eye className="mr-2 h-4 w-4" />
-                    Preview Apply Flow
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto">
-                  <SheetHeader>
-                    <SheetTitle>Artist Application Preview</SheetTitle>
-                  </SheetHeader>
-                  <div className="mt-6 space-y-6">
-                    <div className="space-y-2">
-                      <h3 className="font-medium">Applying for: {formData.title || "Opportunity Title"}</h3>
-                      <p className="text-sm text-gray-500">
-                        {formData.description || "Description will appear here..."}
-                      </p>
+                      <Label htmlFor="requestPhotos" className="text-sm font-medium text-gray-700 cursor-pointer">
+                        Request Photos
+                      </Label>
                     </div>
-
-                    <Separator />
-
-                    {formData.requestPhotos && (
-                      <div className="space-y-2">
-                        <Label>Upload Photos {formData.photoHelper && `(${formData.photoHelper})`}</Label>
-                        <div className="border-2 border-dashed rounded-lg p-8 text-center">
-                          <Upload className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-                          <p className="text-sm text-gray-500">Click to upload or drag and drop</p>
-                        </div>
-                      </div>
+                    {requestPhotos && (
+                      <Input
+                        placeholder="e.g., Please upload recent headshots"
+                        value={photoHelper}
+                        onChange={(e) => setPhotoHelper(e.target.value)}
+                        className="ml-7 rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
                     )}
-
-                    {formData.requestVideos && (
-                      <div className="space-y-2">
-                        <Label>Video Links {formData.videoHelper && `(${formData.videoHelper})`}</Label>
-                        <Input placeholder="Paste YouTube/Vimeo link" />
-                      </div>
-                    )}
-
-                    <Button className="w-full">Submit Application</Button>
                   </div>
-                </SheetContent>
-              </Sheet>
 
-              <Button onClick={handlePublish} disabled={!isFormValid} className="flex-1 rounded-xl">
-                <Sparkles className="mr-2 h-4 w-4" />
+                  {/* Request Videos */}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                        id="requestVideos"
+                        checked={requestVideos}
+                        onCheckedChange={(checked) => setRequestVideos(checked as boolean)}
+                      />
+                      <Label htmlFor="requestVideos" className="text-sm font-medium text-gray-700 cursor-pointer">
+                        Request Video Links
+                      </Label>
+                    </div>
+                    {requestVideos && (
+                      <Input
+                        placeholder="e.g., Share a link to your acting reel"
+                        value={videoHelper}
+                        onChange={(e) => setVideoHelper(e.target.value)}
+                        className="ml-7 rounded-xl border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Publish Button */}
+            <div className="flex items-center justify-between pt-4">
+              <p className="text-xs text-gray-400">© Abhinayपथ • Minimal form, maximal clarity.</p>
+              <Button
+                onClick={handlePublish}
+                disabled={!isFormValid()}
+                className="rounded-xl bg-gray-900 hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed px-8 py-5 text-base"
+              >
                 Publish Opportunity
               </Button>
             </div>
-
-            <p className="text-center text-sm text-gray-500">© Abhinayपथ • Minimal form, maximal clarity.</p>
           </div>
 
-          {/* Live Preview */}
-          <div className="lg:sticky lg:top-8 h-fit hidden lg:block">
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-medium text-gray-900">Live Preview</h2>
-                <Badge variant="outline" className="rounded-full">
-                  {formData.visibility === "public" ? "Public" : "Unlisted"}
-                </Badge>
-              </div>
+          {/* Live Preview Panel */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24 space-y-4">
+              <Card className="border-gray-100 shadow-sm rounded-2xl">
+                <CardContent className="p-6 space-y-4">
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-medium text-gray-500">Live Preview</h3>
+                    <p className="text-xs text-gray-400">How your post will appear</p>
+                  </div>
 
-              {formData.title ? (
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="text-2xl font-light text-gray-900">{formData.title}</h3>
-                    {formData.type && (
-                      <Badge variant="secondary" className="rounded-full">
-                        {opportunityTypes.find((t) => t.value === formData.type)?.label}
-                      </Badge>
+                  <div className="space-y-3 py-4 border-t border-gray-100">
+                    <h4 className="text-lg font-semibold text-gray-900">{title || "Opportunity Title"}</h4>
+
+                    <div className="flex flex-wrap gap-2">
+                      {type && (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs">
+                          <Briefcase className="w-3 h-3" />
+                          {type.replace("-", " ")}
+                        </span>
+                      )}
+                      {deadline && (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs">
+                          <Calendar className="w-3 h-3" />
+                          {new Date(deadline).toLocaleDateString()}
+                        </span>
+                      )}
+                    </div>
+
+                    {(city || platform) && (
+                      <div className="flex items-center gap-1 text-sm text-gray-600">
+                        {locationMode === "city" ? <MapPin className="w-4 h-4" /> : <Globe className="w-4 h-4" />}
+                        <span>{locationMode === "city" ? `${city}${venue ? `, ${venue}` : ""}` : platform}</span>
+                      </div>
+                    )}
+
+                    <p className="text-sm text-gray-600 line-clamp-4">
+                      {description || "Your opportunity description will appear here..."}
+                    </p>
+
+                    {roles && (
+                      <div className="pt-2 border-t border-gray-50">
+                        <p className="text-xs text-gray-500 mb-1">Roles</p>
+                        <p className="text-sm text-gray-700">{roles}</p>
+                      </div>
+                    )}
+
+                    {experience && (
+                      <div className="pt-2 border-t border-gray-50">
+                        <p className="text-xs text-gray-500 mb-1">Experience</p>
+                        <p className="text-sm text-gray-700">{experience}</p>
+                      </div>
+                    )}
+
+                    {(fee === "stipend" || fee === "paid") && amount && (
+                      <div className="pt-2 border-t border-gray-50">
+                        <p className="text-xs text-gray-500 mb-1">Compensation</p>
+                        <p className="text-sm text-gray-700">₹{amount}</p>
+                      </div>
                     )}
                   </div>
 
-                  {formData.deadline && (
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <CalendarIcon className="h-4 w-4" />
-                      <span>Deadline: {format(formData.deadline, "PPP")}</span>
-                    </div>
-                  )}
-
-                  {formData.locationMode === "city"
-                    ? (formData.city || formData.venue) && (
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <MapPin className="h-4 w-4" />
-                          <span>
-                            {formData.city}
-                            {formData.venue && ` • ${formData.venue}`}
-                          </span>
-                        </div>
-                      )
-                    : formData.platform && (
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <Globe className="h-4 w-4" />
-                          <span>{formData.platform}</span>
-                        </div>
-                      )}
-
-                  {formData.description && (
-                    <div className="pt-4 border-t">
-                      <p className="text-sm text-gray-700 whitespace-pre-wrap">{formData.description}</p>
-                    </div>
-                  )}
-
-                  {(formData.rolesNeeded ||
-                    formData.gender !== "any" ||
-                    formData.ageMin ||
-                    formData.ageMax ||
-                    formData.selectedLanguages.length > 0 ||
-                    formData.experience) && (
-                    <div className="pt-4 border-t space-y-3">
-                      <h4 className="text-sm font-medium text-gray-900">Requirements</h4>
-                      <div className="space-y-2 text-sm text-gray-600">
-                        {formData.rolesNeeded && <p>• {formData.rolesNeeded}</p>}
-                        {formData.gender !== "any" && (
-                          <p>• Gender: {genderOptions.find((g) => g.value === formData.gender)?.label}</p>
-                        )}
-                        {(formData.ageMin || formData.ageMax) && (
-                          <p>
-                            • Age: {formData.ageMin || "Any"} - {formData.ageMax || "Any"} years
-                          </p>
-                        )}
-                        {formData.selectedLanguages.length > 0 && (
-                          <p>• Languages: {formData.selectedLanguages.join(", ")}</p>
-                        )}
-                        {formData.experience && (
-                          <p>• Experience: {experienceLevels.find((e) => e.value === formData.experience)?.label}</p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {formData.feeType !== "not-specified" && (
-                    <div className="pt-4 border-t">
-                      <p className="text-sm text-gray-600">
-                        <span className="font-medium">Compensation:</span>{" "}
-                        {formData.feeType === "free"
-                          ? "Free / Volunteer"
-                          : formData.feeAmount
-                            ? `₹${formData.feeAmount}`
-                            : formData.feeType === "stipend"
-                              ? "Stipend amount not specified"
-                              : "Paid amount not specified"}
-                      </p>
-                    </div>
-                  )}
-
-                  {(formData.requestPhotos || formData.requestVideos) && (
-                    <div className="pt-4 border-t">
-                      <h4 className="text-sm font-medium text-gray-900 mb-2">Media Required</h4>
-                      <div className="space-y-1 text-sm text-gray-600">
-                        {formData.requestPhotos && (
-                          <p>• Photos {formData.photoHelper && `(${formData.photoHelper})`}</p>
-                        )}
-                        {formData.requestVideos && (
-                          <p>• Video Links {formData.videoHelper && `(${formData.videoHelper})`}</p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="py-12 text-center text-gray-400">
-                  <p className="text-sm">Fill in the form to see preview</p>
-                </div>
-              )}
+                  <Button
+                    onClick={() => setPreviewOpen(true)}
+                    variant="outline"
+                    className="w-full rounded-xl border-gray-200"
+                  >
+                    Preview Apply Flow
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Preview Apply Flow Sheet */}
+      <Sheet open={previewOpen} onOpenChange={setPreviewOpen}>
+        <SheetContent side="right" className="w-full sm:max-w-lg">
+          <SheetHeader>
+            <SheetTitle>Application Preview</SheetTitle>
+            <SheetDescription>This is what artists will see when applying</SheetDescription>
+          </SheetHeader>
+
+          <div className="mt-6 space-y-6">
+            <div className="p-4 bg-gray-50 rounded-xl space-y-2">
+              <h4 className="font-medium text-gray-900">{title || "Opportunity Title"}</h4>
+              <p className="text-sm text-gray-600">{description || "Description not provided"}</p>
+            </div>
+
+            {(requestPhotos || requestVideos) && (
+              <div className="space-y-4">
+                <h5 className="text-sm font-medium text-gray-700">Required Media</h5>
+
+                {requestPhotos && (
+                  <div className="space-y-2">
+                    <Label className="text-sm text-gray-700">Photos</Label>
+                    <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center">
+                      <p className="text-sm text-gray-500">{photoHelper || "Upload your photos"}</p>
+                    </div>
+                  </div>
+                )}
+
+                {requestVideos && (
+                  <div className="space-y-2">
+                    <Label className="text-sm text-gray-700">Video Links</Label>
+                    <Input placeholder={videoHelper || "Paste video URL"} className="rounded-xl" />
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <Label className="text-sm text-gray-700">Cover Letter</Label>
+              <Textarea placeholder="Why are you a good fit for this role?" rows={4} className="rounded-xl" />
+            </div>
+
+            <Button className="w-full rounded-xl bg-gray-900 hover:bg-gray-800">Submit Application</Button>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
