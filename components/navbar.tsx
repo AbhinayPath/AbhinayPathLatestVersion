@@ -1,60 +1,101 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import { Sheet } from "components/sheet"
-import { Button } from "components/button"
+import { cn } from "@/lib/utils"
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { Link } from "next/link"
+import { usePathname } from "next/navigation"
 
-const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Join", href: "/join-community" },
-    { name: "Post", href: "/post-opportunity" },
-    { name: "Contact", href: "/contact" },
-  ]
+export function Navbar() {
+  const pathname = usePathname()
 
   return (
-    <nav className="bg-background px-4 py-3">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <Link href="/" className="text-foreground font-bold text-lg">
-            Logo
+    <nav className="bg-background sticky top-0 z-40">
+      <div className="container flex items-center justify-between py-6">
+        <Link href="/" className="text-foreground font-bold text-lg">
+          Logo
+        </Link>
+        <div className="hidden md:flex space-x-6">
+          <Link
+            href="/opportunities"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-primary",
+              pathname === "/opportunities" ? "text-foreground" : "text-foreground/60",
+            )}
+          >
+            Opportunities
+          </Link>
+          <Link
+            href="/about"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-primary",
+              pathname === "/about" ? "text-foreground" : "text-foreground/60",
+            )}
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-primary",
+              pathname === "/contact" ? "text-foreground" : "text-foreground/60",
+            )}
+          >
+            Contact
+          </Link>
+          {/* Insert the new "Post Opportunity" link here */}
+          <Link
+            href="/post-opportunity"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-primary",
+              pathname === "/post-opportunity" ? "text-foreground" : "text-foreground/60",
+            )}
+          >
+            Post Opportunity
           </Link>
         </div>
-        <div className="hidden md:flex space-x-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-foreground/80 hover:text-foreground transition-colors font-medium"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-        <Button onClick={() => setMobileMenuOpen(true)} className="md:hidden">
-          Menu
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="ghost" className="md:hidden">
+              Menu
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <SheetHeader>
+              <SheetTitle>Menu</SheetTitle>
+            </SheetHeader>
+            <SheetDescription asChild>
+              <div className="flex flex-col space-y-4">
+                <Link
+                  href="/opportunities"
+                  className="block px-4 py-2 text-base font-medium text-foreground/60 hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                >
+                  Opportunities
+                </Link>
+                <Link
+                  href="/about"
+                  className="block px-4 py-2 text-base font-medium text-foreground/60 hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  className="block px-4 py-2 text-base font-medium text-foreground/60 hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                >
+                  Contact
+                </Link>
+                {/* Insert the new "Post Opportunity" link here */}
+                <Link
+                  href="/post-opportunity"
+                  className="block px-4 py-2 text-base font-medium text-foreground/60 hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                >
+                  Post Opportunity
+                </Link>
+              </div>
+            </SheetDescription>
+          </SheetContent>
+        </Sheet>
       </div>
-      <Sheet isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)}>
-        <div className="p-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="block px-4 py-3 text-base font-medium hover:bg-primary/5 transition-colors rounded-lg"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      </Sheet>
     </nav>
   )
 }
-
-export default Navbar
