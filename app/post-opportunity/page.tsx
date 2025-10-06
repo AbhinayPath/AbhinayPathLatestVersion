@@ -28,6 +28,8 @@ import {
   Camera,
   CheckCircle2,
   X,
+  AlertCircle,
+  Sparkles,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
@@ -84,6 +86,7 @@ export default function PostOpportunityPage() {
   // UI state
   const [contactOpen, setContactOpen] = useState(false)
   const [applyFlowOpen, setApplyFlowOpen] = useState(false)
+  const [showPreview, setShowPreview] = useState(false)
 
   // Calculate progress
   const [progress, setProgress] = useState(0)
@@ -130,23 +133,23 @@ export default function PostOpportunityPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="container max-w-7xl mx-auto px-4 py-12">
-        {/* Header */}
-        <div className="mb-8 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Badge variant="secondary" className="text-xs font-medium px-3 py-1">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+        {/* Header - Mobile Optimized */}
+        <div className="mb-6 sm:mb-8 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+            <Badge variant="secondary" className="text-xs font-medium px-2 sm:px-3 py-1">
               AP
             </Badge>
-            <h1 className="font-playfair text-4xl font-bold text-gray-900">Post Opportunity</h1>
-            <Badge variant="outline" className="text-xs px-3 py-1">
+            <h1 className="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Post Opportunity</h1>
+            <Badge variant="outline" className="text-xs px-2 sm:px-3 py-1">
               All times IST
             </Badge>
           </div>
-          <p className="text-gray-600 text-sm">Keep it crisp. Artists love clarity.</p>
+          <p className="text-gray-600 text-xs sm:text-sm">Keep it crisp. Artists love clarity.</p>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mb-8 max-w-2xl mx-auto">
+        {/* Progress Bar - Mobile Optimized */}
+        <div className="mb-6 sm:mb-8 max-w-2xl mx-auto">
           <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
             <span>Form completion</span>
             <span className="font-medium">{Math.round(progress)}%</span>
@@ -154,18 +157,30 @@ export default function PostOpportunityPage() {
           <Progress value={progress} className="h-2" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        {/* Mobile Preview Toggle Button */}
+        <div className="lg:hidden mb-6">
+          <Button
+            variant="outline"
+            className="w-full rounded-lg h-12 border-2 bg-transparent"
+            onClick={() => setShowPreview(!showPreview)}
+          >
+            <Eye className="mr-2 h-4 w-4" />
+            {showPreview ? "Hide Preview" : "Show Live Preview"}
+          </Button>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Left Column - Form */}
-          <div className="space-y-6">
-            {/* Core Section */}
-            <Card className="border-2 shadow-md rounded-2xl overflow-hidden transition-all hover:shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 pb-4">
+          <div className={cn("space-y-4 sm:space-y-6", showPreview && "hidden lg:block")}>
+            {/* Core Section - Mobile Optimized */}
+            <Card className="border-2 shadow-md rounded-xl sm:rounded-2xl overflow-hidden transition-all hover:shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 pb-3 sm:pb-4 px-4 sm:px-6">
                 <div className="flex items-center gap-2">
-                  <Briefcase className="h-5 w-5 text-purple-600" />
-                  <CardTitle className="text-xl">Core Details</CardTitle>
+                  <Briefcase className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 flex-shrink-0" />
+                  <CardTitle className="text-base sm:text-lg lg:text-xl">Core Details</CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="pt-6 space-y-5">
+              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4 sm:space-y-5">
                 {/* Title */}
                 <div className="space-y-2">
                   <Label htmlFor="title" className="text-sm font-medium">
@@ -176,7 +191,7 @@ export default function PostOpportunityPage() {
                     placeholder="e.g., Lead Actor for Feature Film"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                    className="rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500 h-11 sm:h-10 text-base sm:text-sm"
                   />
                 </div>
 
@@ -186,7 +201,7 @@ export default function PostOpportunityPage() {
                     Type <span className="text-red-500">*</span>
                   </Label>
                   <Select value={type} onValueChange={setType}>
-                    <SelectTrigger className="rounded-lg">
+                    <SelectTrigger className="rounded-lg h-11 sm:h-10">
                       <SelectValue placeholder="Select opportunity type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -210,12 +225,12 @@ export default function PostOpportunityPage() {
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full justify-start text-left font-normal rounded-lg",
+                          "w-full justify-start text-left font-normal rounded-lg h-11 sm:h-10",
                           !deadline && "text-muted-foreground",
                         )}
                       >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {deadline ? format(deadline, "PPP") : "Pick a date"}
+                        <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+                        <span className="truncate">{deadline ? format(deadline, "PPP") : "Pick a date"}</span>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -230,36 +245,36 @@ export default function PostOpportunityPage() {
                   </Popover>
                 </div>
 
-                {/* Location Mode */}
+                {/* Location Mode - Mobile Optimized */}
                 <div className="space-y-3">
                   <Label className="text-sm font-medium">
                     Location Mode <span className="text-red-500">*</span>
                   </Label>
-                  <div className="flex gap-3">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3">
                     <Button
                       type="button"
                       variant={locationMode === "city" ? "default" : "outline"}
-                      className="flex-1 rounded-lg"
+                      className="rounded-lg h-11 sm:h-10 text-sm"
                       onClick={() => setLocationMode("city")}
                     >
-                      <MapPin className="mr-2 h-4 w-4" />
+                      <MapPin className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
                       City
                     </Button>
                     <Button
                       type="button"
                       variant={locationMode === "online" ? "default" : "outline"}
-                      className="flex-1 rounded-lg"
+                      className="rounded-lg h-11 sm:h-10 text-sm"
                       onClick={() => setLocationMode("online")}
                     >
-                      <Globe className="mr-2 h-4 w-4" />
+                      <Globe className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
                       Online
                     </Button>
                   </div>
                 </div>
 
-                {/* City/Venue or Platform */}
+                {/* City/Venue or Platform - Mobile Optimized */}
                 {locationMode === "city" ? (
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="space-y-2">
                       <Label htmlFor="city" className="text-sm font-medium">
                         City <span className="text-red-500">*</span>
@@ -269,7 +284,7 @@ export default function PostOpportunityPage() {
                         placeholder="e.g., Mumbai"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        className="rounded-lg"
+                        className="rounded-lg h-11 sm:h-10"
                       />
                     </div>
                     <div className="space-y-2">
@@ -281,7 +296,7 @@ export default function PostOpportunityPage() {
                         placeholder="Optional"
                         value={venue}
                         onChange={(e) => setVenue(e.target.value)}
-                        className="rounded-lg"
+                        className="rounded-lg h-11 sm:h-10"
                       />
                     </div>
                   </div>
@@ -295,12 +310,12 @@ export default function PostOpportunityPage() {
                       placeholder="e.g., Zoom, Google Meet"
                       value={platform}
                       onChange={(e) => setPlatform(e.target.value)}
-                      className="rounded-lg"
+                      className="rounded-lg h-11 sm:h-10"
                     />
                   </div>
                 )}
 
-                {/* Description */}
+                {/* Description - Mobile Optimized */}
                 <div className="space-y-2">
                   <Label htmlFor="description" className="text-sm font-medium">
                     Description <span className="text-red-500">*</span>
@@ -310,48 +325,48 @@ export default function PostOpportunityPage() {
                     placeholder="What to prepare, key dates, audition flow..."
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="rounded-lg min-h-[120px] resize-none"
+                    className="rounded-lg min-h-[100px] sm:min-h-[120px] resize-none text-base sm:text-sm"
                   />
                 </div>
 
-                {/* Application Method */}
+                {/* Application Method - Mobile Optimized */}
                 <div className="space-y-3">
                   <Label className="text-sm font-medium">
                     Application Method <span className="text-red-500">*</span>
                   </Label>
                   <RadioGroup value={applicationMethod} onValueChange={setApplicationMethod} className="space-y-2">
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
                       <RadioGroupItem value="platform" id="platform-method" />
-                      <Label htmlFor="platform-method" className="flex-1 cursor-pointer">
+                      <Label htmlFor="platform-method" className="flex-1 cursor-pointer text-sm">
                         Quick Apply on Abhinayपथ
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
                       <RadioGroupItem value="whatsapp" id="whatsapp-method" />
-                      <Label htmlFor="whatsapp-method" className="flex-1 cursor-pointer">
+                      <Label htmlFor="whatsapp-method" className="flex-1 cursor-pointer text-sm">
                         WhatsApp
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
                       <RadioGroupItem value="email" id="email-method" />
-                      <Label htmlFor="email-method" className="flex-1 cursor-pointer">
+                      <Label htmlFor="email-method" className="flex-1 cursor-pointer text-sm">
                         Email
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
                       <RadioGroupItem value="external" id="external-method" />
-                      <Label htmlFor="external-method" className="flex-1 cursor-pointer">
+                      <Label htmlFor="external-method" className="flex-1 cursor-pointer text-sm">
                         External Form
                       </Label>
                     </div>
                   </RadioGroup>
                 </div>
 
-                {/* Optional Contact */}
+                {/* Optional Contact - Mobile Optimized */}
                 {applicationMethod !== "platform" && (
                   <Collapsible open={contactOpen} onOpenChange={setContactOpen}>
                     <CollapsibleTrigger asChild>
-                      <Button variant="ghost" className="w-full justify-between p-3 h-auto">
+                      <Button variant="ghost" className="w-full justify-between p-3 h-auto touch-manipulation">
                         <span className="text-sm font-medium">Contact Information</span>
                         <ChevronDown className={cn("h-4 w-4 transition-transform", contactOpen && "rotate-180")} />
                       </Button>
@@ -367,7 +382,7 @@ export default function PostOpportunityPage() {
                         }
                         value={contactInfo}
                         onChange={(e) => setContactInfo(e.target.value)}
-                        className="rounded-lg"
+                        className="rounded-lg h-11 sm:h-10"
                       />
                     </CollapsibleContent>
                   </Collapsible>
@@ -375,22 +390,22 @@ export default function PostOpportunityPage() {
               </CardContent>
             </Card>
 
-            {/* Advanced Section */}
+            {/* Advanced Section - Mobile Optimized */}
             <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
-              <Card className="border-2 shadow-md rounded-2xl overflow-hidden transition-all hover:shadow-lg">
+              <Card className="border-2 shadow-md rounded-xl sm:rounded-2xl overflow-hidden transition-all hover:shadow-lg">
                 <CollapsibleTrigger asChild>
-                  <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50 pb-4 cursor-pointer hover:bg-blue-100 transition-colors">
+                  <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50 pb-3 sm:pb-4 cursor-pointer hover:bg-blue-100 transition-colors px-4 sm:px-6 touch-manipulation">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Users className="h-5 w-5 text-blue-600" />
-                        <CardTitle className="text-xl">Advanced Details</CardTitle>
+                        <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 flex-shrink-0" />
+                        <CardTitle className="text-base sm:text-lg lg:text-xl">Advanced Details</CardTitle>
                       </div>
                       <ChevronDown className={cn("h-5 w-5 transition-transform", advancedOpen && "rotate-180")} />
                     </div>
                   </CardHeader>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  <CardContent className="pt-6 space-y-5">
+                  <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4 sm:space-y-5">
                     {/* Roles Needed */}
                     <div className="space-y-2">
                       <Label htmlFor="roles" className="text-sm font-medium">
@@ -401,7 +416,7 @@ export default function PostOpportunityPage() {
                         placeholder="e.g., 2 Female (20–25), 1 Male (30–40)"
                         value={rolesNeeded}
                         onChange={(e) => setRolesNeeded(e.target.value)}
-                        className="rounded-lg"
+                        className="rounded-lg h-11 sm:h-10"
                       />
                     </div>
 
@@ -409,7 +424,7 @@ export default function PostOpportunityPage() {
                     <div className="space-y-2">
                       <Label className="text-sm font-medium">Gender Preference</Label>
                       <Select value={genderPreference} onValueChange={setGenderPreference}>
-                        <SelectTrigger className="rounded-lg">
+                        <SelectTrigger className="rounded-lg h-11 sm:h-10">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -422,31 +437,34 @@ export default function PostOpportunityPage() {
                       </Select>
                     </div>
 
-                    {/* Age Range */}
+                    {/* Age Range - Mobile Optimized */}
                     <div className="space-y-2">
                       <Label className="text-sm font-medium">Age Range</Label>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
                         <Input
                           type="number"
                           placeholder="Min"
                           value={ageMin}
                           onChange={(e) => setAgeMin(e.target.value)}
-                          className="rounded-lg"
+                          className="rounded-lg h-11 sm:h-10"
                         />
                         <Input
                           type="number"
                           placeholder="Max"
                           value={ageMax}
                           onChange={(e) => setAgeMax(e.target.value)}
-                          className="rounded-lg"
+                          className="rounded-lg h-11 sm:h-10"
                         />
                       </div>
                       {ageMin && ageMax && Number(ageMin) > Number(ageMax) && (
-                        <p className="text-xs text-red-500">Min age must be less than max age</p>
+                        <p className="text-xs text-red-500 flex items-center gap-1">
+                          <AlertCircle className="h-3 w-3 flex-shrink-0" />
+                          Min age must be less than max age
+                        </p>
                       )}
                     </div>
 
-                    {/* Languages */}
+                    {/* Languages - Mobile Optimized with Better Touch Targets */}
                     <div className="space-y-2">
                       <Label className="text-sm font-medium">Languages (max 4)</Label>
                       <div className="flex flex-wrap gap-2">
@@ -456,15 +474,20 @@ export default function PostOpportunityPage() {
                             type="button"
                             onClick={() => toggleLanguage(lang)}
                             className={cn(
-                              "px-3 py-1.5 rounded-full text-sm font-medium transition-all",
+                              "px-3 sm:px-4 py-2 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all touch-manipulation min-h-[44px] sm:min-h-0",
                               selectedLanguages.includes(lang)
                                 ? "bg-purple-600 text-white shadow-md"
                                 : "bg-gray-100 text-gray-700 hover:bg-gray-200",
+                              !selectedLanguages.includes(lang) &&
+                                selectedLanguages.length >= 4 &&
+                                "opacity-40 cursor-not-allowed",
                             )}
                             disabled={!selectedLanguages.includes(lang) && selectedLanguages.length >= 4}
                           >
                             {lang}
-                            {selectedLanguages.includes(lang) && <X className="inline-block ml-1 h-3 w-3" />}
+                            {selectedLanguages.includes(lang) && (
+                              <X className="inline-block ml-1 h-3 w-3 sm:h-3 sm:w-3" />
+                            )}
                           </button>
                         ))}
                       </div>
@@ -474,7 +497,7 @@ export default function PostOpportunityPage() {
                     <div className="space-y-2">
                       <Label className="text-sm font-medium">Experience</Label>
                       <Select value={experience} onValueChange={setExperience}>
-                        <SelectTrigger className="rounded-lg">
+                        <SelectTrigger className="rounded-lg h-11 sm:h-10">
                           <SelectValue placeholder="Select experience level" />
                         </SelectTrigger>
                         <SelectContent>
@@ -485,11 +508,11 @@ export default function PostOpportunityPage() {
                       </Select>
                     </div>
 
-                    {/* Fee/Pay */}
+                    {/* Fee/Pay - Mobile Optimized */}
                     <div className="space-y-3">
                       <Label className="text-sm font-medium">Fee / Pay</Label>
                       <Select value={payType} onValueChange={setPayType}>
-                        <SelectTrigger className="rounded-lg">
+                        <SelectTrigger className="rounded-lg h-11 sm:h-10">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -506,28 +529,28 @@ export default function PostOpportunityPage() {
                           placeholder="Amount (₹)"
                           value={payAmount}
                           onChange={(e) => setPayAmount(e.target.value)}
-                          className="rounded-lg"
+                          className="rounded-lg h-11 sm:h-10"
                         />
                       )}
                     </div>
 
-                    {/* Visibility */}
+                    {/* Visibility - Mobile Optimized */}
                     <div className="space-y-3">
                       <Label className="text-sm font-medium">Visibility</Label>
-                      <div className="flex gap-3">
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
                         <Button
                           type="button"
                           variant={visibility === "public" ? "default" : "outline"}
-                          className="flex-1 rounded-lg"
+                          className="rounded-lg h-11 sm:h-10 text-sm touch-manipulation"
                           onClick={() => setVisibility("public")}
                         >
-                          <Eye className="mr-2 h-4 w-4" />
+                          <Eye className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
                           Public
                         </Button>
                         <Button
                           type="button"
                           variant={visibility === "unlisted" ? "default" : "outline"}
-                          className="flex-1 rounded-lg"
+                          className="rounded-lg h-11 sm:h-10 text-sm touch-manipulation"
                           onClick={() => setVisibility("unlisted")}
                         >
                           Unlisted
@@ -539,22 +562,23 @@ export default function PostOpportunityPage() {
               </Card>
             </Collapsible>
 
-            {/* Media Request */}
-            <Card className="border-2 shadow-md rounded-2xl overflow-hidden transition-all hover:shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 pb-4">
+            {/* Media Request - Mobile Optimized */}
+            <Card className="border-2 shadow-md rounded-xl sm:rounded-2xl overflow-hidden transition-all hover:shadow-lg">
+              <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 pb-3 sm:pb-4 px-4 sm:px-6">
                 <div className="flex items-center gap-2">
-                  <Camera className="h-5 w-5 text-green-600" />
-                  <CardTitle className="text-xl">Media Request (Optional)</CardTitle>
+                  <Camera className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 flex-shrink-0" />
+                  <CardTitle className="text-base sm:text-lg lg:text-xl">Media Request (Optional)</CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="pt-6 space-y-5">
+              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4 sm:space-y-5">
                 {/* Request Photos */}
                 <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 touch-manipulation">
                     <Checkbox
                       id="request-photos"
                       checked={requestPhotos}
                       onCheckedChange={(checked) => setRequestPhotos(checked as boolean)}
+                      className="h-5 w-5"
                     />
                     <Label htmlFor="request-photos" className="text-sm font-medium cursor-pointer">
                       Request Photos
@@ -562,15 +586,16 @@ export default function PostOpportunityPage() {
                   </div>
 
                   {requestPhotos && (
-                    <div className="space-y-2 ml-6">
+                    <div className="space-y-2 ml-0 sm:ml-6">
                       <Input
                         placeholder="Helper text (optional)"
                         value={photoHelperText}
                         onChange={(e) => setPhotoHelperText(e.target.value)}
-                        className="rounded-lg"
+                        className="rounded-lg h-11 sm:h-10"
                       />
-                      <p className="text-xs text-gray-500">
-                        💡 JPG/PNG/WebP up to 5MB each. Ask for 1 headshot + 1 full body.
+                      <p className="text-xs text-gray-500 flex items-start gap-1">
+                        <Sparkles className="h-3 w-3 mt-0.5 flex-shrink-0 text-purple-500" />
+                        JPG/PNG/WebP up to 5MB each. Ask for 1 headshot + 1 full body.
                       </p>
                     </div>
                   )}
@@ -578,11 +603,12 @@ export default function PostOpportunityPage() {
 
                 {/* Request Videos */}
                 <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 touch-manipulation">
                     <Checkbox
                       id="request-videos"
                       checked={requestVideos}
                       onCheckedChange={(checked) => setRequestVideos(checked as boolean)}
+                      className="h-5 w-5"
                     />
                     <Label htmlFor="request-videos" className="text-sm font-medium cursor-pointer">
                       Request Video Links
@@ -590,28 +616,32 @@ export default function PostOpportunityPage() {
                   </div>
 
                   {requestVideos && (
-                    <div className="space-y-2 ml-6">
+                    <div className="space-y-2 ml-0 sm:ml-6">
                       <Input
                         placeholder="Helper text (optional)"
                         value={videoHelperText}
                         onChange={(e) => setVideoHelperText(e.target.value)}
-                        className="rounded-lg"
+                        className="rounded-lg h-11 sm:h-10"
                       />
-                      <p className="text-xs text-gray-500">💡 1-min monologue link (YouTube/Vimeo/Drive; shareable).</p>
+                      <p className="text-xs text-gray-500 flex items-start gap-1">
+                        <Sparkles className="h-3 w-3 mt-0.5 flex-shrink-0 text-purple-500" />
+                        1-min monologue link (YouTube/Vimeo/Drive; shareable).
+                      </p>
                     </div>
                   )}
                 </div>
               </CardContent>
             </Card>
 
-            {/* Consent */}
-            <Card className="border-2 border-purple-200 shadow-md rounded-2xl overflow-hidden">
-              <CardContent className="pt-6 space-y-4">
-                <div className="flex items-start space-x-3">
+            {/* Consent - Mobile Optimized */}
+            <Card className="border-2 border-purple-200 shadow-md rounded-xl sm:rounded-2xl overflow-hidden">
+              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4">
+                <div className="flex items-start space-x-3 touch-manipulation">
                   <Checkbox
                     id="consent1"
                     checked={consent1}
                     onCheckedChange={(checked) => setConsent1(checked as boolean)}
+                    className="mt-1 h-5 w-5 flex-shrink-0"
                   />
                   <Label htmlFor="consent1" className="text-sm leading-relaxed cursor-pointer">
                     I confirm that all details provided are genuine and that I have the right to conduct this
@@ -619,11 +649,12 @@ export default function PostOpportunityPage() {
                   </Label>
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 touch-manipulation">
                   <Checkbox
                     id="consent2"
                     checked={consent2}
                     onCheckedChange={(checked) => setConsent2(checked as boolean)}
+                    className="mt-1 h-5 w-5 flex-shrink-0"
                   />
                   <Label htmlFor="consent2" className="text-sm leading-relaxed cursor-pointer">
                     I agree to Abhinayपथ's{" "}
@@ -640,28 +671,34 @@ export default function PostOpportunityPage() {
               </CardContent>
             </Card>
 
-            {/* CTAs */}
-            <div className="flex gap-3">
+            {/* CTAs - Mobile Optimized */}
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 onClick={handlePublish}
                 disabled={!isFormValid()}
-                className="flex-1 rounded-lg h-12 text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                className="flex-1 rounded-lg h-12 sm:h-12 text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 touch-manipulation"
               >
-                <CheckCircle2 className="mr-2 h-5 w-5" />
+                <CheckCircle2 className="mr-2 h-5 w-5 flex-shrink-0" />
                 Publish Opportunity
               </Button>
 
               <Sheet open={applyFlowOpen} onOpenChange={setApplyFlowOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className="rounded-lg h-12 px-6 bg-transparent">
-                    <Eye className="mr-2 h-4 w-4" />
-                    Preview Apply Flow
+                  <Button
+                    variant="outline"
+                    className="rounded-lg h-12 sm:h-12 px-6 bg-transparent border-2 touch-manipulation sm:w-auto"
+                  >
+                    <Eye className="mr-2 h-4 w-4 flex-shrink-0" />
+                    <span className="hidden sm:inline">Preview Apply Flow</span>
+                    <span className="sm:hidden">Preview</span>
                   </Button>
                 </SheetTrigger>
                 <SheetContent className="w-full sm:max-w-md overflow-y-auto">
                   <SheetHeader>
-                    <SheetTitle>Artist Application View</SheetTitle>
-                    <SheetDescription>This is what artists will see when they apply</SheetDescription>
+                    <SheetTitle className="text-lg sm:text-xl">Artist Application View</SheetTitle>
+                    <SheetDescription className="text-sm">
+                      This is what artists will see when they apply
+                    </SheetDescription>
                   </SheetHeader>
 
                   <div className="mt-6 space-y-6">
@@ -673,10 +710,10 @@ export default function PostOpportunityPage() {
                       <div className="space-y-3">
                         <Label className="text-sm font-medium">Upload Photos</Label>
                         <div className="grid grid-cols-2 gap-3">
-                          <div className="aspect-square border-2 border-dashed rounded-lg flex items-center justify-center hover:bg-gray-50 cursor-pointer">
+                          <div className="aspect-square border-2 border-dashed rounded-lg flex items-center justify-center hover:bg-gray-50 cursor-pointer touch-manipulation">
                             <Camera className="h-8 w-8 text-gray-400" />
                           </div>
-                          <div className="aspect-square border-2 border-dashed rounded-lg flex items-center justify-center hover:bg-gray-50 cursor-pointer">
+                          <div className="aspect-square border-2 border-dashed rounded-lg flex items-center justify-center hover:bg-gray-50 cursor-pointer touch-manipulation">
                             <Camera className="h-8 w-8 text-gray-400" />
                           </div>
                         </div>
@@ -688,14 +725,14 @@ export default function PostOpportunityPage() {
                       <div className="space-y-3">
                         <Label className="text-sm font-medium">Video Links</Label>
                         <div className="space-y-2">
-                          <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-lg" />
-                          <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-lg" />
+                          <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-lg h-11" />
+                          <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-lg h-11" />
                         </div>
                         {videoHelperText && <p className="text-xs text-gray-600">{videoHelperText}</p>}
                       </div>
                     )}
 
-                    <Button className="w-full rounded-lg h-12" disabled>
+                    <Button className="w-full rounded-lg h-12 touch-manipulation" disabled>
                       Submit Application
                     </Button>
 
@@ -708,21 +745,27 @@ export default function PostOpportunityPage() {
             </div>
           </div>
 
-          {/* Right Column - Live Preview */}
-          <div className="lg:sticky lg:top-24 h-fit">
-            <Card className="border-2 shadow-xl rounded-2xl overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+          {/* Right Column - Live Preview - Mobile Toggle */}
+          <div
+            className={cn(
+              "lg:sticky lg:top-24 h-fit",
+              !showPreview && "hidden lg:block",
+              showPreview && "block lg:block",
+            )}
+          >
+            <Card className="border-2 shadow-xl rounded-xl sm:rounded-2xl overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 sm:px-6 py-4 sm:py-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <Eye className="h-5 w-5" />
-                  <CardTitle className="text-lg">Live Preview</CardTitle>
+                  <Eye className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  <CardTitle className="text-base sm:text-lg">Live Preview</CardTitle>
                 </div>
-                <p className="text-sm text-purple-100">How it will appear to artists</p>
+                <p className="text-xs sm:text-sm text-purple-100">How it will appear to artists</p>
               </CardHeader>
-              <CardContent className="pt-6 space-y-4">
+              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-3 sm:space-y-4">
                 {/* Type and Location */}
-                <div className="flex items-center gap-2 text-sm text-gray-600">
+                <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap">
                   {type && (
-                    <Badge variant="secondary" className="capitalize">
+                    <Badge variant="secondary" className="capitalize text-xs">
                       {type.replace("-", " ")}
                     </Badge>
                   )}
@@ -732,12 +775,12 @@ export default function PostOpportunityPage() {
                       <span className="flex items-center gap-1">
                         {locationMode === "city" ? (
                           <>
-                            <MapPin className="h-3 w-3" />
-                            {city || "City"}
+                            <MapPin className="h-3 w-3 flex-shrink-0" />
+                            <span className="truncate">{city || "City"}</span>
                           </>
                         ) : (
                           <>
-                            <Globe className="h-3 w-3" />
+                            <Globe className="h-3 w-3 flex-shrink-0" />
                             Online
                           </>
                         )}
@@ -747,33 +790,37 @@ export default function PostOpportunityPage() {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-playfair text-2xl font-bold text-gray-900">{title || "Opportunity Title"}</h3>
+                <h3 className="font-playfair text-xl sm:text-2xl font-bold text-gray-900 break-words">
+                  {title || "Opportunity Title"}
+                </h3>
 
                 {/* Deadline and Location Detail */}
-                <div className="flex items-center gap-2 text-sm text-gray-600">
+                <div className="flex items-start sm:items-center gap-2 text-sm text-gray-600 flex-wrap">
                   {deadline && (
                     <>
-                      <CalendarIcon className="h-4 w-4" />
-                      <span>Deadline: {format(deadline, "MMM d, yyyy")}</span>
+                      <CalendarIcon className="h-4 w-4 flex-shrink-0" />
+                      <span className="break-words">Deadline: {format(deadline, "MMM d, yyyy")}</span>
                     </>
                   )}
                   {locationMode === "city" && venue && (
                     <>
-                      <span>•</span>
-                      <span>{venue}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="break-words w-full sm:w-auto">{venue}</span>
                     </>
                   )}
                   {locationMode === "online" && platform && (
                     <>
-                      <span>•</span>
-                      <span>{platform}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="break-words w-full sm:w-auto">{platform}</span>
                     </>
                   )}
                 </div>
 
                 {/* Description */}
                 <div className="prose prose-sm max-w-none">
-                  <p className="text-gray-700 line-clamp-4">{description || "Description will appear here..."}</p>
+                  <p className="text-gray-700 line-clamp-4 text-sm sm:text-base break-words">
+                    {description || "Description will appear here..."}
+                  </p>
                 </div>
 
                 {/* Requirements */}
@@ -782,22 +829,22 @@ export default function PostOpportunityPage() {
                     <h4 className="text-sm font-semibold text-gray-900">Requirements</h4>
                     <div className="flex flex-wrap gap-2">
                       {genderPreference !== "any" && (
-                        <Badge variant="outline" className="capitalize">
+                        <Badge variant="outline" className="capitalize text-xs">
                           {genderPreference.replace("-", " ")}
                         </Badge>
                       )}
                       {(ageMin || ageMax) && (
-                        <Badge variant="outline">
+                        <Badge variant="outline" className="text-xs">
                           Age: {ageMin || "?"}–{ageMax || "?"}
                         </Badge>
                       )}
                       {selectedLanguages.map((lang) => (
-                        <Badge key={lang} variant="outline">
+                        <Badge key={lang} variant="outline" className="text-xs">
                           {lang}
                         </Badge>
                       ))}
                       {experience && (
-                        <Badge variant="outline" className="capitalize">
+                        <Badge variant="outline" className="capitalize text-xs">
                           {experience}
                         </Badge>
                       )}
@@ -807,8 +854,8 @@ export default function PostOpportunityPage() {
 
                 {/* Pay */}
                 <div className="flex items-center gap-2 text-sm pt-4 border-t">
-                  <DollarSign className="h-4 w-4 text-gray-600" />
-                  <span className="text-gray-900 font-medium">
+                  <DollarSign className="h-4 w-4 text-gray-600 flex-shrink-0" />
+                  <span className="text-gray-900 font-medium break-words">
                     {payType === "not-specified" && "Not specified"}
                     {payType === "free" && "Free"}
                     {payType === "stipend" && (payAmount ? `Stipend: ₹${payAmount}` : "Stipend")}
@@ -817,7 +864,7 @@ export default function PostOpportunityPage() {
                 </div>
 
                 {/* CTA */}
-                <Button className="w-full rounded-lg h-12 mt-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                <Button className="w-full rounded-lg h-12 mt-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-sm sm:text-base touch-manipulation">
                   {applicationMethod === "platform"
                     ? "Apply on Abhinayपथ"
                     : applicationMethod === "whatsapp"
@@ -835,22 +882,33 @@ export default function PostOpportunityPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Mobile: Back to Form Button */}
+            <div className="lg:hidden mt-4">
+              <Button
+                variant="outline"
+                className="w-full rounded-lg h-12 bg-transparent"
+                onClick={() => setShowPreview(false)}
+              >
+                Back to Form
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Footer */}
-        <footer className="mt-16 text-center text-sm text-gray-600 space-y-2">
+        {/* Footer - Mobile Optimized */}
+        <footer className="mt-12 sm:mt-16 text-center text-xs sm:text-sm text-gray-600 space-y-2 px-4">
           <p>© Abhinayपथ • Minimal form, maximal clarity.</p>
-          <div className="flex items-center justify-center gap-4">
-            <Link href="/privacy" className="hover:text-purple-600 transition-colors">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+            <Link href="/privacy" className="hover:text-purple-600 transition-colors touch-manipulation">
               Privacy Policy
             </Link>
-            <span>•</span>
-            <Link href="/terms" className="hover:text-purple-600 transition-colors">
+            <span className="hidden sm:inline">•</span>
+            <Link href="/terms" className="hover:text-purple-600 transition-colors touch-manipulation">
               Terms
             </Link>
-            <span>•</span>
-            <Link href="/report" className="hover:text-purple-600 transition-colors">
+            <span className="hidden sm:inline">•</span>
+            <Link href="/report" className="hover:text-purple-600 transition-colors touch-manipulation">
               Report Misuse
             </Link>
           </div>
