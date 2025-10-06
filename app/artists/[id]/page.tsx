@@ -1,458 +1,557 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useParams, useRouter } from "next/navigation"
-import { Card, CardContent } from "@/components/ui/card"
+import { useParams } from "next/navigation"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Separator } from "@/components/ui/separator"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
-  MapPin,
   Mail,
   Phone,
-  Globe,
+  MapPin,
   Star,
   Briefcase,
-  Play,
+  Languages,
+  Globe,
   Instagram,
   Youtube,
+  Film,
+  Award,
+  Calendar,
+  Building,
+  Play,
   ExternalLink,
-  ArrowLeft,
-  CheckCircle2,
-  MessageCircle,
+  Sparkles,
 } from "lucide-react"
 import Link from "next/link"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+import Image from "next/image"
 
-interface ArtistProfile {
+interface TalentProfile {
   id: string
   full_name: string
-  email: string
+  email?: string
   phone?: string
   city?: string
   state?: string
   bio?: string
   profile_image_url?: string
   experience_level?: string
-  acting_skills?: string[]
-  languages?: string[]
   years_of_experience?: number
+  skills?: string[]
+  languages?: string[]
+  verified?: boolean
   portfolio_images?: string[]
-  portfolio_videos?: string[]
+  showreel_url?: string
+  monologue_url?: string
   instagram_url?: string
   youtube_url?: string
   website_url?: string
   imdb_url?: string
-  verified?: boolean
-  experience?: Array<{
+  experience_records?: Array<{
     project_title: string
     role: string
-    project_type: string
-    start_date: string
+    description?: string
+    year?: string
+  }>
+  training_records?: Array<{
+    program_name: string
+    instructor?: string
+    institution?: string
+    year?: string
+  }>
+  education_records?: Array<{
+    degree: string
+    institution: string
+    year?: string
   }>
 }
 
 export default function ArtistProfilePage() {
   const params = useParams()
-  const router = useRouter()
-  const [profile, setProfile] = useState<ArtistProfile | null>(null)
+  const [artist, setArtist] = useState<TalentProfile | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [agreedToTerms, setAgreedToTerms] = useState(false)
-  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
+  const [termsAccepted, setTermsAccepted] = useState(false)
+  const [privacyAccepted, setPrivacyAccepted] = useState(false)
 
   useEffect(() => {
     if (params.id) {
-      fetchArtistProfile(params.id as string)
+      fetchArtist(params.id as string)
     }
   }, [params.id])
 
-  const fetchArtistProfile = async (id: string) => {
+  const fetchArtist = async (id: string) => {
     try {
+      setLoading(true)
       const response = await fetch(`/api/talent-profile/${id}`)
-      if (response.ok) {
-        const data = await response.json()
-        setProfile(data)
-      } else {
-        setError("Profile not found")
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch artist profile")
       }
+
+      const data = await response.json()
+      setArtist(data)
     } catch (error) {
-      console.error("Error fetching artist profile:", error)
-      setError("Failed to load profile")
+      console.error("Error fetching artist:", error)
+      setArtist(null)
     } finally {
       setLoading(false)
     }
   }
 
-  const getInitials = () => {
-    if (!profile) return ""
-    const names = profile.full_name.split(" ")
-    return names.length >= 2
-      ? `${names[0].charAt(0)}${names[names.length - 1].charAt(0)}`.toUpperCase()
-      : names[0].substring(0, 2).toUpperCase()
-  }
-
-  const getMediaItems = () => {
-    const items = []
-    if (profile?.portfolio_images) {
-      items.push(...profile.portfolio_images.map((url) => ({ type: "image", url })))
-    }
-    if (profile?.portfolio_videos) {
-      items.push(...profile.portfolio_videos.map((url) => ({ type: "video", url })))
-    }
-    return items.slice(0, 5) // Limit to 5 items
-  }
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
-        <div className="container mx-auto px-4 py-8">
-          <div className="animate-pulse space-y-8">
-            <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-            <div className="max-w-5xl mx-auto space-y-6">
-              <div className="h-64 bg-gray-200 rounded-lg"></div>
-              <div className="h-48 bg-gray-200 rounded-lg"></div>
-              <div className="h-48 bg-gray-200 rounded-lg"></div>
-            </div>
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+          <p className="mt-4 text-gray-600">Loading profile...</p>
         </div>
       </div>
     )
   }
 
-  if (error || !profile) {
+  if (!artist) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
-        <div className="container mx-auto px-4 py-16 text-center">
-          <div className="text-6xl mb-4">😔</div>
-          <h1 className="text-2xl font-bold mb-2">Artist Profile Not Found</h1>
-          <p className="text-muted-foreground mb-4">
-            {error || "The artist profile you're looking for doesn't exist or has been removed."}
-          </p>
-          <Button asChild>
-            <Link href="/artists">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Browse Artists
-            </Link>
-          </Button>
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Artist Not Found</h2>
+          <p className="text-gray-600 mb-6">The profile you're looking for doesn't exist.</p>
+          <Link href="/artists">
+            <Button>Browse All Artists</Button>
+          </Link>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
-      <div className="container mx-auto px-4 py-8 space-y-8">
-        {/* Back Button */}
-        <Button variant="outline" asChild>
-          <Link href="/artists">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Artists
-          </Link>
-        </Button>
-
-        <div className="max-w-5xl mx-auto space-y-8">
-          {/* ESSENCE Section */}
-          <Card className="overflow-hidden border-2 border-primary/20 shadow-lg">
-            <div className="bg-gradient-to-r from-primary/10 to-purple-100 p-8">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-                <div className="relative">
-                  <Avatar className="w-32 h-32 border-4 border-white shadow-xl">
-                    <AvatarImage src={profile.profile_image_url || "/placeholder.svg"} alt={profile.full_name} />
-                    <AvatarFallback className="text-3xl bg-primary/20">{getInitials()}</AvatarFallback>
-                  </Avatar>
-                  {profile.verified && (
-                    <div className="absolute -bottom-2 -right-2 bg-blue-500 rounded-full p-2 shadow-lg">
-                      <CheckCircle2 className="h-6 w-6 text-white" />
-                    </div>
-                  )}
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
+      {/* ESSENCE Section */}
+      <section className="relative bg-gradient-to-r from-purple-600 to-pink-600 text-white py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Profile Image */}
+            <div className="relative inline-block mb-6">
+              <Avatar className="h-32 w-32 md:h-40 md:w-40 border-4 border-white shadow-2xl">
+                <AvatarImage src={artist.profile_image_url || "/placeholder.svg"} alt={artist.full_name} />
+                <AvatarFallback className="bg-purple-100 text-purple-700 text-4xl">
+                  {artist.full_name
+                    ?.split(" ")
+                    .map((n) => n[0])
+                    .join("")
+                    .toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              {artist.verified && (
+                <div className="absolute bottom-2 right-2 bg-blue-500 rounded-full p-2 shadow-lg">
+                  <Star className="h-5 w-5 text-white fill-white" />
                 </div>
-
-                <div className="flex-1 text-center md:text-left space-y-4">
-                  <div>
-                    <h1 className="text-4xl font-bold font-playfair mb-2">{profile.full_name}</h1>
-                    {profile.city && (
-                      <div className="flex items-center justify-center md:justify-start text-muted-foreground gap-2">
-                        <MapPin className="h-4 w-4" />
-                        <span>
-                          {profile.city}
-                          {profile.state ? `, ${profile.state}` : ""}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {profile.bio && <p className="text-muted-foreground leading-relaxed max-w-2xl">{profile.bio}</p>}
-
-                  <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                    {profile.email && (
-                      <Button variant="default" size="sm" asChild>
-                        <a href={`mailto:${profile.email}`}>
-                          <Mail className="h-4 w-4 mr-2" />
-                          Contact
-                        </a>
-                      </Button>
-                    )}
-                    {profile.phone && (
-                      <Button variant="outline" size="sm" asChild>
-                        <a href={`tel:${profile.phone}`}>
-                          <Phone className="h-4 w-4 mr-2" />
-                          Call
-                        </a>
-                      </Button>
-                    )}
-                    {profile.website_url && (
-                      <Button variant="outline" size="sm" asChild>
-                        <a href={profile.website_url} target="_blank" rel="noopener noreferrer">
-                          <Globe className="h-4 w-4 mr-2" />
-                          Website
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
-          </Card>
 
-          {/* CRAFT Section */}
-          <Card className="border-2 border-purple-100">
-            <CardContent className="p-8 space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold font-playfair mb-6 flex items-center gap-2">
-                  <Briefcase className="h-6 w-6 text-primary" />
-                  Craft & Expertise
-                </h2>
+            {/* Name & Location */}
+            <h1 className="text-4xl md:text-5xl font-bold mb-3">{artist.full_name}</h1>
+            {(artist.city || artist.state) && (
+              <div className="flex items-center justify-center gap-2 text-purple-100 mb-6">
+                <MapPin className="h-5 w-5" />
+                <span className="text-lg">{[artist.city, artist.state].filter(Boolean).join(", ")}</span>
               </div>
+            )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Bio */}
+            {artist.bio && (
+              <p className="text-lg text-purple-50 max-w-2xl mx-auto mb-8 leading-relaxed">{artist.bio}</p>
+            )}
+
+            {/* Contact Buttons */}
+            <div className="flex flex-wrap justify-center gap-3">
+              {artist.email && (
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-white/30"
+                >
+                  <a href={`mailto:${artist.email}`}>
+                    <Mail className="h-4 w-4 mr-2" />
+                    Email
+                  </a>
+                </Button>
+              )}
+              {artist.phone && (
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-white/30"
+                >
+                  <a href={`tel:${artist.phone}`}>
+                    <Phone className="h-4 w-4 mr-2" />
+                    Call
+                  </a>
+                </Button>
+              )}
+              {artist.website_url && (
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-white/30"
+                >
+                  <a href={artist.website_url} target="_blank" rel="noopener noreferrer">
+                    <Globe className="h-4 w-4 mr-2" />
+                    Website
+                  </a>
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-purple-50 to-transparent"></div>
+      </section>
+
+      <div className="container mx-auto px-4 py-12 max-w-6xl">
+        {/* CRAFT Section */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Sparkles className="h-6 w-6 text-purple-600" />
+            <h2 className="text-3xl font-bold text-gray-900">Craft</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Experience & Skills */}
+            <Card className="border-purple-100">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Briefcase className="h-5 w-5 text-purple-600" />
+                  Experience & Skills
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
                 {/* Experience Level */}
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                    Experience Level
-                  </h3>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="default" className="text-base px-4 py-2">
-                      {profile.experience_level || "Not specified"}
+                {artist.experience_level && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 block mb-2">Experience Level</label>
+                    <Badge className="bg-purple-100 text-purple-700 hover:bg-purple-200">
+                      {artist.experience_level}
+                      {artist.years_of_experience && ` • ${artist.years_of_experience} years`}
                     </Badge>
-                    {profile.years_of_experience && (
-                      <span className="text-muted-foreground">({profile.years_of_experience}+ years)</span>
-                    )}
                   </div>
-                </div>
+                )}
 
-                {/* Languages */}
-                {profile.languages && profile.languages.length > 0 && (
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Languages</h3>
+                {/* Skills */}
+                {artist.skills && artist.skills.length > 0 && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-700 block mb-2">Skills & Specializations</label>
                     <div className="flex flex-wrap gap-2">
-                      {profile.languages.map((language, index) => (
-                        <Badge key={index} variant="secondary" className="px-3 py-1">
-                          {language}
+                      {artist.skills.map((skill, idx) => (
+                        <Badge key={idx} variant="outline" className="border-purple-200 text-purple-700">
+                          <Star className="h-3 w-3 mr-1 fill-purple-700" />
+                          {skill}
                         </Badge>
                       ))}
                     </div>
                   </div>
                 )}
-              </div>
+              </CardContent>
+            </Card>
 
-              {/* Skills */}
-              {profile.acting_skills && profile.acting_skills.length > 0 && (
-                <div className="space-y-3">
-                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                    Skills & Specializations
-                  </h3>
+            {/* Languages */}
+            <Card className="border-purple-100">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Languages className="h-5 w-5 text-purple-600" />
+                  Languages
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {artist.languages && artist.languages.length > 0 ? (
                   <div className="flex flex-wrap gap-2">
-                    {profile.acting_skills.map((skill, index) => (
-                      <Badge
-                        key={index}
-                        variant="outline"
-                        className="px-3 py-1 border-primary/30 hover:bg-primary/10 transition-colors"
-                      >
-                        <Star className="h-3 w-3 mr-1 text-primary" />
-                        {skill}
+                    {artist.languages.map((language, idx) => (
+                      <Badge key={idx} variant="secondary" className="bg-purple-50 text-purple-700">
+                        {language}
                       </Badge>
                     ))}
                   </div>
-                </div>
-              )}
+                ) : (
+                  <p className="text-gray-500 text-sm">No languages specified</p>
+                )}
+              </CardContent>
+            </Card>
 
-              {/* Past Work Highlights */}
-              {profile.experience && profile.experience.length > 0 && (
-                <div className="space-y-3">
-                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+            {/* Past Work Highlights */}
+            {artist.experience_records && artist.experience_records.length > 0 && (
+              <Card className="border-purple-100 md:col-span-2">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Award className="h-5 w-5 text-purple-600" />
                     Past Work Highlights
-                  </h3>
-                  <div className="space-y-3">
-                    {profile.experience.slice(0, 3).map((exp, index) => (
-                      <div key={index} className="bg-purple-50 rounded-lg p-4 border border-purple-100">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h4 className="font-medium">{exp.project_title}</h4>
-                            <p className="text-sm text-muted-foreground">
-                              {exp.role} • {exp.project_type}
-                            </p>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {artist.experience_records.slice(0, 3).map((work, idx) => (
+                      <div key={idx} className="flex gap-4 p-4 bg-purple-50/50 rounded-lg">
+                        <div className="flex-shrink-0">
+                          <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center">
+                            <Film className="h-6 w-6 text-purple-600" />
                           </div>
-                          <span className="text-xs text-muted-foreground">
-                            {new Date(exp.start_date).getFullYear()}
-                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-gray-900">{work.project_title}</h4>
+                          <p className="text-sm text-purple-600 font-medium">{work.role}</p>
+                          {work.description && <p className="text-sm text-gray-600 mt-1">{work.description}</p>}
+                          {work.year && (
+                            <div className="flex items-center gap-1 mt-2 text-xs text-gray-500">
+                              <Calendar className="h-3 w-3" />
+                              {work.year}
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
                   </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            )}
 
-          {/* SHOWCASE Section */}
-          <Card className="border-2 border-purple-100">
-            <CardContent className="p-8 space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold font-playfair mb-6 flex items-center gap-2">
-                  <Play className="h-6 w-6 text-primary" />
-                  Showcase
-                </h2>
-              </div>
+            {/* Training & Education */}
+            {((artist.training_records && artist.training_records.length > 0) ||
+              (artist.education_records && artist.education_records.length > 0)) && (
+              <Card className="border-purple-100 md:col-span-2">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Building className="h-5 w-5 text-purple-600" />
+                    Training & Education
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {artist.training_records?.map((training, idx) => (
+                    <div key={idx} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                      <Award className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h5 className="font-medium text-gray-900">{training.program_name}</h5>
+                        {training.instructor && (
+                          <p className="text-sm text-gray-600">Instructor: {training.instructor}</p>
+                        )}
+                        {training.institution && <p className="text-sm text-gray-600">{training.institution}</p>}
+                        {training.year && <p className="text-xs text-gray-500 mt-1">{training.year}</p>}
+                      </div>
+                    </div>
+                  ))}
+                  {artist.education_records?.map((edu, idx) => (
+                    <div key={idx} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                      <Building className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h5 className="font-medium text-gray-900">{edu.degree}</h5>
+                        <p className="text-sm text-gray-600">{edu.institution}</p>
+                        {edu.year && <p className="text-xs text-gray-500 mt-1">{edu.year}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </section>
 
-              {/* Gallery */}
-              {getMediaItems().length > 0 && (
-                <div className="space-y-3">
-                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                    Portfolio Gallery
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    {getMediaItems().map((item, index) => (
+        <Separator className="my-12" />
+
+        {/* SHOWCASE Section */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Film className="h-6 w-6 text-purple-600" />
+            <h2 className="text-3xl font-bold text-gray-900">Showcase</h2>
+          </div>
+
+          {/* Portfolio Gallery */}
+          {artist.portfolio_images && artist.portfolio_images.length > 0 && (
+            <Card className="border-purple-100 mb-6">
+              <CardHeader>
+                <CardTitle>Portfolio Gallery</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                  {artist.portfolio_images.slice(0, 5).map((image, idx) => {
+                    const isVideo =
+                      image.includes("youtube.com") ||
+                      image.includes("youtu.be") ||
+                      image.includes("vimeo.com") ||
+                      image.endsWith(".mp4") ||
+                      image.endsWith(".mov")
+
+                    return (
                       <div
-                        key={index}
-                        className="aspect-square relative overflow-hidden rounded-lg border-2 border-purple-100 hover:border-primary transition-all group cursor-pointer"
+                        key={idx}
+                        className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer hover:shadow-xl transition-all"
                       >
-                        {item.type === "image" ? (
-                          <img
-                            src={item.url || "/placeholder.svg"}
-                            alt={`Portfolio ${index + 1}`}
-                            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
-                          />
-                        ) : (
-                          <div className="relative w-full h-full bg-black">
-                            <video src={item.url} className="object-cover w-full h-full" />
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-colors">
-                              <Play className="h-12 w-12 text-white" />
-                            </div>
+                        <Image
+                          src={image || "/placeholder.svg"}
+                          alt={`Portfolio ${idx + 1}`}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                        {isVideo && (
+                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                            <Play className="h-12 w-12 text-white" />
                           </div>
                         )}
                       </div>
-                    ))}
-                  </div>
-                  {(profile.portfolio_images?.length || 0) + (profile.portfolio_videos?.length || 0) > 5 && (
-                    <p className="text-sm text-muted-foreground text-center">
-                      Showing 5 of {(profile.portfolio_images?.length || 0) + (profile.portfolio_videos?.length || 0)}{" "}
-                      items
-                    </p>
-                  )}
+                    )
+                  })}
                 </div>
-              )}
+              </CardContent>
+            </Card>
+          )}
 
-              {/* Showreels & Links */}
-              <div className="space-y-3">
-                <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                  Links & Profiles
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                  {profile.youtube_url && (
-                    <Button variant="outline" className="w-full justify-start bg-transparent" asChild>
-                      <a href={profile.youtube_url} target="_blank" rel="noopener noreferrer">
-                        <Youtube className="h-4 w-4 mr-2 text-red-600" />
-                        Showreel
+          {/* Showreels & Links */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Showreels */}
+            {(artist.showreel_url || artist.monologue_url) && (
+              <Card className="border-purple-100">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Play className="h-5 w-5 text-purple-600" />
+                    Showreels
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {artist.showreel_url && (
+                    <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                      <a href={artist.showreel_url} target="_blank" rel="noopener noreferrer">
+                        <Film className="h-4 w-4 mr-2" />
+                        Watch Showreel
+                        <ExternalLink className="h-4 w-4 ml-auto" />
                       </a>
                     </Button>
                   )}
-                  {profile.instagram_url && (
-                    <Button variant="outline" className="w-full justify-start bg-transparent" asChild>
-                      <a href={profile.instagram_url} target="_blank" rel="noopener noreferrer">
-                        <Instagram className="h-4 w-4 mr-2 text-pink-600" />
+                  {artist.monologue_url && (
+                    <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                      <a href={artist.monologue_url} target="_blank" rel="noopener noreferrer">
+                        <Play className="h-4 w-4 mr-2" />
+                        Watch Monologue
+                        <ExternalLink className="h-4 w-4 ml-auto" />
+                      </a>
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Social Media */}
+            {(artist.instagram_url || artist.youtube_url || artist.imdb_url) && (
+              <Card className="border-purple-100">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Globe className="h-5 w-5 text-purple-600" />
+                    Connect Online
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {artist.instagram_url && (
+                    <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                      <a href={artist.instagram_url} target="_blank" rel="noopener noreferrer">
+                        <Instagram className="h-4 w-4 mr-2" />
                         Instagram
+                        <ExternalLink className="h-4 w-4 ml-auto" />
                       </a>
                     </Button>
                   )}
-                  {profile.imdb_url && (
-                    <Button variant="outline" className="w-full justify-start bg-transparent" asChild>
-                      <a href={profile.imdb_url} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2 text-yellow-600" />
+                  {artist.youtube_url && (
+                    <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                      <a href={artist.youtube_url} target="_blank" rel="noopener noreferrer">
+                        <Youtube className="h-4 w-4 mr-2" />
+                        YouTube
+                        <ExternalLink className="h-4 w-4 ml-auto" />
+                      </a>
+                    </Button>
+                  )}
+                  {artist.imdb_url && (
+                    <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                      <a href={artist.imdb_url} target="_blank" rel="noopener noreferrer">
+                        <Film className="h-4 w-4 mr-2" />
                         IMDb
+                        <ExternalLink className="h-4 w-4 ml-auto" />
                       </a>
                     </Button>
                   )}
-                </div>
-              </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
 
-              {/* Social Connect */}
-              <div className="bg-gradient-to-r from-primary/5 to-purple-50 rounded-lg p-6 border border-primary/20">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div>
-                    <h3 className="font-semibold mb-1">Interested in collaborating?</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Reach out to {profile.full_name.split(" ")[0]} for opportunities
-                    </p>
-                  </div>
-                  <Button size="lg" asChild>
-                    <a href={`mailto:${profile.email}`}>
-                      <MessageCircle className="h-4 w-4 mr-2" />
-                      Get in Touch
+          {/* Call to Action */}
+          <Card className="border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50 mt-6">
+            <CardContent className="p-6 text-center">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Interested in collaborating?</h3>
+              <p className="text-gray-600 mb-4">Reach out to discuss opportunities and creative projects</p>
+              <div className="flex justify-center gap-3">
+                {artist.email && (
+                  <Button asChild className="bg-purple-600 hover:bg-purple-700">
+                    <a href={`mailto:${artist.email}`}>
+                      <Mail className="h-4 w-4 mr-2" />
+                      Send Email
                     </a>
                   </Button>
-                </div>
+                )}
+                {artist.phone && (
+                  <Button asChild variant="outline">
+                    <a href={`tel:${artist.phone}`}>
+                      <Phone className="h-4 w-4 mr-2" />
+                      Call Now
+                    </a>
+                  </Button>
+                )}
               </div>
             </CardContent>
           </Card>
+        </section>
 
-          {/* Consent Footer */}
-          <Card className="border-2 border-purple-100 bg-purple-50/50">
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                <h3 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">Legal & Consent</h3>
-                <div className="space-y-3">
-                  <div className="flex items-start space-x-3">
-                    <Checkbox
-                      id="terms"
-                      checked={agreedToTerms}
-                      onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
-                      className="mt-1"
-                    />
-                    <Label htmlFor="terms" className="text-sm leading-relaxed cursor-pointer">
-                      I confirm that all information displayed on this profile is accurate and I have the right to
-                      showcase this content.
-                    </Label>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <Checkbox
-                      id="privacy"
-                      checked={agreedToPrivacy}
-                      onCheckedChange={(checked) => setAgreedToPrivacy(checked as boolean)}
-                      className="mt-1"
-                    />
-                    <Label htmlFor="privacy" className="text-sm leading-relaxed cursor-pointer">
-                      I agree to Abhinayपथ's{" "}
-                      <Link href="/terms" className="text-primary hover:underline">
-                        Terms of Service
-                      </Link>{" "}
-                      and{" "}
-                      <Link href="/privacy" className="text-primary hover:underline">
-                        Privacy Policy
-                      </Link>
-                      .
-                    </Label>
-                  </div>
+        <Separator className="my-12" />
+
+        {/* Consent Footer */}
+        <section className="mb-8">
+          <Card className="border-purple-200 bg-purple-50/50">
+            <CardContent className="p-6 space-y-4">
+              <h3 className="font-semibold text-gray-900 mb-3">Public Profile Notice</h3>
+
+              <div className="space-y-3 text-sm">
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    id="terms"
+                    checked={termsAccepted}
+                    onCheckedChange={(checked) => setTermsAccepted(checked as boolean)}
+                  />
+                  <label htmlFor="terms" className="text-gray-700 leading-relaxed cursor-pointer">
+                    I understand that this profile is publicly visible and I accept the{" "}
+                    <Link href="/terms" className="text-purple-600 hover:underline">
+                      Terms & Conditions
+                    </Link>
+                  </label>
                 </div>
-                <p className="text-xs text-muted-foreground mt-4">
-                  This profile is publicly visible and may be viewed by casting directors, producers, and other artists
-                  on Abhinayपथ.
-                </p>
+
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    id="privacy"
+                    checked={privacyAccepted}
+                    onCheckedChange={(checked) => setPrivacyAccepted(checked as boolean)}
+                  />
+                  <label htmlFor="privacy" className="text-gray-700 leading-relaxed cursor-pointer">
+                    I acknowledge the{" "}
+                    <Link href="/privacy" className="text-purple-600 hover:underline">
+                      Privacy Policy
+                    </Link>{" "}
+                    and understand how my data is displayed and protected
+                  </label>
+                </div>
               </div>
+
+              <p className="text-xs text-gray-600 mt-4 pt-4 border-t border-purple-200">
+                This profile has been published by the artist and is visible to all visitors of Abhinayपथ. If you notice
+                any inappropriate content, please contact us.
+              </p>
             </CardContent>
           </Card>
-        </div>
+        </section>
       </div>
     </div>
   )

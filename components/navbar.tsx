@@ -1,76 +1,29 @@
+import type React from "react"
 import Link from "next/link"
 
-const Navbar = () => {
-  const navigationLinks = [
-    {
-      name: "Home",
-      href: "/",
-    },
-    {
-      name: "About",
-      href: "/about",
-    },
-    {
-      name: "Recruitment",
-      href: "/recruitment",
-    },
-    {
-      name: "Artists",
-      href: "/artists",
-    },
-    {
-      name: "Resources",
-      href: "/resources",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
-  ]
-
-  const mobileNavigationLinks = [
-    {
-      name: "Home",
-      href: "/",
-    },
-    {
-      name: "About",
-      href: "/about",
-    },
-    {
-      name: "Recruitment",
-      href: "/recruitment",
-    },
-    {
-      name: "Artists",
-      href: "/artists",
-    },
-    {
-      name: "Resources",
-      href: "/resources",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
+const Navbar: React.FC = () => {
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "Auditions", href: "/auditions" },
+    { label: "Workshops", href: "/workshops" },
+    { label: "Networking", href: "/networking" },
+    { label: "Recruitment", href: "/recruitment" },
+    { label: "Artists", href: "/artists" }, // Added this line
+    { label: "Resources", href: "/resources" },
+    { label: "Admissions", href: "/admissions" },
   ]
 
   return (
     <nav>
-      <div>
-        {navigationLinks.map((link) => (
-          <Link key={link.name} href={link.href}>
-            {link.name}
-          </Link>
+      <ul>
+        {navItems.map((item, index) => (
+          <li key={index}>
+            <Link href={item.href}>
+              <a>{item.label}</a>
+            </Link>
+          </li>
         ))}
-      </div>
-      <div>
-        {mobileNavigationLinks.map((link) => (
-          <Link key={link.name} href={link.href}>
-            {link.name}
-          </Link>
-        ))}
-      </div>
+      </ul>
     </nav>
   )
 }

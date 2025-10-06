@@ -1,26 +1,33 @@
-import { NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase-server"
+import { type NextRequest, NextResponse } from "next/server"
+import { getSupabaseServerClientForRouteHandler } from "@/lib/supabase-server"
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+// GET - Fetch a single talent profile by ID
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const supabase = createClient()
+    const { id } = await params
 
-    // Fetch talent profile with related data
+    if (!id) {
+      return NextResponse.json({ error: "Profile ID is required" }, { status: 400 })
+    }
+
+    const supabase = await getSupabaseServerClientForRouteHandler()
+
     const { data: profile, error } = await supabase
       .from("talent_profiles")
       .select(`
         *,
-        experience:talent_experience(*),
-        education:talent_education(*),
-        training:talent_training(*)
+        education_records(*),
+        experience_records(*),
+        training_records(*),
+        media_files(*)
       `)
-      .eq("id", params.id)
-      .eq("profile_status", "published")
+      .eq("id", id)
+      .eq("published", true)
       .single()
 
     if (error) {
       console.error("Error fetching talent profile:", error)
-      return NextResponse.json({ error: "Profile not found" }, { status: 404 })
+      return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
     if (!profile) {
@@ -29,7 +36,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
     return NextResponse.json(profile)
   } catch (error) {
-    console.error("Error in talent profile API:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    console.error("GET talent profile by ID failed:", error)
+    return NextResponse.json({ error: "Failed to fetch talent profile" }, { status: 500 })
   }
 }
