@@ -1,897 +1,809 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import Link from "next/link"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import {
-  CalendarIcon,
-  ChevronDown,
-  MapPin,
-  Globe,
   Briefcase,
-  Users,
+  MapPin,
+  CalendarIcon,
   DollarSign,
-  Eye,
-  Camera,
+  Users,
+  FileText,
+  Clock,
   CheckCircle2,
-  X,
-  AlertCircle,
-  Sparkles,
+  ArrowRight,
+  ArrowLeft,
+  Eye,
+  EyeOff,
+  Info,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { toast } from "sonner"
-import Link from "next/link"
 
-const LANGUAGES = [
-  "Hindi",
-  "English",
-  "Marathi",
-  "Tamil",
-  "Telugu",
-  "Bengali",
-  "Gujarati",
-  "Kannada",
-  "Malayalam",
-  "Punjabi",
+type OpportunityType = "audition" | "workshop" | "job" | "networking"
+
+interface FormData {
+  // Basic Info
+  type: OpportunityType | ""
+  title: string
+  organization: string
+  location: string
+  description: string
+
+  // Details
+  requirements: string
+  deadline: Date | undefined
+  startDate: Date | undefined
+  endDate: Date | undefined
+  compensation: string
+  compensationType: string
+
+  // Additional
+  applicationUrl: string
+  contactEmail: string
+  experienceLevel: string
+  languages: string[]
+  skills: string[]
+  isRemote: boolean
+  isPaid: boolean
+}
+
+const initialFormData: FormData = {
+  type: "",
+  title: "",
+  organization: "",
+  location: "",
+  description: "",
+  requirements: "",
+  deadline: undefined,
+  startDate: undefined,
+  endDate: undefined,
+  compensation: "",
+  compensationType: "fixed",
+  applicationUrl: "",
+  contactEmail: "",
+  experienceLevel: "",
+  languages: [],
+  skills: [],
+  isRemote: false,
+  isPaid: false,
+}
+
+const opportunityTypes = [
+  { value: "audition", label: "Audition", icon: "🎭" },
+  { value: "workshop", label: "Workshop", icon: "📚" },
+  { value: "job", label: "Job Opportunity", icon: "💼" },
+  { value: "networking", label: "Networking Event", icon: "🤝" },
+]
+
+const experienceLevels = ["Beginner", "Intermediate", "Advanced", "Professional", "Any"]
+
+const commonLanguages = ["Hindi", "English", "Tamil", "Telugu", "Marathi", "Bengali", "Kannada", "Malayalam"]
+
+const commonSkills = [
+  "Acting",
+  "Dancing",
+  "Singing",
+  "Direction",
+  "Screenplay Writing",
+  "Cinematography",
+  "Editing",
+  "Production",
 ]
 
 export default function PostOpportunityPage() {
-  // Form state
-  const [title, setTitle] = useState("")
-  const [type, setType] = useState("")
-  const [deadline, setDeadline] = useState<Date>()
-  const [locationMode, setLocationMode] = useState<"city" | "online">("city")
-  const [city, setCity] = useState("")
-  const [venue, setVenue] = useState("")
-  const [platform, setPlatform] = useState("")
-  const [description, setDescription] = useState("")
-  const [applicationMethod, setApplicationMethod] = useState("platform")
-  const [contactInfo, setContactInfo] = useState("")
-
-  // Advanced fields
-  const [advancedOpen, setAdvancedOpen] = useState(false)
-  const [rolesNeeded, setRolesNeeded] = useState("")
-  const [genderPreference, setGenderPreference] = useState("any")
-  const [ageMin, setAgeMin] = useState("")
-  const [ageMax, setAgeMax] = useState("")
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
-  const [experience, setExperience] = useState("")
-  const [payType, setPayType] = useState("not-specified")
-  const [payAmount, setPayAmount] = useState("")
-  const [visibility, setVisibility] = useState("public")
-
-  // Media request
-  const [requestPhotos, setRequestPhotos] = useState(false)
-  const [photoHelperText, setPhotoHelperText] = useState("")
-  const [requestVideos, setRequestVideos] = useState(false)
-  const [videoHelperText, setVideoHelperText] = useState("")
-
-  // Consent
-  const [consent1, setConsent1] = useState(false)
-  const [consent2, setConsent2] = useState(false)
-
-  // UI state
-  const [contactOpen, setContactOpen] = useState(false)
-  const [applyFlowOpen, setApplyFlowOpen] = useState(false)
+  const router = useRouter()
+  const [currentStep, setCurrentStep] = useState(1)
+  const [formData, setFormData] = useState<FormData>(initialFormData)
   const [showPreview, setShowPreview] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Calculate progress
-  const [progress, setProgress] = useState(0)
+  const totalSteps = 3
+  const progress = (currentStep / totalSteps) * 100
 
-  useEffect(() => {
-    const requiredFields = [
-      title,
-      type,
-      deadline,
-      locationMode === "city" ? city : true,
-      description,
-      applicationMethod,
-      consent1,
-      consent2,
-    ]
+  const updateFormData = (field: keyof FormData, value: any) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
 
-    const completed = requiredFields.filter(Boolean).length
-    const total = requiredFields.length
-    setProgress((completed / total) * 100)
-  }, [title, type, deadline, city, description, applicationMethod, consent1, consent2, locationMode])
+  const toggleArrayItem = (field: "languages" | "skills", item: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: prev[field].includes(item) ? prev[field].filter((i) => i !== item) : [...prev[field], item],
+    }))
+  }
 
-  const toggleLanguage = (lang: string) => {
-    if (selectedLanguages.includes(lang)) {
-      setSelectedLanguages(selectedLanguages.filter((l) => l !== lang))
-    } else if (selectedLanguages.length < 4) {
-      setSelectedLanguages([...selectedLanguages, lang])
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        if (!formData.type || !formData.title || !formData.organization) {
+          toast.error("Please fill in all required fields in Step 1")
+          return false
+        }
+        return true
+      case 2:
+        if (!formData.description || !formData.requirements) {
+          toast.error("Please fill in all required fields in Step 2")
+          return false
+        }
+        return true
+      case 3:
+        if (!formData.contactEmail) {
+          toast.error("Please provide a contact email")
+          return false
+        }
+        return true
+      default:
+        return true
     }
   }
 
-  const isFormValid = () => {
-    if (!title || !type || !deadline || !description || !consent1 || !consent2) return false
-    if (locationMode === "city" && !city) return false
-    if ((payType === "stipend" || payType === "paid") && !payAmount) return false
-    if (ageMin && ageMax && Number(ageMin) > Number(ageMax)) return false
-    return true
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep((prev) => Math.min(prev + 1, totalSteps))
+    }
   }
 
-  const handlePublish = () => {
-    if (!isFormValid()) return
+  const handlePrevious = () => {
+    setCurrentStep((prev) => Math.max(prev - 1, 1))
+  }
 
-    toast.success("Published. You can edit anytime.")
-    // Here you would normally submit to an API
+  const handleSubmit = async () => {
+    if (!validateStep(3)) return
+
+    setIsSubmitting(true)
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    setIsSubmitting(false)
+
+    toast.success("Opportunity posted successfully!")
+    router.push("/")
+  }
+
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-3">
+              <Label htmlFor="type" className="text-sm sm:text-base">
+                Opportunity Type <span className="text-red-500">*</span>
+              </Label>
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+                {opportunityTypes.map((type) => (
+                  <button
+                    key={type.value}
+                    type="button"
+                    onClick={() => updateFormData("type", type.value)}
+                    className={cn(
+                      "p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 transition-all text-left min-h-[80px] sm:min-h-[100px] touch-manipulation",
+                      formData.type === type.value
+                        ? "border-purple-500 bg-purple-50 shadow-md"
+                        : "border-gray-200 hover:border-gray-300 hover:bg-gray-50",
+                    )}
+                  >
+                    <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{type.icon}</div>
+                    <div className="text-xs sm:text-sm font-medium">{type.label}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2 sm:space-y-3">
+              <Label htmlFor="title" className="text-sm sm:text-base">
+                Opportunity Title <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="title"
+                placeholder="e.g., Lead Role in Theatre Production"
+                value={formData.title}
+                onChange={(e) => updateFormData("title", e.target.value)}
+                className="h-11 sm:h-12 text-sm sm:text-base"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="space-y-2 sm:space-y-3">
+                <Label htmlFor="organization" className="text-sm sm:text-base">
+                  Organization/Company <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="organization"
+                  placeholder="e.g., National School of Drama"
+                  value={formData.organization}
+                  onChange={(e) => updateFormData("organization", e.target.value)}
+                  className="h-11 sm:h-12 text-sm sm:text-base"
+                />
+              </div>
+
+              <div className="space-y-2 sm:space-y-3">
+                <Label htmlFor="location" className="text-sm sm:text-base">
+                  Location
+                </Label>
+                <Input
+                  id="location"
+                  placeholder="e.g., Mumbai, Maharashtra"
+                  value={formData.location}
+                  onChange={(e) => updateFormData("location", e.target.value)}
+                  className="h-11 sm:h-12 text-sm sm:text-base"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2 pt-2">
+              <Checkbox
+                id="isRemote"
+                checked={formData.isRemote}
+                onCheckedChange={(checked) => updateFormData("isRemote", checked)}
+                className="h-5 w-5 sm:h-4 sm:w-4"
+              />
+              <label
+                htmlFor="isRemote"
+                className="text-sm sm:text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                This is a remote opportunity
+              </label>
+            </div>
+          </div>
+        )
+
+      case 2:
+        return (
+          <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-2 sm:space-y-3">
+              <Label htmlFor="description" className="text-sm sm:text-base">
+                Description <span className="text-red-500">*</span>
+              </Label>
+              <Textarea
+                id="description"
+                placeholder="Provide a detailed description of the opportunity..."
+                value={formData.description}
+                onChange={(e) => updateFormData("description", e.target.value)}
+                rows={5}
+                className="resize-none text-sm sm:text-base min-h-[120px]"
+              />
+            </div>
+
+            <div className="space-y-2 sm:space-y-3">
+              <Label htmlFor="requirements" className="text-sm sm:text-base">
+                Requirements <span className="text-red-500">*</span>
+              </Label>
+              <Textarea
+                id="requirements"
+                placeholder="List the requirements and qualifications..."
+                value={formData.requirements}
+                onChange={(e) => updateFormData("requirements", e.target.value)}
+                rows={5}
+                className="resize-none text-sm sm:text-base min-h-[120px]"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="space-y-2 sm:space-y-3">
+                <Label className="text-sm sm:text-base">Application Deadline</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal h-11 sm:h-12 text-sm sm:text-base",
+                        !formData.deadline && "text-muted-foreground",
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+                      <span className="truncate">
+                        {formData.deadline ? format(formData.deadline, "PPP") : "Pick a date"}
+                      </span>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={formData.deadline}
+                      onSelect={(date) => updateFormData("deadline", date)}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+
+              <div className="space-y-2 sm:space-y-3">
+                <Label htmlFor="experienceLevel" className="text-sm sm:text-base">
+                  Experience Level
+                </Label>
+                <Select
+                  value={formData.experienceLevel}
+                  onValueChange={(value) => updateFormData("experienceLevel", value)}
+                >
+                  <SelectTrigger className="h-11 sm:h-12 text-sm sm:text-base">
+                    <SelectValue placeholder="Select level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {experienceLevels.map((level) => (
+                      <SelectItem key={level} value={level}>
+                        {level}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <Label className="text-sm sm:text-base">Required Languages</Label>
+              <div className="flex flex-wrap gap-2">
+                {commonLanguages.map((lang) => (
+                  <Badge
+                    key={lang}
+                    variant={formData.languages.includes(lang) ? "default" : "outline"}
+                    className="cursor-pointer px-3 py-2 text-xs sm:text-sm touch-manipulation min-h-[36px] sm:min-h-[32px]"
+                    onClick={() => toggleArrayItem("languages", lang)}
+                  >
+                    {lang}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <Label className="text-sm sm:text-base">Required Skills</Label>
+              <div className="flex flex-wrap gap-2">
+                {commonSkills.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant={formData.skills.includes(skill) ? "default" : "outline"}
+                    className="cursor-pointer px-3 py-2 text-xs sm:text-sm touch-manipulation min-h-[36px] sm:min-h-[32px]"
+                    onClick={() => toggleArrayItem("skills", skill)}
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        )
+
+      case 3:
+        return (
+          <div className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="space-y-2 sm:space-y-3">
+                <Label className="text-sm sm:text-base">Start Date</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal h-11 sm:h-12 text-sm sm:text-base",
+                        !formData.startDate && "text-muted-foreground",
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+                      <span className="truncate">
+                        {formData.startDate ? format(formData.startDate, "PPP") : "Pick a date"}
+                      </span>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={formData.startDate}
+                      onSelect={(date) => updateFormData("startDate", date)}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+
+              <div className="space-y-2 sm:space-y-3">
+                <Label className="text-sm sm:text-base">End Date</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal h-11 sm:h-12 text-sm sm:text-base",
+                        !formData.endDate && "text-muted-foreground",
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+                      <span className="truncate">
+                        {formData.endDate ? format(formData.endDate, "PPP") : "Pick a date"}
+                      </span>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={formData.endDate}
+                      onSelect={(date) => updateFormData("endDate", date)}
+                      initialFocus
+                      disabled={(date) => (formData.startDate ? date < formData.startDate : false)}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="isPaid"
+                  checked={formData.isPaid}
+                  onCheckedChange={(checked) => updateFormData("isPaid", checked)}
+                  className="h-5 w-5 sm:h-4 sm:w-4"
+                />
+                <label
+                  htmlFor="isPaid"
+                  className="text-sm sm:text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  This is a paid opportunity
+                </label>
+              </div>
+
+              {formData.isPaid && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pl-0 sm:pl-6">
+                  <div className="space-y-2 sm:space-y-3">
+                    <Label htmlFor="compensation" className="text-sm sm:text-base">
+                      Compensation Amount
+                    </Label>
+                    <Input
+                      id="compensation"
+                      placeholder="e.g., 50000"
+                      value={formData.compensation}
+                      onChange={(e) => updateFormData("compensation", e.target.value)}
+                      className="h-11 sm:h-12 text-sm sm:text-base"
+                    />
+                  </div>
+
+                  <div className="space-y-2 sm:space-y-3">
+                    <Label htmlFor="compensationType" className="text-sm sm:text-base">
+                      Payment Type
+                    </Label>
+                    <Select
+                      value={formData.compensationType}
+                      onValueChange={(value) => updateFormData("compensationType", value)}
+                    >
+                      <SelectTrigger className="h-11 sm:h-12 text-sm sm:text-base">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="fixed">Fixed Amount</SelectItem>
+                        <SelectItem value="hourly">Hourly Rate</SelectItem>
+                        <SelectItem value="daily">Daily Rate</SelectItem>
+                        <SelectItem value="monthly">Monthly Salary</SelectItem>
+                        <SelectItem value="project">Project-based</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-2 sm:space-y-3">
+              <Label htmlFor="applicationUrl" className="text-sm sm:text-base">
+                Application URL
+              </Label>
+              <Input
+                id="applicationUrl"
+                type="url"
+                placeholder="https://..."
+                value={formData.applicationUrl}
+                onChange={(e) => updateFormData("applicationUrl", e.target.value)}
+                className="h-11 sm:h-12 text-sm sm:text-base"
+              />
+            </div>
+
+            <div className="space-y-2 sm:space-y-3">
+              <Label htmlFor="contactEmail" className="text-sm sm:text-base">
+                Contact Email <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="contactEmail"
+                type="email"
+                placeholder="contact@example.com"
+                value={formData.contactEmail}
+                onChange={(e) => updateFormData("contactEmail", e.target.value)}
+                className="h-11 sm:h-12 text-sm sm:text-base"
+              />
+            </div>
+          </div>
+        )
+
+      default:
+        return null
+    }
+  }
+
+  const renderPreview = () => {
+    const typeInfo = opportunityTypes.find((t) => t.value === formData.type)
+
+    return (
+      <Card className="border-2 shadow-lg">
+        <CardHeader className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-3 py-1">
+                  {typeInfo?.icon} {typeInfo?.label}
+                </Badge>
+                {formData.isPaid && (
+                  <Badge variant="default" className="bg-green-500 text-xs sm:text-sm px-2 sm:px-3 py-1">
+                    💰 Paid
+                  </Badge>
+                )}
+                {formData.isRemote && (
+                  <Badge variant="outline" className="text-xs sm:text-sm px-2 sm:px-3 py-1">
+                    🌐 Remote
+                  </Badge>
+                )}
+              </div>
+              <CardTitle className="text-xl sm:text-2xl mb-2 break-words">
+                {formData.title || "Untitled Opportunity"}
+              </CardTitle>
+              <CardDescription className="text-sm sm:text-base break-words">
+                {formData.organization && (
+                  <span className="block">
+                    <Briefcase className="inline h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                    {formData.organization}
+                  </span>
+                )}
+                {formData.location && (
+                  <span className="block mt-1">
+                    <MapPin className="inline h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                    {formData.location}
+                  </span>
+                )}
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+
+        <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6">
+          {formData.description && (
+            <div>
+              <h3 className="font-semibold mb-2 text-sm sm:text-base flex items-center gap-2">
+                <FileText className="h-4 w-4 flex-shrink-0" />
+                Description
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 whitespace-pre-wrap break-words">{formData.description}</p>
+            </div>
+          )}
+
+          {formData.requirements && (
+            <div>
+              <h3 className="font-semibold mb-2 text-sm sm:text-base flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
+                Requirements
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 whitespace-pre-wrap break-words">
+                {formData.requirements}
+              </p>
+            </div>
+          )}
+
+          {(formData.languages.length > 0 || formData.skills.length > 0) && (
+            <div className="space-y-3">
+              {formData.languages.length > 0 && (
+                <div>
+                  <h4 className="font-medium mb-2 text-xs sm:text-sm">Languages</h4>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {formData.languages.map((lang) => (
+                      <Badge key={lang} variant="outline" className="text-xs px-2 py-1">
+                        {lang}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {formData.skills.length > 0 && (
+                <div>
+                  <h4 className="font-medium mb-2 text-xs sm:text-sm">Skills</h4>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {formData.skills.map((skill) => (
+                      <Badge key={skill} variant="outline" className="text-xs px-2 py-1">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4 border-t">
+            {formData.deadline && (
+              <div className="flex items-center gap-2 text-xs sm:text-sm">
+                <Clock className="h-4 w-4 text-gray-500 flex-shrink-0" />
+                <div>
+                  <div className="text-gray-500 text-xs">Deadline</div>
+                  <div className="font-medium">{format(formData.deadline, "PPP")}</div>
+                </div>
+              </div>
+            )}
+
+            {formData.experienceLevel && (
+              <div className="flex items-center gap-2 text-xs sm:text-sm">
+                <Users className="h-4 w-4 text-gray-500 flex-shrink-0" />
+                <div>
+                  <div className="text-gray-500 text-xs">Experience</div>
+                  <div className="font-medium">{formData.experienceLevel}</div>
+                </div>
+              </div>
+            )}
+
+            {formData.isPaid && formData.compensation && (
+              <div className="flex items-center gap-2 text-xs sm:text-sm">
+                <DollarSign className="h-4 w-4 text-gray-500 flex-shrink-0" />
+                <div>
+                  <div className="text-gray-500 text-xs">Compensation</div>
+                  <div className="font-medium">₹{formData.compensation}</div>
+                </div>
+              </div>
+            )}
+
+            {formData.contactEmail && (
+              <div className="flex items-center gap-2 text-xs sm:text-sm">
+                <Info className="h-4 w-4 text-gray-500 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <div className="text-gray-500 text-xs">Contact</div>
+                  <div className="font-medium truncate">{formData.contactEmail}</div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {formData.applicationUrl && (
+            <Button className="w-full mt-4 h-11 sm:h-12 text-sm sm:text-base touch-manipulation" asChild>
+              <a href={formData.applicationUrl} target="_blank" rel="noopener noreferrer">
+                Apply Now
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          )}
+        </CardContent>
+      </Card>
+    )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-        {/* Header - Mobile Optimized */}
-        <div className="mb-6 sm:mb-8 text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-            <Badge variant="secondary" className="text-xs font-medium px-2 sm:px-3 py-1">
-              AP
-            </Badge>
-            <h1 className="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Post Opportunity</h1>
-            <Badge variant="outline" className="text-xs px-2 sm:px-3 py-1">
-              All times IST
-            </Badge>
-          </div>
-          <p className="text-gray-600 text-xs sm:text-sm">Keep it crisp. Artists love clarity.</p>
-        </div>
-
-        {/* Progress Bar - Mobile Optimized */}
-        <div className="mb-6 sm:mb-8 max-w-2xl mx-auto">
-          <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
-            <span>Form completion</span>
-            <span className="font-medium">{Math.round(progress)}%</span>
-          </div>
-          <Progress value={progress} className="h-2" />
-        </div>
-
-        {/* Mobile Preview Toggle Button */}
-        <div className="lg:hidden mb-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 py-4 sm:py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-6 sm:mb-8">
           <Button
-            variant="outline"
-            className="w-full rounded-lg h-12 border-2 bg-transparent"
-            onClick={() => setShowPreview(!showPreview)}
+            variant="ghost"
+            onClick={() => router.back()}
+            className="mb-4 text-sm sm:text-base h-10 sm:h-auto px-3 sm:px-4 touch-manipulation"
           >
-            <Eye className="mr-2 h-4 w-4" />
-            {showPreview ? "Hide Preview" : "Show Live Preview"}
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
           </Button>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Post an Opportunity</h1>
+          <p className="text-sm sm:text-base text-gray-600">Share opportunities with the theatre community</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
-          {/* Left Column - Form */}
-          <div className={cn("space-y-4 sm:space-y-6", showPreview && "hidden lg:block")}>
-            {/* Core Section - Mobile Optimized */}
-            <Card className="border-2 shadow-md rounded-xl sm:rounded-2xl overflow-hidden transition-all hover:shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 pb-3 sm:pb-4 px-4 sm:px-6">
-                <div className="flex items-center gap-2">
-                  <Briefcase className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 flex-shrink-0" />
-                  <CardTitle className="text-base sm:text-lg lg:text-xl">Core Details</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4 sm:space-y-5">
-                {/* Title */}
-                <div className="space-y-2">
-                  <Label htmlFor="title" className="text-sm font-medium">
-                    Title <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="title"
-                    placeholder="e.g., Lead Actor for Feature Film"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500 h-11 sm:h-10 text-base sm:text-sm"
-                  />
-                </div>
-
-                {/* Type */}
-                <div className="space-y-2">
-                  <Label htmlFor="type" className="text-sm font-medium">
-                    Type <span className="text-red-500">*</span>
-                  </Label>
-                  <Select value={type} onValueChange={setType}>
-                    <SelectTrigger className="rounded-lg h-11 sm:h-10">
-                      <SelectValue placeholder="Select opportunity type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="theatre-play">Theatre Play</SelectItem>
-                      <SelectItem value="short-film">Short Film</SelectItem>
-                      <SelectItem value="feature-film">Feature Film</SelectItem>
-                      <SelectItem value="ad">Ad</SelectItem>
-                      <SelectItem value="backstage">Backstage</SelectItem>
-                      <SelectItem value="job">Job</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Deadline */}
-                <div className="space-y-2">
-                  <Label className="text-sm font-medium">
-                    Deadline <span className="text-red-500">*</span>
-                  </Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-full justify-start text-left font-normal rounded-lg h-11 sm:h-10",
-                          !deadline && "text-muted-foreground",
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-                        <span className="truncate">{deadline ? format(deadline, "PPP") : "Pick a date"}</span>
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={deadline}
-                        onSelect={setDeadline}
-                        disabled={(date) => date < new Date()}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-
-                {/* Location Mode - Mobile Optimized */}
-                <div className="space-y-3">
-                  <Label className="text-sm font-medium">
-                    Location Mode <span className="text-red-500">*</span>
-                  </Label>
-                  <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                    <Button
-                      type="button"
-                      variant={locationMode === "city" ? "default" : "outline"}
-                      className="rounded-lg h-11 sm:h-10 text-sm"
-                      onClick={() => setLocationMode("city")}
-                    >
-                      <MapPin className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
-                      City
-                    </Button>
-                    <Button
-                      type="button"
-                      variant={locationMode === "online" ? "default" : "outline"}
-                      className="rounded-lg h-11 sm:h-10 text-sm"
-                      onClick={() => setLocationMode("online")}
-                    >
-                      <Globe className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
-                      Online
-                    </Button>
-                  </div>
-                </div>
-
-                {/* City/Venue or Platform - Mobile Optimized */}
-                {locationMode === "city" ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="space-y-2">
-                      <Label htmlFor="city" className="text-sm font-medium">
-                        City <span className="text-red-500">*</span>
-                      </Label>
-                      <Input
-                        id="city"
-                        placeholder="e.g., Mumbai"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="venue" className="text-sm font-medium">
-                        Venue
-                      </Label>
-                      <Input
-                        id="venue"
-                        placeholder="Optional"
-                        value={venue}
-                        onChange={(e) => setVenue(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-2">
-                    <Label htmlFor="platform" className="text-sm font-medium">
-                      Platform
-                    </Label>
-                    <Input
-                      id="platform"
-                      placeholder="e.g., Zoom, Google Meet"
-                      value={platform}
-                      onChange={(e) => setPlatform(e.target.value)}
-                      className="rounded-lg h-11 sm:h-10"
-                    />
-                  </div>
-                )}
-
-                {/* Description - Mobile Optimized */}
-                <div className="space-y-2">
-                  <Label htmlFor="description" className="text-sm font-medium">
-                    Description <span className="text-red-500">*</span>
-                  </Label>
-                  <Textarea
-                    id="description"
-                    placeholder="What to prepare, key dates, audition flow..."
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="rounded-lg min-h-[100px] sm:min-h-[120px] resize-none text-base sm:text-sm"
-                  />
-                </div>
-
-                {/* Application Method - Mobile Optimized */}
-                <div className="space-y-3">
-                  <Label className="text-sm font-medium">
-                    Application Method <span className="text-red-500">*</span>
-                  </Label>
-                  <RadioGroup value={applicationMethod} onValueChange={setApplicationMethod} className="space-y-2">
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
-                      <RadioGroupItem value="platform" id="platform-method" />
-                      <Label htmlFor="platform-method" className="flex-1 cursor-pointer text-sm">
-                        Quick Apply on Abhinayपथ
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
-                      <RadioGroupItem value="whatsapp" id="whatsapp-method" />
-                      <Label htmlFor="whatsapp-method" className="flex-1 cursor-pointer text-sm">
-                        WhatsApp
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
-                      <RadioGroupItem value="email" id="email-method" />
-                      <Label htmlFor="email-method" className="flex-1 cursor-pointer text-sm">
-                        Email
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
-                      <RadioGroupItem value="external" id="external-method" />
-                      <Label htmlFor="external-method" className="flex-1 cursor-pointer text-sm">
-                        External Form
-                      </Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                {/* Optional Contact - Mobile Optimized */}
-                {applicationMethod !== "platform" && (
-                  <Collapsible open={contactOpen} onOpenChange={setContactOpen}>
-                    <CollapsibleTrigger asChild>
-                      <Button variant="ghost" className="w-full justify-between p-3 h-auto touch-manipulation">
-                        <span className="text-sm font-medium">Contact Information</span>
-                        <ChevronDown className={cn("h-4 w-4 transition-transform", contactOpen && "rotate-180")} />
-                      </Button>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pt-3">
-                      <Input
-                        placeholder={
-                          applicationMethod === "whatsapp"
-                            ? "WhatsApp number"
-                            : applicationMethod === "email"
-                              ? "Email address"
-                              : "Form URL"
-                        }
-                        value={contactInfo}
-                        onChange={(e) => setContactInfo(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
-                    </CollapsibleContent>
-                  </Collapsible>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Advanced Section - Mobile Optimized */}
-            <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
-              <Card className="border-2 shadow-md rounded-xl sm:rounded-2xl overflow-hidden transition-all hover:shadow-lg">
-                <CollapsibleTrigger asChild>
-                  <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50 pb-3 sm:pb-4 cursor-pointer hover:bg-blue-100 transition-colors px-4 sm:px-6 touch-manipulation">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 flex-shrink-0" />
-                        <CardTitle className="text-base sm:text-lg lg:text-xl">Advanced Details</CardTitle>
-                      </div>
-                      <ChevronDown className={cn("h-5 w-5 transition-transform", advancedOpen && "rotate-180")} />
-                    </div>
-                  </CardHeader>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4 sm:space-y-5">
-                    {/* Roles Needed */}
-                    <div className="space-y-2">
-                      <Label htmlFor="roles" className="text-sm font-medium">
-                        Roles Needed
-                      </Label>
-                      <Input
-                        id="roles"
-                        placeholder="e.g., 2 Female (20–25), 1 Male (30–40)"
-                        value={rolesNeeded}
-                        onChange={(e) => setRolesNeeded(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
-                    </div>
-
-                    {/* Gender Preference */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium">Gender Preference</Label>
-                      <Select value={genderPreference} onValueChange={setGenderPreference}>
-                        <SelectTrigger className="rounded-lg h-11 sm:h-10">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="any">Any</SelectItem>
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="female">Female</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Age Range - Mobile Optimized */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium">Age Range</Label>
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                        <Input
-                          type="number"
-                          placeholder="Min"
-                          value={ageMin}
-                          onChange={(e) => setAgeMin(e.target.value)}
-                          className="rounded-lg h-11 sm:h-10"
-                        />
-                        <Input
-                          type="number"
-                          placeholder="Max"
-                          value={ageMax}
-                          onChange={(e) => setAgeMax(e.target.value)}
-                          className="rounded-lg h-11 sm:h-10"
-                        />
-                      </div>
-                      {ageMin && ageMax && Number(ageMin) > Number(ageMax) && (
-                        <p className="text-xs text-red-500 flex items-center gap-1">
-                          <AlertCircle className="h-3 w-3 flex-shrink-0" />
-                          Min age must be less than max age
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Languages - Mobile Optimized with Better Touch Targets */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium">Languages (max 4)</Label>
-                      <div className="flex flex-wrap gap-2">
-                        {LANGUAGES.map((lang) => (
-                          <button
-                            key={lang}
-                            type="button"
-                            onClick={() => toggleLanguage(lang)}
-                            className={cn(
-                              "px-3 sm:px-4 py-2 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all touch-manipulation min-h-[44px] sm:min-h-0",
-                              selectedLanguages.includes(lang)
-                                ? "bg-purple-600 text-white shadow-md"
-                                : "bg-gray-100 text-gray-700 hover:bg-gray-200",
-                              !selectedLanguages.includes(lang) &&
-                                selectedLanguages.length >= 4 &&
-                                "opacity-40 cursor-not-allowed",
-                            )}
-                            disabled={!selectedLanguages.includes(lang) && selectedLanguages.length >= 4}
-                          >
-                            {lang}
-                            {selectedLanguages.includes(lang) && (
-                              <X className="inline-block ml-1 h-3 w-3 sm:h-3 sm:w-3" />
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Experience */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium">Experience</Label>
-                      <Select value={experience} onValueChange={setExperience}>
-                        <SelectTrigger className="rounded-lg h-11 sm:h-10">
-                          <SelectValue placeholder="Select experience level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="beginner">Beginner</SelectItem>
-                          <SelectItem value="intermediate">Intermediate</SelectItem>
-                          <SelectItem value="professional">Professional</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Fee/Pay - Mobile Optimized */}
-                    <div className="space-y-3">
-                      <Label className="text-sm font-medium">Fee / Pay</Label>
-                      <Select value={payType} onValueChange={setPayType}>
-                        <SelectTrigger className="rounded-lg h-11 sm:h-10">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="not-specified">Not specified</SelectItem>
-                          <SelectItem value="free">Free</SelectItem>
-                          <SelectItem value="stipend">Stipend</SelectItem>
-                          <SelectItem value="paid">Paid</SelectItem>
-                        </SelectContent>
-                      </Select>
-
-                      {(payType === "stipend" || payType === "paid") && (
-                        <Input
-                          type="number"
-                          placeholder="Amount (₹)"
-                          value={payAmount}
-                          onChange={(e) => setPayAmount(e.target.value)}
-                          className="rounded-lg h-11 sm:h-10"
-                        />
-                      )}
-                    </div>
-
-                    {/* Visibility - Mobile Optimized */}
-                    <div className="space-y-3">
-                      <Label className="text-sm font-medium">Visibility</Label>
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                        <Button
-                          type="button"
-                          variant={visibility === "public" ? "default" : "outline"}
-                          className="rounded-lg h-11 sm:h-10 text-sm touch-manipulation"
-                          onClick={() => setVisibility("public")}
-                        >
-                          <Eye className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
-                          Public
-                        </Button>
-                        <Button
-                          type="button"
-                          variant={visibility === "unlisted" ? "default" : "outline"}
-                          className="rounded-lg h-11 sm:h-10 text-sm touch-manipulation"
-                          onClick={() => setVisibility("unlisted")}
-                        >
-                          Unlisted
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </CollapsibleContent>
-              </Card>
-            </Collapsible>
-
-            {/* Media Request - Mobile Optimized */}
-            <Card className="border-2 shadow-md rounded-xl sm:rounded-2xl overflow-hidden transition-all hover:shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 pb-3 sm:pb-4 px-4 sm:px-6">
-                <div className="flex items-center gap-2">
-                  <Camera className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 flex-shrink-0" />
-                  <CardTitle className="text-base sm:text-lg lg:text-xl">Media Request (Optional)</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4 sm:space-y-5">
-                {/* Request Photos */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2 touch-manipulation">
-                    <Checkbox
-                      id="request-photos"
-                      checked={requestPhotos}
-                      onCheckedChange={(checked) => setRequestPhotos(checked as boolean)}
-                      className="h-5 w-5"
-                    />
-                    <Label htmlFor="request-photos" className="text-sm font-medium cursor-pointer">
-                      Request Photos
-                    </Label>
-                  </div>
-
-                  {requestPhotos && (
-                    <div className="space-y-2 ml-0 sm:ml-6">
-                      <Input
-                        placeholder="Helper text (optional)"
-                        value={photoHelperText}
-                        onChange={(e) => setPhotoHelperText(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
-                      <p className="text-xs text-gray-500 flex items-start gap-1">
-                        <Sparkles className="h-3 w-3 mt-0.5 flex-shrink-0 text-purple-500" />
-                        JPG/PNG/WebP up to 5MB each. Ask for 1 headshot + 1 full body.
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Request Videos */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2 touch-manipulation">
-                    <Checkbox
-                      id="request-videos"
-                      checked={requestVideos}
-                      onCheckedChange={(checked) => setRequestVideos(checked as boolean)}
-                      className="h-5 w-5"
-                    />
-                    <Label htmlFor="request-videos" className="text-sm font-medium cursor-pointer">
-                      Request Video Links
-                    </Label>
-                  </div>
-
-                  {requestVideos && (
-                    <div className="space-y-2 ml-0 sm:ml-6">
-                      <Input
-                        placeholder="Helper text (optional)"
-                        value={videoHelperText}
-                        onChange={(e) => setVideoHelperText(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
-                      <p className="text-xs text-gray-500 flex items-start gap-1">
-                        <Sparkles className="h-3 w-3 mt-0.5 flex-shrink-0 text-purple-500" />
-                        1-min monologue link (YouTube/Vimeo/Drive; shareable).
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Consent - Mobile Optimized */}
-            <Card className="border-2 border-purple-200 shadow-md rounded-xl sm:rounded-2xl overflow-hidden">
-              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4">
-                <div className="flex items-start space-x-3 touch-manipulation">
-                  <Checkbox
-                    id="consent1"
-                    checked={consent1}
-                    onCheckedChange={(checked) => setConsent1(checked as boolean)}
-                    className="mt-1 h-5 w-5 flex-shrink-0"
-                  />
-                  <Label htmlFor="consent1" className="text-sm leading-relaxed cursor-pointer">
-                    I confirm that all details provided are genuine and that I have the right to conduct this
-                    casting/workshop.
-                  </Label>
-                </div>
-
-                <div className="flex items-start space-x-3 touch-manipulation">
-                  <Checkbox
-                    id="consent2"
-                    checked={consent2}
-                    onCheckedChange={(checked) => setConsent2(checked as boolean)}
-                    className="mt-1 h-5 w-5 flex-shrink-0"
-                  />
-                  <Label htmlFor="consent2" className="text-sm leading-relaxed cursor-pointer">
-                    I agree to Abhinayपथ's{" "}
-                    <Link href="/terms" className="text-purple-600 hover:underline">
-                      Terms
-                    </Link>{" "}
-                    &{" "}
-                    <Link href="/privacy" className="text-purple-600 hover:underline">
-                      Privacy Policy
-                    </Link>
-                    .
-                  </Label>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* CTAs - Mobile Optimized */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button
-                onClick={handlePublish}
-                disabled={!isFormValid()}
-                className="flex-1 rounded-lg h-12 sm:h-12 text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 touch-manipulation"
-              >
-                <CheckCircle2 className="mr-2 h-5 w-5 flex-shrink-0" />
-                Publish Opportunity
-              </Button>
-
-              <Sheet open={applyFlowOpen} onOpenChange={setApplyFlowOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="rounded-lg h-12 sm:h-12 px-6 bg-transparent border-2 touch-manipulation sm:w-auto"
-                  >
-                    <Eye className="mr-2 h-4 w-4 flex-shrink-0" />
-                    <span className="hidden sm:inline">Preview Apply Flow</span>
-                    <span className="sm:hidden">Preview</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent className="w-full sm:max-w-md overflow-y-auto">
-                  <SheetHeader>
-                    <SheetTitle className="text-lg sm:text-xl">Artist Application View</SheetTitle>
-                    <SheetDescription className="text-sm">
-                      This is what artists will see when they apply
-                    </SheetDescription>
-                  </SheetHeader>
-
-                  <div className="mt-6 space-y-6">
-                    <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                      <p className="text-sm text-blue-900">Your Abhinayपथ profile will be shared with the organiser.</p>
-                    </div>
-
-                    {requestPhotos && (
-                      <div className="space-y-3">
-                        <Label className="text-sm font-medium">Upload Photos</Label>
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="aspect-square border-2 border-dashed rounded-lg flex items-center justify-center hover:bg-gray-50 cursor-pointer touch-manipulation">
-                            <Camera className="h-8 w-8 text-gray-400" />
-                          </div>
-                          <div className="aspect-square border-2 border-dashed rounded-lg flex items-center justify-center hover:bg-gray-50 cursor-pointer touch-manipulation">
-                            <Camera className="h-8 w-8 text-gray-400" />
-                          </div>
-                        </div>
-                        {photoHelperText && <p className="text-xs text-gray-600">{photoHelperText}</p>}
-                      </div>
-                    )}
-
-                    {requestVideos && (
-                      <div className="space-y-3">
-                        <Label className="text-sm font-medium">Video Links</Label>
-                        <div className="space-y-2">
-                          <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-lg h-11" />
-                          <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-lg h-11" />
-                        </div>
-                        {videoHelperText && <p className="text-xs text-gray-600">{videoHelperText}</p>}
-                      </div>
-                    )}
-
-                    <Button className="w-full rounded-lg h-12 touch-manipulation" disabled>
-                      Submit Application
-                    </Button>
-
-                    <p className="text-xs text-center text-gray-500">
-                      Submit will be enabled once all required media is provided
-                    </p>
-                  </div>
-                </SheetContent>
-              </Sheet>
+        {/* Progress Bar */}
+        <Card className="mb-6 sm:mb-8 shadow-md">
+          <CardContent className="p-4 sm:p-6">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                <h2 className="text-base sm:text-lg font-semibold">
+                  Step {currentStep} of {totalSteps}
+                </h2>
+                <span className="text-xs sm:text-sm text-gray-500">
+                  {currentStep === 1 && "Basic Information"}
+                  {currentStep === 2 && "Details & Requirements"}
+                  {currentStep === 3 && "Additional Information"}
+                </span>
+              </div>
+              <Progress value={progress} className="h-2 sm:h-3" />
             </div>
-          </div>
+          </CardContent>
+        </Card>
 
-          {/* Right Column - Live Preview - Mobile Toggle */}
-          <div
-            className={cn(
-              "lg:sticky lg:top-24 h-fit",
-              !showPreview && "hidden lg:block",
-              showPreview && "block lg:block",
-            )}
-          >
-            <Card className="border-2 shadow-xl rounded-xl sm:rounded-2xl overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 sm:px-6 py-4 sm:py-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <Eye className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                  <CardTitle className="text-base sm:text-lg">Live Preview</CardTitle>
-                </div>
-                <p className="text-xs sm:text-sm text-purple-100">How it will appear to artists</p>
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8">
+          {/* Form Section */}
+          <div className={cn("lg:col-span-3", showPreview && "hidden lg:block")}>
+            <Card className="shadow-lg">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-lg sm:text-xl">
+                  {currentStep === 1 && "Basic Information"}
+                  {currentStep === 2 && "Details & Requirements"}
+                  {currentStep === 3 && "Additional Information"}
+                </CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
+                  {currentStep === 1 && "Start by selecting the type of opportunity and providing basic details"}
+                  {currentStep === 2 && "Add a detailed description and specify requirements"}
+                  {currentStep === 3 && "Add dates, compensation, and contact information"}
+                </CardDescription>
               </CardHeader>
-              <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-3 sm:space-y-4">
-                {/* Type and Location */}
-                <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap">
-                  {type && (
-                    <Badge variant="secondary" className="capitalize text-xs">
-                      {type.replace("-", " ")}
-                    </Badge>
-                  )}
-                  {(city || platform) && (
-                    <>
-                      <span>•</span>
-                      <span className="flex items-center gap-1">
-                        {locationMode === "city" ? (
-                          <>
-                            <MapPin className="h-3 w-3 flex-shrink-0" />
-                            <span className="truncate">{city || "City"}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Globe className="h-3 w-3 flex-shrink-0" />
-                            Online
-                          </>
-                        )}
-                      </span>
-                    </>
-                  )}
-                </div>
-
-                {/* Title */}
-                <h3 className="font-playfair text-xl sm:text-2xl font-bold text-gray-900 break-words">
-                  {title || "Opportunity Title"}
-                </h3>
-
-                {/* Deadline and Location Detail */}
-                <div className="flex items-start sm:items-center gap-2 text-sm text-gray-600 flex-wrap">
-                  {deadline && (
-                    <>
-                      <CalendarIcon className="h-4 w-4 flex-shrink-0" />
-                      <span className="break-words">Deadline: {format(deadline, "MMM d, yyyy")}</span>
-                    </>
-                  )}
-                  {locationMode === "city" && venue && (
-                    <>
-                      <span className="hidden sm:inline">•</span>
-                      <span className="break-words w-full sm:w-auto">{venue}</span>
-                    </>
-                  )}
-                  {locationMode === "online" && platform && (
-                    <>
-                      <span className="hidden sm:inline">•</span>
-                      <span className="break-words w-full sm:w-auto">{platform}</span>
-                    </>
-                  )}
-                </div>
-
-                {/* Description */}
-                <div className="prose prose-sm max-w-none">
-                  <p className="text-gray-700 line-clamp-4 text-sm sm:text-base break-words">
-                    {description || "Description will appear here..."}
-                  </p>
-                </div>
-
-                {/* Requirements */}
-                {(genderPreference !== "any" || ageMin || ageMax || selectedLanguages.length > 0 || experience) && (
-                  <div className="space-y-2 pt-4 border-t">
-                    <h4 className="text-sm font-semibold text-gray-900">Requirements</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {genderPreference !== "any" && (
-                        <Badge variant="outline" className="capitalize text-xs">
-                          {genderPreference.replace("-", " ")}
-                        </Badge>
-                      )}
-                      {(ageMin || ageMax) && (
-                        <Badge variant="outline" className="text-xs">
-                          Age: {ageMin || "?"}–{ageMax || "?"}
-                        </Badge>
-                      )}
-                      {selectedLanguages.map((lang) => (
-                        <Badge key={lang} variant="outline" className="text-xs">
-                          {lang}
-                        </Badge>
-                      ))}
-                      {experience && (
-                        <Badge variant="outline" className="capitalize text-xs">
-                          {experience}
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Pay */}
-                <div className="flex items-center gap-2 text-sm pt-4 border-t">
-                  <DollarSign className="h-4 w-4 text-gray-600 flex-shrink-0" />
-                  <span className="text-gray-900 font-medium break-words">
-                    {payType === "not-specified" && "Not specified"}
-                    {payType === "free" && "Free"}
-                    {payType === "stipend" && (payAmount ? `Stipend: ₹${payAmount}` : "Stipend")}
-                    {payType === "paid" && (payAmount ? `Paid: ₹${payAmount}` : "Paid")}
-                  </span>
-                </div>
-
-                {/* CTA */}
-                <Button className="w-full rounded-lg h-12 mt-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-sm sm:text-base touch-manipulation">
-                  {applicationMethod === "platform"
-                    ? "Apply on Abhinayपथ"
-                    : applicationMethod === "whatsapp"
-                      ? "Apply via WhatsApp"
-                      : applicationMethod === "email"
-                        ? "Apply via Email"
-                        : "Apply via External Form"}
-                </Button>
-
-                {/* Visibility Badge */}
-                <div className="flex justify-center pt-4">
-                  <Badge variant="outline" className="text-xs capitalize">
-                    Visibility: {visibility}
-                  </Badge>
-                </div>
-              </CardContent>
+              <CardContent className="p-4 sm:p-6">{renderStepContent()}</CardContent>
             </Card>
 
-            {/* Mobile: Back to Form Button */}
-            <div className="lg:hidden mt-4">
+            {/* Navigation Buttons */}
+            <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button
                 variant="outline"
-                className="w-full rounded-lg h-12 bg-transparent"
-                onClick={() => setShowPreview(false)}
+                onClick={handlePrevious}
+                disabled={currentStep === 1}
+                className="flex-1 h-12 sm:h-11 text-sm sm:text-base touch-manipulation order-2 sm:order-1 bg-transparent"
               >
-                Back to Form
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Previous
               </Button>
+
+              {currentStep < totalSteps ? (
+                <Button
+                  onClick={handleNext}
+                  className="flex-1 h-12 sm:h-11 text-sm sm:text-base touch-manipulation order-1 sm:order-2"
+                >
+                  Next
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-12 sm:h-11 text-sm sm:text-base touch-manipulation order-1 sm:order-2"
+                >
+                  {isSubmitting ? "Publishing..." : "Publish Opportunity"}
+                  {!isSubmitting && <CheckCircle2 className="ml-2 h-4 w-4" />}
+                </Button>
+              )}
+            </div>
+
+            {/* Mobile Preview Toggle */}
+            <Button
+              variant="outline"
+              onClick={() => setShowPreview(!showPreview)}
+              className="w-full mt-3 lg:hidden h-12 text-sm touch-manipulation"
+            >
+              {showPreview ? (
+                <>
+                  <EyeOff className="mr-2 h-4 w-4" />
+                  Back to Form
+                </>
+              ) : (
+                <>
+                  <Eye className="mr-2 h-4 w-4" />
+                  Preview
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Preview Section */}
+          <div className={cn("lg:col-span-2", !showPreview && "hidden lg:block")}>
+            <div className="lg:sticky lg:top-20">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-base sm:text-lg font-semibold">Live Preview</h3>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowPreview(false)}
+                  className="lg:hidden h-10 px-3 touch-manipulation"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Form
+                </Button>
+              </div>
+              {renderPreview()}
             </div>
           </div>
         </div>

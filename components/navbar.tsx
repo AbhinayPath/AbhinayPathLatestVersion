@@ -6,7 +6,7 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Menu, X, LogOut, Edit, Plus } from "lucide-react"
+import { Menu, X, LogOut, Edit, Plus, Briefcase } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
 import RegisterModal from "@/components/RegisterModal"
 import LoginModal from "@/components/LoginModal"
@@ -71,7 +71,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -83,40 +83,54 @@ export default function Navbar() {
               {item.name}
             </Link>
           ))}
+
+          {/* Post Opportunity Button - Prominent placement in nav */}
+          {user && (
+            <Link href="/post-opportunity">
+              <Button
+                size="sm"
+                className={`rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg hover:scale-105 ${
+                  pathname === "/post-opportunity" ? "ring-2 ring-purple-300 ring-offset-2" : ""
+                }`}
+              >
+                <Plus className="h-4 w-4 mr-1" />
+                Post Opportunity
+              </Button>
+            </Link>
+          )}
         </nav>
 
         {/* Auth Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           {user ? (
-            <>
-              <Link href="/post-opportunity">
-                <Button
-                  size="sm"
-                  className="rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg"
+            <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+              <DropdownMenuTrigger asChild>
+                <div className="cursor-pointer">
+                  {/* TODO: Replace mockProfileData with real data from context/store/API */}
+                  <NavbarProfilePercentage profileData={mockProfileData} user={user} />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem onClick={handleEditProfile}>
+                  <Edit className="mr-2 h-4 w-4" />
+                  Edit Talent Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    setDropdownOpen(false)
+                    router.push("/post-opportunity")
+                  }}
+                  className="text-purple-600 font-medium"
                 >
-                  <Plus className="h-4 w-4 mr-1" />
+                  <Briefcase className="mr-2 h-4 w-4" />
                   Post Opportunity
-                </Button>
-              </Link>
-              <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
-                <DropdownMenuTrigger asChild>
-                  <div className="cursor-pointer">
-                    {/* TODO: Replace mockProfileData with real data from context/store/API */}
-                    <NavbarProfilePercentage profileData={mockProfileData} user={user} />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={handleEditProfile}>
-                    <Edit className="mr-2 h-4 w-4" />
-                    Edit Talent Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <>
               <Button
@@ -151,6 +165,20 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="lg:hidden border-t">
           <div className="container py-4 flex flex-col gap-4">
+            {/* Post Opportunity - Prominent at top for mobile */}
+            {user && (
+              <Link href="/post-opportunity" onClick={toggleMenu}>
+                <Button
+                  className={`w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg ${
+                    pathname === "/post-opportunity" ? "ring-2 ring-purple-300 ring-offset-2" : ""
+                  }`}
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Post Opportunity
+                </Button>
+              </Link>
+            )}
+
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -163,15 +191,10 @@ export default function Navbar() {
                 {item.name}
               </Link>
             ))}
+
             <div className="pt-4 border-t mt-2">
               {user ? (
                 <div className="space-y-2">
-                  <Link href="/post-opportunity" onClick={toggleMenu}>
-                    <Button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
-                      <Plus className="mr-2 h-4 w-4" />
-                      Post Opportunity
-                    </Button>
-                  </Link>
                   <Button
                     variant="outline"
                     onClick={() => {
