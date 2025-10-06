@@ -1,42 +1,82 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getSupabaseServerClientForRouteHandler } from "@/lib/supabase-server"
 
-// GET - Fetch a single talent profile by ID
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
-
-    if (!id) {
-      return NextResponse.json({ error: "Profile ID is required" }, { status: 400 })
-    }
-
     const supabase = await getSupabaseServerClientForRouteHandler()
 
-    const { data: profile, error } = await supabase
+    // Get the talent profile by ID
+    const { data: profile, error: profileError } = await supabase
       .from("talent_profiles")
       .select(`
-        *,
-        education_records(*),
-        experience_records(*),
-        training_records(*),
-        media_files(*)
+        id,
+        user_id,
+        full_name,
+        city,
+        state,
+        bio,
+        profile_picture_url,
+        experience_level,
+        years_of_experience,
+        acting_skills,
+        languages,
+        contact_email,
+        contact_phone,
+        website,
+        social_instagram,
+        social_youtube,
+        social_imdb,
+        is_published,
+        created_at,
+        updated_at
       `)
       .eq("id", id)
-      .eq("published", true)
+      .eq("is_published", true)
       .single()
 
-    if (error) {
-      console.error("Error fetching talent profile:", error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
-    }
-
-    if (!profile) {
+    if (profileError || !profile) {
       return NextResponse.json({ error: "Profile not found" }, { status: 404 })
     }
 
-    return NextResponse.json(profile)
+    // Get education records
+    const { data: education } = await supabase
+      .from("talent_education")
+      .select("*")
+      .eq("talent_profile_id", id)
+      .order("end_year", { ascending: false })
+
+    // Get experience records
+    const { data: experience } = await supabase
+      .from("talent_experience")
+      .select("*")
+      .eq("talent_profile_id", id)
+      .order("year", { ascending: false })
+
+    // Get training records
+    const { data: training } = await supabase
+      .from("talent_training")
+      .select("*")
+      .eq("talent_profile_id", id)
+      .order("year", { ascending: false })
+
+    // Get portfolio media
+    const { data: media } = await supabase
+      .from("talent_media")
+      .select("*")
+      .eq("talent_profile_id", id)
+      .order("created_at", { ascending: false })
+      .limit(5)
+
+    return NextResponse.json({
+      profile,
+      education: education || [],
+      experience: experience || [],
+      training: training || [],
+      media: media || [],
+    })
   } catch (error) {
-    console.error("GET talent profile by ID failed:", error)
-    return NextResponse.json({ error: "Failed to fetch talent profile" }, { status: 500 })
+    console.error("Error fetching talent profile:", error)
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
