@@ -2,7 +2,7 @@
 
 import type React from "react"
 import Link from "next/link"
-import { useAuth } from "../context/authContext"
+import { useAuth } from "@/contexts/AuthContext"
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth()
