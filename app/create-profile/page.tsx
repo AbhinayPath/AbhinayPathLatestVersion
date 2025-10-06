@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
@@ -45,6 +44,7 @@ import {
   INDIAN_STATES,
   PROJECT_TYPES,
 } from "@/lib/types/talent"
+import { OnboardingTour, OnboardingWelcome, type OnboardingStep } from "@/components/onboarding-tour"
 
 export default function CreateProfilePage() {
   const { user, loading } = useAuth()
@@ -52,6 +52,8 @@ export default function CreateProfilePage() {
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [agreedToTerms, setAgreedToTerms] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(false)
+  const [showTour, setShowTour] = useState(false)
 
   // Profile data
   const [profile, setProfile] = useState<Partial<TalentProfile>>({
@@ -81,6 +83,12 @@ export default function CreateProfilePage() {
   const craftRef = useRef<HTMLDivElement>(null)
   const showcaseRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const profilePictureRef = useRef<HTMLDivElement>(null)
+  const nameInputRef = useRef<HTMLDivElement>(null)
+  const bioTextareaRef = useRef<HTMLDivElement>(null)
+  const skillsSectionRef = useRef<HTMLDivElement>(null)
+  const gallerySectionRef = useRef<HTMLDivElement>(null)
+  const publishButtonRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!loading && !user) {
@@ -91,6 +99,18 @@ export default function CreateProfilePage() {
   useEffect(() => {
     if (user?.email) {
       setProfile((prev) => ({ ...prev, email: user.email }))
+    }
+  }, [user])
+
+  useEffect(() => {
+    // Check if user has seen onboarding
+    const hasSeenOnboarding = localStorage.getItem("profile-onboarding-completed")
+    if (!hasSeenOnboarding && user) {
+      // Show welcome modal after a brief delay
+      const timer = setTimeout(() => {
+        setShowWelcome(true)
+      }, 500)
+      return () => clearTimeout(timer)
     }
   }, [user])
 
@@ -244,6 +264,90 @@ export default function CreateProfilePage() {
     }
   }
 
+  const handleStartTour = () => {
+    setShowWelcome(false)
+    setShowTour(true)
+  }
+
+  const handleSkipTour = () => {
+    setShowWelcome(false)
+    setShowTour(false)
+    localStorage.setItem("profile-onboarding-completed", "skipped")
+  }
+
+  const handleCompleteTour = () => {
+    setShowTour(false)
+    toast.success("🎉 You're ready to create your profile!")
+  }
+
+  const onboardingSteps: OnboardingStep[] = [
+    {
+      id: "welcome",
+      title: "Let's Get Started!",
+      description:
+        "We'll guide you through creating your professional actor profile. This tour will take about 5 minutes.",
+      position: "center",
+      icon: <Sparkles className="h-5 w-5" />,
+    },
+    {
+      id: "profile-picture",
+      title: "Add Your Profile Picture",
+      description:
+        "Upload a professional headshot. This is the first thing casting directors will see, so make it count!",
+      targetRef: profilePictureRef,
+      position: "bottom",
+      icon: <Camera className="h-5 w-5" />,
+    },
+    {
+      id: "basic-info",
+      title: "Your Basic Information",
+      description:
+        "Fill in your name, contact details, and location. These help casting directors reach you for opportunities.",
+      targetRef: nameInputRef,
+      position: "bottom",
+      icon: <Mail className="h-5 w-5" />,
+    },
+    {
+      id: "bio",
+      title: "Tell Your Story",
+      description:
+        "Write a compelling bio that showcases your passion and unique qualities. Be authentic and let your personality shine!",
+      targetRef: bioTextareaRef,
+      position: "top",
+      icon: <Sparkles className="h-5 w-5" />,
+      action: () => scrollToSection(essenceRef),
+    },
+    {
+      id: "skills",
+      title: "Showcase Your Skills",
+      description:
+        "Select your acting skills and languages. This helps casting directors find you for the right roles.",
+      targetRef: skillsSectionRef,
+      position: "bottom",
+      icon: <Award className="h-5 w-5" />,
+      action: () => scrollToSection(craftRef),
+    },
+    {
+      id: "gallery",
+      title: "Build Your Visual Portfolio",
+      description:
+        "Add up to 5 images to showcase your versatility and range. Include headshots, production stills, or character photos.",
+      targetRef: gallerySectionRef,
+      position: "top",
+      icon: <ImageIcon className="h-5 w-5" />,
+      action: () => scrollToSection(showcaseRef),
+    },
+    {
+      id: "complete",
+      title: "You're All Set!",
+      description:
+        "Once you've filled in all the required fields and agreed to the terms, click the publish button to make your profile live!",
+      targetRef: publishButtonRef,
+      position: "top",
+      icon: <CheckCircle2 className="h-5 w-5" />,
+    },
+  ]
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -339,7 +443,7 @@ export default function CreateProfilePage() {
 
             <CardContent className="p-6 space-y-6">
               {/* Profile Picture */}
-              <div className="flex flex-col items-center space-y-4">
+              <div ref={profilePictureRef} className="flex flex-col items-center space-y-4">
                 <div className="relative">
                   {profileImage ? (
                     <div className="relative">
@@ -389,7 +493,7 @@ export default function CreateProfilePage() {
 
               {/* Name & Contact */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
+                <div ref={nameInputRef} className="space-y-2">
                   <Label htmlFor="full_name" className="flex items-center gap-2">
                     <span className="text-red-500">*</span>
                     Full Name
@@ -471,7 +575,7 @@ export default function CreateProfilePage() {
               </div>
 
               {/* About/Bio */}
-              <div className="space-y-2">
+              <div ref={bioTextareaRef} className="space-y-2">
                 <Label htmlFor="bio" className="flex items-center gap-2">
                   <span className="text-red-500">*</span>
                   About You
@@ -538,7 +642,7 @@ export default function CreateProfilePage() {
               </div>
 
               {/* Acting Skills */}
-              <div className="space-y-3">
+              <div ref={skillsSectionRef} className="space-y-3">
                 <Label className="flex items-center gap-2">
                   <Star className="h-4 w-4" />
                   <span className="text-red-500">*</span>
@@ -723,7 +827,7 @@ export default function CreateProfilePage() {
 
             <CardContent className="p-6 space-y-6">
               {/* Gallery Images */}
-              <div className="space-y-4">
+              <div ref={gallerySectionRef} className="space-y-4">
                 <Label className="flex items-center gap-2">
                   <ImageIcon className="h-4 w-4" />
                   Gallery (Max 5 images)
@@ -900,7 +1004,7 @@ export default function CreateProfilePage() {
         </Card>
 
         {/* Final Submit Button */}
-        <div className="sticky bottom-4 z-40">
+        <div ref={publishButtonRef} className="sticky bottom-4 z-40">
           <Card className="border-2 border-purple-200 shadow-lg">
             <CardContent className="p-4">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -956,6 +1060,17 @@ export default function CreateProfilePage() {
           </Card>
         </div>
       </div>
+
+      {/* Onboarding Components */}
+      <OnboardingWelcome isOpen={showWelcome} onStart={handleStartTour} onSkip={handleSkipTour} />
+
+      <OnboardingTour
+        steps={onboardingSteps}
+        isOpen={showTour}
+        onComplete={handleCompleteTour}
+        onSkip={handleSkipTour}
+        storageKey="profile-onboarding-completed"
+      />
     </div>
   )
 }
