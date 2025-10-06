@@ -1,37 +1,36 @@
 "use client"
 
 import { useState } from "react"
-
-import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Menu, X, LogOut, Edit } from "lucide-react"
+import { Menu, X, User, LogOut, Edit } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
 import RegisterModal from "@/components/RegisterModal"
 import LoginModal from "@/components/LoginModal"
 import { NavbarProfilePercentage } from "@/components/navbar-profile-percentage"
+import { getProfileCompletion } from "@/components/profileCompletionUtils"
 
-const Navbar: React.FC = () => {
+export default function Navbar() {
   // TODO: Replace this mockProfileData with real profile data from context/store/API
   const mockProfileData = {
     profile: {
-      full_name: "Demo User",
-      email: "demo@user.com",
-      city: "Mumbai",
-      state: "Maharashtra",
-      bio: "Actor",
-      acting_skills: ["Acting"],
-      languages: ["Hindi"],
-      experience_level: "Beginner" as const,
+      full_name: 'Demo User',
+      email: 'demo@user.com',
+      city: 'Mumbai',
+      state: 'Maharashtra',
+      bio: 'Actor',
+      acting_skills: ['Acting'],
+      languages: ['Hindi'],
+      experience_level: 'Beginner' as 'Beginner',
     },
-    education: [{ institution: "NSD", degree: "BFA" }],
-    experience: [{ project_title: "Movie" }],
-    training: [{ workshop_name: "Workshop" }],
+    education: [{ institution: 'NSD', degree: 'BFA' }],
+    experience: [{ project_title: 'Movie' }],
+    training: [{ workshop_name: 'Workshop' }],
     headshots: [],
-  }
+  };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
@@ -41,6 +40,8 @@ const Navbar: React.FC = () => {
   const router = useRouter()
   const { user, loading, signOut } = useAuth()
 
+  
+  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
@@ -58,19 +59,25 @@ const Navbar: React.FC = () => {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Post Opportunity", href: "/post-opportunity" },
     { name: "Join", href: "/join-community" },
     { name: "Contact", href: "/contact" },
   ]
+
+  const getUserInitial = () => {
+    if (user?.user_metadata?.full_name) {
+      return user.user_metadata.full_name.charAt(0).toUpperCase()
+    }
+    return user?.email?.charAt(0).toUpperCase() || "U"
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="relative h-10 w-10">
-            <Image src="/images/logo.png" alt="Abhinayपथ Logo" width={40} height={40} className="object-contain" />
+            <Image src="/images/logo.png" alt="AbhinayPath Logo" width={40} height={40} className="object-contain" />
           </div>
-          <span className="font-playfair text-2xl font-bold text-[#7E1F2E]">Abhinayपथ</span>
+          <span className="font-playfair text-2xl font-bold text-[#7E1F2E]">AbhinayPath</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -90,49 +97,55 @@ const Navbar: React.FC = () => {
 
         {/* Auth Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-          <>
-            {user ? (
-              <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
-                <DropdownMenuTrigger asChild>
-                  <div className="cursor-pointer">
-                    {/* TODO: Replace mockProfileData with real data from context/store/API */}
-                    <NavbarProfilePercentage profileData={mockProfileData} user={user} />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={handleEditProfile}>
-                    <Edit className="mr-2 h-4 w-4" />
-                    Edit Talent Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <>
-                <Button
-                  variant="ghost"
-                  onClick={() => setShowLoginModal(true)}
-                  className="text-[#7E1F2E] hover:text-[#6a1a27]"
-                >
-                  Login
-                </Button>
-                <Button variant="outline" onClick={() => setShowRegisterModal(true)} className="rounded-full">
-                  Register
-                </Button>
-                <Link href="/join-community">
+          
+            <>
+              {user ? (
+                <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+                  <DropdownMenuTrigger asChild>
+                    <div className="cursor-pointer">
+                      {/* TODO: Replace mockProfileData with real data from context/store/API */}
+                      <NavbarProfilePercentage profileData={mockProfileData} user={user} />
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={handleEditProfile}>
+                      <Edit className="mr-2 h-4 w-4" />
+                      Edit Talent Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleLogout}>
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <>
                   <Button
-                    size="default"
-                    className="rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-4 py-2 h-auto text-sm font-medium transition-transform hover:scale-105"
+                    variant="ghost"
+                    onClick={() => setShowLoginModal(true)}
+                    className="text-[#7E1F2E] hover:text-[#6a1a27]"
                   >
-                    Join Beta Community
+                    Login
                   </Button>
-                </Link>
-              </>
-            )}
-          </>
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowRegisterModal(true)}
+                    className="rounded-full"
+                  >
+                    Register
+                  </Button>
+                  <Link href="/join-community">
+                    <Button
+                      size="default"
+                      className="rounded-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-4 py-2 h-auto text-sm font-medium transition-transform hover:scale-105"
+                    >
+                      Join Beta Community
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </>
+          
         </div>
 
         {/* Mobile Menu Button */}
@@ -163,7 +176,7 @@ const Navbar: React.FC = () => {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      router.push("/talent-profile")
+                      router.push('/talent-profile')
                       toggleMenu()
                     }}
                     className="w-full"
@@ -218,11 +231,16 @@ const Navbar: React.FC = () => {
       )}
 
       {/* Modals */}
-      <RegisterModal isOpen={showRegisterModal} onClose={() => setShowRegisterModal(false)} mode="register" />
+      <RegisterModal
+        isOpen={showRegisterModal}
+        onClose={() => setShowRegisterModal(false)}
+        mode="register"
+      />
 
-      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
     </header>
   )
 }
-
-export default Navbar
