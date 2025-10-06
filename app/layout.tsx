@@ -7,7 +7,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/contexts/AuthContext"
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from '@/components/ui/sonner'
 import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
@@ -23,10 +23,10 @@ const playfair = PlayfairDisplay({
 })
 
 export const metadata: Metadata = {
-  title: "Abhinayपथ - Platform for Creative Artists",
+  title: "AbhinayPath - Platform for Creative Artists",
   description:
     "India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.",
-  generator: "v0.dev",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -34,6 +34,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+
+  
+  
+
+  
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>

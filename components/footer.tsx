@@ -1,182 +1,130 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
+import { Instagram, Linkedin, PhoneIcon as WhatsApp } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
-
   return (
-    <footer className="bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand Section */}
+    <footer className="bg-[#2D1A54] text-white">
+      <div className="container py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <Image
-                src="/images/logo.png"
-                alt="Abhinayपथ Logo"
-                width={40}
-                height={40}
-                className="h-10 w-auto brightness-0 invert"
-              />
-              <span className="text-2xl font-bold font-playfair">Abhinayपथ</span>
+            <Link href="/" className="flex items-center gap-2">
+              <div className="relative h-10 w-10 bg-white rounded-md p-1">
+                <Image
+                  src="/images/logo.png"
+                  alt="AbhinayPath Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+              </div>
+              <span className="font-playfair text-xl font-bold">AbhinayPath</span>
             </Link>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              India's premier platform for discovering auditions, workshops, and career opportunities in theatre, film,
-              and web series.
+            <p className="text-sm text-white">
+              India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#F5A623] transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#F5A623] transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com/abhinaypath"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#F5A623] transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#F5A623] transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#F5A623] transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="h-5 w-5" />
-              </a>
-            </div>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 font-playfair">Quick Links</h3>
+            <h3 className="font-playfair text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/auditions" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Auditions
+                <Link href="/" className="text-sm text-white hover:text-white hover:underline transition-colors">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/workshops" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Workshops
+                <Link href="/about" className="text-sm text-white hover:text-white hover:underline transition-colors">
+                  About
                 </Link>
               </li>
               <li>
-                <Link href="/admissions" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Institute Prep
+                <Link
+                  href="/join-community"
+                  className="text-sm text-white hover:text-white hover:underline transition-colors"
+                >
+                  Join
                 </Link>
               </li>
               <li>
-                <Link href="/recruitment" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Jobs & Opportunities
-                </Link>
-              </li>
-              <li>
-                <Link href="/networking" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Community
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Resources
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* About */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 font-playfair">About</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/about" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
+                <Link href="/contact" className="text-sm text-white hover:text-white hover:underline transition-colors">
                   Contact
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-playfair text-lg font-bold mb-4">Coming Soon</h3>
+            <ul className="space-y-2">
               <li>
-                <Link href="/join-community" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Join Beta
-                </Link>
+                <span className="text-sm text-white">Networking Platform</span>
               </li>
               <li>
-                <Link href="/talent-directory" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Talent Directory
-                </Link>
+                <span className="text-sm text-white">Backstage Opportunities</span>
               </li>
               <li>
-                <Link href="/privacy" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Privacy Policy
-                </Link>
+                <span className="text-sm text-white">Resources Library</span>
               </li>
               <li>
-                <Link href="/terms" className="text-sm text-gray-300 hover:text-[#F5A623] transition-colors">
-                  Terms of Service
-                </Link>
+                <span className="text-sm text-white">Artist Profiles</span>
               </li>
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 font-playfair">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3 text-sm text-gray-300">
-                <Mail className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <a href="mailto:hello@abhinaypath.com" className="hover:text-[#F5A623] transition-colors">
-                  hello@abhinaypath.com
-                </a>
-              </li>
-              <li className="flex items-start space-x-3 text-sm text-gray-300">
-                <Phone className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-[#F5A623] transition-colors">
-                  +91 98765 43210
-                </a>
-              </li>
-              <li className="flex items-start space-x-3 text-sm text-gray-300">
-                <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <span>Mumbai, Maharashtra, India</span>
-              </li>
-            </ul>
+            <h3 className="font-playfair text-lg font-bold mb-4">Connect With Us</h3>
+            <div className="flex space-x-4">
+              <a
+                href="https://www.instagram.com/abhinay_path"
+                className="text-white hover:text-white hover:opacity-80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="h-5 w-5" />
+                <span className="sr-only">Instagram</span>
+              </a>
+              <a
+                href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp"
+                className="text-white hover:text-white hover:opacity-80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <WhatsApp className="h-5 w-5" />
+                <span className="sr-only">WhatsApp</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/abhinaypath"
+                className="text-white hover:text-white hover:opacity-80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+            </div>
+            <div className="mt-4">
+              <p className="text-sm text-white">Subscribe to our newsletter</p>
+              <form className="mt-2 flex">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="w-full rounded-l-full px-4 py-2 text-sm text-black focus:outline-none"
+                />
+                <Button
+                  type="submit"
+                  className="rounded-r-full bg-[#7E1F2E] px-4 py-2 text-sm font-medium text-white hover:bg-[#6a1a27]"
+                >
+                  Subscribe
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/20 mt-8 pt-8 text-center">
-          <p className="text-sm text-gray-300">
-            &copy; {currentYear} Abhinayपथ. All rights reserved. | Empowering artists across India.
-          </p>
+        <div className="mt-8 border-t border-gray-700 pt-8 text-center">
+          <p className="text-sm text-white">&copy; {new Date().getFullYear()} AbhinayPath. All rights reserved.</p>
         </div>
       </div>
     </footer>
