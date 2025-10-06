@@ -1,266 +1,258 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Switch } from "@/components/ui/switch"
-import { Separator } from "@/components/ui/separator"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Progress } from "@/components/ui/progress"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { toast } from "@/components/ui/use-toast"
 import {
-  CalendarIcon,
   ChevronDown,
   ChevronUp,
+  CalendarIcon,
   MapPin,
-  Video,
-  Users,
-  Briefcase,
-  Camera,
-  Info,
   Globe,
+  Briefcase,
   Clock,
+  Users,
+  Languages,
+  Star,
   DollarSign,
   Eye,
+  EyeOff,
+  ImageIcon,
   CheckCircle2,
+  AlertCircle,
 } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
+import { toast } from "sonner"
 
-interface FormData {
-  title: string
-  type: string
-  deadline: Date | undefined
-  locationMode: "city" | "online"
-  city: string
-  venue: string
-  platform: string
-  description: string
-  applicationMethod: "platform" | "whatsapp" | "email" | "external"
-  contact: string
-  rolesNeeded: string
-  gender: string
-  ageMin: string
-  ageMax: string
-  languages: string[]
-  experience: string
-  payType: string
-  amount: string
-  visibility: "public" | "unlisted"
-  requestPhotos: boolean
-  photoHelperText: string
-  requestVideos: boolean
-  videoHelperText: string
-  consent1: boolean
-  consent2: boolean
-}
+const opportunityTypes = ["Theatre Play", "Short Film", "Feature Film", "Ad", "Backstage", "Job"]
 
-const LANGUAGES = [
+const genderOptions = ["Any", "Male", "Female", "Other", "Prefer not to say"]
+
+const experienceLevels = ["Beginner", "Intermediate", "Professional"]
+
+const payOptions = ["Not specified", "Free", "Stipend", "Paid"]
+
+const languageOptions = [
   "Hindi",
   "English",
-  "Marathi",
+  "Bengali",
   "Tamil",
   "Telugu",
-  "Kannada",
-  "Bengali",
+  "Marathi",
   "Gujarati",
+  "Kannada",
   "Malayalam",
   "Punjabi",
+  "Urdu",
+  "Assamese",
+  "Odia",
 ]
 
 export default function PostOpportunityPage() {
-  const [formData, setFormData] = useState<FormData>({
-    title: "",
-    type: "",
-    deadline: undefined,
-    locationMode: "city",
-    city: "",
-    venue: "",
-    platform: "",
-    description: "",
-    applicationMethod: "platform",
-    contact: "",
-    rolesNeeded: "",
-    gender: "any",
-    ageMin: "",
-    ageMax: "",
-    languages: [],
-    experience: "",
-    payType: "not-specified",
-    amount: "",
-    visibility: "public",
-    requestPhotos: false,
-    photoHelperText: "",
-    requestVideos: false,
-    videoHelperText: "",
-    consent1: false,
-    consent2: false,
-  })
+  // Core fields
+  const [title, setTitle] = useState("")
+  const [type, setType] = useState("")
+  const [deadline, setDeadline] = useState<Date>()
+  const [locationMode, setLocationMode] = useState<"city" | "online">("city")
+  const [city, setCity] = useState("")
+  const [venue, setVenue] = useState("")
+  const [platform, setPlatform] = useState("")
+  const [description, setDescription] = useState("")
+  const [applicationMethod, setApplicationMethod] = useState("platform")
+  const [contactInfo, setContactInfo] = useState("")
 
+  // Advanced fields
   const [advancedOpen, setAdvancedOpen] = useState(false)
+  const [rolesNeeded, setRolesNeeded] = useState("")
+  const [gender, setGender] = useState("Any")
+  const [ageMin, setAgeMin] = useState("")
+  const [ageMax, setAgeMax] = useState("")
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+  const [experience, setExperience] = useState("Beginner")
+  const [pay, setPay] = useState("Not specified")
+  const [amount, setAmount] = useState("")
+  const [visibility, setVisibility] = useState<"public" | "unlisted">("public")
+
+  // Media Request
+  const [requestPhotos, setRequestPhotos] = useState(false)
+  const [photoHelper, setPhotoHelper] = useState("")
+  const [requestVideo, setRequestVideo] = useState(false)
+  const [videoHelper, setVideoHelper] = useState("")
+
+  // Consent
+  const [consent1, setConsent1] = useState(false)
+  const [consent2, setConsent2] = useState(false)
+
+  // UI State
   const [contactOpen, setContactOpen] = useState(false)
   const [applyFlowOpen, setApplyFlowOpen] = useState(false)
-  const [progress, setProgress] = useState(0)
 
-  const requiredFields = [
-    formData.title,
-    formData.type,
-    formData.deadline,
-    formData.locationMode === "city" ? formData.city : true,
-    formData.description,
-    formData.consent1,
-    formData.consent2,
-  ]
+  // Calculate progress
+  const progress = useMemo(() => {
+    const requiredFields = [
+      title,
+      type,
+      deadline,
+      locationMode === "city" ? city : true,
+      description,
+      consent1,
+      consent2,
+    ]
 
-  const conditionalFields = [formData.payType === "stipend" || formData.payType === "paid" ? formData.amount : true]
+    if (pay === "Stipend" || pay === "Paid") {
+      requiredFields.push(!!amount)
+    }
 
-  useEffect(() => {
-    const allRequired = [...requiredFields, ...conditionalFields]
-    const filled = allRequired.filter(Boolean).length
-    setProgress((filled / allRequired.length) * 100)
-  }, [formData])
+    if (ageMin && ageMax) {
+      requiredFields.push(Number.parseInt(ageMin) <= Number.parseInt(ageMax))
+    }
 
-  const isFormValid = () => {
-    return (
-      requiredFields.every(Boolean) &&
-      conditionalFields.every(Boolean) &&
-      (!formData.ageMin || !formData.ageMax || Number(formData.ageMin) <= Number(formData.ageMax))
-    )
+    const completed = requiredFields.filter(Boolean).length
+    return Math.round((completed / requiredFields.length) * 100)
+  }, [title, type, deadline, locationMode, city, description, consent1, consent2, pay, amount, ageMin, ageMax])
+
+  const canPublish = progress === 100
+
+  const handleLanguageToggle = (lang: string) => {
+    if (selectedLanguages.includes(lang)) {
+      setSelectedLanguages(selectedLanguages.filter((l) => l !== lang))
+    } else if (selectedLanguages.length < 4) {
+      setSelectedLanguages([...selectedLanguages, lang])
+    }
   }
 
   const handlePublish = () => {
-    if (isFormValid()) {
-      toast({
-        title: "Published Successfully! 🎉",
-        description: "You can edit this opportunity anytime.",
-      })
-    }
+    if (!canPublish) return
+    toast.success("Published. You can edit anytime.")
   }
 
-  const toggleLanguage = (lang: string) => {
-    if (formData.languages.includes(lang)) {
-      setFormData({
-        ...formData,
-        languages: formData.languages.filter((l) => l !== lang),
-      })
-    } else if (formData.languages.length < 4) {
-      setFormData({
-        ...formData,
-        languages: [...formData.languages, lang],
-      })
+  const getApplicationMethodLabel = () => {
+    switch (applicationMethod) {
+      case "platform":
+        return "Apply on Abhinayपथ"
+      case "whatsapp":
+        return "Apply via WhatsApp"
+      case "email":
+        return "Apply via Email"
+      case "external":
+        return "Apply Externally"
+      default:
+        return "Apply"
     }
-  }
-
-  const getLocationDisplay = () => {
-    if (formData.locationMode === "online") {
-      return formData.platform ? `Online (${formData.platform})` : "Online"
-    }
-    return formData.city || "Location TBD"
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50/50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <div className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container py-4">
+      <div className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-40">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-red-600 flex items-center justify-center text-white font-bold text-sm">
                 AP
               </div>
               <div>
-                <h1 className="font-playfair text-2xl font-bold text-gray-900">Post Opportunity</h1>
-                <p className="text-sm text-gray-500">Keep it crisp. Artists love clarity.</p>
+                <h1 className="text-xl font-playfair font-bold text-gray-900">Post Opportunity</h1>
+                <p className="text-sm text-gray-600">Keep it crisp. Artists love clarity.</p>
               </div>
             </div>
-            <div className="text-right">
-              <Badge variant="outline" className="text-xs">
-                <Clock className="h-3 w-3 mr-1" />
-                All times IST
-              </Badge>
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-gray-600">All times IST</span>
+              <div className="flex items-center gap-2">
+                <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-purple-600 to-red-600 transition-all duration-500"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <span className="text-sm font-medium text-gray-900">{progress}%</span>
+              </div>
             </div>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="mt-4">
-            <Progress value={progress} className="h-1.5" />
-            <p className="text-xs text-gray-500 mt-1.5">{Math.round(progress)}% complete</p>
           </div>
         </div>
       </div>
 
-      <div className="container py-8">
-        <div className="grid lg:grid-cols-[1fr_400px] gap-8">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid lg:grid-cols-[1fr,400px] gap-8 max-w-7xl mx-auto">
           {/* Left Column - Form */}
           <div className="space-y-6">
             {/* Core Section */}
-            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <Briefcase className="h-5 w-5 text-purple-600" />
-                  Core Details
-                </CardTitle>
+            <Card className="rounded-2xl shadow-soft border-gray-200">
+              <CardHeader className="border-b border-gray-100">
+                <div className="flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-purple-600" />
+                  <CardTitle className="font-playfair">Core Details</CardTitle>
+                </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-5 pt-6">
+                {/* Title */}
                 <div className="space-y-2">
-                  <Label htmlFor="title">Title *</Label>
+                  <Label htmlFor="title" className="text-sm font-medium">
+                    Title <span className="text-red-500">*</span>
+                  </Label>
                   <Input
                     id="title"
-                    placeholder="e.g., Lead Actor for Theatre Play"
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="rounded-xl"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="e.g., Lead Role for Historical Drama"
+                    className="h-11 rounded-lg"
                   />
                 </div>
 
+                {/* Type */}
                 <div className="space-y-2">
-                  <Label htmlFor="type">Type *</Label>
-                  <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
-                    <SelectTrigger id="type" className="rounded-xl">
+                  <Label htmlFor="type" className="text-sm font-medium">
+                    Type <span className="text-red-500">*</span>
+                  </Label>
+                  <Select value={type} onValueChange={setType}>
+                    <SelectTrigger id="type" className="h-11 rounded-lg">
                       <SelectValue placeholder="Select opportunity type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="theatre">Theatre Play</SelectItem>
-                      <SelectItem value="short-film">Short Film</SelectItem>
-                      <SelectItem value="feature-film">Feature Film</SelectItem>
-                      <SelectItem value="ad">Advertisement</SelectItem>
-                      <SelectItem value="backstage">Backstage Role</SelectItem>
-                      <SelectItem value="job">Job</SelectItem>
+                      {opportunityTypes.map((t) => (
+                        <SelectItem key={t} value={t}>
+                          {t}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
 
+                {/* Deadline */}
                 <div className="space-y-2">
-                  <Label>Deadline *</Label>
+                  <Label className="text-sm font-medium">
+                    Deadline <span className="text-red-500">*</span>
+                  </Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full justify-start text-left font-normal rounded-xl",
-                          !formData.deadline && "text-muted-foreground",
+                          "w-full h-11 rounded-lg justify-start text-left font-normal",
+                          !deadline && "text-muted-foreground",
                         )}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {formData.deadline ? format(formData.deadline, "PPP") : "Pick a date"}
+                        {deadline ? format(deadline, "PPP") : "Pick a date"}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
+                    <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={formData.deadline}
-                        onSelect={(date) => setFormData({ ...formData, deadline: date })}
+                        selected={deadline}
+                        onSelect={setDeadline}
                         disabled={(date) => date < new Date()}
                         initialFocus
                       />
@@ -268,618 +260,652 @@ export default function PostOpportunityPage() {
                   </Popover>
                 </div>
 
-                <Separator />
-
+                {/* Location Mode */}
                 <div className="space-y-3">
-                  <Label>Location Mode *</Label>
-                  <div className="flex gap-4">
+                  <Label className="text-sm font-medium">
+                    Location Mode <span className="text-red-500">*</span>
+                  </Label>
+                  <div className="flex gap-3">
                     <Button
                       type="button"
-                      variant={formData.locationMode === "city" ? "default" : "outline"}
-                      onClick={() => setFormData({ ...formData, locationMode: "city" })}
-                      className="flex-1 rounded-xl"
+                      variant={locationMode === "city" ? "default" : "outline"}
+                      className="flex-1 h-11 rounded-lg"
+                      onClick={() => setLocationMode("city")}
                     >
-                      <MapPin className="h-4 w-4 mr-2" />
+                      <MapPin className="w-4 h-4 mr-2" />
                       City
                     </Button>
                     <Button
                       type="button"
-                      variant={formData.locationMode === "online" ? "default" : "outline"}
-                      onClick={() => setFormData({ ...formData, locationMode: "online" })}
-                      className="flex-1 rounded-xl"
+                      variant={locationMode === "online" ? "default" : "outline"}
+                      className="flex-1 h-11 rounded-lg"
+                      onClick={() => setLocationMode("online")}
                     >
-                      <Video className="h-4 w-4 mr-2" />
+                      <Globe className="w-4 h-4 mr-2" />
                       Online
                     </Button>
                   </div>
                 </div>
 
-                {formData.locationMode === "city" ? (
-                  <>
+                {/* Conditional Location Fields */}
+                {locationMode === "city" ? (
+                  <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="city">City *</Label>
+                      <Label htmlFor="city" className="text-sm font-medium">
+                        City <span className="text-red-500">*</span>
+                      </Label>
                       <Input
                         id="city"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
                         placeholder="e.g., Mumbai"
-                        value={formData.city}
-                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                        className="rounded-xl"
+                        className="h-11 rounded-lg"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="venue">Venue (Optional)</Label>
+                      <Label htmlFor="venue" className="text-sm font-medium">
+                        Venue (optional)
+                      </Label>
                       <Input
                         id="venue"
+                        value={venue}
+                        onChange={(e) => setVenue(e.target.value)}
                         placeholder="e.g., Prithvi Theatre"
-                        value={formData.venue}
-                        onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
-                        className="rounded-xl"
+                        className="h-11 rounded-lg"
                       />
                     </div>
-                  </>
+                  </div>
                 ) : (
                   <div className="space-y-2">
-                    <Label htmlFor="platform">Platform (Optional)</Label>
+                    <Label htmlFor="platform" className="text-sm font-medium">
+                      Platform (optional)
+                    </Label>
                     <Input
                       id="platform"
+                      value={platform}
+                      onChange={(e) => setPlatform(e.target.value)}
                       placeholder="e.g., Zoom, Google Meet"
-                      value={formData.platform}
-                      onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                      className="rounded-xl"
+                      className="h-11 rounded-lg"
                     />
                   </div>
                 )}
 
+                {/* Description */}
                 <div className="space-y-2">
-                  <Label htmlFor="description">Description *</Label>
+                  <Label htmlFor="description" className="text-sm font-medium">
+                    Description <span className="text-red-500">*</span>
+                  </Label>
                   <Textarea
                     id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     placeholder="What to prepare, key dates, audition flow..."
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="rounded-xl min-h-[120px]"
+                    className="min-h-[120px] rounded-lg resize-none"
                   />
                   <p className="text-xs text-gray-500">What to prepare, key dates, audition flow</p>
                 </div>
 
-                <Separator />
-
+                {/* Application Method */}
                 <div className="space-y-3">
-                  <Label>Application Method *</Label>
-                  <RadioGroup
-                    value={formData.applicationMethod}
-                    onValueChange={(value: any) => setFormData({ ...formData, applicationMethod: value })}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="platform" id="platform-method" />
-                      <Label htmlFor="platform-method" className="font-normal cursor-pointer">
-                        Quick Apply on Abhinayपथ (Recommended)
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="whatsapp" id="whatsapp-method" />
-                      <Label htmlFor="whatsapp-method" className="font-normal cursor-pointer">
-                        WhatsApp
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="email" id="email-method" />
-                      <Label htmlFor="email-method" className="font-normal cursor-pointer">
-                        Email
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="external" id="external-method" />
-                      <Label htmlFor="external-method" className="font-normal cursor-pointer">
-                        External Form
-                      </Label>
+                  <Label className="text-sm font-medium">Application Method</Label>
+                  <RadioGroup value={applicationMethod} onValueChange={setApplicationMethod}>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors">
+                        <RadioGroupItem value="platform" id="platform-method" />
+                        <Label htmlFor="platform-method" className="flex-1 cursor-pointer font-normal">
+                          Quick Apply on Abhinayपथ
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors">
+                        <RadioGroupItem value="whatsapp" id="whatsapp-method" />
+                        <Label htmlFor="whatsapp-method" className="flex-1 cursor-pointer font-normal">
+                          WhatsApp
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors">
+                        <RadioGroupItem value="email" id="email-method" />
+                        <Label htmlFor="email-method" className="flex-1 cursor-pointer font-normal">
+                          Email
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors">
+                        <RadioGroupItem value="external" id="external-method" />
+                        <Label htmlFor="external-method" className="flex-1 cursor-pointer font-normal">
+                          External Form
+                        </Label>
+                      </div>
                     </div>
                   </RadioGroup>
                 </div>
 
-                {formData.applicationMethod !== "platform" && (
-                  <Collapsible open={contactOpen} onOpenChange={setContactOpen}>
-                    <CollapsibleTrigger asChild>
-                      <Button variant="ghost" className="w-full justify-between rounded-xl">
-                        <span className="text-sm">Contact Details</span>
-                        {contactOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                      </Button>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pt-3">
-                      <Input
-                        placeholder={
-                          formData.applicationMethod === "whatsapp"
-                            ? "WhatsApp number (with country code)"
-                            : formData.applicationMethod === "email"
-                              ? "Email address"
-                              : "Form URL"
-                        }
-                        value={formData.contact}
-                        onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                        className="rounded-xl"
-                      />
-                    </CollapsibleContent>
-                  </Collapsible>
+                {/* Optional Contact */}
+                {applicationMethod !== "platform" && (
+                  <div className="space-y-2">
+                    <button
+                      type="button"
+                      onClick={() => setContactOpen(!contactOpen)}
+                      className="flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors"
+                    >
+                      {contactOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      Contact Info (optional)
+                    </button>
+                    {contactOpen && (
+                      <div className="pl-6 space-y-2 animate-in slide-in-from-top-2">
+                        <Input
+                          value={contactInfo}
+                          onChange={(e) => setContactInfo(e.target.value)}
+                          placeholder={
+                            applicationMethod === "whatsapp"
+                              ? "+91 XXXXX XXXXX"
+                              : applicationMethod === "email"
+                                ? "contact@example.com"
+                                : "https://forms.google.com/..."
+                          }
+                          className="h-11 rounded-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
                 )}
               </CardContent>
             </Card>
 
             {/* Advanced Section */}
-            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
-                <CardHeader>
-                  <CollapsibleTrigger asChild>
-                    <Button variant="ghost" className="w-full justify-between p-0 hover:bg-transparent">
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <Users className="h-5 w-5 text-purple-600" />
-                        Advanced Details (Optional)
-                      </CardTitle>
-                      {advancedOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
-                    </Button>
-                  </CollapsibleTrigger>
-                </CardHeader>
-                <CollapsibleContent>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="roles">Roles Needed</Label>
-                      <Input
-                        id="roles"
-                        placeholder="e.g., 2 Female (20-25), 1 Male (30-40)"
-                        value={formData.rolesNeeded}
-                        onChange={(e) => setFormData({ ...formData, rolesNeeded: e.target.value })}
-                        className="rounded-xl"
-                      />
-                    </div>
+            <Card className="rounded-2xl shadow-soft border-gray-200">
+              <CardHeader
+                className="border-b border-gray-100 cursor-pointer hover:bg-gray-50/50 transition-colors"
+                onClick={() => setAdvancedOpen(!advancedOpen)}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Star className="w-5 h-5 text-purple-600" />
+                    <CardTitle className="font-playfair">Advanced Details</CardTitle>
+                  </div>
+                  {advancedOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                </div>
+              </CardHeader>
+              {advancedOpen && (
+                <CardContent className="space-y-5 pt-6">
+                  {/* Roles Needed */}
+                  <div className="space-y-2">
+                    <Label htmlFor="roles" className="text-sm font-medium">
+                      Roles Needed
+                    </Label>
+                    <Input
+                      id="roles"
+                      value={rolesNeeded}
+                      onChange={(e) => setRolesNeeded(e.target.value)}
+                      placeholder="e.g., 2 Female (20-25), 1 Male (30-40)"
+                      className="h-11 rounded-lg"
+                    />
+                  </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="gender">Gender Preference</Label>
-                      <Select
-                        value={formData.gender}
-                        onValueChange={(value) => setFormData({ ...formData, gender: value })}
-                      >
-                        <SelectTrigger id="gender" className="rounded-xl">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="any">Any</SelectItem>
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="female">Female</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="age-min">Age Range (Min)</Label>
-                        <Input
-                          id="age-min"
-                          type="number"
-                          placeholder="18"
-                          value={formData.ageMin}
-                          onChange={(e) => setFormData({ ...formData, ageMin: e.target.value })}
-                          className="rounded-xl"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="age-max">Age Range (Max)</Label>
-                        <Input
-                          id="age-max"
-                          type="number"
-                          placeholder="35"
-                          value={formData.ageMax}
-                          onChange={(e) => setFormData({ ...formData, ageMax: e.target.value })}
-                          className="rounded-xl"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label>Languages (Max 4)</Label>
-                      <div className="flex flex-wrap gap-2">
-                        {LANGUAGES.map((lang) => (
-                          <Badge
-                            key={lang}
-                            variant={formData.languages.includes(lang) ? "default" : "outline"}
-                            className="cursor-pointer rounded-full px-3 py-1 transition-all hover:scale-105"
-                            onClick={() => toggleLanguage(lang)}
-                          >
-                            {lang}
-                          </Badge>
+                  {/* Gender Preference */}
+                  <div className="space-y-2">
+                    <Label htmlFor="gender" className="text-sm font-medium">
+                      Gender Preference
+                    </Label>
+                    <Select value={gender} onValueChange={setGender}>
+                      <SelectTrigger id="gender" className="h-11 rounded-lg">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {genderOptions.map((g) => (
+                          <SelectItem key={g} value={g}>
+                            {g}
+                          </SelectItem>
                         ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Age Range */}
+                  <div className="space-y-2">
+                    <Label className="text-sm font-medium">Age Range</Label>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Input
+                          type="number"
+                          value={ageMin}
+                          onChange={(e) => setAgeMin(e.target.value)}
+                          placeholder="Min"
+                          className="h-11 rounded-lg"
+                        />
+                      </div>
+                      <div>
+                        <Input
+                          type="number"
+                          value={ageMax}
+                          onChange={(e) => setAgeMax(e.target.value)}
+                          placeholder="Max"
+                          className="h-11 rounded-lg"
+                        />
                       </div>
                     </div>
+                    {ageMin && ageMax && Number.parseInt(ageMin) > Number.parseInt(ageMax) && (
+                      <p className="text-xs text-red-600 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        Minimum age must be less than maximum age
+                      </p>
+                    )}
+                  </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="experience">Experience Level</Label>
-                      <Select
-                        value={formData.experience}
-                        onValueChange={(value) => setFormData({ ...formData, experience: value })}
-                      >
-                        <SelectTrigger id="experience" className="rounded-xl">
-                          <SelectValue placeholder="Select experience level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="beginner">Beginner</SelectItem>
-                          <SelectItem value="intermediate">Intermediate</SelectItem>
-                          <SelectItem value="professional">Professional</SelectItem>
-                        </SelectContent>
-                      </Select>
+                  {/* Languages */}
+                  <div className="space-y-2">
+                    <Label className="text-sm font-medium">
+                      Languages <span className="text-gray-500 text-xs">(max 4)</span>
+                    </Label>
+                    <div className="flex flex-wrap gap-2">
+                      {languageOptions.map((lang) => (
+                        <button
+                          key={lang}
+                          type="button"
+                          onClick={() => handleLanguageToggle(lang)}
+                          disabled={!selectedLanguages.includes(lang) && selectedLanguages.length >= 4}
+                          className={cn(
+                            "px-3 py-1.5 rounded-full text-sm font-medium transition-all",
+                            selectedLanguages.includes(lang)
+                              ? "bg-purple-600 text-white"
+                              : "bg-gray-100 text-gray-700 hover:bg-gray-200",
+                            !selectedLanguages.includes(lang) &&
+                              selectedLanguages.length >= 4 &&
+                              "opacity-50 cursor-not-allowed",
+                          )}
+                        >
+                          {lang}
+                        </button>
+                      ))}
                     </div>
+                  </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="pay-type">Fee / Pay</Label>
-                      <Select
-                        value={formData.payType}
-                        onValueChange={(value) => setFormData({ ...formData, payType: value })}
-                      >
-                        <SelectTrigger id="pay-type" className="rounded-xl">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="not-specified">Not specified</SelectItem>
-                          <SelectItem value="free">Free</SelectItem>
-                          <SelectItem value="stipend">Stipend</SelectItem>
-                          <SelectItem value="paid">Paid</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  {/* Experience */}
+                  <div className="space-y-2">
+                    <Label htmlFor="experience" className="text-sm font-medium">
+                      Experience
+                    </Label>
+                    <Select value={experience} onValueChange={setExperience}>
+                      <SelectTrigger id="experience" className="h-11 rounded-lg">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {experienceLevels.map((e) => (
+                          <SelectItem key={e} value={e}>
+                            {e}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                    {(formData.payType === "stipend" || formData.payType === "paid") && (
-                      <div className="space-y-2">
-                        <Label htmlFor="amount">Amount *</Label>
+                  {/* Fee / Pay */}
+                  <div className="space-y-3">
+                    <Label htmlFor="pay" className="text-sm font-medium">
+                      Fee / Pay
+                    </Label>
+                    <Select value={pay} onValueChange={setPay}>
+                      <SelectTrigger id="pay" className="h-11 rounded-lg">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {payOptions.map((p) => (
+                          <SelectItem key={p} value={p}>
+                            {p}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {(pay === "Stipend" || pay === "Paid") && (
+                      <div className="pl-6 space-y-2 animate-in slide-in-from-top-2">
+                        <Label htmlFor="amount" className="text-sm font-medium">
+                          Amount <span className="text-red-500">*</span>
+                        </Label>
                         <div className="relative">
-                          <DollarSign className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                          <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                           <Input
                             id="amount"
                             type="number"
-                            placeholder="Enter amount in ₹"
-                            value={formData.amount}
-                            onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                            className="pl-10 rounded-xl"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            placeholder="5000"
+                            className="h-11 rounded-lg pl-10"
                           />
                         </div>
                       </div>
                     )}
+                  </div>
 
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                      <div className="space-y-0.5">
-                        <Label htmlFor="visibility" className="text-base">
-                          Visibility
-                        </Label>
-                        <p className="text-sm text-gray-500">
-                          {formData.visibility === "public" ? "Anyone can find this" : "Only via direct link"}
-                        </p>
-                      </div>
-                      <Switch
-                        id="visibility"
-                        checked={formData.visibility === "public"}
-                        onCheckedChange={(checked) =>
-                          setFormData({ ...formData, visibility: checked ? "public" : "unlisted" })
-                        }
-                      />
+                  {/* Visibility */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium">Visibility</Label>
+                    <div className="flex gap-3">
+                      <Button
+                        type="button"
+                        variant={visibility === "public" ? "default" : "outline"}
+                        className="flex-1 h-11 rounded-lg"
+                        onClick={() => setVisibility("public")}
+                      >
+                        <Eye className="w-4 h-4 mr-2" />
+                        Public
+                      </Button>
+                      <Button
+                        type="button"
+                        variant={visibility === "unlisted" ? "default" : "outline"}
+                        className="flex-1 h-11 rounded-lg"
+                        onClick={() => setVisibility("unlisted")}
+                      >
+                        <EyeOff className="w-4 h-4 mr-2" />
+                        Unlisted
+                      </Button>
                     </div>
-                  </CardContent>
-                </CollapsibleContent>
-              </Collapsible>
+                  </div>
+                </CardContent>
+              )}
             </Card>
 
             {/* Media Request Section */}
-            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <Camera className="h-5 w-5 text-purple-600" />
-                  Media Request (Optional)
-                </CardTitle>
+            <Card className="rounded-2xl shadow-soft border-gray-200">
+              <CardHeader className="border-b border-gray-100">
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="w-5 h-5 text-purple-600" />
+                  <CardTitle className="font-playfair">Media Request</CardTitle>
+                </div>
+                <CardDescription>Optional - Request media from applicants</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 pt-6">
+                {/* Request Photos */}
                 <div className="space-y-3">
-                  <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-xl">
+                  <div className="flex items-center space-x-2">
                     <Checkbox
                       id="request-photos"
-                      checked={formData.requestPhotos}
-                      onCheckedChange={(checked) => setFormData({ ...formData, requestPhotos: checked as boolean })}
+                      checked={requestPhotos}
+                      onCheckedChange={(checked) => setRequestPhotos(checked as boolean)}
                     />
-                    <div className="flex-1 space-y-2">
-                      <Label htmlFor="request-photos" className="cursor-pointer font-normal">
-                        Request Photos
-                      </Label>
+                    <Label htmlFor="request-photos" className="cursor-pointer font-medium">
+                      Request Photos
+                    </Label>
+                  </div>
+                  {requestPhotos && (
+                    <div className="pl-6 space-y-2 animate-in slide-in-from-top-2">
+                      <Input
+                        value={photoHelper}
+                        onChange={(e) => setPhotoHelper(e.target.value)}
+                        placeholder="Helper text (optional)"
+                        className="h-11 rounded-lg"
+                      />
                       <p className="text-xs text-gray-500">
-                        JPG/PNG/WebP up to 5MB each. Ask for 1 headshot + 1 full body.
+                        💡 Tip: JPG/PNG/WebP up to 5MB each. Ask for 1 headshot + 1 full body.
                       </p>
-                      {formData.requestPhotos && (
-                        <Input
-                          placeholder="Helper text (optional)"
-                          value={formData.photoHelperText}
-                          onChange={(e) => setFormData({ ...formData, photoHelperText: e.target.value })}
-                          className="mt-2 rounded-xl text-sm"
-                        />
-                      )}
                     </div>
-                  </div>
-
-                  <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-xl">
-                    <Checkbox
-                      id="request-videos"
-                      checked={formData.requestVideos}
-                      onCheckedChange={(checked) => setFormData({ ...formData, requestVideos: checked as boolean })}
-                    />
-                    <div className="flex-1 space-y-2">
-                      <Label htmlFor="request-videos" className="cursor-pointer font-normal">
-                        Request Video Links
-                      </Label>
-                      <p className="text-xs text-gray-500">1-min monologue link (YouTube/Vimeo/Drive; shareable).</p>
-                      {formData.requestVideos && (
-                        <Input
-                          placeholder="Helper text (optional)"
-                          value={formData.videoHelperText}
-                          onChange={(e) => setFormData({ ...formData, videoHelperText: e.target.value })}
-                          className="mt-2 rounded-xl text-sm"
-                        />
-                      )}
-                    </div>
-                  </div>
+                  )}
                 </div>
+
+                {/* Request Video */}
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="request-video"
+                      checked={requestVideo}
+                      onCheckedChange={(checked) => setRequestVideo(checked as boolean)}
+                    />
+                    <Label htmlFor="request-video" className="cursor-pointer font-medium">
+                      Request Video Links
+                    </Label>
+                  </div>
+                  {requestVideo && (
+                    <div className="pl-6 space-y-2 animate-in slide-in-from-top-2">
+                      <Input
+                        value={videoHelper}
+                        onChange={(e) => setVideoHelper(e.target.value)}
+                        placeholder="Helper text (optional)"
+                        className="h-11 rounded-lg"
+                      />
+                      <p className="text-xs text-gray-500">
+                        💡 Tip: 1-min monologue link (YouTube/Vimeo/Drive; shareable).
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {!requestPhotos && !requestVideo && (
+                  <p className="text-sm text-gray-500 py-4 text-center">No media requested.</p>
+                )}
               </CardContent>
             </Card>
 
             {/* Consent Section */}
-            <Card className="border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <CheckCircle2 className="h-5 w-5 text-purple-600" />
-                  Consent
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+            <Card className="rounded-2xl shadow-soft border-gray-200 border-2 border-purple-100">
+              <CardContent className="space-y-4 pt-6">
                 <div className="flex items-start space-x-3">
                   <Checkbox
                     id="consent1"
-                    checked={formData.consent1}
-                    onCheckedChange={(checked) => setFormData({ ...formData, consent1: checked as boolean })}
+                    checked={consent1}
+                    onCheckedChange={(checked) => setConsent1(checked as boolean)}
+                    className="mt-1"
                   />
-                  <Label htmlFor="consent1" className="cursor-pointer font-normal leading-relaxed">
+                  <Label htmlFor="consent1" className="cursor-pointer text-sm leading-relaxed">
                     I confirm that all details provided are genuine and that I have the right to conduct this
                     casting/workshop.
                   </Label>
                 </div>
-
                 <div className="flex items-start space-x-3">
                   <Checkbox
                     id="consent2"
-                    checked={formData.consent2}
-                    onCheckedChange={(checked) => setFormData({ ...formData, consent2: checked as boolean })}
+                    checked={consent2}
+                    onCheckedChange={(checked) => setConsent2(checked as boolean)}
+                    className="mt-1"
                   />
-                  <Label htmlFor="consent2" className="cursor-pointer font-normal leading-relaxed">
+                  <Label htmlFor="consent2" className="cursor-pointer text-sm leading-relaxed">
                     I agree to Abhinayपथ's{" "}
-                    <Link href="/terms" className="text-purple-600 hover:underline">
+                    <a href="/terms" className="text-purple-600 hover:underline">
                       Terms
-                    </Link>{" "}
-                    &{" "}
-                    <Link href="/privacy" className="text-purple-600 hover:underline">
+                    </a>
+                    {" & "}
+                    <a href="/privacy" className="text-purple-600 hover:underline">
                       Privacy Policy
-                    </Link>
+                    </a>
                     .
                   </Label>
                 </div>
               </CardContent>
             </Card>
 
-            {/* CTAs */}
-            <div className="flex gap-4 pb-8">
+            {/* Action Buttons */}
+            <div className="flex gap-4">
               <Button
-                size="lg"
                 onClick={handlePublish}
-                disabled={!isFormValid()}
-                className="flex-1 rounded-xl bg-gradient-to-r from-purple-600 to-red-600 hover:from-purple-700 hover:to-red-700 text-white font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                disabled={!canPublish}
+                className="flex-1 h-12 rounded-lg text-base font-medium"
               >
+                <CheckCircle2 className="w-5 h-5 mr-2" />
                 Publish Opportunity
               </Button>
-              <Sheet open={applyFlowOpen} onOpenChange={setApplyFlowOpen}>
-                <SheetTrigger asChild>
-                  <Button size="lg" variant="outline" className="rounded-xl bg-transparent">
-                    <Eye className="h-4 w-4 mr-2" />
-                    Preview Apply Flow
-                  </Button>
-                </SheetTrigger>
-                <SheetContent className="sm:max-w-lg overflow-y-auto">
-                  <SheetHeader>
-                    <SheetTitle>Artist Application View</SheetTitle>
-                  </SheetHeader>
-                  <div className="mt-6 space-y-6">
-                    <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                      <p className="text-sm text-blue-800">
-                        <Info className="h-4 w-4 inline mr-2" />
-                        Your Abhinayपथ profile will be shared with the organiser.
-                      </p>
-                    </div>
-
-                    {formData.requestPhotos && (
-                      <div className="space-y-3">
-                        <Label>Upload Photos</Label>
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="h-32 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center bg-gray-50">
-                            <Camera className="h-8 w-8 text-gray-400" />
-                          </div>
-                          <div className="h-32 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center bg-gray-50">
-                            <Camera className="h-8 w-8 text-gray-400" />
-                          </div>
-                        </div>
-                        {formData.photoHelperText && (
-                          <p className="text-xs text-gray-600">{formData.photoHelperText}</p>
-                        )}
-                      </div>
-                    )}
-
-                    {formData.requestVideos && (
-                      <div className="space-y-3">
-                        <Label>Video Links</Label>
-                        <Input placeholder="YouTube/Vimeo/Drive link" className="rounded-xl" />
-                        <Input placeholder="Additional link (optional)" className="rounded-xl" />
-                        {formData.videoHelperText && (
-                          <p className="text-xs text-gray-600">{formData.videoHelperText}</p>
-                        )}
-                      </div>
-                    )}
-
-                    <Button
-                      size="lg"
-                      className="w-full rounded-xl"
-                      disabled={formData.requestPhotos || formData.requestVideos}
-                    >
-                      Submit Application
-                    </Button>
-
-                    {(formData.requestPhotos || formData.requestVideos) && (
-                      <p className="text-xs text-center text-gray-500">Complete required media uploads to submit</p>
-                    )}
-                  </div>
-                </SheetContent>
-              </Sheet>
+              <Button
+                variant="outline"
+                onClick={() => setApplyFlowOpen(true)}
+                className="flex-1 h-12 rounded-lg text-base font-medium"
+              >
+                Preview Apply Flow
+              </Button>
             </div>
           </div>
 
           {/* Right Column - Live Preview */}
           <div className="lg:sticky lg:top-24 h-fit">
-            <Card className="border-gray-200 shadow-lg overflow-hidden">
-              <div className="bg-gradient-to-br from-purple-600/10 to-red-600/10 p-4 border-b">
-                <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                  <Badge variant="secondary" className="rounded-full">
-                    {formData.type || "Type"}
+            <Card className="rounded-2xl shadow-soft border-gray-200">
+              <CardHeader className="border-b border-gray-100">
+                <CardTitle className="font-playfair text-lg">Live Preview</CardTitle>
+                <CardDescription>How artists will see your opportunity</CardDescription>
+              </CardHeader>
+              <CardContent className="p-6 space-y-4">
+                {/* Type & Location */}
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <Badge variant="secondary" className="font-normal">
+                    {type || "Type"}
                   </Badge>
                   <span>•</span>
-                  <span className="flex items-center gap-1">
-                    {formData.locationMode === "online" ? (
-                      <Video className="h-3.5 w-3.5" />
-                    ) : (
-                      <MapPin className="h-3.5 w-3.5" />
-                    )}
-                    {getLocationDisplay()}
-                  </span>
+                  <span>{locationMode === "city" ? city || "City" : "Online"}</span>
                 </div>
-                <h3 className="font-playfair text-xl font-bold text-gray-900 mb-1">
-                  {formData.title || "Opportunity Title"}
+
+                {/* Title */}
+                <h3 className="text-2xl font-playfair font-bold text-gray-900">
+                  {title || "Your opportunity title will appear here"}
                 </h3>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <CalendarIcon className="h-3.5 w-3.5" />
-                  <span>Deadline: {formData.deadline ? format(formData.deadline, "PPP") : "Not set"}</span>
+
+                {/* Deadline & Location Detail */}
+                <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    <span>Deadline: {deadline ? format(deadline, "PP") : "Not set"}</span>
+                  </div>
+                  {locationMode === "city" && venue && (
+                    <>
+                      <span>•</span>
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-4 h-4" />
+                        <span>{venue}</span>
+                      </div>
+                    </>
+                  )}
+                  {locationMode === "online" && platform && (
+                    <>
+                      <span>•</span>
+                      <div className="flex items-center gap-1">
+                        <Globe className="w-4 h-4" />
+                        <span>{platform}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
-              </div>
 
-              <CardContent className="p-6 space-y-4">
-                <div>
-                  <h4 className="font-semibold text-sm text-gray-900 mb-2">Description</h4>
-                  <p className="text-sm text-gray-600 line-clamp-4">
-                    {formData.description || "Description will appear here..."}
-                  </p>
+                {/* Description Snippet */}
+                <div className="prose prose-sm max-w-none">
+                  <p className="text-gray-700 line-clamp-3">{description || "Your description will appear here..."}</p>
                 </div>
 
-                {(formData.rolesNeeded ||
-                  formData.gender !== "any" ||
-                  formData.ageMin ||
-                  formData.languages.length > 0 ||
-                  formData.experience) && <Separator />}
-
-                {(formData.rolesNeeded ||
-                  formData.gender !== "any" ||
-                  formData.ageMin ||
-                  formData.languages.length > 0 ||
-                  formData.experience) && (
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 mb-3">Requirements</h4>
-                    <div className="space-y-2 text-sm">
-                      {formData.rolesNeeded && (
-                        <div className="flex gap-2">
-                          <span className="text-gray-500 min-w-20">Roles:</span>
-                          <span className="text-gray-900">{formData.rolesNeeded}</span>
-                        </div>
-                      )}
-                      {formData.gender !== "any" && (
-                        <div className="flex gap-2">
-                          <span className="text-gray-500 min-w-20">Gender:</span>
-                          <span className="text-gray-900 capitalize">{formData.gender}</span>
-                        </div>
-                      )}
-                      {(formData.ageMin || formData.ageMax) && (
-                        <div className="flex gap-2">
-                          <span className="text-gray-500 min-w-20">Age:</span>
-                          <span className="text-gray-900">
-                            {formData.ageMin || "Any"} - {formData.ageMax || "Any"}
-                          </span>
-                        </div>
-                      )}
-                      {formData.languages.length > 0 && (
-                        <div className="flex gap-2">
-                          <span className="text-gray-500 min-w-20">Languages:</span>
-                          <span className="text-gray-900">{formData.languages.join(", ")}</span>
-                        </div>
-                      )}
-                      {formData.experience && (
-                        <div className="flex gap-2">
-                          <span className="text-gray-500 min-w-20">Experience:</span>
-                          <span className="text-gray-900 capitalize">{formData.experience}</span>
-                        </div>
-                      )}
+                {/* Requirements */}
+                <div className="space-y-2 pt-2">
+                  <h4 className="text-sm font-semibold text-gray-900">Requirements</h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="flex items-center gap-2 text-sm">
+                      <Users className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-700">{gender}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Clock className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-700">{ageMin && ageMax ? `${ageMin}-${ageMax} yrs` : "Any age"}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Languages className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-700">
+                        {selectedLanguages.length > 0 ? selectedLanguages.join(", ") : "Any"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Star className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-700">{experience}</span>
                     </div>
                   </div>
-                )}
-
-                <Separator />
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-gray-500 mb-1">Compensation</p>
-                    <p className="font-semibold text-gray-900">
-                      {formData.payType === "not-specified"
-                        ? "Not specified"
-                        : formData.payType === "free"
-                          ? "Free"
-                          : formData.amount
-                            ? `₹${formData.amount}`
-                            : "To be decided"}
-                    </p>
-                  </div>
-                  <Badge variant={formData.visibility === "public" ? "default" : "secondary"} className="rounded-full">
-                    <Globe className="h-3 w-3 mr-1" />
-                    {formData.visibility === "public" ? "Public" : "Unlisted"}
-                  </Badge>
                 </div>
 
-                <Button className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-red-600 hover:from-purple-700 hover:to-red-700 text-white">
-                  {formData.applicationMethod === "platform"
-                    ? "Apply on Abhinayपथ"
-                    : formData.applicationMethod === "whatsapp"
-                      ? "Contact via WhatsApp"
-                      : formData.applicationMethod === "email"
-                        ? "Apply via Email"
-                        : "Apply via External Form"}
-                </Button>
+                {/* Pay */}
+                <div className="pt-2 border-t border-gray-100">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-900">Compensation</span>
+                    <span className="text-sm font-semibold text-gray-900">
+                      {pay === "Not specified"
+                        ? "Not specified"
+                        : pay === "Free"
+                          ? "Free"
+                          : (pay === "Stipend" || pay === "Paid") && amount
+                            ? `₹${amount}`
+                            : pay}
+                    </span>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <Button className="w-full h-11 rounded-lg text-base font-medium">{getApplicationMethodLabel()}</Button>
+
+                {/* Visibility Badge */}
+                <div className="flex justify-center">
+                  <Badge variant="outline" className="text-xs">
+                    Visibility: {visibility === "public" ? "Public" : "Unlisted"}
+                  </Badge>
+                </div>
               </CardContent>
             </Card>
           </div>
         </div>
-      </div>
 
-      {/* Footer */}
-      <footer className="border-t bg-white/80 backdrop-blur-sm py-6 mt-12">
-        <div className="container text-center">
-          <p className="text-sm text-gray-600">© Abhinayपथ • Minimal form, maximal clarity.</p>
-          <div className="flex items-center justify-center gap-4 mt-2 text-xs text-gray-500">
-            <Link href="/privacy" className="hover:text-purple-600 transition-colors">
+        {/* Footer */}
+        <div className="text-center py-8 text-sm text-gray-600">
+          <p>© Abhinayपथ • Minimal form, maximal clarity.</p>
+          <div className="flex items-center justify-center gap-4 mt-2">
+            <a href="/privacy" className="hover:text-purple-600 transition-colors">
               Privacy Policy
-            </Link>
+            </a>
             <span>•</span>
-            <Link href="/terms" className="hover:text-purple-600 transition-colors">
+            <a href="/terms" className="hover:text-purple-600 transition-colors">
               Terms
-            </Link>
+            </a>
             <span>•</span>
-            <Link href="/report" className="hover:text-purple-600 transition-colors">
+            <a href="/report" className="hover:text-purple-600 transition-colors">
               Report Misuse
-            </Link>
+            </a>
           </div>
         </div>
-      </footer>
+      </div>
+
+      {/* Apply Flow Preview Sheet */}
+      <Sheet open={applyFlowOpen} onOpenChange={setApplyFlowOpen}>
+        <SheetContent className="w-full sm:max-w-lg">
+          <SheetHeader>
+            <SheetTitle className="font-playfair">Apply Flow Preview</SheetTitle>
+            <SheetDescription>This is how artists will apply to your opportunity</SheetDescription>
+          </SheetHeader>
+          <div className="space-y-6 mt-6">
+            <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
+              <p className="text-sm text-purple-900">Your Abhinayपथ profile will be shared with the organiser.</p>
+            </div>
+
+            {requestPhotos && (
+              <div className="space-y-3">
+                <Label className="text-sm font-medium">Upload Photos {photoHelper && `(${photoHelper})`}</Label>
+                <div className="grid grid-cols-2 gap-3">
+                  {[1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className="aspect-square rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 hover:border-purple-400 hover:text-purple-600 transition-colors cursor-pointer"
+                    >
+                      <div className="text-center">
+                        <ImageIcon className="w-8 h-8 mx-auto mb-2" />
+                        <p className="text-xs">Upload photo {i}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {requestVideo && (
+              <div className="space-y-3">
+                <Label className="text-sm font-medium">Video Links {videoHelper && `(${videoHelper})`}</Label>
+                {[1, 2].map((i) => (
+                  <Input key={i} placeholder={`Video link ${i}`} className="h-11 rounded-lg" />
+                ))}
+              </div>
+            )}
+
+            <Button disabled={!requestPhotos && !requestVideo} className="w-full h-11 rounded-lg">
+              Submit Application
+            </Button>
+
+            {!requestPhotos && !requestVideo && (
+              <p className="text-sm text-gray-500 text-center py-4">No media requested. Application will be instant.</p>
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
