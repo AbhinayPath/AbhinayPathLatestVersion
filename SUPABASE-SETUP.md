@@ -11,23 +11,23 @@ This document provides instructions for setting up and using the Supabase auditi
 
 2. **Set Up Environment Variables**
    - Copy the `.env.example` file to `.env.local`
-   ```bash
+   \`\`\`bash
    cp .env.example .env.local
-   ```
+   \`\`\`
    - Open `.env.local` and add your Supabase credentials:
-   ```
+   \`\`\`
    NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
    SUPABASE_URL=https://your-project-id.supabase.co
    SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-   ```
+   \`\`\`
 
 3. **Create the Auditions Table**
    - Go to your Supabase dashboard
    - Navigate to the SQL Editor
    - Run the following SQL to create the auditions table:
 
-   ```sql
+   \`\`\`sql
    CREATE TABLE auditions (
      id BIGINT PRIMARY KEY,
      title TEXT NOT NULL,
@@ -46,13 +46,13 @@ This document provides instructions for setting up and using the Supabase auditi
      image TEXT,
      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
    );
-   ```
+   \`\`\`
 
 4. **Test Your Connection**
    - Run the test script to verify your Supabase connection:
-   ```bash
+   \`\`\`bash
    node scripts/test-supabase-connection.js
-   ```
+   \`\`\`
 
 ## API Usage
 
@@ -64,32 +64,32 @@ You can import auditions using the provided API endpoint or script:
    
    Send a POST request to `/api/auditions` with an array of audition objects:
 
-   ```bash
+   \`\`\`bash
    curl -X POST http://localhost:3000/api/auditions \
      -H "Content-Type: application/json" \
      -d '[{"id":1,"title":"Sample Audition","type":"Commercial","location":"Mumbai",...}]'
-   ```
+   \`\`\`
 
 2. **Using the Import Script**
    
    Edit `scripts/import-auditions.js` to include your audition data, then run:
 
-   ```bash
+   \`\`\`bash
    node scripts/import-auditions.js
-   ```
+   \`\`\`
 
 ### API Response Format
 
 The API will respond with:
 
-```json
+\`\`\`json
 {
   "success": true,
   "message": "Processed X auditions with Y errors",
   "results": [...],
   "errors": null
 }
-```
+\`\`\`
 
 ## Troubleshooting
 
