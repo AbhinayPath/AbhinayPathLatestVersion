@@ -1623,6 +1623,816 @@ const workshops = [
         "This intensive 5-day course provides a comprehensive introduction to filmmaking, perfect for beginners looking to step into the world of cinema. The program combines theoretical knowledge with extensive hands-on practice, ensuring participants gain both understanding and practical skills in all aspects of filmmaking. The collaboration between FTII and SRTM University provides a unique learning environment that bridges academic excellence with creative innovation. Participants will leave with a completed short film and the confidence to pursue their filmmaking aspirations.",
     },
   },
+  {
+    id: 37,
+    title: "FTII Pune: Basic Course in Digital Cinematography",
+    trainer: "Rakesh Bhilare",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "08–20 December 2025",
+    time: "10 AM – 5 PM",
+    description:
+      "🎥 Learn how to see light. Frame truth. Capture emotion. A comprehensive 12-day cinematography course at FTII covering camera & composition, light & exposure, movement & framing, filters & lighting setup, and 6-shot continuity exercise. Led by award-winning cinematographer Rakesh Bhilare with 12+ years in the film industry.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-digital-cinematography-in-pune-08-20-december-2025",
+    featured: true,
+    price: "₹15,000 (Hostel optional: ₹4,200 for 14 days, triple share)",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+    eligibility: "Age 18+",
+    venue: "Vijay Tendulkar Writer's Academy, Kothrud, Pune",
+    includes: "Camera & composition training + Lighting setup + 6-shot continuity exercise + FTII Certificate",
+    highlights: [
+      "Camera & Composition",
+      "Light & Exposure",
+      "Movement & Framing",
+      "Filters & Lighting Setup",
+      "6-Shot Continuity Exercise",
+      "Industry Expert Mentor",
+    ],
+    fullDetails: {
+      venue: "Vijay Tendulkar Writer's Academy, Kothrud, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "12 days (08–20 December 2025, Sunday off)",
+      medium: "English & Hindi",
+      courseDirector: "Rakesh Bhilare (Award-winning cinematographer with 12+ years in film industry, FTII Alumnus)",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Nationality: Indian",
+        "Interest in cinematography and filmmaking",
+        "No prior experience required - perfect for beginners",
+        "Commitment to attend all sessions for certification",
+      ],
+      applicationDeadline: "10 November 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "24 seats",
+      courseFee: "₹15,000 per person (excludes meals)",
+      hostelFee: "₹4,200 (optional, 14 days, triple sharing)",
+      certification: "FTII & CFOL participation certificate",
+      keyHighlights: [
+        "Learn how to see light, frame truth, and capture emotion",
+        "Comprehensive 12-day intensive cinematography training",
+        "Camera operation and composition techniques",
+        "Understanding light and exposure fundamentals",
+        "Movement and framing for visual storytelling",
+        "Filters and lighting setup practical training",
+        "6-shot continuity exercise for hands-on learning",
+        "Led by award-winning cinematographer with 12+ years experience",
+        "FTII alumnus instructor with industry expertise",
+        "Small batch size for personalized attention (24 seats)",
+        "Optional hostel accommodation available on campus",
+      ],
+      curriculum: [
+        "Camera fundamentals and operation",
+        "Composition principles and visual storytelling",
+        "Understanding light: quality, direction, and color",
+        "Exposure triangle: ISO, aperture, and shutter speed",
+        "Camera movement techniques: pan, tilt, dolly, crane",
+        "Framing and shot sizes for narrative impact",
+        "Filters: ND, polarizers, and creative filters",
+        "Lighting setup: three-point lighting and beyond",
+        "Natural light vs artificial light cinematography",
+        "6-shot continuity exercise: practical application",
+        "Visual language and cinematic grammar",
+        "Working with actors and directors as a cinematographer",
+      ],
+      practicalExperience: [
+        "Hands-on camera operation and handling",
+        "Lighting setup and execution exercises",
+        "6-shot continuity exercise filming",
+        "Composition and framing practice",
+        "Exposure control and adjustment drills",
+        "Filter usage and experimentation",
+        "Camera movement exercises",
+        "Real-world cinematography scenarios",
+      ],
+      learningOutcomes: [
+        "Proficiency in digital camera operation",
+        "Understanding of light and its manipulation",
+        "Ability to compose visually compelling shots",
+        "Knowledge of exposure control and settings",
+        "Skills in camera movement and framing",
+        "Practical experience with lighting setups",
+        "Understanding of filters and their applications",
+        "Confidence in executing 6-shot continuity sequences",
+        "Foundation for professional cinematography career",
+        "Visual storytelling through camera work",
+      ],
+      aboutInstructor:
+        "Rakesh Bhilare – Award-winning cinematographer and FTII alumnus with over 12 years of experience in the film industry. His notable works include Y (2022), Athaang (2022), and Lovestoriyaan (2024). With extensive experience in both independent and commercial cinema, Rakesh brings practical industry knowledge and proven cinematography techniques to guide aspiring cinematographers.",
+      instructorExperience: [
+        "FTII alumnus with formal training in cinematography",
+        "12+ years of professional experience in film industry",
+        "Cinematographer for Y (2022) - critically acclaimed film",
+        "Cinematographer for Athaang (2022)",
+        "Cinematographer for Lovestoriyaan (2024)",
+        "Award-winning work recognized in film festivals",
+        "Experience across independent and commercial cinema",
+        "Expert in both digital and traditional cinematography",
+      ],
+      uniqueExperience: [
+        "Exclusive on-campus training at prestigious FTII",
+        "Learn from award-winning industry professional",
+        "Small batch size ensures personalized attention",
+        "Comprehensive curriculum covering all aspects of cinematography",
+        "Hands-on practical training with professional equipment",
+        "6-shot continuity exercise for real-world application",
+        "Optional hostel accommodation for immersive learning",
+        "FTII certificate adds credibility to your portfolio",
+      ],
+      targetAudience: [
+        "Aspiring cinematographers and camera operators",
+        "Filmmakers wanting to enhance visual storytelling skills",
+        "Photography enthusiasts transitioning to cinematography",
+        "Film students seeking professional training",
+        "Content creators looking to improve video quality",
+        "Anyone passionate about visual storytelling through camera",
+      ],
+      workshopPolicies: [
+        "Non-residential program (hostel optional)",
+        "Participants arrange own meals",
+        "Professional conduct expected from all participants",
+        "Active participation required in all practical exercises",
+        "Attendance mandatory for certification",
+        "Equipment provided during workshop sessions",
+      ],
+      contactInfo: [
+        "Mr. Milindkumar Joshi - Assistant Outreach Officer, FTII",
+        "Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+        "Phone: 020–25580085 (working days, office hours only)",
+      ],
+      additionalInfo:
+        "This comprehensive cinematography course at FTII provides aspiring cinematographers with professional-level training in a hands-on, intensive environment. Learn the art and craft of visual storytelling through camera work, lighting, and composition from an award-winning industry professional. The 12-day program combines theoretical knowledge with extensive practical exercises, culminating in a 6-shot continuity exercise that simulates real-world cinematography challenges. With small batch sizes and expert instruction, this workshop offers an exceptional opportunity to master the fundamentals of digital cinematography.",
+    },
+  },
+  {
+    id: 38,
+    title: "FTII Pune: Introduction to Multi-Camera Technical Operations for TV Program Production",
+    trainer: "Prof. Sandeep Shahare",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "01–05 December 2025",
+    time: "9 AM – 6:30 PM",
+    description:
+      "🎥 Step inside the studio. Learn how multi-camera television magic is made — from the switcher to the spotlight. Master multi-camera setup, signal flow, lighting, vision mixing, live switching, audio control, and program production. Create your own 2-5 minute TV program and receive a copy + certificate.",
+    image: "/images/acting-workshop.png",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/introduction-to-multi-camera-technical-operations-for-tv-program-production-01-05-december-2025",
+    featured: true,
+    price: "₹5,000 (Hostel optional: ₹1,800 for 6 days, triple share)",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+    eligibility: "Age 18+",
+    venue: "TV Engineering Department, FTII Main Campus, Law College Road, Pune",
+    includes:
+      "Multi-camera setup training + Live switching + Audio control + Recording & playback + Create your own 2-5 min TV program + Certificate",
+    highlights: [
+      "Multi-Camera Setup",
+      "Vision Mixing",
+      "Live Switching",
+      "Audio Control",
+      "TV Program Production",
+      "Hands-on Studio Experience",
+    ],
+    fullDetails: {
+      venue: "TV Engineering Department, FTII Main Campus, Law College Road, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "5 days (01–05 December 2025)",
+      medium: "English & Hindi",
+      courseDirector:
+        "Prof. Sandeep Shahare (Head of TV Engineering & Dean (TV), FTII with 29 years of professional & teaching experience, M.E. in Electronics & Telecom from COEP)",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Nationality: Indian",
+        "Interest in television production and broadcasting",
+        "No prior technical experience required",
+        "Commitment to attend all sessions for certification",
+      ],
+      applicationDeadline: "10 November 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "20 seats (Minimum 16 participants required)",
+      courseFee: "₹5,000 per person (excludes meals)",
+      hostelFee: "₹1,800 (optional, 6 days, triple sharing)",
+      certification: "FTII certificate + Copy of your own 2-5 minute TV program",
+      keyHighlights: [
+        "Step inside a professional television studio",
+        "Learn multi-camera television production from scratch",
+        "Understand signal flow and technical operations",
+        "Master lighting techniques for TV production",
+        "Learn camera operations in multi-camera setup",
+        "Vision mixing and live switching training",
+        "Audio control and talkback systems",
+        "Recording, playback, and program production",
+        "Create your own 2-5 minute TV program",
+        "Receive a copy of your program + FTII certificate",
+        "Led by Head of TV Engineering with 29 years experience",
+        "Small batch size for hands-on learning (20 seats)",
+        "Optional hostel accommodation available",
+      ],
+      curriculum: [
+        "Introduction to multi-camera television production",
+        "Understanding signal flow in TV studios",
+        "Multi-camera setup and configuration",
+        "Camera operations and positioning",
+        "Lighting fundamentals for television",
+        "Studio lighting techniques and equipment",
+        "Vision mixing console operation",
+        "Live switching and shot selection",
+        "Audio control systems and mixing",
+        "Talkback and communication systems",
+        "Recording and playback operations",
+        "Program production workflow",
+        "Creating a complete 2-5 minute TV program",
+      ],
+      practicalExperience: [
+        "Hands-on multi-camera studio operations",
+        "Live vision mixing and switching exercises",
+        "Camera operation in multi-camera setup",
+        "Lighting setup and control practice",
+        "Audio mixing and control exercises",
+        "Talkback system usage",
+        "Recording and playback operations",
+        "Complete TV program production from concept to completion",
+        "Individual 2-5 minute program creation",
+      ],
+      learningOutcomes: [
+        "Comprehensive understanding of multi-camera TV production",
+        "Proficiency in vision mixing and live switching",
+        "Skills in multi-camera setup and signal flow",
+        "Knowledge of studio lighting techniques",
+        "Ability to operate cameras in multi-camera environment",
+        "Competence in audio control and mixing",
+        "Understanding of talkback and communication systems",
+        "Experience in recording and playback operations",
+        "Practical skills in TV program production",
+        "Portfolio piece: Your own 2-5 minute TV program",
+        "Foundation for career in television production",
+      ],
+      aboutInstructor:
+        "Prof. Sandeep Shahare – Head of TV Engineering Department and Dean (TV) at FTII with 29 years of professional and teaching experience. He holds an M.E. in Electronics & Telecommunication from College of Engineering, Pune (COEP). With nearly three decades of expertise in television engineering and production, Prof. Shahare brings invaluable industry knowledge and technical expertise to guide aspiring TV production professionals.",
+      instructorExperience: [
+        "Head of TV Engineering Department at FTII",
+        "Dean (TV) at Film and Television Institute of India",
+        "29 years of professional and teaching experience",
+        "M.E. in Electronics & Telecommunication from COEP",
+        "Expert in multi-camera television production",
+        "Extensive experience in broadcast engineering",
+        "Trained numerous professionals in TV production",
+        "Deep understanding of studio operations and workflows",
+      ],
+      uniqueExperience: [
+        "Exclusive training at India's premier film institute",
+        "Learn from Head of TV Engineering with 29 years experience",
+        "Hands-on experience in professional TV studio",
+        "Small batch ensures personalized attention (20 seats)",
+        "Create and take home your own TV program",
+        "Comprehensive coverage of all technical aspects",
+        "Professional-grade equipment and facilities",
+        "FTII certificate adds credibility to your portfolio",
+        "Optional on-campus hostel accommodation",
+      ],
+      targetAudience: [
+        "Aspiring television production professionals",
+        "Camera operators wanting to learn multi-camera setup",
+        "Video editors interested in live production",
+        "Content creators expanding to TV production",
+        "Film students seeking television production skills",
+        "Anyone passionate about television broadcasting",
+        "Technical enthusiasts interested in broadcast engineering",
+      ],
+      workshopPolicies: [
+        "Non-residential program (hostel optional)",
+        "Participants arrange own meals",
+        "Professional conduct expected in studio environment",
+        "Active participation required in all practical sessions",
+        "Attendance mandatory for certification",
+        "Equipment provided during workshop sessions",
+        "Minimum 16 participants required for workshop to proceed",
+      ],
+      contactInfo: [
+        "Mr. Milindkumar Joshi - Assistant Outreach Officer, FTII",
+        "Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+        "Phone: 020–25580085 (working days, office hours only)",
+      ],
+      additionalInfo:
+        "This intensive 5-day workshop at FTII provides aspiring television professionals with comprehensive hands-on training in multi-camera technical operations. Step inside a professional TV studio and learn the complete workflow from setup to final program production. Under the guidance of Prof. Sandeep Shahare, Head of TV Engineering with 29 years of experience, you'll master vision mixing, live switching, audio control, and all technical aspects of television production. The highlight of the workshop is creating your own 2-5 minute TV program, which you'll receive a copy of along with your FTII certificate. With small batch sizes and professional-grade equipment, this workshop offers an exceptional opportunity to gain practical skills in television production.",
+    },
+  },
+  {
+    id: 39,
+    title: "FTII Chennai: Basic Film Appreciation Course",
+    trainer: "Dr. Milind Damle",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Chennai",
+    state: "Tamil Nadu",
+    date: "17–21 November 2025",
+    time: "10 AM – 6 PM",
+    description:
+      "🎬 See films not just as stories — but as language, rhythm, and truth. Learn the art and language of cinema, film history, how images and sound create meaning, and the relationship between cinema, culture, and society. Includes film screenings, discussions, and guided analysis led by Dr. Milind Damle with 20+ years of experience.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-film-appreciation-course-in-chennai-17-21-november-2025",
+    featured: true,
+    price: "₹4,000",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+    eligibility: "Age 18+",
+    venue: "SA College of Arts & Science, Thiruverkadu, Chennai",
+    includes: "Film screenings + Discussions + Guided analysis + FTII Certificate",
+    highlights: [
+      "Art & Language of Cinema",
+      "Film History & Evolution",
+      "Images, Sound & Editing",
+      "Cinema & Culture",
+      "Film Screenings",
+      "Expert Analysis",
+    ],
+    fullDetails: {
+      venue: "SA College of Arts & Science, Thiruverkadu, Chennai",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "5 days (17–21 November 2025)",
+      medium: "English & Hindi",
+      courseDirector:
+        "Dr. Milind Damle (Associate Professor at FTII Pune, Film Editor, Writer, and Educator with 20+ years of experience in Radio, Cinema & Television. Ph.D. on Song Picturization in Vijay Anand Films)",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Nationality: Indian",
+        "Passion for cinema and storytelling",
+        "Interest in understanding film as an art form",
+        "No prior film education required",
+        "Open to students, professionals, and cinema enthusiasts",
+      ],
+      applicationDeadline: "30 October 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "70 seats",
+      courseFee: "₹4,000 per person (excludes meals)",
+      certification: "FTII participation certificate",
+      keyHighlights: [
+        "See films not just as stories — but as language, rhythm, and truth",
+        "Learn the art and language of cinema",
+        "Understand film history and evolution of cinematic form",
+        "Discover how images, sound, and editing create meaning",
+        "Explore the journey from idea to screen",
+        "Study the relationship between cinema, culture, and society",
+        "Film screenings with expert analysis",
+        "Interactive discussions and guided analysis",
+        "Led by Dr. Milind Damle with 20+ years experience",
+        "Ph.D. expertise on song picturization in Indian cinema",
+        "FTII certificate upon completion",
+        "Large batch size for diverse perspectives (70 seats)",
+      ],
+      curriculum: [
+        "Introduction to film as an art form",
+        "The language of cinema: visual storytelling",
+        "Film history and evolution of cinematic form",
+        "Understanding mise-en-scène and composition",
+        "The role of cinematography in storytelling",
+        "Sound design and its impact on narrative",
+        "Film editing: rhythm, pace, and meaning",
+        "The journey from idea to screen",
+        "Cinema and culture: social context",
+        "Cinema and society: reflection and influence",
+        "Genre studies and conventions",
+        "Auteur theory and directorial vision",
+        "Song picturization in Indian cinema",
+        "Contemporary cinema and new forms",
+      ],
+      practicalExperience: [
+        "Curated film screenings",
+        "Scene-by-scene analysis sessions",
+        "Group discussions on film techniques",
+        "Comparative studies of different cinematic styles",
+        "Analysis of sound and image relationships",
+        "Exploration of editing patterns",
+        "Cultural context discussions",
+        "Interactive Q&A with Dr. Milind Damle",
+      ],
+      learningOutcomes: [
+        "Comprehensive understanding of cinema as an art form",
+        "Ability to analyze films beyond surface narratives",
+        "Knowledge of film history and evolution",
+        "Understanding of visual language and composition",
+        "Appreciation of sound design and its narrative role",
+        "Insight into editing techniques and their effects",
+        "Awareness of cinema's relationship with culture and society",
+        "Critical thinking skills for film analysis",
+        "Enhanced appreciation for cinematic craft",
+        "Foundation for further film studies or criticism",
+        "Ability to articulate film analysis effectively",
+      ],
+      aboutInstructor:
+        "Dr. Milind Damle – Associate Professor at Film and Television Institute of India (FTII), Pune. A distinguished Film Editor, Writer, and Educator with over 20 years of experience in Radio, Cinema, and Television. Dr. Damle holds a Ph.D. on Song Picturization in Vijay Anand Films, bringing unique expertise in understanding the intersection of music, visuals, and narrative in Indian cinema. His extensive experience across multiple media forms provides students with a comprehensive perspective on film appreciation and analysis.",
+      instructorExperience: [
+        "Associate Professor at FTII Pune",
+        "20+ years in Radio, Cinema & Television",
+        "Ph.D. on Song Picturization in Vijay Anand Films",
+        "Film Editor with extensive industry experience",
+        "Writer and researcher in film studies",
+        "Expert in Indian cinema and song picturization",
+        "Educator with deep understanding of film language",
+        "Experienced in conducting film appreciation courses",
+      ],
+      uniqueExperience: [
+        "Training from India's premier film institute (FTII)",
+        "Learn from a Ph.D. expert in Indian cinema",
+        "Unique focus on song picturization in films",
+        "Comprehensive coverage of film as language",
+        "Curated film screenings with expert analysis",
+        "Interactive discussions with experienced educator",
+        "20+ years of instructor's industry experience",
+        "FTII certificate adds credibility",
+        "Large batch allows diverse perspectives",
+        "Held in Chennai, expanding FTII's reach",
+      ],
+      targetAudience: [
+        "Cinema enthusiasts wanting deeper understanding",
+        "Students considering film studies or filmmaking",
+        "Aspiring film critics and writers",
+        "Content creators seeking to understand film language",
+        "Teachers and educators interested in film education",
+        "Anyone passionate about cinema as an art form",
+        "Professionals from other fields exploring cinema",
+        "Film club members and organizers",
+      ],
+      workshopPolicies: [
+        "Non-residential program",
+        "Participants arrange own meals and accommodation",
+        "Punctuality expected for film screenings",
+        "Active participation encouraged in discussions",
+        "Respectful engagement during analysis sessions",
+        "Mobile phones on silent during screenings",
+        "Note-taking encouraged",
+        "Certificate awarded upon completion",
+      ],
+      contactInfo: [
+        "Mr. Milindkumar Joshi - Assistant Outreach Officer, FTII",
+        "Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+        "Phone: 020–25580085 (working days, office hours only)",
+      ],
+      additionalInfo:
+        "This 5-day Basic Film Appreciation Course at FTII Chennai offers cinema enthusiasts a transformative journey into understanding film as an art form. Led by Dr. Milind Damle, Associate Professor at FTII with a Ph.D. on Song Picturization in Vijay Anand Films, the course goes beyond surface-level storytelling to explore cinema as language, rhythm, and truth. Through curated film screenings, guided analysis, and interactive discussions, participants will learn how images, sound, and editing create meaning, understand film history and evolution, and explore the deep relationship between cinema, culture, and society. With 20+ years of experience across Radio, Cinema, and Television, Dr. Damle brings unique insights into the craft of filmmaking and the art of film appreciation. This course is perfect for anyone who wants to see films with new eyes and understand the profound language of cinema.",
+    },
+  },
+  {
+    id: 40,
+    title: "FTII Pune: Basic Course in Screen Acting (Hindi)",
+    trainer: "Rispal Singh Vikal & Harsh Prasad",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "10–22 November 2025",
+    time: "10:30 AM – 5:00 PM",
+    description:
+      "🎭 Find your truth before the camera. Break inhibitions. Express freely. Live the character. Learn freedom from inhibition, classical & modern acting approaches, memory & imagination work, voice & mime training, and theatre games. Led by veteran theatre director Rispal Singh Vikal with 45+ years of experience.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-hindi-in-pune-10-22-november-2025",
+    featured: true,
+    price: "₹12,000 (Hostel optional: ₹4,200 for 14 days, triple share)",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+    eligibility: "Age 18+",
+    venue: "Vijay Tendulkar Writers' Academy Campus, Kothrud, Pune",
+    includes:
+      "Freedom from inhibition training + Classical & modern acting approaches + Voice & mime training + Theatre games + FTII Certificate",
+    highlights: [
+      "Screen Acting",
+      "Freedom from Inhibition",
+      "Classical & Modern Acting",
+      "Memory & Imagination",
+      "Voice & Mime Training",
+      "Theatre Games",
+    ],
+    fullDetails: {
+      venue: "Vijay Tendulkar Writers' Academy Campus, Kothrud, Pune",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "12 days (10–22 November 2025, Sunday off)",
+      medium: "Hindi",
+      courseDirector:
+        "Rispal Singh Vikal (Veteran theatre director with 45+ years of experience, Writer-Director of acclaimed plays Poster, Kokh, and Dhadhak, Awarded by Home Minister P.C. Sethi in 1980–81, Founder of Virat Acting Lab) & Harsh Prasad (Co-Course Director, Senior cinema & theatre personality)",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Nationality: Indian",
+        "Passion for acting and screen performance",
+        "Willingness to explore emotional depth",
+        "No prior acting experience required",
+        "Open to beginners and aspiring actors",
+        "Comfortable working in Hindi language",
+      ],
+      applicationDeadline: "21 October 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "20 seats (Minimum 16 participants required)",
+      courseFee: "₹12,000 per person (excludes meals)",
+      hostelFee: "₹4,200 for 14 days (triple sharing, optional)",
+      certification: "FTII participation certificate",
+      keyHighlights: [
+        "Find your truth before the camera",
+        "Break inhibitions and express freely",
+        "Live the character authentically",
+        "Freedom from inhibition & body-mind alignment",
+        "Classical, modern & method-free acting approaches",
+        "Memory, imagination & emotional expression",
+        "Observation, improvisation & four-dimensional concentration",
+        "Voice, mime & psycho-physical training",
+        "Theatre games for stamina, focus & trust",
+        "Practical, exploratory, performance-driven training",
+        "Designed specifically for screen acting",
+        "Led by veteran director with 45+ years experience",
+        "Small batch size for personalized attention (20 seats)",
+        "Optional hostel accommodation available",
+      ],
+      curriculum: [
+        "Freedom from inhibition techniques",
+        "Body-mind alignment exercises",
+        "Classical acting approaches",
+        "Modern acting methodologies",
+        "Method-free acting exploration",
+        "Memory work and recall techniques",
+        "Imagination development exercises",
+        "Emotional expression and authenticity",
+        "Observation skills for character building",
+        "Improvisation techniques",
+        "Four-dimensional concentration training",
+        "Voice training and modulation",
+        "Mime and physical expression",
+        "Psycho-physical training methods",
+        "Theatre games for stamina building",
+        "Focus and concentration exercises",
+        "Trust-building activities",
+        "Screen acting techniques",
+        "Camera awareness and presence",
+        "Character development for screen",
+      ],
+      practicalExperience: [
+        "Daily acting exercises and drills",
+        "Improvisation sessions",
+        "Scene work and character exploration",
+        "Voice and speech training",
+        "Physical theatre exercises",
+        "Theatre games and ensemble work",
+        "Camera acting practice",
+        "Emotional memory exercises",
+        "Observation and character study",
+        "Performance-driven training sessions",
+        "Individual and group work",
+        "Feedback and guidance from mentors",
+      ],
+      learningOutcomes: [
+        "Freedom from inhibition in performance",
+        "Strong body-mind connection",
+        "Understanding of classical and modern acting techniques",
+        "Enhanced memory and imagination skills",
+        "Authentic emotional expression",
+        "Improved observation and improvisation abilities",
+        "Four-dimensional concentration skills",
+        "Voice control and modulation",
+        "Physical expression through mime",
+        "Increased stamina and focus",
+        "Trust in ensemble work",
+        "Screen acting confidence",
+        "Camera presence and awareness",
+        "Character development skills",
+        "Professional acting foundation",
+      ],
+      aboutInstructor:
+        "Rispal Singh Vikal – Veteran theatre director with 45+ years of experience in Indian theatre. Writer-Director of acclaimed plays including Poster, Kokh, and Dhadhak. Awarded by Home Minister P.C. Sethi in 1980–81 for outstanding contribution to theatre. Founder of Virat Acting Lab, dedicated to training actors in authentic, truth-based performance. Known for his unique approach that combines classical techniques with modern sensibilities, emphasizing freedom from inhibition and genuine emotional expression. Co-Course Director Harsh Prasad is a senior cinema and theatre personality bringing additional industry expertise to the program.",
+      instructorExperience: [
+        "45+ years in theatre direction and training",
+        "Writer-Director of Poster, Kokh, Dhadhak",
+        "Awarded by Home Minister P.C. Sethi (1980–81)",
+        "Founder of Virat Acting Lab",
+        "Expert in classical and modern acting approaches",
+        "Specialist in freedom from inhibition techniques",
+        "Experienced in screen acting training",
+        "Co-directed with Harsh Prasad (senior cinema & theatre personality)",
+      ],
+      uniqueExperience: [
+        "Training from India's premier film institute (FTII)",
+        "Learn from veteran director with 45+ years experience",
+        "Unique focus on freedom from inhibition",
+        "Combines classical, modern & method-free approaches",
+        "Practical, exploratory, performance-driven training",
+        "Specifically designed for screen acting",
+        "Small batch ensures personalized attention",
+        "Intensive 12-day immersive experience",
+        "Optional on-campus hostel accommodation",
+        "FTII certificate adds professional credibility",
+        "Training at historic Vijay Tendulkar Writers' Academy",
+        "Focus on authentic, truth-based performance",
+      ],
+      targetAudience: [
+        "Aspiring screen actors",
+        "Theatre actors wanting to transition to screen",
+        "Beginners with passion for acting",
+        "Content creators seeking acting skills",
+        "Film and TV enthusiasts",
+        "Anyone wanting to break performance inhibitions",
+        "Hindi language speakers interested in acting",
+        "Individuals seeking authentic self-expression",
+      ],
+      workshopPolicies: [
+        "Punctuality expected for all sessions",
+        "Active participation mandatory",
+        "Respectful engagement with fellow participants",
+        "Willingness to explore emotional depth required",
+        "Physical exercises may be demanding",
+        "Comfortable clothing recommended",
+        "Hostel accommodation optional (triple sharing)",
+        "Meals not included in course fee",
+        "Sunday off for rest and reflection",
+        "Certificate awarded upon completion",
+      ],
+      contactInfo: [
+        "Mr. Milindkumar Joshi - Assistant Outreach Officer, FTII",
+        "Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+        "Phone: 020–25580085 (working days, office hours only)",
+      ],
+      additionalInfo:
+        "This 12-day Basic Course in Screen Acting (Hindi) at FTII Pune offers aspiring actors a transformative journey into authentic screen performance. Led by veteran theatre director Rispal Singh Vikal with 45+ years of experience and co-directed by senior cinema personality Harsh Prasad, the course emphasizes finding your truth before the camera. Through a unique combination of classical, modern, and method-free acting approaches, participants will break inhibitions, develop body-mind alignment, and learn to express freely and authentically. The intensive training includes freedom from inhibition techniques, memory and imagination work, observation and improvisation, voice and mime training, psycho-physical exercises, and theatre games designed to build stamina, focus, and trust. With practical, exploratory, and performance-driven training specifically designed for screen acting, this course provides a solid foundation for anyone serious about pursuing acting in films, television, or web series. The small batch size of 20 participants ensures personalized attention, and optional hostel accommodation makes it accessible for outstation participants.",
+    },
+  },
+  // ADD NEW WORKSHOPS HERE
+  {
+    id: 41,
+    title: "FTII Pune: Basic Course on Creating Films & AV Content using AI",
+    trainer: "Dr. Alwin Anuse",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Online",
+    state: "Maharashtra",
+    date: "10–14 November 2025",
+    time: "10:30 AM – 12:30 PM & 2:30 PM – 4:30 PM",
+    description:
+      "🤖 The camera is evolving. Now the imagination directs the machine. Learn generative AI for storytelling, script ideation, prompt design, AI-based image/video/sound creation, storyboarding, editing, and ethical AI use. Led by Dr. Alwin Anuse with 20+ years experience, 2 patents, and expertise in AI & deep learning.",
+    image: "/images/acting-workshop.png",
+    registrationLink:
+      "https://ftii.ac.in/p/ftii-online-1/basic-course-on-creating-films-audio-visual-contents-using-artificial-intelligence-ai-10-14-november-2025",
+    featured: true,
+    price: "₹9,000",
+    contact: "020–25580085",
+    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+    eligibility: "Age 18+, Laptop/Desktop (min. 4GB RAM, Intel i3+), 10 Mbps Internet, Headphones + HD Webcam",
+    venue: "Online (Google Classroom + Google Meet)",
+    includes:
+      "Generative AI for storytelling + Script ideation & prompt design + AI-based image/video/sound creation + Storyboarding & editing with AI + Ethical AI use + Guided demos + Assignments + Group projects",
+    highlights: [
+      "AI Filmmaking",
+      "Generative AI",
+      "Script Ideation",
+      "Prompt Design",
+      "AI Video Creation",
+      "Ethical AI Use",
+    ],
+    fullDetails: {
+      venue: "Online (Google Classroom + Google Meet)",
+      organizer: "Film and Television Institute of India (FTII), Pune – Centre for Open Learning (CFOL)",
+      duration: "5 days (10–14 November 2025) – 20 hours total",
+      medium: "English / Hindi",
+      courseDirector:
+        "Dr. Alwin Anuse (Associate Professor, FTII Pune, Ph.D. from COEP, Researcher in AI, Deep Learning & Visual Media, 20+ years teaching & industry experience, Published with Springer & Elsevier, Holds 2 patents in technology innovation)",
+      eligibilityCriteria: [
+        "Age: 18+ years",
+        "Nationality: Indian",
+        "Technical Requirements: Laptop/Desktop (minimum 4GB RAM, Intel i3 or higher processor)",
+        "Internet: Minimum 10 Mbps stable connection",
+        "Equipment: Headphones + HD Webcam (mandatory)",
+        "Mobile-only access NOT allowed",
+        "Basic computer literacy required",
+        "Interest in AI and filmmaking",
+        "No prior AI or filmmaking experience required",
+        "Willingness to learn and experiment with AI tools",
+      ],
+      applicationDeadline: "30 October 2025, 6:00 PM IST",
+      selectionProcess: "First-Come, First-Served basis",
+      capacity: "30 seats (Minimum 24 participants required)",
+      courseFee: "₹9,000 per person",
+      certification: "FTII participation certificate",
+      keyHighlights: [
+        "The camera is evolving – imagination now directs the machine",
+        "Learn generative AI for storytelling and visualization",
+        "Master script ideation and prompt design techniques",
+        "Create AI-based images, videos, and sound",
+        "Storyboarding, editing, and post-production with AI",
+        "Understand ethical AI use and creative responsibility",
+        "Guided demos, assignments, and group projects",
+        "Learn from AI expert with 20+ years experience and 2 patents",
+        "Online format with live interactive sessions",
+        "Practical, hands-on approach to AI filmmaking",
+        "No prior AI or filmmaking experience required",
+        "Certificate from India's premier film institute",
+      ],
+      curriculum: [
+        "Introduction to AI in filmmaking and content creation",
+        "Understanding generative AI and its applications",
+        "AI for storytelling and narrative development",
+        "Script ideation using AI tools",
+        "Prompt engineering and design techniques",
+        "AI-based image generation and manipulation",
+        "AI-powered video creation and editing",
+        "Sound design and music creation with AI",
+        "Storyboarding with AI assistance",
+        "AI tools for pre-production planning",
+        "Post-production techniques using AI",
+        "Color grading and visual effects with AI",
+        "Ethical considerations in AI content creation",
+        "Copyright and attribution in AI-generated content",
+        "Creative responsibility and AI limitations",
+        "Industry trends and future of AI in filmmaking",
+        "Practical workflow integration",
+        "Best practices for AI-assisted filmmaking",
+      ],
+      practicalExperience: [
+        "Hands-on AI tool demonstrations",
+        "Script writing exercises with AI assistance",
+        "Image generation projects",
+        "Video creation assignments",
+        "Sound design experiments",
+        "Storyboard development with AI",
+        "Group collaborative projects",
+        "Individual creative assignments",
+        "Real-time problem-solving sessions",
+        "Peer review and feedback",
+        "Portfolio development guidance",
+        "Live Q&A with instructor",
+      ],
+      learningOutcomes: [
+        "Understand the role of AI in modern filmmaking",
+        "Master generative AI tools for content creation",
+        "Develop effective prompt engineering skills",
+        "Create compelling scripts with AI assistance",
+        "Generate high-quality images using AI",
+        "Produce videos with AI-powered tools",
+        "Design sound and music using AI platforms",
+        "Build storyboards efficiently with AI",
+        "Apply AI in editing and post-production",
+        "Navigate ethical considerations in AI content",
+        "Understand copyright and attribution issues",
+        "Integrate AI tools into creative workflow",
+        "Balance AI assistance with human creativity",
+        "Recognize AI limitations and opportunities",
+        "Build a foundation for AI-assisted filmmaking career",
+      ],
+      aboutInstructor:
+        "Dr. Alwin Anuse – Associate Professor at FTII Pune with a Ph.D. from COEP (College of Engineering, Pune). A leading researcher in Artificial Intelligence, Deep Learning, and Visual Media with over 20 years of combined teaching and industry experience. His work has been published in prestigious international journals by Springer and Elsevier, and he holds 2 patents in technology innovation. Dr. Anuse brings cutting-edge AI knowledge combined with deep understanding of filmmaking and visual storytelling, making him uniquely qualified to teach the intersection of AI and cinema. His teaching philosophy emphasizes practical application, ethical responsibility, and maintaining human creativity at the center of AI-assisted content creation.",
+      instructorExperience: [
+        "20+ years in teaching and industry",
+        "Associate Professor at FTII Pune",
+        "Ph.D. from COEP (College of Engineering, Pune)",
+        "Researcher in AI, Deep Learning & Visual Media",
+        "Published with Springer & Elsevier",
+        "Holds 2 patents in technology innovation",
+        "Expert in AI applications for creative industries",
+        "Specialist in generative AI and content creation",
+        "Experienced in online teaching and mentorship",
+      ],
+      uniqueExperience: [
+        "Learn from India's premier film institute (FTII)",
+        "Instructor with 20+ years experience and 2 patents",
+        "Cutting-edge AI tools and techniques",
+        "Practical, hands-on approach to learning",
+        "Live interactive online sessions",
+        "Guided demos and real-time problem solving",
+        "Individual assignments and group projects",
+        "Focus on ethical AI use and creative responsibility",
+        "Balance between AI assistance and human creativity",
+        "No prior AI or filmmaking experience required",
+        "Accessible online format from anywhere in India",
+        "FTII certificate adds professional credibility",
+      ],
+      targetAudience: [
+        "Aspiring filmmakers interested in AI",
+        "Content creators wanting to leverage AI tools",
+        "Film students exploring new technologies",
+        "Video editors seeking AI skills",
+        "Screenwriters interested in AI assistance",
+        "Digital artists and designers",
+        "Marketing professionals creating video content",
+        "Educators teaching media and technology",
+        "Anyone curious about AI in creative fields",
+        "Professionals wanting to upskill in AI filmmaking",
+      ],
+      workshopPolicies: [
+        "Punctuality required for all online sessions",
+        "Active participation in demos and discussions mandatory",
+        "Completion of assignments required for certificate",
+        "Stable internet connection essential",
+        "Laptop/Desktop mandatory (mobile not allowed)",
+        "Headphones and HD webcam required",
+        "Minimum 4GB RAM and Intel i3+ processor needed",
+        "Google Classroom and Google Meet will be used",
+        "Recording of sessions may be available",
+        "Certificate awarded upon 90% attendance and assignment completion",
+      ],
+      contactInfo: [
+        "Mr. Milindkumar Joshi - Assistant Outreach Officer, FTII",
+        "Email: info.cfol@ftii.ac.in / ftiicfol@gmail.com",
+        "Phone: 020–25580085 (working days, office hours only)",
+      ],
+      additionalInfo:
+        "This 5-day online Basic Course on Creating Films & AV Content using AI at FTII Pune represents the future of filmmaking education. As the camera evolves and imagination begins to direct the machine, this course offers a comprehensive introduction to AI-powered content creation. Led by Dr. Alwin Anuse, an Associate Professor at FTII with a Ph.D., 20+ years of experience, 2 patents, and publications in Springer and Elsevier, participants will explore the cutting edge of generative AI for storytelling and visualization. The course covers script ideation and prompt design, AI-based image, video, and sound creation, storyboarding, editing, and post-production with AI, all while emphasizing ethical AI use and creative responsibility. Through guided demos, practical assignments, and collaborative group projects, students will gain hands-on experience with the latest AI tools while maintaining human creativity at the center of the process. The online format makes this accessible to participants across India, requiring only a laptop/desktop with minimum 4GB RAM, stable 10 Mbps internet, and headphones with HD webcam. With 20 hours of intensive training spread across 5 days, this course provides a solid foundation for anyone looking to integrate AI into their filmmaking or content creation workflow.",
+    },
+  },
+  // ADD NEW WORKSHOPS HERE
+  // Format:
 ]
 
 import { useState, useEffect } from "react"
@@ -1639,8 +2449,15 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
   const [workshop, setWorkshop] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
+  // Function to get workshop by ID, handling potential string ID
+  const getWorkshopById = (workshopId: number | string) => {
+    // Ensure workshopId is treated as a number if it's a string representation of a number
+    const numericId = typeof workshopId === "string" ? Number.parseInt(workshopId, 10) : workshopId
+    return workshops.find((w) => w.id === numericId) || null
+  }
+
   useEffect(() => {
-    const foundWorkshop = workshops.find((w) => w.id === id)
+    const foundWorkshop = getWorkshopById(id)
     setWorkshop(foundWorkshop)
     setLoading(false)
   }, [id])
@@ -1687,9 +2504,10 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
     if (workshop.institution === "Threads & Tales") {
       return "/images/threads-tales-logo.png"
     }
-    if (workshop.institution === "Threads & Tales") {
-      return "/images/threads-tales-logo.png"
-    }
+    // Redundant check, already covered by the above. Removed to avoid confusion.
+    // if (workshop.institution === "Threads & Tales") {
+    //   return "/images/threads-tales-logo.png"
+    // }
     return workshop.image || "/images/acting-workshop.png"
   }
 
@@ -1788,6 +2606,7 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                 <p className="text-gray-700 leading-relaxed">{workshop.description}</p>
               </div>
 
+              {/* Privacy Notice for FTII workshops */}
               {(workshop.id === 23 ||
                 workshop.id === 24 ||
                 workshop.id === 25 ||
@@ -1796,7 +2615,12 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                 workshop.id === 28 ||
                 workshop.id === 34 ||
                 workshop.id === 35 ||
-                workshop.id === 36) && (
+                workshop.id === 36 ||
+                workshop.id === 37 ||
+                workshop.id === 38 ||
+                workshop.id === 39 ||
+                workshop.id === 40 ||
+                workshop.id === 41) && (
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
@@ -2113,7 +2937,12 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 33 ||
                     workshop.id === 34 ||
                     workshop.id === 35 ||
-                    workshop.id === 36) &&
+                    workshop.id === 36 ||
+                    workshop.id === 37 ||
+                    workshop.id === 38 ||
+                    workshop.id === 39 ||
+                    workshop.id === 40 ||
+                    workshop.id === 41) &&
                     workshop.fullDetails.aboutInstructor && (
                       <div>
                         <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">
@@ -2131,7 +2960,17 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                                       ? "About the Course Director"
                                       : workshop.id === 36
                                         ? "About the Course Director"
-                                        : "About the Course Director"}
+                                        : workshop.id === 37
+                                          ? "About the Course Director"
+                                          : workshop.id === 38
+                                            ? "About the Instructor"
+                                            : workshop.id === 39
+                                              ? "About the Instructor"
+                                              : workshop.id === 40
+                                                ? "About the Instructors"
+                                                : workshop.id === 41
+                                                  ? "About the Course Director"
+                                                  : "About the Course Director"}
                         </h3>
                         {workshop.id === 30 ? (
                           <p className="text-gray-700 leading-relaxed">
@@ -2153,19 +2992,26 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                       </div>
                     )}
 
-                  {workshop.fullDetails.instructorExperience && (workshop.id === 34 || workshop.id === 36) && (
-                    <div>
-                      <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">Instructor Experience</h3>
-                      <ul className="space-y-2">
-                        {workshop.fullDetails.instructorExperience.map((experience: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700">{experience}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  {workshop.fullDetails.instructorExperience &&
+                    (workshop.id === 34 ||
+                      workshop.id === 36 ||
+                      workshop.id === 37 ||
+                      workshop.id === 39 ||
+                      workshop.id === 40) && (
+                      <div>
+                        <h3 className="font-playfair text-lg md:text-xl font-bold mb-3">
+                          {workshop.id === 40 ? "Instructors' Experience" : "Instructor Experience"}
+                        </h3>
+                        <ul className="space-y-2">
+                          {workshop.fullDetails.instructorExperience.map((experience: string, index: number) => (
+                            <li key={index} className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-700">{experience}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                   {workshop.fullDetails.batchDetails && (workshop.id === 34 || workshop.id === 35) && (
                     <div>
@@ -2193,7 +3039,12 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                     workshop.id === 33 ||
                     workshop.id === 34 ||
                     workshop.id === 35 ||
-                    workshop.id === 36) && (
+                    workshop.id === 36 ||
+                    workshop.id === 37 ||
+                    workshop.id === 38 ||
+                    workshop.id === 39 ||
+                    workshop.id === 40 ||
+                    workshop.id === 41) && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {workshop.fullDetails.applicationDeadline && (
                         <div>
@@ -2268,7 +3119,12 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                         workshop.id === 33 ||
                         workshop.id === 34 ||
                         workshop.id === 35 ||
-                        workshop.id === 36
+                        workshop.id === 36 ||
+                        workshop.id === 37 ||
+                        workshop.id === 38 ||
+                        workshop.id === 39 ||
+                        workshop.id === 40 ||
+                        workshop.id === 41
                           ? "Organizer"
                           : workshop.id === 29
                             ? "Program"
@@ -2298,11 +3154,22 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                             ? "bg-green-600 hover:bg-green-700 text-white"
                             : workshop.id === 33
                               ? "bg-orange-600 hover:bg-orange-700 text-white"
-                              : workshop.id === 34 || workshop.id === 35 || workshop.id === 36
+                              : workshop.id === 34 ||
+                                  workshop.id === 35 ||
+                                  workshop.id === 36 ||
+                                  workshop.id === 37 ||
+                                  workshop.id === 38 ||
+                                  workshop.id === 39 ||
+                                  workshop.id === 40 ||
+                                  workshop.id === 41
                                 ? "bg-blue-600 hover:bg-blue-700 text-white"
-                                : isThreadsTales
-                                  ? "bg-teal-600 hover:bg-teal-700 text-white"
-                                  : "bg-primary hover:bg-primary/90 text-white"
+                                : workshop.id === 38
+                                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                  : workshop.id === 39
+                                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                    : isThreadsTales
+                                      ? "bg-teal-600 hover:bg-teal-700 text-white"
+                                      : "bg-primary hover:bg-primary/90 text-white"
                     }`}
                   >
                     {isParadoxStudios
@@ -2313,9 +3180,19 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                           ? "Apply Now"
                           : workshop.id === 36
                             ? "Register Now"
-                            : isThreadsTales
-                              ? "Contact via WhatsApp"
-                              : "Register Now"}
+                            : workshop.id === 37
+                              ? "Register Now"
+                              : workshop.id === 38
+                                ? "Register Now"
+                                : workshop.id === 39
+                                  ? "Register Now"
+                                  : workshop.id === 40
+                                    ? "Register Now"
+                                    : workshop.id === 41
+                                      ? "Register Now"
+                                      : isThreadsTales
+                                        ? "Contact via WhatsApp"
+                                        : "Register Now"}
                   </Button>
                 </Link>
               </div>
