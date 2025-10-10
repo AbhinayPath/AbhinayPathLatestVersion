@@ -141,99 +141,88 @@ const events: Event[] = [
 ]
 
 const bangalorePlays: BangalorePlay[] = [
-  // Kannada Plays
-  {
-    id: "annana-nenapu",
-    title: "Annana Nenapu",
-    venue: "Kalagrama",
-    date: "Saturday, 27th September",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/annana-nenapu/ET00347598",
-    description: "A touching Kannada drama exploring family bonds and memories.",
-  },
-  {
-    id: "nanna-tejaswi",
-    title: "Nanna Tejaswi",
-    venue: "Vyoma ArtSpace",
-    date: "Sunday, 28th September - 3:30 PM & 7:30 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/nanna-tejaswi/ET00460462",
-    description: "A tribute to the legendary Kannada writer Tejaswi, celebrating his literary contributions.",
-  },
-  {
-    id: "huttadalli-hutta",
-    title: "Huttadalli Hutta",
-    venue: "Dr. C Ashwath Kala Bhavana",
-    date: "Saturday, 27th September",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/huttadalli-hutta/ET00434022",
-    description: "A compelling Kannada play exploring themes of identity and belonging.",
-  },
-  {
-    id: "roshomon",
-    title: "Roshomon",
-    venue: "Kalagrama",
-    date: "Sunday, 28th September",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/roshomon/ET00458452",
-    description: "A Kannada adaptation of the classic tale exploring truth and perspective.",
-  },
-  {
-    id: "radha-nivasa",
-    title: "Radha Nivasa",
-    venue: "Suchitra Cinema & Cultural Academy",
-    date: "Sunday, 28th September",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/radha-nivasa/ET00444841",
-    description: "A heartwarming story set in a traditional household, exploring relationships and values.",
-  },
   // English Plays
   {
-    id: "khatijabai-karmali-terrace",
-    title: "Khatijabai of Karmali Terrace",
+    id: "the-anklet",
+    title: "The Anklet",
+    venue: "Alliance Française de Bangalore",
+    date: "Saturday, 11th October 2025",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/anklet/ET00459544",
+    description: "A captivating English drama at Alliance Française de Bangalore.",
+  },
+  // Kannada Plays
+  {
+    id: "pukkate-salahe",
+    title: "Pukkate Salahe (Comedy Drama)",
+    venue: "Dr. C. Ashwath Kala Bhavana",
+    date: "Saturday, 11th October 2025, 5:00 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/pukkate-salahe-comedy-drama/ET00105263",
+    description: "A hilarious Kannada comedy drama that will keep you entertained throughout.",
+  },
+  {
+    id: "muddannana-promotion",
+    title: "Muddannana Promotion Prasanga",
+    venue: "Dr. C. Ashwath Kala Bhavana",
+    date: "Saturday, 11th October 2025, 7:30 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/muddanan-promotion-prasanga/ET00464404",
+    description: "A compelling Kannada play exploring workplace dynamics and aspirations.",
+  },
+  {
+    id: "gaampara-gumpu",
+    title: "Gaampara Gumpu",
+    venue: "Kalagrama, Bengaluru University",
+    date: "Saturday, 11th October 2025, 7:00 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/gaampara-gumpu/ET00464820",
+    description: "An engaging Kannada production at the prestigious Kalagrama venue.",
+  },
+  {
+    id: "rakshasa-tangadi",
+    title: "Rakshasa Tangadi",
+    venue: "Seva Sadan, Malleswaram",
+    date: "Sunday, 12th October 2025, 6:30 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/rakshasa-tangadi/ET00357400",
+    description: "A powerful Kannada drama exploring mythological themes with contemporary relevance.",
+  },
+  {
+    id: "skewed",
+    title: "SKEWED",
+    venue: "Dr. C. Ashwath Kala Bhavana",
+    date: "Sunday, 12th October 2025",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/skewed/ET00458107",
+    description: "A thought-provoking Kannada play that challenges perspectives.",
+  },
+  {
+    id: "love-letters-ninna-preetiya",
+    title: "Love Letters – Ninna Preetiya, Naanu!",
     venue: "Ranga Shankara",
-    date: "Friday 26th - Sunday 28th September - 7:30 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/khatijabai-of-karmali-terrace/ET00457309",
-    description: "A captivating English drama running for three days, exploring the life of Khatijabai.",
+    date: "Saturday, 11th October 2025",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/love-letters-ninna-preetiya-naanu/ET00444194",
+    description: "A romantic Kannada play exploring love through heartfelt letters.",
   },
+  // Hindi Plays
   {
-    id: "love-time-algorithms",
-    title: "Love in the Time of Algorithms",
-    venue: "Underline Center",
-    date: "Saturday, 27th September - 7:00 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/love-in-the-time-of-algorithms-by-the-self-centre/ET00462659",
-    description: "A contemporary English play exploring modern relationships in the digital age.",
-  },
-  // Hindi Play
-  {
-    id: "orange-candy-play",
-    title: "Orange Candy Play",
-    venue: "Alliance Française",
-    date: "Saturday 27th & Sunday 28th September",
+    id: "spotlight-stories",
+    title: "Spotlight Stories",
+    venue: "Vyoma ArtSpace",
+    date: "Saturday, 11th October 2025",
     language: "Hindi",
     category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/orange-candy-play/ET00459681",
-    description: "A delightful Hindi production running over the weekend at Alliance Française.",
-  },
-  // Special/Storytelling
-  {
-    id: "phir-milenge-kahin",
-    title: "Phir Milenge Kahin (Poetry + Storytelling)",
-    venue: "Rhythm n Soul",
-    date: "Saturday, 27th September - 4:00 PM",
-    language: "Hindi",
-    category: "Special",
-    bookingUrl: "https://in.bookmyshow.com/plays/phir-milenge-kahin-poetry-and-storytelling-show/ET00456876",
-    description: "An enchanting evening of poetry and storytelling, blending literary arts with performance.",
+    bookingUrl: "https://in.bookmyshow.com/plays/spotlight-stories/ET00392746",
+    description: "An engaging Hindi storytelling performance at Vyoma ArtSpace.",
   },
 ]
 
@@ -379,7 +368,7 @@ export default function EventsPage() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - September 26-28
+                Discover this weekend's exciting theatre performances across Bangalore - October 11-12
               </p>
             </div>
 
