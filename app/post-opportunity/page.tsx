@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -34,6 +35,7 @@ import {
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import Link from "next/link"
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 const LANGUAGES = [
   "Hindi",
@@ -49,6 +51,9 @@ const LANGUAGES = [
 ]
 
 export default function PostOpportunityPage() {
+  const router = useRouter()
+  const supabase = createClientComponentClient()
+  
   // Form state
   const [title, setTitle] = useState("")
   const [type, setType] = useState("")
@@ -87,9 +92,20 @@ export default function PostOpportunityPage() {
   const [contactOpen, setContactOpen] = useState(false)
   const [applyFlowOpen, setApplyFlowOpen] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
+  const [isPublishing, setIsPublishing] = useState(false)
+  const [isDraft, setIsDraft] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   // Calculate progress
   const [progress, setProgress] = useState(0)
+
+  // Handle initial loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     const requiredFields = [
@@ -124,11 +140,156 @@ export default function PostOpportunityPage() {
     return true
   }
 
-  const handlePublish = () => {
-    if (!isFormValid()) return
+  const handlePublish = async () => {
+    if (!isFormValid()) {
+      toast.error("Please fill in all required fields")
+      return
+    }
 
-    toast.success("Published. You can edit anytime.")
-    // Here you would normally submit to an API
+    setIsPublishing(true)
+
+    try {
+      // Check if user is authenticated
+      const { data: { user }, error: authError } = await supabase.auth.getUser()
+      
+      if (authError || !user) {
+        toast.error("Please log in to post an opportunity")
+        router.push('/auth/login')
+        return
+      }
+
+      // Prepare opportunity data
+      const opportunityData = {
+        title,
+        type,
+        description,
+        deadline: deadline?.toISOString(),
+        location_mode: locationMode,
+        city: locationMode === 'city' ? city : null,
+        venue: locationMode === 'city' ? venue : null,
+        platform: locationMode === 'online' ? platform : null,
+        application_method: applicationMethod,
+        contact_info: contactInfo,
+        roles_needed: rolesNeeded,
+        gender_preference: genderPreference,
+        age_min: ageMin ? parseInt(ageMin) : null,
+        age_max: ageMax ? parseInt(ageMax) : null,
+        languages: selectedLanguages,
+        experience_required: experience,
+        pay_type: payType,
+        pay_amount: payAmount ? parseFloat(payAmount) : null,
+        visibility,
+        request_photos: requestPhotos,
+        photo_helper_text: photoHelperText,
+        request_videos: requestVideos,
+        video_helper_text: videoHelperText,
+        status: 'published'
+      }
+
+      // Make API call to create opportunity
+      const response = await fetch('/api/opportunities', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(opportunityData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to publish opportunity')
+      }
+
+      toast.success("Opportunity published successfully!")
+      
+      // Redirect to the opportunity page or dashboard
+      router.push(`/opportunities/${result.opportunity.id}`)
+      
+    } catch (error) {
+      console.error('Error publishing opportunity:', error)
+      toast.error(error instanceof Error ? error.message : 'Failed to publish opportunity')
+    } finally {
+      setIsPublishing(false)
+    }
+  }
+
+  const handleSaveDraft = async () => {
+    setIsDraft(true)
+
+    try {
+      // Check if user is authenticated
+      const { data: { user }, error: authError } = await supabase.auth.getUser()
+      
+      if (authError || !user) {
+        toast.error("Please log in to save a draft")
+        router.push('/auth/login')
+        return
+      }
+
+      // Prepare opportunity data
+      const opportunityData = {
+        title: title || 'Untitled Opportunity',
+        type: type || 'job',
+        description: description || '',
+        deadline: deadline?.toISOString(),
+        location_mode: locationMode,
+        city: locationMode === 'city' ? city : null,
+        venue: locationMode === 'city' ? venue : null,
+        platform: locationMode === 'online' ? platform : null,
+        application_method: applicationMethod,
+        contact_info: contactInfo,
+        roles_needed: rolesNeeded,
+        gender_preference: genderPreference,
+        age_min: ageMin ? parseInt(ageMin) : null,
+        age_max: ageMax ? parseInt(ageMax) : null,
+        languages: selectedLanguages,
+        experience_required: experience,
+        pay_type: payType,
+        pay_amount: payAmount ? parseFloat(payAmount) : null,
+        visibility,
+        request_photos: requestPhotos,
+        photo_helper_text: photoHelperText,
+        request_videos: requestVideos,
+        video_helper_text: videoHelperText,
+        status: 'draft'
+      }
+
+      // Make API call to create draft
+      const response = await fetch('/api/opportunities', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(opportunityData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to save draft')
+      }
+
+      toast.success("Draft saved successfully!")
+      
+    } catch (error) {
+      console.error('Error saving draft:', error)
+      toast.error(error instanceof Error ? error.message : 'Failed to save draft')
+    } finally {
+      setIsDraft(false)
+    }
+  }
+
+  // Loading screen
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-purple-200 border-t-purple-600 rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600 text-lg">Loading Post Opportunity</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -675,14 +836,39 @@ export default function PostOpportunityPage() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 onClick={handlePublish}
-                disabled={!isFormValid()}
-                className="flex-1 rounded-lg h-12 sm:h-12 text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 touch-manipulation"
+                disabled={!isFormValid() || isPublishing || isDraft}
+                className="flex-1 rounded-lg h-12 sm:h-12 text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 touch-manipulation disabled:opacity-50"
               >
-                <CheckCircle2 className="mr-2 h-5 w-5 flex-shrink-0" />
-                Publish Opportunity
+                {isPublishing ? (
+                  <>
+                    <div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Publishing...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle2 className="mr-2 h-5 w-5 flex-shrink-0" />
+                    Publish Opportunity
+                  </>
+                )}
               </Button>
+              
+              {/* <Button
+                onClick={handleSaveDraft}
+                disabled={isDraft || isPublishing}
+                variant="outline"
+                className="flex-1 sm:flex-none rounded-lg h-12 sm:h-12 text-base font-medium border-2 touch-manipulation disabled:opacity-50"
+              >
+                {isDraft ? (
+                  <>
+                    <div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                    Saving...
+                  </>
+                ) : (
+                  'Save Draft'
+                )}
+              </Button> */}
 
-              <Sheet open={applyFlowOpen} onOpenChange={setApplyFlowOpen}>
+              {/* <Sheet open={applyFlowOpen} onOpenChange={setApplyFlowOpen}>
                 <SheetTrigger asChild>
                   <Button
                     variant="outline"
@@ -741,7 +927,7 @@ export default function PostOpportunityPage() {
                     </p>
                   </div>
                 </SheetContent>
-              </Sheet>
+              </Sheet> */}
             </div>
           </div>
 

@@ -31,12 +31,12 @@ import { toast } from "@/components/ui/use-toast"
 export default function AuditionDetailContent({ audition }: { audition: Audition }) {
   const [hasAlreadyApplied, setHasAlreadyApplied] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [isLoading,setIsLoading] = useState(true)
 
   useEffect(() => {
     const checkAlreadyApplied = async () => {
       try {
-        // use singleton
-// const supabase = getSupabaseBrowserClient()
+        setIsLoading(true)
         const user = await supabase.auth.getUser()
         const userId = user?.data?.user?.id
         if (!userId) return
@@ -49,6 +49,8 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
         if (existing) setHasAlreadyApplied(true)
       } catch (err) {
         // Optionally handle error
+      } finally {
+        setIsLoading(false)
       }
     }
     checkAlreadyApplied()
@@ -82,12 +84,8 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
       }
       const { error } = await supabase.from("audition_applications").insert({
         user_id: userId,
-        audition_id: audition.id,
-        height: null,
-        weight: null,
-        skin_tone: null,
-        video_url: null,
-        additional_info: { appliedWith: "quick_apply" },
+        audition_id: audition.id
+        
       })
       if (error) {
         toast({ title: "Failed to apply. Try again.", variant: "destructive" })
@@ -265,7 +263,9 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
               )}
 
               <div className="pt-4 mt-4 border-t border-gray-200">
-                {!hasAlreadyApplied ? (
+                {isLoading ? (
+                  <p>...loading</p>
+                ) : !hasAlreadyApplied ? (
                   <Button className="w-full rounded-md" onClick={handleApply} disabled={loading}>
                     {loading ? "Applying..." : "Apply Now"}
                   </Button>

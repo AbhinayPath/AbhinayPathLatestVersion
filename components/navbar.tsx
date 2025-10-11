@@ -31,6 +31,8 @@ export default function Navbar() {
     headshots: [],
   }
 
+  debugger
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
@@ -53,12 +55,27 @@ export default function Navbar() {
     router.push("/talent-profile")
   }
 
-  const navItems = [
+  type NavItem = { name: string; href: string };
+
+  const navItems: NavItem[] = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Join", href: "/join-community" },
     { name: "Contact", href: "/contact" },
-  ]
+  ];
+
+  // Add Dashboard for casting directors
+
+  const navItemsWithDashboard: NavItem[] =
+    user && user.user_metadata?.profession?.toLowerCase() === "director"
+      ? [
+          ...navItems,
+          { name: "Dashboard", href: "/casting" },
+        ]
+      : navItems;
+
+        console.log("navItemsWithDashboard",navItemsWithDashboard)
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
@@ -72,7 +89,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => (
+          {navItemsWithDashboard.map((item: NavItem) => (
             <Link
               key={item.name}
               href={item.href}

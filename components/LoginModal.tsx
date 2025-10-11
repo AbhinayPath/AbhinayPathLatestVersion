@@ -93,6 +93,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
     } catch (error) {
       console.error('Error:', error)
+      alert(error instanceof Error ? error.message : "Invalid credentials");
       toast({
         title: "Login Failed",
         description: error instanceof Error ? error.message : "Invalid credentials",

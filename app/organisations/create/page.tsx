@@ -1,8 +1,7 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -30,9 +29,11 @@ import {
   Video,
   Check,
   AlertCircle,
+  Loader2,
 } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 const organisationTypes = [
   "Theatre Group",
@@ -79,6 +80,21 @@ interface VideoLink {
 }
 
 export default function CreateOrganisationProfile() {
+  const supabase = createClientComponentClient()
+  const router = useRouter()
+  
+  // Authentication state
+  const [user, setUser] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  
+  // Loading states
+  const [isLoading, setIsLoading] = useState(false)
+  const [isDraftSaving, setIsDraftSaving] = useState(false)
+  
+  // State to track existing organization
+  const [existingOrgId, setExistingOrgId] = useState<string | null>(null)
+  const [isCheckingExisting, setIsCheckingExisting] = useState(false)
+  
   // Essence
   const [orgName, setOrgName] = useState("")
   const [selectedTypes, setSelectedTypes] = useState<string[]>([])
@@ -121,6 +137,195 @@ export default function CreateOrganisationProfile() {
 
   // Validation
   const [showErrors, setShowErrors] = useState(false)
+  
+  // Authentication effect
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user }, error: authError } = await supabase.auth.getUser()
+      if (authError) {
+        console.error('Auth error:', authError)
+      }
+      setUser(user)
+      setLoading(false)
+    }
+    fetchUser()
+  }, [])
+  
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      toast.error("Please log in to create an organisation profile")
+      router.push('/login')
+    }
+  }, [user, loading, router])
+  
+  // Check for existing organization on component mount
+  // useEffect(() => {
+  //   const checkExistingOrganisation = async () => {
+  //     if (!user) return
+      
+  //     try {
+  //       const response = await fetch(`/api/organisations?userId=${user.id}`)
+  //       if (response.ok) {
+  //         const result = await response.json()
+  //         if (result.organisations && result.organisations.length > 0) {
+  //           const org = result.organisations[0]
+  //           setExistingOrgId(org.id)
+  //           // Pre-populate form with existing data
+  //           setOrgName(org.name || "")
+  //           setSelectedTypes(org.types || [])
+  //           setFoundedYear(org.founded_year?.toString() || "")
+  //           setLanguage(org.primary_language || "")
+  //           setCity(org.city || "")
+  //           setState(org.state || "")
+  //           setCountry(org.country || "India")
+  //           setWebsite(org.website || "")
+  //           setInstagram(org.instagram || "")
+  //           setYoutube(org.youtube || "")
+  //           setAbout(org.about || "")
+  //           setSelectedAreas(org.core_areas || [])
+  //           setActiveSince(org.active_since || "")
+  //           setEmail(org.email || "")
+  //           setPhone(org.phone || "")
+  //           setAddress(org.address || "")
+  //           setCoverImage(org.cover_image || null)
+  //           setGallery(org.gallery || [])
+            
+  //           // Set related data
+  //           if (org.organisation_key_people) {
+  //             setKeyPeople(org.organisation_key_people.map((p: any, index: number) => ({
+  //               id: (index + 1).toString(),
+  //               name: p.name,
+  //               designation: p.designation || ""
+  //             })))
+  //           }
+            
+  //           if (org.organisation_video_links) {
+  //             setVideoLinks(org.organisation_video_links.map((v: any, index: number) => ({
+  //               id: (index + 1).toString(),
+  //               url: v.url,
+  //               title: v.title || ""
+  //             })))
+  //           }
+            
+  //           if (org.organisation_programs) {
+  //             setPrograms(org.organisation_programs.map((p: any, index: number) => ({
+  //               id: (index + 1).toString(),
+  //               name: p.name,
+  //               brief: p.brief || "",
+  //               duration: p.duration || ""
+  //             })))
+  //           }
+            
+  //           if (org.organisation_additional_info && org.organisation_additional_info.length > 0) {
+  //             const additionalInfo = org.organisation_additional_info[0]
+  //             setProductions(additionalInfo.productions || "")
+  //             setPartners(additionalInfo.partners || "")
+  //           }
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error('Error checking existing organisation:', error)
+  //     }
+  //   }
+    
+  //   checkExistingOrganisation()
+  // }, [user])
+
+  // Check for existing organization on component mount with loading state
+  useEffect(() => {
+    const checkExistingOrganisation = async () => {
+      if (!user) return
+      
+      setIsCheckingExisting(true)
+      try {
+        const response = await fetch(`/api/organisations?userId=${user.id}`)
+        if (response.ok) {
+          const result = await response.json()
+          if (result.organisations && result.organisations.length > 0) {
+            const org = result.organisations[0]
+            setExistingOrgId(org.id)
+            // Pre-populate form with existing data
+            setOrgName(org.name || "")
+            setSelectedTypes(org.types || [])
+            setFoundedYear(org.founded_year?.toString() || "")
+            setLanguage(org.primary_language || "")
+            setCity(org.city || "")
+            setState(org.state || "")
+            setCountry(org.country || "India")
+            setWebsite(org.website || "")
+            setInstagram(org.instagram || "")
+            setYoutube(org.youtube || "")
+            setAbout(org.about || "")
+            setSelectedAreas(org.core_areas || [])
+            setActiveSince(org.active_since || "")
+            setEmail(org.email || "")
+            setPhone(org.phone || "")
+            setAddress(org.address || "")
+            setCoverImage(org.cover_image || null)
+            setGallery(org.gallery || [])
+            
+            // Set related data
+            if (org.organisation_key_people) {
+              setKeyPeople(org.organisation_key_people.map((p: any, index: number) => ({
+                id: (index + 1).toString(),
+                name: p.name,
+                designation: p.designation || ""
+              })))
+            }
+            
+            if (org.organisation_video_links) {
+              setVideoLinks(org.organisation_video_links.map((v: any, index: number) => ({
+                id: (index + 1).toString(),
+                url: v.url,
+                title: v.title || ""
+              })))
+            }
+            
+            if (org.organisation_programs) {
+              setPrograms(org.organisation_programs.map((p: any, index: number) => ({
+                id: (index + 1).toString(),
+                name: p.name,
+                brief: p.brief || "",
+                duration: p.duration || ""
+              })))
+            }
+            
+            if (org.organisation_additional_info && org.organisation_additional_info.length > 0) {
+              const additionalInfo = org.organisation_additional_info[0]
+              setProductions(additionalInfo.productions || "")
+              setPartners(additionalInfo.partners || "")
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error checking existing organisation:', error)
+      } finally {
+        setIsCheckingExisting(false)
+      }
+    }
+    
+    checkExistingOrganisation()
+  }, [user])
+    
+  // Show loading while checking authentication or existing organization
+  if (loading || isCheckingExisting) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">
+            {loading ? "Loading..." : "Checking existing organization..."}
+          </p>
+        </div>
+      </div>
+    )
+  }
+  
+  // Don't render form if user is not authenticated
+  if (!user) {
+    return null
+  }
 
   const shouldShowDeepSection = selectedTypes.some((type) =>
     ["Training School/Institute", "College/University", "Corporate Institution"].includes(type),
@@ -265,22 +470,129 @@ export default function CreateOrganisationProfile() {
     return Math.round((filled / total) * 100)
   }
 
-  const handleSaveAndPublish = () => {
+  
+
+  // API Helper function
+  const createOrganisation = async (published: boolean) => {
+    if (!user) {
+      toast.error("Please log in to create an organisation profile")
+      return null
+    }
+
+    const organisationData = {
+      orgName: orgName.trim(),
+      selectedTypes,
+      foundedYear: foundedYear ? parseInt(foundedYear) : null,
+      language: language.trim() || null,
+      city: city.trim(),
+      state: state.trim() || null,
+      country,
+      website: website.trim() || null,
+      instagram: instagram.trim() || null,
+      youtube: youtube.trim() || null,
+      about: about.trim() || null,
+      selectedAreas,
+      keyPeople: keyPeople.filter(p => p.name.trim() !== "").map(p => ({
+        name: p.name.trim(),
+        designation: p.designation.trim() || null
+      })),
+      activeSince: activeSince.trim() || null,
+      email: email.trim(),
+      phone: phone.trim() || null,
+      address: address.trim() || null,
+      coverImage: coverImage || null,
+      gallery,
+      videoLinks: videoLinks.filter(v => v.url.trim() !== "").map(v => ({
+        url: v.url.trim(),
+        title: v.title.trim() || null
+      })),
+      programs: programs.filter(p => p.name.trim() !== "").map(p => ({
+        name: p.name.trim(),
+        brief: p.brief.trim() || null,
+        duration: p.duration.trim() || null
+      })),
+      productions: productions.trim() || null,
+      partners: partners.trim() || null,
+      published
+    }
+
+    try {
+      const isUpdate = existingOrgId !== null
+      const url = isUpdate ? `/api/organisations/${existingOrgId}` : '/api/organisations'
+      const method = isUpdate ? 'PUT' : 'POST'
+      
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(organisationData),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || `Failed to ${isUpdate ? 'update' : 'create'} organisation`)
+      }
+
+      const result = await response.json()
+      const orgData = result.data || result.organisation
+      
+      // If this was a create operation, store the new org ID
+      if (!isUpdate && orgData?.id) {
+        setExistingOrgId(orgData.id)
+      }
+      
+      return orgData
+    } catch (error) {
+      console.error(`Error ${existingOrgId ? 'updating' : 'creating'} organisation:`, error)
+      toast.error(error instanceof Error ? error.message : `Failed to ${existingOrgId ? 'update' : 'create'} organisation`)
+      return null
+    }
+  }
+
+  const handleSaveAndPublish = async () => {
     setShowErrors(true)
     if (!isFormValid()) {
       toast.error("Please fill all required fields and agree to terms")
       return
     }
 
-    // Here you would submit to your API
-    console.log("Publishing profile...")
-    toast.success("Published. You can edit anytime.")
+    setIsLoading(true)
+    try {
+      const organisation = await createOrganisation(true)
+      if (organisation) {
+        const action = existingOrgId ? "updated" : "published"
+        toast.success(`Organisation profile ${action} successfully!`)
+        // Redirect to the organisation profile or dashboard
+        router.push(`/organisations/${organisation.id}`)
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const handleSaveDraft = () => {
-    // Here you would save as draft
-    console.log("Saving draft...")
-    toast.success("Draft saved")
+  const handleSaveDraft = async () => {
+    if (!user) {
+      toast.error("Please log in to save your profile")
+      return
+    }
+
+    // Basic validation for draft (only require org name)
+    if (!orgName.trim()) {
+      toast.error("Organisation name is required to save draft")
+      return
+    }
+
+    setIsDraftSaving(true)
+    try {
+      const organisation = await createOrganisation(false)
+      if (organisation) {
+        const action = existingOrgId ? "updated" : "saved"
+        toast.success(`Draft ${action} successfully!`)
+      }
+    } finally {
+      setIsDraftSaving(false)
+    }
   }
 
   return (
@@ -910,16 +1222,36 @@ export default function CreateOrganisationProfile() {
                 </div>
 
                 <div className="flex gap-3 pt-4">
-                  <Button type="button" variant="outline" className="flex-1 bg-transparent" onClick={handleSaveDraft}>
-                    Save Draft
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    className="flex-1 bg-transparent" 
+                    onClick={handleSaveDraft}
+                    disabled={isDraftSaving || isLoading || !user}
+                  >
+                    {isDraftSaving ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      existingOrgId ? "Update Draft" : "Save Draft"
+                    )}
                   </Button>
                   <Button
                     type="button"
                     className="flex-1 bg-gradient-to-r from-orange-600 to-purple-600 hover:from-orange-700 hover:to-purple-700"
                     onClick={handleSaveAndPublish}
-                    disabled={!isFormValid()}
+                    disabled={!isFormValid() || isLoading || isDraftSaving || !user}
                   >
-                    Save & Publish Profile
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Publishing...
+                      </>
+                    ) : (
+                      existingOrgId ? "Update & Publish Profile" : "Save & Publish Profile"
+                    )}
                   </Button>
                 </div>
               </CardContent>
