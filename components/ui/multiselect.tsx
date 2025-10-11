@@ -18,7 +18,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "cmdk"
 
 export interface MultiSelectOption {
   label: string
