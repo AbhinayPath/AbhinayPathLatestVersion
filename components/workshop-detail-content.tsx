@@ -641,10 +641,46 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // In a real app, this would be an API call
-    const foundWorkshop = workshops.find((w) => w.id === id)
-    setWorkshop(foundWorkshop)
-    setLoading(false)
+    let canceled = false
+    ;(async () => {
+      try {
+        const res = await fetch(`/api/workshops/${id}`)
+        const data = await res.json()
+        if (!res.ok) throw new Error(data?.error || 'Failed to load workshop')
+        const api = data.workshop
+        const firstSession = Array.isArray(api.sessions) && api.sessions.length ? api.sessions[0] : null
+        const viewWorkshop = {
+          id: api.id,
+          title: api.title,
+          trainer: '',
+          institution: '',
+          location: api.city || (api.platform ? `Online (${api.platform})` : 'Online'),
+          state: '',
+          date: firstSession ? new Date(firstSession.session_date).toLocaleDateString() : '',
+          time: firstSession ? firstSession.start_time : '',
+          description: api.description,
+          image: api.cover_image || '',
+          registrationLink: api.registration_link || '',
+          featured: api.status === 'published',
+          price: api.fee_type === 'paid' ? (api.fee_amount ? `₹${api.fee_amount}` : 'Paid') : 'Free',
+          contact: api.whatsapp_number || '',
+          email: api.email || '',
+          fullDetails: {
+            venue: api.venue || '',
+            capacity: api.capacity || '',
+            format: api.location_mode === 'online' ? 'Online' : 'In person',
+          },
+        }
+        if (!canceled) setWorkshop(viewWorkshop)
+      } catch (e) {
+        if (!canceled) setWorkshop(null)
+      } finally {
+        if (!canceled) setLoading(false)
+      }
+    })()
+    return () => {
+      canceled = true
+    }
   }, [id])
 
   if (loading) {
@@ -691,12 +727,11 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="relative h-48 md:h-64 w-full">
           <Image
-            src="/images/acting-workshop.png"
+            src={workshop.image || "/images/acting-workshop.png"}
             alt={workshop.title}
             fill
             className="object-cover"
             onError={(e) => {
-              // Fallback to a placeholder if image fails to load
               e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
             }}
           />
@@ -711,11 +746,13 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
         <div className="p-4 md:p-8">
           <div className="flex flex-wrap gap-2 mb-4">
             <span className="badge-primary">Workshop</span>
-            <span className="badge-outline">{workshop.institution}</span>
+            {workshop.institution && <span className="badge-outline">{workshop.institution}</span>}
           </div>
 
           <h1 className="font-playfair text-2xl md:text-3xl font-bold mb-2 md:mb-4">{workshop.title}</h1>
-          <p className="text-primary font-medium mb-4 md:mb-6">By {workshop.trainer}</p>
+          {workshop.trainer && (
+  <p className="text-primary font-medium mb-4 md:mb-6">By {workshop.trainer}</p>
+)}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
             <div>
@@ -726,7 +763,7 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
                   <div>
                     <p className="font-medium">Location</p>
                     <p className="text-gray-600 text-sm md:text-base">
-                      {workshop.fullDetails?.venue || `${workshop.location}, ${workshop.state}`}
+                      {workshop.fullDetails?.venue || workshop.location}
                     </p>
                   </div>
                 </div>
