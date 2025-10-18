@@ -100,6 +100,7 @@ export default function PostWorkshopPage() {
   // UI State
   const [showPreview, setShowPreview] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [isPublishing, setIsPublishing] = useState(false)
 
   // Calculate Progress
   useEffect(() => {
@@ -175,14 +176,83 @@ export default function PostWorkshopPage() {
     return true
   }
 
-  const handlePublish = () => {
+  const handlePublish = async () => {
     if (!isFormValid()) {
       toast.error("Please fill in all required fields")
       return
     }
 
-    toast.success("Workshop posted successfully!")
-    // Here you would normally submit to an API
+    setIsPublishing(true)
+    try {
+      let coverImageUrl: string | null = null
+      if (coverImage) {
+        const formData = new FormData()
+        formData.append("file", coverImage)
+        formData.append("type", "cover")
+
+        const uploadRes = await fetch("/api/workshops/media", {
+          method: "POST",
+          body: formData,
+        })
+        const uploadData = await uploadRes.json()
+        if (!uploadRes.ok) {
+          throw new Error(uploadData?.error || "Failed to upload cover image")
+        }
+        coverImageUrl = uploadData.url
+      }
+
+      const payload = {
+        title,
+        description,
+        sessions: sessions
+          .map((s) => ({
+            date: s.date ? format(s.date as Date, "yyyy-MM-dd") : null,
+            startTime: s.startTime,
+            duration: s.duration,
+          }))
+          .filter((s) => s.date),
+        locationMode,
+        city: locationMode === "city" ? city : null,
+        venue,
+        platform: locationMode === "online" ? platform : null,
+        feeType,
+        feeAmount: feeType === "paid" ? feeAmount : null,
+        feeNote,
+        coverImage: coverImageUrl,
+        registrationLink,
+        contactMethod,
+        whatsappNumber:
+          contactMethod === "whatsapp" || contactMethod === "both" ? whatsappNumber : null,
+        email: contactMethod === "email" || contactMethod === "both" ? email : null,
+        skillLevel,
+        selectedLanguages,
+        capacity,
+        registrationDeadline: registrationDeadline
+          ? format(registrationDeadline as Date, "yyyy-MM-dd")
+          : null,
+        targetAudience,
+        visibility: "public",
+        status: "published",
+      }
+
+      const res = await fetch("/api/workshops", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to create workshop")
+      }
+
+      toast.success("Workshop posted successfully!")
+      router.push(`/workshops/${data.workshop.id}`)
+    } catch (err: any) {
+      console.error("Publish workshop failed:", err)
+      toast.error(err?.message || "Failed to post workshop")
+    } finally {
+      setIsPublishing(false)
+    }
   }
 
   return (
@@ -775,7 +845,7 @@ export default function PostWorkshopPage() {
               className="w-full rounded-lg h-12 text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 touch-manipulation"
             >
               <CheckCircle2 className="mr-2 h-5 w-5 flex-shrink-0" />
-              Publish Workshop
+              {isPublishing ? "Publishing..." : "Publish Workshop"}
             </Button>
           </div>
 
