@@ -565,6 +565,51 @@ const auditions = [
       "Technical theater experience (for production roles)",
     ],
   },
+  {
+    id: 14,
+    title: "Nukkad Natak Audition - Female Performer Needed",
+    type: "Theater",
+    location: "Bihar",
+    state: "Bihar",
+    date: "Ongoing",
+    director: "Street Theatre Production",
+    description:
+      "Seeking one talented female performer for an exciting Nukkad Natak (street play) production in Bihar. This is a paid opportunity with excellent compensation and all expenses covered including travel, accommodation, and meals.",
+    company: "Street Theatre Production",
+    companyLink: "https://wa.me/918690301249",
+    contact: "8690301249 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Female performer (1 position available)",
+      "Comfortable with street theatre/Nukkad Natak format",
+      "Strong stage presence and vocal projection",
+      "Ability to engage with diverse audiences",
+      "Available for travel to Bihar",
+      "Flexible schedule for rehearsals and performances",
+    ],
+    roles: [
+      "Female Performer - Lead role in Nukkad Natak production",
+      "Street Theatre Performance - Engaging outdoor audiences",
+      "Social Message Delivery - Conveying important themes through performance",
+    ],
+    applicationProcess:
+      "Contact us via WhatsApp at 8690301249 to express your interest. Share your theatre experience, portfolio, and availability. Selected candidates will be contacted for further discussion.",
+    compensation: {
+      payment: "Good payment offered",
+      travel: "Travel expenses covered",
+      accommodation: "Stay provided",
+      meals: "Food provided",
+    },
+    projectDetails: {
+      format: "Nukkad Natak (Street Play)",
+      positions: "1 Female Performer",
+      location: "Bihar",
+      benefits: ["Good Payment", "Travel Covered", "Accommodation Provided", "Meals Included"],
+    },
+  },
 ]
 
 export default function AuditionDetailContent({ id }: { id: number }) {
@@ -621,13 +666,13 @@ export default function AuditionDetailContent({ id }: { id: number }) {
   }
 
   return (
-    <div className="container py-12">
+    <div className="container py-8 sm:py-10 md:py-12 px-3 sm:px-4">
       <Link href="/auditions" className="inline-flex items-center text-primary hover:underline mb-6">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Auditions
       </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
         <div className="lg:col-span-2">
           <div
             className={`bg-white rounded-lg border overflow-hidden ${
@@ -637,7 +682,9 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   ? "border-purple-200"
                   : audition.id === 13
                     ? "border-blue-200"
-                    : "border-gray-200"
+                    : audition.id === 14
+                      ? "border-green-200"
+                      : "border-gray-200"
             }`}
           >
             <div className="relative h-64 w-full">
@@ -678,9 +725,14 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   🎪 Children's Festival
                 </div>
               )}
+              {audition.id === 14 && (
+                <div className="absolute top-4 left-4 bg-green-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                  🎤 Nukkad Natak
+                </div>
+              )}
             </div>
 
-            <div className="p-6">
+            <div className="p-4 sm:p-5 md:p-6">
               <div className="flex flex-wrap gap-2 mb-4">
                 <span
                   className={`badge-primary ${
@@ -690,7 +742,9 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                         ? "bg-purple-100 text-purple-800"
                         : audition.id === 13
                           ? "bg-blue-100 text-blue-800"
-                          : ""
+                          : audition.id === 14
+                            ? "bg-green-100 text-green-800"
+                            : ""
                   }`}
                 >
                   {audition.type}
@@ -699,14 +753,17 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 {audition.id === 8 && <span className="badge-success">Paid</span>}
                 {audition.id === 1 && <span className="badge-success">Open Now</span>}
                 {audition.id === 13 && <span className="badge-success">Paid Project</span>}
+                {audition.id === 14 && <span className="badge-success">Paid Opportunity</span>}
                 {audition.videoAudition && <span className="badge-secondary">Video Audition</span>}
               </div>
 
               <h1 className="font-playfair text-3xl font-bold mb-4">{audition.title}</h1>
 
               <div className="prose max-w-none">
-                <h2 className="text-xl font-semibold mb-3">Description</h2>
-                <p className="text-gray-800 mb-6">{audition.description}</p>
+                <h2 className="text-lg sm:text-xl font-semibold mb-3">Description</h2>
+                <p className="text-sm sm:text-base text-gray-800 mb-4 sm:mb-6 break-words leading-relaxed">
+                  {audition.description}
+                </p>
 
                 {/* Special section for Children's Theater Festival casting */}
                 {audition.id === 13 && (
@@ -931,8 +988,177 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   </>
                 )}
 
+                {audition.id === 14 && (
+                  <>
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">🎭 Project Overview</h2>
+                      <div className="bg-gradient-to-br from-green-50 to-green-100/50 border border-green-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4">
+                          <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 sm:p-4 border border-green-100">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Performance Type</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-green-800 break-words">
+                              {audition.projectDetails.format}
+                            </p>
+                          </div>
+                          <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 sm:p-4 border border-green-100">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Positions Available</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-green-800 break-words">
+                              {audition.projectDetails.positions}
+                            </p>
+                          </div>
+                          <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 sm:p-4 border border-green-100">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Location</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-green-800 break-words">
+                              {audition.projectDetails.location}
+                            </p>
+                          </div>
+                          <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 sm:p-4 border border-green-100">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Compensation</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-green-700 break-words">
+                              {audition.compensation.payment}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 sm:p-4 border border-green-100">
+                          <p className="text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
+                            ✨ Benefits Included
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {audition.projectDetails.benefits.map((benefit: string, index: number) => (
+                              <div
+                                key={index}
+                                className="flex items-center gap-2 text-xs sm:text-sm text-gray-700 break-words"
+                              >
+                                <span className="text-green-600 flex-shrink-0">✓</span>
+                                <span className="break-words">{benefit}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">🎯 Role Requirements</h2>
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="bg-white rounded-lg p-3 sm:p-4 border border-green-200 mb-4">
+                          <h4 className="text-sm sm:text-base font-semibold text-green-800 mb-3 flex items-center break-words">
+                            👤 Female Performer - Street Theatre
+                          </h4>
+                          <ul className="space-y-2">
+                            {audition.requirements.map((req: string, index: number) => (
+                              <li
+                                key={index}
+                                className="flex items-start gap-2 text-xs sm:text-sm text-gray-700 break-words"
+                              >
+                                <span className="text-green-600 flex-shrink-0 mt-0.5">•</span>
+                                <span className="break-words leading-relaxed">{req}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-3 sm:p-4 border border-green-200">
+                          <h4 className="text-sm sm:text-base font-semibold text-green-800 mb-3 flex items-center break-words">
+                            🎭 What You'll Do
+                          </h4>
+                          <ul className="space-y-2">
+                            {audition.roles.map((role: string, index: number) => (
+                              <li
+                                key={index}
+                                className="flex items-start gap-2 text-xs sm:text-sm text-gray-700 break-words"
+                              >
+                                <span className="text-green-600 flex-shrink-0 mt-0.5">•</span>
+                                <span className="break-words leading-relaxed">{role}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">💰 Compensation & Benefits</h2>
+                      <div className="bg-gradient-to-br from-green-50 to-green-100/50 border border-green-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-green-200">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-lg sm:text-xl">💵</span>
+                              <h4 className="text-sm sm:text-base font-semibold text-green-800 break-words">Payment</h4>
+                            </div>
+                            <p className="text-xs sm:text-sm text-gray-700 break-words leading-relaxed">
+                              {audition.compensation.payment}
+                            </p>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-green-200">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-lg sm:text-xl">✈️</span>
+                              <h4 className="text-sm sm:text-base font-semibold text-green-800 break-words">Travel</h4>
+                            </div>
+                            <p className="text-xs sm:text-sm text-gray-700 break-words leading-relaxed">
+                              {audition.compensation.travel}
+                            </p>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-green-200">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-lg sm:text-xl">🏠</span>
+                              <h4 className="text-sm sm:text-base font-semibold text-green-800 break-words">
+                                Accommodation
+                              </h4>
+                            </div>
+                            <p className="text-xs sm:text-sm text-gray-700 break-words leading-relaxed">
+                              {audition.compensation.accommodation}
+                            </p>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-green-200">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-lg sm:text-xl">🍽️</span>
+                              <h4 className="text-sm sm:text-base font-semibold text-green-800 break-words">Meals</h4>
+                            </div>
+                            <p className="text-xs sm:text-sm text-gray-700 break-words leading-relaxed">
+                              {audition.compensation.meals}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">📱 How to Apply</h2>
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="bg-white rounded-lg p-3 sm:p-4 border border-green-200">
+                          <h4 className="text-sm sm:text-base font-semibold text-green-800 mb-3 flex items-center break-words">
+                            💬 Contact via WhatsApp
+                          </h4>
+                          <p className="text-xs sm:text-sm text-gray-700 mb-3 sm:mb-4 break-words leading-relaxed">
+                            {audition.applicationProcess}
+                          </p>
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <span className="text-xs sm:text-sm font-medium text-green-700 break-all">
+                              📞 WhatsApp: 8690301249
+                            </span>
+                            <a
+                              href={audition.companyLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full sm:w-auto inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-md transition-colors whitespace-nowrap"
+                            >
+                              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4 mr-2 flex-shrink-0" />
+                              Apply Now
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </>
+                )}
+
                 {/* Character Details Section for other auditions */}
-                {audition.characterDetails && audition.id !== 7 && audition.id !== 13 && (
+                {audition.characterDetails && audition.id !== 7 && audition.id !== 13 && audition.id !== 14 && (
                   <section>
                     <h2 className="text-xl font-semibold mb-3">🎭 Character Information</h2>
                     <div className="bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg p-6 mb-6">
@@ -1398,7 +1624,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   </>
                 )}
 
-                {audition.id !== 7 && audition.id !== 13 && (
+                {audition.id !== 7 && audition.id !== 13 && audition.id !== 14 && (
                   <>
                     <h2 className="text-xl font-semibold mb-3">Roles</h2>
                     <ul className="list-disc pl-5 mb-6">
@@ -1428,7 +1654,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
         </div>
 
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg border border-gray-200 p-6 sticky top-24">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-5 md:p-6 sticky top-24 overflow-hidden">
             <h2 className="font-playfair text-xl font-bold mb-4">Audition Details</h2>
 
             <div className="space-y-4">
@@ -1622,6 +1848,32 @@ export default function AuditionDetailContent({ id }: { id: number }) {
               </div>
             )}
 
+            {audition.id === 14 && (
+              <div className="mt-4 sm:mt-6 bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 overflow-hidden">
+                <h4 className="text-sm sm:text-base font-medium text-green-800 mb-2 flex items-center break-words">
+                  🎭 All Expenses Covered
+                </h4>
+                <ul className="text-xs sm:text-sm text-green-700 space-y-1">
+                  <li className="flex items-start gap-2 break-words">
+                    <span className="text-green-600 flex-shrink-0 mt-0.5">✓</span>
+                    <span className="break-words">Good payment</span>
+                  </li>
+                  <li className="flex items-start gap-2 break-words">
+                    <span className="text-green-600 flex-shrink-0 mt-0.5">✓</span>
+                    <span className="break-words">Travel covered</span>
+                  </li>
+                  <li className="flex items-start gap-2 break-words">
+                    <span className="text-green-600 flex-shrink-0 mt-0.5">✓</span>
+                    <span className="break-words">Accommodation provided</span>
+                  </li>
+                  <li className="flex items-start gap-2 break-words">
+                    <span className="text-green-600 flex-shrink-0 mt-0.5">✓</span>
+                    <span className="break-words">Meals included</span>
+                  </li>
+                </ul>
+              </div>
+            )}
+
             {/* Apply Button */}
             <div className="mt-6 space-y-3">
               {audition.id === 2 ? (
@@ -1670,6 +1922,13 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                     <Mail className="h-4 w-4 mr-2" />
                     Send Profile via Email
+                  </Button>
+                </a>
+              ) : audition.id === 14 ? (
+                <a href={audition.companyLink} target="_blank" rel="noopener noreferrer" className="block">
+                  <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Apply via WhatsApp
                   </Button>
                 </a>
               ) : audition.contactType === "whatsapp" ? (

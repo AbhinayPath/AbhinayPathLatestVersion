@@ -64,6 +64,51 @@ const auditions = [
     ],
   },
   {
+    id: 14,
+    title: "Nukkad Natak Audition - Female Performer Needed",
+    type: "Theater",
+    location: "Bihar",
+    state: "Bihar",
+    date: "Ongoing",
+    director: "Street Theatre Production",
+    description:
+      "Seeking one talented female performer for an exciting Nukkad Natak (street play) production in Bihar. This is a paid opportunity with excellent compensation and all expenses covered including travel, accommodation, and meals.",
+    company: "Street Theatre Production",
+    companyLink: "https://wa.me/918690301249",
+    contact: "8690301249 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Female performer (1 position available)",
+      "Comfortable with street theatre/Nukkad Natak format",
+      "Strong stage presence and vocal projection",
+      "Ability to engage with diverse audiences",
+      "Available for travel to Bihar",
+      "Flexible schedule for rehearsals and performances",
+    ],
+    roles: [
+      "Female Performer - Lead role in Nukkad Natak production",
+      "Street Theatre Performance - Engaging outdoor audiences",
+      "Social Message Delivery - Conveying important themes through performance",
+    ],
+    applicationProcess:
+      "Contact us via WhatsApp at 8690301249 to express your interest. Share your theatre experience, portfolio, and availability. Selected candidates will be contacted for further discussion.",
+    compensation: {
+      payment: "Good payment offered",
+      travel: "Travel expenses covered",
+      accommodation: "Stay provided",
+      meals: "Food provided",
+    },
+    projectDetails: {
+      format: "Nukkad Natak (Street Play)",
+      positions: "1 Female Performer",
+      location: "Bihar",
+      benefits: ["Good Payment", "Travel Covered", "Accommodation Provided", "Meals Included"],
+    },
+  },
+  {
     id: 1,
     title: "Casting Call – Female Lead for Feature Film",
     type: "Film",
@@ -408,36 +453,38 @@ export default function AuditionsContent() {
   }
 
   return (
-    <div className="container py-12">
+    <div className="container py-6 sm:py-8 md:py-12 px-3 sm:px-4">
       <AuditionBanner />
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="font-playfair text-4xl font-bold mb-4">Audition Board</h1>
-        <p className="text-gray-600">
+      <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10 md:mb-12 px-2">
+        <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 break-words">
+          Audition Board
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600 break-words leading-relaxed">
           Discover verified audition opportunities across the country. Filter by location, type, and experience level to
           find your perfect role.
         </p>
       </div>
 
       {/* Filters */}
-      <div className="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
-        <div className="flex items-center gap-2 mb-4">
-          <Filter className="h-5 w-5 text-primary" />
-          <h2 className="font-playfair text-xl font-bold">Filter Auditions</h2>
+      <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gray-50 rounded-lg shadow-sm overflow-hidden">
+        <div className="flex items-center gap-2 mb-3 sm:mb-4">
+          <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+          <h2 className="font-playfair text-lg sm:text-xl font-bold break-words">Filter Auditions</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="relative sm:col-span-2 lg:col-span-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               type="text"
-              placeholder="Search by title or description"
-              className="pl-10 rounded-md"
+              placeholder="Search auditions..."
+              className="pl-10 rounded-md text-sm sm:text-base w-full"
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
             />
           </div>
 
           <Select value={filters.city} onValueChange={(value) => handleFilterChange("city", value)}>
-            <SelectTrigger className="rounded-md">
+            <SelectTrigger className="rounded-md text-sm sm:text-base w-full">
               <SelectValue placeholder="City" />
             </SelectTrigger>
             <SelectContent>
@@ -451,7 +498,7 @@ export default function AuditionsContent() {
           </Select>
 
           <Select value={filters.state} onValueChange={(value) => handleFilterChange("state", value)}>
-            <SelectTrigger className="rounded-md">
+            <SelectTrigger className="rounded-md text-sm sm:text-base w-full">
               <SelectValue placeholder="State" />
             </SelectTrigger>
             <SelectContent>
@@ -465,7 +512,7 @@ export default function AuditionsContent() {
           </Select>
 
           <Select value={filters.category} onValueChange={(value) => handleFilterChange("category", value)}>
-            <SelectTrigger className="rounded-md">
+            <SelectTrigger className="rounded-md text-sm sm:text-base w-full">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
@@ -479,7 +526,7 @@ export default function AuditionsContent() {
           </Select>
 
           <Select value={filters.experience} onValueChange={(value) => handleFilterChange("experience", value)}>
-            <SelectTrigger className="rounded-md">
+            <SelectTrigger className="rounded-md text-sm sm:text-base w-full">
               <SelectValue placeholder="Experience" />
             </SelectTrigger>
             <SelectContent>
@@ -497,8 +544,13 @@ export default function AuditionsContent() {
           filters.state !== "all" ||
           filters.category !== "all" ||
           filters.experience !== "all") && (
-          <div className="mt-4 flex justify-end">
-            <Button variant="outline" size="sm" onClick={clearFilters} className="rounded-md bg-transparent">
+          <div className="mt-3 sm:mt-4 flex justify-end">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={clearFilters}
+              className="rounded-md bg-transparent text-xs sm:text-sm"
+            >
               Clear Filters
             </Button>
           </div>
@@ -506,7 +558,7 @@ export default function AuditionsContent() {
       </div>
 
       {/* Audition Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
         {filteredAuditions.length > 0 ? (
           filteredAuditions.map((audition) => (
             <div
@@ -522,23 +574,25 @@ export default function AuditionsContent() {
                         ? "border-green-300 shadow-lg"
                         : audition.id === 13
                           ? "border-blue-300 shadow-lg"
-                          : "border-gray-200"
+                          : audition.id === 14
+                            ? "border-yellow-500 shadow-lg"
+                            : "border-gray-200"
               }`}
             >
-              <div className="relative h-48 w-full">
+              <div className="relative h-40 sm:h-48 w-full flex-shrink-0">
                 <Image
                   src={audition.image || "/placeholder.svg"}
                   alt={audition.title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   onError={(e) => {
-                    // Fallback to default image on error
                     const target = e.target as HTMLImageElement
                     target.src = "/images/auditions-stage.png"
                   }}
                 />
                 {audition.verified && (
-                  <div className="absolute top-2 right-2 badge-verified">
+                  <div className="absolute top-2 right-2 badge-verified text-xs">
                     <span className="flex items-center">
                       <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path
@@ -552,77 +606,88 @@ export default function AuditionsContent() {
                   </div>
                 )}
                 {audition.id === 1 && (
-                  <div className="absolute top-2 left-2 bg-primary text-white text-xs font-medium px-2 py-1 rounded-full">
+                  <div className="absolute top-2 left-2 bg-primary text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
                     🎬 Film Lead
                   </div>
                 )}
                 {audition.id === 2 && (
-                  <div className="absolute top-2 left-2 bg-orange-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                  <div className="absolute top-2 left-2 bg-orange-600 text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
                     ⚔️ Action Drama
                   </div>
                 )}
                 {audition.id === 7 && (
-                  <div className="absolute top-2 left-2 bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                  <div className="absolute top-2 left-2 bg-purple-600 text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
                     🎭 Video Audition
                   </div>
                 )}
                 {audition.id === 12 && (
-                  <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                  <div className="absolute top-2 left-2 bg-green-600 text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
                     🎭 Repertory Company
                   </div>
                 )}
                 {audition.id === 13 && (
-                  <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                  <div className="absolute top-2 left-2 bg-blue-600 text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
                     🎪 Children's Festival
                   </div>
                 )}
+                {audition.id === 14 && (
+                  <div className="absolute top-2 left-2 bg-yellow-600 text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
+                    🎭 Nukkad Natak
+                  </div>
+                )}
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-3">
+              <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col overflow-hidden">
+                <div className="flex justify-between items-start mb-3 gap-2 flex-wrap">
                   <span
-                    className={`badge-primary ${audition.id === 7 ? "bg-purple-100 text-purple-800" : audition.id === 13 ? "bg-blue-100 text-blue-800" : ""}`}
+                    className={`badge-primary text-xs ${audition.id === 7 ? "bg-purple-100 text-purple-800" : audition.id === 13 ? "bg-blue-100 text-blue-800" : audition.id === 14 ? "bg-yellow-100 text-yellow-800" : ""}`}
                   >
                     {audition.type}
                   </span>
-                  <span className="badge-outline">{audition.experience}</span>
+                  <span className="badge-outline text-xs">{audition.experience}</span>
                 </div>
-                <h3 className="font-playfair text-xl font-bold mb-4">{audition.title}</h3>
+                <h3 className="font-playfair text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4 break-words leading-tight">
+                  {audition.title}
+                </h3>
 
                 {/* Special character info for Meera casting */}
                 {audition.id === 1 && audition.characterDetails && (
-                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
-                    <h4 className="font-semibold text-primary mb-2 flex items-center">
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4 overflow-hidden">
+                    <h4 className="font-semibold text-primary mb-2 flex items-center text-xs sm:text-sm break-words">
                       🎭 Character: {audition.characterDetails.name}
                     </h4>
-                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                      <div>
+                    <div className="grid grid-cols-2 gap-2 text-xs sm:text-sm mb-2 sm:mb-3">
+                      <div className="break-words">
                         <span className="font-medium text-gray-700">Age:</span>
                         <span className="ml-1 text-gray-800">{audition.characterDetails.ageRange}</span>
                       </div>
-                      <div>
+                      <div className="break-words">
                         <span className="font-medium text-gray-700">Language:</span>
                         <span className="ml-1 text-gray-800">{audition.characterDetails.languages}</span>
                       </div>
                     </div>
-                    <p className="text-sm text-gray-700 mb-3 italic">"{audition.characterDetails.description}"</p>
-                    <div className="mb-3">
-                      <p className="font-medium text-gray-700 text-sm mb-1">✨ Looking for:</p>
-                      <div className="grid grid-cols-2 gap-1 text-xs text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3 italic break-words leading-relaxed">
+                      "{audition.characterDetails.description}"
+                    </p>
+                    <div className="mb-2 sm:mb-3">
+                      <p className="font-medium text-gray-700 text-xs sm:text-sm mb-1">✨ Looking for:</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[10px] sm:text-xs text-gray-600">
                         {audition.characterDetails.lookingFor.map((item: string, index: number) => (
-                          <div key={index} className="flex items-center">
-                            <span className="text-primary mr-1">•</span>
-                            {item}
+                          <div key={index} className="flex items-start break-words">
+                            <span className="text-primary mr-1 flex-shrink-0">•</span>
+                            <span className="break-words">{item}</span>
                           </div>
                         ))}
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium text-green-600">📞 WhatsApp: 7375962175</span>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                      <span className="text-[10px] sm:text-xs font-medium text-green-600 break-all">
+                        📞 WhatsApp: 7375962175
+                      </span>
                       <a
                         href={audition.companyLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition-colors"
+                        className="text-[10px] sm:text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition-colors whitespace-nowrap"
                       >
                         Quick Apply
                       </a>
@@ -784,89 +849,205 @@ export default function AuditionsContent() {
 
                 {/* Special info for Children's Theater Festival casting */}
                 {audition.id === 13 && audition.festivalDetails && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                    <h4 className="font-semibold text-blue-700 mb-2 flex items-center">
-                      🎪 Festival: {audition.festivalDetails.name}
-                    </h4>
-                    <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                      <div>
-                        <span className="font-medium text-gray-700">Type:</span>
-                        <span className="ml-1 text-gray-800">{audition.festivalDetails.type}</span>
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4 overflow-hidden">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg">🎪</span>
+                      <h4 className="font-semibold text-blue-800 text-sm sm:text-base break-words">
+                        {audition.festivalDetails.name}
+                      </h4>
+                    </div>
+
+                    <div className="space-y-2 mb-3">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-blue-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Type</p>
+                        <p className="text-xs sm:text-sm font-semibold text-blue-900 break-words leading-tight">
+                          {audition.festivalDetails.type}
+                        </p>
                       </div>
-                      <div>
-                        <span className="font-medium text-gray-700">Compensation:</span>
-                        <span className="ml-1 text-gray-800">{audition.festivalDetails.compensation}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-gray-700">Rehearsals:</span>
-                        <span className="ml-1 text-gray-800">{audition.festivalDetails.rehearsalPeriod}</span>
-                      </div>
-                      <div>
-                        <span className="font-medium text-gray-700">Shows:</span>
-                        <span className="ml-1 text-gray-800">{audition.festivalDetails.performancePeriod}</span>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-blue-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Compensation</p>
+                        <p className="text-xs sm:text-sm font-semibold text-green-700 break-words">
+                          {audition.festivalDetails.compensation}
+                        </p>
                       </div>
                     </div>
-                    <p className="text-sm text-gray-700 mb-3 italic">"{audition.description}"</p>
-                    <div className="mb-3">
-                      <p className="font-medium text-gray-700 text-sm mb-1">🎭 Special Requirements:</p>
-                      <div className="text-xs text-gray-600 space-y-1">
-                        {audition.specialRequirements.map((req: string, index: number) => (
-                          <div key={index} className="flex items-center">
-                            <span className="text-blue-600 mr-1">•</span>
-                            {req}
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-blue-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-2">Timeline</p>
+                      <div className="space-y-1.5">
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-blue-600 text-xs flex-shrink-0">📅</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[10px] sm:text-xs text-gray-600">Rehearsals</p>
+                            <p className="text-xs sm:text-sm font-medium text-blue-900 break-words">
+                              {audition.festivalDetails.rehearsalPeriod}
+                            </p>
                           </div>
-                        ))}
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-blue-600 text-xs flex-shrink-0">🎭</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[10px] sm:text-xs text-gray-600">Shows</p>
+                            <p className="text-xs sm:text-sm font-medium text-blue-900 break-words">
+                              {audition.festivalDetails.performancePeriod}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium text-green-600">📧 Email: 44clowncompany@gmail.com</span>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-blue-100 mb-3">
+                      <p className="text-xs sm:text-sm text-gray-700 leading-relaxed break-words">
+                        {audition.description}
+                      </p>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-blue-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-700 mb-2">Key Requirements</p>
+                      <ul className="space-y-1">
+                        <li className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                          <span className="text-blue-600 flex-shrink-0 mt-0.5">•</span>
+                          <span className="break-words">Full-time theater artists</span>
+                        </li>
+                        <li className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                          <span className="text-blue-600 flex-shrink-0 mt-0.5">•</span>
+                          <span className="break-words">Clowning experience preferred</span>
+                        </li>
+                        <li className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                          <span className="text-blue-600 flex-shrink-0 mt-0.5">•</span>
+                          <span className="break-words">Passion for children's audiences</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-blue-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1">Contact</p>
+                        <p className="text-xs sm:text-sm font-medium text-blue-900 break-all">
+                          44clowncompany@gmail.com
+                        </p>
+                      </div>
                       <a
                         href={audition.companyLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 transition-colors"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-md transition-colors text-center"
                       >
-                        Send Profile
+                        Send Your Profile
                       </a>
                     </div>
                   </div>
                 )}
 
-                <div className="space-y-3 mb-4 flex-1">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Production:</span>
+                {/* New section for Nukkad Natak Audition */}
+                {audition.id === 14 && audition.projectDetails && audition.compensation && (
+                  <div className="bg-gradient-to-br from-yellow-50 to-yellow-100/50 border border-yellow-200 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4 overflow-hidden">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg">🎭</span>
+                      <h4 className="font-semibold text-yellow-800 text-sm sm:text-base break-words">
+                        {audition.projectDetails.format}
+                      </h4>
+                    </div>
+
+                    <div className="space-y-2 mb-3">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-yellow-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Position</p>
+                        <p className="text-xs sm:text-sm font-semibold text-yellow-900 break-words leading-tight">
+                          {audition.projectDetails.positions}
+                        </p>
+                      </div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-yellow-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Location</p>
+                        <p className="text-xs sm:text-sm font-semibold text-yellow-900 break-words">
+                          {audition.projectDetails.location}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-yellow-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-700 mb-2">Benefits</p>
+                      <ul className="space-y-1">
+                        {audition.projectDetails.benefits.map((benefit, index) => (
+                          <li key={index} className="flex items-center gap-1.5 text-[10px] sm:text-xs text-yellow-800">
+                            <span className="text-yellow-600">•</span>
+                            <span className="break-words">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-yellow-100 mb-3">
+                      <p className="text-xs sm:text-sm text-gray-700 leading-relaxed break-words">
+                        {audition.description}
+                      </p>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-yellow-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-700 mb-2">Key Requirements</p>
+                      <ul className="space-y-1">
+                        {audition.requirements.slice(0, 3).map((req, index) => (
+                          <li key={index} className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                            <span className="text-yellow-600 flex-shrink-0 mt-0.5">•</span>
+                            <span className="break-words">{req}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-yellow-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1">Contact</p>
+                        <p className="text-xs sm:text-sm font-medium text-yellow-900 break-all">{audition.contact}</p>
+                      </div>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-yellow-600 hover:bg-yellow-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-md transition-colors text-center"
+                      >
+                        Express Interest
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4 flex-1 overflow-hidden">
+                  <div className="flex items-start text-xs sm:text-sm text-gray-500">
+                    <span className="font-medium text-gray-700 w-16 sm:w-20 flex-shrink-0">Production:</span>
                     {audition.id === 7 ? (
                       <a
                         href={audition.companyInstagram}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary hover:text-primary/80 hover:underline transition-colors"
+                        className="text-primary hover:text-primary/80 hover:underline transition-colors break-words"
                       >
                         {audition.director}
                       </a>
                     ) : (
-                      <span>{audition.director}</span>
+                      <span className="break-words">{audition.director}</span>
                     )}
                   </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Location:</span>
-                    <span className="flex items-center">
-                      <MapPin className="h-3 w-3 mr-1 text-gray-400" />
-                      {audition.location}, {audition.state}
+                  <div className="flex items-start text-xs sm:text-sm text-gray-500">
+                    <span className="font-medium text-gray-700 w-16 sm:w-20 flex-shrink-0">Location:</span>
+                    <span className="flex items-start break-words">
+                      <MapPin className="h-3 w-3 mr-1 text-gray-400 flex-shrink-0 mt-0.5" />
+                      <span className="break-words">
+                        {audition.location}, {audition.state}
+                      </span>
                     </span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Dates:</span>
-                    <span className="flex items-center">
-                      <Calendar className="h-3 w-3 mr-1 text-gray-400" />
-                      {audition.date}
+                  <div className="flex items-start text-xs sm:text-sm text-gray-500">
+                    <span className="font-medium text-gray-700 w-16 sm:w-20 flex-shrink-0">Dates:</span>
+                    <span className="flex items-start break-words">
+                      <Calendar className="h-3 w-3 mr-1 text-gray-400 flex-shrink-0 mt-0.5" />
+                      <span className="break-words">{audition.date}</span>
                     </span>
                   </div>
                 </div>
 
-                <div className="flex justify-end mt-auto pt-4 border-t">
+                <div className="flex justify-end mt-auto pt-3 sm:pt-4 border-t">
                   <Link href={`/auditions/${audition.id}`}>
-                    <Button size="sm" className="rounded-md">
+                    <Button size="sm" className="rounded-md text-xs sm:text-sm">
                       More Details
                     </Button>
                   </Link>
@@ -875,9 +1056,11 @@ export default function AuditionsContent() {
             </div>
           ))
         ) : (
-          <div className="col-span-full text-center py-12">
-            <p className="text-gray-500 mb-4">No auditions match your current filters.</p>
-            <Button onClick={clearFilters} variant="outline" className="rounded-md bg-transparent">
+          <div className="col-span-full text-center py-8 sm:py-12 px-4">
+            <p className="text-sm sm:text-base text-gray-500 mb-4 break-words">
+              No auditions match your current filters.
+            </p>
+            <Button onClick={clearFilters} variant="outline" className="rounded-md bg-transparent text-xs sm:text-sm">
               Clear Filters
             </Button>
           </div>
