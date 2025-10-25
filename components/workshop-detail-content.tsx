@@ -2251,7 +2251,6 @@ const workshops = [
         "This 12-day Basic Course in Screen Acting (Hindi) at FTII Pune offers aspiring actors a transformative journey into authentic screen performance. Led by veteran theatre director Rispal Singh Vikal with 45+ years of experience and co-directed by senior cinema personality Harsh Prasad, the course emphasizes finding your truth before the camera. Through a unique combination of classical, modern, and method-free acting approaches, participants will break inhibitions, develop body-mind alignment, and learn to express freely and authentically. The intensive training includes freedom from inhibition techniques, memory and imagination work, observation and improvisation, voice and mime training, psycho-physical exercises, and theatre games designed to build stamina, focus, and trust. With practical, exploratory, and performance-driven training specifically designed for screen acting, this course provides a solid foundation for anyone serious about pursuing acting in films, television, or web series. The small batch size of 20 participants ensures personalized attention, and optional hostel accommodation makes it accessible for outstation participants.",
     },
   },
-  // ADD NEW WORKSHOPS HERE
   {
     id: 41,
     title: "FTII Pune: Basic Course on Creating Films & AV Content using AI",
@@ -2429,6 +2428,170 @@ const workshops = [
       ],
       additionalInfo:
         "This 5-day online Basic Course on Creating Films & AV Content using AI at FTII Pune represents the future of filmmaking education. As the camera evolves and imagination begins to direct the machine, this course offers a comprehensive introduction to AI-powered content creation. Led by Dr. Alwin Anuse, an Associate Professor at FTII with a Ph.D., 20+ years of experience, 2 patents, and publications in Springer and Elsevier, participants will explore the cutting edge of generative AI for storytelling and visualization. The course covers script ideation and prompt design, AI-based image, video, and sound creation, storyboarding, editing, and post-production with AI, all while emphasizing ethical AI use and creative responsibility. Through guided demos, practical assignments, and collaborative group projects, students will gain hands-on experience with the latest AI tools while maintaining human creativity at the center of the process. The online format makes this accessible to participants across India, requiring only a laptop/desktop with minimum 4GB RAM, stable 10 Mbps internet, and headphones with HD webcam. With 20 hours of intensive training spread across 5 days, this course provides a solid foundation for anyone looking to integrate AI into their filmmaking or content creation workflow.",
+    },
+  },
+  {
+    id: 42,
+    title: "ACT IT OUT – 7 Days Theatre Workshop",
+    trainer: "Mr. Arun Srivastava",
+    institution: "Vinod Rastogi Smriti Sansthan",
+    location: "Prayagraj",
+    state: "Uttar Pradesh",
+    date: "24th October 2025",
+    time: "Everyday 10:00 AM",
+    description:
+      "🎭 Unleash your hidden performer & step into the world of stage! A comprehensive 7-day theatre workshop covering basic understanding of theatre & human activities, physical exercises & theatre games, script reading, pronunciation & diction, work on Rasa's & Bhava, and improvisation & performance techniques. Under the supervision of Ajay Mukherjee and mentored by Mr. Arun Srivastava (Research Scholar, University of Rajasthan | Alumnus – Mandi School of Drama & Pondicherry University).",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://forms.gle/9Dw8N1eJDCNpE3Mb7",
+    featured: true,
+    price: "₹500",
+    contact: "+91 7783912449",
+    email: "Via registration form",
+    eligibility: "Open to all",
+    venue: "Maharashtra Lok Sewa Mandal, Alopibagh, Prayagraj",
+    includes: "Certificate + Comprehensive theatre training",
+    fullDetails: {
+      description:
+        "🎭 Unleash your hidden performer & step into the world of stage! ACT IT OUT is a comprehensive 7-day theatre workshop designed to introduce participants to the fundamentals of theatre arts and performance. Whether you're a complete beginner or have some experience, this workshop will help you discover your inner performer and develop essential theatre skills.",
+      venue: "Maharashtra Lok Sewa Mandal, Alopibagh, Prayagraj",
+      organizer: "Vinod Rastogi Smriti Sansthan",
+      duration: "7 days (Starting 24th October 2025)",
+      medium: "Hindi & English",
+      supervisor: "Ajay Mukherjee",
+      courseDirector:
+        "Mr. Arun Srivastava (Research Scholar, University of Rajasthan | Alumnus – Mandi School of Drama & Pondicherry University). An accomplished theatre practitioner and educator with extensive training from prestigious institutions, Mr. Srivastava brings a wealth of knowledge in classical and contemporary theatre practices.",
+      eligibilityCriteria: [
+        "Open to all age groups",
+        "No prior theatre experience required",
+        "Passion for performing arts and willingness to learn",
+        "Commitment to attend all 7 days of the workshop",
+        "Physical fitness for movement and exercise activities",
+        "Open mind and readiness to explore creative expression",
+      ],
+      applicationDeadline: "Registration open until workshop starts",
+      selectionProcess: "First-Come, First-Served basis",
+      courseFee: "₹500 per person (highly affordable)",
+      certification: "Certificate of Participation will be provided",
+      keyHighlights: [
+        "Comprehensive 7-day intensive theatre training",
+        "Learn from experienced theatre professionals",
+        "Hands-on practical training in all aspects of theatre",
+        "Focus on classical Indian theatre concepts (Rasa & Bhava)",
+        "Modern improvisation and performance techniques",
+        "Small batch size for personalized attention",
+        "Affordable fee of only ₹500",
+        "Certificate upon completion",
+        "Supervised by Ajay Mukherjee",
+        "Mentored by alumnus of Mandi School of Drama & Pondicherry University",
+        "Perfect for beginners and enthusiasts",
+        "Build confidence and stage presence",
+      ],
+      curriculum: [
+        "Introduction to theatre and its role in human activities",
+        "Understanding the basics of dramatic arts",
+        "Theatre history and evolution",
+        "Physical exercises for actors",
+        "Body awareness and movement training",
+        "Theatre games for ensemble building",
+        "Trust and collaboration exercises",
+        "Script reading techniques",
+        "Understanding dramatic text",
+        "Pronunciation and diction training",
+        "Voice modulation and projection",
+        "Articulation exercises",
+        "Introduction to Rasa (aesthetic emotions)",
+        "Understanding Bhava (emotional states)",
+        "Classical Indian theatre concepts",
+        "Improvisation fundamentals",
+        "Spontaneity and creativity exercises",
+        "Performance techniques for stage",
+        "Character development basics",
+        "Stage presence and confidence building",
+      ],
+      practicalExperience: [
+        "Daily physical warm-up and exercises",
+        "Interactive theatre games and activities",
+        "Script reading practice sessions",
+        "Voice and diction exercises",
+        "Rasa and Bhava exploration through exercises",
+        "Improvisation workshops",
+        "Group performance activities",
+        "Individual presentation opportunities",
+        "Peer feedback and discussion sessions",
+        "Final showcase or presentation",
+      ],
+      learningOutcomes: [
+        "Understand the fundamentals of theatre arts",
+        "Develop physical awareness and stage presence",
+        "Master basic voice and diction techniques",
+        "Learn classical Indian theatre concepts (Rasa & Bhava)",
+        "Build improvisation and spontaneity skills",
+        "Gain confidence in public performance",
+        "Develop teamwork and collaboration abilities",
+        "Understand script reading and interpretation",
+        "Build a foundation for further theatre training",
+        "Connect with fellow theatre enthusiasts",
+        "Discover your creative potential",
+        "Overcome stage fright and inhibitions",
+      ],
+      aboutInstructor:
+        "Mr. Arun Srivastava is a dedicated theatre practitioner and educator currently pursuing research at the University of Rajasthan. As an alumnus of both Mandi School of Drama and Pondicherry University, he brings a unique blend of traditional and contemporary theatre knowledge. His training encompasses classical Indian theatre forms as well as modern performance techniques, making him well-equipped to guide students through a comprehensive theatre education. Under the supervision of Ajay Mukherjee, this workshop benefits from experienced leadership committed to nurturing new talent in the performing arts.",
+      instructorExperience: [
+        "Research Scholar at University of Rajasthan",
+        "Alumnus of Mandi School of Drama",
+        "Alumnus of Pondicherry University",
+        "Trained in classical Indian theatre forms",
+        "Experienced in contemporary performance techniques",
+        "Skilled in Rasa and Bhava theory and practice",
+        "Expertise in improvisation and devised theatre",
+        "Passionate about theatre education",
+      ],
+      uniqueExperience: [
+        "Learn from alumni of prestigious theatre institutions",
+        "Affordable workshop fee of only ₹500",
+        "Comprehensive 7-day intensive training",
+        "Focus on both classical and modern techniques",
+        "Small batch size for personalized attention",
+        "Hands-on practical approach to learning",
+        "Explore classical Indian theatre concepts",
+        "Build confidence through performance",
+        "Certificate of participation",
+        "Supportive and encouraging learning environment",
+        "Perfect for beginners with no experience",
+        "Located in the cultural city of Prayagraj",
+      ],
+      targetAudience: [
+        "Complete beginners interested in theatre",
+        "Students exploring performing arts",
+        "Working professionals seeking creative outlet",
+        "Teachers wanting to incorporate theatre in education",
+        "Anyone interested in building confidence",
+        "Aspiring actors and performers",
+        "Theatre enthusiasts of all ages",
+        "People looking to overcome stage fright",
+        "Those interested in Indian classical theatre",
+        "Community members wanting to connect through arts",
+      ],
+      workshopPolicies: [
+        "Punctuality required for all sessions (10:00 AM daily)",
+        "Commitment to attend all 7 days mandatory",
+        "Comfortable clothing suitable for movement required",
+        "Active participation in all activities expected",
+        "Respectful and supportive behavior towards fellow participants",
+        "Mobile phones to be kept on silent during sessions",
+        "Certificate awarded upon 100% attendance",
+        "Registration fee of ₹500 to be paid in advance",
+        "Follow all instructions from workshop facilitators",
+        "Maintain discipline and focus during sessions",
+      ],
+      contactInfo: [
+        "Contact: +91 7783912449",
+        "Registration: https://forms.gle/9Dw8N1eJDCNpE3Mb7",
+        "Social Media: @Officialvrss",
+        "Organized by: Vinod Rastogi Smriti Sansthan",
+      ],
+      additionalInfo:
+        "ACT IT OUT is a 7-day theatre workshop organized by Vinod Rastogi Smriti Sansthan, designed to make quality theatre education accessible to everyone. With an incredibly affordable fee of just ₹500, this workshop removes financial barriers to learning the performing arts. Under the supervision of Ajay Mukherjee and mentored by Mr. Arun Srivastava (Research Scholar at University of Rajasthan and alumnus of Mandi School of Drama & Pondicherry University), participants will receive comprehensive training in theatre fundamentals. The workshop covers essential topics including basic understanding of theatre and human activities, physical exercises and theatre games, script reading with focus on pronunciation and diction, classical Indian theatre concepts of Rasa and Bhava, and modern improvisation and performance techniques. Starting from 24th October 2025 at 10:00 AM daily, the workshop will be held at Maharashtra Lok Sewa Mandal, Alopibagh, Prayagraj. This intensive 7-day program is perfect for complete beginners, students, working professionals, or anyone interested in exploring their creative potential through theatre. With hands-on practical training, small batch sizes for personalized attention, and a supportive learning environment, participants will build confidence, develop stage presence, and gain a solid foundation in theatre arts. A certificate of participation will be awarded upon completion, recognizing your commitment to learning and growth in the performing arts.",
     },
   },
   // ADD NEW WORKSHOPS HERE
@@ -3190,9 +3353,11 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
                                     ? "Register Now"
                                     : workshop.id === 41
                                       ? "Register Now"
-                                      : isThreadsTales
-                                        ? "Contact via WhatsApp"
-                                        : "Register Now"}
+                                      : workshop.id === 42
+                                        ? "Register Now"
+                                        : isThreadsTales
+                                          ? "Contact via WhatsApp"
+                                          : "Register Now"}
                   </Button>
                 </Link>
               </div>

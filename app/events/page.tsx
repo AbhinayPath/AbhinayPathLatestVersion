@@ -60,7 +60,7 @@ interface BangalorePlay {
   venue: string
   date: string
   language: string
-  category: "English" | "Hindi" | "Kannada" | "Special"
+  category: "English" | "Hindi" | "Kannada" | "Odia"
   bookingUrl: string
   description?: string
 }
@@ -143,86 +143,128 @@ const events: Event[] = [
 const bangalorePlays: BangalorePlay[] = [
   // English Plays
   {
-    id: "the-anklet",
-    title: "The Anklet",
-    venue: "Alliance Française de Bangalore",
-    date: "Saturday, 11th October 2025",
+    id: "something-like-truth",
+    title: "Something Like Truth",
+    venue: "Ranga Shankara, JP Nagar",
+    date: "Saturday, 25th October 2025, 6:30 PM",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/anklet/ET00459544",
-    description: "A captivating English drama at Alliance Française de Bangalore.",
+    bookingUrl: "https://in.bookmyshow.com/plays/something-like-truth/ET00464467",
+    description: "An engaging English drama exploring the nature of truth and perception.",
   },
+  {
+    id: "aakhirkhaar",
+    title: "Aakhirkhaar",
+    venue: "Ranga Shankara, JP Nagar",
+    date: "Saturday, 25th October 2025",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/aakhirkhaar/ET00464465",
+    description: "A compelling theatrical performance at the renowned Ranga Shankara.",
+  },
+  {
+    id: "love-in-time-of-algorithms",
+    title: "Love in the Time of Algorithms (The Self Centre)",
+    venue: "Underline Center, Indiranagar",
+    date: "Saturday, 25th October 2025, 6:00–8:00 PM",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/love-in-the-time-of-algorithms-by-the-self-centre/ET00462659",
+    description: "A contemporary exploration of love and relationships in the digital age.",
+  },
+  {
+    id: "mahabharata-dialogues",
+    title: "Mahabharata Dialogues",
+    venue: "Koramangala Dialogues Cafe",
+    date: "Sat, Oct 25 • 5:00–6:30 PM | Sun, Oct 26 • 4:00–6:00 PM & 7:00–9:00 PM",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/mahabharatha-dialogues-koramangala/ET00357289",
+    description: "Interactive dialogues exploring the timeless wisdom of the Mahabharata epic.",
+  },
+  {
+    id: "key-to-enter-secret-island",
+    title: "KEY TO ENTER THE SECRET ISLAND",
+    venue: "ASDream Studio",
+    date: "Sunday, 26th October 2025",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/key-to-enter-the-secret-island/ET00467257",
+    description: "An immersive theatrical experience that takes you on a mysterious journey.",
+  },
+
   // Kannada Plays
   {
-    id: "pukkate-salahe",
-    title: "Pukkate Salahe (Comedy Drama)",
-    venue: "Dr. C. Ashwath Kala Bhavana",
-    date: "Saturday, 11th October 2025, 5:00 PM",
+    id: "maayaa-dweepa",
+    title: "Maayaa Dweepa",
+    venue: "Kalagrama, Bengaluru University (Mallathahalli)",
+    date: "Sunday, 26th October 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/pukkate-salahe-comedy-drama/ET00105263",
-    description: "A hilarious Kannada comedy drama that will keep you entertained throughout.",
+    bookingUrl: "https://in.bookmyshow.com/plays/maayaa-dweepa/ET00462369",
+    description: "A captivating Kannada play at the prestigious Kalagrama venue.",
   },
   {
-    id: "muddannana-promotion",
-    title: "Muddannana Promotion Prasanga",
-    venue: "Dr. C. Ashwath Kala Bhavana",
-    date: "Saturday, 11th October 2025, 7:30 PM",
+    id: "mr-rao-and-associates",
+    title: "Mr Rao and Associates",
+    venue: "Dr. C. Ashwath Kala Bhavana, NR Colony",
+    date: "Saturday, 25th October 2025, 4:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/muddanan-promotion-prasanga/ET00464404",
-    description: "A compelling Kannada play exploring workplace dynamics and aspirations.",
+    bookingUrl: "https://in.bookmyshow.com/plays/mr-rao-and-associates/ET00448369",
+    description: "A delightful Kannada production exploring professional and personal dynamics.",
   },
   {
-    id: "gaampara-gumpu",
-    title: "Gaampara Gumpu",
-    venue: "Kalagrama, Bengaluru University",
-    date: "Saturday, 11th October 2025, 7:00 PM",
+    id: "bay-tumba-nakbidi",
+    title: "BAY TUMBA NAKBIDI",
+    venue: "Dr. C. Ashwath Kala Bhavana, NR Colony",
+    date: "Saturday, 25th October 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/gaampara-gumpu/ET00464820",
-    description: "An engaging Kannada production at the prestigious Kalagrama venue.",
+    bookingUrl: "https://in.bookmyshow.com/plays/bay-tumba-nakbidi/ET00451448",
+    description: "An entertaining Kannada play at Dr. C. Ashwath Kala Bhavana.",
   },
   {
-    id: "rakshasa-tangadi",
-    title: "Rakshasa Tangadi",
-    venue: "Seva Sadan, Malleswaram",
-    date: "Sunday, 12th October 2025, 6:30 PM",
+    id: "kaayuva-kaayaka",
+    title: "KAAYUVA KAAYAKA",
+    venue: "Nayana Auditorium, Hudson Circle",
+    date: "Sunday, 26th October 2025",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/rakshasa-tangadi/ET00357400",
-    description: "A powerful Kannada drama exploring mythological themes with contemporary relevance.",
+    bookingUrl: "https://in.bookmyshow.com/plays/kaayuva-kaayaka/ET00381819",
+    description: "A thought-provoking Kannada theatrical performance.",
   },
   {
-    id: "skewed",
-    title: "SKEWED",
-    venue: "Dr. C. Ashwath Kala Bhavana",
-    date: "Sunday, 12th October 2025",
+    id: "heegadre-hege",
+    title: "HEEGADRE HEGE?",
+    venue: "Dr. C. Ashwath Kala Bhavana, NR Colony",
+    date: "Sunday, 26th October 2025, 4:15 PM & 7:15 PM (two shows)",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/skewed/ET00458107",
-    description: "A thought-provoking Kannada play that challenges perspectives.",
+    bookingUrl: "https://in.bookmyshow.com/plays/heegadre-hege/ET00440421",
+    description: "A compelling Kannada drama with two shows on Sunday.",
+  },
+
+  // Odia Plays
+  {
+    id: "taa-maa-ra-kahani",
+    title: "Taa Maa Ra Kahani",
+    venue: "Samarthanam Auditorium",
+    date: "Sunday, 26th October 2025, 4:00 PM",
+    language: "Odia",
+    category: "Odia",
+    bookingUrl: "https://in.bookmyshow.com/plays/taa-maa-ra-kahani/ET00460617",
+    description: "A heartfelt Odia play exploring family bonds and relationships.",
   },
   {
-    id: "love-letters-ninna-preetiya",
-    title: "Love Letters – Ninna Preetiya, Naanu!",
-    venue: "Ranga Shankara",
-    date: "Saturday, 11th October 2025",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/love-letters-ninna-preetiya-naanu/ET00444194",
-    description: "A romantic Kannada play exploring love through heartfelt letters.",
-  },
-  // Hindi Plays
-  {
-    id: "spotlight-stories",
-    title: "Spotlight Stories",
-    venue: "Vyoma ArtSpace",
-    date: "Saturday, 11th October 2025",
-    language: "Hindi",
-    category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/spotlight-stories/ET00392746",
-    description: "An engaging Hindi storytelling performance at Vyoma ArtSpace.",
+    id: "koffee-katha-kabita",
+    title: "Koffee Katha Kabita",
+    venue: "Samarthanam Auditorium, JP Nagar",
+    date: "Saturday, 25th October 2025, 6:00–8:00 PM",
+    language: "Odia",
+    category: "Odia",
+    bookingUrl: "https://in.bookmyshow.com/plays/katha-koffee-kabita/ET00460607",
+    description: "An engaging Odia theatrical experience blending stories and poetry.",
   },
 ]
 
@@ -236,6 +278,7 @@ export default function EventsPage() {
       Kannada: "bg-yellow-100 text-yellow-800",
       English: "bg-blue-100 text-blue-800",
       Bengali: "bg-green-100 text-green-800",
+      Odia: "bg-purple-100 text-purple-800",
       "Hindi + English": "bg-purple-100 text-purple-800",
       "French/Malayalam": "bg-indigo-100 text-indigo-800",
       Multilingual: "bg-pink-100 text-pink-800",
@@ -254,7 +297,7 @@ export default function EventsPage() {
   const englishPlays = bangalorePlays.filter((play) => play.category === "English")
   const hindiPlays = bangalorePlays.filter((play) => play.category === "Hindi")
   const kannadaPlays = bangalorePlays.filter((play) => play.category === "Kannada")
-  const specialPlays = bangalorePlays.filter((play) => play.category === "Special")
+  const odiaPlays = bangalorePlays.filter((play) => play.category === "Odia")
 
   const PlayCard = ({ play }: { play: BangalorePlay }) => (
     <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 h-full flex flex-col">
@@ -368,7 +411,7 @@ export default function EventsPage() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - October 11-12
+                Discover this weekend's exciting theatre performances across Bangalore - October 25-26
               </p>
             </div>
 
@@ -384,8 +427,8 @@ export default function EventsPage() {
                   <TabsTrigger value="kannada" className="text-xs sm:text-sm px-2 sm:px-4">
                     Kannada ({kannadaPlays.length})
                   </TabsTrigger>
-                  <TabsTrigger value="special" className="text-xs sm:text-sm px-2 sm:px-4">
-                    Special ({specialPlays.length})
+                  <TabsTrigger value="odia" className="text-xs sm:text-sm px-2 sm:px-4">
+                    Odia ({odiaPlays.length})
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -414,9 +457,9 @@ export default function EventsPage() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="special" className="mt-6 sm:mt-8">
+              <TabsContent value="odia" className="mt-6 sm:mt-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {specialPlays.map((play) => (
+                  {odiaPlays.map((play) => (
                     <PlayCard key={play.id} play={play} />
                   ))}
                 </div>
