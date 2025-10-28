@@ -37,11 +37,14 @@ import {
   LinkIcon,
   Mail,
   Phone,
+  Loader2,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import Link from "next/link"
 import Image from "next/image"
+import { createClient } from "@supabase/supabase-js"
+import { INDIAN_STATES } from "@/lib/types/talent"
 
 const LANGUAGES = [
   "Hindi",
@@ -75,6 +78,17 @@ export default function PostWorkshopPage() {
   const [city, setCity] = useState("")
   const [venue, setVenue] = useState("")
   const [platform, setPlatform] = useState("")
+  // Pincode + State/City dropdowns
+  const [pincode, setPincode] = useState("")
+  const [selectedState, setSelectedState] = useState("")
+  const [stateOptions, setStateOptions] = useState<string[]>([])
+  const [cityOptions, setCityOptions] = useState<string[]>([])
+  const [isCityDisabled, setIsCityDisabled] = useState(true)
+  const [stateSearch, setStateSearch] = useState("")
+  const [citySearch, setCitySearch] = useState("")
+  const [stateOpen, setStateOpen] = useState(false)
+  const [cityOpen, setCityOpen] = useState(false)
+  const [isPincodeLoading, setIsPincodeLoading] = useState(false)
   const [description, setDescription] = useState("")
   const [feeType, setFeeType] = useState<"free" | "paid">("free")
   const [feeAmount, setFeeAmount] = useState("")
@@ -100,6 +114,7 @@ export default function PostWorkshopPage() {
   // UI State
   const [showPreview, setShowPreview] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [isPublishing, setIsPublishing] = useState(false)
 
   // Calculate Progress
   useEffect(() => {
@@ -108,7 +123,7 @@ export default function PostWorkshopPage() {
       sessions[0].date,
       sessions[0].startTime,
       sessions[0].duration,
-      locationMode === "city" ? city : platform,
+      locationMode === "city" ? (selectedState && city) : platform,
       description,
       feeType === "paid" ? feeAmount : true,
       consent1,
@@ -118,7 +133,122 @@ export default function PostWorkshopPage() {
     const completed = requiredFields.filter(Boolean).length
     const total = requiredFields.length
     setProgress((completed / total) * 100)
-  }, [title, sessions, city, platform, description, feeType, feeAmount, consent1, consent2, locationMode])
+  }, [title, sessions, city, selectedState, platform, description, feeType, feeAmount, consent1, consent2, locationMode])
+
+  // Load distinct states on mount
+  useEffect(() => {
+    async function loadStates() {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+      if (!supabaseUrl || !supabaseAnonKey) {
+        setStateOptions(Array.from(INDIAN_STATES))
+        return
+      }
+      const client = createClient(supabaseUrl, supabaseAnonKey)
+      const { data, error } = await client
+        .from("pincodes")
+        .select("state")
+        .order("state", { ascending: true })
+        .limit(50000)
+      if (!error && data) {
+        const unique = Array.from(new Set(data.map((d: any) => (d.state || "").trim()))).filter(Boolean)
+        setStateOptions(unique)
+      }
+    }
+    loadStates()
+  }, [])
+
+  // When state changes, load cities and enable city dropdown
+  useEffect(() => {
+    async function loadCities() {
+      if (!selectedState) {
+        setCityOptions([])
+        setIsCityDisabled(true)
+        return
+      }
+      setIsCityDisabled(false)
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+      if (!supabaseUrl || !supabaseAnonKey) return
+      const client = createClient(supabaseUrl, supabaseAnonKey)
+      const { data, error } = await client
+        .from("pincodes")
+        .select("city")
+        .eq("state", selectedState)
+        .order("city", { ascending: true })
+        .limit(50000)
+      if (!error && data) {
+        const unique = Array.from(new Set(data.map((d: any) => (d.city || "").trim()))).filter(Boolean)
+        setCityOptions(unique)
+      }
+    }
+    loadCities()
+  }, [selectedState])
+
+  // Auto-fill state/city on valid 6-digit pincode
+  useEffect(() => {
+    async function tryAutofill() {
+      const six = pincode.replace(/\D/g, "")
+      if (six.length !== 6) return
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+      if (!supabaseUrl || !supabaseAnonKey) return
+      
+      setIsPincodeLoading(true)
+      try {
+        const client = createClient(supabaseUrl, supabaseAnonKey)
+        // First try matching pincode as text
+        let { data, error } = await client
+          .from("pincodes")
+          .select("city, state")
+          .eq("pincode", six)
+          .limit(1)
+      
+        if (error) {
+          console.error("Pincode lookup error (text):", error)
+        }
+      
+        let row: any | null = Array.isArray(data) && data.length > 0 ? data[0] : null
+      
+        // Fallback: try numeric column if text match fails
+        if (!row) {
+          const parsed = parseInt(six, 10)
+          if (!Number.isNaN(parsed)) {
+            const res2 = await client
+              .from("pincodes")
+              .select("city, state")
+              .eq("pincode_int", parsed)
+              .limit(1)
+            if (res2.error) {
+              console.error("Pincode lookup error (int):", res2.error)
+            }
+            row = Array.isArray(res2.data) && res2.data.length > 0 ? res2.data[0] : null
+          }
+        }
+      
+        if (row) {
+         setSelectedState((row.state || "").trim())
+          setCity((row.city || "").trim())
+          const stateValue = (row.state || "").trim()
+          const cityValue = (row.city || "").trim()
+          setSelectedState(stateValue)
+          setCity(cityValue)
+          // Enable city dropdown immediately on autofill
+          setIsCityDisabled(false)
+          // Ensure dropdowns include the autofilled values even if options are empty
+          if (stateValue) {
+            setStateOptions((prev) => Array.from(new Set([...prev, stateValue])))
+          }
+          if (cityValue) {
+           setCityOptions((prev) => Array.from(new Set([...prev, cityValue])))
+          }
+        }
+      } finally {
+        setIsPincodeLoading(false)
+      }
+    }
+    tryAutofill()
+  }, [pincode])
 
   const toggleLanguage = (lang: string) => {
     if (selectedLanguages.includes(lang)) {
@@ -169,20 +299,91 @@ export default function PostWorkshopPage() {
   const isFormValid = () => {
     if (!title || !description || !consent1 || !consent2) return false
     if (sessions.length === 0 || !sessions[0].date || !sessions[0].startTime || !sessions[0].duration) return false
-    if (locationMode === "city" && !city) return false
+    if (locationMode === "city" && (!selectedState || !city)) return false
     if (locationMode === "online" && !platform) return false
     if (feeType === "paid" && !feeAmount) return false
     return true
   }
 
-  const handlePublish = () => {
+  const handlePublish = async () => {
     if (!isFormValid()) {
       toast.error("Please fill in all required fields")
       return
     }
 
-    toast.success("Workshop posted successfully!")
-    // Here you would normally submit to an API
+    setIsPublishing(true)
+    try {
+      let coverImageUrl: string | null = null
+      if (coverImage) {
+        const formData = new FormData()
+        formData.append("file", coverImage)
+        formData.append("type", "cover")
+
+        const uploadRes = await fetch("/api/workshops/media", {
+          method: "POST",
+          body: formData,
+        })
+        const uploadData = await uploadRes.json()
+        if (!uploadRes.ok) {
+          throw new Error(uploadData?.error || "Failed to upload cover image")
+        }
+        coverImageUrl = uploadData.url
+      }
+
+      const payload = {
+        title,
+        description,
+        sessions: sessions
+          .map((s) => ({
+            date: s.date ? format(s.date as Date, "yyyy-MM-dd") : null,
+            startTime: s.startTime,
+            duration: s.duration,
+          }))
+          .filter((s) => s.date),
+        locationMode,
+        state: locationMode === "city" ? selectedState : null,
+        city: locationMode === "city" ? city : null,
+        pincode: locationMode === "city" ? pincode : null,
+        venue,
+        platform: locationMode === "online" ? platform : null,
+        feeType,
+        feeAmount: feeType === "paid" ? feeAmount : null,
+        feeNote,
+        coverImage: coverImageUrl,
+        registrationLink,
+        contactMethod,
+        whatsappNumber:
+          contactMethod === "whatsapp" || contactMethod === "both" ? whatsappNumber : null,
+        email: contactMethod === "email" || contactMethod === "both" ? email : null,
+        skillLevel,
+        selectedLanguages,
+        capacity,
+        registrationDeadline: registrationDeadline
+          ? format(registrationDeadline as Date, "yyyy-MM-dd")
+          : null,
+        targetAudience,
+        visibility: "public",
+        status: "published",
+      }
+
+      const res = await fetch("/api/workshops", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to create workshop")
+      }
+
+      toast.success("Workshop posted successfully!")
+      router.push(`/workshops/${data.workshop.id}`)
+    } catch (err: any) {
+      console.error("Publish workshop failed:", err)
+      toast.error(err?.message || "Failed to post workshop")
+    } finally {
+      setIsPublishing(false)
+    }
   }
 
   return (
@@ -387,19 +588,33 @@ export default function PostWorkshopPage() {
 
                 {/* City/Venue or Platform */}
                 {locationMode === "city" ? (
+                  <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {/* Pincode */}
                     <div className="space-y-2">
-                      <Label htmlFor="city" className="text-sm font-medium">
-                        City <span className="text-red-500">*</span>
+                      <Label htmlFor="pincode" className="text-sm font-medium">
+                        Pincode
                       </Label>
-                      <Input
-                        id="city"
-                        placeholder="e.g., Mumbai"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
+                      <div className="relative">
+                        <Input
+                          id="pincode"
+                          inputMode="numeric"
+                          maxLength={6}
+                          placeholder="Enter 6-digit pincode"
+                          value={pincode}
+                          onChange={(e) => setPincode(e.target.value)}
+                          className="rounded-lg h-11 sm:h-10 pr-10"
+                        />
+                        {isPincodeLoading && (
+                          <div className="absolute inset-y-0 right-2 flex items-center">
+                            <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                          </div>
+                        )}
+                      </div>
                     </div>
+                    </div>
+
+                    {/* Venue */}
                     <div className="space-y-2">
                       <Label htmlFor="venue" className="text-sm font-medium">
                         Venue
@@ -412,7 +627,66 @@ export default function PostWorkshopPage() {
                         className="rounded-lg h-11 sm:h-10"
                       />
                     </div>
-                  </div>
+
+                    {/* State Dropdown (searchable) */}
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">
+                        State <span className="text-red-500">*</span>
+                      </Label>
+                      <Select value={selectedState} onValueChange={setSelectedState}>
+                        <SelectTrigger className="h-11 sm:h-10">
+                          <SelectValue placeholder="Select state" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <div className="p-2 border-b">
+                            <Input
+                              placeholder="Search state"
+                              value={stateSearch}
+                              onChange={(e) => setStateSearch(e.target.value)}
+                              className="h-9"
+                            />
+                          </div>
+                          {stateOptions
+                            .filter((s) => s.toLowerCase().includes(stateSearch.toLowerCase()))
+                            .map((s) => (
+                              <SelectItem key={s} value={s}>
+                                {s}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* City Dropdown (searchable, disabled until state selected) */}
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">
+                        City <span className="text-red-500">*</span>
+                      </Label>
+                      <Select value={city} onValueChange={setCity}>
+                        <SelectTrigger className="h-11 sm:h-10" disabled={isCityDisabled}>
+                          <SelectValue placeholder={isCityDisabled ? "Select a state first" : "Select city"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <div className="p-2 border-b">
+                            <Input
+                              placeholder="Search city"
+                              value={citySearch}
+                              onChange={(e) => setCitySearch(e.target.value)}
+                              className="h-9"
+                            />
+                          </div>
+                          {cityOptions
+                            .filter((c) => c.toLowerCase().includes(citySearch.toLowerCase()))
+                            .map((c) => (
+                              <SelectItem key={c} value={c}>
+                                {c}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  
+                  </>
                 ) : (
                   <div className="space-y-2">
                     <Label htmlFor="platform" className="text-sm font-medium">
@@ -775,7 +1049,7 @@ export default function PostWorkshopPage() {
               className="w-full rounded-lg h-12 text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 touch-manipulation"
             >
               <CheckCircle2 className="mr-2 h-5 w-5 flex-shrink-0" />
-              Publish Workshop
+              {isPublishing ? "Publishing..." : "Publish Workshop"}
             </Button>
           </div>
 
@@ -862,7 +1136,7 @@ export default function PostWorkshopPage() {
                       <>
                         <MapPin className="h-4 w-4 flex-shrink-0" />
                         <span>
-                          {city || "City"}
+                          {(city || "City") + (selectedState ? `, ${selectedState}` : "")}
                           {venue && `, ${venue}`}
                         </span>
                       </>
