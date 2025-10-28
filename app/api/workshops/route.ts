@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
     let query = supabase
       .from('workshops')
-      .select('*')
+      .select('*, workshop_sessions(*)')
       .order('created_at', { ascending: false })
       .range(offset, offset + limit - 1)
 
@@ -62,6 +62,7 @@ export async function POST(request: NextRequest) {
       sessions = [],
       locationMode = 'city',
       city,
+     state,
       venue,
       platform,
       feeType = 'free',
@@ -96,6 +97,10 @@ export async function POST(request: NextRequest) {
     if (locationMode === 'city' && !city) {
       return NextResponse.json({ error: 'City is required for in-city workshops' }, { status: 400 })
     }
+   if (locationMode === 'city' && !state) {
+     return NextResponse.json({ error: 'State is required for in-city workshops' }, { status: 400 })
+
+    }
     if (locationMode === 'online' && !platform) {
       return NextResponse.json({ error: 'Platform is required for online workshops' }, { status: 400 })
     }
@@ -110,6 +115,7 @@ export async function POST(request: NextRequest) {
       description,
       location_mode: locationMode,
       city: city || null,
+   state: state || null,
       venue: venue || null,
       platform: platform || null,
       fee_type: feeType,

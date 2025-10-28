@@ -4,7 +4,7 @@ import WorkshopDetailContent from "@/components/workshop-detail-content"
 export default function WorkshopDetailPage({ params }: { params: { id: string } }) {
   return (
     <Suspense fallback={<div className="container py-12">Loading workshop details...</div>}>
-      <WorkshopDetailContent id={Number.parseInt(params.id)} />
+      <WorkshopDetailContent id={params.id} />
     </Suspense>
   )
 }
