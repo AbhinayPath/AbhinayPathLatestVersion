@@ -17,6 +17,7 @@ import {
   X,
   Youtube,
   Award,
+  Facebook,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -36,6 +37,7 @@ interface Artist {
   interests: string[]
   bio: string
   instagram?: string
+  facebook?: string
   whatsapp?: string
   youtube?: string
   credential?: string
@@ -100,6 +102,7 @@ const artists: Artist[] = [
     email: "surreal.reels@gmail.com",
     interests: ["Acting", "Direction", "Writing", "Lyrics Writing", "Music Composition", "Singing"],
     bio: "An engineer by profession, artist by passion, I have been involved with theatre and films since 2012. Acted in many plays since then, I have also contributed to writing, direction, songs writing and composition and singing. I have also written, directed and produced a feature film, short film and music video (under progress). I have done many types of theatre like improv, playback, forum, complete the story, clown, devised and scripted.",
+    instagram: "https://www.instagram.com/src_films?igsh=MWU0bGV6eWI0eTE1Zw==",
     youtube: "https://youtube.com/@surrealreelscreation8951?si=DiD-z_uKjcd8LO3D",
   },
   {
@@ -126,6 +129,99 @@ const artists: Artist[] = [
     bio: "A dedicated theatre artist with formal training from India's most prestigious theatre institution.",
     credential: "NSD ALUMNI (DELHI) 2017-2020 BATCH",
     instagram: "https://www.instagram.com/sugandhpandey5?igsh=dHYwOXk2Mzh0OWlu",
+  },
+  {
+    id: "mohammed-yunus-parvez",
+    name: "Mohammed Yunus Parvez",
+    image: "/images/artists/mohammed-yunus-parvez.jpg",
+    location: "Bangalore",
+    languages: ["Urdu", "Hindi", "English", "Kannada"],
+    interests: ["Acting", "Direction"],
+    bio: "Fresher seeking good roles opportunity",
+    whatsapp: "9845428007",
+  },
+  {
+    id: "sangeeta-singh",
+    name: "Sangeeta Singh",
+    image: "/images/artists/sangeeta-singh.jpg",
+    location: "Fremont, California, USA",
+    languages: ["Hindi", "English", "Bhojpuri", "Urdu"],
+    email: "sangeeta.xinix@gmail.com",
+    interests: ["Acting", "Direction", "Backstage roles"],
+    bio: 'Acted in English (Shakespeare), Bengali (Rabindranath Tagore\'s dance drama "Chandalika") and Hindi plays. A versatile theatre artist with international experience, bringing diverse cultural perspectives to every performance.',
+    facebook: "https://www.facebook.com/sangeeta.singh.7330763?mibextid=ZbWKwL",
+    youtube: "https://youtu.be/foXwI5jPd1M?si=WOo_AHB6kTr-pVCm",
+  },
+  {
+    id: "ronak-sharma",
+    name: "Ronak Sharma",
+    image: "/images/artists/ronak-sharma.jpg",
+    location: "Bangalore",
+    age: 41,
+    languages: ["Hindi", "English"],
+    email: "Shanu.ronak@gmail.com",
+    interests: ["Directing", "Writing", "Costume"],
+    bio: "I have 10 years of experience in writing directing plays, music video, documentary, podcast and mini series.",
+    instagram: "https://www.instagram.com/ronaksharmagupta?igsh=MWUwZnpkaGFxdGdvdw==",
+    whatsapp: "8095955140",
+  },
+  {
+    id: "vandana-dugar",
+    name: "Vandana Dugar",
+    image: "/images/artists/vandana-dugar.jpg",
+    location: "Bangalore, Dr. Raj Kumar Road",
+    languages: ["Hindi"],
+    interests: ["Acting"],
+    bio: "I am Vandana dugar Theatre enthusiast from Bangalore based theatre group Urban Chaupaal. Here to learn, explore and tell stories.",
+    instagram: "https://www.instagram.com/theatrekraft?igsh=b21nMnh3eXN4Njhz&utm_source=qr",
+    whatsapp: "9019760520",
+  },
+  {
+    id: "srinivas-nayaka",
+    name: "Srinivas Nayaka",
+    image: "/images/artists/srinivas-nayaka.jpg",
+    location: "Bengaluru",
+    age: 24,
+    languages: ["Kannada", "Telugu", "Hindi", "English"],
+    email: "srinivasnayakame@gmail.com",
+    interests: ["Direction"],
+    bio: "Srinivas, Writer - Director from Bangalore. I have made 4 short films so far and one of them has been screened in BISFF 2025.",
+  },
+  {
+    id: "ganesh-gopalan",
+    name: "Ganesh Gopalan",
+    image: "/images/artists/ganesh-gopalan.jpg",
+    location: "Coimbatore",
+    age: 45,
+    languages: ["Hindi", "English", "Telugu", "Tamil"],
+    email: "ganesh.thinker@gmail.com",
+    interests: ["Writing", "Direction"],
+    bio: "An IT professional with 12 stage plays to credit both within IT companies and in famous theatre spaces across India...",
+    whatsapp: "8095225777",
+  },
+  {
+    id: "aaqib-jamal",
+    name: "Aaqib Jamal",
+    image: "/images/artists/aaqib-jamal.jpg",
+    location: "Bangalore",
+    age: 33,
+    languages: ["English", "Hindi", "Kannada"],
+    email: "aaqib.jamal25@gmail.com",
+    interests: ["Direction", "Acting", "Production Manager", "Sound Design", "Videography", "Photography"],
+    bio: "Bangalore based creative director, filmmaker, photographer, actor, theatre practitioner, and soft skills trainer. Started theatre in 2011 as an actor, then moved on to be an assistant director, sound designer, director, producer and production manager",
+    instagram: "https://www.instagram.com/aaqib_jamal/",
+  },
+  {
+    id: "zahoor",
+    name: "Zahoor",
+    image: "/images/artists/zahoor.jpg",
+    location: "Bangalore",
+    age: 40,
+    languages: ["English", "Hindi"],
+    email: "zoshsaysright@gmail.com",
+    interests: ["Acting"],
+    bio: "I am a theatre enthusiast looking for an opportunity to act",
+    whatsapp: "7892146961",
   },
 ]
 
@@ -176,9 +272,9 @@ export default function TheatreArtistsContent() {
       <section className="relative py-12 sm:py-16 md:py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="container relative">
-          <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
+          <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6 md:space-y-8 overflow-hidden">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium">
-              <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
+              <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
               <span>Meet Our Community</span>
             </div>
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-balance leading-tight">
@@ -424,6 +520,17 @@ export default function TheatreArtistsContent() {
                                 </Button>
                               </Link>
                             )}
+                            {artist.facebook && (
+                              <Link href={artist.facebook} target="_blank" rel="noopener noreferrer">
+                                <Button
+                                  size="icon"
+                                  variant="outline"
+                                  className="rounded-full bg-transparent h-8 w-8 sm:h-10 sm:w-10"
+                                >
+                                  <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
+                                </Button>
+                              </Link>
+                            )}
                             {artist.youtube && (
                               <Link href={artist.youtube} target="_blank" rel="noopener noreferrer">
                                 <Button
@@ -548,6 +655,18 @@ export default function TheatreArtistsContent() {
                             >
                               <Youtube className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
                               YouTube
+                            </Button>
+                          </Link>
+                        )}
+                        {artist.facebook && (
+                          <Link href={artist.facebook} target="_blank" rel="noopener noreferrer">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="rounded-full bg-transparent text-xs sm:text-sm h-9 sm:h-11"
+                            >
+                              <Facebook className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+                              Facebook
                             </Button>
                           </Link>
                         )}
