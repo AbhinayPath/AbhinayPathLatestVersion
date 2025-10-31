@@ -610,6 +610,65 @@ const auditions = [
       benefits: ["Good Payment", "Travel Covered", "Accommodation Provided", "Meals Included"],
     },
   },
+  {
+    id: 15,
+    title: "MYCELIUM - Workshop & Audition with Ana Mirtha Sariego",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Sunday, 2nd November 2025",
+    director: "Ana Mirtha Sariego",
+    description:
+      "Join this unique international theatre project focused on devising & collective creation. Led by renowned Spanish actress, director & founder of Sariego Theatre, Ana Mirtha Sariego, with global experience across Europe, the Americas & India. Free workshop & non-paid audition for performers, dancers & physical theatre actors.",
+    company: "Sariego Theatre",
+    companyLink: "https://wa.me/447810802938",
+    contact: "+44 7810 802938 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Performers, dancers & physical theatre actors",
+      "Interest in devising & collective creation",
+      "Available for full day (11:00–14:00 & 16:00–19:00) or one slot",
+      "Based in or able to travel to Bangalore",
+      "Open to experimental and collaborative theatre practices",
+    ],
+    roles: [
+      "Performers - Physical theatre and devised work",
+      "Dancers - Contemporary and experimental movement",
+      "Physical Theatre Actors - Collaborative creation",
+    ],
+    applicationProcess:
+      "Confirm your participation via WhatsApp at +44 7810 802938. Mention your preferred time slot (full day or morning/afternoon session) and brief background in theatre/dance.",
+    directorDetails: {
+      name: "Ana Mirtha Sariego",
+      title: "Renowned Spanish Actress, Director & Founder of Sariego Theatre",
+      experience: "Global experience across Europe, the Americas & India",
+      company: "Sariego Theatre",
+      instagram: ["@anamirtha.theatre", "@sariegotheatre"],
+      website: ["www.anamirtha.com", "www.sariegotheatre.com"],
+      description:
+        "Ana Mirtha Sariego is a celebrated Spanish theatre artist with extensive international experience. As the founder of Sariego Theatre, she has worked across continents, bringing innovative approaches to devising and collective creation. Her work spans Europe, the Americas, and India, making her a truly global theatre practitioner.",
+      achievements: [
+        "Founder of Sariego Theatre",
+        "International theatre director with work across 3 continents",
+        "Specialist in devising and collective creation",
+        "Extensive experience in physical theatre and experimental performance",
+        "Collaborations with artists across Europe, Americas, and India",
+      ],
+    },
+    workshopDetails: {
+      projectName: "MYCELIUM",
+      focus: "Devising & Collective Creation",
+      venue: "Play Practice Residency, Bangalore",
+      date: "Sunday, 2nd November 2025",
+      timings: "11:00–14:00 & 16:00–19:00",
+      options: "Full day or one slot",
+      fee: "Free workshop & non-paid audition",
+      type: "International theatre project",
+    },
+  },
 ]
 
 export default function AuditionDetailContent({ id }: { id: number }) {
@@ -684,7 +743,9 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                     ? "border-blue-200"
                     : audition.id === 14
                       ? "border-green-200"
-                      : "border-gray-200"
+                      : audition.id === 15
+                        ? "border-purple-200"
+                        : "border-gray-200"
             }`}
           >
             <div className="relative h-64 w-full">
@@ -726,8 +787,14 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                 </div>
               )}
               {audition.id === 14 && (
-                <div className="absolute top-4 left-4 bg-green-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">
-                  🎤 Nukkad Natak
+                <div className="absolute top-4 left-4 bg-yellow-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                  🎭 Nukkad Natak
+                </div>
+              )}
+              {/* Adding badge for MYCELIUM audition */}
+              {audition.id === 15 && (
+                <div className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                  🌿 International Project
                 </div>
               )}
             </div>
@@ -744,7 +811,9 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                           ? "bg-blue-100 text-blue-800"
                           : audition.id === 14
                             ? "bg-green-100 text-green-800"
-                            : ""
+                            : audition.id === 15
+                              ? "bg-purple-100 text-purple-800"
+                              : ""
                   }`}
                 >
                   {audition.type}
@@ -1157,81 +1226,278 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   </>
                 )}
 
-                {/* Character Details Section for other auditions */}
-                {audition.characterDetails && audition.id !== 7 && audition.id !== 13 && audition.id !== 14 && (
-                  <section>
-                    <h2 className="text-xl font-semibold mb-3">🎭 Character Information</h2>
-                    <div className="bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg p-6 mb-6">
-                      <h3 className="text-lg font-semibold text-primary mb-4 flex items-center">
-                        Character: {audition.characterDetails.name}
-                      </h3>
+                {/* Adding detailed section for MYCELIUM workshop-audition */}
+                {audition.id === 15 && audition.directorDetails && audition.workshopDetails && (
+                  <>
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">✨ About the Director</h2>
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 border border-purple-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-2xl sm:text-3xl">🎭</span>
+                          <div>
+                            <h3 className="text-base sm:text-lg md:text-xl font-bold text-purple-900 break-words">
+                              {audition.directorDetails.name}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-purple-700 break-words leading-relaxed">
+                              {audition.directorDetails.title}
+                            </p>
+                          </div>
+                        </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                        <div className="bg-white rounded-lg p-4 border">
-                          <p className="font-medium text-gray-700 mb-1">Age Range</p>
-                          <p className="text-lg font-semibold text-primary">{audition.characterDetails.ageRange}</p>
+                        <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 sm:p-4 border border-purple-100 mb-4">
+                          <p className="text-xs sm:text-sm text-gray-700 leading-relaxed break-words">
+                            {audition.directorDetails.description}
+                          </p>
                         </div>
-                        <div className="bg-white rounded-lg p-4 border">
-                          <p className="font-medium text-gray-700 mb-1">Languages</p>
-                          <p className="text-lg font-semibold text-primary">{audition.characterDetails.languages}</p>
-                        </div>
-                        <div className="bg-white rounded-lg p-4 border">
-                          <p className="font-medium text-gray-700 mb-1">Contact</p>
-                          <p className="text-lg font-semibold text-green-600">📞 WhatsApp: 7375962175</p>
-                        </div>
-                      </div>
 
-                      <div className="mb-6">
-                        <h4 className="font-medium text-gray-700 mb-3">Character Description</h4>
-                        <div className="bg-white rounded-lg p-4 border">
-                          <p className="text-gray-800 italic">"{audition.characterDetails.description}"</p>
+                        <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 sm:p-4 border border-purple-100 mb-4">
+                          <h4 className="text-sm sm:text-base font-semibold text-purple-800 mb-3 break-words">
+                            🌟 Achievements & Experience
+                          </h4>
+                          <ul className="space-y-2">
+                            {audition.directorDetails.achievements.map((achievement: string, index: number) => (
+                              <li
+                                key={index}
+                                className="flex items-start gap-2 text-xs sm:text-sm text-gray-700 break-words"
+                              >
+                                <span className="text-purple-600 flex-shrink-0 mt-0.5">✓</span>
+                                <span className="break-words leading-relaxed">{achievement}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                      </div>
 
-                      <div className="bg-white rounded-lg p-4 border mb-6">
-                        <h4 className="font-medium text-gray-700 mb-3 flex items-center">
-                          ✨ We are looking for an actor with:
-                        </h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                          {audition.characterDetails.lookingFor.map((item: string, index: number) => (
-                            <div key={index} className="text-gray-700 flex items-center">
-                              <span className="text-primary mr-2">•</span>
-                              {item}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 border border-purple-100">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-2">🌐 Websites</p>
+                            <div className="space-y-1">
+                              {audition.directorDetails.website.map((site: string, index: number) => (
+                                <a
+                                  key={index}
+                                  href={`https://${site}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block text-xs sm:text-sm text-purple-600 hover:text-purple-700 hover:underline break-all"
+                                >
+                                  {site}
+                                </a>
+                              ))}
                             </div>
-                          ))}
+                          </div>
+
+                          <div className="bg-white/80 backdrop-blur-sm rounded-md p-3 border border-purple-100">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-2">📱 Instagram</p>
+                            <div className="space-y-1">
+                              {audition.directorDetails.instagram.map((handle: string, index: number) => (
+                                <a
+                                  key={index}
+                                  href={`https://instagram.com/${handle.replace("@", "")}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block text-xs sm:text-sm text-purple-600 hover:text-purple-700 hover:underline break-all"
+                                >
+                                  {handle}
+                                </a>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </div>
+                    </section>
 
-                      {audition.characterDetails.traits && (
-                        <div className="bg-white rounded-lg p-4 border mb-6">
-                          <h4 className="font-medium text-gray-700 mb-3">Character Traits</h4>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {audition.characterDetails.traits.map((trait: string, index: number) => (
-                              <div key={index} className="text-gray-700 flex items-center">
-                                <span className="text-primary mr-2">•</span>
-                                {trait}
-                              </div>
-                            ))}
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">🌿 Workshop Details</h2>
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4">
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Project Name</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-purple-800 break-words">
+                              {audition.workshopDetails.projectName}
+                            </p>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Focus</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-purple-800 break-words">
+                              {audition.workshopDetails.focus}
+                            </p>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Venue</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-purple-800 break-words">
+                              {audition.workshopDetails.venue}
+                            </p>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Date</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-purple-800 break-words">
+                              {audition.workshopDetails.date}
+                            </p>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Timings</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-purple-800 break-words">
+                              {audition.workshopDetails.timings}
+                            </p>
+                            <p className="text-xs text-gray-600 italic mt-1">({audition.workshopDetails.options})</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                            <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1">Fee</p>
+                            <p className="text-sm sm:text-base md:text-lg font-semibold text-green-700 break-words">
+                              {audition.workshopDetails.fee}
+                            </p>
                           </div>
                         </div>
-                      )}
+                      </div>
+                    </section>
 
-                      {audition.characterDetails.keySkills && (
-                        <div className="bg-white rounded-lg p-4 border">
-                          <h4 className="font-medium text-gray-700 mb-3">🎬 Key Skills Required</h4>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {audition.characterDetails.keySkills.map((skill: string, index: number) => (
-                              <div key={index} className="text-gray-700 flex items-center">
-                                <span className="text-primary mr-2">•</span>
-                                {skill}
-                              </div>
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">🎯 Who Should Attend</h2>
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200 mb-4">
+                          <h4 className="text-sm sm:text-base font-semibold text-purple-800 mb-3 flex items-center break-words">
+                            💫 Calling All
+                          </h4>
+                          <ul className="space-y-2">
+                            {audition.requirements.map((req: string, index: number) => (
+                              <li
+                                key={index}
+                                className="flex items-start gap-2 text-xs sm:text-sm text-gray-700 break-words"
+                              >
+                                <span className="text-purple-600 flex-shrink-0 mt-0.5">•</span>
+                                <span className="break-words leading-relaxed">{req}</span>
+                              </li>
                             ))}
+                          </ul>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                          <h4 className="text-sm sm:text-base font-semibold text-purple-800 mb-3 flex items-center break-words">
+                            🎭 Roles Available
+                          </h4>
+                          <ul className="space-y-2">
+                            {audition.roles.map((role: string, index: number) => (
+                              <li
+                                key={index}
+                                className="flex items-start gap-2 text-xs sm:text-sm text-gray-700 break-words"
+                              >
+                                <span className="text-purple-600 flex-shrink-0 mt-0.5">•</span>
+                                <span className="break-words leading-relaxed">{role}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h2 className="text-lg sm:text-xl font-semibold mb-3">📱 How to Register</h2>
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-6 overflow-hidden">
+                        <div className="bg-white rounded-lg p-3 sm:p-4 border border-purple-200">
+                          <h4 className="text-sm sm:text-base font-semibold text-purple-800 mb-3 flex items-center break-words">
+                            💬 Confirm via WhatsApp
+                          </h4>
+                          <p className="text-xs sm:text-sm text-gray-700 mb-3 sm:mb-4 break-words leading-relaxed">
+                            {audition.applicationProcess}
+                          </p>
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <span className="text-xs sm:text-sm font-medium text-purple-700 break-all">
+                              📞 WhatsApp: +44 7810 802938
+                            </span>
+                            <a
+                              href={audition.companyLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full sm:w-auto inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-md transition-colors whitespace-nowrap"
+                            >
+                              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4 mr-2 flex-shrink-0" />
+                              Confirm Participation
+                            </a>
                           </div>
                         </div>
-                      )}
-                    </div>
-                  </section>
+                      </div>
+                    </section>
+                  </>
                 )}
+
+                {/* Character Details Section for other auditions */}
+                {audition.characterDetails &&
+                  audition.id !== 7 &&
+                  audition.id !== 13 &&
+                  audition.id !== 14 &&
+                  audition.id !== 15 && (
+                    <section>
+                      <h2 className="text-xl font-semibold mb-3">🎭 Character Information</h2>
+                      <div className="bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-lg p-6 mb-6">
+                        <h3 className="text-lg font-semibold text-primary mb-4 flex items-center">
+                          Character: {audition.characterDetails.name}
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                          <div className="bg-white rounded-lg p-4 border">
+                            <p className="font-medium text-gray-700 mb-1">Age Range</p>
+                            <p className="text-lg font-semibold text-primary">{audition.characterDetails.ageRange}</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border">
+                            <p className="font-medium text-gray-700 mb-1">Languages</p>
+                            <p className="text-lg font-semibold text-primary">{audition.characterDetails.languages}</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-4 border">
+                            <p className="font-medium text-gray-700 mb-1">Contact</p>
+                            <p className="text-lg font-semibold text-green-600">📞 WhatsApp: 7375962175</p>
+                          </div>
+                        </div>
+
+                        <div className="mb-6">
+                          <h4 className="font-medium text-gray-700 mb-3">Character Description</h4>
+                          <div className="bg-white rounded-lg p-4 border">
+                            <p className="text-gray-800 italic">"{audition.characterDetails.description}"</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-white rounded-lg p-4 border mb-6">
+                          <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+                            ✨ We are looking for an actor with:
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {audition.characterDetails.lookingFor.map((item: string, index: number) => (
+                              <div key={index} className="text-gray-700 flex items-center">
+                                <span className="text-primary mr-2">•</span>
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {audition.characterDetails.traits && (
+                          <div className="bg-white rounded-lg p-4 border mb-6">
+                            <h4 className="font-medium text-gray-700 mb-3">Character Traits</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                              {audition.characterDetails.traits.map((trait: string, index: number) => (
+                                <div key={index} className="text-gray-700 flex items-center">
+                                  <span className="text-primary mr-2">•</span>
+                                  {trait}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {audition.characterDetails.keySkills && (
+                          <div className="bg-white rounded-lg p-4 border">
+                            <h4 className="font-medium text-gray-700 mb-3">🎬 Key Skills Required</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                              {audition.characterDetails.keySkills.map((skill: string, index: number) => (
+                                <div key={index} className="text-gray-700 flex items-center">
+                                  <span className="text-primary mr-2">•</span>
+                                  {skill}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </section>
+                  )}
 
                 {/* Special section for OMASTA Studios audition */}
                 {audition.id === 2 && (
@@ -1339,7 +1605,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
 
                     <section>
                       <h2 className="text-xl font-semibold mb-3">🎥 Shoot Details</h2>
-                      <div className="bg-orange-50 p-4 rounded-lg mb-6 border border-orange-200">
+                      <div className="bg-orange-50 p-4 rounded-lg mb-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <p className="font-medium text-gray-700">Location</p>
@@ -1624,7 +1890,7 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   </>
                 )}
 
-                {audition.id !== 7 && audition.id !== 13 && audition.id !== 14 && (
+                {audition.id !== 7 && audition.id !== 13 && audition.id !== 14 && audition.id !== 15 && (
                   <>
                     <h2 className="text-xl font-semibold mb-3">Roles</h2>
                     <ul className="list-disc pl-5 mb-6">
@@ -1874,6 +2140,32 @@ export default function AuditionDetailContent({ id }: { id: number }) {
               </div>
             )}
 
+            {/* Special notice for MYCELIUM workshop */}
+            {audition.id === 15 && audition.directorDetails && (
+              <div className="mt-4 sm:mt-6 bg-purple-50 border border-purple-200 rounded-lg p-3 sm:p-4 overflow-hidden">
+                <h4 className="text-sm sm:text-base font-medium text-purple-800 mb-2 flex items-center break-words">
+                  ✨ Led by Renowned Director
+                </h4>
+                <p className="text-xs sm:text-sm text-purple-700 mb-2 break-words leading-relaxed">
+                  {audition.directorDetails.name}
+                </p>
+                <ul className="text-xs sm:text-sm text-purple-700 space-y-1">
+                  <li className="flex items-start gap-2 break-words">
+                    <span className="text-purple-600 flex-shrink-0 mt-0.5">✓</span>
+                    <span className="break-words">Founder of Sariego Theatre</span>
+                  </li>
+                  <li className="flex items-start gap-2 break-words">
+                    <span className="text-purple-600 flex-shrink-0 mt-0.5">✓</span>
+                    <span className="break-words">Global experience across 3 continents</span>
+                  </li>
+                  <li className="flex items-start gap-2 break-words">
+                    <span className="text-purple-600 flex-shrink-0 mt-0.5">✓</span>
+                    <span className="break-words">Specialist in devising & collective creation</span>
+                  </li>
+                </ul>
+              </div>
+            )}
+
             {/* Apply Button */}
             <div className="mt-6 space-y-3">
               {audition.id === 2 ? (
@@ -1929,6 +2221,13 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                   <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
                     <MessageSquare className="h-4 w-4 mr-2" />
                     Apply via WhatsApp
+                  </Button>
+                </a>
+              ) : audition.id === 15 ? (
+                <a href={audition.companyLink} target="_blank" rel="noopener noreferrer" className="block">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Confirm via WhatsApp
                   </Button>
                 </a>
               ) : audition.contactType === "whatsapp" ? (

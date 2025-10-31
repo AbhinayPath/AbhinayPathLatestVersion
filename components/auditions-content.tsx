@@ -109,6 +109,65 @@ const auditions = [
     },
   },
   {
+    id: 15,
+    title: "MYCELIUM - Workshop & Audition with Ana Mirtha Sariego",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Sunday, 2nd November 2025",
+    director: "Ana Mirtha Sariego",
+    description:
+      "Join this unique international theatre project focused on devising & collective creation. Led by renowned Spanish actress, director & founder of Sariego Theatre, Ana Mirtha Sariego, with global experience across Europe, the Americas & India. Free workshop & non-paid audition for performers, dancers & physical theatre actors.",
+    company: "Sariego Theatre",
+    companyLink: "https://wa.me/447810802938",
+    contact: "+44 7810 802938 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Performers, dancers & physical theatre actors",
+      "Interest in devising & collective creation",
+      "Available for full day (11:00–14:00 & 16:00–19:00) or one slot",
+      "Based in or able to travel to Bangalore",
+      "Open to experimental and collaborative theatre practices",
+    ],
+    roles: [
+      "Performers - Physical theatre and devised work",
+      "Dancers - Contemporary and experimental movement",
+      "Physical Theatre Actors - Collaborative creation",
+    ],
+    applicationProcess:
+      "Confirm your participation via WhatsApp at +44 7810 802938. Mention your preferred time slot (full day or morning/afternoon session) and brief background in theatre/dance.",
+    directorDetails: {
+      name: "Ana Mirtha Sariego",
+      title: "Renowned Spanish Actress, Director & Founder of Sariego Theatre",
+      experience: "Global experience across Europe, the Americas & India",
+      company: "Sariego Theatre",
+      instagram: ["@anamirtha.theatre", "@sariegotheatre"],
+      website: ["www.anamirtha.com", "www.sariegotheatre.com"],
+      description:
+        "Ana Mirtha Sariego is a celebrated Spanish theatre artist with extensive international experience. As the founder of Sariego Theatre, she has worked across continents, bringing innovative approaches to devising and collective creation. Her work spans Europe, the Americas, and India, making her a truly global theatre practitioner.",
+      achievements: [
+        "Founder of Sariego Theatre",
+        "International theatre director with work across 3 continents",
+        "Specialist in devising and collective creation",
+        "Extensive experience in physical theatre and experimental performance",
+        "Collaborations with artists across Europe, Americas, and India",
+      ],
+    },
+    workshopDetails: {
+      projectName: "MYCELIUM",
+      focus: "Devising & Collective Creation",
+      venue: "Play Practice Residency, Bangalore",
+      date: "Sunday, 2nd November 2025",
+      timings: "11:00–14:00 & 16:00–19:00",
+      options: "Full day or one slot",
+      fee: "Free workshop & non-paid audition",
+      type: "International theatre project",
+    },
+  },
+  {
     id: 1,
     title: "Casting Call – Female Lead for Feature Film",
     type: "Film",
@@ -576,7 +635,9 @@ export default function AuditionsContent() {
                           ? "border-blue-300 shadow-lg"
                           : audition.id === 14
                             ? "border-yellow-500 shadow-lg"
-                            : "border-gray-200"
+                            : audition.id === 15
+                              ? "border-purple-300 shadow-lg"
+                              : "border-gray-200"
               }`}
             >
               <div className="relative h-40 sm:h-48 w-full flex-shrink-0">
@@ -635,11 +696,17 @@ export default function AuditionsContent() {
                     🎭 Nukkad Natak
                   </div>
                 )}
+                {/* Adding badge for MYCELIUM audition */}
+                {audition.id === 15 && (
+                  <div className="absolute top-2 left-2 bg-purple-600 text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
+                    🌿 International Project
+                  </div>
+                )}
               </div>
               <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col overflow-hidden">
                 <div className="flex justify-between items-start mb-3 gap-2 flex-wrap">
                   <span
-                    className={`badge-primary text-xs ${audition.id === 7 ? "bg-purple-100 text-purple-800" : audition.id === 13 ? "bg-blue-100 text-blue-800" : audition.id === 14 ? "bg-yellow-100 text-yellow-800" : ""}`}
+                    className={`badge-primary text-xs ${audition.id === 7 ? "bg-purple-100 text-purple-800" : audition.id === 13 ? "bg-blue-100 text-blue-800" : audition.id === 14 ? "bg-yellow-100 text-yellow-800" : audition.id === 15 ? "bg-purple-100 text-purple-800" : ""}`}
                   >
                     {audition.type}
                   </span>
@@ -873,7 +940,7 @@ export default function AuditionsContent() {
                     </div>
 
                     <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-blue-100 mb-3">
-                      <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-2">Timeline</p>
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-700 mb-2">Timeline</p>
                       <div className="space-y-1.5">
                         <div className="flex items-start gap-1.5">
                           <span className="text-blue-600 text-xs flex-shrink-0">📅</span>
@@ -1006,6 +1073,105 @@ export default function AuditionsContent() {
                         className="w-full bg-yellow-600 hover:bg-yellow-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-md transition-colors text-center"
                       >
                         Express Interest
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* New section for MYCELIUM Workshop-Audition */}
+                {audition.id === 15 && audition.workshopDetails && audition.directorDetails && (
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 border border-purple-200 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4 overflow-hidden">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg">🌿</span>
+                      <h4 className="font-semibold text-purple-800 text-sm sm:text-base break-words">
+                        {audition.workshopDetails.projectName}
+                      </h4>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-purple-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-2">✨ Led by</p>
+                      <p className="text-xs sm:text-sm font-semibold text-purple-900 break-words leading-tight mb-1">
+                        {audition.directorDetails.name}
+                      </p>
+                      <p className="text-[10px] sm:text-xs text-purple-700 break-words leading-relaxed">
+                        {audition.directorDetails.title}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2 mb-3">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-purple-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Focus</p>
+                        <p className="text-xs sm:text-sm font-semibold text-purple-900 break-words leading-tight">
+                          {audition.workshopDetails.focus}
+                        </p>
+                      </div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-purple-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Fee</p>
+                        <p className="text-xs sm:text-sm font-semibold text-green-700 break-words">
+                          {audition.workshopDetails.fee}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-purple-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-2">Schedule</p>
+                      <div className="space-y-1.5">
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-purple-600 text-xs flex-shrink-0">📅</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[10px] sm:text-xs text-gray-600">Date</p>
+                            <p className="text-xs sm:text-sm font-medium text-purple-900 break-words">
+                              {audition.workshopDetails.date}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-purple-600 text-xs flex-shrink-0">🕐</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[10px] sm:text-xs text-gray-600">Timings</p>
+                            <p className="text-xs sm:text-sm font-medium text-purple-900 break-words">
+                              {audition.workshopDetails.timings}
+                            </p>
+                            <p className="text-[10px] sm:text-xs text-gray-600 italic">
+                              ({audition.workshopDetails.options})
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-purple-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-700 mb-2">Calling</p>
+                      <ul className="space-y-1">
+                        <li className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                          <span className="text-purple-600 flex-shrink-0 mt-0.5">•</span>
+                          <span className="break-words">Performers</span>
+                        </li>
+                        <li className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                          <span className="text-purple-600 flex-shrink-0 mt-0.5">•</span>
+                          <span className="break-words">Dancers</span>
+                        </li>
+                        <li className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                          <span className="text-purple-600 flex-shrink-0 mt-0.5">•</span>
+                          <span className="break-words">Physical theatre actors</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-purple-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1">Registration</p>
+                        <p className="text-xs sm:text-sm font-medium text-purple-900 break-all">
+                          WhatsApp: +44 7810 802938
+                        </p>
+                      </div>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-md transition-colors text-center"
+                      >
+                        Confirm Participation
                       </a>
                     </div>
                   </div>
