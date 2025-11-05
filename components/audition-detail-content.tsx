@@ -21,9 +21,12 @@ type Audition = {
   state: string
   date: string
   contactType: "email" | "phone" | "whatsapp"
-  contact: string
-}
+  contact: string,
+  experience_required: string,
+  city: string
 
+
+}
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase-browser"
 import { toast } from "@/components/ui/use-toast"
@@ -57,7 +60,6 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
   }, [audition.id])
 
   const handleApply = async () => {
-    debugger
     setLoading(true)
     try {
       // use singleton
@@ -129,7 +131,8 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
           <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
             <div className="relative h-64 w-full">
               <Image
-                src={audition.image || "/placeholder.svg"}
+                src={audition.image || "/images/auditions-stage.png"}
+
                 alt={audition.title}
                 fill
                 className="object-cover"
@@ -149,7 +152,7 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
             <div className="p-6">
               <div className="flex flex-wrap gap-2 mb-4">
                 <span className="badge-primary">{audition.type}</span>
-                <span className="badge-outline">{audition.experience}</span>
+                <span className="badge-outline">{audition.experience_required}</span>
                 {audition.id === 7 && <span className="badge-success">Paid</span>}
               </div>
 
@@ -159,16 +162,9 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
                 <h2 className="text-xl font-semibold mb-3">Description</h2>
                 <p className="text-gray-800 mb-6">{audition.description}</p>
 
-                <h2 className="text-xl font-semibold mb-3">Roles</h2>
-                <ul className="list-disc pl-5 mb-6">
-                  {audition.roles.map((role, index) => (
-                    <li key={index} className="text-gray-800 mb-2">
-                      {role}
-                    </li>
-                  ))}
-                </ul>
+             
 
-                <h2 className="text-xl font-semibold mb-3">Requirements</h2>
+                {/* <h2 className="text-xl font-semibold mb-3">Requirements</h2>
                 <ul className="list-disc pl-5 mb-6">
                   {audition.requirements.map((req, index) => (
                     <li key={index} className="text-gray-800 mb-2">
@@ -176,9 +172,19 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
                     </li>
                   ))}
                 </ul>
-
-                <h2 className="text-xl font-semibold mb-3">How to Apply</h2>
-                <p className="text-gray-800 mb-6">{audition.applicationProcess}</p>
+                {(Array.isArray(audition?.requirements) && audition.requirements.length > 0) && (
+                  <>
+                    <h2 className="text-xl font-semibold mb-3">Requirements</h2>
+                    <ul className="list-disc pl-5 mb-6">
+                      {audition.requirements.map((req: string, index: number) => (
+                        <li key={index} className="text-gray-800 mb-2">
+                          {req}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )} */}
+                
               </div>
             </div>
           </div>
@@ -196,26 +202,22 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
                   <p className="text-gray-800">{audition.company}</p>
                 </div>
               </div>
+         
 
               <div className="flex items-start">
                 <MapPin className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                 <div>
                   <p className="font-medium text-gray-700">Location</p>
                   <p className="text-gray-800">
-                    {audition.location}, {audition.state}
+                    {audition.city}, {audition.state}
                   </p>
+                
                 </div>
               </div>
 
-              <div className="flex items-start">
-                <Calendar className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
-                <div>
-                  <p className="font-medium text-gray-700">Dates</p>
-                  <p className="text-gray-800">{audition.date}</p>
-                </div>
-              </div>
+             
 
-              <div className="flex items-start">
+              {/* <div className="flex items-start">
                 {audition.contactType === "email" ? (
                   <Mail className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                 ) : (
@@ -248,19 +250,7 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
                     </a>
                   )}
                 </div>
-              </div>
-
-              {audition.id === 7 && (
-                <div className="flex items-start">
-                  <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                    <span className="font-bold">💰</span>
-                  </div>
-                  <div>
-                    <p className="font-medium">Compensation</p>
-                    <p className="text-gray-600">Paid opportunity (details during selection)</p>
-                  </div>
-                </div>
-              )}
+              </div> */}
 
               <div className="pt-4 mt-4 border-t border-gray-200">
                 {isLoading ? (

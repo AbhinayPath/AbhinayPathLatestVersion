@@ -197,7 +197,7 @@ export default function TalentProfileUploadPage() {
         const response = await fetch('/api/talent-profile')
         if (response.ok) {
           const data = await response.json();
-          debugger
+          
             setProfile({
               id: data.id,
               user_id: data.user_id,

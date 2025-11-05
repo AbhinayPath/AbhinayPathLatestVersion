@@ -31,11 +31,13 @@ import {
   X,
   AlertCircle,
   Sparkles,
+  Loader2,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import Link from "next/link"
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { INDIAN_STATES } from "@/lib/types/talent"
 
 const LANGUAGES = [
   "Hindi",
@@ -65,6 +67,16 @@ export default function PostOpportunityPage() {
   const [description, setDescription] = useState("")
   const [applicationMethod, setApplicationMethod] = useState("platform")
   const [contactInfo, setContactInfo] = useState("")
+
+  // Pincode + State/City dropdowns
+  const [pincode, setPincode] = useState("")
+  const [selectedState, setSelectedState] = useState("")
+  const [stateOptions, setStateOptions] = useState<string[]>([])
+  const [cityOptions, setCityOptions] = useState<string[]>([])
+  const [isCityDisabled, setIsCityDisabled] = useState(true)
+  const [stateSearch, setStateSearch] = useState("")
+  const [citySearch, setCitySearch] = useState("")
+  const [isPincodeLoading, setIsPincodeLoading] = useState(false)
 
   // Advanced fields
   const [advancedOpen, setAdvancedOpen] = useState(false)
@@ -112,7 +124,7 @@ export default function PostOpportunityPage() {
       title,
       type,
       deadline,
-      locationMode === "city" ? city : true,
+      locationMode === "city" ? (selectedState && city) : true,
       description,
       applicationMethod,
       consent1,
@@ -122,7 +134,90 @@ export default function PostOpportunityPage() {
     const completed = requiredFields.filter(Boolean).length
     const total = requiredFields.length
     setProgress((completed / total) * 100)
-  }, [title, type, deadline, city, description, applicationMethod, consent1, consent2, locationMode])
+  }, [title, type, deadline, selectedState, city, description, applicationMethod, consent1, consent2, locationMode])
+
+  // Load states initially
+  useEffect(() => {
+    setStateOptions(Array.from(INDIAN_STATES))
+  }, [])
+
+  // Load cities when state selected
+  useEffect(() => {
+    if (!selectedState) {
+      setCityOptions([])
+      setIsCityDisabled(true)
+      return
+    }
+
+    (async () => {
+      const { data, error } = await supabase
+        .from("pincodes")
+        .select("city")
+        .eq("state", selectedState)
+
+      if (error) {
+        console.error("Error loading cities:", error)
+        return
+      }
+
+      const unique = Array.from(new Set((data || []).map((r: any) => (r.city || '').trim()).filter(Boolean)))
+      setCityOptions(unique)
+      setIsCityDisabled(false)
+    })()
+  }, [selectedState])
+
+  // Auto-fill state/city on valid 6-digit pincode
+  useEffect(() => {
+    const six = pincode.replace(/\D/g, "")
+    if (six.length !== 6) return
+
+    const lookup = async () => {
+      setIsPincodeLoading(true)
+      try {
+        // First try matching pincode as text
+        const { data: res1, error } = await supabase
+          .from("pincodes")
+          .select("state, city")
+          .eq("pincode", six)
+          .limit(1)
+          .maybeSingle()
+
+        let row = res1
+        if (error) {
+          console.error("Pincode lookup error (text):", error)
+        }
+
+        if (!row) {
+          const parsed = parseInt(six, 10)
+          const { data: res2 } = await supabase
+            .from("pincodes")
+            .select("state, city")
+            .eq("pincode_int", parsed)
+            .limit(1)
+            .maybeSingle()
+          row = res2 || null
+        }
+
+        if (row) {
+          const stateValue = (row.state || '').trim()
+          const cityValue = (row.city || '').trim()
+          if (stateValue) setSelectedState(stateValue)
+          if (cityValue) setCity(cityValue)
+          setIsCityDisabled(false)
+          setStateOptions((prev) => Array.from(new Set([...prev, stateValue])))
+          setCityOptions((prev) => Array.from(new Set([...prev, cityValue])))
+        } else {
+          toast.error("No results found for this pincode")
+        }
+      } catch (e) {
+        console.error("Error looking up pincode:", e)
+      } finally {
+        setIsPincodeLoading(false)
+      }
+    }
+
+    lookup()
+  }, [pincode])
 
   const toggleLanguage = (lang: string) => {
     if (selectedLanguages.includes(lang)) {
@@ -134,7 +229,7 @@ export default function PostOpportunityPage() {
 
   const isFormValid = () => {
     if (!title || !type || !deadline || !description || !consent1 || !consent2) return false
-    if (locationMode === "city" && !city) return false
+    if (locationMode === "city" && (!selectedState || !city)) return false
     if ((payType === "stipend" || payType === "paid") && !payAmount) return false
     if (ageMin && ageMax && Number(ageMin) > Number(ageMax)) return false
     return true
@@ -165,6 +260,7 @@ export default function PostOpportunityPage() {
         description,
         deadline: deadline?.toISOString(),
         location_mode: locationMode,
+        state: locationMode === 'city' ? selectedState : null,
         city: locationMode === 'city' ? city : null,
         venue: locationMode === 'city' ? venue : null,
         platform: locationMode === 'online' ? platform : null,
@@ -234,6 +330,7 @@ export default function PostOpportunityPage() {
         description: description || '',
         deadline: deadline?.toISOString(),
         location_mode: locationMode,
+        state: locationMode === 'city' ? selectedState : null,
         city: locationMode === 'city' ? city : null,
         venue: locationMode === 'city' ? venue : null,
         platform: locationMode === 'online' ? platform : null,
@@ -435,19 +532,33 @@ export default function PostOpportunityPage() {
 
                 {/* City/Venue or Platform - Mobile Optimized */}
                 {locationMode === "city" ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="space-y-2">
-                      <Label htmlFor="city" className="text-sm font-medium">
-                        City <span className="text-red-500">*</span>
-                      </Label>
-                      <Input
-                        id="city"
-                        placeholder="e.g., Mumbai"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {/* Pincode */}
+                      <div className="space-y-2">
+                        <Label htmlFor="pincode" className="text-sm font-medium">
+                          Pincode
+                        </Label>
+                        <div className="relative">
+                          <Input
+                            id="pincode"
+                            inputMode="numeric"
+                            maxLength={6}
+                            placeholder="Enter 6-digit pincode"
+                            value={pincode}
+                            onChange={(e) => setPincode(e.target.value)}
+                            className="rounded-lg h-11 sm:h-10 pr-10"
+                          />
+                          {isPincodeLoading && (
+                            <div className="absolute inset-y-0 right-2 flex items-center">
+                              <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
+                
+                    {/* Venue */}
                     <div className="space-y-2">
                       <Label htmlFor="venue" className="text-sm font-medium">
                         Venue
@@ -460,7 +571,65 @@ export default function PostOpportunityPage() {
                         className="rounded-lg h-11 sm:h-10"
                       />
                     </div>
-                  </div>
+                
+                    {/* State Dropdown (searchable) */}
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">
+                        State <span className="text-red-500">*</span>
+                      </Label>
+                      <Select value={selectedState} onValueChange={setSelectedState}>
+                        <SelectTrigger className="h-11 sm:h-10">
+                          <SelectValue placeholder="Select state" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <div className="p-2 border-b">
+                            <Input
+                              placeholder="Search state"
+                              value={stateSearch}
+                              onChange={(e) => setStateSearch(e.target.value)}
+                              className="h-9"
+                            />
+                          </div>
+                          {stateOptions
+                            .filter((s) => s.toLowerCase().includes(stateSearch.toLowerCase()))
+                            .map((s) => (
+                              <SelectItem key={s} value={s}>
+                                {s}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                
+                    {/* City Dropdown (searchable, disabled until state selected) */}
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">
+                        City <span className="text-red-500">*</span>
+                      </Label>
+                      <Select value={city} onValueChange={setCity}>
+                        <SelectTrigger className="h-11 sm:h-10" disabled={isCityDisabled}>
+                          <SelectValue placeholder={isCityDisabled ? "Select a state first" : "Select city"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <div className="p-2 border-b">
+                            <Input
+                              placeholder="Search city"
+                              value={citySearch}
+                              onChange={(e) => setCitySearch(e.target.value)}
+                              className="h-9"
+                            />
+                          </div>
+                          {cityOptions
+                            .filter((c) => c.toLowerCase().includes(citySearch.toLowerCase()))
+                            .map((c) => (
+                              <SelectItem key={c} value={c}>
+                                {c}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </>
                 ) : (
                   <div className="space-y-2">
                     <Label htmlFor="platform" className="text-sm font-medium">
