@@ -31,7 +31,7 @@ export default function Navbar() {
     headshots: [],
   }
 
-  debugger
+  
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)

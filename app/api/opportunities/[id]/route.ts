@@ -6,9 +6,12 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    console.log("opportunity_id",params.id);
+
     const supabase = await getSupabaseServerClientForRouteHandler()
     const { id } = params
     
+
     if (!id) {
       return NextResponse.json(
         { error: 'Opportunity ID is required' },

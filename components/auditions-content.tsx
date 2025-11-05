@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Badge } from "@/components/ui/badge"
 import { Search, Filter, MapPin, Calendar } from "lucide-react"
 import AuditionBanner from "@/components/audition-banner"
 
@@ -27,12 +28,12 @@ export default function AuditionsContent() {
     async function fetchAuditions() {
       try {
         setLoader(true)
-        const response = await fetch("/api/auditions")
+        const response = await fetch("/api/opportunities")
         if (!response.ok) {
           throw new Error("Failed to fetch auditions")
         }
-        const data = await response.json()
-        setAuditions(data)
+        const { opportunities } = await response.json()
+        setAuditions(opportunities || [])
         setLoader(false)
       } catch (error) {
         console.error("Error fetching auditions:", error)
@@ -48,10 +49,10 @@ export default function AuditionsContent() {
       (filters.search === "" ||
         audition.title.toLowerCase().includes(filters.search.toLowerCase()) ||
         audition.description.toLowerCase().includes(filters.search.toLowerCase())) &&
-      (filters.city === "all" || filters.city === "" || audition.location === filters.city) &&
+      (filters.city === "all" || filters.city === "" || audition.city === filters.city) &&
       (filters.state === "all" || filters.state === "" || audition.state === filters.state) &&
       (filters.category === "all" || filters.category === "" || audition.type === filters.category) &&
-      (filters.experience === "all" || filters.experience === "" || audition.experience === filters.experience)
+      (filters.experience === "all" || filters.experience === "" || audition.experience_required === filters.experience)
     )
   })
 
@@ -69,10 +70,10 @@ export default function AuditionsContent() {
     })
   }
 
-  const states = [...new Set(auditions.map((audition) => audition.state))].sort()
-  const categories = [...new Set(auditions.map((audition) => audition.type))].sort()
-  const cities = [...new Set(auditions.map((audition) => audition.location))].sort()
-  const experienceLevels = [...new Set(auditions.map((audition) => audition.experience))].sort()
+  const states = [...new Set(auditions.map((a) => (a.state ?? "").trim()).filter(Boolean))].sort()
+  const categories = [...new Set(auditions.map((a) => (a.type ?? "").trim()).filter(Boolean))].sort()
+  const cities = [...new Set(auditions.map((a) => (a.city ?? "").trim()).filter(Boolean))].sort()
+  const experienceLevels = [...new Set(auditions.map((a) => (a.experience_required ?? "").trim()).filter(Boolean))].sort()
 
   return (
     <div className="container py-12">
@@ -178,7 +179,7 @@ export default function AuditionsContent() {
           filteredAuditions.map((audition) => (
             <div
               key={audition.id}
-              className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-full card-hover"
+              className="bg-white rounded-lg   overflow-hidden flex flex-col h-full card-hover"
             >
               <div className="relative h-48 w-full">
                 <Image src="/images/auditions-stage.png" alt={audition.title} fill className="object-cover" />
@@ -197,35 +198,112 @@ export default function AuditionsContent() {
                   </div>
                 )}
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-3">
-                  <span className="badge-primary">{audition.type}</span>
-                  <span className="badge-outline">{audition.experience}</span>
+              <div className="p-6 flex-1 flex flex-col space-y-3">
+                {/* Meta: Type and Location */}
+                <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap mb-3">
+                  {audition.type && (
+                    <Badge variant="secondary" className="capitalize text-xs">
+                      {String(audition.type).replace("-", " ")}
+                    </Badge>
+                  )}
+                  {(audition.location_mode === "city" ? audition.city : audition.location_mode === "online") && (
+                    <>
+                      <span>•</span>
+                      <span className="flex items-center gap-1">
+                        {audition.location_mode === "city" ? (
+                          <>
+                            <MapPin className="h-3 w-3 flex-shrink-0" />
+                            <span className="truncate">{audition.city || "City"}</span>
+                          </>
+                        ) : (
+                          <>
+                            {/* Globe icon intentionally omitted to keep imports minimal */}
+                            Online
+                          </>
+                        )}
+                      </span>
+                    </>
+                  )}
                 </div>
-                <h3 className="font-playfair text-xl font-bold mb-4">{audition.title}</h3>
 
-                <div className="space-y-3 mb-4 flex-1">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Production:</span>
-                    <span>{audition.director}</span>
+                {/* Title */}
+                <h3 className="font-playfair text-xl font-bold text-gray-900 break-words mb-2">
+                  {audition.title || "Opportunity Title"}
+                </h3>
+
+                {/* Deadline and Venue/Platform */}
+                <div className="flex items-start gap-2 text-sm text-gray-600 flex-wrap mb-3">
+                  {audition.deadline && (
+                    <>
+                      <Calendar className="h-4 w-4 flex-shrink-0" />
+                      <span className="break-words">Deadline: {new Date(audition.deadline).toLocaleDateString()}</span>
+                    </>
+                  )}
+                  {audition.location_mode === "city" && audition.venue && (
+                    <>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="break-words w-full sm:w-auto">{audition.venue}</span>
+                    </>
+                  )}
+                  {audition.location_mode === "online" && audition.platform && (
+                    <>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="break-words w-full sm:w-auto">{audition.platform}</span>
+                    </>
+                  )}
+                </div>
+
+                {/* Description snippet */}
+                {audition.description && (
+                  <p className="text-gray-700 line-clamp-3 text-sm break-words mb-3">
+                    {audition.description}
+                  </p>
+                )}
+
+                {/* Requirements */}
+                {(audition.gender_preference !== "any" || audition.age_min || audition.age_max || (Array.isArray(audition.languages) && audition.languages.length > 0) || audition.experience_required) && (
+                  <div className="space-y-2 pt-3">
+                    <h4 className="text-sm font-semibold text-gray-900">Requirements</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {audition.gender_preference && audition.gender_preference !== "any" && (
+                        <Badge variant="outline" className="capitalize text-xs">
+                          {String(audition.gender_preference).replace("-", " ")}
+                        </Badge>
+                      )}
+                      {(audition.age_min || audition.age_max) && (
+                        <Badge variant="outline" className="text-xs">
+                          Age: {audition.age_min || "?"}–{audition.age_max || "?"}
+                        </Badge>
+                      )}
+                      {Array.isArray(audition.languages) && audition.languages.map((lang: string) => (
+                        <Badge key={lang} variant="outline" className="text-xs">
+                          {lang}
+                        </Badge>
+                      ))}
+                      {audition.experience_required && (
+                        <Badge variant="outline" className="capitalize text-xs">
+                          {audition.experience_required}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Location:</span>
-                    <span className="flex items-center">
-                      <MapPin className="h-3 w-3 mr-1 text-gray-400" />
-                      {audition.location}, {audition.state}
+                )}
+
+                {/* Pay */}
+                {(audition.pay_type || audition.pay_amount) && (
+                  <div className="flex items-center gap-2 text-sm pt-3 text-gray-900 font-medium">
+                    {/* Using text only to avoid adding new icon imports */}
+                    <span>
+                      {audition.pay_type === "not-specified" && "Not specified"}
+                      {audition.pay_type === "free" && "Free"}
+                      {audition.pay_type === "stipend" && (audition.pay_amount ? `Stipend: ₹${audition.pay_amount}` : "Stipend")}
+                      {audition.pay_type === "paid" && (audition.pay_amount ? `Paid: ₹${audition.pay_amount}` : "Paid")}
                     </span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium text-gray-700 w-20">Dates:</span>
-                    <span className="flex items-center">
-                      <Calendar className="h-3 w-3 mr-1 text-gray-400" />
-                      {audition.date}
-                    </span>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex justify-end mt-auto pt-4 border-t">
+                {/* CTA */}
+                <div className="flex justify-end mt-auto pt-4">
                   <Link href={`/auditions/${audition.id}`}>
                     <Button size="sm" className="rounded-md">
                       More Details
