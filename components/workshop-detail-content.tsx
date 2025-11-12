@@ -1769,7 +1769,7 @@ const workshops = [
   {
     id: 38,
     title: "FTII Pune: Introduction to Multi-Camera Technical Operations for TV Program Production",
-    trainer: "Prof. Sandeep Shahare",
+    trainer: "Prof. Sandeep Shahare (Head of TV Engineering, FTII)",
     institution: "Film and Television Institute of India (FTII)",
     location: "Pune",
     state: "Maharashtra",
@@ -1802,7 +1802,7 @@ const workshops = [
       duration: "5 days (01–05 December 2025)",
       medium: "English & Hindi",
       courseDirector:
-        "Prof. Sandeep Shahare (Head of TV Engineering & Dean (TV), FTII with 29 years of professional & teaching experience, M.E. in Electronics & Telecom from COEP)",
+        "Prof. Sandeep Shahare (Head of TV Engineering and Dean (TV), FTII with 29 years of professional & teaching experience, M.E. in Electronics & Telecom from COEP)",
       eligibilityCriteria: [
         "Age: 18+ years",
         "Nationality: Indian",
@@ -2056,18 +2056,6 @@ const workshops = [
         "Supportive and encouraging learning environment",
         "Perfect for beginners with no experience",
         "Located in the cultural city of Prayagraj",
-      ],
-      targetAudience: [
-        "Complete beginners interested in theatre",
-        "Students exploring performing arts",
-        "Working professionals seeking creative outlet",
-        "Teachers wanting to incorporate theatre in education",
-        "Anyone interested in building confidence",
-        "Aspiring actors and performers",
-        "Theatre enthusiasts of all ages",
-        "People looking to overcome stage fright",
-        "Those interested in Indian classical theatre",
-        "Community members wanting to connect through arts",
       ],
       workshopPolicies: [
         "Punctuality required for all sessions (10:00 AM daily)",
@@ -2847,7 +2835,7 @@ const workshops = [
         "⏰ Schedule: 9 AM – 6:30 PM daily",
         "📍 Venue: FTII Pune",
         "💰 Fee: ₹5,000 (course fee only)",
-        "🏠 Hostel (optional): ₹1,800 for 6 days (triple share)",
+        "🏠 Hostel (optional): ₹1,800 for 6 days (triple sharing)",
         "👥 Batch Size: 20 students only",
         "📝 Application Deadline: 10 November 2025, 6:00 PM IST",
         "🎟️ Selection: First-Come, First-Served basis",
@@ -3126,16 +3114,106 @@ const workshops = [
       ],
     },
   },
+  {
+    id: 48,
+    title: "The Essential Body: Journey of the Neutral Mask",
+    trainer: "Ana Mirtha Sariego (Sariego Theatre)",
+    institution: "Sariego Theatre",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "15–16 November 2025",
+    time: "11 AM – 7 PM (Full day or one slot)",
+    description:
+      "🎭 An immersive 16-hour physical theatre workshop inspired by Jacques Lecoq's pedagogy, exploring body awareness, rhythm, neutrality, and authentic presence through the Neutral Mask. Participants will learn to dissolve inner blockages and connect mind, emotion, and action to achieve a truly alive stage presence. Led by renowned Spanish actress, director & founder of Sariego Theatre, Ana Mirtha Sariego, with global experience across Europe, the Americas & India.",
+    image: "/images/sariego-theatre-logo.png",
+    registrationLink: "https://wa.me/447810802938",
+    featured: true,
+    price: "₹4,500 (Early Bird) / ₹5,000 (On Spot)",
+    contact: "+44 7810 802938",
+    email: "info@sariegotheatre.com",
+    eligibility: "Actors, dancers, movers & students of all levels",
+    duration: "16 hours",
+    mode: "Offline",
+    venue: "Laya Abhinaya Centre for Performing Arts, JP Nagar 8th Phase, Bengaluru",
+    includes: "Neutral Mask work + Physical expression + Body awareness techniques",
+    fullDetails: {
+      description:
+        "🎭 An immersive 16-hour physical theatre workshop inspired by Jacques Lecoq's pedagogy, exploring body awareness, rhythm, neutrality, and authentic presence through the Neutral Mask. Participants will learn to dissolve inner blockages and connect mind, emotion, and action to achieve a truly alive stage presence. Led by renowned Spanish actress, director & founder of Sariego Theatre, Ana Mirtha Sariego, with global experience across Europe, the Americas & India.",
+      venue: "Laya Abhinaya Centre for Performing Arts, JP Nagar 8th Phase, Bengaluru",
+      organizer: "Sariego Theatre",
+      duration: "2 days (16 hours total)",
+      medium: "English",
+      workshopDates: "15–16 November 2025",
+      timings: "11 AM – 7 PM (Full day or one slot)",
+      eligibilityCriteria: [
+        "Actors, dancers, movers & students",
+        "All experience levels welcome",
+        "Individuals seeking authentic stage presence",
+        "Those interested in Jacques Lecoq's pedagogy",
+        "Participants willing to engage in physical exploration",
+      ],
+      feeStructure: {
+        earlyBird: {
+          amount: 4500,
+          description: "Early Bird",
+        },
+        onSpot: {
+          amount: 5000,
+          description: "On Spot Registration",
+        },
+      },
+      keyHighlights: [
+        "Authentic Presence: Develop genuine, alive stage presence through Neutral Mask work",
+        "Body Awareness: Discover new dimensions of physical expression and movement",
+        "Dissolve Blockages: Release inner tensions and connect mind, emotion, and action",
+        "Jacques Lecoq Pedagogy: Learn from one of theatre's most influential training methodologies",
+        "International Expert: Train with Ana Mirtha Sariego, renowned across Europe, the Americas & India",
+        "All Levels Welcome: Open to actors, dancers, movers & students of all experience levels",
+      ],
+      whatYouWillLearn: [
+        "The Neutral Mask: Discover the power of neutrality as a foundation for authentic expression",
+        "Body Awareness & Rhythm: Develop heightened physical consciousness and organic movement",
+        "Mind-Body-Emotion Connection: Unite thought, feeling, and physical action",
+        "Dissolving Inner Blockages: Release tensions and habits that limit authentic presence",
+        "Jacques Lecoq Principles: Understand and apply foundational physical theatre techniques",
+        "Alive Stage Presence: Cultivate genuine, compelling presence in performance",
+      ],
+      aboutInstructor:
+        "✨ Renowned Spanish actress, director & founder of Sariego Theatre, with global experience across Europe, the Americas & India. Ana Mirtha brings the authentic pedagogy of Jacques Lecoq to Bengaluru, offering participants a rare opportunity to train in physical theatre techniques that have shaped some of the world's most innovative performers. Her work focuses on the essential connection between body, mind, and emotion, using the Neutral Mask as a transformative tool for discovering authentic presence on stage. With years of international teaching experience, Ana Mirtha creates a safe, supportive environment for exploration and growth.",
+      contactInfo: {
+        whatsapp: "+44 7810 802938",
+        instagram: ["https://www.instagram.com/anamirtha.theatre", "https://www.instagram.com/sariegotheatre"],
+        website: ["https://sariegotheatre.com", "https://anamirtha.com"],
+      },
+    },
+  },
 ]
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Calendar, MapPin, GraduationCap, CheckCircle, Clock } from "lucide-react"
+import {
+  ArrowLeft,
+  Calendar,
+  MapPin,
+  GraduationCap,
+  CheckCircle,
+  Clock,
+  ChevronLeft,
+  Star,
+  Check,
+  Users,
+  BookOpen,
+  DollarSign,
+  Phone,
+  ExternalLink,
+} from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 interface WorkshopDetailContentProps {
-  id: number
+  id: number | string // Allow string ID for flexibility, convert internally
 }
 
 function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
@@ -3154,6 +3232,416 @@ function WorkshopDetailContent({ id }: WorkshopDetailContentProps) {
     setWorkshop(foundWorkshop)
     setLoading(false)
   }, [id])
+
+  // Special handling for workshop ID "48" to render custom component
+  if (id === "48") {
+    return (
+      <div className="container py-16 px-6">
+        <Link
+          href="/workshops"
+          className="inline-flex items-center text-primary hover:text-primary/80 mb-8 transition-colors"
+        >
+          <ChevronLeft className="h-4 w-4 mr-1" />
+          Back to Workshops
+        </Link>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <div className="flex items-start gap-6 mb-6">
+              <div className="relative w-48 h-48 rounded-xl overflow-hidden shadow-lg flex-shrink-0">
+                <Image
+                  src="/images/sariego-theatre-logo.png" // Updated path
+                  alt="The Essential Body Workshop"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex-1">
+                <h1 className="font-playfair text-4xl font-bold mb-4 text-gray-800">
+                  The Essential Body: Journey of the Neutral Mask
+                </h1>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge variant="secondary" className="bg-secondary/10 text-secondary">
+                    Physical Theatre
+                  </Badge>
+                  <Badge variant="secondary" className="bg-primary/10 text-primary">
+                    Jacques Lecoq Pedagogy
+                  </Badge>
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-700">
+                    Neutral Mask
+                  </Badge>
+                </div>
+                <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                  <div className="flex items-center gap-1">
+                    <MapPin className="h-4 w-4" />
+                    <span>Bengaluru, Karnataka</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>16 hours</span>
+                  </div>
+                </div>
+                <div className="text-2xl font-bold text-primary mb-2">
+                  ₹4,500 <span className="text-lg text-gray-600">(Early Bird)</span>
+                </div>
+                <div className="text-lg text-gray-600 mb-4">₹5,000 (On Spot)</div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-6 rounded-xl mb-8">
+              <p className="text-gray-700 leading-relaxed">
+                🎭 An immersive 16-hour physical theatre workshop inspired by Jacques Lecoq's pedagogy, exploring body
+                awareness, rhythm, neutrality, and authentic presence through the Neutral Mask. Participants will learn
+                to dissolve inner blockages and connect mind, emotion, and action to achieve a truly alive stage
+                presence. Led by renowned Spanish actress, director & founder of Sariego Theatre, Ana Mirtha Sariego,
+                with global experience across Europe, the Americas & India.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Calendar className="h-5 w-5 text-primary" />
+                    Workshop Details
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <p className="text-sm text-gray-600">Dates</p>
+                    <p className="font-semibold">15–16 November 2025</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Timings</p>
+                    <p className="font-semibold">11 AM – 7 PM (Full day or one slot)</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Duration</p>
+                    <p className="font-semibold">2 days (16 hours total)</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Mode</p>
+                    <p className="font-semibold">Offline</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    Venue Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <p className="text-sm text-gray-600">Location</p>
+                    <p className="font-semibold">
+                      Laya Abhinaya Centre for Performing Arts
+                      <br />
+                      JP Nagar 8th Phase, Bengaluru
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">State</p>
+                    <p className="font-semibold">Karnataka</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Star className="h-5 w-5 text-secondary" />
+                  Why This Workshop?
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>
+                      <strong>Authentic Presence:</strong> Develop genuine, alive stage presence through Neutral Mask
+                      work
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>
+                      <strong>Body Awareness:</strong> Discover new dimensions of physical expression and movement
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>
+                      <strong>Dissolve Blockages:</strong> Release inner tensions and connect mind, emotion, and action
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>
+                      <strong>Jacques Lecoq Pedagogy:</strong> Learn from one of theatre's most influential training
+                      methodologies
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>
+                      <strong>International Expert:</strong> Train with Ana Mirtha Sariego, renowned across Europe, the
+                      Americas & India
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>
+                      <strong>All Levels Welcome:</strong> Open to actors, dancers, movers & students of all experience
+                      levels
+                    </span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-primary" />
+                  About Ana Mirtha Sariego
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  ✨ <strong>Renowned Spanish actress, director & founder of Sariego Theatre</strong>, with global
+                  experience across Europe, the Americas & India. Ana Mirtha brings the authentic pedagogy of Jacques
+                  Lecoq to Bengaluru, offering participants a rare opportunity to train in physical theatre techniques
+                  that have shaped some of the world's most innovative performers.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Her work focuses on the essential connection between body, mind, and emotion, using the Neutral Mask
+                  as a transformative tool for discovering authentic presence on stage. With years of international
+                  teaching experience, Ana Mirtha creates a safe, supportive environment for exploration and growth.
+                </p>
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <a
+                    href="https://www.instagram.com/anamirtha.theatre"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 flex items-center gap-2"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    @anamirtha.theatre
+                  </a>
+                  <a
+                    href="https://www.instagram.com/sariegotheatre"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 flex items-center gap-2"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    @sariegotheatre
+                  </a>
+                  <a
+                    href="https://sariegotheatre.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 flex items-center gap-2"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    sariegotheatre.com
+                  </a>
+                  <a
+                    href="https://anamirtha.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 flex items-center gap-2"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    anamirtha.com
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                  What You'll Learn
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                    <span>
+                      <strong>The Neutral Mask:</strong> Discover the power of neutrality as a foundation for authentic
+                      expression
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                    <span>
+                      <strong>Body Awareness & Rhythm:</strong> Develop heightened physical consciousness and organic
+                      movement
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                    <span>
+                      <strong>Mind-Body-Emotion Connection:</strong> Unite thought, feeling, and physical action
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                    <span>
+                      <strong>Dissolving Inner Blockages:</strong> Release tensions and habits that limit authentic
+                      presence
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                    <span>
+                      <strong>Jacques Lecoq Principles:</strong> Understand and apply foundational physical theatre
+                      techniques
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                    <span>
+                      <strong>Alive Stage Presence:</strong> Cultivate genuine, compelling presence in performance
+                    </span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <DollarSign className="h-5 w-5 text-primary" />
+                    Fee Structure
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-sm text-gray-600 mb-1">Early Bird</p>
+                      <p className="text-2xl font-bold text-green-700">₹4,500</p>
+                    </div>
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                      <p className="text-sm text-gray-600 mb-1">On Spot Registration</p>
+                      <p className="text-2xl font-bold text-gray-700">₹5,000</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="h-5 w-5 text-primary" />
+                    Eligibility & Requirements
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <p className="text-sm text-gray-600">Open To</p>
+                    <p className="font-semibold">Actors, dancers, movers & students</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Experience Level</p>
+                    <p className="font-semibold">All levels welcome</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Language</p>
+                    <p className="font-semibold">English</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">What to Bring</p>
+                    <p className="font-semibold">Comfortable movement clothes, open mind</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Phone className="h-5 w-5 text-primary" />
+                  Registration & Contact
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-600 mb-2">Register via WhatsApp</p>
+                  <a
+                    href="https://wa.me/447810802938"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold"
+                  >
+                    <Phone className="h-4 w-4" />
+                    +44 7810 802938
+                  </a>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 mb-2">More Information</p>
+                  <div className="flex flex-wrap gap-4">
+                    <a
+                      href="https://www.instagram.com/sariegotheatre"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 flex items-center gap-2"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      @sariegotheatre
+                    </a>
+                    <a
+                      href="https://www.instagram.com/anamirtha.theatre"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 flex items-center gap-2"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      @anamirtha.theatre
+                    </a>
+                    <a
+                      href="https://sariegotheatre.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 flex items-center gap-2"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      sariegotheatre.com
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="bg-gradient-to-r from-primary to-secondary p-8 rounded-xl text-white text-center">
+              <h3 className="font-playfair text-2xl font-bold mb-4">Ready to Transform Your Practice?</h3>
+              <p className="mb-6 max-w-2xl mx-auto">
+                Join this rare opportunity to train in Jacques Lecoq's pedagogy with an internationally renowned expert.
+                Discover your essential body and authentic presence.
+              </p>
+              <a
+                href="https://wa.me/447810802938"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+              >
+                <Phone className="h-5 w-5" />
+                Register via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
