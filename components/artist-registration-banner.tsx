@@ -42,7 +42,7 @@ export function ArtistRegistrationBanner() {
         </div>
 
         <div className="flex items-center gap-3 relative z-10 w-full md:w-auto">
-          <Link href="/artists-registration" className="w-full md:w-auto">
+          <Link href="https://tally.so/r/2EEo1g" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
             <Button className="w-full md:w-auto bg-[#F5A623] text-[#2D1A54] hover:bg-[#e69b1e] font-medium rounded-full">
               Register Now <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

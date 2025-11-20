@@ -6,8 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { CheckCircle, ArrowRight, Sparkles, UserPlus } from "lucide-react"
 
 export default function ArtistsRegistrationPage() {
-  const googleFormLink =
-    "https://docs.google.com/forms/d/e/1FAIpQLSdfHZ-tbD5BE1s_MlurCqlcKnnbUDReDlEXxUkO42cX5X3G6w/viewform"
+  const googleFormLink = "https://tally.so/r/2EEo1g"
 
   return (
     <div className="flex flex-col min-h-screen">
