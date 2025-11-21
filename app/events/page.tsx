@@ -4,7 +4,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, MapPin, Clock, ExternalLink, Star, Trophy, Phone, Globe, Instagram, Award, Info, Theater, Mail } from 'lucide-react'
+import {
+  Calendar,
+  MapPin,
+  Clock,
+  ExternalLink,
+  Star,
+  Trophy,
+  Phone,
+  Globe,
+  Instagram,
+  Award,
+  Info,
+  Theater,
+  Mail,
+} from "lucide-react"
 import Link from "next/link"
 
 interface Event {
@@ -129,168 +143,96 @@ const events: Event[] = [
 const bangalorePlays: BangalorePlay[] = [
   // English Plays
   {
-    id: "bravely-fought-the-queen",
-    title: "Bravely Fought The Queen",
-    venue: "Shoonya – Centre for Art & Somatic Practices",
-    date: "Sunday, 16 November 2025, 6:30 PM",
+    id: "frankenstein",
+    title: "Frankenstein",
+    venue: "Prabhat Kaladwarka Koramangala Club, Bengaluru",
+    date: "Saturday, 22 November 2025",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/bravely-fought-the-queen/ET00468916",
-    description: "A powerful theatrical production exploring themes of strength and resilience.",
+    bookingUrl: "https://in.bookmyshow.com/plays/frankenstein/ET00454959",
+    description:
+      "Stage adaptation of Mary Shelley’s Frankenstein. Victor Frankenstein creates a creature from a corpse in his obsession to defeat death, but terrified by his creation, he abandons it. The creature's loneliness and people's hatred turn into a tragic conflict of creator vs creation.",
   },
   {
-    id: "the-trojan-women",
-    title: "The Trojan Women",
-    venue: "St. Kuriakose Elias Auditorium, Christ University",
-    date: "Sunday, 16 November 2025, 5:00 PM",
+    id: "chamak",
+    title: "Chamak, A play for children",
+    venue: "Ranga Shankara, Bengaluru",
+    date: "Sunday, 23 November 2025",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/the-trojan-women/ET00468837",
-    description: "A classic Greek tragedy depicting the aftermath of the Trojan War.",
-  },
-  {
-    id: "the-star",
-    title: "THE STAR",
-    venue: "Bhandutvas, Bengaluru",
-    date: "Sunday, 16 November 2025, 7:00 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/the-star/ET00468377",
-    description: "An engaging theatrical experience at Bhandutvas.",
-  },
-  {
-    id: "defending-the-caveman",
-    title: "Defending The Caveman",
-    venue: "Jagriti Theatre, Whitefield",
-    date: "Saturday, 15 November 2025",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/defending-the-caveman/ET00467911",
-    description: "A hilarious comedy exploring the differences between men and women.",
-  },
-  {
-    id: "the-anklet",
-    title: "The Anklet",
-    venue: "Ranga Shankara",
-    date: "Saturday, 15 November 2025",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/anklet/ET00459544",
-    description: "A compelling theatrical performance at the renowned Ranga Shankara.",
-  },
-  {
-    id: "the-grave-of-dara-shukoh",
-    title: "The Grave of Dara Shukoh (English/Hindi)",
-    venue: "Ranga Shankara",
-    date: "Sunday, 16 November 2025",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/the-grave-of-dara-shukoh/ET00465714",
-    description: "A historical drama exploring the life and legacy of Dara Shukoh.",
+    bookingUrl: "https://in.bookmyshow.com/plays/chamak/ET00449898",
+    description:
+      "Ranga Shankara’s AHA! Theatre for Children production. Chamak is a 10-year-old girl who loves her seaside town, but fears the 'new world' will change everything. Amidst waves, chickens, friends, and coconut barfi, she searches for 'home', 'belonging', and her identity.",
   },
 
   // Hindi Plays
   {
-    id: "sanhita-manch-25-mithyasur",
-    title: "Sanhita Manch'25 – Mithyasur",
-    venue: "Samarthanam Auditorium – TheatreNama (HSR)",
-    date: "Saturday, 15 November 2025, 7:30 PM",
+    id: "kaun-draupadi",
+    title: "Kaun Draupadi?",
+    venue: "Samarthanam Auditorium – Bengaluru",
+    date: "Sunday, 23 November 2025",
     language: "Hindi",
     category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/sanhita-manch-25-mithyasur/ET00452999",
-    description: "A captivating Hindi play presented by Sanhita Manch.",
-  },
-  {
-    id: "papa-painter",
-    title: "Papa Painter (Hindi/Rajasthani/Assamese)",
-    venue: "Jagriti Theatre, Whitefield",
-    date: "Sunday, 16 November 2025, 3:30 PM & 7:30 PM",
-    language: "Hindi",
-    category: "Hindi",
-    bookingUrl: "https://www.instagram.com/p/DQ_2IErDL_3/",
-    description: "A multilingual theatrical experience exploring family relationships.",
+    bookingUrl: "https://in.bookmyshow.com/plays/kaun-draupadi/ET00469287",
+    description:
+      "Set backstage of a Mahabharat production. New actor Dravya (Draupadi) becomes the center of gossip due to her closeness with the lead. Amidst lost props and tension, the stage becomes a 'courtroom of conscience' asking: who is Draupadi in real life — wronged, used, or survivor?",
   },
 
   // Kannada Plays
   {
-    id: "sharmisthe",
-    title: "Sharmisthe",
-    venue: "Ravindra Kalakshetra",
-    date: "Sunday, 16 November 2025, 7:00 PM",
+    id: "bob-marley-from-kodihalli",
+    title: "Bob Marley from Kodihalli",
+    venue: "Ranga Shankara, Bengaluru",
+    date: "Saturday, 22 November 2025",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/sharmisthe/ET00467552",
-    description: "A classical Kannada theatrical performance at the prestigious Ravindra Kalakshetra.",
+    bookingUrl: "https://in.bookmyshow.com/plays/bob-marley-from-kodihalli/ET00467805",
+    description:
+      "Set in urban Bangalore, three people try to survive by hiding their caste/identity. A political/social commentary on identity, caste concealment, and survival, inspired by Dr. Ambedkar's 'Waiting for a Visa'.",
   },
   {
-    id: "seethu-maduve",
-    title: "SEETHU MADUVE",
-    venue: "Dr. C. Ashwath Kala Bhavana",
-    date: "Saturday, 15 November 2025, 7:15 PM",
+    id: "mr-rao-and-associates",
+    title: "Mr Rao and Associates",
+    venue: "Khincha Auditorium – Bhartiya Vidya Bhavan, Bengaluru",
+    date: "Saturday, 22 November 2025, 11:00 AM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/kannada-play-seethu-maduve/ET00470124",
-    description: "A delightful Kannada production at Dr. C. Ashwath Kala Bhavana.",
+    bookingUrl: "https://in.bookmyshow.com/plays/mr-rao-and-associates/ET00448369",
+    description:
+      "A family/society-based comic drama showing that parents are not ATMs. It explores how modern lifestyle and materialism weaken relationship bonds, leading to emotional neglect of the elderly.",
   },
   {
-    id: "chingari",
-    title: "CHINGARI – Kannada Comedy Drama",
-    venue: "Dr. C. Ashwath Kala Bhavana",
-    date: "Sunday, 16 November 2025, 4:15 PM",
+    id: "rakshasa-tangadi",
+    title: "Rakshasa Tangadi",
+    venue: "Ravindra Kalakshetra, Bengaluru",
+    date: "Saturday, 22 November 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/chingari-kannada-comedy-drama/ET00463212",
-    description: "A hilarious Kannada comedy drama that will keep you entertained.",
+    bookingUrl: "https://in.bookmyshow.com/plays/rakshasa-tangadi/ET00357400",
+    description:
+      "Girish Karnad's classic historical play bringing the 1565 Battle of Talikota (Vijayanagara vs Deccan Sultans) to stage. A spectacle of politics, ego, war strategy, power, and the plight of common people.",
   },
   {
-    id: "bhagwatra-nataka-mandali",
-    title: "BHAGWATRA NATAKA MANDALI",
-    venue: "Dr. C. Ashwath Kala Bhavana",
-    date: "Sunday, 16 November 2025, 6:35 PM",
+    id: "lakshmi-kataksha",
+    title: "Lakshmi Kataksha",
+    venue: "Kalagrama (Backside Bangalore University), Bengaluru",
+    date: "Saturday, 22 November 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/bhagwatra-nataka-mandali-kannada-comedy-drama/ET00463247",
-    description: "A traditional Kannada comedy drama performance.",
+    bookingUrl: "https://in.bookmyshow.com/plays/lakshmi-kataksha/ET00470236",
+    description:
+      "A play based on relationships and selfishness — husband-wife, teacher-student, parents-children, citizen-politician. It questions whether relationships are just calculations or divine, and what true 'Lakshmi Kataksha' really is.",
   },
   {
-    id: "eshtu-kaadataava-kabbakki",
-    title: "Eshtu Kaadataava Kabbakki…",
-    venue: "Vyoma ArtSpace & Studio Theatre",
-    date: "Sunday, 16 November 2025, 7:30 PM",
+    id: "oorugoolu",
+    title: "OORUGOOLU – Tragedy Drama",
+    venue: "Suchitra Cinema & Cultural Academy, Bengaluru",
+    date: "Saturday, 22 November 2025, 6:30 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/eshtu-kaadataava-kabbakki/ET00466590",
-    description: "An engaging Kannada play at Vyoma ArtSpace.",
-  },
-  {
-    id: "anumanada-avanthara",
-    title: "ANUMANADA AVANTHARA (Comedy Drama)",
-    venue: "Kalagrama, Bengaluru University",
-    date: "Sunday, 16 November 2025",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/anumanada-avanthara-comedy-drama/ET00448368",
-    description: "A comedy drama that promises laughter and entertainment.",
-  },
-  {
-    id: "kala-samvaada-ravana",
-    title: "Kala samvaada - Ravana",
-    venue: "Suchitra Cinema & Cultural Academy",
-    date: "Sunday, 16 November 2025, 5:30 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/kala-samvaada-ravana/ET00469046",
-    description: "A theatrical dialogue exploring the character of Ravana.",
-  },
-  {
-    id: "matha",
-    title: "Matha",
-    venue: "Bhanu Nenapina Nani Angala, Bangalore",
-    date: "Sunday, 16 November 2025, 7:30 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "#",
-    description: "A powerful Kannada theatrical performance.",
+    bookingUrl: "https://in.bookmyshow.com/plays/oorugoolu-tragedy-drama/ET00467563",
+    description:
+      "An emotional tragedy about parents who give everything for their children, only to be abandoned by them. The play questions duty, humanity, and the meaning of 'home' and 'peace' for an old soul.",
   },
 ]
 
@@ -437,7 +379,7 @@ export default function EventsPage() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - November 15-16
+                Discover this weekend's exciting theatre performances across Bangalore - November 22-23
               </p>
             </div>
 
