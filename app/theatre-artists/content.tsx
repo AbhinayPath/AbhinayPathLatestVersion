@@ -134,7 +134,7 @@ const artists: Artist[] = [
     id: "mohammed-yunus-parvez",
     name: "Mohammed Yunus Parvez",
     image: "/images/artists/mohammed-yunus-parvez.jpg",
-    location: "Bangalore",
+    location: "Bengaluru",
     languages: ["Urdu", "Hindi", "English", "Kannada"],
     interests: ["Acting", "Direction"],
     bio: "Fresher seeking good roles opportunity",
@@ -156,7 +156,7 @@ const artists: Artist[] = [
     id: "ronak-sharma",
     name: "Ronak Sharma",
     image: "/images/artists/ronak-sharma.jpg",
-    location: "Bangalore",
+    location: "Bengaluru",
     age: 41,
     languages: ["Hindi", "English"],
     email: "Shanu.ronak@gmail.com",
@@ -169,7 +169,7 @@ const artists: Artist[] = [
     id: "vandana-dugar",
     name: "Vandana Dugar",
     image: "/images/artists/vandana-dugar.jpg",
-    location: "Bangalore, Dr. Raj Kumar Road",
+    location: "Bengaluru, Dr. Raj Kumar Road",
     languages: ["Hindi"],
     interests: ["Acting"],
     bio: "I am Vandana dugar Theatre enthusiast from Bangalore based theatre group Urban Chaupaal. Here to learn, explore and tell stories.",
@@ -203,7 +203,7 @@ const artists: Artist[] = [
     id: "aaqib-jamal",
     name: "Aaqib Jamal",
     image: "/images/artists/aaqib-jamal.jpg",
-    location: "Bangalore",
+    location: "Bengaluru",
     age: 33,
     languages: ["English", "Hindi", "Kannada"],
     email: "aaqib.jamal25@gmail.com",
@@ -215,7 +215,7 @@ const artists: Artist[] = [
     id: "zahoor",
     name: "Zahoor",
     image: "/images/artists/zahoor.jpg",
-    location: "Bangalore",
+    location: "Bengaluru",
     age: 40,
     languages: ["English", "Hindi"],
     email: "zoshsaysright@gmail.com",
@@ -225,14 +225,16 @@ const artists: Artist[] = [
   },
 ]
 
-const locations = [...new Set(artists.map((artist) => artist.location))].sort()
+const locations = [...new Set(artists.map((artist) => artist.location.split(",")[0].trim()))].sort()
 const allLanguages = [...new Set(artists.flatMap((artist) => artist.languages))].sort()
+const allSkills = [...new Set(artists.flatMap((artist) => artist.interests))].sort()
 
 export default function TheatreArtistsContent() {
   const [filters, setFilters] = useState({
     search: "",
     location: "",
     language: "",
+    skill: "",
   })
   const [showDesktopFilters, setShowDesktopFilters] = useState(true)
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -244,11 +246,13 @@ export default function TheatreArtistsContent() {
       artist.bio.toLowerCase().includes(filters.search.toLowerCase()) ||
       artist.interests.some((interest) => interest.toLowerCase().includes(filters.search.toLowerCase()))
 
-    const matchesLocation = filters.location === "" || artist.location === filters.location
+    const matchesLocation = filters.location === "" || artist.location.includes(filters.location)
 
     const matchesLanguage = filters.language === "" || artist.languages.includes(filters.language)
 
-    return matchesSearch && matchesLocation && matchesLanguage
+    const matchesSkill = filters.skill === "" || artist.interests.includes(filters.skill)
+
+    return matchesSearch && matchesLocation && matchesLanguage && matchesSkill
   })
 
   const handleFilterChange = (key: string, value: string) => {
@@ -260,6 +264,7 @@ export default function TheatreArtistsContent() {
       search: "",
       location: "",
       language: "",
+      skill: "",
     })
   }
 
@@ -393,6 +398,18 @@ export default function TheatreArtistsContent() {
                   </button>
                 </div>
               )}
+              {filters.skill && (
+                <div className="bg-gray-100 text-gray-800 text-xs md:text-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                  <span className="truncate max-w-[150px]">Skill: {filters.skill}</span>
+                  <button
+                    onClick={() => handleFilterChange("skill", "")}
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label="Remove skill filter"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
@@ -407,7 +424,7 @@ export default function TheatreArtistsContent() {
           {/* Filter Controls */}
           {showDesktopFilters && (
             <div className="mb-8 p-6 bg-gray-50 rounded-xl">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Search - Desktop only */}
                 <div className="hidden md:block relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -421,7 +438,10 @@ export default function TheatreArtistsContent() {
                 </div>
 
                 {/* Location Filter */}
-                <Select value={filters.location} onValueChange={(value) => handleFilterChange("location", value)}>
+                <Select
+                  value={filters.location}
+                  onValueChange={(value) => handleFilterChange("location", value === "all" ? "" : value)}
+                >
                   <SelectTrigger className="rounded-full">
                     <SelectValue placeholder="All Locations" />
                   </SelectTrigger>
@@ -436,7 +456,10 @@ export default function TheatreArtistsContent() {
                 </Select>
 
                 {/* Language Filter */}
-                <Select value={filters.language} onValueChange={(value) => handleFilterChange("language", value)}>
+                <Select
+                  value={filters.language}
+                  onValueChange={(value) => handleFilterChange("language", value === "all" ? "" : value)}
+                >
                   <SelectTrigger className="rounded-full">
                     <SelectValue placeholder="All Languages" />
                   </SelectTrigger>
@@ -445,6 +468,24 @@ export default function TheatreArtistsContent() {
                     {allLanguages.map((language) => (
                       <SelectItem key={language} value={language}>
                         {language}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                {/* Skills Filter */}
+                <Select
+                  value={filters.skill}
+                  onValueChange={(value) => handleFilterChange("skill", value === "all" ? "" : value)}
+                >
+                  <SelectTrigger className="rounded-full">
+                    <SelectValue placeholder="All Skills" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Skills</SelectItem>
+                    {allSkills.map((skill) => (
+                      <SelectItem key={skill} value={skill}>
+                        {skill}
                       </SelectItem>
                     ))}
                   </SelectContent>

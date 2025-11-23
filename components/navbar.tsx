@@ -16,12 +16,10 @@ export default function Navbar() {
   }
 
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "Auditions", href: "/auditions" },
-    { name: "Workshops", href: "/workshops" },
     { name: "Events", href: "/events" },
     { name: "Theatre Artists", href: "/theatre-artists" },
-    { name: "Admissions", href: "/admissions" },
+    { name: "Production & Backstage", href: "/production-backstage" },
+    { name: "Mentorship", href: "/admissions" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ]
