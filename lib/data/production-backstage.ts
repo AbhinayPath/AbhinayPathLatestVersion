@@ -13,6 +13,7 @@ export interface ProductionProfessional {
   workLink?: string
   youtube?: string
   auditionVideo?: string
+  facebook?: string
 }
 
 export const productionProfessionals: ProductionProfessional[] = [
@@ -62,5 +63,22 @@ export const productionProfessionals: ProductionProfessional[] = [
     instagram: "https://www.instagram.com/p/DHL5rqwSck3/?igsh=YnJ0NzhjemhkbWNk",
     youtube: "https://www.youtube.com/@lighthouseproduction6571",
     auditionVideo: "https://youtube.com/shorts/tUkFpuSgCWY?si=22O2bJH-H929WBXP",
+  },
+  {
+    id: "madhurima-gupta",
+    name: "Madhurima Gupta",
+    image: "/images/madhurima-gupta.jpg",
+    location: "Koramangala, Bangalore",
+    state: "Karnataka",
+    email: "madhurima.g@gmail.com",
+    whatsapp: "9830079293",
+    skills: ["Sound Designer / Operator", "Assistant Director", "Animation"],
+    experience: "8 years",
+    productions: [
+      "Animation mixed media production for BLT production ‘ The Anklet’",
+      "Sound and foley design for multiple stage shows and short films",
+    ],
+    facebook: "https://www.facebook.com/share/17xg3cqxdW/",
+    workLink: "https://drive.google.com/file/d/1BsfzMhRfEWXTB4KEpCL1I6KH64RtY2pm/view",
   },
 ]

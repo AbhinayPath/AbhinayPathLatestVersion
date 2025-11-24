@@ -19,6 +19,7 @@ import {
   ExternalLink,
   Youtube,
   Video,
+  Facebook,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -31,14 +32,25 @@ import { productionProfessionals } from "@/lib/data/production-backstage"
 export default function ProductionBackstageContent() {
   const [filters, setFilters] = useState({
     search: "",
-    location: "",
+    city: "",
+    state: "",
     skill: "",
   })
   const [showDesktopFilters, setShowDesktopFilters] = useState(true)
   const isMobile = useMediaQuery("(max-width: 768px)")
 
   // Get unique values for filters
-  const locations = [...new Set(productionProfessionals.map((p) => p.location.split(",")[0].trim()))].sort()
+  // Extract city from location string (assuming "Area, City" or just "City")
+  const cities = [
+    ...new Set(
+      productionProfessionals.map((p) => {
+        const parts = p.location.split(",")
+        return parts[parts.length - 1].trim()
+      }),
+    ),
+  ].sort()
+
+  const states = [...new Set(productionProfessionals.map((p) => p.state))].sort()
   const allSkills = [...new Set(productionProfessionals.flatMap((p) => p.skills))].sort()
 
   const filteredProfessionals = productionProfessionals.filter((professional) => {
@@ -48,11 +60,11 @@ export default function ProductionBackstageContent() {
       professional.productions.some((prod) => prod.toLowerCase().includes(filters.search.toLowerCase())) ||
       professional.skills.some((skill) => skill.toLowerCase().includes(filters.search.toLowerCase()))
 
-    const matchesLocation = filters.location === "" || professional.location.includes(filters.location)
-
+    const matchesCity = filters.city === "" || professional.location.toLowerCase().includes(filters.city.toLowerCase())
+    const matchesState = filters.state === "" || professional.state === filters.state
     const matchesSkill = filters.skill === "" || professional.skills.includes(filters.skill)
 
-    return matchesSearch && matchesLocation && matchesSkill
+    return matchesSearch && matchesCity && matchesState && matchesSkill
   })
 
   const handleFilterChange = (key: string, value: string) => {
@@ -62,7 +74,8 @@ export default function ProductionBackstageContent() {
   const clearFilters = () => {
     setFilters({
       search: "",
-      location: "",
+      city: "",
+      state: "",
       skill: "",
     })
   }
@@ -158,6 +171,42 @@ export default function ProductionBackstageContent() {
                   </button>
                 </div>
               )}
+              {filters.state && (
+                <div className="bg-gray-100 text-gray-800 text-xs md:text-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                  <span>State: {filters.state}</span>
+                  <button
+                    onClick={() => handleFilterChange("state", "")}
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label="Remove state filter"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+              {filters.city && (
+                <div className="bg-gray-100 text-gray-800 text-xs md:text-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                  <span>City: {filters.city}</span>
+                  <button
+                    onClick={() => handleFilterChange("city", "")}
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label="Remove city filter"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+              {filters.skill && (
+                <div className="bg-gray-100 text-gray-800 text-xs md:text-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                  <span>Skill: {filters.skill}</span>
+                  <button
+                    onClick={() => handleFilterChange("skill", "")}
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label="Remove skill filter"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
@@ -172,7 +221,7 @@ export default function ProductionBackstageContent() {
           {/* Filter Controls */}
           {showDesktopFilters && (
             <div className="mb-8 p-6 bg-gray-50 rounded-xl">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Search - Desktop only */}
                 <div className="hidden md:block relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -185,19 +234,37 @@ export default function ProductionBackstageContent() {
                   />
                 </div>
 
-                {/* Location Filter */}
+                {/* State Filter */}
                 <Select
-                  value={filters.location}
-                  onValueChange={(value) => handleFilterChange("location", value === "all" ? "" : value)}
+                  value={filters.state}
+                  onValueChange={(value) => handleFilterChange("state", value === "all" ? "" : value)}
                 >
                   <SelectTrigger className="rounded-full">
-                    <SelectValue placeholder="All Locations" />
+                    <SelectValue placeholder="All States" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Locations</SelectItem>
-                    {locations.map((location) => (
-                      <SelectItem key={location} value={location}>
-                        {location}
+                    <SelectItem value="all">All States</SelectItem>
+                    {states.map((state) => (
+                      <SelectItem key={state} value={state}>
+                        {state}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                {/* City Filter */}
+                <Select
+                  value={filters.city}
+                  onValueChange={(value) => handleFilterChange("city", value === "all" ? "" : value)}
+                >
+                  <SelectTrigger className="rounded-full">
+                    <SelectValue placeholder="All Cities" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Cities</SelectItem>
+                    {cities.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -276,6 +343,17 @@ export default function ProductionBackstageContent() {
                                   className="rounded-full bg-transparent h-8 w-8 sm:h-10 sm:w-10"
                                 >
                                   <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
+                                </Button>
+                              </Link>
+                            )}
+                            {professional.facebook && (
+                              <Link href={professional.facebook} target="_blank" rel="noopener noreferrer">
+                                <Button
+                                  size="icon"
+                                  variant="outline"
+                                  className="rounded-full bg-transparent h-8 w-8 sm:h-10 sm:w-10"
+                                >
+                                  <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
                                 </Button>
                               </Link>
                             )}
