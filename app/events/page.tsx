@@ -143,96 +143,118 @@ const events: Event[] = [
 const bangalorePlays: BangalorePlay[] = [
   // English Plays
   {
-    id: "frankenstein",
-    title: "Frankenstein",
-    venue: "Prabhat Kaladwarka Koramangala Club, Bengaluru",
-    date: "Saturday, 22 November 2025",
+    id: "besharam-aadmi",
+    title: "Besharam Aadmi",
+    venue: "JNCASR Auditorium, Bengaluru",
+    date: "Sunday, 30 November 2025, 6:30 PM",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/frankenstein/ET00454959",
+    bookingUrl: "https://in.bookmyshow.com/plays/besharam-aadmi/ET00473673",
     description:
-      "Stage adaptation of Mary Shelley’s Frankenstein. Victor Frankenstein creates a creature from a corpse in his obsession to defeat death, but terrified by his creation, he abandons it. The creature's loneliness and people's hatred turn into a tragic conflict of creator vs creation.",
-  },
-  {
-    id: "chamak",
-    title: "Chamak, A play for children",
-    venue: "Ranga Shankara, Bengaluru",
-    date: "Sunday, 23 November 2025",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/chamak/ET00449898",
-    description:
-      "Ranga Shankara’s AHA! Theatre for Children production. Chamak is a 10-year-old girl who loves her seaside town, but fears the 'new world' will change everything. Amidst waves, chickens, friends, and coconut barfi, she searches for 'home', 'belonging', and her identity.",
+      "A bilingual Hindi and English theatrical production exploring bold themes and contemporary storytelling at JNCASR Auditorium.",
   },
 
   // Hindi Plays
   {
-    id: "kaun-draupadi",
-    title: "Kaun Draupadi?",
-    venue: "Samarthanam Auditorium – Bengaluru",
-    date: "Sunday, 23 November 2025",
+    id: "papa-painter",
+    title: "Papa Painter",
+    venue: "Ranga Shankara, Bengaluru",
+    date: "Saturday, 29 November 2025",
     language: "Hindi",
     category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/kaun-draupadi/ET00469287",
+    bookingUrl: "https://in.bookmyshow.com/plays/papa-painter/ET00470198",
     description:
-      "Set backstage of a Mahabharat production. New actor Dravya (Draupadi) becomes the center of gossip due to her closeness with the lead. Amidst lost props and tension, the stage becomes a 'courtroom of conscience' asking: who is Draupadi in real life — wronged, used, or survivor?",
+      "A multilingual comedy drama in Hindi, Rajasthani, and Assamese. Duration: 1 hour 10 minutes. A contemporary theatrical experience blending regional flavors.",
+  },
+  {
+    id: "maithili",
+    title: "Maithili",
+    venue: "Vyoma ArtSpace and Studio Theatre, Bengaluru",
+    date: "Saturday, 29 November 2025",
+    language: "Hindi",
+    category: "Hindi",
+    bookingUrl: "https://in.bookmyshow.com/plays/maithili/ET00469522",
+    description:
+      "A powerful Hindi drama exploring deep emotional themes. Duration: 1 hour. An intimate theatrical experience at Vyoma ArtSpace.",
+  },
+  {
+    id: "khidki",
+    title: "Khidki",
+    venue: "Jagriti Theatre, Whitefield, Bengaluru",
+    date: "Sunday, 30 November 2025",
+    language: "Hindi",
+    category: "Hindi",
+    bookingUrl: "https://in.bookmyshow.com/plays/khidki/ET00469361",
+    description:
+      "A captivating Hindi play blending Comedy, Drama, and Fantasy genres. Duration: 1 hour 10 minutes. An imaginative theatrical journey at Jagriti Theatre.",
   },
 
   // Kannada Plays
   {
-    id: "bob-marley-from-kodihalli",
-    title: "Bob Marley from Kodihalli",
+    id: "karimayi",
+    title: "Karimayi",
     venue: "Ranga Shankara, Bengaluru",
-    date: "Saturday, 22 November 2025",
+    date: "Sunday, 30 November 2025",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/bob-marley-from-kodihalli/ET00467805",
+    bookingUrl: "https://in.bookmyshow.com/plays/karimayi/ET00473699",
     description:
-      "Set in urban Bangalore, three people try to survive by hiding their caste/identity. A political/social commentary on identity, caste concealment, and survival, inspired by Dr. Ambedkar's 'Waiting for a Visa'.",
+      "A compelling Kannada theatrical production at the renowned Ranga Shankara auditorium, showcasing rich regional storytelling.",
   },
   {
-    id: "mr-rao-and-associates",
-    title: "Mr Rao and Associates",
-    venue: "Khincha Auditorium – Bhartiya Vidya Bhavan, Bengaluru",
-    date: "Saturday, 22 November 2025, 11:00 AM",
+    id: "nanna-tejaswi",
+    title: "Nanna Tejaswi",
+    venue: "Nayana Auditorium, Bengaluru",
+    date: "Saturday, 29 November 2025",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/mr-rao-and-associates/ET00448369",
+    bookingUrl: "https://in.bookmyshow.com/plays/nanna-tejaswi/ET00473674",
     description:
-      "A family/society-based comic drama showing that parents are not ATMs. It explores how modern lifestyle and materialism weaken relationship bonds, leading to emotional neglect of the elderly.",
+      "A tribute to the legendary Kannada writer K.P. Poornachandra Tejaswi, celebrating his life and literary contributions through theatre.",
   },
   {
-    id: "rakshasa-tangadi",
-    title: "Rakshasa Tangadi",
-    venue: "Ravindra Kalakshetra, Bengaluru",
-    date: "Saturday, 22 November 2025, 7:00 PM",
+    id: "bay-tumba-nakbidi",
+    title: "BAY TUMBA NAKBIDI",
+    venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
+    date: "Saturday, 29 November 2025, 4:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/rakshasa-tangadi/ET00357400",
+    bookingUrl: "https://in.bookmyshow.com/plays/bay-tumba-nakbidi/ET00473093",
     description:
-      "Girish Karnad's classic historical play bringing the 1565 Battle of Talikota (Vijayanagara vs Deccan Sultans) to stage. A spectacle of politics, ego, war strategy, power, and the plight of common people.",
+      "An entertaining Kannada theatre production at Dr. C Ashwath Kala Bhavana, bringing local stories and culture to the stage.",
   },
   {
-    id: "lakshmi-kataksha",
-    title: "Lakshmi Kataksha",
-    venue: "Kalagrama (Backside Bangalore University), Bengaluru",
-    date: "Saturday, 22 November 2025, 7:00 PM",
+    id: "baybadki",
+    title: "BAYBADKI (Comedy Drama)",
+    venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
+    date: "Saturday, 29 November 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/lakshmi-kataksha/ET00470236",
+    bookingUrl: "https://in.bookmyshow.com/plays/baybadki/ET00473095",
     description:
-      "A play based on relationships and selfishness — husband-wife, teacher-student, parents-children, citizen-politician. It questions whether relationships are just calculations or divine, and what true 'Lakshmi Kataksha' really is.",
+      "A hilarious Kannada comedy drama that promises an evening of laughter and entertainment at Dr. C Ashwath Kala Bhavana.",
   },
   {
-    id: "oorugoolu",
-    title: "OORUGOOLU – Tragedy Drama",
-    venue: "Suchitra Cinema & Cultural Academy, Bengaluru",
-    date: "Saturday, 22 November 2025, 6:30 PM",
+    id: "rama-shama-drama",
+    title: "Rama Shama Drama (Comedy Drama)",
+    venue: "Kalagrama, Bengaluru",
+    date: "Saturday, 29 November 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/oorugoolu-tragedy-drama/ET00467563",
+    bookingUrl: "https://in.bookmyshow.com/plays/rama-shama-drama/ET00473126",
     description:
-      "An emotional tragedy about parents who give everything for their children, only to be abandoned by them. The play questions duty, humanity, and the meaning of 'home' and 'peace' for an old soul.",
+      "A delightful Kannada comedy drama at Kalagrama, offering wholesome family entertainment with humor and heart.",
+  },
+  {
+    id: "varna-pallata",
+    title: "Varna Pallata",
+    venue: "Kalagrama Bengaluru University",
+    date: "Sunday, 30 November 2025, 7:00 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/varna-pallata/ET00473094",
+    description:
+      "A vibrant Kannada theatrical experience at Kalagrama near Bengaluru University, showcasing the richness of regional theatre.",
   },
 ]
 
@@ -379,7 +401,7 @@ export default function EventsPage() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - November 22-23
+                Discover this weekend's exciting theatre performances across Bangalore - November 29-30
               </p>
             </div>
 
