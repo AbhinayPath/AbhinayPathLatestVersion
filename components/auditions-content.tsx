@@ -12,6 +12,40 @@ import AuditionBanner from "@/components/audition-banner"
 // Verified audition data
 const auditions = [
   {
+    id: 16,
+    title: "Audition Call - Urban Chaupaal's Next Theatre Production",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "November 30, 2025",
+    director: "Urban Chaupaal",
+    description:
+      "Join the Revolution of Artists! Urban Chaupaal is holding auditions for their next theatre production. This is an extraordinary chance to highlight your skills, collaborate with a dynamic creative crew, and immerse yourself in a deeply moving stage production.",
+    company: "Urban Chaupaal",
+    companyLink: "https://forms.gle/LGuwkUn4mPzBUNfT9",
+    contact: "Register via Google Form",
+    contactType: "form",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Passion for theatre and stage performance",
+      "Available for audition on November 30, 2025 (2 PM - 6 PM)",
+      "Willingness to collaborate with a dynamic creative team",
+      "Commitment to rehearsals and production schedule",
+    ],
+    roles: ["Theatre Performers - Various roles available", "All experience levels welcome"],
+    applicationProcess:
+      "Fill out the registration form at https://forms.gle/LGuwkUn4mPzBUNfT9 to confirm your participation. Arrive at the venue on November 30th between 2 PM and 6 PM.",
+    auditionDetails: {
+      date: "November 30, 2025",
+      time: "2:00 PM - 6:00 PM",
+      venue: "TASC (The Alchemy Studio Corner)",
+      venueLink: "https://maps.app.goo.gl/BERLTJtHGWqytu4TA",
+      registrationLink: "https://forms.gle/LGuwkUn4mPzBUNfT9",
+    },
+  },
+  {
     id: 13,
     title: "Casting Call for Theater Actors/Clowns and Production Team",
     type: "Theater",
@@ -637,7 +671,9 @@ export default function AuditionsContent() {
                             ? "border-yellow-500 shadow-lg"
                             : audition.id === 15
                               ? "border-purple-300 shadow-lg"
-                              : "border-gray-200"
+                              : audition.id === 16 // Added condition for new audition
+                                ? "border-teal-300 shadow-lg"
+                                : "border-gray-200"
               }`}
             >
               <div className="relative h-40 sm:h-48 w-full flex-shrink-0">
@@ -702,11 +738,17 @@ export default function AuditionsContent() {
                     🌿 International Project
                   </div>
                 )}
+                {/* Added badge for Urban Chaupaal audition */}
+                {audition.id === 16 && (
+                  <div className="absolute top-2 left-2 bg-teal-600 text-white text-[10px] sm:text-xs font-medium px-2 py-1 rounded-full">
+                    "Urban Chaupaal" Production
+                  </div>
+                )}
               </div>
               <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col overflow-hidden">
                 <div className="flex justify-between items-start mb-3 gap-2 flex-wrap">
                   <span
-                    className={`badge-primary text-xs ${audition.id === 7 ? "bg-purple-100 text-purple-800" : audition.id === 13 ? "bg-blue-100 text-blue-800" : audition.id === 14 ? "bg-yellow-100 text-yellow-800" : audition.id === 15 ? "bg-purple-100 text-purple-800" : ""}`}
+                    className={`badge-primary text-xs ${audition.id === 7 ? "bg-purple-100 text-purple-800" : audition.id === 13 ? "bg-blue-100 text-blue-800" : audition.id === 14 ? "bg-yellow-100 text-yellow-800" : audition.id === 15 ? "bg-purple-100 text-purple-800" : audition.id === 16 ? "bg-teal-100 text-teal-800" : ""}`}
                   >
                     {audition.type}
                   </span>
@@ -1172,6 +1214,100 @@ export default function AuditionsContent() {
                         className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-md transition-colors text-center"
                       >
                         Confirm Participation
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* New section for Urban Chaupaal audition */}
+                {audition.id === 16 && audition.auditionDetails && (
+                  <div className="bg-gradient-to-br from-teal-50 to-teal-100/50 border border-teal-200 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4 overflow-hidden">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg">🎭</span>
+                      <h4 className="font-semibold text-teal-800 text-sm sm:text-base break-words">{audition.title}</h4>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-teal-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-2">📣 About the Production</p>
+                      <p className="text-xs sm:text-sm text-teal-900 break-words leading-relaxed">
+                        {audition.description}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2 mb-3">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-teal-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Roles</p>
+                        <p className="text-xs sm:text-sm font-semibold text-teal-900 break-words leading-tight">
+                          {audition.roles.join(", ")}
+                        </p>
+                      </div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-teal-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-0.5">Experience</p>
+                        <p className="text-xs sm:text-sm font-semibold text-teal-900 break-words">
+                          {audition.experience}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-teal-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-2">📅 Audition Details</p>
+                      <div className="space-y-1.5">
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-teal-600 text-xs flex-shrink-0">📅 Date:</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs sm:text-sm font-medium text-teal-900 break-words">
+                              {audition.auditionDetails.date}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-teal-600 text-xs flex-shrink-0">🕐 Time:</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs sm:text-sm font-medium text-teal-900 break-words">
+                              {audition.auditionDetails.time}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-teal-600 text-xs flex-shrink-0">📍 Venue:</span>
+                          <div className="flex-1 min-w-0">
+                            <a
+                              href={audition.auditionDetails.venueLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs sm:text-sm font-medium text-teal-900 hover:underline break-words"
+                            >
+                              {audition.auditionDetails.venue}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-teal-100 mb-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-gray-700 mb-2">Key Requirements</p>
+                      <ul className="space-y-1">
+                        {audition.requirements.slice(0, 3).map((req, index) => (
+                          <li key={index} className="flex items-start gap-1.5 text-[10px] sm:text-xs text-gray-600">
+                            <span className="text-teal-600 flex-shrink-0 mt-0.5">•</span>
+                            <span className="break-words">{req}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-md p-2 border border-teal-100">
+                        <p className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1">Registration</p>
+                        <p className="text-xs sm:text-sm font-medium text-teal-900 break-all">{audition.contact}</p>
+                      </div>
+                      <a
+                        href={audition.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-md transition-colors text-center"
+                      >
+                        Register Now
                       </a>
                     </div>
                   </div>
