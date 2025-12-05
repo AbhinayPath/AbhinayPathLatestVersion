@@ -141,120 +141,189 @@ const events: Event[] = [
 ]
 
 const bangalorePlays: BangalorePlay[] = [
-  // English Plays
+  // English Plays - December 6-7
   {
-    id: "besharam-aadmi",
-    title: "Besharam Aadmi",
-    venue: "JNCASR Auditorium, Bengaluru",
-    date: "Sunday, 30 November 2025, 6:30 PM",
+    id: "vodka-no-tonic",
+    title: "Vodka & No Tonic – Bengaluru Theatre Festival",
+    venue: "Good Shepherd Auditorium, Bengaluru",
+    date: "Saturday, 6 December 2025, 12:00 PM",
+    language: "English, Hindi",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/vodka-no-tonic-bengaluru-theatre-festival/ET00465411",
+    description:
+      "A bilingual drama at the Bengaluru Theatre Festival. Duration: 1 hour 40 minutes. Age: 12+. Tickets from ₹500.",
+  },
+  {
+    id: "jaaji",
+    title: "Jaaji (Puppet Show)",
+    venue: "Shoonya – Centre for Art and Somatic Practices, Bengaluru",
+    date: "Saturday, 6 December 2025, 6:00 PM",
+    language: "English, Kannada",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/jaaji/ET00471630",
+    description:
+      "A unique puppet show blending English and Kannada at Shoonya. Duration: 1 hour. An intimate theatrical experience.",
+  },
+  {
+    id: "einstein-6th-dec",
+    title: "Einstein – Bengaluru Theatre Festival",
+    venue: "Prestige Centre for Performing Arts, Bengaluru",
+    date: "Saturday, 6 December 2025, 7:00 PM",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/besharam-aadmi/ET00473673",
+    bookingUrl: "https://in.bookmyshow.com/plays/einstein-6th-december-bengaluru-theatre-festival/ET00465412",
     description:
-      "A bilingual Hindi and English theatrical production exploring bold themes and contemporary storytelling at JNCASR Auditorium.",
+      "A captivating exploration of the legendary physicist's life at the Bengaluru Theatre Festival. Duration: 1 hour 30 minutes.",
+  },
+  {
+    id: "love-algorithms",
+    title: "Love in the Time of Algorithms by The Self Centre",
+    venue: "Underline Center, Bengaluru",
+    date: "Saturday, 6 December 2025, 7:00 PM",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/love-in-the-time-of-algorithms-by-the-self-centre/ET00462659",
+    description:
+      "A contemporary drama exploring modern romance and technology. Duration: 1 hour 15 minutes. A thought-provoking theatrical experience.",
+  },
+  {
+    id: "nothing-like-lear",
+    title: "Nothing Like Lear – Bengaluru Theatre Festival",
+    venue: "Good Shepherd Auditorium, Bengaluru",
+    date: "Saturday, 6 December 2025, 7:00 PM",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/nothing-like-lear-bengaluru-theatre-festival/ET00465413",
+    description:
+      "A reimagined take on Shakespeare's King Lear at the Bengaluru Theatre Festival. Duration: 1 hour 50 minutes.",
+  },
+  {
+    id: "einstein-7th-dec",
+    title: "Einstein – Bengaluru Theatre Festival",
+    venue: "Prestige Centre for Performing Arts, Bengaluru",
+    date: "Sunday, 7 December 2025, 1:00 PM",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/einstein-7th-november-bengaluru-theatre-festival/ET00465410",
+    description: "Second showing of the captivating exploration of Einstein's life. Duration: 1 hour 30 minutes.",
+  },
+  {
+    id: "once-there-was-a-way",
+    title: "Once There Was a Way",
+    venue: "St. Kuriakose Elias Auditorium, Christ University",
+    date: "Sunday, 7 December 2025, 4:00 PM",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/once-there-was-a-way/ET00468684",
+    description: "An engaging English drama at Christ University auditorium. Duration: 2 hours.",
+  },
+  {
+    id: "dhumrapaan",
+    title: "Dhumrapaan – Bengaluru Theatre Festival",
+    venue: "Good Shepherd Auditorium, Bengaluru",
+    date: "Sunday, 7 December 2025, 7:00 PM",
+    language: "English, Hindi",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/dhumrapaan-bengaluru-theatre-festival/ET00465414",
+    description:
+      "A bilingual drama at the Bengaluru Theatre Festival. Duration: 1 hour 15 minutes. Age: 18+. Tickets from ₹1750.",
   },
 
-  // Hindi Plays
+  // Hindi Plays - December 6-7
   {
-    id: "papa-painter",
-    title: "Papa Painter",
-    venue: "Ranga Shankara, Bengaluru",
-    date: "Saturday, 29 November 2025",
-    language: "Hindi",
+    id: "vodka-no-tonic-hindi",
+    title: "Vodka & No Tonic – Bengaluru Theatre Festival",
+    venue: "Good Shepherd Auditorium, Bengaluru",
+    date: "Saturday, 6 December 2025, 12:00 PM",
+    language: "Hindi, English",
     category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/papa-painter/ET00470198",
+    bookingUrl: "https://in.bookmyshow.com/plays/vodka-no-tonic-bengaluru-theatre-festival/ET00465411",
     description:
-      "A multilingual comedy drama in Hindi, Rajasthani, and Assamese. Duration: 1 hour 10 minutes. A contemporary theatrical experience blending regional flavors.",
+      "A bilingual drama blending Hindi and English at the Bengaluru Theatre Festival. Duration: 1 hour 40 minutes. Age: 12+. Tickets from ₹500.",
   },
   {
-    id: "maithili",
-    title: "Maithili",
-    venue: "Vyoma ArtSpace and Studio Theatre, Bengaluru",
-    date: "Saturday, 29 November 2025",
-    language: "Hindi",
+    id: "dhumrapaan-hindi",
+    title: "Dhumrapaan – Bengaluru Theatre Festival",
+    venue: "Good Shepherd Auditorium, Bengaluru",
+    date: "Sunday, 7 December 2025, 7:00 PM",
+    language: "Hindi, English",
     category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/maithili/ET00469522",
+    bookingUrl: "https://in.bookmyshow.com/plays/dhumrapaan-bengaluru-theatre-festival/ET00465414",
     description:
-      "A powerful Hindi drama exploring deep emotional themes. Duration: 1 hour. An intimate theatrical experience at Vyoma ArtSpace.",
-  },
-  {
-    id: "khidki",
-    title: "Khidki",
-    venue: "Jagriti Theatre, Whitefield, Bengaluru",
-    date: "Sunday, 30 November 2025",
-    language: "Hindi",
-    category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/khidki/ET00469361",
-    description:
-      "A captivating Hindi play blending Comedy, Drama, and Fantasy genres. Duration: 1 hour 10 minutes. An imaginative theatrical journey at Jagriti Theatre.",
+      "A powerful Hindi-English drama at the Bengaluru Theatre Festival. Duration: 1 hour 15 minutes. Age: 18+. Tickets from ₹1750.",
   },
 
-  // Kannada Plays
+  // Kannada Plays - December 6-7
   {
-    id: "karimayi",
-    title: "Karimayi",
+    id: "gokula-nirgamana",
+    title: "Gokula Nirgamana",
+    venue: "Ravindra Kalakshetra, Bengaluru",
+    date: "Saturday, 6 December 2025, 7:00 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/gokula-nirgamana/ET00000000",
+    description: "A classic Kannada theatrical production at the renowned Ravindra Kalakshetra. Duration: 2 hours.",
+  },
+  {
+    id: "jaaji-kannada",
+    title: "Jaaji (Puppet Show)",
+    venue: "Shoonya – Centre for Art and Somatic Practices, Bengaluru",
+    date: "Saturday, 6 December 2025, 6:00 PM",
+    language: "Kannada, English",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/jaaji/ET00471630",
+    description: "A bilingual puppet show blending Kannada and English traditions. Duration: 1 hour.",
+  },
+  {
+    id: "anu-renu-truna-kaashta",
+    title: "ANU RENU TRUNA KAASHTA",
+    venue: "Suchitra Cinema & Cultural Academy, Bengaluru",
+    date: "Saturday, 6 December 2025, 5:30 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/anu-renu-truna-kaashta/ET00000000",
+    description: "An engaging Kannada production at Suchitra Cinema & Cultural Academy. Duration: 1 hour.",
+  },
+  {
+    id: "mysuru-mallige",
+    title: "Mysuru Mallige",
     venue: "Ranga Shankara, Bengaluru",
-    date: "Sunday, 30 November 2025",
+    date: "Sunday, 7 December 2025, 3:25 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/karimayi/ET00473699",
-    description:
-      "A compelling Kannada theatrical production at the renowned Ranga Shankara auditorium, showcasing rich regional storytelling.",
+    bookingUrl: "https://in.bookmyshow.com/plays/mysuru-mallige/ET00000000",
+    description: "A beloved Kannada classic at the renowned Ranga Shankara auditorium. Duration: 2 hours.",
   },
   {
-    id: "nanna-tejaswi",
-    title: "Nanna Tejaswi",
-    venue: "Nayana Auditorium, Bengaluru",
-    date: "Saturday, 29 November 2025",
+    id: "mukhyamantri",
+    title: "Mukhyamantri",
+    venue: "Ranga Shankara, Bengaluru",
+    date: "Sunday, 7 December 2025, 7:25 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/nanna-tejaswi/ET00473674",
-    description:
-      "A tribute to the legendary Kannada writer K.P. Poornachandra Tejaswi, celebrating his life and literary contributions through theatre.",
+    bookingUrl: "https://in.bookmyshow.com/plays/mukhyamantri/ET00000000",
+    description: "A compelling Kannada political drama at Ranga Shankara. Duration: 2 hours.",
   },
   {
-    id: "bay-tumba-nakbidi",
-    title: "BAY TUMBA NAKBIDI",
+    id: "muddannana-promotion-prasanga",
+    title: "Muddannana Promotion Prasanga",
     venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
-    date: "Saturday, 29 November 2025, 4:00 PM",
+    date: "Sunday, 7 December 2025, 5:00 PM & 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/bay-tumba-nakbidi/ET00473093",
+    bookingUrl: "https://in.bookmyshow.com/plays/muddannana-promotion-prasanga/ET00000000",
     description:
-      "An entertaining Kannada theatre production at Dr. C Ashwath Kala Bhavana, bringing local stories and culture to the stage.",
+      "An entertaining Kannada production with two shows at Dr. C Ashwath Kala Bhavana. Duration: 1 hour 20 minutes.",
   },
   {
-    id: "baybadki",
-    title: "BAYBADKI (Comedy Drama)",
-    venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
-    date: "Saturday, 29 November 2025, 7:00 PM",
+    id: "naanu-polisanaagidde",
+    title: "Naanu Polisanaagidde",
+    venue: "Kalagrama, Bengaluru University, Bengaluru",
+    date: "Sunday, 7 December 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/baybadki/ET00473095",
-    description:
-      "A hilarious Kannada comedy drama that promises an evening of laughter and entertainment at Dr. C Ashwath Kala Bhavana.",
-  },
-  {
-    id: "rama-shama-drama",
-    title: "Rama Shama Drama (Comedy Drama)",
-    venue: "Kalagrama, Bengaluru",
-    date: "Saturday, 29 November 2025, 7:00 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/rama-shama-drama/ET00473126",
-    description:
-      "A delightful Kannada comedy drama at Kalagrama, offering wholesome family entertainment with humor and heart.",
-  },
-  {
-    id: "varna-pallata",
-    title: "Varna Pallata",
-    venue: "Kalagrama Bengaluru University",
-    date: "Sunday, 30 November 2025, 7:00 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/varna-pallata/ET00473094",
-    description:
-      "A vibrant Kannada theatrical experience at Kalagrama near Bengaluru University, showcasing the richness of regional theatre.",
+    bookingUrl: "https://in.bookmyshow.com/plays/naanu-polisanaagidde/ET00000000",
+    description: "A vibrant Kannada drama at Kalagrama near Bengaluru University. Duration: 1 hour 15 minutes.",
   },
 ]
 
@@ -270,6 +339,9 @@ export default function EventsPage() {
       Bengali: "bg-green-100 text-green-800",
       Odia: "bg-purple-100 text-purple-800",
       "Hindi + English": "bg-purple-100 text-purple-800",
+      "English, Hindi": "bg-purple-100 text-purple-800", // Added for "Vodka & No Tonic" and "Dhumrapaan"
+      "English, Kannada": "bg-indigo-100 text-indigo-800", // Added for "Jaaji"
+      "Kannada, English": "bg-indigo-100 text-indigo-800", // Added for "Jaaji - Kannada"
       "French/Malayalam": "bg-indigo-100 text-indigo-800",
       Multilingual: "bg-pink-100 text-pink-800",
     }
@@ -401,7 +473,7 @@ export default function EventsPage() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - November 29-30
+                Discover this weekend's exciting theatre performances across Bangalore - December 6-7
               </p>
             </div>
 
