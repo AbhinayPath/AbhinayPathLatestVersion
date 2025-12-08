@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { ShareProfileButton } from "@/components/share-profile-button"
 
 interface Artist {
   id: string
@@ -550,6 +551,7 @@ export default function TheatreArtistsContent() {
                             </div>
                           </div>
                           <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
+                            <ShareProfileButton artistId={artist.id} artistName={artist.name} />
                             {artist.instagram && (
                               <Link href={artist.instagram} target="_blank" rel="noopener noreferrer">
                                 <Button
@@ -719,6 +721,7 @@ export default function TheatreArtistsContent() {
                             </Button>
                           </Link>
                         )}
+                        <ShareProfileButton artistId={artist.id} artistName={artist.name} variant="button" />
                       </div>
                     </div>
                   </div>
