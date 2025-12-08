@@ -18,6 +18,7 @@ import {
   Youtube,
   Award,
   Facebook,
+  ExternalLink,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -510,16 +511,24 @@ export default function TheatreArtistsContent() {
                   <div className="grid md:grid-cols-5 gap-4 sm:gap-6 md:gap-8 p-4 sm:p-6 md:p-8 lg:p-12">
                     {/* Artist Image */}
                     <div className="md:col-span-2">
-                      <div className="relative w-full aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden bg-muted">
-                        <Image
-                          src={artist.image || "/placeholder.svg"}
-                          alt={artist.name}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 40vw"
-                          priority
-                        />
-                      </div>
+                      <Link href={`/theatre-artists/${artist.id}`} className="block">
+                        <div className="relative w-full aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden bg-muted group cursor-pointer">
+                          <Image
+                            src={artist.image || "/placeholder.svg"}
+                            alt={artist.name}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 40vw"
+                            priority
+                          />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                            <span className="text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2">
+                              <ExternalLink className="h-4 w-4" />
+                              View Profile
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
 
                     {/* Artist Details */}
@@ -528,9 +537,14 @@ export default function TheatreArtistsContent() {
                       <div className="space-y-3 sm:space-y-4">
                         <div className="flex items-start justify-between gap-2 sm:gap-4">
                           <div className="flex-1 min-w-0">
-                            <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance break-words leading-tight">
-                              {artist.name}
-                            </h2>
+                            <Link
+                              href={`/theatre-artists/${artist.id}`}
+                              className="hover:text-primary transition-colors"
+                            >
+                              <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance break-words leading-tight hover:underline decoration-primary/50 underline-offset-4">
+                                {artist.name}
+                              </h2>
+                            </Link>
                             {artist.credential && (
                               <div className="mt-2 sm:mt-3 inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 text-primary border border-primary/20">
                                 <Award className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
@@ -669,9 +683,19 @@ export default function TheatreArtistsContent() {
 
                       {/* CTA */}
                       <div className="pt-2 sm:pt-4 flex flex-wrap gap-2 sm:gap-3">
+                        <Link href={`/theatre-artists/${artist.id}`}>
+                          <Button size="sm" variant="default" className="rounded-full text-xs sm:text-sm h-9 sm:h-11">
+                            <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+                            View Full Profile
+                          </Button>
+                        </Link>
                         {artist.email && (
                           <Link href={`mailto:${artist.email}`}>
-                            <Button size="sm" className="rounded-full text-xs sm:text-sm h-9 sm:h-11">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="rounded-full bg-transparent text-xs sm:text-sm h-9 sm:h-11"
+                            >
                               <Mail className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
                               Email
                             </Button>
