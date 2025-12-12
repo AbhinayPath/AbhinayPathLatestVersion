@@ -141,189 +141,128 @@ const events: Event[] = [
 ]
 
 const bangalorePlays: BangalorePlay[] = [
-  // English Plays - December 6-7
+  // English Plays - December 13-14
   {
-    id: "vodka-no-tonic",
-    title: "Vodka & No Tonic – Bengaluru Theatre Festival",
-    venue: "Good Shepherd Auditorium, Bengaluru",
-    date: "Saturday, 6 December 2025, 12:00 PM",
-    language: "English, Hindi",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/vodka-no-tonic-bengaluru-theatre-festival/ET00465411",
-    description:
-      "A bilingual drama at the Bengaluru Theatre Festival. Duration: 1 hour 40 minutes. Age: 12+. Tickets from ₹500.",
-  },
-  {
-    id: "jaaji",
-    title: "Jaaji (Puppet Show)",
-    venue: "Shoonya – Centre for Art and Somatic Practices, Bengaluru",
-    date: "Saturday, 6 December 2025, 6:00 PM",
+    id: "jaaji-dec13",
+    title: "Jaaji",
+    venue: "Ranga Shankara, Bengaluru",
+    date: "Saturday, 13 December 2025",
     language: "English, Kannada",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/jaaji/ET00471630",
+    bookingUrl: "https://in.bookmyshow.com/plays/jaaji/ET00474051",
     description:
-      "A unique puppet show blending English and Kannada at Shoonya. Duration: 1 hour. An intimate theatrical experience.",
+      "An adaptation featuring adventure, comedy, drama, and fantasy. Duration: 1 hour. Age: 6+. Ticket price: ₹300.",
   },
   {
-    id: "einstein-6th-dec",
-    title: "Einstein – Bengaluru Theatre Festival",
+    id: "the-anklet",
+    title: "The Anklet",
+    venue: "Medai - The Stage Bengaluru",
+    date: "Saturday, 13 December 2025",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/anklet/ET00459544",
+    description:
+      "A classic adaptation featuring drama, fantasy, historical, musical, and mythological elements. Duration: 2 hours. Age: 12+. Ticket price: ₹400 onwards.",
+  },
+  {
+    id: "handle-with-care",
+    title: "Handle with Care",
     venue: "Prestige Centre for Performing Arts, Bengaluru",
-    date: "Saturday, 6 December 2025, 7:00 PM",
+    date: "Saturday, 13 December 2025, 12:00 PM",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/einstein-6th-december-bengaluru-theatre-festival/ET00465412",
+    bookingUrl: "https://in.bookmyshow.com/plays/handle-with-care/ET00471110",
+    description: "A compelling drama exploring human connections. Duration: 1 hour. Age: 14+. Ticket price: ₹399.",
+  },
+  {
+    id: "que-cera-cera",
+    title: "Que cera cera",
+    venue: "Bhandutvas, Bengaluru",
+    date: "Saturday, 13 December 2025, 7:00 PM",
+    language: "English",
+    category: "English",
+    bookingUrl: "https://in.bookmyshow.com/plays/threads/ET00469528",
     description:
-      "A captivating exploration of the legendary physicist's life at the Bengaluru Theatre Festival. Duration: 1 hour 30 minutes.",
+      "A comedy-drama that weaves together compelling narratives. Duration: 1 hour 5 minutes. Ticket price: ₹200.",
   },
   {
-    id: "love-algorithms",
-    title: "Love in the Time of Algorithms by The Self Centre",
-    venue: "Underline Center, Bengaluru",
-    date: "Saturday, 6 December 2025, 7:00 PM",
+    id: "4ced-humour",
+    title: "4'ced Humour",
+    venue: "Alliance Francaise, Bengaluru",
+    date: "Sunday, 14 December 2025",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/love-in-the-time-of-algorithms-by-the-self-centre/ET00462659",
+    bookingUrl: "https://in.bookmyshow.com/plays/4-ced-humour/ET00464484",
     description:
-      "A contemporary drama exploring modern romance and technology. Duration: 1 hour 15 minutes. A thought-provoking theatrical experience.",
-  },
-  {
-    id: "nothing-like-lear",
-    title: "Nothing Like Lear – Bengaluru Theatre Festival",
-    venue: "Good Shepherd Auditorium, Bengaluru",
-    date: "Saturday, 6 December 2025, 7:00 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/nothing-like-lear-bengaluru-theatre-festival/ET00465413",
-    description:
-      "A reimagined take on Shakespeare's King Lear at the Bengaluru Theatre Festival. Duration: 1 hour 50 minutes.",
-  },
-  {
-    id: "einstein-7th-dec",
-    title: "Einstein – Bengaluru Theatre Festival",
-    venue: "Prestige Centre for Performing Arts, Bengaluru",
-    date: "Sunday, 7 December 2025, 1:00 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/einstein-7th-november-bengaluru-theatre-festival/ET00465410",
-    description: "Second showing of the captivating exploration of Einstein's life. Duration: 1 hour 30 minutes.",
-  },
-  {
-    id: "once-there-was-a-way",
-    title: "Once There Was a Way",
-    venue: "St. Kuriakose Elias Auditorium, Christ University",
-    date: "Sunday, 7 December 2025, 4:00 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/once-there-was-a-way/ET00468684",
-    description: "An engaging English drama at Christ University auditorium. Duration: 2 hours.",
-  },
-  {
-    id: "dhumrapaan",
-    title: "Dhumrapaan – Bengaluru Theatre Festival",
-    venue: "Good Shepherd Auditorium, Bengaluru",
-    date: "Sunday, 7 December 2025, 7:00 PM",
-    language: "English, Hindi",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/dhumrapaan-bengaluru-theatre-festival/ET00465414",
-    description:
-      "A bilingual drama at the Bengaluru Theatre Festival. Duration: 1 hour 15 minutes. Age: 18+. Tickets from ₹1750.",
+      "A comedy-fantasy performance featuring multiple humorous acts. Duration: 2 hours 30 minutes. Age: 16+. Ticket price: ₹399 onwards.",
   },
 
-  // Hindi Plays - December 6-7
+  // Hindi Plays - December 13-14
   {
-    id: "vodka-no-tonic-hindi",
-    title: "Vodka & No Tonic – Bengaluru Theatre Festival",
-    venue: "Good Shepherd Auditorium, Bengaluru",
-    date: "Saturday, 6 December 2025, 12:00 PM",
-    language: "Hindi, English",
+    id: "adhura",
+    title: "ADHURA – an original (solo) play in Hindi",
+    venue: "Our Theatre Collective, Bengaluru",
+    date: "Sat 13 Dec 2025 – Sun 14 Dec 2025",
+    language: "Hindi",
     category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/vodka-no-tonic-bengaluru-theatre-festival/ET00465411",
+    bookingUrl: "https://in.bookmyshow.com/plays/adhura-an-original-solo-play-in-hindi/ET00472659",
     description:
-      "A bilingual drama blending Hindi and English at the Bengaluru Theatre Festival. Duration: 1 hour 40 minutes. Age: 12+. Tickets from ₹500.",
-  },
-  {
-    id: "dhumrapaan-hindi",
-    title: "Dhumrapaan – Bengaluru Theatre Festival",
-    venue: "Good Shepherd Auditorium, Bengaluru",
-    date: "Sunday, 7 December 2025, 7:00 PM",
-    language: "Hindi, English",
-    category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/dhumrapaan-bengaluru-theatre-festival/ET00465414",
-    description:
-      "A powerful Hindi-English drama at the Bengaluru Theatre Festival. Duration: 1 hour 15 minutes. Age: 18+. Tickets from ₹1750.",
+      "A powerful solo performance featuring the protagonist's journey with references to Bhagat Singh and Karna. Includes a gallery display. Duration: 55 minutes. Age: 16+. Ticket price: ₹300.",
   },
 
-  // Kannada Plays - December 6-7
+  // Kannada Plays - December 13-14
   {
-    id: "gokula-nirgamana",
-    title: "Gokula Nirgamana",
-    venue: "Ravindra Kalakshetra, Bengaluru",
-    date: "Saturday, 6 December 2025, 7:00 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/gokula-nirgamana/ET00000000",
-    description: "A classic Kannada theatrical production at the renowned Ravindra Kalakshetra. Duration: 2 hours.",
-  },
-  {
-    id: "jaaji-kannada",
-    title: "Jaaji (Puppet Show)",
-    venue: "Shoonya – Centre for Art and Somatic Practices, Bengaluru",
-    date: "Saturday, 6 December 2025, 6:00 PM",
-    language: "Kannada, English",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/jaaji/ET00471630",
-    description: "A bilingual puppet show blending Kannada and English traditions. Duration: 1 hour.",
-  },
-  {
-    id: "anu-renu-truna-kaashta",
-    title: "ANU RENU TRUNA KAASHTA",
-    venue: "Suchitra Cinema & Cultural Academy, Bengaluru",
-    date: "Saturday, 6 December 2025, 5:30 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/anu-renu-truna-kaashta/ET00000000",
-    description: "An engaging Kannada production at Suchitra Cinema & Cultural Academy. Duration: 1 hour.",
-  },
-  {
-    id: "mysuru-mallige",
-    title: "Mysuru Mallige",
-    venue: "Ranga Shankara, Bengaluru",
-    date: "Sunday, 7 December 2025, 3:25 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/mysuru-mallige/ET00000000",
-    description: "A beloved Kannada classic at the renowned Ranga Shankara auditorium. Duration: 2 hours.",
-  },
-  {
-    id: "mukhyamantri",
-    title: "Mukhyamantri",
-    venue: "Ranga Shankara, Bengaluru",
-    date: "Sunday, 7 December 2025, 7:25 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/mukhyamantri/ET00000000",
-    description: "A compelling Kannada political drama at Ranga Shankara. Duration: 2 hours.",
-  },
-  {
-    id: "muddannana-promotion-prasanga",
-    title: "Muddannana Promotion Prasanga",
+    id: "tippe-rudra",
+    title: "Tippe Rudra",
     venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
-    date: "Sunday, 7 December 2025, 5:00 PM & 7:00 PM",
+    date: "Saturday, 13 December 2025, 5:15 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/muddannana-promotion-prasanga/ET00000000",
-    description:
-      "An entertaining Kannada production with two shows at Dr. C Ashwath Kala Bhavana. Duration: 1 hour 20 minutes.",
+    bookingUrl: "https://in.bookmyshow.com/plays/tippe-rudra/ET00473388",
+    description: "An engaging Kannada drama performance. Duration: 1 hour 20 minutes. Age: 8+. Ticket price: ₹200.",
   },
   {
-    id: "naanu-polisanaagidde",
-    title: "Naanu Polisanaagidde",
-    venue: "Kalagrama, Bengaluru University, Bengaluru",
-    date: "Sunday, 7 December 2025, 7:00 PM",
+    id: "sanje-haadu",
+    title: "Kannada PLAY Sanje haadu",
+    venue: "Kalagrama, Bengaluru",
+    date: "Saturday, 13 December 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/naanu-polisanaagidde/ET00000000",
-    description: "A vibrant Kannada drama at Kalagrama near Bengaluru University. Duration: 1 hour 15 minutes.",
+    bookingUrl: "https://in.bookmyshow.com/plays/kannada-play-sanje-haadu/ET00471243",
+    description:
+      "A captivating evening performance in Kannada. Duration: 1 hour 50 minutes. Age: 10+. Ticket price: ₹150.",
+  },
+  {
+    id: "aata",
+    title: "Aata",
+    venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
+    date: "Saturday, 13 December 2025, 7:15 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/aata/ET00473411",
+    description:
+      "An engaging theatrical production in Kannada. Duration: 1 hour 20 minutes. Age: 8+. Ticket price: ₹200.",
+  },
+  {
+    id: "supari-kole",
+    title: "Supari Kole by Jyotirmegha",
+    venue: "Suchitra Film Society",
+    date: "Sunday, 14 December 2025",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/supari-kole-by-jyotirmegha/ET00462736",
+    description:
+      "A compelling Kannada production by Jyotirmegha. Duration: 1 hour 20 minutes. Age: 8+. Ticket price: ₹150.",
+  },
+  {
+    id: "raktha-dwaja",
+    title: "Raktha Dwaja",
+    venue: "Kalagrama Bengaluru University, Bengaluru",
+    date: "Sunday, 14 December 2025, 7:00 PM",
+    language: "Kannada",
+    category: "Kannada",
+    bookingUrl: "https://in.bookmyshow.com/plays/raktha-dwaja/ET00473531",
+    description: "A powerful Kannada drama performance. Duration: 1 hour 40 minutes. Age: 5+. Ticket price: ₹150.",
   },
 ]
 
@@ -473,7 +412,7 @@ export default function EventsPage() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - December 6-7
+                Discover this weekend's exciting theatre performances across Bangalore - December 13-14
               </p>
             </div>
 
