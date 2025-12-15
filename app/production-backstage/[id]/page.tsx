@@ -51,11 +51,11 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Section */}
-      <section className="relative py-12 sm:py-16 md:py-20 px-4">
+      <section className="relative py-8 sm:py-12 md:py-16 lg:py-20 px-4">
         <div className="container max-w-6xl">
           {/* Back Button */}
           <Link href="/production-backstage">
-            <Button variant="ghost" size="sm" className="mb-6 sm:mb-8 group">
+            <Button variant="ghost" size="sm" className="mb-4 sm:mb-6 md:mb-8 group">
               <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
               Back to Production & Backstage
             </Button>
@@ -63,7 +63,7 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
 
           {/* Profile Card */}
           <Card className="overflow-hidden border-0 shadow-2xl">
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 p-6 sm:p-8 md:p-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 p-4 sm:p-6 md:p-8 lg:p-12">
               {/* Left Column - Image */}
               <div className="space-y-4">
                 <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
@@ -79,14 +79,14 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
               </div>
 
               {/* Right Column - Details */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Header */}
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-balance leading-tight">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex flex-col xs:flex-row items-start justify-between gap-3 sm:gap-4">
+                    <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-tight">
                       {professional.name}
                     </h1>
-                    <div className="flex gap-2 flex-shrink-0">
+                    <div className="flex gap-2 flex-wrap">
                       <ShareProfileButton
                         artistId={professional.id}
                         artistName={professional.name}
@@ -95,46 +95,58 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
                       />
                       {professional.instagram && (
                         <Link href={professional.instagram} target="_blank" rel="noopener noreferrer">
-                          <Button size="icon" variant="outline" className="rounded-full bg-transparent h-10 w-10">
-                            <Instagram className="h-5 w-5" />
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="rounded-full bg-transparent h-9 w-9 sm:h-10 sm:w-10"
+                          >
+                            <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
                           </Button>
                         </Link>
                       )}
                       {professional.facebook && (
                         <Link href={professional.facebook} target="_blank" rel="noopener noreferrer">
-                          <Button size="icon" variant="outline" className="rounded-full bg-transparent h-10 w-10">
-                            <Facebook className="h-5 w-5" />
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="rounded-full bg-transparent h-9 w-9 sm:h-10 sm:w-10"
+                          >
+                            <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
                           </Button>
                         </Link>
                       )}
                       {professional.youtube && (
                         <Link href={professional.youtube} target="_blank" rel="noopener noreferrer">
-                          <Button size="icon" variant="outline" className="rounded-full bg-transparent h-10 w-10">
-                            <Youtube className="h-5 w-5" />
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="rounded-full bg-transparent h-9 w-9 sm:h-10 sm:w-10"
+                          >
+                            <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
                           </Button>
                         </Link>
                       )}
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm sm:text-base text-muted-foreground">
                     <MapPin className="h-4 w-4 flex-shrink-0" />
-                    <span>
+                    <span className="break-words">
                       {professional.location}, {professional.state}
                     </span>
                   </div>
                 </div>
 
                 {/* Quick Info Grid */}
-                <div className="grid gap-6">
+                <div className="grid gap-4 sm:gap-6">
                   {/* Skills */}
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Briefcase className="h-4 w-4 flex-shrink-0" />
                       <span>Skills & Expertise</span>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {professional.skills.map((skill) => (
-                        <Badge key={skill} variant="secondary" className="text-sm px-3 py-1">
+                        <Badge key={skill} variant="secondary" className="text-xs sm:text-sm px-2 sm:px-3 py-1">
                           {skill}
                         </Badge>
                       ))}
@@ -147,7 +159,7 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
                       <Calendar className="h-4 w-4 flex-shrink-0" />
                       <span>Experience</span>
                     </div>
-                    <p className="text-lg font-semibold">{professional.experience}</p>
+                    <p className="text-base sm:text-lg font-semibold">{professional.experience}</p>
                   </div>
 
                   {/* Contact Info */}
@@ -159,7 +171,7 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
                       </div>
                       <Link
                         href={`mailto:${professional.email}`}
-                        className="text-sm text-primary hover:underline block break-all"
+                        className="text-sm text-primary hover:underline block break-words"
                       >
                         {professional.email}
                       </Link>
@@ -185,48 +197,70 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
                 </div>
 
                 {/* CTAs */}
-                <div className="pt-4 flex flex-wrap gap-3">
+                <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-3">
                   {professional.workLink && (
-                    <Link href={professional.workLink} target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full">
+                    <Link
+                      href={professional.workLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto"
+                    >
+                      <Button className="rounded-full w-full sm:w-auto">
                         <ExternalLink className="h-4 w-4 mr-2" />
                         View Work Portfolio
                       </Button>
                     </Link>
                   )}
                   {professional.auditionVideo && (
-                    <Link href={professional.auditionVideo} target="_blank" rel="noopener noreferrer">
-                      <Button className="rounded-full">
+                    <Link
+                      href={professional.auditionVideo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto"
+                    >
+                      <Button className="rounded-full w-full sm:w-auto">
                         <Video className="h-4 w-4 mr-2" />
                         Watch Audition Video
                       </Button>
                     </Link>
                   )}
                   {professional.whatsapp && (
-                    <Link href={`https://wa.me/${professional.whatsapp}`} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" className="rounded-full bg-transparent">
+                    <Link
+                      href={`https://wa.me/${professional.whatsapp}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto"
+                    >
+                      <Button variant="outline" className="rounded-full bg-transparent w-full sm:w-auto">
                         <Phone className="h-4 w-4 mr-2" />
                         Contact via WhatsApp
                       </Button>
                     </Link>
                   )}
-                  <ShareProfileButton
-                    artistId={professional.id}
-                    artistName={professional.name}
-                    variant="button"
-                    profileType="production-backstage"
-                  />
+                  <div className="w-full sm:w-auto">
+                    <ShareProfileButton
+                      artistId={professional.id}
+                      artistName={professional.name}
+                      variant="button"
+                      profileType="production-backstage"
+                      className="w-full sm:w-auto"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Productions Section */}
-            <div className="border-t bg-muted/30 p-6 sm:p-8 md:p-12">
-              <div className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-semibold font-playfair">Productions Worked With</h2>
+            <div className="border-t bg-muted/30 p-4 sm:p-6 md:p-8 lg:p-12">
+              <div className="space-y-3 sm:space-y-4">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold font-playfair">Productions Worked With</h2>
                 <div className="flex flex-wrap gap-2">
                   {professional.productions.map((prod, index) => (
-                    <Badge key={index} variant="outline" className="text-sm px-4 py-2 bg-background">
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 bg-background"
+                    >
                       {prod}
                     </Badge>
                   ))}
