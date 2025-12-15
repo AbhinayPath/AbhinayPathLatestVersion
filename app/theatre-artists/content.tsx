@@ -225,6 +225,21 @@ const artists: Artist[] = [
     bio: "I am a theatre enthusiast looking for an opportunity to act",
     whatsapp: "7892146961",
   },
+  {
+    id: "madhurima-gupta",
+    name: "Madhurima Gupta",
+    image: "/images/artists/madhurima-gupta.jpg",
+    location: "Bengaluru, Koramangala",
+    age: 45,
+    languages: ["English", "Hindi", "Bengali", "Spanish"],
+    email: "maddurima.g@gmail.com",
+    interests: ["Acting", "Sound Design", "Music"],
+    bio: "Madhurima Gupta is a versatile theatre artist with 8-9 years of acting experience across Kolkata, Bangalore, Hyderabad, and Delhi. She specializes in diverse theatrical forms including Shakespearean, Drawing room drama, Brechtian, Third Theatre, Comedy, and Absurd theatre. Beyond acting, she excels in sound design, creating soundscapes and foley for programs and short films. She has worked with renowned theatre groups including BLT, Forum 3, Dramarsis, Dramanons, Theatricians, Chandrato Collective, Kalayan, and Nilanjan Chowdhury, showcasing her multifaceted talent in singing, keyboard, and technical sound execution.",
+    facebook: "https://www.facebook.com/share/17YxxrdQNx/",
+    whatsapp: "9830079293",
+    credential:
+      "Specializations: Shakespearean, Drawing room drama, Brechtian, Third Theatre, Comedy, Absurd theatre, Sound design",
+  },
 ]
 
 const locations = [...new Set(artists.map((artist) => artist.location.split(",")[0].trim()))].sort()
