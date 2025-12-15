@@ -28,6 +28,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { productionProfessionals } from "@/lib/data/production-backstage"
+import { ShareProfileButton } from "@/components/share-profile-button"
 
 export default function ProductionBackstageContent() {
   const [filters, setFilters] = useState({
@@ -306,16 +307,23 @@ export default function ProductionBackstageContent() {
                   <div className="grid md:grid-cols-5 gap-4 sm:gap-6 md:gap-8 p-4 sm:p-6 md:p-8 lg:p-12">
                     {/* Image */}
                     <div className="md:col-span-2">
-                      <div className="relative w-full aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden bg-muted">
-                        <Image
-                          src={professional.image || "/placeholder.svg"}
-                          alt={professional.name}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 40vw"
-                          priority
-                        />
-                      </div>
+                      <Link href={`/production-backstage/${professional.id}`} className="block group">
+                        <div className="relative w-full aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden bg-muted">
+                          <Image
+                            src={professional.image || "/placeholder.svg"}
+                            alt={professional.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 40vw"
+                            priority
+                          />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                            <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              View Profile
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
 
                     {/* Details */}
@@ -324,9 +332,14 @@ export default function ProductionBackstageContent() {
                       <div className="space-y-3 sm:space-y-4">
                         <div className="flex items-start justify-between gap-2 sm:gap-4">
                           <div className="flex-1 min-w-0">
-                            <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance break-words leading-tight">
-                              {professional.name}
-                            </h2>
+                            <Link
+                              href={`/production-backstage/${professional.id}`}
+                              className="hover:underline decoration-2 underline-offset-4"
+                            >
+                              <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance break-words leading-tight">
+                                {professional.name}
+                              </h2>
+                            </Link>
                             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-2 sm:mt-3 text-muted-foreground text-sm sm:text-base">
                               <MapPin className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                               <span className="break-words">
@@ -335,6 +348,12 @@ export default function ProductionBackstageContent() {
                             </div>
                           </div>
                           <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
+                            <ShareProfileButton
+                              artistId={professional.id}
+                              artistName={professional.name}
+                              variant="icon"
+                              profileType="production-backstage"
+                            />
                             {professional.instagram && (
                               <Link href={professional.instagram} target="_blank" rel="noopener noreferrer">
                                 <Button
@@ -449,37 +468,37 @@ export default function ProductionBackstageContent() {
 
                       {/* CTA */}
                       <div className="pt-2 sm:pt-4 flex flex-wrap gap-2 sm:gap-3">
+                        <Link href={`/production-backstage/${professional.id}`}>
+                          <Button className="rounded-full text-xs sm:text-sm h-9 sm:h-11">View Full Profile</Button>
+                        </Link>
                         {professional.workLink && (
                           <Link href={professional.workLink} target="_blank" rel="noopener noreferrer">
-                            <Button className="rounded-full text-xs sm:text-sm h-9 sm:h-11">
+                            <Button
+                              variant="outline"
+                              className="rounded-full bg-transparent text-xs sm:text-sm h-9 sm:h-11"
+                            >
                               <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
-                              View Work Portfolio
+                              View Portfolio
                             </Button>
                           </Link>
                         )}
                         {professional.auditionVideo && (
                           <Link href={professional.auditionVideo} target="_blank" rel="noopener noreferrer">
-                            <Button className="rounded-full text-xs sm:text-sm h-9 sm:h-11">
-                              <Video className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
-                              Watch Audition Video
-                            </Button>
-                          </Link>
-                        )}
-                        {professional.whatsapp && (
-                          <Link
-                            href={`https://wa.me/${professional.whatsapp}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
                             <Button
                               variant="outline"
                               className="rounded-full bg-transparent text-xs sm:text-sm h-9 sm:h-11"
                             >
-                              <Phone className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
-                              Contact via WhatsApp
+                              <Video className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+                              Audition Video
                             </Button>
                           </Link>
                         )}
+                        <ShareProfileButton
+                          artistId={professional.id}
+                          artistName={professional.name}
+                          variant="button"
+                          profileType="production-backstage"
+                        />
                       </div>
                     </div>
                   </div>
