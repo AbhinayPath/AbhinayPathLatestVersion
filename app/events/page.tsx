@@ -60,7 +60,7 @@ interface BangalorePlay {
   venue: string
   date: string
   language: string
-  category: "English" | "Hindi" | "Kannada" | "Odia"
+  category: "English" | "Hindi" | "Kannada" | "Odia" | "Marathi"
   bookingUrl: string
   description?: string
 }
@@ -141,128 +141,107 @@ const events: Event[] = [
 ]
 
 const bangalorePlays: BangalorePlay[] = [
-  // English Plays - December 13-14
+  // English Plays - December 20-21
   {
-    id: "jaaji-dec13",
-    title: "Jaaji",
-    venue: "Ranga Shankara, Bengaluru",
-    date: "Saturday, 13 December 2025",
-    language: "English, Kannada",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/jaaji/ET00474051",
-    description:
-      "An adaptation featuring adventure, comedy, drama, and fantasy. Duration: 1 hour. Age: 6+. Ticket price: ₹300.",
-  },
-  {
-    id: "the-anklet",
-    title: "The Anklet",
-    venue: "Medai - The Stage Bengaluru",
-    date: "Saturday, 13 December 2025",
+    id: "fever-dreams",
+    title: "Fever Dreams – Illusion and Magic",
+    venue: "Medai – The Stage, Bengaluru",
+    date: "Sunday, 21 December 2025, 6:00 PM",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/anklet/ET00459544",
+    bookingUrl: "https://in.bookmyshow.com/plays/fever-dreams/ET00468137",
     description:
-      "A classic adaptation featuring drama, fantasy, historical, musical, and mythological elements. Duration: 2 hours. Age: 12+. Ticket price: ₹400 onwards.",
+      "A theatrical experience blending illusion, dreamlike elements, and performance that blurs the lines between imagination and reality. Duration: 1 Hour. Age: 16+. Ticket price: From ₹500 approx.",
   },
   {
-    id: "handle-with-care",
-    title: "Handle with Care",
-    venue: "Prestige Centre for Performing Arts, Bengaluru",
-    date: "Saturday, 13 December 2025, 12:00 PM",
+    id: "jingle-all-the-way",
+    title: "JINGLE ALL THE WAY (Christmas Special)",
+    venue: "Namma Ashram, Bengaluru",
+    date: "Sunday, 21 December 2025, 5:30 PM",
     language: "English",
     category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/handle-with-care/ET00471110",
-    description: "A compelling drama exploring human connections. Duration: 1 hour. Age: 14+. Ticket price: ₹399.",
-  },
-  {
-    id: "que-cera-cera",
-    title: "Que cera cera",
-    venue: "Bhandutvas, Bengaluru",
-    date: "Saturday, 13 December 2025, 7:00 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/threads/ET00469528",
+    bookingUrl: "https://in.bookmyshow.com/plays/jingle-all-the-way-christmas-special/ET00475467",
     description:
-      "A comedy-drama that weaves together compelling narratives. Duration: 1 hour 5 minutes. Ticket price: ₹200.",
-  },
-  {
-    id: "4ced-humour",
-    title: "4'ced Humour",
-    venue: "Alliance Francaise, Bengaluru",
-    date: "Sunday, 14 December 2025",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/4-ced-humour/ET00464484",
-    description:
-      "A comedy-fantasy performance featuring multiple humorous acts. Duration: 2 hours 30 minutes. Age: 16+. Ticket price: ₹399 onwards.",
+      "A festive, interactive Christmas storytelling theatre experience with seasonal themes, fantasy, and family-friendly fun. Duration: ~1 Hour. Age: All ages. Ticket price: ~₹350.",
   },
 
-  // Hindi Plays - December 13-14
+  // Hindi Plays - December 20-21
   {
-    id: "adhura",
-    title: "ADHURA – an original (solo) play in Hindi",
-    venue: "Our Theatre Collective, Bengaluru",
-    date: "Sat 13 Dec 2025 – Sun 14 Dec 2025",
+    id: "apne-ghar-jaisa",
+    title: "Apne Ghar Jaisa",
+    venue: "Ranga Shankara, Bengaluru",
+    date: "Sunday, 21 December 2025",
     language: "Hindi",
     category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/adhura-an-original-solo-play-in-hindi/ET00472659",
+    bookingUrl: "https://in.bookmyshow.com/plays/apne-ghar-jaisa/ET00385811",
+    description: "A compelling drama exploring the essence of home. Duration: 1 hour. Age: 16+. Ticket price: ₹250.",
+  },
+  {
+    id: "mombattikaar",
+    title: "Mombattikaar",
+    venue: "Samarthanam Auditorium – TheatreNama, Bengaluru",
+    date: "Sunday, 21 December 2025",
+    language: "Hindi",
+    category: "Hindi",
+    bookingUrl: "https://in.bookmyshow.com/plays/mombattikaar/ET00471714",
     description:
-      "A powerful solo performance featuring the protagonist's journey with references to Bhagat Singh and Karna. Includes a gallery display. Duration: 55 minutes. Age: 16+. Ticket price: ₹300.",
+      "A contemporary drama paying tribute to theatrical excellence. Duration: 1 hour 15 minutes. Age: 12+. Ticket price: ₹249 onwards.",
+  },
+  {
+    id: "mahabharata-dialogues",
+    title: "Mahabharata Dialogues (Koramangala)",
+    venue: "Dialogues Cafe, Koramangala, Bengaluru",
+    date: "Sunday, 21 December 2025, 5:30 PM",
+    language: "English, Hindi",
+    category: "Hindi",
+    bookingUrl: "https://in.bookmyshow.com/plays/mahabharatha-dialogues-koramangala/ET00357289",
+    description:
+      "An interactive storytelling experience exploring the epic Mahabharata. Duration: 2 hours. Age: All ages. Ticket price: ₹499.",
   },
 
-  // Kannada Plays - December 13-14
+  // Kannada Plays - December 20-21
   {
-    id: "tippe-rudra",
-    title: "Tippe Rudra",
-    venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
-    date: "Saturday, 13 December 2025, 5:15 PM",
+    id: "kamaroopigal",
+    title: "Kamaroopigal",
+    venue: "Ranga Shankara, Bengaluru",
+    date: "Saturday, 20 December 2025",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/tippe-rudra/ET00473388",
-    description: "An engaging Kannada drama performance. Duration: 1 hour 20 minutes. Age: 8+. Ticket price: ₹200.",
+    bookingUrl: "https://in.bookmyshow.com/plays/kamaroopigal/ET00352979",
+    description: "A captivating Kannada theatre play exploring human emotions and relationships.",
   },
   {
-    id: "sanje-haadu",
-    title: "Kannada PLAY Sanje haadu",
-    venue: "Kalagrama, Bengaluru",
-    date: "Saturday, 13 December 2025, 7:00 PM",
+    id: "iddaga-nimdu-kaddaga-namdu",
+    title: "Iddaga Nimdu Kaddaga Namdu",
+    venue: "Vyoma ArtSpace and Studio Theatre, Bengaluru",
+    date: "Saturday, 20 December 2025",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/kannada-play-sanje-haadu/ET00471243",
-    description:
-      "A captivating evening performance in Kannada. Duration: 1 hour 50 minutes. Age: 10+. Ticket price: ₹150.",
+    bookingUrl: "https://in.bookmyshow.com/plays/iddaga-nimdu-kaddaga-namdu/ET00427874",
+    description: "An interactive Kannada theatrical production engaging audiences in thought-provoking narratives.",
   },
   {
-    id: "aata",
-    title: "Aata",
-    venue: "Dr. C Ashwath Kala Bhavana, Bengaluru",
-    date: "Saturday, 13 December 2025, 7:15 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/aata/ET00473411",
-    description:
-      "An engaging theatrical production in Kannada. Duration: 1 hour 20 minutes. Age: 8+. Ticket price: ₹200.",
-  },
-  {
-    id: "supari-kole",
-    title: "Supari Kole by Jyotirmegha",
-    venue: "Suchitra Film Society",
-    date: "Sunday, 14 December 2025",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/supari-kole-by-jyotirmegha/ET00462736",
-    description:
-      "A compelling Kannada production by Jyotirmegha. Duration: 1 hour 20 minutes. Age: 8+. Ticket price: ₹150.",
-  },
-  {
-    id: "raktha-dwaja",
-    title: "Raktha Dwaja",
+    id: "maayaa-dweepa",
+    title: "Maayaa Dweepa",
     venue: "Kalagrama Bengaluru University, Bengaluru",
-    date: "Sunday, 14 December 2025, 7:00 PM",
+    date: "Sunday, 21 December 2025, 7:00 PM",
     language: "Kannada",
     category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/raktha-dwaja/ET00473531",
-    description: "A powerful Kannada drama performance. Duration: 1 hour 40 minutes. Age: 5+. Ticket price: ₹150.",
+    bookingUrl: "https://in.bookmyshow.com/plays/maayaa-dweepa/ET00472222",
+    description:
+      "A Kannada play featuring adaptation, comedy, drama, and musical elements exploring fantastical themes. Ticket price: ₹150 approx.",
+  },
+
+  // Marathi Plays - December 20-21
+  {
+    id: "labhale-amhas-bhagya",
+    title: "Labhale Amhas Bhagya",
+    venue: "Chowdiah Memorial Hall, Bengaluru",
+    date: "Sunday, 21 December 2025, 10:00 AM",
+    language: "Marathi",
+    category: "Odia",
+    bookingUrl: "https://in.bookmyshow.com/plays/labhale-amhas-bhagya/ET00469405",
+    description: "A powerful Marathi drama production. Duration: 3 Hours. Age: 5yrs+. Ticket price: ₹500 onwards.",
   },
 ]
 
@@ -277,6 +256,7 @@ export default function EventsPage() {
       English: "bg-blue-100 text-blue-800",
       Bengali: "bg-green-100 text-green-800",
       Odia: "bg-purple-100 text-purple-800",
+      Marathi: "bg-pink-100 text-pink-800",
       "Hindi + English": "bg-purple-100 text-purple-800",
       "English, Hindi": "bg-purple-100 text-purple-800", // Added for "Vodka & No Tonic" and "Dhumrapaan"
       "English, Kannada": "bg-indigo-100 text-indigo-800", // Added for "Jaaji"
@@ -299,6 +279,7 @@ export default function EventsPage() {
   const hindiPlays = bangalorePlays.filter((play) => play.category === "Hindi")
   const kannadaPlays = bangalorePlays.filter((play) => play.category === "Kannada")
   const odiaPlays = bangalorePlays.filter((play) => play.category === "Odia")
+  const marathiPlays = bangalorePlays.filter((play) => play.category === "Marathi")
 
   const PlayCard = ({ play }: { play: BangalorePlay }) => (
     <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 h-full flex flex-col">
@@ -315,11 +296,11 @@ export default function EventsPage() {
         </div>
 
         <div className="space-y-2 text-xs sm:text-sm text-gray-600 flex-grow">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Calendar className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
             <span>{play.date}</span>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-3">
             <MapPin className="h-3 w-3 sm:h-4 sm:w-4 shrink-0 mt-0.5" />
             <span className="line-clamp-2 leading-tight">{play.venue}</span>
           </div>
@@ -412,13 +393,13 @@ export default function EventsPage() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - December 13-14
+                Discover this weekend's exciting theatre performances across Bangalore - December 20-21
               </p>
             </div>
 
             <Tabs defaultValue="english" className="w-full">
               <div className="overflow-x-auto mb-6 sm:mb-8">
-                <TabsList className="grid w-full grid-cols-4 min-w-[400px] sm:min-w-0">
+                <TabsList className="grid w-full grid-cols-5 min-w-[400px] sm:min-w-0">
                   <TabsTrigger value="english" className="text-xs sm:text-sm px-2 sm:px-4">
                     English ({englishPlays.length})
                   </TabsTrigger>
@@ -430,6 +411,9 @@ export default function EventsPage() {
                   </TabsTrigger>
                   <TabsTrigger value="odia" className="text-xs sm:text-sm px-2 sm:px-4">
                     Odia ({odiaPlays.length})
+                  </TabsTrigger>
+                  <TabsTrigger value="marathi" className="text-xs sm:text-sm px-2 sm:px-4">
+                    Marathi ({marathiPlays.length})
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -461,6 +445,14 @@ export default function EventsPage() {
               <TabsContent value="odia" className="mt-6 sm:mt-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {odiaPlays.map((play) => (
+                    <PlayCard key={play.id} play={play} />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="marathi" className="mt-6 sm:mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {marathiPlays.map((play) => (
                     <PlayCard key={play.id} play={play} />
                   ))}
                 </div>
