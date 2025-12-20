@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Calendar,
@@ -15,7 +14,6 @@ import {
   Globe,
   Instagram,
   Award,
-  Info,
   Theater,
   Mail,
 } from "lucide-react"
@@ -356,28 +354,55 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Privacy & Attribution Notice */}
-      <section className="py-6 bg-blue-50 border-b">
+      {/* Featured Play Spotlight */}
+      <section className="py-8 sm:py-12 bg-gradient-to-br from-amber-50 via-white to-orange-50 border-y-4 border-[#7E1F2E]">
         <div className="container px-4">
-          <Alert className="max-w-4xl mx-auto border-blue-200 bg-blue-50 mb-4">
-            <Info className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-blue-800 leading-relaxed">
-              <strong>Privacy & Data Handling Notice:</strong> This event information is shared for educational and
-              promotional purposes. For Bharat Rang Mahotsav 2026, all application data is handled directly by the
-              National School of Drama (NSD) through their official portal. For Gorakhpur Rang Mahotsav, data is managed
-              by Abhiyan Theatre Group. Abhinayपथ does not collect, store, or process any personal data related to these
-              events and serves only as an information platform.
-            </AlertDescription>
-          </Alert>
-          <Alert className="max-w-4xl mx-auto border-orange-200 bg-orange-50">
-            <Award className="h-4 w-4 text-orange-600" />
-            <AlertDescription className="text-orange-800 leading-relaxed">
-              <strong>Attribution Notice:</strong> All festival details are sourced from official announcements by the
-              National School of Drama (NSD) and Abhiyan Theatre Group. All credits and copyrights belong to their
-              respective organizers. For the most current information and official applications, please visit their
-              official websites or contact them directly.
-            </AlertDescription>
-          </Alert>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center gap-2 bg-[#7E1F2E] text-white px-4 py-2 rounded-full mb-4 text-sm font-semibold">
+                <span className="animate-pulse">★</span>
+                FEATURED THIS WEEKEND
+                <span className="animate-pulse">★</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-gray-900 mb-4">
+                Apne Ghar Jaisa
+              </h2>
+              <p className="text-lg sm:text-xl text-gray-700 mb-2">A compelling drama exploring the essence of home</p>
+              <div className="flex flex-wrap items-center justify-center gap-4 text-sm sm:text-base text-gray-600 mb-6">
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5 text-[#7E1F2E]" />
+                  <span className="font-semibold">Sunday, 21 December 2025</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-[#7E1F2E]" />
+                  <span>Ranga Shankara, Bengaluru</span>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+                <Badge className="bg-orange-100 text-orange-800 border-orange-300 px-3 py-1 text-sm">Hindi</Badge>
+                <span className="text-gray-600">•</span>
+                <span className="text-gray-700">1 hour duration</span>
+                <span className="text-gray-600">•</span>
+                <span className="text-gray-700">Age 16+</span>
+                <span className="text-gray-600">•</span>
+                <span className="text-gray-700 font-semibold">₹250</span>
+              </div>
+              <Link
+                href="https://in.bookmyshow.com/plays/apne-ghar-jaisa/ET00385811"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <Button
+                  size="lg"
+                  className="bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
+                  Book Tickets Now
+                  <ExternalLink className="h-5 w-5 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
