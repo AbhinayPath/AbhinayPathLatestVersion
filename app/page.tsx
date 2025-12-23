@@ -29,9 +29,12 @@ export default function Home() {
               Abhinayपथ Community Access
             </Badge>
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              India&apos;s First Platform for Theatre Artists & Backstage Professionals
+              A Professional Home for Theatre Practice & Technical Craft
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed">Join The Revolution of Artists</p>
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed">
+              Build a structured theatre portfolio, explore serious training and theatre festivals, and present your
+              work with clarity
+            </p>
             <div className="pt-4 space-y-4">
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/auditions" className="flex-1">
