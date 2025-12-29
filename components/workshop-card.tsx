@@ -20,6 +20,8 @@ interface WorkshopCardProps {
     registrationLink: string
     image?: string
     highlights?: string[]
+    tags?: string[]
+    category?: string
   }
   variant?: "compact" | "full"
 }
@@ -101,6 +103,19 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
       </div>
 
       <div className="p-4 sm:p-5 flex-1 flex flex-col">
+        {workshop.tags && workshop.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {workshop.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="bg-amber-50 border border-amber-200 text-amber-800 px-2.5 py-1 rounded-full text-xs font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
         <p className="text-primary font-medium text-sm mb-3 flex items-center">
           <span className="inline-block w-5 h-5 bg-primary/10 rounded-full mr-2 flex items-center justify-center">
             <span className="text-primary text-xs">👤</span>

@@ -51,7 +51,7 @@ export default function Home() {
                     variant="outline"
                     className="w-full rounded-full border-2 border-white text-white hover:bg-white hover:text-[#2D1A54] text-lg px-8 py-6 h-auto font-medium transition-all bg-transparent"
                   >
-                    Browse Workshops <ArrowRight className="ml-2 h-5 w-5" />
+                    Training & Education <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
               </div>
@@ -145,7 +145,7 @@ export default function Home() {
                     variant="outline"
                     className="rounded-full mt-2 border-[#2D1A54] text-[#2D1A54] hover:bg-[#2D1A54] hover:text-white transition-all bg-transparent"
                   >
-                    Browse Workshops <ArrowRight className="ml-1 h-4 w-4" />
+                    Training & Education <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>

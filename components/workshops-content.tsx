@@ -4,400 +4,307 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Search, Filter, ChevronDown, ChevronUp, Star, X } from "lucide-react"
 import WorkshopCard from "@/components/workshop-card"
 import MobileFilterDrawer from "@/components/mobile-filter-drawer"
 import ActiveFilters from "@/components/active-filters"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import Link from "next/link"
+import { Badge } from "@/components/ui/badge"
+import { BookOpen, Calendar, MapPin, Clock, IndianRupee, ExternalLink, Tag } from "lucide-react"
 
 // Verified workshops data
-const workshops = [
+interface Workshop {
+  id: number
+  title: string
+  trainer: string
+  institution: string
+  location: string
+  state: string
+  date: string
+  time: string
+  description: string
+  image?: string
+  registrationLink: string
+  featured?: boolean
+  price: string
+  contact: string
+  email: string
+  eligibility: string
+  venue: string
+  includes?: string
+  category: string
+  tags: string[]
+}
+
+const workshops: Workshop[] = [
   {
-    id: 49,
-    title: "Puppetry Festival Mysore – Workshop on Puppetry",
-    trainer: "Umashanker Periodi, Shashidara Adapa, Prasanna, Gagan & others",
+    id: 1,
+    title: "FTII / CFOL — Masterclass of Acting (Mumbai)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "15–24 Jan 2026",
+    time: "10 AM–5 PM",
+    description:
+      "🎭 Master the craft of acting with FTII's intensive masterclass in Mumbai. Comprehensive training covering performance techniques, character development, and scene work.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/masterclass-of-acting-in-mumbai-15-24th-january-2026",
+    featured: true,
+    price: "₹25,000",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+ (as on 1 Jan 2026), HSC/12th (10th in exceptional cases), Indian nationals",
+    venue: "Mumbai",
+    includes: "10-day intensive training + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 2,
+    title: "FTII / CFOL — Michael Chekhov Acting Workshop (Goa)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Saligao, Goa",
+    state: "Goa",
+    date: "15–21 Jan 2026",
+    time: "10 AM–5 PM",
+    description:
+      "🎭 Explore the Michael Chekhov acting technique in the beautiful setting of Goa. Learn psychological gesture, imagination, and character transformation methods.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/michael-chekhov-acting-workshop-in-goa-15th-to-21st-jan-2026",
+    featured: true,
+    price: "₹12,000",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Open to all",
+    venue: "Villa Azavado, Saligao, Goa",
+    includes: "7-day workshop + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 3,
+    title: "FTII / CFOL — Basic Course in Screen Acting (New Delhi)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "21–27 Jan 2026",
+    time: "10 AM–5 PM",
+    description:
+      "🎬 Learn fundamentals of screen acting for film and television. Comprehensive training in camera techniques, close-ups, and on-screen performance.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-new-delhi-21-27-january-2026",
+    featured: true,
+    price: "₹9,900",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+",
+    venue: "NIV Art Centre and Film Studios, Neb Sarai (near IGNOU), New Delhi",
+    includes: "7-day training + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 4,
+    title: "FTII / CFOL — Digital Cinematography (Pune)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "05–17 Jan 2026",
+    time: "10 AM–5 PM",
+    description:
+      "🎥 Master digital cinematography techniques, camera operations, lighting, and visual storytelling. Hands-on training with professional equipment.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-digital-cinematography-in-pune-05-17-january-2026",
+    featured: true,
+    price: "Contact for details",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+",
+    venue: "FTII Pune",
+    includes: "Comprehensive cinematography training + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 5,
+    title: "All the World's a Stage - Intro to Acting (The Self Centre)",
+    trainer: "The Self Centre",
+    institution: "The Self Centre",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "Sun, 18 Jan 2026",
+    time: "10:00 AM",
+    description:
+      "🎭 Introduction to acting workshop covering basic acting techniques, improvisation, and character development. Perfect for beginners exploring theatre.",
+    registrationLink:
+      "https://www.district.in/events/all-the-worlds-a-stage-intro-to-acting-workshop-by-the-self-centre-jan18-2026-buy-tickets",
+    featured: false,
+    price: "₹1,499",
+    contact: "Via district.in",
+    email: "Via district.in",
+    eligibility: "Open to all",
+    venue: "Underline Center, Domlur, Bengaluru",
+    includes: "4-hour workshop + certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 6,
+    title: "Moving Parts (Arambol, Goa) — Body & Performance Course: Part Two",
+    trainer: "Moving Parts",
+    institution: "Moving Parts",
+    location: "Arambol, Goa",
+    state: "Goa",
+    date: "5–30 Jan 2026",
+    time: "Full day intensive",
+    description:
+      "🧍 Intensive physical theatre training focusing on neutral mask journey, hero's journey, tragic chorus, ensemble work, monologues and vocal technique.",
+    registrationLink: "https://www.movingparts.art/training",
+    featured: true,
+    price: "Contact for details",
+    contact: "Via website",
+    email: "Via website",
+    eligibility: "Open to serious practitioners",
+    venue: "Arambol, Goa",
+    includes: "Part of 4-part intensive Dec 2025–Mar 2026",
+    category: "Movement & Physical Theatre",
+    tags: ["Long-term Course"],
+  },
+  {
+    id: 7,
+    title: "FTII / CFOL — Workshop: Script to Screen (Only for Women) (Pune)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Pune",
+    state: "Maharashtra",
+    date: "20–29 Jan 2026",
+    time: "10 AM–5 PM",
+    description:
+      "🎬 Exclusive workshop for women covering the complete journey from script development to screen. Learn storytelling, direction, and production.",
+    registrationLink:
+      "https://ftii.ac.in/p/vtwa/workshop-on-script-to-screen-only-for-women-in-pune-20-29-january-2026",
+    featured: true,
+    price: "₹18,000",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "Women only, 18+",
+    venue: "Vijay Tendulkar Writer's Academy, Kothrud, Pune",
+    includes: "10-day intensive + FTII Certificate",
+    category: "Direction & Dramaturgy",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 8,
+    title: "FTII / CFOL — Basic Course in Screenplay Writing (Mumbai)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "25–31 Jan 2026",
+    time: "10 AM–5 PM",
+    description:
+      "✍️ Learn fundamentals of screenplay writing including story structure, character development, dialogue, and formatting for cinema.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screenplay-writing-in-mumbai-25-31-january-2026",
+    featured: true,
+    price: "Contact for details",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+",
+    venue: "Mumbai",
+    includes: "7-day training + FTII Certificate",
+    category: "Direction & Dramaturgy",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 9,
+    title: "FTII / CFOL — Basic Course in Screenplay Writing (Goa)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Goa",
+    state: "Goa",
+    date: "25–31 Jan 2026",
+    time: "10 AM–5 PM",
+    description:
+      "✍️ Learn screenplay writing in the inspiring setting of Goa. Master story structure, character arcs, and cinematic storytelling techniques.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screenplay-writing-in-goa-25th-to-31st-jan-2026",
+    featured: true,
+    price: "Contact for details",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+",
+    venue: "Goa",
+    includes: "7-day training + FTII Certificate",
+    category: "Direction & Dramaturgy",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 10,
+    title: "FTII / CFOL — The Art of Foley Sound FX for Films (Mumbai)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "21–23 Jan 2026",
+    time: "Full day sessions",
+    description:
+      "🎙️ Learn the art of creating Foley sound effects for films. Hands-on training in sound design, recording techniques, and audio post-production.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/the-art-of-foley-sound-fx-for-films-in-mumbai-21-23-jan-2026",
+    featured: true,
+    price: "Contact for details",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+",
+    venue: "Mumbai",
+    includes: "3-day intensive + FTII Certificate",
+    category: "Design & Production",
+    tags: ["Short-term Workshop"],
+  },
+  {
+    id: 11,
+    title: "IIET (Mysuru) — Educational Theatre National Workshop",
+    trainer: "Rajneesh Bisht",
     institution: "Indian Institute of Educational Theatre (IIET)",
     location: "Mysuru",
     state: "Karnataka",
-    date: "16th to 20th December 2025",
-    time: "10 AM to 4 PM",
+    date: "22–29 Jan 2026",
+    time: "9:00 AM–6:00 PM daily",
     description:
-      "A unique puppetry workshop guided by a distinguished panel of master puppeteers, educationalists, and artists. Organised by IIET in collaboration with Astikya Foundation and supported by Rajiv Gandhi Foundation. Learn various puppetry techniques from experienced practitioners in the field.",
-    image: "/placeholder.svg?height=400&width=600",
-    registrationLink: "https://wa.me/919448871815",
+      "🏛️ Intensive 8-day residential workshop on educational theatre led by Rajneesh Bisht, guided by Prasanna. Includes accommodation and meals.",
+    registrationLink:
+      "https://masthmysore.com/events/educational-theatre-national-workshop-mysuru-rajneesh-bisht-prasanna/",
     featured: true,
-    price: "₹3,000 (Students & Theatre Practitioners), ₹5,000 (Others)",
-    contact: "9448871815",
-    email: "Via WhatsApp",
-    eligibility: "Open to all - students, theatre practitioners, and enthusiasts",
-    mode: "Offline",
-    venue: "IIET, Hardwick School Campus, J.L.B. Road, Mysuru",
-    duration: "5 days",
-    includes: "Hands-on puppetry training + Certificate",
+    price: "₹16,000 (includes breakfast, lunch, accommodation)",
+    contact: "Via website",
+    email: "Via website",
+    eligibility: "Open to all",
+    venue: "Hardwicke School Campus, J.L.B. Road, Mysuru (IIET)",
+    includes: "Accommodation + 2 meals/day + Certificate",
+    category: "Institutional Programs",
+    tags: ["Institutional Training", "Residency"],
   },
   {
-    id: 33,
-    title: "NSD's One-Year Acting Course – Mumbai",
+    id: 12,
+    title: "NSD Mumbai Centre — Weekend Acting Course / 3-Month Certificate",
     trainer: "NSD Faculty",
     institution: "National School of Drama (NSD)",
     location: "Mumbai",
     state: "Maharashtra",
-    date: "15th October 2025",
-    time: "Monday–Friday, 8 AM to 6 PM",
+    date: "Admissions open",
+    time: "Part-time, non-residential",
     description:
-      "🎭 Comprehensive one-year full-time acting course by NSD Mumbai. Learn directly from renowned industry professionals with intensive, practical training for camera acting. Perfect for beginners and aspiring professionals in films, TV, and web series. Two intensive semesters with step-by-step learning and professional guidance.",
-    image: "/images/acting-workshop.png",
-    registrationLink: "https://nsd.gov.in/delhi/index.php/admission-notice-mumbai-2025/",
+      "🎭 NSD invites applications for Basic Three-Month Certificate Course in Dramatics and Weekend Acting Course. Part-time, non-residential programs.",
+    registrationLink: "https://onlineadmission.nsd.gov.in/mumbai/",
     featured: true,
-    price: "₹5,00,000 (Full Course) or ₹3,00,000 per semester",
-    contact: "011-23389402 / 23387916",
+    price: "Contact for details (Application fee: ₹100)",
+    contact: "Via NSD website",
     email: "Via NSD website",
-    eligibility: "12th Pass, Age 18+",
-    mode: "Offline",
-    applicationDeadline: "1st October 2025",
-    auditionDate: "10th October 2025",
-    selection: "Online/Offline Audition (mandatory)",
-    capacity: "Limited seats available",
-    language: "Hindi & English",
-    certification: "NSD Certificate",
-    venue: "602 Durga Chambers, Andheri West, Mumbai",
-    duration: "1 Year (Full-Time) - 1440 hours total",
-    courseStructure: "Semester 1: Foundation Training (720 hours), Semester 2: Industry-Oriented Training (720 hours)",
-    includes: "Professional industry training + NSD Certificate + Real-world preparation",
-  },
-  {
-    id: 29,
-    title: "NSD Delhi: Sunday Club Part-I (2025–26) - Children's Theatre Workshop",
-    trainer: "Sanskaar Rang Toli (T.I.E. Company)",
-    institution: "National School of Drama (NSD)",
-    location: "New Delhi",
-    state: "Delhi",
-    date: "Last week of August 2025 – January 2026",
-    time: "Saturdays & Sundays + Daily sessions during Winter Vacation",
-    description:
-      "🎭 A unique opportunity for children aged 8-17 to learn theatre at India's premier drama institution! This extension of NSD's Summer Theatre Workshop focuses on devising performances through improvisation, play-making, and collaborative theatre. Culminates in a Festival of Devised Performances in January 2026.",
-    image: "/images/acting-workshop.png",
-    registrationLink: "https://nsd.gov.in",
-    featured: true,
-    price: "₹8,000 (General), ₹2,000 (SC/ST/OBC/EWS), Free (BPL) + ₹150 processing fee",
-    contact: "NSD Campus, New Delhi",
-    email: "Via NSD website",
-    eligibility: "Children aged 8-17 years (must have participated in NSD Summer Theatre Workshop)",
-    mode: "Offline",
-    applicationDeadline: "25 August 2025, 6:00 PM",
-    applicationStart: "15 August 2025, 10:00 AM",
-    selection: "First-Come, First-Served basis",
-    capacity: "Limited seats available",
-    language: "Hindi & English",
-    certification: "NSD Certificate + Festival Performance",
-    venue: "NSD Campus or other designated spaces in Delhi",
-    duration: "5 months (August 2025 – January 2026)",
-    includes: "Festival of Devised Performances + NSD Certificate",
-  },
-  {
-    id: 30,
-    title: "Improv Theatre Workshop by White Board – Bengaluru",
-    trainer: "White Board Theatre Group",
-    institution: "White Board Theatre Group",
-    location: "Bengaluru",
-    state: "Karnataka",
-    date: "23 & 24 August 2025",
-    time: "9:00 AM – 2:00 PM",
-    description:
-      "🎭 Beginner or experienced — this is for anyone ready to break habits and try something new. Even trained actors will find improv like learning a fresh dance form. Unlearn. Go deeper. Feel the freedom. Learn core tools of improv, devising through collaboration, mind & body prep, ensemble thinking, and the difference between acting vs improv.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSfN161-59dE3oo0wuVc2EwWNQ2T5FXmwVoVuQOTjcTK_nivRA/viewform",
-    featured: true,
-    price: "₹2,999 (Early Bird: ₹2,499, Student: ₹2,199)",
-    contact: "Via registration form",
-    email: "Via Instagram @whit.eboard",
-    eligibility: "Open to all - beginners and experienced actors welcome",
-    mode: "Offline",
-    venue: "Obeya Nest, HSR Layout, Bengaluru",
-    duration: "2 days (Weekend Workshop)",
-    includes: "Complete improv training + performance techniques",
-  },
-  {
-    id: 31,
-    title: "Educational Theatre National Workshop – IIET, Mysore",
-    trainer: "Rajneesh Bisht",
-    institution: "Indian Institute of Educational Theatre (IIET)",
-    location: "Mysore",
-    state: "Karnataka",
-    date: "6 – 15 October 2025",
-    time: "Full day sessions",
-    description:
-      "🎭 A comprehensive 10-day workshop for actors & educators by renowned theatre director Rajneesh Bisht. Develop acting skills, confidence & teamwork through improvisation, empathy & communication training. Learn theatre as a tool for student growth and innovative classroom management strategies.",
-    image: "/images/iiet-logo.png",
-    registrationLink: "https://www.indiantheatrefoundation.org/theatre-in-education-workshop/",
-    featured: true,
-    price: "₹16,000 (includes accommodation + 2 meals/day)",
-    contact: "Via registration link",
-    email: "Via IIET website",
-    eligibility: "Open to actors and educators",
-    mode: "Offline",
-    venue: "Indian Institute of Educational Theatre, Hardwicke School, JLB Road, Mysore",
-    accommodation: "Youth Hostel, Saraswathipuram, Mysore",
-    duration: "10 days",
-    includes: "Accommodation + 2 meals/day + Tea/Coffee + Workshop materials",
-    instagramLink: "https://www.instagram.com/iietmysuru?igsh=NHdqZ2FsdmEwdTZ3",
-  },
-  {
-    id: 34,
-    title: "FTII Pune: Basic Acting Workshop for Children",
-    trainer: "Megh Varn Pant",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "18–26 October 2025",
-    time: "Morning: 9:30 AM – 12:30 PM (Ages 8–13), Afternoon: 2:00 PM – 5:00 PM (Ages 13–17)",
-    description:
-      "🎭 A special on-campus acting workshop exclusively for children at FTII! Learn theatre games, improvisation, storytelling, Navrasas, voice training, monologue work, and audition techniques. Led by FTII alumnus and experienced acting coach Megh Varn Pant with 18+ years of teaching experience.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://ftii.ac.in/p/courses-for-children/basic-acting-workshop-for-children-in-pune-18-26-october-2025-1",
-    featured: true,
-    price: "₹9,000 (excludes meals)",
-    contact: "020–25580085",
-    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
-    eligibility: "Children aged 8-17, minimum 3rd std. pass (2nd std. in exceptional cases)",
-    mode: "Offline",
-    applicationDeadline: "30 September 2025, 6:00 PM IST",
-    selection: "First-Come, First-Served basis",
-    capacity: "25 per batch (Minimum 20 required per batch)",
-    language: "English & Hindi",
-    certification: "FTII & CFOL participation certificate (90% attendance required)",
-    venue: "FTII's Vijay Tendulkar Writers' Academy Campus, Pune",
-    duration: "9 days (including Saturdays & Sundays)",
-    courseDirector: "Megh Varn Pant (FTII alumnus 2004–06, actor & coach with 18+ years teaching experience)",
-    includes: "Theatre games, improvisation, storytelling, voice training, monologue work, audition techniques",
-    highlights: [
-      "Children's Acting",
-      "Theatre Games",
-      "Improvisation",
-      "Storytelling",
-      "Voice Training",
-      "Audition Techniques",
-    ],
-  },
-  {
-    id: 37,
-    title: "FTII Pune: Basic Course in Digital Cinematography",
-    trainer: "Rakesh Bhilare",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "08–20 December 2025",
-    time: "10 AM – 5 PM",
-    description:
-      "🎥 Learn how to see light. Frame truth. Capture emotion. A comprehensive 12-day cinematography course at FTII covering camera & composition, light & exposure, movement & framing, filters & lighting setup, and 6-shot continuity exercise. Led by award-winning cinematographer Rakesh Bhilare with 12+ years in the film industry.",
-    image: "/images/acting-workshop.png",
-    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-digital-cinematography-in-pune-08-20-december-2025",
-    featured: true,
-    price: "₹15,000 (Hostel optional: ₹4,200 for 14 days, triple share)",
-    contact: "020–25580085",
-    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
-    eligibility: "Age 18+",
-    mode: "Offline",
-    applicationDeadline: "10 November 2025, 6:00 PM IST",
-    selection: "First-Come, First-Served basis",
-    capacity: "24 seats",
-    language: "Hindi & English",
-    certification: "FTII & CFOL participation certificate",
-    venue: "Vijay Tendulkar Writer's Academy, Kothrud, Pune",
-    duration: "12 days (Sunday off)",
-    courseDirector: "Rakesh Bhilare (Cinematographer with 12+ years in film industry, FTII Alumnus)",
-    includes: "Camera & composition training + Lighting setup + 6-shot continuity exercise + FTII Certificate",
-    highlights: [
-      "Camera & Composition",
-      "Light & Exposure",
-      "Movement & Framing",
-      "Filters & Lighting Setup",
-      "6-Shot Continuity Exercise",
-      "Industry Expert Mentor",
-    ],
-  },
-  {
-    id: 42,
-    title: "ACT IT OUT – 7 Days Theatre Workshop",
-    trainer: "Mr. Arun Srivastava",
-    institution: "Vinod Rastogi Smriti Sansthan",
-    location: "Prayagraj",
-    state: "Uttar Pradesh",
-    date: "24th October 2025",
-    time: "Everyday 10:00 AM",
-    description:
-      "🎭 Unleash your hidden performer & step into the world of stage! A comprehensive 7-day theatre workshop covering basic understanding of theatre & human activities, physical exercises & theatre games, script reading, pronunciation & diction, work on Rasa's & Bhava, and improvisation & performance techniques. Under the supervision of Ajay Mukherjee and mentored by Mr. Arun Srivastava (Research Scholar, University of Rajasthan | Alumnus – Mandi School of Drama & Pondicherry University).",
-    image: "/images/acting-workshop.png",
-    registrationLink: "https://forms.gle/9Dw8N1eJDCNpE3Mb7",
-    featured: true,
-    price: "₹500",
-    contact: "+91 7783912449",
-    email: "Via registration form",
-    eligibility: "Open to all",
-    mode: "Offline",
-    certification: "Certificate will be provided",
-    venue: "Maharashtra Lok Sewa Mandal, Alopibagh, Prayagraj",
-    duration: "7 days",
-    supervisor: "Ajay Mukherjee",
-    language: "Hindi & English",
-    includes: "Certificate + Comprehensive theatre training",
-    highlights: [
-      "Basic understanding of theatre & human activities",
-      "Physical exercises & theatre games",
-      "Script reading, pronunciation & diction",
-      "Work on Rasa's & Bhava",
-      "Improvisation & performance techniques",
-    ],
-    socialMedia: "@Officialvrss",
-  },
-  {
-    id: 45,
-    title: "FTII Foundation Course in Filmmaking – Goa",
-    trainer: "Avinash & Jasmine Roy (National Award-winning filmmakers)",
-    institution: "Film and Television Institute of India (FTII) & Arthouse Film Academy",
-    location: "Saligao, Goa",
-    state: "Goa",
-    date: "10–23 December 2025",
-    time: "10 AM – 5 PM",
-    description:
-      "🎬 Learn filmmaking hands-on in Goa! A comprehensive 14-day intensive course covering writing, direction, cinematography & editing under National Award-winning filmmakers Avinash & Jasmine Roy. Perfect for aspiring filmmakers seeking practical skills in a short-term program. Limited to 18 seats only.",
-    image: "/images/acting-workshop.png",
-    registrationLink: "https://ftii.ac.in/p/vtwa/foundation-course-in-filmmaking-in-goa-10-23-december-2025",
-    featured: true,
-    price: "₹29,000 (excludes food & accommodation)",
-    contact: "020–25580085",
-    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
-    eligibility: "Age 18+",
-    mode: "Offline",
-    applicationDeadline: "20 November 2025 (First-Come, First-Served basis)",
-    selection: "First-Come, First-Served basis",
-    capacity: "18 seats only",
-    language: "Hindi & English",
-    certification: "FTII Certificate on completion",
-    venue: "Villa Azavado, Saligao, Goa",
-    duration: "14 days (Intensive full-time program)",
-    courseDirector: "Avinash & Jasmine Roy (National Award-winning filmmakers)",
-    includes: "Writing + Direction + Cinematography + Editing + FTII Certificate",
-    highlights: [
-      "Hands-on filmmaking training",
-      "Writing & Storytelling",
-      "Direction Techniques",
-      "Cinematography Fundamentals",
-      "Editing & Post-Production",
-      "National Award-winning mentors",
-    ],
-  },
-  {
-    id: 46,
-    title: "FTII Short-Term Course – Multi-Camera TV Production",
-    trainer: "Prof. Sandeep Shahare (Head of TV Engineering, FTII)",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Pune",
-    state: "Maharashtra",
-    date: "1–5 December 2025",
-    time: "9 AM – 6:30 PM",
-    description:
-      "📺 Master multi-camera technical operations for live TV! Learn hands-on with professional equipment — cameras, audio & lighting consoles, vision mixers, teleprompters. Produce your own 5-min TV program under expert guidance. Perfect for aspiring TV production professionals.",
-    image: "/images/acting-workshop.png",
-    registrationLink:
-      "https://ftii.ac.in/p/vtwa/introduction-to-multi-camera-technical-operations-for-tv-program-production-01-05-december-2025",
-    featured: true,
-    price: "₹5,000 (Hostel optional: ₹1,800 for 6 days)",
-    contact: "020–25580085",
-    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
-    eligibility: "Age 18+",
-    mode: "Offline",
-    applicationDeadline: "10 November 2025, 6:00 PM IST",
-    selection: "First-Come, First-Served basis",
-    capacity: "20 seats only",
-    language: "Hindi & English",
-    certification: "FTII & CFOL participation certificate",
-    venue: "FTII Pune",
-    duration: "5 days (Intensive)",
-    courseDirector: "Prof. Sandeep Shahare (Head of TV Engineering, FTII)",
-    includes:
-      "Multi-camera operations + Professional equipment training + 5-min TV program production + FTII Certificate",
-    highlights: [
-      "Multi-Camera Operations",
-      "Live TV Production",
-      "Professional Equipment Training",
-      "Vision Mixers & Teleprompters",
-      "Audio & Lighting Consoles",
-      "Produce Your Own TV Program",
-    ],
-  },
-  {
-    id: 47,
-    title: "FTII Basic Course in Smartphone Filmmaking – Delhi",
-    trainer: "Sanjeev Sood (Veteran Cinematographer & FTII Alumnus)",
-    institution: "Film and Television Institute of India (FTII)",
-    location: "Delhi",
-    state: "Delhi",
-    date: "15–19 December 2025",
-    time: "10 AM – 5 PM",
-    description:
-      "📱 Turn your phone into a powerful filmmaking tool! Learn to shoot, light, edit & tell stories using just your smartphone. Create your own short film in 5 days under veteran cinematographer Sanjeev Sood, FTII alumnus. Perfect for aspiring filmmakers on a budget.",
-    image: "/images/acting-workshop.png",
-    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-smartphone-filmmaking-in-delhi-15-19-december-2025",
-    featured: true,
-    price: "₹7,000",
-    contact: "020–25580085",
-    email: "info.cfol@ftii.ac.in / ftiicfol@gmail.com",
-    eligibility: "Age 18+",
-    mode: "Offline",
-    applicationDeadline: "10 November 2025 (First-Come, First-Served basis)",
-    selection: "First-Come, First-Served basis",
-    capacity: "30 seats only",
-    language: "Hindi & English",
-    certification: "FTII Certificate on completion",
-    venue: "Triveni Kala Sangam, Mandi House, Delhi",
-    duration: "5 days (Intensive)",
-    courseDirector: "Sanjeev Sood (Veteran Cinematographer & FTII Alumnus)",
-    includes: "Smartphone filmmaking techniques + Short film creation + FTII Certificate + Stay assistance available",
-    highlights: [
-      "Smartphone Cinematography",
-      "Mobile Editing",
-      "Lighting for Smartphones",
-      "Storytelling Techniques",
-      "Create Your Own Short Film",
-      "Veteran FTII Mentor",
-    ],
-  },
-  {
-    id: 48,
-    title: "The Essential Body: Journey of the Neutral Mask",
-    trainer: "Ana Mirtha Sariego",
-    institution: "Sariego Theatre",
-    location: "Bengaluru",
-    state: "Karnataka",
-    date: "15–16 November 2025",
-    time: "11 AM – 7 PM",
-    description:
-      "🎭 An immersive 16-hour physical theatre workshop inspired by Jacques Lecoq's pedagogy. Explore body awareness, rhythm, neutrality, and authentic presence through the Neutral Mask. Dissolve inner blockages and connect mind, emotion, and action for a truly alive stage presence.",
-    image: "/images/sariego-theatre-logo.png",
-    registrationLink: "https://wa.me/447810802938",
-    featured: true,
-    price: "₹4,500 (Early Bird) | ₹5,000 (On Spot)",
-    contact: "+44 7810 802938",
-    email: "Via WhatsApp",
-    eligibility: "Open to actors, dancers, movers & students – all levels welcome",
-    mode: "Offline",
-    venue: "Laya Abhinaya Centre for Performing Arts, JP Nagar 8th Phase, Bengaluru",
-    duration: "2 days (16 hours total)",
-    language: "English",
-    includes: "Neutral Mask training + Physical theatre techniques + Certificate",
-    highlights: [
-      "Jacques Lecoq Pedagogy",
-      "Neutral Mask Work",
-      "Body Awareness",
-      "Rhythm & Movement",
-      "Authentic Presence",
-      "International Theatre Expert",
-    ],
-    socialMedia: "@sariegotheatre | @anamirtha.theatre",
-    website: "sariegotheatre.com",
+    eligibility: "Age 18–60, 12th pass",
+    venue: "NSD Mumbai Centre",
+    includes: "NSD Certificate upon completion",
+    category: "Institutional Programs",
+    tags: ["Institutional Training", "Long-term Course"],
   },
 ]
 
@@ -407,7 +314,18 @@ const cities = [...new Set(workshops.map((workshop) => workshop.location))].sort
 const trainers = [...new Set(workshops.map((workshop) => workshop.trainer))].sort()
 const institutions = [...new Set(workshops.map((workshop) => workshop.institution))].sort()
 
+const categories = [
+  { id: "all", name: "All", icon: "🎭" },
+  { id: "Acting & Performance", name: "Acting & Performance", icon: "🎭" },
+  { id: "Movement & Physical Theatre", name: "Movement & Physical Theatre", icon: "🧍" },
+  { id: "Voice & Speech", name: "Voice & Speech", icon: "🗣" },
+  { id: "Direction & Dramaturgy", name: "Direction & Dramaturgy", icon: "🎬" },
+  { id: "Design & Production", name: "Design & Production", icon: "🎨" },
+  { id: "Institutional Programs", name: "Institutional Programs", icon: "🏛" },
+]
+
 function WorkshopsContent() {
+  const [activeCategory, setActiveCategory] = useState("all")
   const [filters, setFilters] = useState({
     search: "",
     city: "",
@@ -422,6 +340,7 @@ function WorkshopsContent() {
 
   const filteredWorkshops = workshops.filter((workshop) => {
     return (
+      (activeCategory === "all" || workshop.category === activeCategory) &&
       (filters.search === "" ||
         workshop.title.toLowerCase().includes(filters.search.toLowerCase()) ||
         workshop.description.toLowerCase().includes(filters.search.toLowerCase())) &&
@@ -448,7 +367,6 @@ function WorkshopsContent() {
     })
   }
 
-  // Featured workshops
   const featuredWorkshops = workshops.filter((workshop) => workshop.featured)
   const hasActiveFilters = Object.values(filters).some((value) => value !== "")
 
@@ -456,10 +374,10 @@ function WorkshopsContent() {
     <div className="container py-6 md:py-16 px-3 sm:px-6">
       <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
         <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-3 text-gray-800">
-          Workshops & <span className="text-primary">Training</span>
+          Training & <span className="text-primary">Education</span>
         </h1>
         <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto">
-          Enhance your skills with professional workshops and training sessions led by renowned theater professionals
+          Enhance your skills with professional training and education sessions led by renowned theater professionals
           from across the country.
         </p>
       </div>
@@ -471,7 +389,7 @@ function WorkshopsContent() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               type="text"
-              placeholder="Search workshops"
+              placeholder="Search programs"
               className="pl-10 rounded-full"
               value={filters.search}
               onChange={(e) => handleFilterChange("search", e.target.value)}
@@ -488,12 +406,28 @@ function WorkshopsContent() {
         </div>
       )}
 
+      {/* Category Tabs Navigation */}
+      <Tabs value={activeCategory} onValueChange={setActiveCategory} className="mb-6">
+        <TabsList className="w-full flex flex-wrap justify-start gap-2 bg-transparent h-auto p-0 mb-6">
+          {categories.map((category) => (
+            <TabsTrigger
+              key={category.id}
+              value={category.id}
+              className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-white px-4 py-2 text-sm"
+            >
+              <span className="mr-2">{category.icon}</span>
+              {isMobile ? category.name.split(" ")[0] : category.name}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+
       {/* Mobile Filter Button and Count */}
       <div className="mb-6 flex justify-between items-center">
         <h2 className="font-playfair text-lg md:text-xl font-bold">
-          {hasActiveFilters
-            ? `${filteredWorkshops.length} Workshop${filteredWorkshops.length !== 1 ? "s" : ""} Found`
-            : "All Workshops"}
+          {hasActiveFilters || activeCategory !== "all"
+            ? `${filteredWorkshops.length} Program${filteredWorkshops.length !== 1 ? "s" : ""} Found`
+            : "All Programs"}
         </h2>
 
         <div className="flex items-center gap-2">
@@ -531,7 +465,7 @@ function WorkshopsContent() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 type="text"
-                placeholder="Search workshops"
+                placeholder="Search programs"
                 className="pl-10 rounded-full"
                 value={filters.search}
                 onChange={(e) => handleFilterChange("search", e.target.value)}
@@ -608,11 +542,11 @@ function WorkshopsContent() {
         </div>
       )}
 
-      {featuredWorkshops.length > 0 && !hasActiveFilters && !isSmallMobile && (
+      {featuredWorkshops.length > 0 && !hasActiveFilters && activeCategory === "all" && !isSmallMobile && (
         <div className="mb-10 md:mb-16">
           <div className="flex items-center mb-4 md:mb-6">
             <Star className="h-5 w-5 text-secondary mr-2 fill-secondary" />
-            <h2 className="font-playfair text-xl md:text-2xl font-bold">Featured Workshops</h2>
+            <h2 className="font-playfair text-xl md:text-2xl font-bold">Featured Programs</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
             {featuredWorkshops.slice(0, 2).map((workshop) => (
@@ -623,18 +557,74 @@ function WorkshopsContent() {
       )}
 
       {/* Workshop Cards */}
-      {filteredWorkshops.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-          {filteredWorkshops.map((workshop) => (
-            <WorkshopCard key={workshop.id} workshop={workshop} variant={isMobile ? "compact" : "full"} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-8 md:py-12 bg-gray-50 rounded-xl">
-          <p className="text-gray-500 mb-4">No workshops match your current filters.</p>
-          <Button onClick={clearFilters} variant="outline" className="rounded-full bg-transparent">
-            Clear Filters
-          </Button>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+        {filteredWorkshops.map((workshop) => (
+          <Link
+            key={workshop.id}
+            href={`/workshops/${workshop.id}`}
+            className="group block rounded-xl border bg-card p-6 shadow-sm transition-all hover:shadow-md hover:border-primary"
+          >
+            <div className="space-y-4">
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2">
+                {workshop.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="text-xs">
+                    <Tag className="mr-1 h-3 w-3" />
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-balance group-hover:text-primary transition-colors line-clamp-2">
+                {workshop.title}
+              </h3>
+
+              {/* Details */}
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="flex items-start gap-2">
+                  <Calendar className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span className="line-clamp-1">{workshop.date}</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span className="line-clamp-1">
+                    {workshop.location}, {workshop.state}
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span className="line-clamp-1">{workshop.time}</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <IndianRupee className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span className="font-semibold text-foreground line-clamp-1">{workshop.price}</span>
+                </div>
+              </div>
+
+              {/* Institution */}
+              <div className="flex items-center gap-2 text-sm">
+                <BookOpen className="h-4 w-4 text-primary" />
+                <span className="font-medium line-clamp-1">{workshop.institution}</span>
+              </div>
+
+              {/* View Details Button */}
+              <Button
+                variant="outline"
+                className="w-full group-hover:bg-primary group-hover:text-primary-foreground bg-transparent"
+              >
+                View Details
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Empty State */}
+      {filteredWorkshops.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">No workshops found in this category.</p>
         </div>
       )}
     </div>
