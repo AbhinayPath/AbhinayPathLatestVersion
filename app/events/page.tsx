@@ -2,874 +2,480 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-  Calendar,
-  MapPin,
-  Clock,
-  ExternalLink,
-  Star,
-  Trophy,
-  Phone,
-  Globe,
-  Instagram,
-  Award,
-  Theater,
-  Mail,
-} from "lucide-react"
+import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive } from "lucide-react"
 import Link from "next/link"
 
-interface Event {
+interface Festival {
   id: string
-  title: string
-  organizer: string
+  name: string
+  city: string
+  country: string
+  languages: string
+  scale: string
+  duration: string
+  month: string
   dates: string
-  competitionDates: string
-  lastSubmissionDate: string
-  venue: string
-  language: string
-  category: "Festival" | "Competition"
-  type: "Theatre" | "Street Play"
-  registrationUrl: string
-  description: string
-  featured: boolean
-  specialEvent: string
-  topic: string
-  groupSize: string
-  registrationFee: string
-  prizes: {
-    first: string
-    second: string
-    third: string
-  }
-  contact: {
-    phones: string[]
-    website: string
-    instagram: string
-    email?: string
-  }
+  submissionDeadline: string
+  status: "open" | "upcoming" | "past"
+  selectionProcess: string
   eligibility: string
-  additionalInfo?: string[]
+  travelSupport?: string
+  visaSupport?: string
+  registrationFee?: string
+  description: string
+  link: string
+  featured?: boolean
+  isFellowship?: boolean
 }
 
-interface BangalorePlay {
-  id: string
-  title: string
-  venue: string
-  date: string
-  language: string
-  category: "English" | "Hindi" | "Kannada" | "Odia" | "Marathi"
-  bookingUrl: string
-  description?: string
-}
-
-const events: Event[] = [
+const festivals: Festival[] = [
+  // January Festivals
   {
     id: "bharat-rang-mahotsav-2026",
-    title: "25th Bharat Rang Mahotsav 2026 – International Theatre Festival of India",
-    organizer: "National School of Drama (NSD), New Delhi",
+    name: "Bharat Rang Mahotsav 2026 (NSD)",
+    city: "New Delhi",
+    country: "India",
+    languages: "Multilingual (Indian & International)",
+    scale: "International",
+    duration: "Multi-week (Jan–Feb)",
+    month: "January",
     dates: "January–February 2026",
-    competitionDates: "January–February 2026",
-    lastSubmissionDate: "25th October 2025 till 12:00 Midnight",
-    venue: "Delhi & other cities in India and abroad",
-    language: "Multilingual",
-    category: "Festival",
-    type: "Theatre",
-    registrationUrl: "https://brmapplication.nsd.gov.in/",
+    submissionDeadline: "Expected: August–September 2025",
+    status: "upcoming",
+    selectionProcess: "Open Call + Selection Committee",
+    eligibility: "Professional theatre groups, repertory companies, institutions (India & International)",
     description:
-      "The world's largest theatre festival celebrating 25 years of international theatrical excellence. This prestigious festival brings together drama institutions, theatre companies, and directors from India and abroad to showcase the finest in contemporary theatre across multiple venues and cities.",
+      "The world's largest theatre festival celebrating international theatrical excellence. NSD's premier festival brings together drama institutions, theatre companies, and directors from India and abroad to showcase contemporary, traditional, and experimental theatre across multiple venues.",
+    link: "https://brmapplication.nsd.gov.in/brm_notification_english.pdf",
     featured: true,
-    specialEvent: "25th Edition - Silver Jubilee Celebration",
-    topic: "International Theatre Excellence & Cultural Exchange",
-    groupSize: "Theatre Companies & Institutions",
-    registrationFee: "₹250 (India & SAARC) | ₹500 (Others)",
-    prizes: {
-      first: "International Recognition",
-      second: "Global Platform",
-      third: "Cultural Exchange",
-    },
-    contact: {
-      phones: [],
-      website: "www.nsd.gov.in",
-      instagram: "@nsd_delhi",
-      email: "festivalcell@gmail.com",
-    },
+  },
+  {
+    id: "itfok-2026",
+    name: "International Theatre Festival of Kerala (ITFoK) 2026",
+    city: "Thrissur",
+    country: "India (Kerala)",
+    languages: "Multilingual",
+    scale: "International",
+    duration: "8 days",
+    month: "January",
+    dates: "Late January 2026",
+    submissionDeadline: "Expected: September–October 2025",
+    status: "upcoming",
+    selectionProcess: "Open Call / Curated",
+    eligibility: "Student groups, professional companies, international ensembles",
+    description:
+      "An international platform for contemporary, experimental, and culturally rooted theatre works. The festival welcomes student groups, professional companies, and international ensembles to participate in Kerala's premier theatre celebration.",
+    link: "https://theatrefestivalkerala.com/",
+  },
+  {
+    id: "kala-ghoda-2026",
+    name: "Kala Ghoda Arts Festival 2026 – Theatre Section",
+    city: "Mumbai",
+    country: "India",
+    languages: "Multilingual",
+    scale: "National",
+    duration: "9 days",
+    month: "January",
+    dates: "31 Jan – 8 Feb 2026",
+    submissionDeadline: "9 Nov 2025",
+    status: "past",
+    selectionProcess: "Open Call + Curated Selection",
+    eligibility: "Theatre groups, independent artists, production houses",
+    description:
+      "Mumbai's premier arts festival featuring an avant-garde theatre section. The festival aims for linguistic and cultural diversity, selecting work based on quality, originality, and alignment with the festival's theme.",
+    link: "https://www.mumbaitheatreguide.com/dramas/Articles/25/sep/kala-ghoda-arts-festival-2026-call-for-entries-theatre-section.asp",
+  },
+  {
+    id: "triveni-2026",
+    name: "Triveni Theatre Festival 2026",
+    city: "New Delhi",
+    country: "India",
+    languages: "Not specified",
+    scale: "Regional (Delhi-NCR)",
+    duration: "8 days",
+    month: "January",
+    dates: "17–24 Jan 2026",
+    submissionDeadline: "25 Oct 2025",
+    status: "past",
+    selectionProcess: "Open Call",
+    eligibility: "Theatre groups based in Delhi-NCR",
+    description:
+      "A regional theatre festival celebrating Delhi-NCR's vibrant theatre community. Organized by Triveni Kala Sangam with support from Rukavipa Foundation, the festival features free entry performances for the general public and theatre enthusiasts.",
+    link: "https://www.facebook.com/triveninewdelhi/",
+  },
+
+  // March Festivals
+  {
+    id: "meta-2026",
+    name: "META – Mahindra Excellence in Theatre Awards 2026",
+    city: "New Delhi",
+    country: "India",
+    languages: "Multilingual (Indian languages)",
+    scale: "National",
+    duration: "7 days",
+    month: "March",
+    dates: "March 2026",
+    submissionDeadline: "15th January 2026",
+    status: "open",
+    selectionProcess: "Open Call + Jury Selection",
+    eligibility: "Professional theatre groups & directors (India)",
+    description:
+      "India's most prestigious theatre awards celebrating excellence across proscenium, physical theatre, puppetry, and musical theatre. The festival takes place at premium venues like Kamani Auditorium and Shri Ram Centre, featuring jury-selected productions competing for national recognition.",
+    link: "https://metawards.com/",
+    featured: true,
+  },
+
+  // May Festivals
+  {
+    id: "outnow-2026",
+    name: "OUTNOW! Festival 2026",
+    city: "Bremen",
+    country: "Germany",
+    languages: "Multilingual / English-friendly",
+    scale: "International",
+    duration: "5 days",
+    month: "May",
+    dates: "May 2026",
+    submissionDeadline: "Expected: October–November 2025",
+    status: "upcoming",
+    selectionProcess: "Open Call",
+    eligibility: "Professional & experimental theatre / performance groups (International)",
+    travelSupport: "Yes (travel + accommodation + meals)",
+    description:
+      "Bremen's international platform for experimental and contemporary performance. The festival actively supports international participation with comprehensive travel, accommodation, and meal provisions for selected artists and companies.",
+    link: "https://outnowbremen.de/en/open-call-2026",
+  },
+  {
+    id: "novi-sad-2026",
+    name: "Novi Sad Theatre Festival — Serbia",
+    city: "Novi Sad",
+    country: "Serbia",
+    languages: "Not publicly specified",
+    scale: "International",
+    duration: "Festival month: May 2026",
+    month: "May",
+    dates: "May 2026",
+    submissionDeadline: "15 Nov 2025",
+    status: "past",
+    selectionProcess: "Open call + Competition + International jury",
+    eligibility: "Apply via organiser link (not fully specified)",
+    travelSupport: "Yes (travel support + accommodation + full board for selected)",
+    description:
+      "ASSITEJ International theatre festival featuring competition-based selection through an international jury. Selected participants receive comprehensive support including travel, accommodation, and full board during the festival period.",
+    link: "https://assitej-international.org/2025/09/16/open-call-novi-sad-theatre-festival/",
+  },
+  {
+    id: "torino-fringe-2026",
+    name: "Torino Fringe Festival 2026",
+    city: "Turin (Torino)",
+    country: "Italy",
+    languages: "Multilingual (not restricted)",
+    scale: "International",
+    duration: "13 days (19–31 May 2026)",
+    month: "May",
+    dates: "19–31 May 2026",
+    submissionDeadline: "21 Oct 2025",
+    status: "past",
+    selectionProcess: "Open Call",
     eligibility:
-      "Drama Institutions, Theatre Companies & Theatre Directors (India & abroad). Only plays previously performed for the public with minimum 60 minutes duration.",
-    additionalInfo: [
-      "Productions can be submitted under 10 categories",
-      "Only plays previously performed for the public are eligible",
-      "Minimum duration: 60 minutes",
-      "Offline submissions will not be accepted",
-      "NSD reserves the right to change or cancel the festival schedule",
-    ],
+      "Theatre + performance + music + dance + circus + stand-up (Italian & international artists/companies)",
+    description:
+      "Turin's international fringe festival celebrating contemporary and mixed performance forms. The multi-venue festival welcomes diverse art forms from theatre and performance to music, dance, circus, and stand-up comedy, attracting both local and international audiences.",
+    link: "https://www.tofringe.it/call-2026-eng/",
   },
   {
-    id: "gorakhpur-rang-mahotsav-2025",
-    title: "3rd Gorakhpur Rang Mahotsav 2025 – National Theatre Festival",
-    organizer: "Abhiyan Theatre Group, Gorakhpur",
-    dates: "11th to 15th October 2025",
-    competitionDates: "6th October – 10th October 2025",
-    lastSubmissionDate: "5th October 2025",
-    venue: "Gorakhpur",
-    language: "Hindi",
-    category: "Festival",
-    type: "Theatre",
-    registrationUrl:
-      "https://surveyheart.com/form/68c17c6071e428b25f8045bd?fbclid=PAVERTVgM3eatleHRuA2FlbQIxMAABp7q-Ss95hd9qOoUm-wd2UzJYzd-X_SBuo3gKNxPL-QRAC9KtNH86REvFUjbW_aem_Haq5gk4kNuUv7nZU_xHG5g",
+    id: "theatertreffen-forum-2026",
+    name: "International Forum @ Theatertreffen 2026 — Berlin",
+    city: "Berlin",
+    country: "Germany",
+    languages: "Not specified",
+    scale: "International",
+    duration: "17 days (1–17 May 2026)",
+    month: "May",
+    dates: "1–17 May 2026",
+    submissionDeadline: "30 Nov 2025 (23:59 CET)",
+    status: "past",
+    selectionProcess: "Open applications + Fellows selection",
+    eligibility: "Theatre professionals / makers (forum fellowship)",
+    travelSupport: "Yes (scholarship covers travel & accommodation for fellows)",
     description:
-      "A prestigious national theatre festival celebrating the art of theatre with competitions, performances, and cultural exchange.",
-    featured: false,
-    specialEvent: "Nukkad Natak Pratiyogita (Street Play Competition)",
-    topic: "Influence of Social Media (सोशल मीडिया का प्रभाव)",
-    groupSize: "8 to 12 participants in a group",
-    registrationFee: "₹500",
-    prizes: {
-      first: "₹5,000 + Memento",
-      second: "₹2,500 + Memento",
-      third: "₹1,100 + Memento",
-    },
-    contact: {
-      phones: ["+91 7897591044", "+91 6390027730"],
-      website: "www.nationaltheatrefestival.in",
-      instagram: "@nationaltheatrefest",
-    },
-    eligibility: "Open entry for all organizations",
-  },
-]
-
-const bangalorePlays: BangalorePlay[] = [
-  // English Plays - December 20-21
-  {
-    id: "fever-dreams",
-    title: "Fever Dreams – Illusion and Magic",
-    venue: "Medai – The Stage, Bengaluru",
-    date: "Sunday, 21 December 2025, 6:00 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/fever-dreams/ET00468137",
-    description:
-      "A theatrical experience blending illusion, dreamlike elements, and performance that blurs the lines between imagination and reality. Duration: 1 Hour. Age: 16+. Ticket price: From ₹500 approx.",
-  },
-  {
-    id: "jingle-all-the-way",
-    title: "JINGLE ALL THE WAY (Christmas Special)",
-    venue: "Namma Ashram, Bengaluru",
-    date: "Sunday, 21 December 2025, 5:30 PM",
-    language: "English",
-    category: "English",
-    bookingUrl: "https://in.bookmyshow.com/plays/jingle-all-the-way-christmas-special/ET00475467",
-    description:
-      "A festive, interactive Christmas storytelling theatre experience with seasonal themes, fantasy, and family-friendly fun. Duration: ~1 Hour. Age: All ages. Ticket price: ~₹350.",
+      "A prestigious fellowship within one of Berlin's major theatre festivals. This highly valuable opportunity is designed for theatre professionals and makers, providing selected fellows with comprehensive support including travel and accommodation to attend the festival's professional forum program.",
+    link: "https://www.berlinerfestspiele.de/en/theatertreffen/das-festival/theatertreffen-blog/open-call",
+    isFellowship: true,
   },
 
-  // Hindi Plays - December 20-21
+  // June Festivals
   {
-    id: "apne-ghar-jaisa",
-    title: "Apne Ghar Jaisa",
-    venue: "Ranga Shankara, Bengaluru",
-    date: "Sunday, 21 December 2025",
-    language: "Hindi",
-    category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/apne-ghar-jaisa/ET00385811",
-    description: "A compelling drama exploring the essence of home. Duration: 1 hour. Age: 16+. Ticket price: ₹250.",
-  },
-  {
-    id: "mombattikaar",
-    title: "Mombattikaar",
-    venue: "Samarthanam Auditorium – TheatreNama, Bengaluru",
-    date: "Sunday, 21 December 2025",
-    language: "Hindi",
-    category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/mombattikaar/ET00471714",
+    id: "sibiu-2026",
+    name: "Sibiu International Theatre Festival (FITS) 2026",
+    city: "Sibiu",
+    country: "Romania",
+    languages: "Multilingual",
+    scale: "International",
+    duration: "10 days",
+    month: "June",
+    dates: "June 2026",
+    submissionDeadline: "Submission Closed",
+    status: "past",
+    selectionProcess: "Curated / Open calls for specific sections",
+    eligibility: "Professional theatre companies (International)",
     description:
-      "A contemporary drama paying tribute to theatrical excellence. Duration: 1 hour 15 minutes. Age: 12+. Ticket price: ₹249 onwards.",
+      "One of Europe's largest theatre festivals featuring large-scale, visual, contemporary, and classical productions. The festival showcases work on indoor and outdoor stages, attracting international audiences, programmers, and critics.",
+    link: "https://www.sibfest.ro/en/faq",
   },
   {
-    id: "mahabharata-dialogues",
-    title: "Mahabharata Dialogues (Koramangala)",
-    venue: "Dialogues Cafe, Koramangala, Bengaluru",
-    date: "Sunday, 21 December 2025, 5:30 PM",
-    language: "English, Hindi",
-    category: "Hindi",
-    bookingUrl: "https://in.bookmyshow.com/plays/mahabharatha-dialogues-koramangala/ET00357289",
+    id: "iti-academy-2026",
+    name: "ITI Academy Week @ THEATER DER WELT 2026 — Germany",
+    city: "Berlin + Chemnitz",
+    country: "Germany",
+    languages: "Not specified",
+    scale: "International",
+    duration: "8 days (21–28 June 2026)",
+    month: "June",
+    dates: "21–28 June 2026",
+    submissionDeadline: "5 Jan 2026",
+    status: "past",
+    selectionProcess: "Open call (global) + Selection of fellows",
+    eligibility: "Artists / theatre makers / cultural practitioners",
+    travelSupport: "Yes (contribution + local transfers + accommodation + per diems)",
+    visaSupport: "Yes (assistance + visa fees covered)",
     description:
-      "An interactive storytelling experience exploring the epic Mahabharata. Duration: 2 hours. Age: All ages. Ticket price: ₹499.",
-  },
-
-  // Kannada Plays - December 20-21
-  {
-    id: "kamaroopigal",
-    title: "Kamaroopigal",
-    venue: "Ranga Shankara, Bengaluru",
-    date: "Saturday, 20 December 2025",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/kamaroopigal/ET00352979",
-    description: "A captivating Kannada theatre play exploring human emotions and relationships.",
-  },
-  {
-    id: "iddaga-nimdu-kaddaga-namdu",
-    title: "Iddaga Nimdu Kaddaga Namdu",
-    venue: "Vyoma ArtSpace and Studio Theatre, Bengaluru",
-    date: "Saturday, 20 December 2025",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/iddaga-nimdu-kaddaga-namdu/ET00427874",
-    description: "An interactive Kannada theatrical production engaging audiences in thought-provoking narratives.",
-  },
-  {
-    id: "maayaa-dweepa",
-    title: "Maayaa Dweepa",
-    venue: "Kalagrama Bengaluru University, Bengaluru",
-    date: "Sunday, 21 December 2025, 7:00 PM",
-    language: "Kannada",
-    category: "Kannada",
-    bookingUrl: "https://in.bookmyshow.com/plays/maayaa-dweepa/ET00472222",
-    description:
-      "A Kannada play featuring adaptation, comedy, drama, and musical elements exploring fantastical themes. Ticket price: ₹150 approx.",
-  },
-
-  // Marathi Plays - December 20-21
-  {
-    id: "labhale-amhas-bhagya",
-    title: "Labhale Amhas Bhagya",
-    venue: "Chowdiah Memorial Hall, Bengaluru",
-    date: "Sunday, 21 December 2025, 10:00 AM",
-    language: "Marathi",
-    category: "Odia",
-    bookingUrl: "https://in.bookmyshow.com/plays/labhale-amhas-bhagya/ET00469405",
-    description: "A powerful Marathi drama production. Duration: 3 Hours. Age: 5yrs+. Ticket price: ₹500 onwards.",
+      "A high-value international fellowship embedded within a major festival. Selected fellows receive comprehensive support including visa assistance with fees covered, travel contribution, local transfers, accommodation, and per diems, making this an exceptional opportunity for global theatre practitioners.",
+    link: "https://www.iti-germany.de/en/meeting-exchange/the-iti-academy/iti-academy-week-open-call-2026",
+    isFellowship: true,
   },
 ]
 
 export default function EventsPage() {
-  const bharatRangEvent = events[0] // Bharat Rang Mahotsav 2026
-  const gorakhpurEvent = events[1] // Gorakhpur Rang Mahotsav 2025
-
-  const getLanguageColor = (language: string) => {
-    const colors: { [key: string]: string } = {
-      Hindi: "bg-red-100 text-red-800",
-      Kannada: "bg-yellow-100 text-yellow-800",
-      English: "bg-blue-100 text-blue-800",
-      Bengali: "bg-green-100 text-green-800",
-      Odia: "bg-purple-100 text-purple-800",
-      Marathi: "bg-pink-100 text-pink-800",
-      "Hindi + English": "bg-purple-100 text-purple-800",
-      "English, Hindi": "bg-purple-100 text-purple-800", // Added for "Vodka & No Tonic" and "Dhumrapaan"
-      "English, Kannada": "bg-indigo-100 text-indigo-800", // Added for "Jaaji"
-      "Kannada, English": "bg-indigo-100 text-indigo-800", // Added for "Jaaji - Kannada"
-      "French/Malayalam": "bg-indigo-100 text-indigo-800",
-      Multilingual: "bg-pink-100 text-pink-800",
+  const getStatusBadge = (status: string) => {
+    const statusConfig = {
+      open: {
+        label: "Open / Accepting Submissions",
+        color: "bg-green-100 text-green-800 border-green-300",
+        icon: CheckCircle,
+      },
+      upcoming: {
+        label: "Upcoming (Submission Closed)",
+        color: "bg-blue-100 text-blue-800 border-blue-300",
+        icon: Clock,
+      },
+      past: {
+        label: "Past / Archived",
+        color: "bg-gray-100 text-gray-800 border-gray-300",
+        icon: Archive,
+      },
     }
-    return colors[language] || "bg-gray-100 text-gray-800"
+    return statusConfig[status as keyof typeof statusConfig] || statusConfig.past
   }
 
-  const getCategoryColor = (category: string) => {
+  const getScaleColor = (scale: string) => {
     const colors: { [key: string]: string } = {
-      Festival: "bg-orange-100 text-orange-800",
-      Competition: "bg-green-100 text-green-800",
+      International: "bg-purple-100 text-purple-800",
+      National: "bg-blue-100 text-blue-800",
+      Regional: "bg-yellow-100 text-yellow-800",
     }
-    return colors[category] || "bg-gray-100 text-gray-800"
+    return colors[scale] || "bg-gray-100 text-gray-800"
   }
 
-  const englishPlays = bangalorePlays.filter((play) => play.category === "English")
-  const hindiPlays = bangalorePlays.filter((play) => play.category === "Hindi")
-  const kannadaPlays = bangalorePlays.filter((play) => play.category === "Kannada")
-  const odiaPlays = bangalorePlays.filter((play) => play.category === "Odia")
-  const marathiPlays = bangalorePlays.filter((play) => play.category === "Marathi")
-
-  const PlayCard = ({ play }: { play: BangalorePlay }) => (
-    <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 h-full flex flex-col">
-      <CardHeader className="pb-3 flex-shrink-0">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <CardTitle className="text-base sm:text-lg font-bold group-hover:text-[#7E1F2E] transition-colors line-clamp-2 leading-tight">
-            {play.title}
-          </CardTitle>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-3 flex-grow flex flex-col">
-        <div className="flex flex-wrap gap-1.5">
-          <Badge className={`${getLanguageColor(play.language)} text-xs`}>{play.language}</Badge>
-        </div>
-
-        <div className="space-y-2 text-xs sm:text-sm text-gray-600 flex-grow">
-          <div className="flex items-center gap-3">
-            <Calendar className="h-3 w-3 sm:h-4 sm:w-4 shrink-0" />
-            <span>{play.date}</span>
-          </div>
-          <div className="flex items-start gap-3">
-            <MapPin className="h-3 w-3 sm:h-4 sm:w-4 shrink-0 mt-0.5" />
-            <span className="line-clamp-2 leading-tight">{play.venue}</span>
-          </div>
-        </div>
-
-        {play.description && (
-          <p className="text-xs sm:text-sm text-gray-600 line-clamp-3 leading-relaxed">{play.description}</p>
-        )}
-
-        <div className="pt-2 mt-auto">
-          <Link href={play.bookingUrl} target="_blank" rel="noopener noreferrer">
-            <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-xs sm:text-sm py-2 sm:py-2.5">
-              Book Tickets
-              <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
-            </Button>
-          </Link>
-        </div>
-      </CardContent>
-    </Card>
+  // Group festivals by month
+  const festivalsByMonth = festivals.reduce(
+    (acc, festival) => {
+      if (!acc[festival.month]) {
+        acc[festival.month] = []
+      }
+      acc[festival.month].push(festival)
+      return acc
+    },
+    {} as Record<string, Festival[]>,
   )
+
+  const monthOrder = ["January", "March", "May", "June"]
+
+  const FestivalCard = ({ festival }: { festival: Festival }) => {
+    const statusBadge = getStatusBadge(festival.status)
+    const StatusIcon = statusBadge.icon
+
+    return (
+      <Card
+        className={`group hover:shadow-xl transition-all duration-300 border-2 h-full flex flex-col ${
+          festival.featured
+            ? "border-[#7E1F2E]/30 bg-gradient-to-br from-amber-50/50 to-white"
+            : "hover:border-[#7E1F2E]/20"
+        }`}
+      >
+        <CardHeader className="pb-4 flex-shrink-0">
+          {festival.featured && (
+            <div className="mb-3">
+              <Badge className="bg-[#7E1F2E] text-white text-xs px-3 py-1 font-semibold">⭐ FEATURED FESTIVAL</Badge>
+            </div>
+          )}
+          {festival.isFellowship && (
+            <div className="mb-3">
+              <Badge className="bg-purple-600 text-white text-xs px-3 py-1 font-semibold">🎓 FELLOWSHIP PROGRAM</Badge>
+            </div>
+          )}
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-[#7E1F2E] transition-colors leading-tight">
+              {festival.name}
+            </CardTitle>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Badge className={`${statusBadge.color} text-xs flex items-center gap-1 px-2 py-1`}>
+              <StatusIcon className="h-3 w-3" />
+              {statusBadge.label}
+            </Badge>
+            <Badge className={`${getScaleColor(festival.scale)} text-xs`}>{festival.scale}</Badge>
+          </div>
+        </CardHeader>
+
+        <CardContent className="space-y-4 flex-grow flex flex-col">
+          <div className="space-y-3 text-sm text-gray-600">
+            <div className="flex items-start gap-3">
+              <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-[#7E1F2E]" />
+              <div>
+                <span className="font-semibold">
+                  {festival.city}, {festival.country}
+                </span>
+                <div className="text-xs text-gray-500 mt-0.5">{festival.languages}</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Calendar className="h-4 w-4 shrink-0 text-[#7E1F2E]" />
+              <div>
+                <span className="font-semibold">{festival.dates}</span>
+                <div className="text-xs text-gray-500 mt-0.5">Duration: {festival.duration}</div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <Clock className="h-4 w-4 shrink-0 mt-0.5 text-[#7E1F2E]" />
+              <div>
+                <span className="text-xs font-semibold text-gray-700">Submission Deadline:</span>
+                <div className="text-sm mt-0.5">{festival.submissionDeadline}</div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <Users className="h-4 w-4 shrink-0 mt-0.5 text-[#7E1F2E]" />
+              <div className="text-xs">
+                <span className="font-semibold">Eligibility: </span>
+                {festival.eligibility}
+              </div>
+            </div>
+          </div>
+
+          <p className="text-sm text-gray-600 leading-relaxed line-clamp-4 flex-grow">{festival.description}</p>
+
+          {festival.visaSupport && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <p className="text-xs text-blue-800 font-semibold flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                Visa Support: {festival.visaSupport}
+              </p>
+            </div>
+          )}
+
+          {festival.travelSupport && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="text-xs text-green-800 font-semibold flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                Travel Support: {festival.travelSupport}
+              </p>
+            </div>
+          )}
+
+          <div className="pt-3 mt-auto border-t">
+            <Link href={festival.link} target="_blank" rel="noopener noreferrer">
+              <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-sm py-2.5">
+                View Festival Details
+                <ExternalLink className="h-4 w-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-[#7E1F2E] to-[#A02A3A] text-white py-8 sm:py-12 lg:py-16">
+      <section className="bg-gradient-to-r from-[#7E1F2E] to-[#A02A3A] text-white py-12 sm:py-16 lg:py-20">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              Theatre Events & Festivals
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Theatre Festivals 2026
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl opacity-90 mb-6 sm:mb-8 px-4">
-              Discover national festivals and weekend theatre performances in Bangalore
+            <p className="text-lg sm:text-xl lg:text-2xl opacity-90 mb-8 leading-relaxed">
+              Discover national and international theatre festivals across India and beyond
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center max-w-2xl mx-auto">
-              <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">25th</div>
-                <div className="text-xs sm:text-sm opacity-80">BRM Edition</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center max-w-3xl mx-auto">
+              <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">{festivals.length}</div>
+                <div className="text-sm opacity-80">Festivals</div>
               </div>
-              <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">{bangalorePlays.length}+</div>
-                <div className="text-xs sm:text-sm opacity-80">Weekend Shows</div>
+              <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                  {festivals.filter((f) => f.scale === "International").length}
+                </div>
+                <div className="text-sm opacity-80">International</div>
               </div>
-              <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">Global</div>
-                <div className="text-xs sm:text-sm opacity-80">Participation</div>
+              <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                  {festivals.filter((f) => f.status === "open").length}
+                </div>
+                <div className="text-sm opacity-80">Open Now</div>
               </div>
-              <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">₹250</div>
-                <div className="text-xs sm:text-sm opacity-80">BRM Entry</div>
+              <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                  {festivals.filter((f) => f.country === "India").length}
+                </div>
+                <div className="text-sm opacity-80">In India</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Play Spotlight */}
-      <section className="py-8 sm:py-12 bg-gradient-to-br from-amber-50 via-white to-orange-50 border-y-4 border-[#7E1F2E]">
+      {/* Festivals by Month */}
+      <section className="py-12 sm:py-16">
         <div className="container px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-2 bg-[#7E1F2E] text-white px-4 py-2 rounded-full mb-4 text-sm font-semibold">
-                <span className="animate-pulse">★</span>
-                FEATURED THIS WEEKEND
-                <span className="animate-pulse">★</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-gray-900 mb-4">
-                Apne Ghar Jaisa
-              </h2>
-              <p className="text-lg sm:text-xl text-gray-700 mb-2">A compelling drama exploring the essence of home</p>
-              <div className="flex flex-wrap items-center justify-center gap-4 text-sm sm:text-base text-gray-600 mb-6">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-5 w-5 text-[#7E1F2E]" />
-                  <span className="font-semibold">Sunday, 21 December 2025</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-[#7E1F2E]" />
-                  <span>Ranga Shankara, Bengaluru</span>
-                </div>
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-                <Badge className="bg-orange-100 text-orange-800 border-orange-300 px-3 py-1 text-sm">Hindi</Badge>
-                <span className="text-gray-600">•</span>
-                <span className="text-gray-700">1 hour duration</span>
-                <span className="text-gray-600">•</span>
-                <span className="text-gray-700">Age 16+</span>
-                <span className="text-gray-600">•</span>
-                <span className="text-gray-700 font-semibold">₹250</span>
-              </div>
-              <Link
-                href="https://in.bookmyshow.com/plays/apne-ghar-jaisa/ET00385811"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block"
-              >
-                <Button
-                  size="lg"
-                  className="bg-[#7E1F2E] hover:bg-[#6a1a27] text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                >
-                  Book Tickets Now
-                  <ExternalLink className="h-5 w-5 ml-2" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Bangalore Theatre Events Section */}
-      <section className="py-8 sm:py-12 bg-white">
-        <div className="container px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8 sm:mb-12">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Theater className="h-6 w-6 sm:h-8 sm:w-8 text-[#7E1F2E]" />
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-playfair text-gray-800">
-                  Bangalore Theatre Events
-                </h2>
-              </div>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Discover this weekend's exciting theatre performances across Bangalore - December 20-21
-              </p>
-            </div>
-
-            <Tabs defaultValue="english" className="w-full">
-              <div className="overflow-x-auto mb-6 sm:mb-8">
-                <TabsList className="grid w-full grid-cols-5 min-w-[400px] sm:min-w-0">
-                  <TabsTrigger value="english" className="text-xs sm:text-sm px-2 sm:px-4">
-                    English ({englishPlays.length})
-                  </TabsTrigger>
-                  <TabsTrigger value="hindi" className="text-xs sm:text-sm px-2 sm:px-4">
-                    Hindi ({hindiPlays.length})
-                  </TabsTrigger>
-                  <TabsTrigger value="kannada" className="text-xs sm:text-sm px-2 sm:px-4">
-                    Kannada ({kannadaPlays.length})
-                  </TabsTrigger>
-                  <TabsTrigger value="odia" className="text-xs sm:text-sm px-2 sm:px-4">
-                    Odia ({odiaPlays.length})
-                  </TabsTrigger>
-                  <TabsTrigger value="marathi" className="text-xs sm:text-sm px-2 sm:px-4">
-                    Marathi ({marathiPlays.length})
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="english" className="mt-6 sm:mt-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {englishPlays.map((play) => (
-                    <PlayCard key={play.id} play={play} />
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="hindi" className="mt-6 sm:mt-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {hindiPlays.map((play) => (
-                    <PlayCard key={play.id} play={play} />
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="kannada" className="mt-6 sm:mt-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {kannadaPlays.map((play) => (
-                    <PlayCard key={play.id} play={play} />
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="odia" className="mt-6 sm:mt-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {odiaPlays.map((play) => (
-                    <PlayCard key={play.id} play={play} />
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="marathi" className="mt-6 sm:mt-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {marathiPlays.map((play) => (
-                    <PlayCard key={play.id} play={play} />
-                  ))}
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </div>
-      </section>
-
-      {/* Major Theatre Festivals Section */}
-      <section className="py-8 sm:py-12">
-        <div className="container px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold font-playfair text-gray-800 mb-4">
-                Major Theatre Festivals
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600">
-                Discover prestigious national and international theatre festivals
-              </p>
-            </div>
-
-            <Tabs defaultValue="bharat-rang" className="w-full">
-              <div className="overflow-x-auto mb-6 sm:mb-8">
-                <TabsList className="grid w-full grid-cols-2 min-w-[400px] sm:min-w-0">
-                  <TabsTrigger value="bharat-rang" className="text-xs sm:text-sm px-2 sm:px-4">
-                    Bharat Rang Mahotsav 2026
-                  </TabsTrigger>
-                  <TabsTrigger value="gorakhpur-rang" className="text-xs sm:text-sm px-2 sm:px-4">
-                    Gorakhpur Rang Mahotsav 2025
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="bharat-rang" className="mt-6 sm:mt-8">
-                {/* Bharat Rang Mahotsav Card */}
-                <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 mb-8">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between gap-4 mb-4">
-                      <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold group-hover:text-[#7E1F2E] transition-colors font-playfair">
-                        {bharatRangEvent.title}
-                      </CardTitle>
-                      {bharatRangEvent.featured && (
-                        <Badge className="bg-[#7E1F2E] text-white shrink-0">
-                          <Star className="h-4 w-4 mr-1" />
-                          Featured
-                        </Badge>
-                      )}
-                    </div>
-                    <p className="text-lg text-gray-600 mb-4">
-                      Organized by: <strong>{bharatRangEvent.organizer}</strong>
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-purple-100 text-purple-800">{bharatRangEvent.language}</Badge>
-                      <Badge className={`${getCategoryColor(bharatRangEvent.category)}`}>
-                        {bharatRangEvent.category}
-                      </Badge>
-                      <Badge variant="outline">{bharatRangEvent.type}</Badge>
-                      <Badge className="bg-gold-100 text-gold-800">World's Largest</Badge>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="space-y-6">
-                    {/* Event Description */}
-                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">{bharatRangEvent.description}</p>
-
-                    {/* Special Event Highlight */}
-                    <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-4 sm:p-6 rounded-lg border border-purple-200">
-                      <h3 className="text-lg sm:text-xl font-bold text-purple-800 mb-2 flex items-center">
-                        <Award className="h-5 w-5 mr-2" />
-                        Special Milestone
-                      </h3>
-                      <p className="text-purple-700 font-semibold text-base sm:text-lg mb-2">
-                        {bharatRangEvent.specialEvent}
-                      </p>
-                      <p className="text-purple-600">
-                        <strong>Focus:</strong> {bharatRangEvent.topic}
+          <div className="max-w-7xl mx-auto space-y-16">
+            {monthOrder.map(
+              (month) =>
+                festivalsByMonth[month] && (
+                  <div key={month} id={month.toLowerCase()}>
+                    <div className="mb-8">
+                      <h2 className="text-3xl sm:text-4xl font-bold font-playfair text-gray-800 mb-2 flex items-center gap-3">
+                        <span className="text-[#7E1F2E]">{month} 2026</span>
+                      </h2>
+                      <p className="text-gray-600">
+                        {festivalsByMonth[month].length} festival{festivalsByMonth[month].length !== 1 ? "s" : ""}{" "}
+                        scheduled
                       </p>
                     </div>
-
-                    {/* Event Details Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                      {/* Dates & Venue */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Festival Details</h3>
-                        <div className="space-y-3">
-                          <div className="flex items-start gap-3">
-                            <Calendar className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                            <div>
-                              <p className="font-medium">Festival Dates</p>
-                              <p className="text-gray-600">{bharatRangEvent.dates}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-3">
-                            <MapPin className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                            <div>
-                              <p className="font-medium">Locations</p>
-                              <p className="text-gray-600">{bharatRangEvent.venue}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-3">
-                            <Globe className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                            <div>
-                              <p className="font-medium">Website</p>
-                              <p className="text-gray-600">{bharatRangEvent.contact.website}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Application & Eligibility */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Application Info</h3>
-                        <div className="space-y-3">
-                          <div>
-                            <p className="font-medium">Application Fee</p>
-                            <p className="text-gray-600 text-sm font-semibold text-[#7E1F2E]">
-                              {bharatRangEvent.registrationFee}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="font-medium">Participants</p>
-                            <p className="text-gray-600">{bharatRangEvent.groupSize}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium text-red-600">Application Deadline</p>
-                            <p className="text-red-700 font-semibold">{bharatRangEvent.lastSubmissionDate}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium">Contact</p>
-                            <p className="text-gray-600 text-sm">{bharatRangEvent.contact.email}</p>
-                          </div>
-                        </div>
-                      </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {festivalsByMonth[month].map((festival) => (
+                        <FestivalCard key={festival.id} festival={festival} />
+                      ))}
                     </div>
-
-                    {/* Eligibility & Requirements Section */}
-                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 sm:p-6 rounded-lg border border-green-200">
-                      <h3 className="text-lg sm:text-xl font-bold text-green-800 mb-4 flex items-center">
-                        <Award className="h-5 w-5 mr-2" />
-                        Eligibility & Requirements
-                      </h3>
-                      <div className="space-y-2 text-green-700">
-                        <p>• {bharatRangEvent.eligibility}</p>
-                        {bharatRangEvent.additionalInfo?.map((info, index) => (
-                          <p key={index}>• {info}</p>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Contact Information */}
-                    <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Contact Information</h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div className="flex items-center gap-3">
-                          <Mail className="h-5 w-5 text-[#7E1F2E]" />
-                          <div>
-                            <p className="font-medium">Email</p>
-                            <p className="text-sm text-gray-600">{bharatRangEvent.contact.email}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Globe className="h-5 w-5 text-[#7E1F2E]" />
-                          <div>
-                            <p className="font-medium">Website</p>
-                            <p className="text-sm text-gray-600">{bharatRangEvent.contact.website}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Instagram className="h-5 w-5 text-[#7E1F2E]" />
-                          <div>
-                            <p className="font-medium">Instagram</p>
-                            <p className="text-sm text-gray-600">{bharatRangEvent.contact.instagram}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Application Button */}
-                    <div className="pt-4">
-                      <Link href={bharatRangEvent.registrationUrl} target="_blank" rel="noopener noreferrer">
-                        <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-lg py-6 rounded-lg font-semibold">
-                          Apply Now - {bharatRangEvent.registrationFee}
-                          <ExternalLink className="h-5 w-5 ml-2" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="gorakhpur-rang" className="mt-6 sm:mt-8">
-                {/* Gorakhpur Rang Mahotsav Card */}
-                <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-[#7E1F2E]/20 mb-8">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between gap-4 mb-4">
-                      <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold group-hover:text-[#7E1F2E] transition-colors font-playfair">
-                        {gorakhpurEvent.title}
-                      </CardTitle>
-                    </div>
-                    <p className="text-lg text-gray-600 mb-4">
-                      Organized by: <strong>{gorakhpurEvent.organizer}</strong>
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge className={`${getLanguageColor(gorakhpurEvent.language)}`}>
-                        {gorakhpurEvent.language}
-                      </Badge>
-                      <Badge className={`${getCategoryColor(gorakhpurEvent.category)}`}>
-                        {gorakhpurEvent.category}
-                      </Badge>
-                      <Badge variant="outline">{gorakhpurEvent.type}</Badge>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="space-y-6">
-                    {/* Event Description */}
-                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed">{gorakhpurEvent.description}</p>
-
-                    {/* Special Event Highlight */}
-                    <div className="bg-gradient-to-r from-orange-50 to-red-50 p-4 sm:p-6 rounded-lg border border-orange-200">
-                      <h3 className="text-lg sm:text-xl font-bold text-orange-800 mb-2 flex items-center">
-                        <Award className="h-5 w-5 mr-2" />
-                        Special Event
-                      </h3>
-                      <p className="text-orange-700 font-semibold text-base sm:text-lg mb-2">
-                        {gorakhpurEvent.specialEvent}
-                      </p>
-                      <p className="text-orange-600">
-                        <strong>Topic:</strong> {gorakhpurEvent.topic}
-                      </p>
-                    </div>
-
-                    {/* Event Details Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                      {/* Dates & Venue */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Event Details</h3>
-                        <div className="space-y-3">
-                          <div className="flex items-start gap-3">
-                            <Calendar className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                            <div>
-                              <p className="font-medium">Festival Dates</p>
-                              <p className="text-gray-600">{gorakhpurEvent.dates}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-3">
-                            <Clock className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                            <div>
-                              <p className="font-medium">Competition Dates</p>
-                              <p className="text-gray-600">{gorakhpurEvent.competitionDates}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-3">
-                            <MapPin className="h-5 w-5 text-[#7E1F2E] shrink-0 mt-0.5" />
-                            <div>
-                              <p className="font-medium">Location</p>
-                              <p className="text-gray-600">{gorakhpurEvent.venue}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Registration & Eligibility */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Registration Info</h3>
-                        <div className="space-y-3">
-                          <div>
-                            <p className="font-medium">Registration Fee</p>
-                            <p className="text-gray-600 text-lg font-semibold text-[#7E1F2E]">
-                              {gorakhpurEvent.registrationFee}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="font-medium">Group Size</p>
-                            <p className="text-gray-600">{gorakhpurEvent.groupSize}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium">Eligibility</p>
-                            <p className="text-gray-600">{gorakhpurEvent.eligibility}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium text-red-600">Last Date of Submission</p>
-                            <p className="text-red-700 font-semibold">{gorakhpurEvent.lastSubmissionDate}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Prizes Section */}
-                    <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 sm:p-6 rounded-lg border border-yellow-200">
-                      <h3 className="text-lg sm:text-xl font-bold text-yellow-800 mb-4 flex items-center">
-                        <Trophy className="h-5 w-5 mr-2" />
-                        Cash Prizes
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div className="text-center p-3 bg-yellow-100 rounded-lg">
-                          <div className="text-2xl font-bold text-yellow-700 mb-1">🥇</div>
-                          <div className="font-semibold text-yellow-800">1st Prize</div>
-                          <div className="text-yellow-700">{gorakhpurEvent.prizes.first}</div>
-                        </div>
-                        <div className="text-center p-3 bg-gray-100 rounded-lg">
-                          <div className="text-2xl font-bold text-gray-700 mb-1">🥈</div>
-                          <div className="font-semibold text-gray-800">2nd Prize</div>
-                          <div className="text-gray-700">{gorakhpurEvent.prizes.second}</div>
-                        </div>
-                        <div className="text-center p-3 bg-orange-100 rounded-lg">
-                          <div className="text-2xl font-bold text-orange-700 mb-1">🥉</div>
-                          <div className="font-semibold text-orange-800">3rd Prize</div>
-                          <div className="text-orange-700">{gorakhpurEvent.prizes.third}</div>
-                        </div>
-                      </div>
-                      <p className="text-center text-yellow-700 mt-4 font-medium">
-                        + Participation Certificate for all participants
-                      </p>
-                    </div>
-
-                    {/* Contact Information */}
-                    <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Contact Information</h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div className="flex items-center gap-3">
-                          <Phone className="h-5 w-5 text-[#7E1F2E]" />
-                          <div>
-                            <p className="font-medium">Phone</p>
-                            <div className="text-sm text-gray-600">
-                              {gorakhpurEvent.contact.phones.map((phone, index) => (
-                                <p key={index}>{phone}</p>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Globe className="h-5 w-5 text-[#7E1F2E]" />
-                          <div>
-                            <p className="font-medium">Website</p>
-                            <p className="text-sm text-gray-600">{gorakhpurEvent.contact.website}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Instagram className="h-5 w-5 text-[#7E1F2E]" />
-                          <div>
-                            <p className="font-medium">Instagram</p>
-                            <p className="text-sm text-gray-600">{gorakhpurEvent.contact.instagram}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Registration Button */}
-                    <div className="pt-4">
-                      <Link href={gorakhpurEvent.registrationUrl} target="_blank" rel="noopener noreferrer">
-                        <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-lg py-6 rounded-lg font-semibold">
-                          Register Now - {gorakhpurEvent.registrationFee}
-                          <ExternalLink className="h-5 w-5 ml-2" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
+                  </div>
+                ),
+            )}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 bg-gradient-to-r from-[#7E1F2E] to-[#A02A3A] text-white">
-        <div className="container px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-playfair">
-            Ready to Experience Theatre?
-          </h2>
-          <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto px-4">
-            Book your tickets for this weekend's shows or apply for prestigious theatre festivals. Don't miss the
-            application deadline for Bharat Rang Mahotsav 2026 till 12:00 Midnight on{" "}
-            {bharatRangEvent.lastSubmissionDate.split(" till ")[0]}!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href={bharatRangEvent.registrationUrl} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                className="bg-white text-[#7E1F2E] hover:bg-gray-100 px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full font-medium"
-              >
-                Apply to BRM 2026
-              </Button>
-            </Link>
-            <Link href="/join-community">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-[#7E1F2E] px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full font-medium bg-transparent"
-              >
-                Join Our Community
+      <section className="py-12 bg-gradient-to-r from-[#7E1F2E] to-[#A02A3A] text-white">
+        <div className="container px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4">Want to showcase your work?</h3>
+            <p className="text-lg opacity-90 mb-6">Stay updated with festival submission deadlines and opportunities</p>
+            <Link href="/contact">
+              <Button size="lg" className="bg-white text-[#7E1F2E] hover:bg-gray-100 font-semibold px-8 py-6 text-lg">
+                Get in Touch
               </Button>
             </Link>
           </div>
