@@ -418,6 +418,28 @@ const workshops: Workshop[] = [
     category: "Fellowship & Seminars",
     tags: ["Residency", "Art-Science", "Fellowship"],
   },
+  {
+    id: 18,
+    title: "Culture Moves Europe — Individual Mobility",
+    trainer: "Culture Moves Europe",
+    institution: "Culture Moves Europe / Goethe-Institut",
+    location: "Europe-wide",
+    state: "Europe",
+    date: "Rolling deadlines: 31 Jan, 28 Feb, 31 Mar, 30 Apr 2026",
+    time: "Application rounds throughout 2026",
+    description:
+      "🌍 Mobility grant supporting artists and cultural professionals across Europe. Rolling monthly deadlines with multiple application rounds. Funding for cross-border collaborations, artistic residencies, and professional development opportunities throughout Europe.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://on-the-move.org/news/countries",
+    featured: true,
+    price: "Grant funding available",
+    contact: "Via Culture Moves Europe website",
+    email: "Via Culture Moves Europe website",
+    eligibility: "Artists and cultural professionals in Europe",
+    venue: "Europe-wide programme",
+    category: "Fellowship & Seminars",
+    tags: ["Mobility Grant", "Fellowship", "Europe-wide"],
+  },
 ]
 
 // Get unique states, cities, and trainers for filters
