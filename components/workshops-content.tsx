@@ -396,6 +396,28 @@ const workshops: Workshop[] = [
     category: "Fellowship & Seminars",
     tags: ["Fellowship", "Theatre", "Academy Week"],
   },
+  {
+    id: 17,
+    title: "Planetary Transitions 2026 — Potsdam Artist Residency (GFZ)",
+    trainer: "GFZ Research Center",
+    institution: "GFZ German Research Centre for Geosciences",
+    location: "Potsdam",
+    state: "Germany",
+    date: "Deadline: 8 Feb 2026",
+    time: "Residency programme",
+    description:
+      "🎨 Unique artist residency at Germany's leading earth science research center. Art-science collaboration opportunity exploring planetary transitions, climate change, and earth systems. Interdisciplinary programme at GFZ Potsdam.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://www.gfz.de/en/career/job-offers/details/10920",
+    featured: true,
+    price: "Fellowship support available",
+    contact: "Via GFZ website",
+    email: "Via GFZ website",
+    eligibility: "Artists interested in art-science collaboration",
+    venue: "GFZ German Research Centre for Geosciences, Potsdam",
+    category: "Fellowship & Seminars",
+    tags: ["Residency", "Art-Science", "Fellowship"],
+  },
 ]
 
 // Get unique states, cities, and trainers for filters
