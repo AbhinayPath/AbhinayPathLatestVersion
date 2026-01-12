@@ -103,6 +103,44 @@ const festivals: Festival[] = [
       "A regional theatre festival celebrating Delhi-NCR's vibrant theatre community. Organized by Triveni Kala Sangam with support from Rukavipa Foundation, the festival features free entry performances for the general public and theatre enthusiasts.",
     link: "https://www.facebook.com/triveninewdelhi/",
   },
+  {
+    id: "alter-ego-2026",
+    name: "Alter Ego 2026 - Theatre & Dance Festival",
+    city: "Bulgaria",
+    country: "Bulgaria",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "Festival dates TBA",
+    month: "January",
+    dates: "2026 (dates TBA)",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Apply via form (curation by festival)",
+    eligibility: "Alternative theatre and dance artists (experimental/avant-garde focus)",
+    description:
+      "International open call for experimental and avant-garde theatre and dance artists. This festival celebrates alternative performance practices and contemporary experimental works, providing a platform for cutting-edge theatrical and choreographic expressions.",
+    link: "https://dancingopportunities.com/alter-ego-2026-theater-and-dance-festival-open-call/",
+  },
+
+  // February Festivals
+  {
+    id: "pflasterspektakel-2026",
+    name: "Pflasterspektakel 2026",
+    city: "Linz",
+    country: "Austria",
+    languages: "Open to all",
+    scale: "International",
+    duration: "3 days",
+    month: "February",
+    dates: "Festival dates TBA",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Apply online → invited/refused by email",
+    eligibility: "Companies & solo performers (800+ applicants; ~100 invited)",
+    description:
+      "Large international street theatre and performance festival. A major platform for contemporary street performance art with highly selective curation process, inviting approximately 100 performers from a pool of 800+ international applicants to perform in festival setup venues.",
+    link: "https://www.unima.org.uk/p/call-for-artists-applications-open",
+  },
 
   // March Festivals
   {
@@ -203,6 +241,42 @@ const festivals: Festival[] = [
     link: "https://www.berlinerfestspiele.de/en/theatertreffen/das-festival/theatertreffen-blog/open-call",
     isFellowship: true,
   },
+  {
+    id: "mittelyoung-2026",
+    name: "Mittelyoung 2026 (Mittelfest)",
+    city: "Cividale del Friuli",
+    country: "Italy",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "4 days (with possible July re-programming)",
+    month: "May",
+    dates: "14–17 May 2026",
+    submissionDeadline: "10 Feb 2026 (3:00 PM)",
+    status: "open",
+    selectionProcess: "Under-30 curators select 9 projects",
+    eligibility: "Under-30 artists/companies from listed European countries",
+    description:
+      "Europe-focused platform exclusively for emerging artists under 30. Selected by young curators, 9 projects will be featured during the festival with possible re-programming opportunities into the main Mittelfest in July, providing exceptional visibility for early-career European theatre makers.",
+    link: "https://www.mittelfest.org/en/mittelyoung/",
+  },
+  {
+    id: "shreeram-lagoo-2026",
+    name: "Shreeram Lagoo National Theatre Festival",
+    city: "Pune",
+    country: "India",
+    languages: "Not specified",
+    scale: "National",
+    duration: "7 days",
+    month: "May",
+    dates: "25 May – 31 May 2026",
+    submissionDeadline: "10 Feb 2026",
+    status: "open",
+    selectionProcess: "Open Call",
+    eligibility: "Theatre groups and companies (India)",
+    description:
+      "A national theatre festival honoring the legacy of legendary actor Dr. Shreeram Lagoo. Hosted at Jyotsna Bhole Sabhagruha and associated with Shreeram Lagoo Rang-Avkash in Pune, this festival celebrates theatrical excellence and pays tribute to one of Indian theatre's most influential figures.",
+    link: "mailto:lagoofestival@mcckala.com",
+  },
 
   // June Festivals
   {
@@ -243,6 +317,64 @@ const festivals: Festival[] = [
       "A high-value international fellowship embedded within a major festival. Selected fellows receive comprehensive support including visa assistance with fees covered, travel contribution, local transfers, accommodation, and per diems, making this an exceptional opportunity for global theatre practitioners.",
     link: "https://www.iti-germany.de/en/meeting-exchange/the-iti-academy/iti-academy-week-open-call-2026",
     isFellowship: true,
+  },
+  {
+    id: "valise-2026",
+    name: "VALISE 2026 - International Theatrical Festival",
+    city: "Łomża",
+    country: "Poland",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "4 days",
+    month: "June",
+    dates: "25–28 Jun 2026",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Apply via email; requirements PDF provided",
+    eligibility: "Professional & non-institutional theatres + drama school students",
+    description:
+      "The 39th edition of this international theatrical festival welcomes professional theatres, non-institutional groups, and drama school students from around the world. Application process requires email submission with detailed requirements provided in PDF format.",
+    link: "https://www.unima.org.uk/p/39th-international-theatrical-festival",
+  },
+
+  // July Festivals
+  {
+    id: "china-childrens-theatre-2026",
+    name: "China Children's Theatre Festival 2026",
+    city: "Beijing",
+    country: "China",
+    languages: "English or Chinese",
+    scale: "International",
+    duration: "1 month",
+    month: "July",
+    dates: "15 Jul – 15 Aug 2026",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Reviewed by selection team; notification by 9 Mar 2026",
+    eligibility: "Companies with eligible productions (international TYA focus)",
+    travelSupport:
+      "Local accommodation/per diem/local transport & performance fee (international travel/shipping on participants)",
+    description:
+      "International Theatre for Young Audiences (TYA) festival with performance opportunities across Beijing and potentially other Chinese cities. Selected companies receive local support including accommodation, per diem, transportation, and performance fees, though international travel and shipping costs are borne by participants.",
+    link: "https://assitej-international.org/2025/12/15/international-performance-open-call-china-childrens-theatre-festival/",
+  },
+  {
+    id: "borderlight-2026",
+    name: "BorderLight Theatre Festival 2026",
+    city: "Cleveland",
+    country: "USA",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "Festival month",
+    month: "July",
+    dates: "July 2026",
+    submissionDeadline: "16 Jan 2026",
+    status: "open",
+    selectionProcess: "Call for artists (details via application link)",
+    eligibility: "Artists / theatre makers",
+    description:
+      "Cleveland's international theatre festival brings together diverse voices and theatrical practices from around the world. The festival seeks innovative artists and theatre makers to participate in this celebration of contemporary performance.",
+    link: "https://www.borderlightcle.org/2026artist/",
   },
 ]
 
@@ -289,7 +421,7 @@ export default function EventsPage() {
     {} as Record<string, Festival[]>,
   )
 
-  const monthOrder = ["January", "March", "May", "June"]
+  const monthOrder = ["January", "February", "March", "May", "June", "July"]
 
   const FestivalCard = ({ festival }: { festival: Festival }) => {
     const statusBadge = getStatusBadge(festival.status)
