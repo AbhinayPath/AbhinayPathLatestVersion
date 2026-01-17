@@ -104,6 +104,25 @@ const festivals: Festival[] = [
     link: "https://www.facebook.com/triveninewdelhi/",
   },
   {
+    id: "alcheringa-2026",
+    name: "Alcheringa 2026 — Theatre Competitions (IIT Guwahati)",
+    city: "IIT Guwahati, Assam",
+    country: "India",
+    languages: "Hindi / English",
+    scale: "National",
+    duration: "4 days",
+    month: "January",
+    dates: "29 Jan – 1 Feb 2026",
+    submissionDeadline: "Open (check website)",
+    status: "open",
+    selectionProcess: "Online Registration",
+    eligibility:
+      "Open to all participants (min age 12); includes Theatrix (Group Stage Play), Monodrama (Solo 5 min), Halla Bol (Nukkad-style, min 6 members)",
+    description:
+      "IIT Guwahati's flagship cultural festival featuring three theatre competitions: Theatrix (Group Stage Play, 50 min finals), Monodrama (Solo Play, 5 min limit with collar mic provided), and Halla Bol (Nukkad-style group play, 20 min limit, min 6 members). Venues include Main Stage and Auditorium. Rules: No fire/water/smoke; live music allowed; bring laptop for sound.",
+    link: "https://www.alcheringa.co.in/Competitions",
+  },
+  {
     id: "alter-ego-2026",
     name: "Alter Ego 2026 - Theatre & Dance Festival",
     city: "Bulgaria",
