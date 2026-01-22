@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive } from "lucide-react"
 import Link from "next/link"
+import { ShareEventButton } from "@/components/share-event-button"
 
 interface Festival {
   id: string
@@ -466,9 +467,16 @@ export default function EventsPage() {
             </div>
           )}
           <div className="flex items-start justify-between gap-3 mb-3">
-            <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-[#7E1F2E] transition-colors leading-tight">
+            <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-[#7E1F2E] transition-colors leading-tight flex-1">
               {festival.name}
             </CardTitle>
+            <ShareEventButton 
+              eventId={festival.id} 
+              eventName={festival.name} 
+              shareType="event" 
+              variant="icon"
+              size="sm"
+            />
           </div>
           <div className="flex flex-wrap gap-2">
             <Badge className={`${statusBadge.color} text-xs flex items-center gap-1 px-2 py-1`}>
@@ -584,6 +592,9 @@ export default function EventsPage() {
                 </div>
                 <div className="text-sm opacity-80">In India</div>
               </div>
+            </div>
+            <div className="mt-8 flex justify-center">
+              <ShareEventButton shareType="page" variant="button" />
             </div>
           </div>
         </div>
