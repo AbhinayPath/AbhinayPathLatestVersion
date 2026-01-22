@@ -71,6 +71,19 @@ const auditions = [
       performanceVenue: "Historic ruins of Mahmood Gawan Madrasa, Bidar",
       venueDescription: "A magnificent 15th-century madrasa with stunning Islamic architecture, providing a breathtaking backdrop for this historical production.",
     },
+    historicalContext: {
+      mahmoodGawan: {
+        title: "Mahmood Gawan",
+        description: "Mahmood Gawan was a visionary statesman and Prime Minister of the Bahmani Sultanate in the 15th century. Renowned for his wisdom, integrity, and scholarship, he was a mathematician, poet, and military strategist who greatly strengthened the kingdom. Despite his stature, he lived a simple life and ultimately became a tragic victim of court intrigue.",
+      },
+      madrasa: {
+        title: "Mahmood Gawan Madrasa (Bidar)",
+        description: "Built in 1472, this magnificent three-storey madrasa was once a world-renowned centre of learning, housing over 3,000 manuscripts and welcoming scholars from across Asia. Today, its towering minarets and intricate tile work stand as a powerful symbol of Bidar's cultural and intellectual heritage.",
+        yearBuilt: 1472,
+        manuscripts: "Over 3,000",
+        significance: "World-renowned centre of learning",
+      },
+    },
   },
   {
     id: 16,
@@ -1505,6 +1518,61 @@ export default function AuditionDetailContent({ id }: { id: number }) {
                       </div>
                     </section>
                   </>
+                )}
+
+                {/* Historical Context Section for Katputliyan Theatre audition */}
+                {audition.id === 17 && audition.historicalContext && (
+                  <section className="mb-6">
+                    <h2 className="text-lg sm:text-xl font-semibold mb-3">Historical Context</h2>
+                    <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-4 sm:p-5 md:p-6 overflow-hidden">
+                      {/* Mahmood Gawan */}
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-5 border border-amber-100 mb-4">
+                        <div className="flex items-start gap-3 mb-3">
+                          <span className="text-2xl sm:text-3xl flex-shrink-0">📜</span>
+                          <div>
+                            <h3 className="text-base sm:text-lg md:text-xl font-bold text-amber-900 break-words">
+                              {audition.historicalContext.mahmoodGawan.title}
+                            </h3>
+                          </div>
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed break-words">
+                          {audition.historicalContext.mahmoodGawan.description}
+                        </p>
+                      </div>
+
+                      {/* Mahmood Gawan Madrasa */}
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-5 border border-amber-100">
+                        <div className="flex items-start gap-3 mb-3">
+                          <span className="text-2xl sm:text-3xl flex-shrink-0">🏛️</span>
+                          <div>
+                            <h3 className="text-base sm:text-lg md:text-xl font-bold text-amber-900 break-words">
+                              {audition.historicalContext.madrasa.title}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-amber-700 mt-1">
+                              Built in {audition.historicalContext.madrasa.yearBuilt}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed break-words mb-4">
+                          {audition.historicalContext.madrasa.description}
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="bg-amber-50 rounded-md p-3 border border-amber-200">
+                            <p className="text-xs font-medium text-amber-600 mb-1">Manuscripts Housed</p>
+                            <p className="text-sm sm:text-base font-semibold text-amber-900">
+                              {audition.historicalContext.madrasa.manuscripts}
+                            </p>
+                          </div>
+                          <div className="bg-amber-50 rounded-md p-3 border border-amber-200">
+                            <p className="text-xs font-medium text-amber-600 mb-1">Historical Significance</p>
+                            <p className="text-sm sm:text-base font-semibold text-amber-900">
+                              {audition.historicalContext.madrasa.significance}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
                 )}
 
                 {/* Character Details Section for other auditions */}

@@ -64,6 +64,19 @@ const auditions = [
       performanceVenue: "Historic ruins of Mahmood Gawan Madrasa, Bidar",
       venueDescription: "A magnificent 15th-century madrasa with stunning Islamic architecture, providing a breathtaking backdrop for this historical production.",
     },
+    historicalContext: {
+      mahmoodGawan: {
+        title: "Mahmood Gawan",
+        description: "Mahmood Gawan was a visionary statesman and Prime Minister of the Bahmani Sultanate in the 15th century. Renowned for his wisdom, integrity, and scholarship, he was a mathematician, poet, and military strategist who greatly strengthened the kingdom. Despite his stature, he lived a simple life and ultimately became a tragic victim of court intrigue.",
+      },
+      madrasa: {
+        title: "Mahmood Gawan Madrasa (Bidar)",
+        description: "Built in 1472, this magnificent three-storey madrasa was once a world-renowned centre of learning, housing over 3,000 manuscripts and welcoming scholars from across Asia. Today, its towering minarets and intricate tile work stand as a powerful symbol of Bidar's cultural and intellectual heritage.",
+        yearBuilt: 1472,
+        manuscripts: "Over 3,000",
+        significance: "World-renowned centre of learning",
+      },
+    },
   },
   {
     id: 16,
