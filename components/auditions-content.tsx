@@ -12,6 +12,60 @@ import AuditionBanner from "@/components/audition-banner"
 // Verified audition data
 const auditions = [
   {
+    id: 17,
+    title: "Mega Historical Play (Hindi) - Katputliyan Theatre Group",
+    type: "Theater",
+    location: "Bidar / Bangalore",
+    state: "Karnataka",
+    date: "End of April 2026",
+    director: "Zafer Mohiuddin",
+    description:
+      "Audition call for a Mega Historical Play written by Chandra Shekhar Kambar (originally in Kannada), Hindi adaptation. The play features 27 characters and will be performed at the historic ruins of Mahmood Gawan Madrasa in Bidar. Rehearsals will be held in RT Nagar area, Bangalore from Monday to Saturday, 6:30 PM to 9:00 PM.",
+    company: "Katputliyan Theatre Group",
+    companyLink: "https://wa.me/917847852004",
+    contact: "+91 78478 52004 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/zafer-mohiuddin.jpeg",
+    requirements: [
+      "Actors interested in historical theatre",
+      "Available for rehearsals Monday to Saturday, 6:30 PM - 9:00 PM",
+      "Based in or able to travel to RT Nagar area, Bangalore for rehearsals",
+      "Comfortable with Hindi language",
+      "Commitment to the full production schedule",
+      "Available for performance at end of April 2026",
+    ],
+    roles: [
+      "27 characters available - Various historical roles",
+      "Male and female actors needed",
+      "All experience levels welcome",
+    ],
+    applicationProcess:
+      "Contact Director Zafer Mohiuddin via WhatsApp at +91 78478 52004 to express your interest and schedule an audition.",
+    auditionDetails: {
+      venue: "RT Nagar area, Bangalore (Rehearsals)",
+      performanceVenue: "Historic ruins of Mahmood Gawan Madrasa, Bidar",
+      rehearsalSchedule: "Monday to Saturday, 6:30 PM - 9:00 PM",
+      performanceDate: "End of April 2026",
+      registrationLink: "https://wa.me/917847852004",
+    },
+    directorDetails: {
+      name: "Zafer Mohiuddin",
+      company: "Katputliyan Theatre Group",
+      description: "Renowned theatre director leading Katputliyan Theatre Group with extensive experience in historical and cultural productions.",
+    },
+    playDetails: {
+      title: "Mega Historical Play",
+      originalAuthor: "Chandra Shekhar Kambar",
+      originalLanguage: "Kannada",
+      adaptedLanguage: "Hindi",
+      totalCharacters: 27,
+      performanceVenue: "Historic ruins of Mahmood Gawan Madrasa, Bidar",
+      venueDescription: "A magnificent 15th-century madrasa with stunning Islamic architecture, providing a breathtaking backdrop for this historical production.",
+    },
+  },
+  {
     id: 16,
     title: "Audition Call - Urban Chaupaal's Next Theatre Production",
     type: "Theater",
