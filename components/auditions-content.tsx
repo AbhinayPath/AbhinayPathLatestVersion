@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Filter, MapPin, Calendar } from "lucide-react"
 import AuditionBanner from "@/components/audition-banner"
+import { ShareAuditionButton } from "@/components/share-audition-button"
 
 // Verified audition data
 const auditions = [
@@ -619,10 +620,13 @@ export default function AuditionsContent() {
         <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 break-words">
           Audition Board
         </h1>
-        <p className="text-sm sm:text-base text-gray-600 break-words leading-relaxed">
+        <p className="text-sm sm:text-base text-gray-600 break-words leading-relaxed mb-4">
           Discover verified audition opportunities across the country. Filter by location, type, and experience level to
           find your perfect role.
         </p>
+        <div className="flex justify-center">
+          <ShareAuditionButton shareType="page" variant="button" />
+        </div>
       </div>
 
       {/* Filters */}
@@ -755,6 +759,16 @@ export default function AuditionsContent() {
                     target.src = "/images/auditions-stage.png"
                   }}
                 />
+                {/* Share button */}
+                <div className="absolute bottom-2 right-2 z-10">
+                  <ShareAuditionButton 
+                    auditionId={audition.id} 
+                    auditionTitle={audition.title} 
+                    shareType="audition" 
+                    variant="icon"
+                    size="sm"
+                  />
+                </div>
                 {audition.verified && (
                   <div className="absolute top-2 right-2 badge-verified text-xs">
                     <span className="flex items-center">
