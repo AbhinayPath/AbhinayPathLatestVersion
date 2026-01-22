@@ -34,7 +34,7 @@ const auditions = [
     contactType: "whatsapp",
     experience: "All Levels",
     verified: true,
-    image: "/images/zafer-mohiuddin.jpeg",
+    image: "/images/auditions-stage.png",
     requirements: [
       "Actors interested in historical theatre",
       "Available for rehearsals Monday to Saturday, 6:30 PM - 9:00 PM",
