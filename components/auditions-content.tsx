@@ -13,6 +13,57 @@ import { ShareAuditionButton } from "@/components/share-audition-button"
 // Verified audition data
 const auditions = [
   {
+    id: 18,
+    title: "POOP - World Toilet Organisation Theatre Production",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Ongoing",
+    director: "Theatre Production Team",
+    description:
+      "POOP is a bold, relevant, and socially urgent production that uses humour, satire, and storytelling to talk about sanitation, dignity, and public health. Officially partnered with World Toilet Organisation (WTO), this production goes beyond the stage with planned traveling performances across festivals, institutions, and multiple cities.",
+    company: "World Toilet Organisation Partnership",
+    companyLink: "https://forms.gle/iXNJPaDBrFi1m16h7",
+    contact: "Register via Google Form",
+    contactType: "form",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Passionate about meaningful and purpose-driven theatre",
+      "Interested in ensemble work and collaborative performances",
+      "Excited to tour and engage with diverse audiences",
+      "Available for traveling performances across festivals and cities",
+      "Based in or able to travel to Bangalore for rehearsals",
+      "Commitment to social impact theatre",
+    ],
+    roles: [
+      "Actors / Performers - Ensemble cast members",
+      "Physical theatre performers welcome",
+      "All experience levels considered",
+    ],
+    applicationProcess:
+      "Fill out the audition form at https://forms.gle/iXNJPaDBrFi1m16h7 to express your interest and be considered for the production.",
+    auditionDetails: {
+      venue: "Bangalore (Rehearsals)",
+      registrationLink: "https://forms.gle/iXNJPaDBrFi1m16h7",
+    },
+    projectDetails: {
+      title: "POOP",
+      partner: "World Toilet Organisation (WTO)",
+      theme: "Sanitation, dignity, and public health",
+      style: "Humour, satire, and storytelling",
+      scope: "Traveling performances - festivals, institutions, multiple cities",
+      impact: "Strong social impact & purpose-driven theatre",
+    },
+    whyThisMatters: [
+      "Backed by World Toilet Organisation - a global organisation working across countries and communities",
+      "Strong social impact & purpose-driven theatre",
+      "Planned traveling performances across festivals, institutions, and multiple cities",
+      "Opportunity to be part of a production that goes beyond the stage",
+    ],
+  },
+  {
     id: 17,
     title: "Mega Historical Play (Hindi) - Katputliyan Theatre Group",
     type: "Theater",
