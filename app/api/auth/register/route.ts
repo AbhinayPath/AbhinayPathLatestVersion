@@ -1,135 +1,93 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAnonServerClient } from "@/lib/supabase";
+import { getSupabaseServerClient } from "@/lib/supabase";
 
-const supabase = getSupabaseAnonServerClient();
+type ProfileType = "artist" | "technician" | "organisation";
 
-export async function POST(request: NextRequest) {
-  let createdUserId: string | null = null;
-
+export async function POST(req: NextRequest) {
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      profession,
-      name,
-    } = await request.json();
+    const { email, password, profileType } = await req.json() as {
+      email: string;
+      password: string;
+      profileType: ProfileType;
+    };
 
-    // Name normalization
-    let finalFirstName = firstName?.trim() || "";
-    let finalLastName = lastName?.trim() || "";
-
-    if (!finalFirstName && name) {
-      const parts = name.trim().split(" ");
-      finalFirstName = parts[0] || "";
-      finalLastName = parts.slice(1).join(" ") || "";
-    }
-
-    if (!finalFirstName || !email || !password) {
+    if (!email || !password || !profileType) {
       return NextResponse.json(
-        {
-          error: "Missing required fields",
-          message: "First name, email, and password are required",
-          success: false,
-        },
+        { success: false, message: "Email, password, and profile type are required" },
         { status: 400 }
       );
     }
 
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        {
-          error: "Invalid email format",
-          message: "Please provide a valid email address",
-          success: false,
-        },
-        { status: 400 }
-      );
-    }
-
-    // Password length validation
     if (password.length < 6) {
       return NextResponse.json(
-        {
-          error: "Password too short",
-          message: "Password must be at least 6 characters long",
-          success: false,
-        },
+        { success: false, message: "Password must be at least 6 characters" },
         { status: 400 }
       );
     }
+    const supabase = getSupabaseServerClient();
+    const { data: existingProfile } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("email", email)
+      .maybeSingle();
 
-    // ✅ Register user with public signUp
-    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+    if (existingProfile) {
+      return NextResponse.json(
+        { success: false, message: "Email already registered" },
+        { status: 409 }
+      );
+    }
+
+    const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          first_name: finalFirstName,
-          last_name: finalLastName,
-          full_name: `${finalFirstName} ${finalLastName}`.trim(),
-          profession: profession || null,
-        }
-      }
+          profile_type: profileType,
+        },
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+      },
     });
 
-    if (signUpError) {
-      let message = "Failed to create account";
-      if (signUpError.message.includes("already registered")) {
-        message = "An account with this email already exists";
-      } else if (signUpError.message.includes("password")) {
-        message = "Password does not meet requirements";
+
+    console.log("authError", authError, "authData", authData)
+    if (authError || !authData.user) {
+      // Handle specific Supabase auth errors
+      if (authError?.message.includes("already registered")) {
+        return NextResponse.json(
+          { success: false, message: "Email already registered" },
+          { status: 409 }
+        );
       }
-      console.log("signUpError", signUpError);
+
       return NextResponse.json(
-        {
-          error: signUpError.message,
-          message,
-          success: false,
-        },
+        { success: false, message: authError?.message ?? "Signup failed" },
         { status: 400 }
       );
     }
 
-    if (!signUpData.user) {
-      return NextResponse.json(
-        {
-          error: "User creation failed",
-          message: "Failed to create user account",
-          success: false,
-        },
-        { status: 500 }
-      );
-    }
-
-    // ✅ Create talent profile
-    const { data: profileData, error: profileError } = await supabase
-      .from("talent_profiles")
+    const userId = authData.user.id;
+    console.log("userId", userId)
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
       .insert({
-        user_id: signUpData.user.id,
-        first_name: finalFirstName,
-        last_name: finalLastName,
+        user_id: userId,
         email,
-        published: false,
-        profile_completion_percentage: 10,
+        type: profileType,
+        is_completed: false,
+        completion_percentage: 0,
       })
       .select()
       .single();
-      console.log("signUpData", signUpData);
-    console.log("profileData", profileData);
-    console.log("profileError", profileError);
-    
-    if (profileError) {
+
+    if (profileError || !profile) {
+      console.error("Profile creation error:", profileError);
+
+      // Rollback: Delete user and auth user
+      await supabase.auth.admin.deleteUser(userId);
+
       return NextResponse.json(
-        {
-          error: "Profile creation failed",
-          message: "User created, but failed to create profile.",
-          success: false,
-          details: profileError.message,
-        },
+        { success: false, message: "Profile creation failed" },
         { status: 500 }
       );
     }
@@ -137,27 +95,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "Account created successfully! Please check your email to confirm your account.",
-        user: {
-          id: signUpData.user.id,
-          email,
-          firstName: finalFirstName,
-          lastName: finalLastName,
-          fullName: `${finalFirstName} ${finalLastName}`.trim(),
-          profession: profession || null,
-          profile: profileData,
-        },
+        message: "Account created. Please verify your email.",
+        profileId: profile.id,
       },
       { status: 201 }
     );
-  } catch (error: any) {
-    console.error("❌ Registration error:", error);
+
+  } catch (err) {
+    console.error("Registration error:", err);
     return NextResponse.json(
-      {
-        error: "Internal server error",
-        message: "Something went wrong. Please try again.",
-        success: false,
-      },
+      { success: false, message: "Internal server error" },
       { status: 500 }
     );
   }

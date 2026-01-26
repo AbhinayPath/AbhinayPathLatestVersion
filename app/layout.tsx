@@ -27,25 +27,28 @@ export const metadata: Metadata = {
   title: "AbhinayPath - Platform for Creative Artists",
   description:
     "India's creative platform to discover auditions, workshops & prep support — across theatre, film & web.",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
   children,
+  modallogin
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode,
+  modallogin: React.ReactNode,
 }>) {
 
 
-  
-  
 
-  
+
+
+
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <AuthProvider>
+            {modallogin}
             <div className="flex min-h-screen flex-col">
               <Suspense fallback={<div className="h-16 border-b bg-background/95 backdrop-blur"></div>}>
                 <Navbar />
@@ -53,7 +56,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
             </div>
-            <Toaster />
+            <Toaster  position="top-right"/>
           </AuthProvider>
         </ThemeProvider>
         <Analytics />

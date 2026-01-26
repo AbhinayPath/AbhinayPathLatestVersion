@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Menu, X, LogOut, Edit, Plus } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
-import RegisterModal from "@/components/RegisterModal"
 import LoginModal from "@/components/LoginModal"
 import { NavbarProfilePercentage } from "@/components/navbar-profile-percentage"
+import { RegisterModal } from "@/features/auth/components/RegisterModal"
+import { useAuthActions } from "@/hooks/useAuthActions"
 
 export default function Navbar() {
   // TODO: Replace this mockProfileData with real profile data from context/store/API
@@ -31,7 +32,7 @@ export default function Navbar() {
     headshots: [],
   }
 
-  
+
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
@@ -39,7 +40,8 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
-  const { user, loading, signOut } = useAuth()
+  const { user, loading } = useAuth()
+  const { signOut } = useAuthActions()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -69,12 +71,12 @@ export default function Navbar() {
   const navItemsWithDashboard: NavItem[] =
     user && user.user_metadata?.profession?.toLowerCase() === "director"
       ? [
-          ...navItems,
-          { name: "Dashboard", href: "/casting" },
-        ]
+        ...navItems,
+        { name: "Dashboard", href: "/casting" },
+      ]
       : navItems;
 
-        console.log("navItemsWithDashboard",navItemsWithDashboard)
+  console.log("navItemsWithDashboard", navItemsWithDashboard)
 
 
   return (
@@ -93,9 +95,8 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`text-base font-medium transition-colors hover:text-[#7E1F2E] hover:font-medium ${
-                pathname === item.href ? "text-[#7E1F2E] font-medium" : ""
-              }`}
+              className={`text-base font-medium transition-colors hover:text-[#7E1F2E] hover:font-medium ${pathname === item.href ? "text-[#7E1F2E] font-medium" : ""
+                }`}
             >
               {item.name}
             </Link>
@@ -138,7 +139,7 @@ export default function Navbar() {
             <>
               <Button
                 variant="ghost"
-                onClick={() => setShowLoginModal(true)}
+                onClick={() => router.push("/login")}
                 className="text-[#7E1F2E] hover:text-[#6a1a27]"
               >
                 Login
@@ -172,9 +173,8 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-2 text-base font-medium rounded-md transition-colors hover:bg-gray-100 hover:text-[#7E1F2E] ${
-                  pathname === item.href ? "text-[#7E1F2E] bg-gray-50" : ""
-                }`}
+                className={`px-3 py-2 text-base font-medium rounded-md transition-colors hover:bg-gray-100 hover:text-[#7E1F2E] ${pathname === item.href ? "text-[#7E1F2E] bg-gray-50" : ""
+                  }`}
                 onClick={toggleMenu}
               >
                 {item.name}
@@ -217,7 +217,7 @@ export default function Navbar() {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      setShowLoginModal(true)
+                      router.push("/login")
                       toggleMenu()
                     }}
                     className="w-full"
@@ -247,7 +247,7 @@ export default function Navbar() {
       )}
 
       {/* Modals */}
-      <RegisterModal isOpen={showRegisterModal} onClose={() => setShowRegisterModal(false)} mode="register" />
+      <RegisterModal isOpen={showRegisterModal} onClose={() => setShowRegisterModal(false)} />
 
       <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </header>
