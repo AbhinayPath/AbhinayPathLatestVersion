@@ -14,9 +14,8 @@ import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2, Mail, Lock, AlertCircleIcon, OctagonAlert } from "lucide-react";
 import { LoginFormValues, loginSchema } from "../schemas/login.schema";
-import { Alert, AlertTitle } from "@/components/ui/alert";
 
-type ProfileType = "artist" | "technician" | "organisation";
+export type ProfileType = "artist" | "technician" | "organisation";
 
 interface Profile {
     is_completed: boolean;
@@ -164,7 +163,7 @@ export function LoginForm() {
 }
 
 
-function getPostLoginRedirect(profile: Profile): string {
+export default function getPostLoginRedirect(profile: Profile): string {
     if (profile.is_completed) {
         return "/";
     }

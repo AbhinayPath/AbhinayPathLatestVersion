@@ -38,11 +38,6 @@ export default function RootLayout({
   modallogin: React.ReactNode,
 }>) {
 
-
-
-
-
-
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>

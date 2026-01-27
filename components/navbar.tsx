@@ -13,8 +13,24 @@ import { NavbarProfilePercentage } from "@/components/navbar-profile-percentage"
 import { RegisterModal } from "@/features/auth/components/RegisterModal"
 import { useAuthActions } from "@/hooks/useAuthActions"
 
+
+const PROFILE_EDIT_CONFIG = {
+  artist: {
+    label: "Edit Talent Profile",
+    editRoute: "/talent-profile",
+  },
+  organisation: {
+    label: "Edit Organisation Profile",
+    editRoute: "/organisations/profile/edit",
+  },
+  technician: {
+    label: "Edit technician Profile",
+    editRoute: "/technician/profile/edit",
+  },
+};
+
 export default function Navbar() {
-  // TODO: Replace this mockProfileData with real profile data from context/store/API
+
   const mockProfileData = {
     profile: {
       full_name: "Demo User",
@@ -40,7 +56,7 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
-  const { user, loading } = useAuth()
+  const { user, loading, profile } = useAuth()
   const { signOut } = useAuthActions()
 
   const toggleMenu = () => {
@@ -52,10 +68,7 @@ export default function Navbar() {
     await signOut()
   }
 
-  const handleEditProfile = () => {
-    setDropdownOpen(false)
-    router.push("/talent-profile")
-  }
+
 
   type NavItem = { name: string; href: string };
 
@@ -75,9 +88,14 @@ export default function Navbar() {
         { name: "Dashboard", href: "/casting" },
       ]
       : navItems;
-
-  console.log("navItemsWithDashboard", navItemsWithDashboard)
-
+  const editProfileConfig = profile?.type
+    ? PROFILE_EDIT_CONFIG[profile?.type]
+    : null;
+  const handleEditProfile = () => {
+    setDropdownOpen(false);
+    if (!editProfileConfig) return;
+    router.push(editProfileConfig.editRoute);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
@@ -126,7 +144,7 @@ export default function Navbar() {
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={handleEditProfile}>
                     <Edit className="mr-2 h-4 w-4" />
-                    Edit Talent Profile
+                    {editProfileConfig?.label ?? "Edit Profile"}
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />

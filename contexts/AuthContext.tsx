@@ -3,6 +3,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User } from '@supabase/supabase-js';
 import { getSupabaseBrowserClient } from '@/lib/supabase';
+import getPostLoginRedirect from '@/features/auth/components/LoginForm';
+import { useRouter } from 'next/navigation';
 
 interface Profile {
   id: string;
@@ -26,6 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter()
 
   // Fetch user and profile together
   const refreshUser = async () => {
@@ -56,6 +59,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           const data = await res.json();
           setUser(data.user);
           setProfile(data.profile);
+          const redirectPath = getPostLoginRedirect(data.profile);
+          router.push(redirectPath);
         } else {
           setUser(null);
           setProfile(null);

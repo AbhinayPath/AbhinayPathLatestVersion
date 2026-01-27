@@ -42,8 +42,8 @@ export default function ResetPasswordPage() {
     setIsLoading(true);
 
     if (typeof window === "undefined") return;
-  const { supabase } = await import("@/lib/supabase-browser");
-  const { error: updateError } = await supabase.auth.updateUser({ password });
+    const { supabase } = await import("@/lib/supabase-browser");
+    const { error: updateError } = await supabase.auth.updateUser({ password });
 
     if (updateError) {
       setError(updateError.message || 'Failed to reset password.');
