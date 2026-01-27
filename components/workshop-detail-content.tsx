@@ -929,6 +929,58 @@ const workshops: Workshop[] = [
       organizer: "The International Academic Forum (IAFOR)",
     },
   },
+  {
+    id: 21,
+    title: "Villa Albertine — Theatre & New Forms Grant",
+    trainer: "Villa Albertine",
+    institution: "Villa Albertine (France–USA Cultural Program)",
+    location: "France–USA",
+    state: "International",
+    date: "Deadline: 29 January 2026",
+    time: "Application deadline approaching",
+    description:
+      "International grant for collaborative theatre projects between France and USA. Comprehensive funding covering travel, living expenses, and project costs.",
+    registrationLink: "https://villa-albertine.org/va/professionals/call-for-applications-theatre-new-forms-2026/?utm_source=chatgpt.com",
+    price: "Travel + living + project costs funded",
+    contact: "Via Villa Albertine website",
+    email: "Via Villa Albertine website",
+    eligibility: "International theatre artists with FR–US partnership",
+    venue: "France–USA Collaboration",
+    travelSupport: true,
+    fullDetails: {
+      description:
+        "Villa Albertine's Theatre & New Forms Grant supports collaborative theatre projects between France and the United States. This prestigious grant provides comprehensive funding including travel expenses, living costs, and project funding for international theatre artists developing innovative work that bridges French and American theatrical traditions. The program encourages experimentation with new theatrical forms and cross-cultural collaboration, making it ideal for theatre makers seeking to develop ambitious international projects.",
+      keyHighlights: [
+        "Application deadline: 29 January 2026 (Soon!)",
+        "Comprehensive funding: travel + living + project costs",
+        "France–USA collaborative partnership requirement",
+        "Focus on theatre and new theatrical forms",
+        "International grant opportunity",
+        "Travel support included",
+        "Best for collaborative and innovative theatre projects",
+      ],
+      curriculum: [
+        "Development of collaborative France-USA theatre projects",
+        "Exploration of new theatrical forms and techniques",
+        "Cross-cultural artistic exchange and collaboration",
+        "Project development and production support",
+        "Professional networking in French and American theatre scenes",
+        "Residency and creation time as needed",
+      ],
+      duration: "Project-based (varies by proposal)",
+      medium: "French/English",
+      courseFee: "Fully funded grant (travel + living + project costs)",
+      certification: "Villa Albertine grant recipient recognition",
+      contactInfo: [
+        "Website: https://villa-albertine.org/va/professionals/call-for-applications-theatre-new-forms-2026/",
+        "Application deadline: 29 January 2026",
+        "Program: Villa Albertine Theatre & New Forms",
+        "Travel Support: Yes - included in grant",
+      ],
+      venue: "France–USA (locations based on project)",
+      organizer: "Villa Albertine",
+    },
+  },
 ]
 
 export default function WorkshopDetailContent({ id }: { id: number }) {

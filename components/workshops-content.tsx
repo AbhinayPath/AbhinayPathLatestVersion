@@ -486,6 +486,29 @@ const workshops: Workshop[] = [
     category: "Fellowship & Seminars",
     tags: ["Conference", "Call for Papers", "Arts & Humanities", "Paris"],
   },
+  {
+    id: 21,
+    title: "Villa Albertine — Theatre & New Forms Grant",
+    trainer: "Villa Albertine",
+    institution: "Villa Albertine (France–USA Cultural Program)",
+    location: "France–USA",
+    state: "International",
+    date: "Deadline: 29 January 2026",
+    time: "Application deadline approaching",
+    description:
+      "International grant for collaborative theatre projects between France and USA. Comprehensive funding covering travel, living expenses, and project costs. Open to international theatre artists with France-USA partnership. Best for collaborative theatre projects and new theatrical forms exploring cross-cultural collaboration.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://villa-albertine.org/va/professionals/call-for-applications-theatre-new-forms-2026/?utm_source=chatgpt.com",
+    featured: true,
+    price: "Travel + living + project costs funded",
+    contact: "Via Villa Albertine website",
+    email: "Via Villa Albertine website",
+    eligibility: "International theatre artists with FR–US partnership",
+    venue: "France–USA Collaboration",
+    category: "Fellowship & Seminars",
+    tags: ["International Grant", "Travel Support", "Project Fund", "Collaboration"],
+    travelSupport: true,
+  },
 ]
 
 // Get unique states, cities, and trainers for filters
