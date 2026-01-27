@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive } from "lucide-react"
 import Link from "next/link"
+import { ShareEventButton } from "@/components/share-event-button"
 
 interface Festival {
   id: string
@@ -102,6 +103,83 @@ const festivals: Festival[] = [
     description:
       "A regional theatre festival celebrating Delhi-NCR's vibrant theatre community. Organized by Triveni Kala Sangam with support from Rukavipa Foundation, the festival features free entry performances for the general public and theatre enthusiasts.",
     link: "https://www.facebook.com/triveninewdelhi/",
+  },
+  {
+    id: "alcheringa-2026",
+    name: "Alcheringa 2026 — Theatre Competitions (IIT Guwahati)",
+    city: "IIT Guwahati, Assam",
+    country: "India",
+    languages: "Hindi / English",
+    scale: "National",
+    duration: "4 days",
+    month: "January",
+    dates: "29 Jan – 1 Feb 2026",
+    submissionDeadline: "Open (check website)",
+    status: "open",
+    selectionProcess: "Online Registration",
+    eligibility:
+      "Open to all participants (min age 12); includes Theatrix (Group Stage Play), Monodrama (Solo 5 min), Halla Bol (Nukkad-style, min 6 members)",
+    description:
+      "IIT Guwahati's flagship cultural festival featuring three theatre competitions: Theatrix (Group Stage Play, 50 min finals), Monodrama (Solo Play, 5 min limit with collar mic provided), and Halla Bol (Nukkad-style group play, 20 min limit, min 6 members). Venues include Main Stage and Auditorium. Rules: No fire/water/smoke; live music allowed; bring laptop for sound.",
+    link: "https://www.alcheringa.co.in/Competitions",
+  },
+  {
+    id: "alter-ego-2026",
+    name: "Alter Ego 2026 - Theatre & Dance Festival",
+    city: "Bulgaria",
+    country: "Bulgaria",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "Festival dates TBA",
+    month: "January",
+    dates: "2026 (dates TBA)",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Apply via form (curation by festival)",
+    eligibility: "Alternative theatre and dance artists (experimental/avant-garde focus)",
+    description:
+      "International open call for experimental and avant-garde theatre and dance artists. This festival celebrates alternative performance practices and contemporary experimental works, providing a platform for cutting-edge theatrical and choreographic expressions.",
+    link: "https://dancingopportunities.com/alter-ego-2026-theater-and-dance-festival-open-call/",
+  },
+
+  // February Festivals
+  {
+    id: "pflasterspektakel-2026",
+    name: "Pflasterspektakel 2026",
+    city: "Linz",
+    country: "Austria",
+    languages: "Open to all",
+    scale: "International",
+    duration: "3 days",
+    month: "February",
+    dates: "Festival dates TBA",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Apply online → invited/refused by email",
+    eligibility: "Companies & solo performers (800+ applicants; ~100 invited)",
+    description:
+      "Large international street theatre and performance festival. A major platform for contemporary street performance art with highly selective curation process, inviting approximately 100 performers from a pool of 800+ international applicants to perform in festival setup venues.",
+    link: "https://www.unima.org.uk/p/call-for-artists-applications-open",
+  },
+  {
+    id: "lotte-lenya-competition-2026",
+    name: "Lotte Lenya Competition 2026 - Singing & Acting International Contest",
+    city: "New York",
+    country: "USA",
+    languages: "English (International applicants welcome)",
+    scale: "International",
+    duration: "Competition event",
+    month: "February",
+    dates: "2026 (Competition dates TBA)",
+    submissionDeadline: "4 Feb 2026",
+    status: "open",
+    selectionProcess: "Application + Audition",
+    eligibility: "Actors/singers aged 19-32 years, all nationalities",
+    travelSupport: "No funded travel included",
+    description:
+      "An international singing and acting competition celebrating musical theatre and lyric performance artistry. This prestigious competition blends acting and singing, offering cash prizes up to $25,000 plus exceptional performance exposure. Great opportunity for musical theatre and lyric performance artists looking to showcase their combined vocal and dramatic talents on an international stage.",
+    link: "https://thekurtweillfoundationformusic.submittable.com/submit/335888/2026-lotte-lenya-competition-application",
+    featured: true,
   },
 
   // March Festivals
@@ -203,6 +281,42 @@ const festivals: Festival[] = [
     link: "https://www.berlinerfestspiele.de/en/theatertreffen/das-festival/theatertreffen-blog/open-call",
     isFellowship: true,
   },
+  {
+    id: "mittelyoung-2026",
+    name: "Mittelyoung 2026 (Mittelfest)",
+    city: "Cividale del Friuli",
+    country: "Italy",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "4 days (with possible July re-programming)",
+    month: "May",
+    dates: "14–17 May 2026",
+    submissionDeadline: "10 Feb 2026 (3:00 PM)",
+    status: "open",
+    selectionProcess: "Under-30 curators select 9 projects",
+    eligibility: "Under-30 artists/companies from listed European countries",
+    description:
+      "Europe-focused platform exclusively for emerging artists under 30. Selected by young curators, 9 projects will be featured during the festival with possible re-programming opportunities into the main Mittelfest in July, providing exceptional visibility for early-career European theatre makers.",
+    link: "https://www.mittelfest.org/en/mittelyoung/",
+  },
+  {
+    id: "shreeram-lagoo-2026",
+    name: "Shreeram Lagoo National Theatre Festival",
+    city: "Pune",
+    country: "India",
+    languages: "Not specified",
+    scale: "National",
+    duration: "7 days",
+    month: "May",
+    dates: "25 May – 31 May 2026",
+    submissionDeadline: "10 Feb 2026",
+    status: "open",
+    selectionProcess: "Open Call",
+    eligibility: "Theatre groups and companies (India)",
+    description:
+      "A national theatre festival honoring the legacy of legendary actor Dr. Shreeram Lagoo. Hosted at Jyotsna Bhole Sabhagruha and associated with Shreeram Lagoo Rang-Avkash in Pune, this festival celebrates theatrical excellence and pays tribute to one of Indian theatre's most influential figures.",
+    link: "mailto:lagoofestival@mcckala.com",
+  },
 
   // June Festivals
   {
@@ -243,6 +357,103 @@ const festivals: Festival[] = [
       "A high-value international fellowship embedded within a major festival. Selected fellows receive comprehensive support including visa assistance with fees covered, travel contribution, local transfers, accommodation, and per diems, making this an exceptional opportunity for global theatre practitioners.",
     link: "https://www.iti-germany.de/en/meeting-exchange/the-iti-academy/iti-academy-week-open-call-2026",
     isFellowship: true,
+  },
+  {
+    id: "bursa-children-youth-2026",
+    name: "International Bursa Children & Youth Theatre Festival 2026",
+    city: "Bursa",
+    country: "Turkiye",
+    languages: "Open to all",
+    scale: "International",
+    duration: "Festival",
+    month: "June",
+    dates: "2026 (Festival dates TBA)",
+    submissionDeadline: "30 June 2026",
+    status: "open",
+    selectionProcess: "Open call + Selection committee",
+    eligibility: "International theatre companies with works for children & youth",
+    travelSupport: "Not guaranteed (festival hospitality may apply)",
+    description:
+      "One of the leading global festivals for theatre for young audiences. Open to international theatre companies including Indian artists. A great platform for exposure, networking, and presenting work created for children and youth audiences on an international stage.",
+    link: "https://assitej-international.org/2026/01/14/open-call-international-bursa-children-and-youth-theatre-festival/",
+  },
+  {
+    id: "valise-2026",
+    name: "VALISE 2026 - International Theatrical Festival",
+    city: "Łomża",
+    country: "Poland",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "4 days",
+    month: "June",
+    dates: "25–28 Jun 2026",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Apply via email; requirements PDF provided",
+    eligibility: "Professional & non-institutional theatres + drama school students",
+    description:
+      "The 39th edition of this international theatrical festival welcomes professional theatres, non-institutional groups, and drama school students from around the world. Application process requires email submission with detailed requirements provided in PDF format.",
+    link: "https://www.unima.org.uk/p/39th-international-theatrical-festival",
+  },
+
+  // July Festivals
+  {
+    id: "china-childrens-theatre-2026",
+    name: "China Children's Theatre Festival 2026",
+    city: "Beijing",
+    country: "China",
+    languages: "English or Chinese",
+    scale: "International",
+    duration: "1 month",
+    month: "July",
+    dates: "15 Jul – 15 Aug 2026",
+    submissionDeadline: "15 Jan 2026",
+    status: "open",
+    selectionProcess: "Reviewed by selection team; notification by 9 Mar 2026",
+    eligibility: "Companies with eligible productions (international TYA focus)",
+    travelSupport:
+      "Local accommodation/per diem/local transport & performance fee (international travel/shipping on participants)",
+    description:
+      "International Theatre for Young Audiences (TYA) festival with performance opportunities across Beijing and potentially other Chinese cities. Selected companies receive local support including accommodation, per diem, transportation, and performance fees, though international travel and shipping costs are borne by participants.",
+    link: "https://assitej-international.org/2025/12/15/international-performance-open-call-china-childrens-theatre-festival/",
+  },
+  {
+    id: "borderlight-2026",
+    name: "BorderLight Theatre Festival 2026",
+    city: "Cleveland",
+    country: "USA",
+    languages: "Open to all Languages",
+    scale: "International",
+    duration: "Festival month",
+    month: "July",
+    dates: "July 2026",
+    submissionDeadline: "16 Jan 2026",
+    status: "open",
+    selectionProcess: "Call for artists (details via application link)",
+    eligibility: "Artists / theatre makers",
+    description:
+      "Cleveland's international theatre festival brings together diverse voices and theatrical practices from around the world. The festival seeks innovative artists and theatre makers to participate in this celebration of contemporary performance.",
+    link: "https://www.borderlightcle.org/2026artist/",
+  },
+  {
+    id: "theatre-exposed-2026",
+    name: "THEATRE EXPOSED 2026 - International Theatre Photography Competition",
+    city: "Online",
+    country: "International",
+    languages: "Open to all",
+    scale: "International",
+    duration: "Competition",
+    month: "July",
+    dates: "2026 (Online submissions)",
+    submissionDeadline: "1 July 2026",
+    status: "open",
+    selectionProcess: "Online submission + jury selection",
+    eligibility: "Professional theatre photographers globally",
+    travelSupport: "Not Provided",
+    registrationFee: "Free participation",
+    description:
+      "International theatre photography competition celebrating the art of performance documentation. Categories include art photo, portrait, movement, and open (theatre). A great international platform for theatre photographers to showcase their work capturing the magic of live performance. Free to enter.",
+    link: "https://assitej-international.org/2026/01/14/international-theatre-photography-competition/",
   },
 ]
 
@@ -289,7 +500,7 @@ export default function EventsPage() {
     {} as Record<string, Festival[]>,
   )
 
-  const monthOrder = ["January", "March", "May", "June"]
+  const monthOrder = ["January", "February", "March", "May", "June", "July"]
 
   const FestivalCard = ({ festival }: { festival: Festival }) => {
     const statusBadge = getStatusBadge(festival.status)
@@ -315,9 +526,16 @@ export default function EventsPage() {
             </div>
           )}
           <div className="flex items-start justify-between gap-3 mb-3">
-            <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-[#7E1F2E] transition-colors leading-tight">
+            <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-[#7E1F2E] transition-colors leading-tight flex-1">
               {festival.name}
             </CardTitle>
+            <ShareEventButton 
+              eventId={festival.id} 
+              eventName={festival.name} 
+              shareType="event" 
+              variant="icon"
+              size="sm"
+            />
           </div>
           <div className="flex flex-wrap gap-2">
             <Badge className={`${statusBadge.color} text-xs flex items-center gap-1 px-2 py-1`}>
@@ -433,6 +651,9 @@ export default function EventsPage() {
                 </div>
                 <div className="text-sm opacity-80">In India</div>
               </div>
+            </div>
+            <div className="mt-8 flex justify-center">
+              <ShareEventButton shareType="page" variant="button" />
             </div>
           </div>
         </div>

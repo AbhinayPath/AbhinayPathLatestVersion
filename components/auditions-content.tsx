@@ -8,9 +8,128 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Filter, MapPin, Calendar } from "lucide-react"
 import AuditionBanner from "@/components/audition-banner"
+import { ShareAuditionButton } from "@/components/share-audition-button"
 
 // Verified audition data
 const auditions = [
+  {
+    id: 18,
+    title: "POOP - World Toilet Organisation Theatre Production",
+    type: "Theater",
+    location: "Bangalore",
+    state: "Karnataka",
+    date: "Ongoing",
+    director: "Theatre Production Team",
+    description:
+      "POOP is a bold, relevant, and socially urgent production that uses humour, satire, and storytelling to talk about sanitation, dignity, and public health. Officially partnered with World Toilet Organisation (WTO), this production goes beyond the stage with planned traveling performances across festivals, institutions, and multiple cities.",
+    company: "World Toilet Organisation Partnership",
+    companyLink: "https://forms.gle/iXNJPaDBrFi1m16h7",
+    contact: "Register via Google Form",
+    contactType: "form",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Passionate about meaningful and purpose-driven theatre",
+      "Interested in ensemble work and collaborative performances",
+      "Excited to tour and engage with diverse audiences",
+      "Available for traveling performances across festivals and cities",
+      "Based in or able to travel to Bangalore for rehearsals",
+      "Commitment to social impact theatre",
+    ],
+    roles: [
+      "Actors / Performers - Ensemble cast members",
+      "Physical theatre performers welcome",
+      "All experience levels considered",
+    ],
+    applicationProcess:
+      "Fill out the audition form at https://forms.gle/iXNJPaDBrFi1m16h7 to express your interest and be considered for the production.",
+    auditionDetails: {
+      venue: "Bangalore (Rehearsals)",
+      registrationLink: "https://forms.gle/iXNJPaDBrFi1m16h7",
+    },
+    projectDetails: {
+      title: "POOP",
+      partner: "World Toilet Organisation (WTO)",
+      theme: "Sanitation, dignity, and public health",
+      style: "Humour, satire, and storytelling",
+      scope: "Traveling performances - festivals, institutions, multiple cities",
+      impact: "Strong social impact & purpose-driven theatre",
+    },
+    whyThisMatters: [
+      "Backed by World Toilet Organisation - a global organisation working across countries and communities",
+      "Strong social impact & purpose-driven theatre",
+      "Planned traveling performances across festivals, institutions, and multiple cities",
+      "Opportunity to be part of a production that goes beyond the stage",
+    ],
+  },
+  {
+    id: 17,
+    title: "Mega Historical Play (Hindi) - Katputliyan Theatre Group",
+    type: "Theater",
+    location: "Bidar / Bangalore",
+    state: "Karnataka",
+    date: "End of April 2026",
+    director: "Zafer Mohiuddin",
+    description:
+      "Audition call for a Mega Historical Play written by Chandra Shekhar Kambar (originally in Kannada), Hindi adaptation. The play features 27 characters and will be performed at the historic ruins of Mahmood Gawan Madrasa in Bidar. Rehearsals will be held in RT Nagar area, Bangalore from Monday to Saturday, 6:30 PM to 9:00 PM.",
+    company: "Katputliyan Theatre Group",
+    companyLink: "https://wa.me/917847852004",
+    contact: "+91 78478 52004 (WhatsApp)",
+    contactType: "whatsapp",
+    experience: "All Levels",
+    verified: true,
+    image: "/images/auditions-stage.png",
+    requirements: [
+      "Actors interested in historical theatre",
+      "Available for rehearsals Monday to Saturday, 6:30 PM - 9:00 PM",
+      "Based in or able to travel to RT Nagar area, Bangalore for rehearsals",
+      "Comfortable with Hindi language",
+      "Commitment to the full production schedule",
+      "Available for performance at end of April 2026",
+    ],
+    roles: [
+      "27 characters available - Various historical roles",
+      "Male and female actors needed",
+      "All experience levels welcome",
+    ],
+    applicationProcess:
+      "Contact Director Zafer Mohiuddin via WhatsApp at +91 78478 52004 to express your interest and schedule an audition.",
+    auditionDetails: {
+      venue: "RT Nagar area, Bangalore (Rehearsals)",
+      performanceVenue: "Historic ruins of Mahmood Gawan Madrasa, Bidar",
+      rehearsalSchedule: "Monday to Saturday, 6:30 PM - 9:00 PM",
+      performanceDate: "End of April 2026",
+      registrationLink: "https://wa.me/917847852004",
+    },
+    directorDetails: {
+      name: "Zafer Mohiuddin",
+      company: "Katputliyan Theatre Group",
+      description: "Renowned theatre director leading Katputliyan Theatre Group with extensive experience in historical and cultural productions.",
+    },
+    playDetails: {
+      title: "Mega Historical Play",
+      originalAuthor: "Chandra Shekhar Kambar",
+      originalLanguage: "Kannada",
+      adaptedLanguage: "Hindi",
+      totalCharacters: 27,
+      performanceVenue: "Historic ruins of Mahmood Gawan Madrasa, Bidar",
+      venueDescription: "A magnificent 15th-century madrasa with stunning Islamic architecture, providing a breathtaking backdrop for this historical production.",
+    },
+    historicalContext: {
+      mahmoodGawan: {
+        title: "Mahmood Gawan",
+        description: "Mahmood Gawan was a visionary statesman and Prime Minister of the Bahmani Sultanate in the 15th century. Renowned for his wisdom, integrity, and scholarship, he was a mathematician, poet, and military strategist who greatly strengthened the kingdom. Despite his stature, he lived a simple life and ultimately became a tragic victim of court intrigue.",
+      },
+      madrasa: {
+        title: "Mahmood Gawan Madrasa (Bidar)",
+        description: "Built in 1472, this magnificent three-storey madrasa was once a world-renowned centre of learning, housing over 3,000 manuscripts and welcoming scholars from across Asia. Today, its towering minarets and intricate tile work stand as a powerful symbol of Bidar's cultural and intellectual heritage.",
+        yearBuilt: 1472,
+        manuscripts: "Over 3,000",
+        significance: "World-renowned centre of learning",
+      },
+    },
+  },
   {
     id: 16,
     title: "Audition Call - Urban Chaupaal's Next Theatre Production",
@@ -552,10 +671,13 @@ export default function AuditionsContent() {
         <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 break-words">
           Audition Board
         </h1>
-        <p className="text-sm sm:text-base text-gray-600 break-words leading-relaxed">
+        <p className="text-sm sm:text-base text-gray-600 break-words leading-relaxed mb-4">
           Discover verified audition opportunities across the country. Filter by location, type, and experience level to
           find your perfect role.
         </p>
+        <div className="flex justify-center">
+          <ShareAuditionButton shareType="page" variant="button" />
+        </div>
       </div>
 
       {/* Filters */}
@@ -688,6 +810,16 @@ export default function AuditionsContent() {
                     target.src = "/images/auditions-stage.png"
                   }}
                 />
+                {/* Share button */}
+                <div className="absolute bottom-2 right-2 z-10">
+                  <ShareAuditionButton 
+                    auditionId={audition.id} 
+                    auditionTitle={audition.title} 
+                    shareType="audition" 
+                    variant="icon"
+                    size="sm"
+                  />
+                </div>
                 {audition.verified && (
                   <div className="absolute top-2 right-2 badge-verified text-xs">
                     <span className="flex items-center">
