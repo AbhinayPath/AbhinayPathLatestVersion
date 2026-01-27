@@ -493,7 +493,7 @@ const workshops: Workshop[] = [
     institution: "Villa Albertine (France–USA Cultural Program)",
     location: "France–USA",
     state: "International",
-    date: "Deadline: 29 January 2026",
+    date: "Deadline: 13 February 2026",
     time: "Application deadline approaching",
     description:
       "International grant for collaborative theatre projects between France and USA. Comprehensive funding covering travel, living expenses, and project costs. Open to international theatre artists with France-USA partnership. Best for collaborative theatre projects and new theatrical forms exploring cross-cultural collaboration.",

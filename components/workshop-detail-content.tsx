@@ -936,7 +936,7 @@ const workshops: Workshop[] = [
     institution: "Villa Albertine (France–USA Cultural Program)",
     location: "France–USA",
     state: "International",
-    date: "Deadline: 29 January 2026",
+    date: "Deadline: 13 February 2026",
     time: "Application deadline approaching",
     description:
       "International grant for collaborative theatre projects between France and USA. Comprehensive funding covering travel, living expenses, and project costs.",
@@ -951,7 +951,7 @@ const workshops: Workshop[] = [
       description:
         "Villa Albertine's Theatre & New Forms Grant supports collaborative theatre projects between France and the United States. This prestigious grant provides comprehensive funding including travel expenses, living costs, and project funding for international theatre artists developing innovative work that bridges French and American theatrical traditions. The program encourages experimentation with new theatrical forms and cross-cultural collaboration, making it ideal for theatre makers seeking to develop ambitious international projects.",
       keyHighlights: [
-        "Application deadline: 29 January 2026 (Soon!)",
+        "Application deadline: 13 February 2026",
         "Comprehensive funding: travel + living + project costs",
         "France–USA collaborative partnership requirement",
         "Focus on theatre and new theatrical forms",
@@ -973,7 +973,7 @@ const workshops: Workshop[] = [
       certification: "Villa Albertine grant recipient recognition",
       contactInfo: [
         "Website: https://villa-albertine.org/va/professionals/call-for-applications-theatre-new-forms-2026/",
-        "Application deadline: 29 January 2026",
+        "Application deadline: 13 February 2026",
         "Program: Villa Albertine Theatre & New Forms",
         "Travel Support: Yes - included in grant",
       ],
