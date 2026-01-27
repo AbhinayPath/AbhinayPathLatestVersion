@@ -52,6 +52,9 @@ export function MultiSelect({
     e.stopPropagation();
     onChange(selected.filter((item) => item !== value));
   };
+  const safeSelected = React.useMemo<string[]>(() => {
+    return Array.isArray(selected) ? selected : [];
+  }, [selected]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -69,10 +72,10 @@ export function MultiSelect({
           )}
         >
           <div className="flex flex-wrap gap-1.5">
-            {selected.length === 0 && (
+            {safeSelected.length === 0 && (
               <span className="text-muted-foreground">{placeholder}</span>
             )}
-            {selected.slice(0, maxDisplay).map((value) => (
+            {safeSelected.slice(0, maxDisplay)?.map((value) => (
               <Badge
                 key={value}
                 variant="default"
@@ -88,6 +91,7 @@ export function MultiSelect({
                 </button>
               </Badge>
             ))}
+
             {selected.length > maxDisplay && (
               <Badge
                 variant="default"

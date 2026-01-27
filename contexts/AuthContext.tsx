@@ -59,8 +59,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           const data = await res.json();
           setUser(data.user);
           setProfile(data.profile);
-          const redirectPath = getPostLoginRedirect(data.profile);
-          router.push(redirectPath);
+          if (!data.profile.is_completed) {
+            const redirectPath = getPostLoginRedirect(data.profile);
+            router.push(redirectPath);
+          }
         } else {
           setUser(null);
           setProfile(null);

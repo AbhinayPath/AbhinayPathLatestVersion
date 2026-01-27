@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         data: {
           profile_type: profileType,
         },
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+        // emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
       },
     });
 
