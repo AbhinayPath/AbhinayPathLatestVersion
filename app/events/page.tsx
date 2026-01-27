@@ -161,6 +161,26 @@ const festivals: Festival[] = [
       "Large international street theatre and performance festival. A major platform for contemporary street performance art with highly selective curation process, inviting approximately 100 performers from a pool of 800+ international applicants to perform in festival setup venues.",
     link: "https://www.unima.org.uk/p/call-for-artists-applications-open",
   },
+  {
+    id: "lotte-lenya-competition-2026",
+    name: "Lotte Lenya Competition 2026 - Singing & Acting International Contest",
+    city: "New York",
+    country: "USA",
+    languages: "English (International applicants welcome)",
+    scale: "International",
+    duration: "Competition event",
+    month: "February",
+    dates: "2026 (Competition dates TBA)",
+    submissionDeadline: "4 Feb 2026",
+    status: "open",
+    selectionProcess: "Application + Audition",
+    eligibility: "Actors/singers aged 19-32 years, all nationalities",
+    travelSupport: "No funded travel included",
+    description:
+      "An international singing and acting competition celebrating musical theatre and lyric performance artistry. This prestigious competition blends acting and singing, offering cash prizes up to $25,000 plus exceptional performance exposure. Great opportunity for musical theatre and lyric performance artists looking to showcase their combined vocal and dramatic talents on an international stage.",
+    link: "https://thekurtweillfoundationformusic.submittable.com/submit/335888/2026-lotte-lenya-competition-application",
+    featured: true,
+  },
 
   // March Festivals
   {
