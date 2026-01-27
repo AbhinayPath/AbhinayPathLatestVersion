@@ -33,3 +33,8 @@ export const registrationSchema = z.object({
 });
 
 export type RegistrationFormData = z.infer<typeof registrationSchema>;
+
+// instagram: z.preprocess(
+//   (val) => (val === "" ? undefined : val),
+//   z.string().url("Please enter a valid URL").optional()
+// ),
