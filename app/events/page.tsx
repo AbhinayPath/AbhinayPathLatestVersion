@@ -416,6 +416,26 @@ const festivals: Festival[] = [
       "Cleveland's international theatre festival brings together diverse voices and theatrical practices from around the world. The festival seeks innovative artists and theatre makers to participate in this celebration of contemporary performance.",
     link: "https://www.borderlightcle.org/2026artist/",
   },
+  {
+    id: "theatre-exposed-2026",
+    name: "THEATRE EXPOSED 2026 - International Theatre Photography Competition",
+    city: "Online",
+    country: "International",
+    languages: "Open to all",
+    scale: "International",
+    duration: "Competition",
+    month: "July",
+    dates: "2026 (Online submissions)",
+    submissionDeadline: "1 July 2026",
+    status: "open",
+    selectionProcess: "Online submission + jury selection",
+    eligibility: "Professional theatre photographers globally",
+    travelSupport: "Not Provided",
+    registrationFee: "Free participation",
+    description:
+      "International theatre photography competition celebrating the art of performance documentation. Categories include art photo, portrait, movement, and open (theatre). A great international platform for theatre photographers to showcase their work capturing the magic of live performance. Free to enter.",
+    link: "https://assitej-international.org/2026/01/14/international-theatre-photography-competition/",
+  },
 ]
 
 export default function EventsPage() {
