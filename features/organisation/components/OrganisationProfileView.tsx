@@ -48,6 +48,7 @@ interface OrganisationProfileProps {
 }
 
 export function OrganisationProfileView({ organisation }: OrganisationProfileProps) {
+    console.log(organisation)
     return (
         <div className="min-h-screen bg-background">
             {/* Hero Section */}
@@ -55,15 +56,18 @@ export function OrganisationProfileView({ organisation }: OrganisationProfilePro
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
                     {/* Organisation Types */}
                     <div className="flex flex-wrap gap-2 mb-4">
-                        {organisation.organisation_types.map((type, index) => (
-                            <Badge
-                                key={index}
-                                variant="secondary"
-                                className="text-xs font-medium"
-                            >
-                                {type}
-                            </Badge>
-                        ))}
+                        {organisation?.organisation_types?.length > 0 && (
+                            organisation?.organisation_types?.map((type, index) => (
+                                <Badge
+                                    key={index}
+                                    variant="secondary"
+                                    className="text-xs font-medium"
+                                >
+                                    {type}
+                                </Badge>
+                            ))
+                        )}
+
                     </div>
 
                     {/* Name & Description */}
