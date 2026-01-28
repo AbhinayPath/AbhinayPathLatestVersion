@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         data: {
           profile_type: profileType,
         },
-        // emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/confirm`,
+       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
       },
     });
 
