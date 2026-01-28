@@ -1,5 +1,6 @@
 import { CORE_AREAS, ORGANIZATION_TYPES, PRIMARY_LANGUAGES } from "@/constants/organization.constants";
 import { z } from "zod";
+import { urlSchema } from "./organisationenhancedprofileschema";
 
 export const registrationSchema = z.object({
   organisation_name: z
@@ -19,13 +20,7 @@ export const registrationSchema = z.object({
     .array(z.enum(CORE_AREAS))
     .min(1, "Please select at least one core area"),
   contact_email: z.string().email("Please enter a valid email address"),
-  instagram: z
-    .string()
-    .refine(
-      (val) => !val || val === "" || z.string().url().safeParse(val).success,
-      "Please enter a valid URL"
-    )
-    .optional(),
+  instagram: urlSchema,
   short_description: z
     .string()
     .max(300, "Short description must be less than 300 characters")

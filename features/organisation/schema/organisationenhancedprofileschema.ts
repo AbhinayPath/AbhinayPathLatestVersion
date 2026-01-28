@@ -1,4 +1,18 @@
 import { z } from "zod";
+export const urlSchema = z
+    .string()
+    .optional()
+    .or(z.literal(""))
+    .refine(
+        (val) => {
+            if (!val || val === "") return true;
+            // Accept URLs with or without protocol
+            const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i;
+            return urlPattern.test(val);
+        },
+        { message: "Please enter a valid URL" }
+    );
+
 const enhancedProductionSchema = z.object({
     name: z.string().min(1, "Production name is required"),
     images: z.array(z.instanceof(File)).max(3, "Maximum 3 images allowed").optional(),
@@ -8,8 +22,8 @@ const enhancedProductionSchema = z.object({
 
 export const organisationEnhancedProfileSchema = z.object({
     founded_year: z.string().optional(),
-    website: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-    youtube: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+    website: urlSchema,
+    youtube: urlSchema,
     keyPeople: z.array(z.object({
         name: z.string(),
         role: z.string(),
