@@ -85,6 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser(null);
           setProfile(null);
         } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          router.refresh();
           await refreshUser();
         }
       }
@@ -118,3 +119,4 @@ export function useAuth() {
   }
   return context;
 }
+
