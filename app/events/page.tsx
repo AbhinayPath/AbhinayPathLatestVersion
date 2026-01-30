@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive, Ticket, FileText, Gift, AlertTriangle, Mail, Phone, User, AlertCircle, RefreshCw } from "lucide-react"
 import Link from "next/link"
 import { ShareEventButton } from "@/components/share-event-button"
+import { ShareFestivalCard } from "@/components/share-festival-card"
 import { useEvents } from "@/hooks/use-events"
 import { 
   festivals, 
@@ -284,11 +285,21 @@ export default function EventsPage() {
       </section>
 
       {/* Featured Festival - Natsamrat Natya Utsav 2026 */}
-      <section className="py-12 sm:py-16 bg-gradient-to-b from-amber-50/50 to-white">
+      <section id="natsamrat-natya-utsav-2026" className="py-12 sm:py-16 bg-gradient-to-b from-amber-50/50 to-white">
         <div className="container px-4">
           <div className="max-w-5xl mx-auto">
             {/* Festival Header */}
-            <div className="text-center mb-10">
+            <div className="text-center mb-10 relative">
+              {/* Share Button - Top Right */}
+              <div className="absolute top-0 right-0 hidden sm:block">
+                <ShareEventButton 
+                  eventId="natsamrat-natya-utsav-2026"
+                  eventName="Natsamrat Natya Utsav 2026"
+                  variant="icon"
+                  size="default"
+                />
+              </div>
+              
               <Badge className="bg-[#7E1F2E] text-white text-sm px-4 py-1.5 mb-4">Featured Festival</Badge>
               <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
                 Natsamrat Natya Utsav 2026
@@ -299,6 +310,17 @@ export default function EventsPage() {
               <p className="mt-4 text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Abhinaypath brings to you an exciting opportunity for theatre directors and groups from Delhi & NCR to be part of Natsamrat Natya Utsav 2026 — a curated theatre festival celebrating meaningful stage work in an intimate studio setting.
               </p>
+              
+              {/* Mobile Share Button */}
+              <div className="mt-6 sm:hidden">
+                <ShareFestivalCard
+                  festivalId="natsamrat-natya-utsav-2026"
+                  festivalName="Natsamrat Natya Utsav 2026"
+                  festivalDates="Feb 28 - Mar 8, 2026"
+                  venue="LTG Auditorium, Mandi House, Delhi"
+                  variant="inline"
+                />
+              </div>
             </div>
 
             {/* Festival Details Grid */}
@@ -452,6 +474,17 @@ export default function EventsPage() {
               </div>
             </div>
 
+            {/* Share This Festival - Desktop */}
+            <div className="hidden sm:block mb-8">
+              <ShareFestivalCard
+                festivalId="natsamrat-natya-utsav-2026"
+                festivalName="Natsamrat Natya Utsav 2026"
+                festivalDates="Feb 28 - Mar 8, 2026"
+                venue="LTG Auditorium, Mandi House, Delhi"
+                variant="card"
+              />
+            </div>
+
             {/* Apply / Contact Section */}
             <Card className="border-2 border-[#7E1F2E] bg-gradient-to-br from-[#7E1F2E]/5 to-white">
               <CardHeader className="pb-3">
@@ -497,12 +530,35 @@ export default function EventsPage() {
                   <p className="text-[#7E1F2E] font-bold text-lg mb-4">
                     Apply before 2 February 2026 and be part of NATSAMRAT NATYA UTSAV 2026.
                   </p>
-                  <a href="mailto:shyamkumaro8@yahoo.co.in?subject=Application for Natsamrat Natya Utsav 2026">
-                    <Button size="lg" className="bg-[#7E1F2E] hover:bg-[#6a1a27] text-white font-semibold px-8 py-6 text-lg">
-                      <Mail className="h-5 w-5 mr-2" />
-                      Apply Now via Email
-                    </Button>
-                  </a>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="mailto:shyamkumaro8@yahoo.co.in?subject=Application for Natsamrat Natya Utsav 2026">
+                      <Button size="lg" className="bg-[#7E1F2E] hover:bg-[#6a1a27] text-white font-semibold px-8 py-6 text-lg">
+                        <Mail className="h-5 w-5 mr-2" />
+                        Apply Now via Email
+                      </Button>
+                    </a>
+                    
+                    {/* Share Button with Dropdown */}
+                    <ShareEventButton 
+                      eventId="natsamrat-natya-utsav-2026"
+                      eventName="Natsamrat Natya Utsav 2026"
+                      variant="button"
+                      size="default"
+                      shareType="event"
+                    />
+                  </div>
+                  
+                  {/* Quick Share Links - Mobile */}
+                  <div className="mt-6 sm:hidden">
+                    <p className="text-sm text-gray-500 mb-3">Share this festival:</p>
+                    <ShareFestivalCard
+                      festivalId="natsamrat-natya-utsav-2026"
+                      festivalName="Natsamrat Natya Utsav 2026"
+                      festivalDates="Feb 28 - Mar 8, 2026"
+                      venue="LTG Auditorium, Mandi House, Delhi"
+                      variant="inline"
+                    />
+                  </div>
                 </div>
               </CardContent>
             </Card>

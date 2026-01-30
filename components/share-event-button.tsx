@@ -150,12 +150,12 @@ export function ShareEventButton({
           </Button>
         ) : (
           <Button 
-            size="sm" 
+            size="lg" 
             variant="outline" 
-            className="rounded-full bg-white/20 hover:bg-white/30 border-white/40 text-white text-xs sm:text-sm h-8 sm:h-9 px-3 backdrop-blur-sm"
+            className="rounded-lg border-2 border-[#7E1F2E] text-[#7E1F2E] hover:bg-[#7E1F2E]/10 text-sm sm:text-base h-12 sm:h-14 px-6 font-semibold"
           >
-            <Share2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5" />
-            {shareType === "event" ? "Share" : "Share Page"}
+            <Share2 className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+            {shareType === "event" ? "Share This Event" : "Share Page"}
           </Button>
         )}
       </DropdownMenuTrigger>
