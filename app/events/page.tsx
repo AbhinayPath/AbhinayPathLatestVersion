@@ -1,10 +1,12 @@
 "use client"
+import { useState, useEffect, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive, Ticket, FileText, Gift, AlertTriangle, Mail, Phone, User } from "lucide-react"
+import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive, Ticket, FileText, Gift, AlertTriangle, Mail, Phone, User, AlertCircle } from "lucide-react"
 import Link from "next/link"
 import { ShareEventButton } from "@/components/share-event-button"
+import { getEventStatus, getDaysUntilDeadline, type EventStatus } from "@/lib/utils"
 
 interface Festival {
   id: string
@@ -17,7 +19,7 @@ interface Festival {
   month: string
   dates: string
   submissionDeadline: string
-  status: "open" | "upcoming" | "past"
+  status: EventStatus
   selectionProcess: string
   eligibility: string
   travelSupport?: string
@@ -458,12 +460,42 @@ const festivals: Festival[] = [
 ]
 
 export default function EventsPage() {
-  const getStatusBadge = (status: string) => {
+  const [currentDate, setCurrentDate] = useState<Date | null>(null)
+
+  // Update current date on mount to trigger status recalculation
+  useEffect(() => {
+    setCurrentDate(new Date())
+    
+    // Set up interval to check every hour for deadline changes
+    const interval = setInterval(() => {
+      setCurrentDate(new Date())
+    }, 60 * 60 * 1000) // Check every hour
+    
+    return () => clearInterval(interval)
+  }, [])
+
+  // Compute festivals with auto-calculated status
+  const festivalsWithAutoStatus = useMemo(() => {
+    if (!currentDate) return festivals
+    
+    return festivals.map(festival => ({
+      ...festival,
+      computedStatus: getEventStatus(festival.submissionDeadline, festival.status),
+      daysUntilDeadline: getDaysUntilDeadline(festival.submissionDeadline)
+    }))
+  }, [currentDate])
+
+  const getStatusBadge = (status: EventStatus) => {
     const statusConfig = {
       open: {
         label: "Open / Accepting Submissions",
         color: "bg-green-100 text-green-800 border-green-300",
         icon: CheckCircle,
+      },
+      "closing-soon": {
+        label: "Closing Soon!",
+        color: "bg-orange-100 text-orange-800 border-orange-300 animate-pulse",
+        icon: AlertCircle,
       },
       upcoming: {
         label: "Upcoming (Submission Closed)",
@@ -471,12 +503,12 @@ export default function EventsPage() {
         icon: Clock,
       },
       past: {
-        label: "Past / Archived",
-        color: "bg-gray-100 text-gray-800 border-gray-300",
+        label: "Deadline Passed",
+        color: "bg-gray-100 text-gray-600 border-gray-300",
         icon: Archive,
       },
     }
-    return statusConfig[status as keyof typeof statusConfig] || statusConfig.past
+    return statusConfig[status] || statusConfig.past
   }
 
   const getScaleColor = (scale: string) => {
@@ -488,45 +520,84 @@ export default function EventsPage() {
     return colors[scale] || "bg-gray-100 text-gray-800"
   }
 
-  // Group festivals by month
-  const festivalsByMonth = festivals.reduce(
-    (acc, festival) => {
-      if (!acc[festival.month]) {
-        acc[festival.month] = []
-      }
-      acc[festival.month].push(festival)
-      return acc
-    },
-    {} as Record<string, Festival[]>,
-  )
+  // Enhanced festival type with computed status
+  type EnhancedFestival = Festival & {
+    computedStatus: EventStatus
+    daysUntilDeadline: number | null
+  }
+
+  // Group festivals by month using computed status
+  const festivalsByMonth = useMemo(() => {
+    return festivalsWithAutoStatus.reduce(
+      (acc, festival) => {
+        if (!acc[festival.month]) {
+          acc[festival.month] = []
+        }
+        acc[festival.month].push(festival)
+        return acc
+      },
+      {} as Record<string, EnhancedFestival[]>,
+    )
+  }, [festivalsWithAutoStatus])
+
+  // Calculate stats based on computed status
+  const openCount = useMemo(() => {
+    return festivalsWithAutoStatus.filter(f => f.computedStatus === "open" || f.computedStatus === "closing-soon").length
+  }, [festivalsWithAutoStatus])
 
   const monthOrder = ["January", "February", "March", "May", "June", "July"]
 
-  const FestivalCard = ({ festival }: { festival: Festival }) => {
-    const statusBadge = getStatusBadge(festival.status)
+  const FestivalCard = ({ festival }: { festival: EnhancedFestival }) => {
+    const statusBadge = getStatusBadge(festival.computedStatus)
     const StatusIcon = statusBadge.icon
+    const isPast = festival.computedStatus === "past"
+    const isClosingSoon = festival.computedStatus === "closing-soon"
 
     return (
       <Card
-        className={`group hover:shadow-xl transition-all duration-300 border-2 h-full flex flex-col ${
-          festival.featured
-            ? "border-[#7E1F2E]/30 bg-gradient-to-br from-amber-50/50 to-white"
-            : "hover:border-[#7E1F2E]/20"
+        className={`group transition-all duration-300 border-2 h-full flex flex-col relative ${
+          isPast 
+            ? "opacity-60 bg-gray-50 border-gray-200 hover:opacity-80" 
+            : festival.featured
+              ? "border-[#7E1F2E]/30 bg-gradient-to-br from-amber-50/50 to-white hover:shadow-xl"
+              : isClosingSoon
+                ? "border-orange-300 bg-gradient-to-br from-orange-50/50 to-white hover:shadow-xl"
+                : "hover:border-[#7E1F2E]/20 hover:shadow-xl"
         }`}
       >
-        <CardHeader className="pb-4 flex-shrink-0">
-          {festival.featured && (
+        {/* Expired Overlay Banner */}
+        {isPast && (
+          <div className="absolute top-0 left-0 right-0 bg-gray-700 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg">
+            <Archive className="h-3 w-3 inline mr-1.5" />
+            Submissions Closed
+          </div>
+        )}
+        
+        {/* Closing Soon Banner */}
+        {isClosingSoon && festival.daysUntilDeadline !== null && (
+          <div className="absolute top-0 left-0 right-0 bg-orange-500 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg animate-pulse">
+            <AlertCircle className="h-3 w-3 inline mr-1.5" />
+            {festival.daysUntilDeadline === 0 
+              ? "Last Day to Apply!" 
+              : festival.daysUntilDeadline === 1 
+                ? "1 Day Left!" 
+                : `${festival.daysUntilDeadline} Days Left!`}
+          </div>
+        )}
+
+        <CardHeader className={`pb-4 flex-shrink-0 ${isPast || isClosingSoon ? "pt-10" : ""}`}>
+          {festival.featured && !isPast && (
             <div className="mb-3">
-              <Badge className="bg-[#7E1F2E] text-white text-xs px-3 py-1 font-semibold">⭐ FEATURED FESTIVAL</Badge>
+              <Badge className="bg-[#7E1F2E] text-white text-xs px-3 py-1 font-semibold">FEATURED FESTIVAL</Badge>
             </div>
           )}
-          {festival.isFellowship && (
+          {festival.isFellowship && !isPast && (
             <div className="mb-3">
-              <Badge className="bg-purple-600 text-white text-xs px-3 py-1 font-semibold">🎓 FELLOWSHIP PROGRAM</Badge>
+              <Badge className="bg-purple-600 text-white text-xs px-3 py-1 font-semibold">FELLOWSHIP PROGRAM</Badge>
             </div>
           )}
           <div className="flex items-start justify-between gap-3 mb-3">
-            <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-[#7E1F2E] transition-colors leading-tight flex-1">
+            <CardTitle className={`text-lg sm:text-xl font-bold transition-colors leading-tight flex-1 ${isPast ? "text-gray-500" : "group-hover:text-[#7E1F2E]"}`}>
               {festival.name}
             </CardTitle>
             <ShareEventButton 
@@ -538,18 +609,18 @@ export default function EventsPage() {
             />
           </div>
           <div className="flex flex-wrap gap-2">
-            <Badge className={`${statusBadge.color} text-xs flex items-center gap-1 px-2 py-1`}>
+            <Badge className={`${statusBadge.color} text-xs flex items-center gap-1 px-2 py-1 border`}>
               <StatusIcon className="h-3 w-3" />
               {statusBadge.label}
             </Badge>
-            <Badge className={`${getScaleColor(festival.scale)} text-xs`}>{festival.scale}</Badge>
+            <Badge className={`${getScaleColor(festival.scale)} text-xs ${isPast ? "opacity-60" : ""}`}>{festival.scale}</Badge>
           </div>
         </CardHeader>
 
         <CardContent className="space-y-4 flex-grow flex flex-col">
-          <div className="space-y-3 text-sm text-gray-600">
+          <div className={`space-y-3 text-sm ${isPast ? "text-gray-500" : "text-gray-600"}`}>
             <div className="flex items-start gap-3">
-              <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-[#7E1F2E]" />
+              <MapPin className={`h-4 w-4 shrink-0 mt-0.5 ${isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
               <div>
                 <span className="font-semibold">
                   {festival.city}, {festival.country}
@@ -559,7 +630,7 @@ export default function EventsPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Calendar className="h-4 w-4 shrink-0 text-[#7E1F2E]" />
+              <Calendar className={`h-4 w-4 shrink-0 ${isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
               <div>
                 <span className="font-semibold">{festival.dates}</span>
                 <div className="text-xs text-gray-500 mt-0.5">Duration: {festival.duration}</div>
@@ -567,15 +638,24 @@ export default function EventsPage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <Clock className="h-4 w-4 shrink-0 mt-0.5 text-[#7E1F2E]" />
+              <Clock className={`h-4 w-4 shrink-0 mt-0.5 ${isPast ? "text-gray-400" : isClosingSoon ? "text-orange-500" : "text-[#7E1F2E]"}`} />
               <div>
-                <span className="text-xs font-semibold text-gray-700">Submission Deadline:</span>
-                <div className="text-sm mt-0.5">{festival.submissionDeadline}</div>
+                <span className={`text-xs font-semibold ${isPast ? "text-gray-500" : isClosingSoon ? "text-orange-700" : "text-gray-700"}`}>
+                  Submission Deadline:
+                </span>
+                <div className={`text-sm mt-0.5 ${isPast ? "line-through text-gray-400" : isClosingSoon ? "text-orange-700 font-semibold" : ""}`}>
+                  {festival.submissionDeadline}
+                </div>
+                {!isPast && festival.daysUntilDeadline !== null && festival.daysUntilDeadline > 0 && festival.daysUntilDeadline <= 14 && (
+                  <div className={`text-xs mt-1 font-medium ${isClosingSoon ? "text-orange-600" : "text-green-600"}`}>
+                    {festival.daysUntilDeadline} {festival.daysUntilDeadline === 1 ? "day" : "days"} remaining
+                  </div>
+                )}
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <Users className="h-4 w-4 shrink-0 mt-0.5 text-[#7E1F2E]" />
+              <Users className={`h-4 w-4 shrink-0 mt-0.5 ${isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
               <div className="text-xs">
                 <span className="font-semibold">Eligibility: </span>
                 {festival.eligibility}
@@ -583,9 +663,9 @@ export default function EventsPage() {
             </div>
           </div>
 
-          <p className="text-sm text-gray-600 leading-relaxed line-clamp-4 flex-grow">{festival.description}</p>
+          <p className={`text-sm leading-relaxed line-clamp-4 flex-grow ${isPast ? "text-gray-500" : "text-gray-600"}`}>{festival.description}</p>
 
-          {festival.visaSupport && (
+          {festival.visaSupport && !isPast && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
               <p className="text-xs text-blue-800 font-semibold flex items-center gap-2">
                 <CheckCircle className="h-4 w-4" />
@@ -594,7 +674,7 @@ export default function EventsPage() {
             </div>
           )}
 
-          {festival.travelSupport && (
+          {festival.travelSupport && !isPast && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
               <p className="text-xs text-green-800 font-semibold flex items-center gap-2">
                 <CheckCircle className="h-4 w-4" />
@@ -605,8 +685,14 @@ export default function EventsPage() {
 
           <div className="pt-3 mt-auto border-t">
             <Link href={festival.link} target="_blank" rel="noopener noreferrer">
-              <Button className="w-full bg-[#7E1F2E] hover:bg-[#6a1a27] text-white text-sm py-2.5">
-                View Festival Details
+              <Button 
+                className={`w-full text-sm py-2.5 ${
+                  isPast 
+                    ? "bg-gray-400 hover:bg-gray-500 text-white" 
+                    : "bg-[#7E1F2E] hover:bg-[#6a1a27] text-white"
+                }`}
+              >
+                {isPast ? "View Past Festival" : "View Festival Details"}
                 <ExternalLink className="h-4 w-4 ml-2" />
               </Button>
             </Link>
@@ -630,26 +716,26 @@ export default function EventsPage() {
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center max-w-3xl mx-auto">
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">{festivals.length}</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">{festivalsWithAutoStatus.length}</div>
                 <div className="text-sm opacity-80">Festivals</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                  {festivals.filter((f) => f.scale === "International").length}
+                  {festivalsWithAutoStatus.filter((f) => f.computedStatus !== "past").length}
                 </div>
-                <div className="text-sm opacity-80">International</div>
+                <div className="text-sm opacity-80">Active</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                  {festivals.filter((f) => f.status === "open").length}
+                  {openCount}
                 </div>
                 <div className="text-sm opacity-80">Open Now</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                  {festivals.filter((f) => f.country === "India").length}
+                  {festivalsWithAutoStatus.filter((f) => f.computedStatus === "closing-soon").length}
                 </div>
-                <div className="text-sm opacity-80">In India</div>
+                <div className="text-sm opacity-80">Closing Soon</div>
               </div>
             </div>
             <div className="mt-8 flex justify-center">
@@ -898,15 +984,37 @@ export default function EventsPage() {
                       <h2 className="text-3xl sm:text-4xl font-bold font-playfair text-gray-800 mb-2 flex items-center gap-3">
                         <span className="text-[#7E1F2E]">{month} 2026</span>
                       </h2>
-                      <p className="text-gray-600">
-                        {festivalsByMonth[month].length} festival{festivalsByMonth[month].length !== 1 ? "s" : ""}{" "}
-                        scheduled
-                      </p>
+                      <div className="flex flex-wrap items-center gap-4 text-gray-600">
+                        <span>
+                          {festivalsByMonth[month].length} festival{festivalsByMonth[month].length !== 1 ? "s" : ""}
+                        </span>
+                        {festivalsByMonth[month].filter(f => f.computedStatus === "open" || f.computedStatus === "closing-soon").length > 0 && (
+                          <Badge className="bg-green-100 text-green-800 text-xs">
+                            {festivalsByMonth[month].filter(f => f.computedStatus === "open" || f.computedStatus === "closing-soon").length} accepting submissions
+                          </Badge>
+                        )}
+                        {festivalsByMonth[month].filter(f => f.computedStatus === "closing-soon").length > 0 && (
+                          <Badge className="bg-orange-100 text-orange-800 text-xs animate-pulse">
+                            {festivalsByMonth[month].filter(f => f.computedStatus === "closing-soon").length} closing soon
+                          </Badge>
+                        )}
+                        {festivalsByMonth[month].filter(f => f.computedStatus === "past").length > 0 && (
+                          <Badge className="bg-gray-100 text-gray-600 text-xs">
+                            {festivalsByMonth[month].filter(f => f.computedStatus === "past").length} closed
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {festivalsByMonth[month].map((festival) => (
-                        <FestivalCard key={festival.id} festival={festival} />
-                      ))}
+                      {/* Sort: open/closing-soon first, then upcoming, then past */}
+                      {[...festivalsByMonth[month]]
+                        .sort((a, b) => {
+                          const statusOrder = { "closing-soon": 0, open: 1, upcoming: 2, past: 3 }
+                          return statusOrder[a.computedStatus] - statusOrder[b.computedStatus]
+                        })
+                        .map((festival) => (
+                          <FestivalCard key={festival.id} festival={festival} />
+                        ))}
                     </div>
                   </div>
                 ),
