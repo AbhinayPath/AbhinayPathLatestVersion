@@ -1,557 +1,59 @@
 "use client"
-import { useState, useEffect, useMemo } from "react"
+import { useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive, Ticket, FileText, Gift, AlertTriangle, Mail, Phone, User, AlertCircle } from "lucide-react"
+import { Calendar, MapPin, ExternalLink, Users, Clock, CheckCircle, Archive, Ticket, FileText, Gift, AlertTriangle, Mail, Phone, User, AlertCircle, RefreshCw } from "lucide-react"
 import Link from "next/link"
 import { ShareEventButton } from "@/components/share-event-button"
-import { getEventStatus, getDaysUntilDeadline, type EventStatus } from "@/lib/utils"
-
-interface Festival {
-  id: string
-  name: string
-  city: string
-  country: string
-  languages: string
-  scale: string
-  duration: string
-  month: string
-  dates: string
-  submissionDeadline: string
-  status: EventStatus
-  selectionProcess: string
-  eligibility: string
-  travelSupport?: string
-  visaSupport?: string
-  registrationFee?: string
-  description: string
-  link: string
-  featured?: boolean
-  isFellowship?: boolean
-}
-
-const festivals: Festival[] = [
-  // January Festivals
-  {
-    id: "bharat-rang-mahotsav-2026",
-    name: "Bharat Rang Mahotsav 2026 (NSD)",
-    city: "New Delhi",
-    country: "India",
-    languages: "Multilingual (Indian & International)",
-    scale: "International",
-    duration: "Multi-week (Jan–Feb)",
-    month: "January",
-    dates: "January–February 2026",
-    submissionDeadline: "Expected: August–September 2025",
-    status: "upcoming",
-    selectionProcess: "Open Call + Selection Committee",
-    eligibility: "Professional theatre groups, repertory companies, institutions (India & International)",
-    description:
-      "The world's largest theatre festival celebrating international theatrical excellence. NSD's premier festival brings together drama institutions, theatre companies, and directors from India and abroad to showcase contemporary, traditional, and experimental theatre across multiple venues.",
-    link: "https://brmapplication.nsd.gov.in/brm_notification_english.pdf",
-    featured: true,
-  },
-  {
-    id: "itfok-2026",
-    name: "International Theatre Festival of Kerala (ITFoK) 2026",
-    city: "Thrissur",
-    country: "India (Kerala)",
-    languages: "Multilingual",
-    scale: "International",
-    duration: "8 days",
-    month: "January",
-    dates: "Late January 2026",
-    submissionDeadline: "Expected: September–October 2025",
-    status: "upcoming",
-    selectionProcess: "Open Call / Curated",
-    eligibility: "Student groups, professional companies, international ensembles",
-    description:
-      "An international platform for contemporary, experimental, and culturally rooted theatre works. The festival welcomes student groups, professional companies, and international ensembles to participate in Kerala's premier theatre celebration.",
-    link: "https://theatrefestivalkerala.com/",
-  },
-  {
-    id: "kala-ghoda-2026",
-    name: "Kala Ghoda Arts Festival 2026 – Theatre Section",
-    city: "Mumbai",
-    country: "India",
-    languages: "Multilingual",
-    scale: "National",
-    duration: "9 days",
-    month: "January",
-    dates: "31 Jan – 8 Feb 2026",
-    submissionDeadline: "9 Nov 2025",
-    status: "past",
-    selectionProcess: "Open Call + Curated Selection",
-    eligibility: "Theatre groups, independent artists, production houses",
-    description:
-      "Mumbai's premier arts festival featuring an avant-garde theatre section. The festival aims for linguistic and cultural diversity, selecting work based on quality, originality, and alignment with the festival's theme.",
-    link: "https://www.mumbaitheatreguide.com/dramas/Articles/25/sep/kala-ghoda-arts-festival-2026-call-for-entries-theatre-section.asp",
-  },
-  {
-    id: "triveni-2026",
-    name: "Triveni Theatre Festival 2026",
-    city: "New Delhi",
-    country: "India",
-    languages: "Not specified",
-    scale: "Regional (Delhi-NCR)",
-    duration: "8 days",
-    month: "January",
-    dates: "17–24 Jan 2026",
-    submissionDeadline: "25 Oct 2025",
-    status: "past",
-    selectionProcess: "Open Call",
-    eligibility: "Theatre groups based in Delhi-NCR",
-    description:
-      "A regional theatre festival celebrating Delhi-NCR's vibrant theatre community. Organized by Triveni Kala Sangam with support from Rukavipa Foundation, the festival features free entry performances for the general public and theatre enthusiasts.",
-    link: "https://www.facebook.com/triveninewdelhi/",
-  },
-  {
-    id: "alcheringa-2026",
-    name: "Alcheringa 2026 — Theatre Competitions (IIT Guwahati)",
-    city: "IIT Guwahati, Assam",
-    country: "India",
-    languages: "Hindi / English",
-    scale: "National",
-    duration: "4 days",
-    month: "January",
-    dates: "29 Jan – 1 Feb 2026",
-    submissionDeadline: "Open (check website)",
-    status: "open",
-    selectionProcess: "Online Registration",
-    eligibility:
-      "Open to all participants (min age 12); includes Theatrix (Group Stage Play), Monodrama (Solo 5 min), Halla Bol (Nukkad-style, min 6 members)",
-    description:
-      "IIT Guwahati's flagship cultural festival featuring three theatre competitions: Theatrix (Group Stage Play, 50 min finals), Monodrama (Solo Play, 5 min limit with collar mic provided), and Halla Bol (Nukkad-style group play, 20 min limit, min 6 members). Venues include Main Stage and Auditorium. Rules: No fire/water/smoke; live music allowed; bring laptop for sound.",
-    link: "https://www.alcheringa.co.in/Competitions",
-  },
-  {
-    id: "alter-ego-2026",
-    name: "Alter Ego 2026 - Theatre & Dance Festival",
-    city: "Bulgaria",
-    country: "Bulgaria",
-    languages: "Open to all Languages",
-    scale: "International",
-    duration: "Festival dates TBA",
-    month: "January",
-    dates: "2026 (dates TBA)",
-    submissionDeadline: "15 Jan 2026",
-    status: "open",
-    selectionProcess: "Apply via form (curation by festival)",
-    eligibility: "Alternative theatre and dance artists (experimental/avant-garde focus)",
-    description:
-      "International open call for experimental and avant-garde theatre and dance artists. This festival celebrates alternative performance practices and contemporary experimental works, providing a platform for cutting-edge theatrical and choreographic expressions.",
-    link: "https://dancingopportunities.com/alter-ego-2026-theater-and-dance-festival-open-call/",
-  },
-
-  // February Festivals
-  {
-    id: "pflasterspektakel-2026",
-    name: "Pflasterspektakel 2026",
-    city: "Linz",
-    country: "Austria",
-    languages: "Open to all",
-    scale: "International",
-    duration: "3 days",
-    month: "February",
-    dates: "Festival dates TBA",
-    submissionDeadline: "15 Jan 2026",
-    status: "open",
-    selectionProcess: "Apply online → invited/refused by email",
-    eligibility: "Companies & solo performers (800+ applicants; ~100 invited)",
-    description:
-      "Large international street theatre and performance festival. A major platform for contemporary street performance art with highly selective curation process, inviting approximately 100 performers from a pool of 800+ international applicants to perform in festival setup venues.",
-    link: "https://www.unima.org.uk/p/call-for-artists-applications-open",
-  },
-  {
-    id: "lotte-lenya-competition-2026",
-    name: "Lotte Lenya Competition 2026 - Singing & Acting International Contest",
-    city: "New York",
-    country: "USA",
-    languages: "English (International applicants welcome)",
-    scale: "International",
-    duration: "Competition event",
-    month: "February",
-    dates: "2026 (Competition dates TBA)",
-    submissionDeadline: "4 Feb 2026",
-    status: "open",
-    selectionProcess: "Application + Audition",
-    eligibility: "Actors/singers aged 19-32 years, all nationalities",
-    travelSupport: "No funded travel included",
-    description:
-      "An international singing and acting competition celebrating musical theatre and lyric performance artistry. This prestigious competition blends acting and singing, offering cash prizes up to $25,000 plus exceptional performance exposure. Great opportunity for musical theatre and lyric performance artists looking to showcase their combined vocal and dramatic talents on an international stage.",
-    link: "https://thekurtweillfoundationformusic.submittable.com/submit/335888/2026-lotte-lenya-competition-application",
-    featured: true,
-  },
-
-  // March Festivals
-  {
-    id: "meta-2026",
-    name: "META – Mahindra Excellence in Theatre Awards 2026",
-    city: "New Delhi",
-    country: "India",
-    languages: "Multilingual (Indian languages)",
-    scale: "National",
-    duration: "7 days",
-    month: "March",
-    dates: "March 2026",
-    submissionDeadline: "15th January 2026",
-    status: "open",
-    selectionProcess: "Open Call + Jury Selection",
-    eligibility: "Professional theatre groups & directors (India)",
-    description:
-      "India's most prestigious theatre awards celebrating excellence across proscenium, physical theatre, puppetry, and musical theatre. The festival takes place at premium venues like Kamani Auditorium and Shri Ram Centre, featuring jury-selected productions competing for national recognition.",
-    link: "https://metawards.com/",
-    featured: true,
-  },
-
-  // May Festivals
-  {
-    id: "outnow-2026",
-    name: "OUTNOW! Festival 2026",
-    city: "Bremen",
-    country: "Germany",
-    languages: "Multilingual / English-friendly",
-    scale: "International",
-    duration: "5 days",
-    month: "May",
-    dates: "May 2026",
-    submissionDeadline: "Expected: October–November 2025",
-    status: "upcoming",
-    selectionProcess: "Open Call",
-    eligibility: "Professional & experimental theatre / performance groups (International)",
-    travelSupport: "Yes (travel + accommodation + meals)",
-    description:
-      "Bremen's international platform for experimental and contemporary performance. The festival actively supports international participation with comprehensive travel, accommodation, and meal provisions for selected artists and companies.",
-    link: "https://outnowbremen.de/en/open-call-2026",
-  },
-  {
-    id: "novi-sad-2026",
-    name: "Novi Sad Theatre Festival — Serbia",
-    city: "Novi Sad",
-    country: "Serbia",
-    languages: "Not publicly specified",
-    scale: "International",
-    duration: "Festival month: May 2026",
-    month: "May",
-    dates: "May 2026",
-    submissionDeadline: "15 Nov 2025",
-    status: "past",
-    selectionProcess: "Open call + Competition + International jury",
-    eligibility: "Apply via organiser link (not fully specified)",
-    travelSupport: "Yes (travel support + accommodation + full board for selected)",
-    description:
-      "ASSITEJ International theatre festival featuring competition-based selection through an international jury. Selected participants receive comprehensive support including travel, accommodation, and full board during the festival period.",
-    link: "https://assitej-international.org/2025/09/16/open-call-novi-sad-theatre-festival/",
-  },
-  {
-    id: "torino-fringe-2026",
-    name: "Torino Fringe Festival 2026",
-    city: "Turin (Torino)",
-    country: "Italy",
-    languages: "Multilingual (not restricted)",
-    scale: "International",
-    duration: "13 days (19–31 May 2026)",
-    month: "May",
-    dates: "19–31 May 2026",
-    submissionDeadline: "21 Oct 2025",
-    status: "past",
-    selectionProcess: "Open Call",
-    eligibility:
-      "Theatre + performance + music + dance + circus + stand-up (Italian & international artists/companies)",
-    description:
-      "Turin's international fringe festival celebrating contemporary and mixed performance forms. The multi-venue festival welcomes diverse art forms from theatre and performance to music, dance, circus, and stand-up comedy, attracting both local and international audiences.",
-    link: "https://www.tofringe.it/call-2026-eng/",
-  },
-  {
-    id: "theatertreffen-forum-2026",
-    name: "International Forum @ Theatertreffen 2026 — Berlin",
-    city: "Berlin",
-    country: "Germany",
-    languages: "Not specified",
-    scale: "International",
-    duration: "17 days (1–17 May 2026)",
-    month: "May",
-    dates: "1–17 May 2026",
-    submissionDeadline: "30 Nov 2025 (23:59 CET)",
-    status: "past",
-    selectionProcess: "Open applications + Fellows selection",
-    eligibility: "Theatre professionals / makers (forum fellowship)",
-    travelSupport: "Yes (scholarship covers travel & accommodation for fellows)",
-    description:
-      "A prestigious fellowship within one of Berlin's major theatre festivals. This highly valuable opportunity is designed for theatre professionals and makers, providing selected fellows with comprehensive support including travel and accommodation to attend the festival's professional forum program.",
-    link: "https://www.berlinerfestspiele.de/en/theatertreffen/das-festival/theatertreffen-blog/open-call",
-    isFellowship: true,
-  },
-  {
-    id: "mittelyoung-2026",
-    name: "Mittelyoung 2026 (Mittelfest)",
-    city: "Cividale del Friuli",
-    country: "Italy",
-    languages: "Open to all Languages",
-    scale: "International",
-    duration: "4 days (with possible July re-programming)",
-    month: "May",
-    dates: "14–17 May 2026",
-    submissionDeadline: "10 Feb 2026 (3:00 PM)",
-    status: "open",
-    selectionProcess: "Under-30 curators select 9 projects",
-    eligibility: "Under-30 artists/companies from listed European countries",
-    description:
-      "Europe-focused platform exclusively for emerging artists under 30. Selected by young curators, 9 projects will be featured during the festival with possible re-programming opportunities into the main Mittelfest in July, providing exceptional visibility for early-career European theatre makers.",
-    link: "https://www.mittelfest.org/en/mittelyoung/",
-  },
-  {
-    id: "shreeram-lagoo-2026",
-    name: "Shreeram Lagoo National Theatre Festival",
-    city: "Pune",
-    country: "India",
-    languages: "Not specified",
-    scale: "National",
-    duration: "7 days",
-    month: "May",
-    dates: "25 May – 31 May 2026",
-    submissionDeadline: "10 Feb 2026",
-    status: "open",
-    selectionProcess: "Open Call",
-    eligibility: "Theatre groups and companies (India)",
-    description:
-      "A national theatre festival honoring the legacy of legendary actor Dr. Shreeram Lagoo. Hosted at Jyotsna Bhole Sabhagruha and associated with Shreeram Lagoo Rang-Avkash in Pune, this festival celebrates theatrical excellence and pays tribute to one of Indian theatre's most influential figures.",
-    link: "mailto:lagoofestival@mcckala.com",
-  },
-
-  // June Festivals
-  {
-    id: "sibiu-2026",
-    name: "Sibiu International Theatre Festival (FITS) 2026",
-    city: "Sibiu",
-    country: "Romania",
-    languages: "Multilingual",
-    scale: "International",
-    duration: "10 days",
-    month: "June",
-    dates: "June 2026",
-    submissionDeadline: "Submission Closed",
-    status: "past",
-    selectionProcess: "Curated / Open calls for specific sections",
-    eligibility: "Professional theatre companies (International)",
-    description:
-      "One of Europe's largest theatre festivals featuring large-scale, visual, contemporary, and classical productions. The festival showcases work on indoor and outdoor stages, attracting international audiences, programmers, and critics.",
-    link: "https://www.sibfest.ro/en/faq",
-  },
-  {
-    id: "iti-academy-2026",
-    name: "ITI Academy Week @ THEATER DER WELT 2026 — Germany",
-    city: "Berlin + Chemnitz",
-    country: "Germany",
-    languages: "Not specified",
-    scale: "International",
-    duration: "8 days (21–28 June 2026)",
-    month: "June",
-    dates: "21–28 June 2026",
-    submissionDeadline: "5 Jan 2026",
-    status: "past",
-    selectionProcess: "Open call (global) + Selection of fellows",
-    eligibility: "Artists / theatre makers / cultural practitioners",
-    travelSupport: "Yes (contribution + local transfers + accommodation + per diems)",
-    visaSupport: "Yes (assistance + visa fees covered)",
-    description:
-      "A high-value international fellowship embedded within a major festival. Selected fellows receive comprehensive support including visa assistance with fees covered, travel contribution, local transfers, accommodation, and per diems, making this an exceptional opportunity for global theatre practitioners.",
-    link: "https://www.iti-germany.de/en/meeting-exchange/the-iti-academy/iti-academy-week-open-call-2026",
-    isFellowship: true,
-  },
-  {
-    id: "bursa-children-youth-2026",
-    name: "International Bursa Children & Youth Theatre Festival 2026",
-    city: "Bursa",
-    country: "Turkiye",
-    languages: "Open to all",
-    scale: "International",
-    duration: "Festival",
-    month: "June",
-    dates: "2026 (Festival dates TBA)",
-    submissionDeadline: "30 June 2026",
-    status: "open",
-    selectionProcess: "Open call + Selection committee",
-    eligibility: "International theatre companies with works for children & youth",
-    travelSupport: "Not guaranteed (festival hospitality may apply)",
-    description:
-      "One of the leading global festivals for theatre for young audiences. Open to international theatre companies including Indian artists. A great platform for exposure, networking, and presenting work created for children and youth audiences on an international stage.",
-    link: "https://assitej-international.org/2026/01/14/open-call-international-bursa-children-and-youth-theatre-festival/",
-  },
-  {
-    id: "valise-2026",
-    name: "VALISE 2026 - International Theatrical Festival",
-    city: "Łomża",
-    country: "Poland",
-    languages: "Open to all Languages",
-    scale: "International",
-    duration: "4 days",
-    month: "June",
-    dates: "25–28 Jun 2026",
-    submissionDeadline: "15 Jan 2026",
-    status: "open",
-    selectionProcess: "Apply via email; requirements PDF provided",
-    eligibility: "Professional & non-institutional theatres + drama school students",
-    description:
-      "The 39th edition of this international theatrical festival welcomes professional theatres, non-institutional groups, and drama school students from around the world. Application process requires email submission with detailed requirements provided in PDF format.",
-    link: "https://www.unima.org.uk/p/39th-international-theatrical-festival",
-  },
-
-  // July Festivals
-  {
-    id: "china-childrens-theatre-2026",
-    name: "China Children's Theatre Festival 2026",
-    city: "Beijing",
-    country: "China",
-    languages: "English or Chinese",
-    scale: "International",
-    duration: "1 month",
-    month: "July",
-    dates: "15 Jul – 15 Aug 2026",
-    submissionDeadline: "15 Jan 2026",
-    status: "open",
-    selectionProcess: "Reviewed by selection team; notification by 9 Mar 2026",
-    eligibility: "Companies with eligible productions (international TYA focus)",
-    travelSupport:
-      "Local accommodation/per diem/local transport & performance fee (international travel/shipping on participants)",
-    description:
-      "International Theatre for Young Audiences (TYA) festival with performance opportunities across Beijing and potentially other Chinese cities. Selected companies receive local support including accommodation, per diem, transportation, and performance fees, though international travel and shipping costs are borne by participants.",
-    link: "https://assitej-international.org/2025/12/15/international-performance-open-call-china-childrens-theatre-festival/",
-  },
-  {
-    id: "borderlight-2026",
-    name: "BorderLight Theatre Festival 2026",
-    city: "Cleveland",
-    country: "USA",
-    languages: "Open to all Languages",
-    scale: "International",
-    duration: "Festival month",
-    month: "July",
-    dates: "July 2026",
-    submissionDeadline: "16 Jan 2026",
-    status: "open",
-    selectionProcess: "Call for artists (details via application link)",
-    eligibility: "Artists / theatre makers",
-    description:
-      "Cleveland's international theatre festival brings together diverse voices and theatrical practices from around the world. The festival seeks innovative artists and theatre makers to participate in this celebration of contemporary performance.",
-    link: "https://www.borderlightcle.org/2026artist/",
-  },
-  {
-    id: "theatre-exposed-2026",
-    name: "THEATRE EXPOSED 2026 - International Theatre Photography Competition",
-    city: "Online",
-    country: "International",
-    languages: "Open to all",
-    scale: "International",
-    duration: "Competition",
-    month: "July",
-    dates: "2026 (Online submissions)",
-    submissionDeadline: "1 July 2026",
-    status: "open",
-    selectionProcess: "Online submission + jury selection",
-    eligibility: "Professional theatre photographers globally",
-    travelSupport: "Not Provided",
-    registrationFee: "Free participation",
-    description:
-      "International theatre photography competition celebrating the art of performance documentation. Categories include art photo, portrait, movement, and open (theatre). A great international platform for theatre photographers to showcase their work capturing the magic of live performance. Free to enter.",
-    link: "https://assitej-international.org/2026/01/14/international-theatre-photography-competition/",
-  },
-]
+import { useEvents } from "@/hooks/use-events"
+import { 
+  festivals, 
+  STATUS_CONFIG, 
+  getScaleColor,
+  MONTH_ORDER,
+  type EnhancedFestival 
+} from "@/lib/data/events"
+import type { EventStatus } from "@/lib/utils"
 
 export default function EventsPage() {
-  const [currentDate, setCurrentDate] = useState<Date | null>(null)
+  // Use the scalable events hook with automatic expiry detection
+  const { 
+    events, 
+    eventsByMonth, 
+    stats, 
+    lastUpdated, 
+    refresh, 
+    closingSoon,
+    isLoading 
+  } = useEvents({
+    refreshInterval: 5 * 60 * 1000, // Refresh every 5 minutes
+    showExpired: true, // Show all events including expired
+  })
 
-  // Update current date on mount to trigger status recalculation
-  useEffect(() => {
-    setCurrentDate(new Date())
-    
-    // Set up interval to check every hour for deadline changes
-    const interval = setInterval(() => {
-      setCurrentDate(new Date())
-    }, 60 * 60 * 1000) // Check every hour
-    
-    return () => clearInterval(interval)
-  }, [])
-
-  // Compute festivals with auto-calculated status
-  const festivalsWithAutoStatus = useMemo(() => {
-    if (!currentDate) return festivals
-    
-    return festivals.map(festival => ({
-      ...festival,
-      computedStatus: getEventStatus(festival.submissionDeadline, festival.status),
-      daysUntilDeadline: getDaysUntilDeadline(festival.submissionDeadline)
-    }))
-  }, [currentDate])
-
+  // Get status badge configuration
   const getStatusBadge = (status: EventStatus) => {
-    const statusConfig = {
-      open: {
-        label: "Open / Accepting Submissions",
-        color: "bg-green-100 text-green-800 border-green-300",
-        icon: CheckCircle,
-      },
-      "closing-soon": {
-        label: "Closing Soon!",
-        color: "bg-orange-100 text-orange-800 border-orange-300 animate-pulse",
-        icon: AlertCircle,
-      },
-      upcoming: {
-        label: "Upcoming (Submission Closed)",
-        color: "bg-blue-100 text-blue-800 border-blue-300",
-        icon: Clock,
-      },
-      past: {
-        label: "Deadline Passed",
-        color: "bg-gray-100 text-gray-600 border-gray-300",
-        icon: Archive,
-      },
+    const iconMap = {
+      open: CheckCircle,
+      "closing-soon": AlertCircle,
+      upcoming: Clock,
+      past: Archive,
     }
-    return statusConfig[status] || statusConfig.past
-  }
-
-  const getScaleColor = (scale: string) => {
-    const colors: { [key: string]: string } = {
-      International: "bg-purple-100 text-purple-800",
-      National: "bg-blue-100 text-blue-800",
-      Regional: "bg-yellow-100 text-yellow-800",
+    const config = STATUS_CONFIG[status] || STATUS_CONFIG.past
+    return {
+      ...config,
+      icon: iconMap[status] || Archive,
     }
-    return colors[scale] || "bg-gray-100 text-gray-800"
   }
 
-  // Enhanced festival type with computed status
-  type EnhancedFestival = Festival & {
-    computedStatus: EventStatus
-    daysUntilDeadline: number | null
-  }
-
-  // Group festivals by month using computed status
-  const festivalsByMonth = useMemo(() => {
-    return festivalsWithAutoStatus.reduce(
-      (acc, festival) => {
-        if (!acc[festival.month]) {
-          acc[festival.month] = []
-        }
-        acc[festival.month].push(festival)
-        return acc
-      },
-      {} as Record<string, EnhancedFestival[]>,
-    )
-  }, [festivalsWithAutoStatus])
-
-  // Calculate stats based on computed status
-  const openCount = useMemo(() => {
-    return festivalsWithAutoStatus.filter(f => f.computedStatus === "open" || f.computedStatus === "closing-soon").length
-  }, [festivalsWithAutoStatus])
-
-  const monthOrder = ["January", "February", "March", "May", "June", "July"]
+  // Month order for display
+  const monthOrder = MONTH_ORDER.filter(month => eventsByMonth[month])
 
   const FestivalCard = ({ festival }: { festival: EnhancedFestival }) => {
     const statusBadge = getStatusBadge(festival.computedStatus)
     const StatusIcon = statusBadge.icon
-    const isPast = festival.computedStatus === "past"
-    const isClosingSoon = festival.computedStatus === "closing-soon"
+    const isPast = festival.isExpired
+    const isClosingSoon = festival.isClosingSoon
 
     return (
       <Card
@@ -716,28 +218,64 @@ export default function EventsPage() {
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center max-w-3xl mx-auto">
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">{festivalsWithAutoStatus.length}</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">{stats.total}</div>
                 <div className="text-sm opacity-80">Festivals</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                  {festivalsWithAutoStatus.filter((f) => f.computedStatus !== "past").length}
+                  {stats.active}
                 </div>
                 <div className="text-sm opacity-80">Active</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                  {openCount}
+                  {stats.open}
                 </div>
                 <div className="text-sm opacity-80">Open Now</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                  {festivalsWithAutoStatus.filter((f) => f.computedStatus === "closing-soon").length}
+                  {stats.closingSoon}
                 </div>
                 <div className="text-sm opacity-80">Closing Soon</div>
               </div>
             </div>
+            
+            {/* Last Updated & Refresh */}
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm opacity-80">
+              {lastUpdated && (
+                <span>
+                  Last checked: {lastUpdated.toLocaleTimeString()}
+                </span>
+              )}
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={refresh}
+                className="text-white hover:bg-white/20"
+              >
+                <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
+                Refresh Status
+              </Button>
+            </div>
+
+            {/* Closing Soon Alert */}
+            {closingSoon.length > 0 && (
+              <div className="mt-6 bg-orange-500/20 border border-orange-400/30 rounded-lg p-4 max-w-2xl mx-auto">
+                <div className="flex items-center gap-2 text-orange-100 font-semibold mb-2">
+                  <AlertCircle className="h-5 w-5" />
+                  {closingSoon.length} event{closingSoon.length !== 1 ? 's' : ''} closing soon!
+                </div>
+                <div className="text-sm text-orange-100/80">
+                  {closingSoon.slice(0, 3).map(e => (
+                    <span key={e.id} className="inline-block mr-3">
+                      {e.name.split(' ').slice(0, 3).join(' ')}... ({e.daysUntilDeadline}d)
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="mt-8 flex justify-center">
               <ShareEventButton shareType="page" variant="button" />
             </div>
@@ -976,49 +514,50 @@ export default function EventsPage() {
       <section className="py-12 sm:py-16">
         <div className="container px-4">
           <div className="max-w-7xl mx-auto space-y-16">
-            {monthOrder.map(
-              (month) =>
-                festivalsByMonth[month] && (
-                  <div key={month} id={month.toLowerCase()}>
-                    <div className="mb-8">
-                      <h2 className="text-3xl sm:text-4xl font-bold font-playfair text-gray-800 mb-2 flex items-center gap-3">
-                        <span className="text-[#7E1F2E]">{month} 2026</span>
-                      </h2>
-                      <div className="flex flex-wrap items-center gap-4 text-gray-600">
-                        <span>
-                          {festivalsByMonth[month].length} festival{festivalsByMonth[month].length !== 1 ? "s" : ""}
-                        </span>
-                        {festivalsByMonth[month].filter(f => f.computedStatus === "open" || f.computedStatus === "closing-soon").length > 0 && (
-                          <Badge className="bg-green-100 text-green-800 text-xs">
-                            {festivalsByMonth[month].filter(f => f.computedStatus === "open" || f.computedStatus === "closing-soon").length} accepting submissions
-                          </Badge>
-                        )}
-                        {festivalsByMonth[month].filter(f => f.computedStatus === "closing-soon").length > 0 && (
-                          <Badge className="bg-orange-100 text-orange-800 text-xs animate-pulse">
-                            {festivalsByMonth[month].filter(f => f.computedStatus === "closing-soon").length} closing soon
-                          </Badge>
-                        )}
-                        {festivalsByMonth[month].filter(f => f.computedStatus === "past").length > 0 && (
-                          <Badge className="bg-gray-100 text-gray-600 text-xs">
-                            {festivalsByMonth[month].filter(f => f.computedStatus === "past").length} closed
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* Sort: open/closing-soon first, then upcoming, then past */}
-                      {[...festivalsByMonth[month]]
-                        .sort((a, b) => {
-                          const statusOrder = { "closing-soon": 0, open: 1, upcoming: 2, past: 3 }
-                          return statusOrder[a.computedStatus] - statusOrder[b.computedStatus]
-                        })
-                        .map((festival) => (
-                          <FestivalCard key={festival.id} festival={festival} />
-                        ))}
+            {monthOrder.map((month) => {
+              const monthEvents = eventsByMonth[month]
+              if (!monthEvents) return null
+              
+              const openInMonth = monthEvents.filter(f => f.isOpen).length
+              const closingSoonInMonth = monthEvents.filter(f => f.isClosingSoon).length
+              const expiredInMonth = monthEvents.filter(f => f.isExpired).length
+
+              return (
+                <div key={month} id={month.toLowerCase()}>
+                  <div className="mb-8">
+                    <h2 className="text-3xl sm:text-4xl font-bold font-playfair text-gray-800 mb-2 flex items-center gap-3">
+                      <span className="text-[#7E1F2E]">{month} 2026</span>
+                    </h2>
+                    <div className="flex flex-wrap items-center gap-4 text-gray-600">
+                      <span>
+                        {monthEvents.length} festival{monthEvents.length !== 1 ? "s" : ""}
+                      </span>
+                      {openInMonth > 0 && (
+                        <Badge className="bg-green-100 text-green-800 text-xs border border-green-200">
+                          {openInMonth} accepting submissions
+                        </Badge>
+                      )}
+                      {closingSoonInMonth > 0 && (
+                        <Badge className="bg-orange-100 text-orange-800 text-xs border border-orange-200 animate-pulse">
+                          {closingSoonInMonth} closing soon
+                        </Badge>
+                      )}
+                      {expiredInMonth > 0 && (
+                        <Badge className="bg-gray-100 text-gray-600 text-xs border border-gray-200">
+                          {expiredInMonth} closed
+                        </Badge>
+                      )}
                     </div>
                   </div>
-                ),
-            )}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Events are pre-sorted by the useEvents hook */}
+                    {monthEvents.map((festival) => (
+                      <FestivalCard key={festival.id} festival={festival} />
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
