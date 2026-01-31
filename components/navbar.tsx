@@ -210,13 +210,13 @@ export default function Navbar() {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      router.push("/talent-profile")
+                      handleEditProfile()
                       toggleMenu()
                     }}
                     className="w-full"
                   >
                     <Edit className="mr-2 h-4 w-4" />
-                    Edit Talent Profile
+                    {editProfileConfig?.label ?? "Edit Profile"}
                   </Button>
                   <Button
                     variant="outline"
