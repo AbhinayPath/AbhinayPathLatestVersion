@@ -67,7 +67,7 @@ export default function Footer() {
                 <span className="text-sm text-white">Networking Platform</span>
               </li>
               <li>
-                <span className="text-sm text-white">Backstage Opportunities</span>
+                <span className="text-sm text-white">Technical & Production Opportunities</span>
               </li>
               <li>
                 <span className="text-sm text-white">Resources Library</span>
