@@ -106,7 +106,7 @@ export function OrganisationProfileView({ organisation }: OrganisationProfilePro
                         </Button>
                         {organisation.website && (
                             <Button variant="outline" asChild>
-                                <a href={organisation.website} target="_blank" rel="noopener noreferrer">
+                                <a href={normalizeUrl(organisation.website)} target="_blank" rel="noopener noreferrer">
                                     <Globe className="w-4 h-4 mr-2" />
                                     Website
                                 </a>
