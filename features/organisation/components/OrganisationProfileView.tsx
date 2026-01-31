@@ -47,8 +47,13 @@ interface OrganisationProfileProps {
     organisation: OrganisationData;
 }
 
+const normalizeUrl = (url: string): string =>
+    url.startsWith("http://") || url.startsWith("https://")
+        ? url
+        : `https://${url}`;
+
+
 export function OrganisationProfileView({ organisation }: OrganisationProfileProps) {
-    console.log(organisation)
     return (
         <div className="min-h-screen bg-background">
             {/* Hero Section */}
@@ -109,14 +114,14 @@ export function OrganisationProfileView({ organisation }: OrganisationProfilePro
                         )}
                         {organisation.instagram && (
                             <Button variant="outline" size="icon" asChild>
-                                <a href={organisation.instagram} target="_blank" rel="noopener noreferrer">
+                                <a href={normalizeUrl(organisation.instagram)} target="_blank" rel="noopener noreferrer">
                                     <Instagram className="w-4 h-4" />
                                 </a>
                             </Button>
                         )}
                         {organisation.youtube && (
                             <Button variant="outline" size="icon" asChild>
-                                <a href={organisation.youtube} target="_blank" rel="noopener noreferrer">
+                                <a href={normalizeUrl(organisation.youtube)} target="_blank" rel="noopener noreferrer">
                                     <Youtube className="w-4 h-4" />
                                 </a>
                             </Button>
