@@ -96,7 +96,7 @@ export default function ProductionBackstageContent() {
               <span>Behind the Scenes</span>
             </div>
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-balance leading-tight">
-              Production & Backstage
+              Technical & Production Artists
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground text-pretty max-w-2xl mx-auto px-2">
               Discover the skilled professionals who make the magic happen behind the curtains. From lighting designers
