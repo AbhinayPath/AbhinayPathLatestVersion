@@ -241,6 +241,21 @@ const artists: Artist[] = [
     credential:
       "Specializations: Shakespearean, Drawing room drama, Brechtian, Third Theatre, Comedy, Absurd theatre, Sound design",
   },
+  {
+    id: "nimesh-kuntar",
+    name: "Kuntar Nimesh Mukeshbhai",
+    image: "/images/artists/nimesh-kuntar.jpg",
+    location: "Ahmedabad, Gujarat",
+    age: 25,
+    languages: ["Hindi", "Gujarati", "English"],
+    email: "nimeshkuntar7@gmail.com",
+    interests: ["Acting"],
+    bio: "Theatre actor trained at Gujarat College's Drama Department, with strong performance ability across Hindi and Gujarati theatre productions.",
+    instagram: "https://www.instagram.com/nimesh.7/",
+    youtube: "https://youtu.be/egm_KmlUMoc?si=NGVMHhb13nKk80eY",
+    whatsapp: "9712022073",
+    credential: "Gujarat College – Drama Department",
+  },
 ]
 
 const locations = [...new Set(artists.map((artist) => artist.location.split(",")[0].trim()))].sort()
