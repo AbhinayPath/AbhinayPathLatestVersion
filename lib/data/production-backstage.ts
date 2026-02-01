@@ -1,3 +1,26 @@
+// Centralized skills list - single source of truth
+export const PRODUCTION_SKILLS = [
+  "Assistant Director",
+  "Production Manager",
+  "Production Assistant",
+  "Set Designer",
+  "Lighting Designer",
+  "Costume Designer",
+  "Sound Designer",
+  "Makeup & Hair Designer",
+  "Lighting Technician",
+  "Sound Operator",
+  "Stage Manager",
+  "Props Master",
+  "Technical Crew",
+  "Technical Support",
+  "Photographer",
+  "Videographer",
+  "Animator"
+] as const
+
+export type ProductionSkill = typeof PRODUCTION_SKILLS[number]
+
 export interface ProductionProfessional {
   id: string
   name: string
@@ -6,7 +29,7 @@ export interface ProductionProfessional {
   state: string
   email?: string
   whatsapp: string
-  skills: string[]
+  skills: ProductionSkill[]
   experience: string
   productions: string[]
   instagram?: string
@@ -25,7 +48,7 @@ export const productionProfessionals: ProductionProfessional[] = [
     state: "Karnataka",
     email: "vatsalachoubey027@gmail.com",
     whatsapp: "9113153576",
-    skills: ["Light Designer"],
+    skills: ["Lighting Designer"],
     experience: "3 years",
     productions: [
       "Court Martial",
@@ -51,12 +74,12 @@ export const productionProfessionals: ProductionProfessional[] = [
     skills: [
       "Set Designer",
       "Costume Designer",
-      "Props",
+      "Props Master",
       "Stage Manager",
       "Production Assistant",
       "Production Manager",
       "Assistant Director",
-      "Makeup & Hair",
+      "Makeup & Hair Designer",
     ],
     experience: "7 years",
     productions: ["Performers Cultural Society of Udaipur"],
@@ -72,7 +95,7 @@ export const productionProfessionals: ProductionProfessional[] = [
     state: "Karnataka",
     email: "madhurima.g@gmail.com",
     whatsapp: "9830079293",
-    skills: ["Sound Designer / Operator", "Assistant Director", "Animation"],
+    skills: ["Sound Designer", "Sound Operator", "Assistant Director", "Animator"],
     experience: "8 years",
     productions: [
       "Animation mixed media production for BLT production ' The Anklet'",
@@ -100,11 +123,12 @@ export const productionProfessionals: ProductionProfessional[] = [
     state: "Delhi",
     whatsapp: "8287820851",
     skills: [
-      "Photography & Videography",
+      "Photographer",
+      "Videographer",
       "Assistant Director",
-      "Set Design",
-      "Lighting",
-      "Costume",
+      "Set Designer",
+      "Lighting Technician",
+      "Costume Designer",
       "Technical Support",
     ],
     experience: "0-1 years",
