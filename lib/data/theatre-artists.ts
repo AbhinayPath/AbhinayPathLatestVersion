@@ -1,4 +1,6 @@
 // Centralized skills list - single source of truth for Theatre Artists
+// Note: Production-related skills (Production Manager, Costume Designer, Sound Designer, 
+// Photographer, Videographer) are managed in the Technical & Production Artists page
 export const THEATRE_ARTIST_SKILLS = [
   "Acting",
   "Direction",
@@ -7,12 +9,7 @@ export const THEATRE_ARTIST_SKILLS = [
   "Writing",
   "Lyrics Writing",
   "Music",
-  "Music Composition",
-  "Production Manager",
-  "Costume Designer",
-  "Sound Designer",
-  "Photographer",
-  "Videographer"
+  "Music Composition"
 ] as const
 
 export type TheatreArtistSkill = typeof THEATRE_ARTIST_SKILLS[number]
