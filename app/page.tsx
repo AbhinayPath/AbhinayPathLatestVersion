@@ -125,7 +125,7 @@ export default function Home() {
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
                   src="/images/acting-workshop.png"
-                  alt="Skill Up with Workshops"
+                  alt="Training & Education"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -138,8 +138,8 @@ export default function Home() {
                 </div>
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
-                <h3 className="font-playfair text-2xl font-bold mb-3">Skill Up with Workshops</h3>
-                <p className="text-gray-800 mb-6 text-lg">Professional workshops and training to enhance your craft.</p>
+                <h3 className="font-playfair text-2xl font-bold mb-3">Training & Education</h3>
+                <p className="text-gray-800 mb-6 text-lg">Training & Education to enhance your craft.</p>
                 <Link href="/workshops">
                   <Button
                     variant="outline"
