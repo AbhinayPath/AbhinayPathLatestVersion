@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 
   return {
-    title: `${professional.name} - Production & Backstage Professional | Abhinayपथ`,
+    title: `${professional.name} - Technical & Production Artist | Abhinayपथ`,
     description: `${professional.name} is a ${professional.skills.join(", ")} professional with ${professional.experience} of experience. Based in ${professional.location}, ${professional.state}.`,
   }
 }
@@ -57,7 +57,7 @@ export default function ProfessionalProfilePage({ params }: { params: { id: stri
           <Link href="/production-backstage">
             <Button variant="ghost" size="sm" className="mb-4 sm:mb-6 md:mb-8 group">
               <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-              Back to Production & Backstage
+              Back to Technical & Production Artists
             </Button>
           </Link>
 

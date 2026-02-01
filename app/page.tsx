@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Award, Calendar, GraduationCap, Sparkles } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArtistRegistrationBanner } from "@/components/artist-registration-banner"
 // import { PlausibleAnalytics } from "@/components/analytics"
 // Uncomment and add your domain to enable Plausible Analytics
 // <PlausibleAnalytics domain="yourdomain.com" />
@@ -16,7 +15,6 @@ import { ArtistRegistrationBanner } from "@/components/artist-registration-banne
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      <ArtistRegistrationBanner />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20">
@@ -125,7 +123,7 @@ export default function Home() {
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
                   src="/images/acting-workshop.png"
-                  alt="Skill Up with Workshops"
+                  alt="Training & Education"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -138,8 +136,8 @@ export default function Home() {
                 </div>
               </div>
               <CardContent className="p-8 flex flex-col items-center text-center">
-                <h3 className="font-playfair text-2xl font-bold mb-3">Skill Up with Workshops</h3>
-                <p className="text-gray-800 mb-6 text-lg">Professional workshops and training to enhance your craft.</p>
+                <h3 className="font-playfair text-2xl font-bold mb-3">Training & Education</h3>
+                <p className="text-gray-800 mb-6 text-lg">Training & Education to enhance your craft.</p>
                 <Link href="/workshops">
                   <Button
                     variant="outline"

@@ -1,3 +1,26 @@
+// Centralized skills list - single source of truth
+export const PRODUCTION_SKILLS = [
+  "Assistant Director",
+  "Production Manager",
+  "Production Assistant",
+  "Set Designer",
+  "Lighting Designer",
+  "Costume Designer",
+  "Sound Designer",
+  "Makeup & Hair Designer",
+  "Lighting Technician",
+  "Sound Operator",
+  "Stage Manager",
+  "Props Master",
+  "Technical Crew",
+  "Technical Support",
+  "Photographer",
+  "Videographer",
+  "Animator"
+] as const
+
+export type ProductionSkill = typeof PRODUCTION_SKILLS[number]
+
 export interface ProductionProfessional {
   id: string
   name: string
@@ -6,7 +29,7 @@ export interface ProductionProfessional {
   state: string
   email?: string
   whatsapp: string
-  skills: string[]
+  skills: ProductionSkill[]
   experience: string
   productions: string[]
   instagram?: string
@@ -25,7 +48,7 @@ export const productionProfessionals: ProductionProfessional[] = [
     state: "Karnataka",
     email: "vatsalachoubey027@gmail.com",
     whatsapp: "9113153576",
-    skills: ["Light Designer"],
+    skills: ["Lighting Designer"],
     experience: "3 years",
     productions: [
       "Court Martial",
@@ -51,12 +74,12 @@ export const productionProfessionals: ProductionProfessional[] = [
     skills: [
       "Set Designer",
       "Costume Designer",
-      "Props",
+      "Props Master",
       "Stage Manager",
       "Production Assistant",
       "Production Manager",
       "Assistant Director",
-      "Makeup & Hair",
+      "Makeup & Hair Designer",
     ],
     experience: "7 years",
     productions: ["Performers Cultural Society of Udaipur"],
@@ -72,7 +95,7 @@ export const productionProfessionals: ProductionProfessional[] = [
     state: "Karnataka",
     email: "madhurima.g@gmail.com",
     whatsapp: "9830079293",
-    skills: ["Sound Designer / Operator", "Assistant Director", "Animation"],
+    skills: ["Sound Designer", "Sound Operator", "Assistant Director", "Animator"],
     experience: "8 years",
     productions: [
       "Animation mixed media production for BLT production ' The Anklet'",
@@ -100,11 +123,12 @@ export const productionProfessionals: ProductionProfessional[] = [
     state: "Delhi",
     whatsapp: "8287820851",
     skills: [
-      "Photography & Videography",
+      "Photographer",
+      "Videographer",
       "Assistant Director",
-      "Set Design",
-      "Lighting",
-      "Costume",
+      "Set Designer",
+      "Lighting Technician",
+      "Costume Designer",
       "Technical Support",
     ],
     experience: "0-1 years",
@@ -122,5 +146,67 @@ export const productionProfessionals: ProductionProfessional[] = [
     skills: ["Assistant Director"],
     experience: "5 years",
     productions: ["Bargad Theatre Group"],
+  },
+  // Cloned from Theatre Artists - profiles with production-related skills
+  {
+    id: "aaqib-jamal-production",
+    name: "Aaqib Jamal",
+    image: "/images/artists/aaqib-jamal.jpg",
+    location: "Bengaluru",
+    state: "Karnataka",
+    email: "aaqib.jamal25@gmail.com",
+    whatsapp: "",
+    skills: ["Production Manager", "Sound Designer", "Videographer", "Photographer"],
+    experience: "13+ years",
+    productions: [
+      "Various theatre productions as Production Manager",
+      "Sound design for stage performances",
+      "Video and photography documentation",
+    ],
+    instagram: "https://www.instagram.com/aaqib_jamal/",
+  },
+  {
+    id: "ronak-sharma-production",
+    name: "Ronak Sharma",
+    image: "/images/artists/ronak-sharma.jpg",
+    location: "Bengaluru",
+    state: "Karnataka",
+    email: "Shanu.ronak@gmail.com",
+    whatsapp: "8095955140",
+    skills: ["Costume Designer"],
+    experience: "10 years",
+    productions: [
+      "Costume design for multiple plays",
+      "Music videos",
+      "Documentaries",
+      "Mini series",
+    ],
+    instagram: "https://www.instagram.com/ronaksharmagupta?igsh=MWUwZnpkaGFxdGdvdw==",
+  },
+  {
+    id: "vyshnavi-krishnan",
+    name: "Vyshnavi Krishnan",
+    image: "/images/vyshnavi-krishnan.jpg",
+    location: "Chennai",
+    state: "Tamil Nadu",
+    email: "Vyshnavikrishnan.design@gmail.com",
+    whatsapp: "",
+    skills: [
+      "Set Designer",
+      "Costume Designer",
+      "Lighting Designer",
+      "Lighting Technician",
+      "Production Manager",
+      "Photographer",
+      "Videographer",
+    ],
+    experience: "3 years",
+    productions: [
+      "The Arms (London, Brighton, Bristol)",
+      "The Ugly One (Bristol, London)",
+      "A Midsummer Night's Dream (Bristol)",
+    ],
+    instagram: "https://www.instagram.com/Vysh_design/",
+    workLink: "https://vyshnavikrishnan.com",
   },
 ]

@@ -27,7 +27,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useMediaQuery } from "@/hooks/use-media-query"
-import { productionProfessionals } from "@/lib/data/production-backstage"
+import { productionProfessionals, PRODUCTION_SKILLS } from "@/lib/data/production-backstage"
 import { ShareProfileButton } from "@/components/share-profile-button"
 
 export default function ProductionBackstageContent() {
@@ -52,7 +52,8 @@ export default function ProductionBackstageContent() {
   ].sort()
 
   const states = [...new Set(productionProfessionals.map((p) => p.state))].sort()
-  const allSkills = [...new Set(productionProfessionals.flatMap((p) => p.skills))].sort()
+  // Use centralized skills list as single source of truth
+  const allSkills = [...PRODUCTION_SKILLS]
 
   const filteredProfessionals = productionProfessionals.filter((professional) => {
     const matchesSearch =
@@ -63,7 +64,7 @@ export default function ProductionBackstageContent() {
 
     const matchesCity = filters.city === "" || professional.location.toLowerCase().includes(filters.city.toLowerCase())
     const matchesState = filters.state === "" || professional.state === filters.state
-    const matchesSkill = filters.skill === "" || professional.skills.includes(filters.skill)
+    const matchesSkill = filters.skill === "" || professional.skills.includes(filters.skill as typeof professional.skills[number])
 
     return matchesSearch && matchesCity && matchesState && matchesSkill
   })
@@ -96,7 +97,7 @@ export default function ProductionBackstageContent() {
               <span>Behind the Scenes</span>
             </div>
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-balance leading-tight">
-              Production & Backstage
+              Technical & Production Artists
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground text-pretty max-w-2xl mx-auto px-2">
               Discover the skilled professionals who make the magic happen behind the curtains. From lighting designers

@@ -1,3 +1,48 @@
+// Centralized skills list - single source of truth for Theatre Artists
+// Note: Production-related skills (Production Manager, Costume Designer, Sound Designer, 
+// Photographer, Videographer) are managed in the Technical & Production Artists page
+export const THEATRE_ARTIST_SKILLS = [
+  "Acting",
+  "Direction",
+  "Assistant Directing",
+  "Singing",
+  "Writing",
+  "Lyrics Writing",
+  "Music",
+  "Music Composition"
+] as const
+
+export type TheatreArtistSkill = typeof THEATRE_ARTIST_SKILLS[number]
+
+// Normalize skill names from stored data to standardized values
+// Returns null for invalid skills that should be removed (e.g., "Backstage roles")
+export function normalizeSkill(skill: string): string | null {
+  const normalizations: Record<string, string | null> = {
+    // Remove invalid entries
+    "Backstage roles": null,
+    // Merge duplicates
+    "Directing": "Direction",
+    // Rename to standardized names
+    "Costume": "Costume Designer",
+    "Sound Design": "Sound Designer",
+    "Photography": "Photographer",
+    "Videography": "Videographer",
+  }
+  
+  // Return normalized value if mapping exists, otherwise return original
+  if (skill in normalizations) {
+    return normalizations[skill]
+  }
+  return skill
+}
+
+// Get normalized skills for an artist (filters out nulls from invalid skills)
+export function getNormalizedSkills(skills: string[]): string[] {
+  return skills
+    .map(normalizeSkill)
+    .filter((skill): skill is string => skill !== null)
+}
+
 export interface Artist {
   id: string
   name: string
@@ -209,6 +254,21 @@ export const artists: Artist[] = [
     whatsapp: "9830079293",
     credential:
       "Specializations: Shakespearean, Drawing room drama, Brechtian, Third Theatre, Comedy, Absurd theatre, Sound design",
+  },
+  {
+    id: "nimesh-kuntar",
+    name: "Kuntar Nimesh Mukeshbhai",
+    image: "/images/artists/nimesh-kuntar.jpg",
+    location: "Ahmedabad, Gujarat",
+    age: 25,
+    languages: ["Hindi", "Gujarati", "English"],
+    email: "nimeshkuntar7@gmail.com",
+    interests: ["Acting"],
+    bio: "Theatre actor trained at Gujarat College's Drama Department, with strong performance ability across Hindi and Gujarati theatre productions.",
+    instagram: "https://www.instagram.com/nimesh.7/",
+    youtube: "https://youtu.be/egm_KmlUMoc?si=NGVMHhb13nKk80eY",
+    whatsapp: "9712022073",
+    credential: "Gujarat College – Drama Department",
   },
 ]
 
