@@ -1,3 +1,51 @@
+// Centralized skills list - single source of truth for Theatre Artists
+export const THEATRE_ARTIST_SKILLS = [
+  "Acting",
+  "Direction",
+  "Assistant Directing",
+  "Singing",
+  "Writing",
+  "Lyrics Writing",
+  "Music",
+  "Music Composition",
+  "Production Manager",
+  "Costume Designer",
+  "Sound Designer",
+  "Photographer",
+  "Videographer"
+] as const
+
+export type TheatreArtistSkill = typeof THEATRE_ARTIST_SKILLS[number]
+
+// Normalize skill names from stored data to standardized values
+// Returns null for invalid skills that should be removed (e.g., "Backstage roles")
+export function normalizeSkill(skill: string): string | null {
+  const normalizations: Record<string, string | null> = {
+    // Remove invalid entries
+    "Backstage roles": null,
+    // Merge duplicates
+    "Directing": "Direction",
+    // Rename to standardized names
+    "Costume": "Costume Designer",
+    "Sound Design": "Sound Designer",
+    "Photography": "Photographer",
+    "Videography": "Videographer",
+  }
+  
+  // Return normalized value if mapping exists, otherwise return original
+  if (skill in normalizations) {
+    return normalizations[skill]
+  }
+  return skill
+}
+
+// Get normalized skills for an artist (filters out nulls from invalid skills)
+export function getNormalizedSkills(skills: string[]): string[] {
+  return skills
+    .map(normalizeSkill)
+    .filter((skill): skill is string => skill !== null)
+}
+
 export interface Artist {
   id: string
   name: string

@@ -27,6 +27,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { ShareProfileButton } from "@/components/share-profile-button"
+import { THEATRE_ARTIST_SKILLS, normalizeSkill, getNormalizedSkills } from "@/lib/data/theatre-artists"
 
 interface Artist {
   id: string
@@ -244,7 +245,8 @@ const artists: Artist[] = [
 
 const locations = [...new Set(artists.map((artist) => artist.location.split(",")[0].trim()))].sort()
 const allLanguages = [...new Set(artists.flatMap((artist) => artist.languages))].sort()
-const allSkills = [...new Set(artists.flatMap((artist) => artist.interests))].sort()
+// Use centralized skills list as single source of truth
+const allSkills = [...THEATRE_ARTIST_SKILLS]
 
 export default function TheatreArtistsContent() {
   const [filters, setFilters] = useState({
@@ -257,17 +259,21 @@ export default function TheatreArtistsContent() {
   const isMobile = useMediaQuery("(max-width: 768px)")
 
   const filteredArtists = artists.filter((artist) => {
+    // Normalize artist skills for filtering
+    const normalizedInterests = getNormalizedSkills(artist.interests)
+    
     const matchesSearch =
       filters.search === "" ||
       artist.name.toLowerCase().includes(filters.search.toLowerCase()) ||
       artist.bio.toLowerCase().includes(filters.search.toLowerCase()) ||
-      artist.interests.some((interest) => interest.toLowerCase().includes(filters.search.toLowerCase()))
+      normalizedInterests.some((interest) => interest.toLowerCase().includes(filters.search.toLowerCase()))
 
     const matchesLocation = filters.location === "" || artist.location.includes(filters.location)
 
     const matchesLanguage = filters.language === "" || artist.languages.includes(filters.language)
 
-    const matchesSkill = filters.skill === "" || artist.interests.includes(filters.skill)
+    // Compare against normalized skills
+    const matchesSkill = filters.skill === "" || normalizedInterests.includes(filters.skill)
 
     return matchesSearch && matchesLocation && matchesLanguage && matchesSkill
   })
