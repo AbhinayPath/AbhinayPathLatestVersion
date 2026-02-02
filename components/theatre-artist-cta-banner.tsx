@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Sparkles, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const REGISTRATION_FORM_URL = "https://tally.so/r/2EEo1g"
+const REGISTRATION_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeAHTz3-fdFQaU9Sht8u5h95K7-0dBWhksACEx8xkeoJRGPXw/viewform?usp=header"
 
 export function TheatreArtistCTABanner() {
   return (
