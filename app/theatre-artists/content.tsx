@@ -28,6 +28,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { ShareProfileButton } from "@/components/share-profile-button"
 import { THEATRE_ARTIST_SKILLS, normalizeSkill, getNormalizedSkills } from "@/lib/data/theatre-artists"
+import { TheatreArtistCTABanner } from "@/components/theatre-artist-cta-banner"
 
 interface Artist {
   id: string
@@ -330,6 +331,9 @@ export default function TheatreArtistsContent() {
           </div>
         </div>
       </section>
+
+      {/* CTA Banner */}
+      <TheatreArtistCTABanner />
 
       <section className="py-8 px-4">
         <div className="container">
