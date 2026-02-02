@@ -150,7 +150,7 @@ export async function PUT(req: NextRequest) {
         contact_email: data.contact_email,
         instagram: data.instagram,
         short_description: data.short_description,
-        founded_year: data.foundedYear,
+        founded_year: data.founded_year,
         website: data.website,
         youtube: data.youtube,
       })
