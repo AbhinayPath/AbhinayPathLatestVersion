@@ -17,9 +17,6 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-20">
-          <Image src="/images/hero-bg.png" alt="Stage Background" fill className="object-cover" priority />
-        </div>
         <div className="container relative z-10 py-16 sm:py-20 md:py-24 lg:py-32">
           <div className="max-w-3xl space-y-4 sm:space-y-6 md:space-y-8 px-2 sm:px-0">
             <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4">
