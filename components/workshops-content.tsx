@@ -36,6 +36,26 @@ interface Workshop {
   includes?: string
   category: string
   tags: string[]
+  travelSupport?: boolean
+  // ISO date string for expiration check (YYYY-MM-DD format)
+  // If not provided, workshop is considered non-expiring (e.g., ongoing programs)
+  expiresOn?: string
+}
+
+// Utility function to check if a workshop has expired
+function isWorkshopExpired(workshop: Workshop): boolean {
+  // If no expiration date is set, workshop doesn't expire (ongoing programs)
+  if (!workshop.expiresOn) {
+    return false
+  }
+  
+  const today = new Date()
+  today.setHours(0, 0, 0, 0) // Reset to start of day for fair comparison
+  
+  const expirationDate = new Date(workshop.expiresOn)
+  expirationDate.setHours(23, 59, 59, 999) // End of expiration day
+  
+  return today > expirationDate
 }
 
 const workshops: Workshop[] = [
@@ -60,6 +80,7 @@ const workshops: Workshop[] = [
     includes: "10-day intensive training + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-24", // End date of workshop
   },
   {
     id: 2,
@@ -82,6 +103,7 @@ const workshops: Workshop[] = [
     includes: "7-day workshop + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-21",
   },
   {
     id: 3,
@@ -104,6 +126,7 @@ const workshops: Workshop[] = [
     includes: "7-day training + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-27",
   },
   {
     id: 4,
@@ -126,6 +149,7 @@ const workshops: Workshop[] = [
     includes: "Comprehensive cinematography training + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-17",
   },
   {
     id: 5,
@@ -149,6 +173,7 @@ const workshops: Workshop[] = [
     includes: "4-hour workshop + certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-18",
   },
   {
     id: 6,
@@ -171,6 +196,7 @@ const workshops: Workshop[] = [
     includes: "Part of 4-part intensive Dec 2025–Mar 2026",
     category: "Movement & Physical Theatre",
     tags: ["Long-term Course"],
+    expiresOn: "2026-01-30",
   },
   {
     id: 7,
@@ -194,6 +220,7 @@ const workshops: Workshop[] = [
     includes: "10-day intensive + FTII Certificate",
     category: "Direction & Dramaturgy",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-29",
   },
   {
     id: 8,
@@ -216,6 +243,7 @@ const workshops: Workshop[] = [
     includes: "7-day training + FTII Certificate",
     category: "Direction & Dramaturgy",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-31",
   },
   {
     id: 9,
@@ -238,6 +266,7 @@ const workshops: Workshop[] = [
     includes: "7-day training + FTII Certificate",
     category: "Direction & Dramaturgy",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-31",
   },
   {
     id: 10,
@@ -260,6 +289,7 @@ const workshops: Workshop[] = [
     includes: "3-day intensive + FTII Certificate",
     category: "Design & Production",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-23",
   },
   {
     id: 11,
@@ -283,6 +313,7 @@ const workshops: Workshop[] = [
     includes: "Accommodation + 2 meals/day + Certificate",
     category: "Institutional Programs",
     tags: ["Institutional Training", "Residency"],
+    expiresOn: "2026-01-29",
   },
   {
     id: 12,
@@ -328,6 +359,7 @@ const workshops: Workshop[] = [
     venue: "TISS Mumbai Campus",
     category: "Fellowship & Seminars",
     tags: ["Seminar", "Call for Papers", "International"],
+    expiresOn: "2026-03-10", // End of seminar
   },
   {
     id: 14,
@@ -395,6 +427,7 @@ const workshops: Workshop[] = [
     venue: "Berlin and Chemnitz, Germany",
     category: "Fellowship & Seminars",
     tags: ["Fellowship", "Theatre", "Academy Week"],
+    expiresOn: "2026-06-28", // End of academy week
   },
   {
     id: 17,
@@ -417,6 +450,7 @@ const workshops: Workshop[] = [
     venue: "GFZ German Research Centre for Geosciences, Potsdam",
     category: "Fellowship & Seminars",
     tags: ["Residency", "Art-Science", "Fellowship"],
+    expiresOn: "2026-02-08", // Application deadline
   },
   {
     id: 18,
@@ -440,6 +474,7 @@ const workshops: Workshop[] = [
     category: "Fellowship & Seminars",
     tags: ["Mobility Grant", "Fellowship", "Europe-wide", "Travel Support"],
     travelSupport: true,
+    expiresOn: "2026-04-30", // Last application deadline
   },
   {
     id: 19,
@@ -463,6 +498,7 @@ const workshops: Workshop[] = [
     venue: "Aalto University, Finland",
     category: "Fellowship & Seminars",
     tags: ["Conference", "Call for Papers", "Arts Research", "Design Research"],
+    expiresOn: "2026-03-15", // Paper submission deadline
   },
   {
     id: 20,
@@ -485,6 +521,7 @@ const workshops: Workshop[] = [
     venue: "Paris, France",
     category: "Fellowship & Seminars",
     tags: ["Conference", "Call for Papers", "Arts & Humanities", "Paris"],
+    expiresOn: "2026-06-19", // End of conference
   },
   {
     id: 21,
@@ -508,14 +545,18 @@ const workshops: Workshop[] = [
     category: "Fellowship & Seminars",
     tags: ["International Grant", "Travel Support", "Project Fund", "Collaboration"],
     travelSupport: true,
+    expiresOn: "2026-02-13", // Application deadline
   },
 ]
 
-// Get unique states, cities, and trainers for filters
-const states = [...new Set(workshops.map((workshop) => workshop.state))].sort()
-const cities = [...new Set(workshops.map((workshop) => workshop.location))].sort()
-const trainers = [...new Set(workshops.map((workshop) => workshop.trainer))].sort()
-const institutions = [...new Set(workshops.map((workshop) => workshop.institution))].sort()
+// Filter out expired workshops - this runs on every render for real-time updates
+const activeWorkshops = workshops.filter((workshop) => !isWorkshopExpired(workshop))
+
+// Get unique states, cities, and trainers for filters (from active workshops only)
+const states = [...new Set(activeWorkshops.map((workshop) => workshop.state))].sort()
+const cities = [...new Set(activeWorkshops.map((workshop) => workshop.location))].sort()
+const trainers = [...new Set(activeWorkshops.map((workshop) => workshop.trainer))].sort()
+const institutions = [...new Set(activeWorkshops.map((workshop) => workshop.institution))].sort()
 
 const categories = [
   { id: "all", name: "All", icon: "🎭" },
@@ -542,7 +583,8 @@ function WorkshopsContent() {
   const isMobile = useMediaQuery("(max-width: 768px)")
   const isSmallMobile = useMediaQuery("(max-width: 640px)")
 
-  const filteredWorkshops = workshops.filter((workshop) => {
+  // Filter from activeWorkshops (already excludes expired)
+  const filteredWorkshops = activeWorkshops.filter((workshop) => {
     return (
       (activeCategory === "all" || workshop.category === activeCategory) &&
       (filters.search === "" ||
@@ -571,7 +613,8 @@ function WorkshopsContent() {
     })
   }
 
-  const featuredWorkshops = workshops.filter((workshop) => workshop.featured)
+  // Featured workshops also exclude expired ones
+  const featuredWorkshops = activeWorkshops.filter((workshop) => workshop.featured)
   const hasActiveFilters = Object.values(filters).some((value) => value !== "")
 
   return (
