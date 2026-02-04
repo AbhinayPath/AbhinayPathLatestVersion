@@ -76,7 +76,7 @@ const OrganisationProfile = async () => {
 
   return (
     <section className="max-w-7xl mx-auto">
-      <OrganisationProfileView organisation={organisation as OrganisationData} />
+      <OrganisationProfileView organisation={organisation as any} />
       <div className="mb-4 ml-4">
         <Link href="/organisations/profile/edit">
           <Button>

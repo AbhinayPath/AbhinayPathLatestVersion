@@ -243,7 +243,7 @@ export function OrganisationProfileView({ organisation }: OrganisationProfilePro
                                                     </div>
                                                     {production.video_url && (
                                                         <Button variant="ghost" size="icon" className="flex-shrink-0 -mr-2" asChild>
-                                                            <a href={production.video_url} target="_blank" rel="noopener noreferrer">
+                                                            <a href={normalizeUrl(production.video_url)} target="_blank" rel="noopener noreferrer">
                                                                 <ExternalLink className="w-4 h-4" />
                                                             </a>
                                                         </Button>
