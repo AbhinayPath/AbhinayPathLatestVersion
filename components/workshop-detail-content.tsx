@@ -37,6 +37,50 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 22,
+    title: "FTII / CFOL — Basic Course in Screen Acting (Mumbai)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "09–18 Feb 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn acting fundamentals and on-camera performance techniques in this intensive short-term course. Covers screen acting essentials for film and television.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-mumbai-09-18-february-2026",
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Mumbai",
+    fullDetails: {
+      description:
+        "Learn acting fundamentals and on-camera performance techniques in this intensive 10-day short-term course from FTII. This comprehensive programme covers screen acting essentials for film and television, helping participants develop their on-camera presence and performance skills.",
+      keyHighlights: [
+        "10-day intensive screen acting training",
+        "Learn from experienced FTII faculty",
+        "Acting fundamentals and techniques",
+        "On-camera performance skills",
+        "FTII certification upon completion",
+      ],
+      curriculum: [
+        "Introduction to screen acting",
+        "Acting fundamentals for camera",
+        "On-camera presence and movement",
+        "Working with close-ups and different shots",
+        "Scene work and performance practice",
+        "Continuity and technical awareness",
+      ],
+      duration: "10 days",
+      medium: "English/Hindi",
+      courseFee: "Contact FTII for fee details",
+      certification: "FTII Certificate",
+      contactInfo: ["Phone: 020-25580085", "Email: info.cfol@ftii.ac.in"],
+      venue: "Mumbai, Maharashtra",
+      organizer: "Film and Television Institute of India (FTII)",
+    },
+  },
+  {
     id: 1,
     title: "FTII / CFOL — Masterclass of Acting (Mumbai)",
     trainer: "FTII Faculty",
