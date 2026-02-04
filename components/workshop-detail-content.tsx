@@ -37,6 +37,50 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 23,
+    title: "FTII / CFOL — Basic Course in Screen Acting (Lucknow)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Lucknow",
+    state: "Uttar Pradesh",
+    date: "19–25 Feb 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn acting fundamentals and on-camera performance techniques in this intensive short-term workshop. Covers screen acting essentials for film and television.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-lucknow-19-25-february-2026",
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Lucknow",
+    fullDetails: {
+      description:
+        "Learn acting fundamentals and on-camera performance techniques in this intensive 7-day short-term workshop from FTII. This comprehensive programme covers screen acting essentials for film and television, helping participants develop their on-camera presence and performance skills.",
+      keyHighlights: [
+        "7-day intensive screen acting training",
+        "Learn from experienced FTII faculty",
+        "Acting fundamentals and techniques",
+        "On-camera performance skills",
+        "FTII certification upon completion",
+      ],
+      curriculum: [
+        "Introduction to screen acting",
+        "Acting fundamentals for camera",
+        "On-camera presence and movement",
+        "Working with close-ups and different shots",
+        "Scene work and performance practice",
+        "Continuity and technical awareness",
+      ],
+      duration: "7 days",
+      medium: "English/Hindi",
+      courseFee: "Contact FTII for fee details",
+      certification: "FTII Certificate",
+      contactInfo: ["Phone: 020-25580085", "Email: info.cfol@ftii.ac.in"],
+      venue: "Lucknow, Uttar Pradesh",
+      organizer: "Film and Television Institute of India (FTII)",
+    },
+  },
+  {
     id: 22,
     title: "FTII / CFOL — Basic Course in Screen Acting (Mumbai)",
     trainer: "FTII Faculty",
