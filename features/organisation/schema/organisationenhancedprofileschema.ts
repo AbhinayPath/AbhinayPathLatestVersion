@@ -17,7 +17,7 @@ const enhancedProductionSchema = z.object({
     name: z.string().min(1, "Production name is required"),
     images: z.array(z.instanceof(File)).max(3, "Maximum 3 images allowed").optional(),
     imageUrls: z.array(z.string()).optional(),
-    videoUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+    videoUrl: urlSchema,
 });
 
 export const organisationEnhancedProfileSchema = z.object({

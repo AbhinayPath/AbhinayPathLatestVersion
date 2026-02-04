@@ -53,8 +53,6 @@ export default function OrganisationProfilePage() {
                     ...restData,
                     keyPeople: keyPeople || []
                 }));
-                console.log("Basic data added to FormData");
-
                 // Add images to delete
                 if (imagesToDelete && imagesToDelete.length > 0) {
                     formData.append("imagesToDelete", JSON.stringify(imagesToDelete));
@@ -79,9 +77,7 @@ export default function OrganisationProfilePage() {
 
                         // Add new image files to FormData
                         if (production.images && production.images.length > 0) {
-                            console.log(`Adding ${production.images.length} images for production ${index}`);
                             production.images.forEach((file: File) => {
-                                console.log(`  - File: ${file.name}, Size: ${file.size}, Type: ${file.type}`);
                                 formData.append(`production_${index}_images`, file, file.name);
                             });
                         }
@@ -89,10 +85,7 @@ export default function OrganisationProfilePage() {
                 }
 
                 formData.append("productions", JSON.stringify(productionsMetadata));
-                console.log("Productions metadata:", productionsMetadata);
 
-                // Log FormData contents
-                console.log("=== FormData contents ===");
                 for (const [key, value] of formData.entries()) {
                     if (value instanceof File) {
                         console.log(`${key}: File - ${value.name} (${value.size} bytes, ${value.type})`);
@@ -102,7 +95,6 @@ export default function OrganisationProfilePage() {
                 }
 
                 // Send to API
-                console.log("Sending request to API...");
                 const res = await fetch("/api/organisations/me", {
                     method: "PUT",
                     credentials: "include",

@@ -79,6 +79,7 @@ export function MergedOrganisationForm({
     // Initialize form with existing data and set up image previews
     useEffect(() => {
         if (initialData) {
+            console.log("initialData", initialData);
             reset(initialData);
             
             // Set up previews for existing images
