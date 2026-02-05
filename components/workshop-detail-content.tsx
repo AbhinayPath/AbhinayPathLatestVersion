@@ -37,6 +37,51 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 24,
+    title: "FTII / CFOL — Masterclass of Documentary Film Making (Mandi)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Mandi",
+    state: "Himachal Pradesh",
+    date: "25 Feb–07 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Master documentary filmmaking techniques in this intensive short-term workshop. Covers documentary practice, storytelling, camera work, and post-production essentials.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/masterclass-of-documentary-film-making-in-mandi-himachal-pradesh-25-february-07-march-2026",
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Mandi, Himachal Pradesh",
+    fullDetails: {
+      description:
+        "Master documentary filmmaking techniques in this intensive 11-day short-term workshop from FTII. This comprehensive programme covers documentary practice, storytelling techniques, camera work, sound recording, and post-production essentials for aspiring documentary filmmakers.",
+      keyHighlights: [
+        "11-day intensive documentary filmmaking training",
+        "Learn from experienced FTII faculty",
+        "Hands-on documentary production experience",
+        "Storytelling and narrative techniques",
+        "FTII certification upon completion",
+      ],
+      curriculum: [
+        "Introduction to documentary filmmaking",
+        "Documentary storytelling and research",
+        "Camera techniques for documentaries",
+        "Sound recording and design",
+        "Interview techniques",
+        "Editing and post-production",
+        "Documentary ethics and practices",
+      ],
+      duration: "11 days",
+      medium: "English/Hindi",
+      courseFee: "Contact FTII for fee details",
+      certification: "FTII Certificate",
+      contactInfo: ["Phone: 020-25580085", "Email: info.cfol@ftii.ac.in"],
+      venue: "Mandi, Himachal Pradesh",
+      organizer: "Film and Television Institute of India (FTII)",
+    },
+  },
+  {
     id: 23,
     title: "FTII / CFOL — Basic Course in Screen Acting (Lucknow)",
     trainer: "FTII Faculty",
