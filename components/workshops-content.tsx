@@ -38,6 +38,7 @@ interface Workshop {
   category: string
   tags: string[]
   travelSupport?: boolean
+  mode?: string
   // ISO date string for expiration check (YYYY-MM-DD format)
   // If not provided, workshop is considered non-expiring (e.g., ongoing programs)
   expiresOn?: string
