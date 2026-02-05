@@ -37,6 +37,52 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 29,
+    title: "FTII / CFOL — Sound Recording & Design Workshop (Lonavala)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Lonavala",
+    state: "Maharashtra",
+    date: "09–15 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Master the art of sound recording and sound design for films through immersive learning. Covers recording techniques, sound design principles, and post-production audio workflows.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/master-the-art-of-sound-recording-sound-design-for-your-films-though-immersive-learning-in-lonavala-09-to-15-march-2026",
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Lonavala, Maharashtra",
+    fullDetails: {
+      description:
+        "Master the art of sound recording and sound design for films through immersive learning in this intensive 7-day workshop from FTII. This comprehensive programme covers professional recording techniques, sound design principles, and post-production audio workflows essential for filmmakers and sound professionals.",
+      keyHighlights: [
+        "7-day intensive sound design training",
+        "Learn from experienced FTII faculty",
+        "Professional sound recording techniques",
+        "Sound design principles and practices",
+        "Post-production audio workflows",
+        "FTII certification upon completion",
+      ],
+      curriculum: [
+        "Introduction to sound recording for film",
+        "Microphone techniques and placement",
+        "Location sound recording",
+        "Sound design fundamentals",
+        "Foley and sound effects",
+        "Audio post-production and mixing",
+        "Final project presentation",
+      ],
+      duration: "7 days",
+      medium: "English/Hindi",
+      courseFee: "Contact FTII for fee details",
+      certification: "FTII Certificate",
+      contactInfo: ["Phone: 020-25580085", "Email: info.cfol@ftii.ac.in"],
+      venue: "Lonavala, Maharashtra",
+      organizer: "Film and Television Institute of India (FTII)",
+    },
+  },
+  {
     id: 28,
     title: "FTII / CFOL — Workshop on Foundations of Mobile Filmmaking (Lonavala)",
     trainer: "FTII Faculty",
