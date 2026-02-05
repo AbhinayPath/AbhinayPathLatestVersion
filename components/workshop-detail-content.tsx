@@ -37,6 +37,52 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 30,
+    title: "Rangakarmee Kolkata — Act. Create. Transform. 3-Month Weekend Acting Workshop",
+    trainer: "Rangakarmee Faculty",
+    institution: "Rangakarmee Kolkata",
+    location: "Kolkata",
+    state: "West Bengal",
+    date: "March 2026 (Weekends)",
+    time: "Weekend Evenings & Sundays",
+    description:
+      "A comprehensive 3-month weekend acting workshop focusing on acting technique, scene work, and character development with a theatre focus. Perfect for working professionals looking to develop their craft.",
+    registrationLink: "tel:7278992871",
+    price: "Contact for details",
+    contact: "7278992871",
+    email: "rangakarmee@gmail.com",
+    eligibility: "Open to all aspiring actors",
+    venue: "Kolkata, West Bengal",
+    fullDetails: {
+      description:
+        "Act. Create. Transform. is Rangakarmee Kolkata's comprehensive 3-month weekend acting workshop designed for aspiring actors and working professionals. This long-term course provides thorough training in acting technique, scene work, and character development with a strong theatre focus.",
+      keyHighlights: [
+        "3-month comprehensive acting program",
+        "Weekend format for working professionals",
+        "Acting technique fundamentals",
+        "Scene work and partner dynamics",
+        "Character development methods",
+        "Theatre-focused training",
+      ],
+      curriculum: [
+        "Acting fundamentals and technique",
+        "Scene study and analysis",
+        "Character development and transformation",
+        "Voice and speech for theatre",
+        "Movement and physical expression",
+        "Improvisation exercises",
+        "Performance showcase",
+      ],
+      duration: "3 months (Weekends)",
+      medium: "Bengali/Hindi/English",
+      courseFee: "Contact for fee details",
+      certification: "Rangakarmee Certificate",
+      contactInfo: ["Phone: 7278992871", "Email: rangakarmee@gmail.com"],
+      venue: "Kolkata, West Bengal",
+      organizer: "Rangakarmee Kolkata",
+    },
+  },
+  {
     id: 29,
     title: "FTII / CFOL — Sound Recording & Design Workshop (Lonavala)",
     trainer: "FTII Faculty",
