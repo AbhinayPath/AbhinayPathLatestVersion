@@ -57,6 +57,7 @@ export interface Artist {
   facebook?: string
   whatsapp?: string
   youtube?: string
+  auditionVideo?: string
   credential?: string
 }
 
@@ -281,6 +282,7 @@ export const artists: Artist[] = [
     bio: "Theatre practitioner with experience in 5 stage productions including Aakhen (Narration), Toba Tek Singh (by Saadat Hasan Manto), Chiththi, and Chaturthi Shreni (by Tarana Parveen). Actively involved in acting and direction, with a passion for meaningful storytelling.",
     instagram: "https://www.instagram.com/imronniegupta",
     youtube: "https://youtube.com/@actorronniegupta",
+    auditionVideo: "https://www.youtube.com/watch?v=FKI4VXtdxlA",
     whatsapp: "9569049869",
   },
 ]
