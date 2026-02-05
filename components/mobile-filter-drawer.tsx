@@ -10,14 +10,16 @@ import { Filter, X, Search } from "lucide-react"
 interface MobileFilterDrawerProps {
   filters: {
     search: string
-    city: string
+    country: string
     state: string
+    city: string
     trainer: string
     institution: string
-    mode: string // Add mode property
+    mode: string
   }
-  cities: string[]
+  countries: string[]
   states: string[]
+  cities: string[]
   trainers: string[]
   institutions: string[]
   handleFilterChange: (key: string, value: string) => void
@@ -26,8 +28,9 @@ interface MobileFilterDrawerProps {
 
 export default function MobileFilterDrawer({
   filters,
-  cities,
+  countries,
   states,
+  cities,
   trainers,
   institutions,
   handleFilterChange,
@@ -97,6 +100,48 @@ export default function MobileFilterDrawer({
           </div>
 
           <div>
+            <label htmlFor="mobile-country" className="text-sm font-medium block mb-1.5">
+              Country
+            </label>
+            <Select value={filters.country} onValueChange={(value) => handleFilterChange("country", value)}>
+              <SelectTrigger id="mobile-country" className="rounded-full h-10">
+                <SelectValue placeholder="All Countries" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Countries</SelectItem>
+                {countries.map((country) => (
+                  <SelectItem key={country} value={country}>
+                    {country}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div>
+            <label htmlFor="mobile-state" className="text-sm font-medium block mb-1.5">
+              State
+            </label>
+            <Select 
+              value={filters.state} 
+              onValueChange={(value) => handleFilterChange("state", value)}
+              disabled={states.length === 0}
+            >
+              <SelectTrigger id="mobile-state" className="rounded-full h-10">
+                <SelectValue placeholder={states.length === 0 ? "No states available" : "All States"} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All States</SelectItem>
+                {states.map((state) => (
+                  <SelectItem key={state} value={state}>
+                    {state}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div>
             <label htmlFor="mobile-city" className="text-sm font-medium block mb-1.5">
               City
             </label>
@@ -109,25 +154,6 @@ export default function MobileFilterDrawer({
                 {cities.map((city) => (
                   <SelectItem key={city} value={city}>
                     {city}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <label htmlFor="mobile-state" className="text-sm font-medium block mb-1.5">
-              State
-            </label>
-            <Select value={filters.state} onValueChange={(value) => handleFilterChange("state", value)}>
-              <SelectTrigger id="mobile-state" className="rounded-full h-10">
-                <SelectValue placeholder="All States" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All States</SelectItem>
-                {states.map((state) => (
-                  <SelectItem key={state} value={state}>
-                    {state}
                   </SelectItem>
                 ))}
               </SelectContent>
