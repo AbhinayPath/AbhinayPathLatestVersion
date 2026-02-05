@@ -237,6 +237,31 @@ export default async function ArtistProfilePage({ params }: PageProps) {
               </CardContent>
             </Card>
 
+            {/* Audition Video Section */}
+            {artist.auditionVideo && (
+              <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-semibold text-amber-500 mb-4">Audition Video</h2>
+                  <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-black/20">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${artist.auditionVideo.includes('watch?v=') 
+                        ? artist.auditionVideo.split('watch?v=')[1].split('&')[0] 
+                        : artist.auditionVideo.includes('youtu.be/') 
+                          ? artist.auditionVideo.split('youtu.be/')[1].split('?')[0]
+                          : ''}`}
+                      title={`${artist.name} - Audition Video`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    />
+                  </div>
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    Watch {artist.name.split(" ")[0]}&apos;s audition reel showcasing their performance skills.
+                  </p>
+                </CardContent>
+              </Card>
+            )}
+
             {/* CTA Section */}
             <Card className="border-amber-600/30 bg-gradient-to-r from-amber-950/30 to-amber-900/20">
               <CardContent className="p-6">
