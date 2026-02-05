@@ -147,7 +147,7 @@ const workshops: Workshop[] = [
     eligibility: "18+, 12th pass (exceptions considered)",
     venue: "Mandi, Himachal Pradesh",
     includes: "11-day intensive training + FTII Certificate",
-    category: "Direction & Dramaturgy",
+    category: "Acting & Performance",
     tags: ["Short-term Workshop"],
     expiresOn: "2026-03-07",
   },
