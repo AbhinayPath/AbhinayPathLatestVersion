@@ -52,7 +52,7 @@ const artists: Artist[] = [
     id: "naman-jain",
     name: "Naman Jain",
     image: "/images/artists/naman-jain.jpeg",
-    location: "Bengaluru, Indiranagar",
+    location: "Bengaluru, Karnataka",
     age: 26,
     languages: ["English", "Hindi"],
     email: "namanjn0608@gmail.com",
@@ -65,7 +65,7 @@ const artists: Artist[] = [
     id: "shivesh-ranjan",
     name: "Shivesh Ranjan",
     image: "/images/artists/shivesh-ranjan.jpg",
-    location: "Bengaluru, BTM Layout",
+    location: "Bengaluru, Karnataka",
     age: 35,
     languages: ["Hindi", "English"],
     email: "shiveshranjan7@gmail.com",
@@ -78,7 +78,7 @@ const artists: Artist[] = [
     id: "nuhar-bansal",
     name: "Nuhar Bansal",
     image: "/images/artists/nuhar-bansal.jpeg",
-    location: "Bengaluru, Jakkur",
+    location: "Bengaluru, Karnataka",
     age: 32,
     languages: ["Hindi", "English", "Punjabi", "Kannada"],
     email: "nuharbansal@gmail.com",
@@ -91,7 +91,7 @@ const artists: Artist[] = [
     id: "bhoomika-srivastava",
     name: "Dr. Bhoomika Srivastava",
     image: "/images/artists/bhoomika-srivastava.jpg",
-    location: "Bengaluru, Brookfield",
+    location: "Bengaluru, Karnataka",
     languages: ["Hindi", "English"],
     interests: ["Acting"],
     bio: "I am a trained Kathak dancer, hindi poet & theatre artist",
@@ -101,7 +101,7 @@ const artists: Artist[] = [
     id: "aniruddh-jain",
     name: "Aniruddh Jain",
     image: "/images/artists/aniruddh-jain.jpg",
-    location: "Bengaluru, Beratena Agrahara",
+    location: "Bengaluru, Karnataka",
     languages: ["Hindi", "English"],
     email: "surreal.reels@gmail.com",
     interests: ["Acting", "Direction", "Writing", "Lyrics Writing", "Music Composition", "Singing"],
@@ -113,7 +113,7 @@ const artists: Artist[] = [
     id: "deepali-sharma",
     name: "Deepali Sharma",
     image: "/images/artists/deepali-sharma.jpg",
-    location: "Bengaluru, Jalahalli East",
+    location: "Bengaluru, Karnataka",
     age: 50,
     languages: ["Hindi", "Punjabi", "English"],
     email: "deepalisharmarocky43@gmail.com",
@@ -125,7 +125,7 @@ const artists: Artist[] = [
     id: "sugandh-pandey",
     name: "Sugandh Pandey",
     image: "/images/artists/sugandh-pandey.jpg",
-    location: "Bengaluru, J P Nagar",
+    location: "Bengaluru, Karnataka",
     age: 33,
     languages: ["Hindi"],
     email: "Sugandhpandey5@gmail.com",
@@ -138,7 +138,7 @@ const artists: Artist[] = [
     id: "mohammed-yunus-parvez",
     name: "Mohammed Yunus Parvez",
     image: "/images/artists/mohammed-yunus-parvez.jpg",
-    location: "Bengaluru",
+    location: "Bengaluru, Karnataka",
     languages: ["Urdu", "Hindi", "English", "Kannada"],
     interests: ["Acting", "Direction"],
     bio: "Fresher seeking good roles opportunity",
@@ -160,7 +160,7 @@ const artists: Artist[] = [
     id: "ronak-sharma",
     name: "Ronak Sharma",
     image: "/images/artists/ronak-sharma.jpg",
-    location: "Bengaluru",
+    location: "Bengaluru, Karnataka",
     age: 41,
     languages: ["Hindi", "English"],
     email: "Shanu.ronak@gmail.com",
@@ -173,7 +173,7 @@ const artists: Artist[] = [
     id: "vandana-dugar",
     name: "Vandana Dugar",
     image: "/images/artists/vandana-dugar.jpg",
-    location: "Bengaluru, Dr. Raj Kumar Road",
+    location: "Bengaluru, Karnataka",
     languages: ["Hindi"],
     interests: ["Acting"],
     bio: "I am Vandana dugar Theatre enthusiast from Bangalore based theatre group Urban Chaupaal. Here to learn, explore and tell stories.",
@@ -184,7 +184,7 @@ const artists: Artist[] = [
     id: "srinivas-nayaka",
     name: "Srinivas Nayaka",
     image: "/images/artists/srinivas-nayaka.jpg",
-    location: "Bengaluru",
+    location: "Bengaluru, Karnataka",
     age: 24,
     languages: ["Kannada", "Telugu", "Hindi", "English"],
     email: "srinivasnayakame@gmail.com",
@@ -195,7 +195,7 @@ const artists: Artist[] = [
     id: "ganesh-gopalan",
     name: "Ganesh Gopalan",
     image: "/images/artists/ganesh-gopalan.jpg",
-    location: "Coimbatore",
+    location: "Coimbatore, Tamil Nadu",
     age: 45,
     languages: ["Hindi", "English", "Telugu", "Tamil"],
     email: "ganesh.thinker@gmail.com",
@@ -207,7 +207,7 @@ const artists: Artist[] = [
     id: "aaqib-jamal",
     name: "Aaqib Jamal",
     image: "/images/artists/aaqib-jamal.jpg",
-    location: "Bengaluru",
+    location: "Bengaluru, Karnataka",
     age: 33,
     languages: ["English", "Hindi", "Kannada"],
     email: "aaqib.jamal25@gmail.com",
@@ -219,7 +219,7 @@ const artists: Artist[] = [
     id: "zahoor",
     name: "Zahoor",
     image: "/images/artists/zahoor.jpg",
-    location: "Bengaluru",
+    location: "Bengaluru, Karnataka",
     age: 40,
     languages: ["English", "Hindi"],
     email: "zoshsaysright@gmail.com",
@@ -231,7 +231,7 @@ const artists: Artist[] = [
     id: "madhurima-gupta",
     name: "Madhurima Gupta",
     image: "/images/artists/madhurima-gupta.jpg",
-    location: "Bengaluru, Koramangala",
+    location: "Bengaluru, Karnataka",
     age: 45,
     languages: ["English", "Hindi", "Bengali", "Spanish"],
     email: "maddurima.g@gmail.com",
@@ -272,7 +272,24 @@ const artists: Artist[] = [
   },
 ]
 
-const locations = [...new Set(artists.map((artist) => artist.location.split(",")[0].trim()))].sort()
+// Parse location to extract city, state, and country
+function parseLocation(location: string): { city: string; state: string; country: string } {
+  const parts = location.split(",").map((part) => part.trim())
+  // Default country is India if not specified
+  if (parts.length === 1) {
+    return { city: parts[0], state: "", country: "India" }
+  } else if (parts.length === 2) {
+    return { city: parts[0], state: parts[1], country: "India" }
+  } else {
+    return { city: parts[0], state: parts[1], country: parts[2] || "India" }
+  }
+}
+
+// Extract unique cities, states, and countries from artists
+const allCities = [...new Set(artists.map((artist) => parseLocation(artist.location).city))].filter(Boolean).sort()
+const allStates = [...new Set(artists.map((artist) => parseLocation(artist.location).state))].filter(Boolean).sort()
+const allCountries = [...new Set(artists.map((artist) => parseLocation(artist.location).country))].filter(Boolean).sort()
+
 const allLanguages = [...new Set(artists.flatMap((artist) => artist.languages))].sort()
 // Use centralized skills list as single source of truth
 const allSkills = [...THEATRE_ARTIST_SKILLS]
@@ -280,7 +297,9 @@ const allSkills = [...THEATRE_ARTIST_SKILLS]
 export default function TheatreArtistsContent() {
   const [filters, setFilters] = useState({
     search: "",
-    location: "",
+    city: "",
+    state: "",
+    country: "",
     language: "",
     skill: "",
   })
@@ -290,6 +309,7 @@ export default function TheatreArtistsContent() {
   const filteredArtists = artists.filter((artist) => {
     // Normalize artist skills for filtering
     const normalizedInterests = getNormalizedSkills(artist.interests)
+    const parsedLocation = parseLocation(artist.location)
     
     const matchesSearch =
       filters.search === "" ||
@@ -297,14 +317,16 @@ export default function TheatreArtistsContent() {
       artist.bio.toLowerCase().includes(filters.search.toLowerCase()) ||
       normalizedInterests.some((interest) => interest.toLowerCase().includes(filters.search.toLowerCase()))
 
-    const matchesLocation = filters.location === "" || artist.location.includes(filters.location)
+    const matchesCity = filters.city === "" || parsedLocation.city === filters.city
+    const matchesState = filters.state === "" || parsedLocation.state === filters.state
+    const matchesCountry = filters.country === "" || parsedLocation.country === filters.country
 
     const matchesLanguage = filters.language === "" || artist.languages.includes(filters.language)
 
     // Compare against normalized skills
     const matchesSkill = filters.skill === "" || normalizedInterests.includes(filters.skill)
 
-    return matchesSearch && matchesLocation && matchesLanguage && matchesSkill
+    return matchesSearch && matchesCity && matchesState && matchesCountry && matchesLanguage && matchesSkill
   })
 
   const handleFilterChange = (key: string, value: string) => {
@@ -314,7 +336,9 @@ export default function TheatreArtistsContent() {
   const clearFilters = () => {
     setFilters({
       search: "",
-      location: "",
+      city: "",
+      state: "",
+      country: "",
       language: "",
       skill: "",
     })
@@ -429,13 +453,37 @@ export default function TheatreArtistsContent() {
                   </button>
                 </div>
               )}
-              {filters.location && (
+              {filters.city && (
                 <div className="bg-gray-100 text-gray-800 text-xs md:text-sm px-3 py-1.5 rounded-full flex items-center gap-2">
-                  <span className="truncate max-w-[150px]">Location: {filters.location}</span>
+                  <span className="truncate max-w-[150px]">City: {filters.city}</span>
                   <button
-                    onClick={() => handleFilterChange("location", "")}
+                    onClick={() => handleFilterChange("city", "")}
                     className="text-gray-500 hover:text-gray-700"
-                    aria-label="Remove location filter"
+                    aria-label="Remove city filter"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              )}
+              {filters.state && (
+                <div className="bg-gray-100 text-gray-800 text-xs md:text-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                  <span className="truncate max-w-[150px]">State: {filters.state}</span>
+                  <button
+                    onClick={() => handleFilterChange("state", "")}
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label="Remove state filter"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              )}
+              {filters.country && (
+                <div className="bg-gray-100 text-gray-800 text-xs md:text-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                  <span className="truncate max-w-[150px]">Country: {filters.country}</span>
+                  <button
+                    onClick={() => handleFilterChange("country", "")}
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label="Remove country filter"
                   >
                     <X className="h-3 w-3" />
                   </button>
@@ -479,9 +527,9 @@ export default function TheatreArtistsContent() {
           {/* Filter Controls */}
           {showDesktopFilters && (
             <div className="mb-8 p-6 bg-gray-50 rounded-xl">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                 {/* Search - Desktop only */}
-                <div className="hidden md:block relative">
+                <div className="hidden md:block relative lg:col-span-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     type="text"
@@ -492,19 +540,57 @@ export default function TheatreArtistsContent() {
                   />
                 </div>
 
-                {/* Location Filter */}
+                {/* City Filter */}
                 <Select
-                  value={filters.location}
-                  onValueChange={(value) => handleFilterChange("location", value === "all" ? "" : value)}
+                  value={filters.city}
+                  onValueChange={(value) => handleFilterChange("city", value === "all" ? "" : value)}
                 >
                   <SelectTrigger className="rounded-full">
-                    <SelectValue placeholder="All Locations" />
+                    <SelectValue placeholder="All Cities" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Locations</SelectItem>
-                    {locations.map((location) => (
-                      <SelectItem key={location} value={location}>
-                        {location}
+                    <SelectItem value="all">All Cities</SelectItem>
+                    {allCities.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                {/* State Filter */}
+                <Select
+                  value={filters.state}
+                  onValueChange={(value) => handleFilterChange("state", value === "all" ? "" : value)}
+                >
+                  <SelectTrigger className="rounded-full">
+                    <SelectValue placeholder="All States" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All States</SelectItem>
+                    {allStates.map((state) => (
+                      <SelectItem key={state} value={state}>
+                        {state}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Country Filter */}
+                <Select
+                  value={filters.country}
+                  onValueChange={(value) => handleFilterChange("country", value === "all" ? "" : value)}
+                >
+                  <SelectTrigger className="rounded-full">
+                    <SelectValue placeholder="All Countries" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Countries</SelectItem>
+                    {allCountries.map((country) => (
+                      <SelectItem key={country} value={country}>
+                        {country}
                       </SelectItem>
                     ))}
                   </SelectContent>
