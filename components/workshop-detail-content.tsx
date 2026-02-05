@@ -37,6 +37,51 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 25,
+    title: "FTII / CFOL — Basic Course in Screen Acting (Nainital)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Nainital",
+    state: "Uttarakhand",
+    date: "08–14 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn acting technique, characterization, monologue work, scene work, voice and expression in this intensive short-term course at Jim Corbett National Park.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-nainital-08th-to-14th-march-2026",
+    price: "Rs. 8,900",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (10th pass in exceptional cases)",
+    venue: "Lemonwood Riverside Premier Resort, Jim Corbett National Park, Nainital",
+    fullDetails: {
+      description:
+        "Learn acting technique, characterization, monologue work, scene work, voice and expression in this intensive 7-day short-term course from FTII. Set in the scenic surroundings of Jim Corbett National Park, this programme offers a unique learning environment for aspiring actors.",
+      keyHighlights: [
+        "7-day intensive screen acting training",
+        "Learn from experienced FTII faculty",
+        "Acting technique and characterization",
+        "Monologue and scene work",
+        "Voice and expression training",
+        "FTII certification upon completion",
+      ],
+      curriculum: [
+        "Acting technique fundamentals",
+        "Characterization methods",
+        "Monologue preparation and performance",
+        "Scene work and partner dynamics",
+        "Voice modulation and expression",
+        "On-camera presence and awareness",
+      ],
+      duration: "7 days",
+      medium: "English/Hindi",
+      courseFee: "Rs. 8,900",
+      certification: "FTII Certificate",
+      contactInfo: ["Phone: 020-25580085", "Email: info.cfol@ftii.ac.in"],
+      venue: "Lemonwood Riverside Premier Resort, Jim Corbett National Park, Nainital, Uttarakhand",
+      organizer: "Film and Television Institute of India (FTII)",
+    },
+  },
+  {
     id: 24,
     title: "FTII / CFOL — Masterclass of Documentary Film Making (Mandi)",
     trainer: "FTII Faculty",
