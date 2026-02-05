@@ -37,6 +37,52 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 28,
+    title: "FTII / CFOL — Workshop on Foundations of Mobile Filmmaking (Lonavala)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Lonavala",
+    state: "Maharashtra",
+    date: "14–20 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn production design concepts and mobile filmmaking foundations in this intensive short-term workshop. Covers visual storytelling, set design principles, and practical production techniques.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/workshop-on-foundations-of-mobile-filmmaking-in-lonavala-16th-to-20th-march-2026",
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Lonavala, Maharashtra",
+    fullDetails: {
+      description:
+        "Learn production design concepts and mobile filmmaking foundations in this intensive 7-day short-term workshop from FTII. This comprehensive programme covers visual storytelling, set design principles, and practical production techniques for aspiring filmmakers and production designers.",
+      keyHighlights: [
+        "7-day intensive production design training",
+        "Learn from experienced FTII faculty",
+        "Mobile filmmaking foundations",
+        "Visual storytelling techniques",
+        "Practical production experience",
+        "FTII certification upon completion",
+      ],
+      curriculum: [
+        "Introduction to production design",
+        "Visual storytelling fundamentals",
+        "Set design principles",
+        "Mobile filmmaking techniques",
+        "Lighting and composition",
+        "Practical production exercises",
+        "Final project presentation",
+      ],
+      duration: "7 days",
+      medium: "English/Hindi",
+      courseFee: "Contact FTII for fee details",
+      certification: "FTII Certificate",
+      contactInfo: ["Phone: 020-25580085", "Email: info.cfol@ftii.ac.in"],
+      venue: "Lonavala, Maharashtra",
+      organizer: "Film and Television Institute of India (FTII)",
+    },
+  },
+  {
     id: 26,
     title: "Adishakti SOPE Residency — Session 1 (March 2026)",
     trainer: "Adishakti Faculty",
