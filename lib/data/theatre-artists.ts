@@ -270,6 +270,19 @@ export const artists: Artist[] = [
     whatsapp: "9712022073",
     credential: "Gujarat College – Drama Department",
   },
+  {
+    id: "ronnie-gupta",
+    name: "Ronnie Gupta",
+    image: "/images/artists/ronnie-gupta.jpg",
+    location: "Kanpur, Uttar Pradesh",
+    languages: ["Hindi"],
+    email: "ronniegupta2966@gmail.com",
+    interests: ["Acting", "Direction"],
+    bio: "Theatre practitioner with experience in 5 stage productions including Aakhen (Narration), Toba Tek Singh (by Saadat Hasan Manto), Chiththi, and Chaturthi Shreni (by Tarana Parveen). Actively involved in acting and direction, with a passion for meaningful storytelling.",
+    instagram: "https://www.instagram.com/imronniegupta",
+    youtube: "https://youtube.com/@actorronniegupta",
+    whatsapp: "9569049869",
+  },
 ]
 
 export function getArtistById(id: string): Artist | undefined {

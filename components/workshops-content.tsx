@@ -22,6 +22,7 @@ interface Workshop {
   institution: string
   location: string
   state: string
+  country: string
   date: string
   time: string
   description: string
@@ -36,6 +37,27 @@ interface Workshop {
   includes?: string
   category: string
   tags: string[]
+  travelSupport?: boolean
+  mode?: string
+  // ISO date string for expiration check (YYYY-MM-DD format)
+  // If not provided, workshop is considered non-expiring (e.g., ongoing programs)
+  expiresOn?: string
+}
+
+// Utility function to check if a workshop has expired
+function isWorkshopExpired(workshop: Workshop): boolean {
+  // If no expiration date is set, workshop doesn't expire (ongoing programs)
+  if (!workshop.expiresOn) {
+    return false
+  }
+  
+  const today = new Date()
+  today.setHours(0, 0, 0, 0) // Reset to start of day for fair comparison
+  
+  const expirationDate = new Date(workshop.expiresOn)
+  expirationDate.setHours(23, 59, 59, 999) // End of expiration day
+  
+  return today > expirationDate
 }
 
 const workshops: Workshop[] = [
@@ -46,6 +68,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Mumbai",
     state: "Maharashtra",
+    country: "India",
     date: "15–24 Jan 2026",
     time: "10 AM–5 PM",
     description:
@@ -60,6 +83,222 @@ const workshops: Workshop[] = [
     includes: "10-day intensive training + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-24", // End date of workshop
+  },
+  {
+    id: 22,
+    title: "FTII / CFOL — Basic Course in Screen Acting (Mumbai)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Mumbai",
+    state: "Maharashtra",
+    country: "India",
+    date: "09–18 Feb 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn acting fundamentals and on-camera performance techniques in this intensive short-term course. Covers screen acting essentials for film and television.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-mumbai-09-18-february-2026",
+    featured: true,
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Mumbai",
+    includes: "10-day intensive training + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-02-18",
+  },
+  {
+    id: 23,
+    title: "FTII / CFOL — Basic Course in Screen Acting (Lucknow)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Lucknow",
+    state: "Uttar Pradesh",
+    country: "India",
+    date: "19–25 Feb 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn acting fundamentals and on-camera performance techniques in this intensive short-term workshop. Covers screen acting essentials for film and television.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-lucknow-19-25-february-2026",
+    featured: true,
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Lucknow",
+    includes: "7-day intensive training + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-02-25",
+  },
+  {
+    id: 24,
+    title: "FTII / CFOL — Masterclass of Documentary Film Making (Mandi)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Mandi",
+    state: "Himachal Pradesh",
+    country: "India",
+    date: "25 Feb–07 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Master documentary filmmaking techniques in this intensive short-term workshop. Covers documentary practice, storytelling, camera work, and post-production essentials.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/masterclass-of-documentary-film-making-in-mandi-himachal-pradesh-25-february-07-march-2026",
+    featured: true,
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Mandi, Himachal Pradesh",
+    includes: "11-day intensive training + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-07",
+  },
+  {
+    id: 25,
+    title: "FTII / CFOL — Basic Course in Screen Acting (Nainital)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Nainital",
+    state: "Uttarakhand",
+    country: "India",
+    date: "08–14 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn acting technique, characterization, monologue work, scene work, voice and expression in this intensive short-term course at Jim Corbett National Park.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/basic-course-in-screen-acting-in-nainital-08th-to-14th-march-2026",
+    featured: true,
+    price: "Rs. 8,900",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (10th pass in exceptional cases)",
+    venue: "Lemonwood Riverside Premier Resort, Jim Corbett National Park, Nainital",
+    includes: "7-day intensive training + FTII Certificate",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-14",
+  },
+  {
+    id: 26,
+    title: "Adishakti SOPE Residency — Session 1 (March 2026)",
+    trainer: "Adishakti Faculty",
+    institution: "Adishakti Theatre Arts Laboratory",
+    location: "Puducherry",
+    state: "Tamil Nadu",
+    country: "India",
+    date: "08–17 Mar 2026",
+    time: "Full Day (Residential)",
+    description:
+      "Source of Performance Energy (SOPE) is an intensive residential training program focusing on breath, energy, movement, body expression, voice, and rhythm for holistic performer development.",
+    registrationLink: "https://adishaktitheatrearts.com/training/",
+    featured: true,
+    price: "Contact Adishakti",
+    contact: "0413-2622287",
+    email: "info@adishaktitheatrearts.com",
+    eligibility: "Open to performers and theatre practitioners",
+    venue: "Adishakti Campus, Tamil Nadu",
+    includes: "10-day immersive residential training",
+    category: "Movement & Physical Theatre",
+    tags: ["Residency", "Intensive Workshop"],
+    expiresOn: "2026-03-17",
+  },
+  {
+    id: 27,
+    title: "Adishakti SOPE Residency — Session 2 (March 2026)",
+    trainer: "Adishakti Faculty",
+    institution: "Adishakti Theatre Arts Laboratory",
+    location: "Puducherry",
+    state: "Tamil Nadu",
+    country: "India",
+    date: "21–30 Mar 2026",
+    time: "Full Day (Residential)",
+    description:
+      "Source of Performance Energy (SOPE) is an intensive residential training program focusing on breath, energy, movement, body expression, voice, and rhythm for holistic performer development.",
+    registrationLink: "https://adishaktitheatrearts.com/training/",
+    featured: true,
+    price: "Contact Adishakti",
+    contact: "0413-2622287",
+    email: "info@adishaktitheatrearts.com",
+    eligibility: "Open to performers and theatre practitioners",
+    venue: "Adishakti Campus, Tamil Nadu",
+    includes: "10-day immersive residential training",
+    category: "Movement & Physical Theatre",
+    tags: ["Residency", "Intensive Workshop"],
+    expiresOn: "2026-03-30",
+  },
+  {
+    id: 28,
+    title: "FTII / CFOL — Workshop on Foundations of Mobile Filmmaking (Lonavala)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Lonavala",
+    state: "Maharashtra",
+    country: "India",
+    date: "14–20 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Learn production design concepts and mobile filmmaking foundations in this intensive short-term workshop. Covers visual storytelling, set design principles, and practical production techniques.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/workshop-on-foundations-of-mobile-filmmaking-in-lonavala-16th-to-20th-march-2026",
+    featured: true,
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Lonavala, Maharashtra",
+    includes: "7-day intensive training + FTII Certificate",
+    category: "Design & Production",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-20",
+  },
+  {
+    id: 29,
+    title: "FTII / CFOL — Sound Recording & Design Workshop (Lonavala)",
+    trainer: "FTII Faculty",
+    institution: "Film and Television Institute of India (FTII)",
+    location: "Lonavala",
+    state: "Maharashtra",
+    country: "India",
+    date: "09–15 Mar 2026",
+    time: "10 AM–5 PM",
+    description:
+      "Master the art of sound recording and sound design for films through immersive learning. Covers recording techniques, sound design principles, and post-production audio workflows.",
+    registrationLink: "https://ftii.ac.in/p/vtwa/master-the-art-of-sound-recording-sound-design-for-your-films-though-immersive-learning-in-lonavala-09-to-15-march-2026",
+    featured: true,
+    price: "Contact FTII",
+    contact: "020-25580085",
+    email: "info.cfol@ftii.ac.in",
+    eligibility: "18+, 12th pass (exceptions considered)",
+    venue: "Lonavala, Maharashtra",
+    includes: "7-day intensive training + FTII Certificate",
+    category: "Design & Production",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-15",
+  },
+  {
+    id: 30,
+    title: "Rangakarmee Kolkata — Act. Create. Transform. 3-Month Weekend Acting Workshop",
+    trainer: "Rangakarmee Faculty",
+    institution: "Rangakarmee Kolkata",
+    location: "Kolkata",
+    state: "West Bengal",
+    country: "India",
+    date: "March 2026 (Weekends)",
+    time: "Weekend Evenings & Sundays",
+    description:
+      "A comprehensive 3-month weekend acting workshop focusing on acting technique, scene work, and character development with a theatre focus. Perfect for working professionals looking to develop their craft.",
+    registrationLink: "tel:7278992871",
+    featured: true,
+    price: "Contact for details",
+    contact: "7278992871",
+    email: "rangakarmee@gmail.com",
+    eligibility: "Open to all aspiring actors",
+    venue: "Kolkata, West Bengal",
+    includes: "3-month weekend training program",
+    category: "Acting & Performance",
+    tags: ["Long-term Course"],
   },
   {
     id: 2,
@@ -68,6 +307,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Saligao, Goa",
     state: "Goa",
+    country: "India",
     date: "15–21 Jan 2026",
     time: "10 AM–5 PM",
     description:
@@ -82,6 +322,7 @@ const workshops: Workshop[] = [
     includes: "7-day workshop + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-21",
   },
   {
     id: 3,
@@ -90,6 +331,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "New Delhi",
     state: "Delhi",
+    country: "India",
     date: "21–27 Jan 2026",
     time: "10 AM–5 PM",
     description:
@@ -104,6 +346,7 @@ const workshops: Workshop[] = [
     includes: "7-day training + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-27",
   },
   {
     id: 4,
@@ -112,6 +355,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Pune",
     state: "Maharashtra",
+    country: "India",
     date: "05–17 Jan 2026",
     time: "10 AM–5 PM",
     description:
@@ -126,6 +370,7 @@ const workshops: Workshop[] = [
     includes: "Comprehensive cinematography training + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-17",
   },
   {
     id: 5,
@@ -134,6 +379,7 @@ const workshops: Workshop[] = [
     institution: "The Self Centre",
     location: "Bengaluru",
     state: "Karnataka",
+    country: "India",
     date: "Sun, 18 Jan 2026",
     time: "10:00 AM",
     description:
@@ -149,6 +395,7 @@ const workshops: Workshop[] = [
     includes: "4-hour workshop + certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-18",
   },
   {
     id: 6,
@@ -157,6 +404,7 @@ const workshops: Workshop[] = [
     institution: "Moving Parts",
     location: "Arambol, Goa",
     state: "Goa",
+    country: "India",
     date: "5–30 Jan 2026",
     time: "Full day intensive",
     description:
@@ -171,6 +419,7 @@ const workshops: Workshop[] = [
     includes: "Part of 4-part intensive Dec 2025–Mar 2026",
     category: "Movement & Physical Theatre",
     tags: ["Long-term Course"],
+    expiresOn: "2026-01-30",
   },
   {
     id: 7,
@@ -179,6 +428,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Pune",
     state: "Maharashtra",
+    country: "India",
     date: "20–29 Jan 2026",
     time: "10 AM–5 PM",
     description:
@@ -194,6 +444,7 @@ const workshops: Workshop[] = [
     includes: "10-day intensive + FTII Certificate",
     category: "Direction & Dramaturgy",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-29",
   },
   {
     id: 8,
@@ -202,6 +453,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Mumbai",
     state: "Maharashtra",
+    country: "India",
     date: "25–31 Jan 2026",
     time: "10 AM–5 PM",
     description:
@@ -216,6 +468,7 @@ const workshops: Workshop[] = [
     includes: "7-day training + FTII Certificate",
     category: "Direction & Dramaturgy",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-31",
   },
   {
     id: 9,
@@ -224,6 +477,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Goa",
     state: "Goa",
+    country: "India",
     date: "25–31 Jan 2026",
     time: "10 AM–5 PM",
     description:
@@ -238,6 +492,7 @@ const workshops: Workshop[] = [
     includes: "7-day training + FTII Certificate",
     category: "Direction & Dramaturgy",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-31",
   },
   {
     id: 10,
@@ -246,6 +501,7 @@ const workshops: Workshop[] = [
     institution: "Film and Television Institute of India (FTII)",
     location: "Mumbai",
     state: "Maharashtra",
+    country: "India",
     date: "21–23 Jan 2026",
     time: "Full day sessions",
     description:
@@ -260,6 +516,7 @@ const workshops: Workshop[] = [
     includes: "3-day intensive + FTII Certificate",
     category: "Design & Production",
     tags: ["Short-term Workshop"],
+    expiresOn: "2026-01-23",
   },
   {
     id: 11,
@@ -268,6 +525,7 @@ const workshops: Workshop[] = [
     institution: "Indian Institute of Educational Theatre (IIET)",
     location: "Mysuru",
     state: "Karnataka",
+    country: "India",
     date: "22–29 Jan 2026",
     time: "9:00 AM–6:00 PM daily",
     description:
@@ -283,6 +541,7 @@ const workshops: Workshop[] = [
     includes: "Accommodation + 2 meals/day + Certificate",
     category: "Institutional Programs",
     tags: ["Institutional Training", "Residency"],
+    expiresOn: "2026-01-29",
   },
   {
     id: 12,
@@ -291,6 +550,7 @@ const workshops: Workshop[] = [
     institution: "National School of Drama (NSD)",
     location: "Mumbai",
     state: "Maharashtra",
+    country: "India",
     date: "Admissions open",
     time: "Part-time, non-residential",
     description:
@@ -313,6 +573,7 @@ const workshops: Workshop[] = [
     institution: "Tata Institute of Social Sciences (TISS)",
     location: "Mumbai",
     state: "Maharashtra",
+    country: "India",
     date: "8-10 March 2026",
     time: "Full day event",
     description:
@@ -328,6 +589,7 @@ const workshops: Workshop[] = [
     venue: "TISS Mumbai Campus",
     category: "Fellowship & Seminars",
     tags: ["Seminar", "Call for Papers", "International"],
+    expiresOn: "2026-03-10", // End of seminar
   },
   {
     id: 14,
@@ -335,7 +597,8 @@ const workshops: Workshop[] = [
     trainer: "Rijksakademie Faculty",
     institution: "Rijksakademie van beeldende kunsten",
     location: "Amsterdam",
-    state: "Netherlands",
+    state: "",
+    country: "Netherlands",
     date: "Residency Year 2027",
     time: "Full year programme",
     description:
@@ -357,7 +620,8 @@ const workshops: Workshop[] = [
     trainer: "Cité internationale des arts",
     institution: "Cité internationale des arts",
     location: "Paris",
-    state: "France",
+    state: "",
+    country: "France",
     date: "2025-2026 Programme",
     time: "Variable duration",
     description:
@@ -380,7 +644,8 @@ const workshops: Workshop[] = [
     trainer: "ITI Germany Team",
     institution: "International Theatre Institute (ITI) Germany",
     location: "Berlin + Chemnitz",
-    state: "Germany",
+    state: "",
+    country: "Germany",
     date: "21-28 June 2026",
     time: "Full week programme",
     description:
@@ -395,6 +660,7 @@ const workshops: Workshop[] = [
     venue: "Berlin and Chemnitz, Germany",
     category: "Fellowship & Seminars",
     tags: ["Fellowship", "Theatre", "Academy Week"],
+    expiresOn: "2026-06-28", // End of academy week
   },
   {
     id: 17,
@@ -402,7 +668,8 @@ const workshops: Workshop[] = [
     trainer: "GFZ Research Center",
     institution: "GFZ German Research Centre for Geosciences",
     location: "Potsdam",
-    state: "Germany",
+    state: "",
+    country: "Germany",
     date: "Deadline: 8 Feb 2026",
     time: "Residency programme",
     description:
@@ -417,6 +684,7 @@ const workshops: Workshop[] = [
     venue: "GFZ German Research Centre for Geosciences, Potsdam",
     category: "Fellowship & Seminars",
     tags: ["Residency", "Art-Science", "Fellowship"],
+    expiresOn: "2026-02-08", // Application deadline
   },
   {
     id: 18,
@@ -424,7 +692,8 @@ const workshops: Workshop[] = [
     trainer: "Culture Moves Europe",
     institution: "Culture Moves Europe / Goethe-Institut",
     location: "Europe-wide",
-    state: "Europe",
+    state: "",
+    country: "Europe",
     date: "Deadlines: 28 Feb, 31 Mar, 30 Apr 2026",
     time: "Rolling application rounds",
     description:
@@ -440,14 +709,16 @@ const workshops: Workshop[] = [
     category: "Fellowship & Seminars",
     tags: ["Mobility Grant", "Fellowship", "Europe-wide", "Travel Support"],
     travelSupport: true,
+    expiresOn: "2026-04-30", // Last application deadline
   },
   {
     id: 19,
     title: "Art of Research 2026 (Aalto University) — Call for Papers",
     trainer: "Aalto University",
     institution: "Aalto University, Finland",
-    location: "Aalto / Finland",
-    state: "Finland",
+    location: "Aalto",
+    state: "",
+    country: "Finland",
     date: "Deadline: 15 March 2026",
     time: "Conference dates TBA",
     description:
@@ -463,6 +734,7 @@ const workshops: Workshop[] = [
     venue: "Aalto University, Finland",
     category: "Fellowship & Seminars",
     tags: ["Conference", "Call for Papers", "Arts Research", "Design Research"],
+    expiresOn: "2026-03-15", // Paper submission deadline
   },
   {
     id: 20,
@@ -470,7 +742,8 @@ const workshops: Workshop[] = [
     trainer: "IAFOR",
     institution: "The International Academic Forum (IAFOR)",
     location: "Paris",
-    state: "France",
+    state: "",
+    country: "France",
     date: "Conference: 15–19 June 2026",
     time: "Early-bird deadline: 15 Jan 2026, Final deadline: 20 Mar 2026",
     description:
@@ -485,6 +758,7 @@ const workshops: Workshop[] = [
     venue: "Paris, France",
     category: "Fellowship & Seminars",
     tags: ["Conference", "Call for Papers", "Arts & Humanities", "Paris"],
+    expiresOn: "2026-06-19", // End of conference
   },
   {
     id: 21,
@@ -492,7 +766,8 @@ const workshops: Workshop[] = [
     trainer: "Villa Albertine",
     institution: "Villa Albertine (France–USA Cultural Program)",
     location: "France–USA",
-    state: "International",
+    state: "",
+    country: "International",
     date: "Deadline: 13 February 2026",
     time: "Application deadline approaching",
     description:
@@ -508,14 +783,40 @@ const workshops: Workshop[] = [
     category: "Fellowship & Seminars",
     tags: ["International Grant", "Travel Support", "Project Fund", "Collaboration"],
     travelSupport: true,
+    expiresOn: "2026-02-13", // Application deadline
   },
 ]
 
-// Get unique states, cities, and trainers for filters
-const states = [...new Set(workshops.map((workshop) => workshop.state))].sort()
-const cities = [...new Set(workshops.map((workshop) => workshop.location))].sort()
-const trainers = [...new Set(workshops.map((workshop) => workshop.trainer))].sort()
-const institutions = [...new Set(workshops.map((workshop) => workshop.institution))].sort()
+// Filter out expired workshops - this runs on every render for real-time updates
+const activeWorkshops = workshops.filter((workshop) => !isWorkshopExpired(workshop))
+
+// Get unique countries, states, cities, and trainers for filters (from active workshops only)
+const countries = [...new Set(activeWorkshops.map((workshop) => workshop.country))].filter(Boolean).sort()
+const allStates = [...new Set(activeWorkshops.map((workshop) => workshop.state))].filter(Boolean).sort()
+const allCities = [...new Set(activeWorkshops.map((workshop) => workshop.location))].sort()
+const trainers = [...new Set(activeWorkshops.map((workshop) => workshop.trainer))].sort()
+const institutions = [...new Set(activeWorkshops.map((workshop) => workshop.institution))].sort()
+
+// Helper function to get states for a specific country
+function getStatesForCountry(country: string): string[] {
+  if (!country) return allStates
+  return [...new Set(activeWorkshops
+    .filter((workshop) => workshop.country === country)
+    .map((workshop) => workshop.state)
+  )].filter(Boolean).sort()
+}
+
+// Helper function to get cities for a specific country and state
+function getCitiesForFilters(country: string, state: string): string[] {
+  let filtered = activeWorkshops
+  if (country) {
+    filtered = filtered.filter((workshop) => workshop.country === country)
+  }
+  if (state) {
+    filtered = filtered.filter((workshop) => workshop.state === state)
+  }
+  return [...new Set(filtered.map((workshop) => workshop.location))].sort()
+}
 
 const categories = [
   { id: "all", name: "All", icon: "🎭" },
@@ -532,8 +833,9 @@ function WorkshopsContent() {
   const [activeCategory, setActiveCategory] = useState("all")
   const [filters, setFilters] = useState({
     search: "",
-    city: "",
+    country: "",
     state: "",
+    city: "",
     trainer: "",
     institution: "",
     mode: "",
@@ -542,14 +844,20 @@ function WorkshopsContent() {
   const isMobile = useMediaQuery("(max-width: 768px)")
   const isSmallMobile = useMediaQuery("(max-width: 640px)")
 
-  const filteredWorkshops = workshops.filter((workshop) => {
+  // Get available states and cities based on selected filters
+  const availableStates = getStatesForCountry(filters.country)
+  const availableCities = getCitiesForFilters(filters.country, filters.state)
+
+  // Filter from activeWorkshops (already excludes expired)
+  const filteredWorkshops = activeWorkshops.filter((workshop) => {
     return (
       (activeCategory === "all" || workshop.category === activeCategory) &&
       (filters.search === "" ||
         workshop.title.toLowerCase().includes(filters.search.toLowerCase()) ||
         workshop.description.toLowerCase().includes(filters.search.toLowerCase())) &&
-      (filters.city === "" || workshop.location === filters.city) &&
+      (filters.country === "" || workshop.country === filters.country) &&
       (filters.state === "" || workshop.state === filters.state) &&
+      (filters.city === "" || workshop.location === filters.city) &&
       (filters.trainer === "" || workshop.trainer === filters.trainer) &&
       (filters.institution === "" || workshop.institution === filters.institution) &&
       (filters.mode === "" || workshop.mode === filters.mode)
@@ -557,21 +865,33 @@ function WorkshopsContent() {
   })
 
   const handleFilterChange = (key: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value }))
+    setFilters((prev) => {
+      const newFilters = { ...prev, [key]: value }
+      // Reset dependent filters when parent filter changes
+      if (key === "country") {
+        newFilters.state = ""
+        newFilters.city = ""
+      } else if (key === "state") {
+        newFilters.city = ""
+      }
+      return newFilters
+    })
   }
 
   const clearFilters = () => {
     setFilters({
       search: "",
-      city: "",
+      country: "",
       state: "",
+      city: "",
       trainer: "",
       institution: "",
       mode: "",
     })
   }
 
-  const featuredWorkshops = workshops.filter((workshop) => workshop.featured)
+  // Featured workshops also exclude expired ones
+  const featuredWorkshops = activeWorkshops.filter((workshop) => workshop.featured)
   const hasActiveFilters = Object.values(filters).some((value) => value !== "")
 
   return (
@@ -637,8 +957,9 @@ function WorkshopsContent() {
         <div className="flex items-center gap-2">
           <MobileFilterDrawer
             filters={filters}
-            cities={cities}
-            states={states}
+            countries={countries}
+            states={availableStates}
+            cities={availableCities}
             trainers={trainers}
             institutions={institutions}
             handleFilterChange={handleFilterChange}
@@ -664,7 +985,7 @@ function WorkshopsContent() {
       {/* Desktop Filters */}
       {showDesktopFilters && (
         <div className="hidden md:block mb-8 p-6 bg-gray-50 rounded-xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
@@ -676,27 +997,31 @@ function WorkshopsContent() {
               />
             </div>
 
-            <Select value={filters.city} onValueChange={(value) => handleFilterChange("city", value)}>
+            <Select value={filters.country} onValueChange={(value) => handleFilterChange("country", value)}>
               <SelectTrigger className="rounded-full">
-                <SelectValue placeholder="City" />
+                <SelectValue placeholder="Country" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Cities</SelectItem>
-                {cities.map((city) => (
-                  <SelectItem key={city} value={city}>
-                    {city}
+                <SelectItem value="all">All Countries</SelectItem>
+                {countries.map((country) => (
+                  <SelectItem key={country} value={country}>
+                    {country}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
 
-            <Select value={filters.state} onValueChange={(value) => handleFilterChange("state", value)}>
+            <Select 
+              value={filters.state} 
+              onValueChange={(value) => handleFilterChange("state", value)}
+              disabled={availableStates.length === 0}
+            >
               <SelectTrigger className="rounded-full">
-                <SelectValue placeholder="State" />
+                <SelectValue placeholder={availableStates.length === 0 ? "No states available" : "State"} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All States</SelectItem>
-                {states.map((state) => (
+                {availableStates.map((state) => (
                   <SelectItem key={state} value={state}>
                     {state}
                   </SelectItem>
@@ -704,6 +1029,22 @@ function WorkshopsContent() {
               </SelectContent>
             </Select>
 
+            <Select value={filters.city} onValueChange={(value) => handleFilterChange("city", value)}>
+              <SelectTrigger className="rounded-full">
+                <SelectValue placeholder="City" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Cities</SelectItem>
+                {availableCities.map((city) => (
+                  <SelectItem key={city} value={city}>
+                    {city}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
             <Select value={filters.trainer} onValueChange={(value) => handleFilterChange("trainer", value)}>
               <SelectTrigger className="rounded-full">
                 <SelectValue placeholder="Trainer" />

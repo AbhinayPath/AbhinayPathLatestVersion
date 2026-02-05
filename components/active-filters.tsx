@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button"
 interface ActiveFiltersProps {
   filters: {
     search: string
-    city: string
+    country: string
     state: string
+    city: string
     trainer: string
     institution: string
-    mode: string // Add mode property
+    mode: string
   }
   handleFilterChange: (key: string, value: string) => void
   clearFilters: () => void
@@ -25,16 +26,18 @@ export default function ActiveFilters({ filters, handleFilterChange, clearFilter
     switch (key) {
       case "search":
         return `Search: ${value}`
-      case "city":
-        return `City: ${value}`
+      case "country":
+        return `Country: ${value}`
       case "state":
         return `State: ${value}`
+      case "city":
+        return `City: ${value}`
       case "trainer":
         return `Trainer: ${value}`
       case "institution":
         return `Institution: ${value}`
       case "mode":
-        return `Mode: ${value}` // Add mode case
+        return `Mode: ${value}`
       default:
         return value
     }
