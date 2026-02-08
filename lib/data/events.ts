@@ -340,6 +340,26 @@ export const festivals: Festival[] = [
 
   // February Festivals
   {
+    id: "natsamrat-natya-utsav-2026",
+    name: "Natsamrat Natya Utsav 2026",
+    city: "New Delhi",
+    country: "India",
+    languages: "Hindi",
+    scale: "Regional",
+    duration: "9 days (Feb 28 – Mar 8)",
+    month: "February",
+    dates: "28 Feb – 8 Mar 2026",
+    submissionDeadline: "2 Feb 2026",
+    status: "open",
+    selectionProcess: "Open Call + Selection by Natsamrat Theatre Group",
+    eligibility: "Theatre Directors & Groups based in Delhi & NCR (play duration: 50–75 mins, studio format)",
+    description:
+      "Dedicated to Padmashree Late Shri D. P. Sinha Ji. A curated theatre festival by Abhinaypath celebrating meaningful stage work in an intimate studio setting at LTG Auditorium – The Blank Canvas Studio, Mandi House. Ticketed entry with 50-seat studio capacity. Festival offers performance venue access, 5 complimentary passes, publicity support, social media coverage, festival memento for the director, and certificates for all on-stage and backstage members. No TA/DA or honorarium provided. Contact: Shyam Kumar (Director – Natsamrat Theatre Group) at shyamkumaro8@yahoo.co.in or 9811232072 / 7982598635.",
+    link: "mailto:shyamkumaro8@yahoo.co.in?subject=Application for Natsamrat Natya Utsav 2026",
+    category: "theatre",
+    tags: ["Delhi-NCR", "studio format", "curated"],
+  },
+  {
     id: "pflasterspektakel-2026",
     name: "Pflasterspektakel 2026",
     city: "Linz",
