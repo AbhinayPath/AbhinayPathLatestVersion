@@ -1,4 +1,4 @@
-import { getEventStatus, getDaysUntilDeadline, type EventStatus } from "@/lib/utils"
+import { getEventStatus, getDaysUntilDeadline, isEventCompleted, type EventStatus } from "@/lib/utils"
 
 /**
  * Event/Festival interface for scalable event management
@@ -43,6 +43,10 @@ export interface EnhancedFestival extends Festival {
   isExpired: boolean
   isClosingSoon: boolean
   isOpen: boolean
+  /** Whether the event dates themselves have fully passed */
+  isEventCompleted: boolean
+  /** Whether submissions are closed but event hasn't happened yet */
+  isSubmissionsClosed: boolean
   lastUpdated: string
 }
 
@@ -100,14 +104,18 @@ export function getScaleColor(scale: string): string {
 export function processEvent(festival: Festival): EnhancedFestival {
   const computedStatus = getEventStatus(festival.submissionDeadline, festival.status)
   const daysUntilDeadline = getDaysUntilDeadline(festival.submissionDeadline)
+  const eventCompleted = isEventCompleted(festival.dates)
+  const deadlinePassed = computedStatus === "past"
   
   return {
     ...festival,
     computedStatus,
     daysUntilDeadline,
-    isExpired: computedStatus === "past",
+    isExpired: deadlinePassed,
     isClosingSoon: computedStatus === "closing-soon",
     isOpen: computedStatus === "open" || computedStatus === "closing-soon",
+    isEventCompleted: eventCompleted,
+    isSubmissionsClosed: deadlinePassed && !eventCompleted,
     lastUpdated: new Date().toISOString(),
   }
 }
@@ -157,6 +165,8 @@ export function getEventStats(festivals: EnhancedFestival[]) {
     active: festivals.filter(f => f.isOpen).length,
     international: festivals.filter(f => f.scale === "International").length,
     featured: festivals.filter(f => f.featured).length,
+    completed: festivals.filter(f => f.isEventCompleted).length,
+    submissionsClosed: festivals.filter(f => f.isSubmissionsClosed).length,
   }
 }
 

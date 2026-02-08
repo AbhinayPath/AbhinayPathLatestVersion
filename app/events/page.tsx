@@ -54,36 +54,58 @@ export default function EventsPage() {
     const StatusIcon = statusBadge.icon
     const isPast = festival.isExpired
     const isClosingSoon = festival.isClosingSoon
+    const isCompleted = festival.isEventCompleted
+    const isSubmissionsClosed = festival.isSubmissionsClosed
 
     return (
       <Card
         className={`group transition-all duration-300 border-2 h-full flex flex-col relative ${
-          isPast 
-            ? "opacity-60 bg-gray-50 border-gray-200 hover:opacity-80" 
-            : festival.featured
-              ? "border-[#7E1F2E]/30 bg-gradient-to-br from-amber-50/50 to-white hover:shadow-xl"
-              : isClosingSoon
-                ? "border-orange-300 bg-gradient-to-br from-orange-50/50 to-white hover:shadow-xl"
-                : "hover:border-[#7E1F2E]/20 hover:shadow-xl"
+          isCompleted
+            ? "opacity-50 bg-gray-50 border-gray-200 hover:opacity-70"
+            : isSubmissionsClosed
+              ? "opacity-75 bg-gray-50/50 border-amber-200/60 hover:opacity-90 hover:shadow-lg"
+              : festival.featured
+                ? "border-[#7E1F2E]/30 bg-gradient-to-br from-amber-50/50 to-white hover:shadow-xl"
+                : isClosingSoon
+                  ? "border-orange-300 bg-gradient-to-br from-orange-50/50 to-white hover:shadow-xl"
+                  : "hover:border-[#7E1F2E]/20 hover:shadow-xl"
         }`}
       >
-        {/* Expired Overlay Banner */}
-        {isPast && (
-          <div className="absolute top-0 left-0 right-0 bg-gray-700 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg">
-            <Archive className="h-3 w-3 inline mr-1.5" />
-            Submissions Closed
+        {/* Event Completed Banner */}
+        {isCompleted && (
+          <div className="absolute top-0 left-0 right-0 bg-gray-600 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg flex items-center justify-center gap-1.5" role="status">
+            <Archive className="h-3 w-3" />
+            <span>Event Completed</span>
+          </div>
+        )}
+
+        {/* Submissions Closed Banner (deadline passed but event still upcoming) */}
+        {isSubmissionsClosed && (
+          <div className="absolute top-0 left-0 right-0 bg-amber-600 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg flex items-center justify-center gap-1.5" role="status">
+            <Clock className="h-3 w-3" />
+            <span>Submissions Closed</span>
+          </div>
+        )}
+
+        {/* Deadline Passed (can't parse event dates, generic closed state) */}
+        {isPast && !isCompleted && !isSubmissionsClosed && (
+          <div className="absolute top-0 left-0 right-0 bg-gray-500 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg flex items-center justify-center gap-1.5" role="status">
+            <Archive className="h-3 w-3" />
+            <span>Deadline Passed</span>
           </div>
         )}
         
         {/* Closing Soon Banner */}
         {isClosingSoon && festival.daysUntilDeadline !== null && (
-          <div className="absolute top-0 left-0 right-0 bg-orange-500 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg animate-pulse">
-            <AlertCircle className="h-3 w-3 inline mr-1.5" />
-            {festival.daysUntilDeadline === 0 
-              ? "Last Day to Apply!" 
-              : festival.daysUntilDeadline === 1 
-                ? "1 Day Left!" 
-                : `${festival.daysUntilDeadline} Days Left!`}
+          <div className="absolute top-0 left-0 right-0 bg-orange-500 text-white text-xs font-semibold py-1.5 px-3 text-center z-10 rounded-t-lg animate-pulse flex items-center justify-center gap-1.5" role="status">
+            <AlertCircle className="h-3 w-3" />
+            <span>
+              {festival.daysUntilDeadline === 0 
+                ? "Last Day to Apply!" 
+                : festival.daysUntilDeadline === 1 
+                  ? "1 Day Left!" 
+                  : `${festival.daysUntilDeadline} Days Left!`}
+            </span>
           </div>
         )}
 
@@ -99,7 +121,7 @@ export default function EventsPage() {
             </div>
           )}
           <div className="flex items-start justify-between gap-3 mb-3">
-            <CardTitle className={`text-lg sm:text-xl font-bold transition-colors leading-tight flex-1 ${isPast ? "text-gray-500" : "group-hover:text-[#7E1F2E]"}`}>
+            <CardTitle className={`text-lg sm:text-xl font-bold transition-colors leading-tight flex-1 ${isCompleted ? "text-gray-400" : isPast ? "text-gray-500" : "group-hover:text-[#7E1F2E]"}`}>
               {festival.name}
             </CardTitle>
             <ShareEventButton 
@@ -113,36 +135,42 @@ export default function EventsPage() {
           <div className="flex flex-wrap gap-2">
             <Badge className={`${statusBadge.color} text-xs flex items-center gap-1 px-2 py-1 border`}>
               <StatusIcon className="h-3 w-3" />
-              {statusBadge.label}
+              {isCompleted ? "Event Completed" : isSubmissionsClosed ? "Submissions Closed" : statusBadge.label}
             </Badge>
             <Badge className={`${getScaleColor(festival.scale)} text-xs ${isPast ? "opacity-60" : ""}`}>{festival.scale}</Badge>
+            {isCompleted && (
+              <Badge className="bg-gray-100 text-gray-500 text-xs border border-gray-200">Past Event</Badge>
+            )}
+            {isSubmissionsClosed && (
+              <Badge className="bg-amber-50 text-amber-700 text-xs border border-amber-200">Event Upcoming</Badge>
+            )}
           </div>
         </CardHeader>
 
         <CardContent className="space-y-4 flex-grow flex flex-col">
-          <div className={`space-y-3 text-sm ${isPast ? "text-gray-500" : "text-gray-600"}`}>
+          <div className={`space-y-3 text-sm ${isCompleted ? "text-gray-400" : isPast ? "text-gray-500" : "text-gray-600"}`}>
             <div className="flex items-start gap-3">
-              <MapPin className={`h-4 w-4 shrink-0 mt-0.5 ${isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
+              <MapPin className={`h-4 w-4 shrink-0 mt-0.5 ${isCompleted ? "text-gray-300" : isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
               <div>
                 <span className="font-semibold">
                   {festival.city}, {festival.country}
                 </span>
-                <div className="text-xs text-gray-500 mt-0.5">{festival.languages}</div>
+                <div className={`text-xs mt-0.5 ${isCompleted ? "text-gray-400" : "text-gray-500"}`}>{festival.languages}</div>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              <Calendar className={`h-4 w-4 shrink-0 ${isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
+              <Calendar className={`h-4 w-4 shrink-0 ${isCompleted ? "text-gray-300" : isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
               <div>
-                <span className="font-semibold">{festival.dates}</span>
-                <div className="text-xs text-gray-500 mt-0.5">Duration: {festival.duration}</div>
+                <span className={`font-semibold ${isCompleted ? "line-through" : ""}`}>{festival.dates}</span>
+                <div className={`text-xs mt-0.5 ${isCompleted ? "text-gray-400" : "text-gray-500"}`}>Duration: {festival.duration}</div>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <Clock className={`h-4 w-4 shrink-0 mt-0.5 ${isPast ? "text-gray-400" : isClosingSoon ? "text-orange-500" : "text-[#7E1F2E]"}`} />
+              <Clock className={`h-4 w-4 shrink-0 mt-0.5 ${isCompleted ? "text-gray-300" : isPast ? "text-gray-400" : isClosingSoon ? "text-orange-500" : "text-[#7E1F2E]"}`} />
               <div>
-                <span className={`text-xs font-semibold ${isPast ? "text-gray-500" : isClosingSoon ? "text-orange-700" : "text-gray-700"}`}>
+                <span className={`text-xs font-semibold ${isCompleted ? "text-gray-400" : isPast ? "text-gray-500" : isClosingSoon ? "text-orange-700" : "text-gray-700"}`}>
                   Submission Deadline:
                 </span>
                 <div className={`text-sm mt-0.5 ${isPast ? "line-through text-gray-400" : isClosingSoon ? "text-orange-700 font-semibold" : ""}`}>
@@ -157,7 +185,7 @@ export default function EventsPage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <Users className={`h-4 w-4 shrink-0 mt-0.5 ${isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
+              <Users className={`h-4 w-4 shrink-0 mt-0.5 ${isCompleted ? "text-gray-300" : isPast ? "text-gray-400" : "text-[#7E1F2E]"}`} />
               <div className="text-xs">
                 <span className="font-semibold">Eligibility: </span>
                 {festival.eligibility}
@@ -165,7 +193,7 @@ export default function EventsPage() {
             </div>
           </div>
 
-          <p className={`text-sm leading-relaxed line-clamp-4 flex-grow ${isPast ? "text-gray-500" : "text-gray-600"}`}>{festival.description}</p>
+          <p className={`text-sm leading-relaxed line-clamp-4 flex-grow ${isCompleted ? "text-gray-400" : isPast ? "text-gray-500" : "text-gray-600"}`}>{festival.description}</p>
 
           {festival.visaSupport && !isPast && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
@@ -189,12 +217,16 @@ export default function EventsPage() {
             <Link href={festival.link} target="_blank" rel="noopener noreferrer">
               <Button 
                 className={`w-full text-sm py-2.5 ${
-                  isPast 
-                    ? "bg-gray-400 hover:bg-gray-500 text-white" 
-                    : "bg-[#7E1F2E] hover:bg-[#6a1a27] text-white"
+                  isCompleted 
+                    ? "bg-gray-300 hover:bg-gray-400 text-gray-600"
+                    : isSubmissionsClosed
+                      ? "bg-amber-600 hover:bg-amber-700 text-white"
+                      : isPast 
+                        ? "bg-gray-400 hover:bg-gray-500 text-white" 
+                        : "bg-[#7E1F2E] hover:bg-[#6a1a27] text-white"
                 }`}
               >
-                {isPast ? "View Past Festival" : "View Festival Details"}
+                {isCompleted ? "View Past Festival" : isSubmissionsClosed ? "View Festival Info" : isPast ? "View Festival" : "View Festival Details"}
                 <ExternalLink className="h-4 w-4 ml-2" />
               </Button>
             </Link>
@@ -216,28 +248,34 @@ export default function EventsPage() {
             <p className="text-lg sm:text-xl lg:text-2xl opacity-90 mb-8 leading-relaxed">
               Discover national and international theatre festivals across India and beyond
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 text-center max-w-4xl mx-auto">
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">{stats.total}</div>
                 <div className="text-sm opacity-80">Festivals</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-300">
                   {stats.active}
                 </div>
                 <div className="text-sm opacity-80">Active</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-200">
                   {stats.open}
                 </div>
                 <div className="text-sm opacity-80">Open Now</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-orange-300">
                   {stats.closingSoon}
                 </div>
                 <div className="text-sm opacity-80">Closing Soon</div>
+              </div>
+              <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm col-span-2 sm:col-span-1">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-300">
+                  {stats.past}
+                </div>
+                <div className="text-sm opacity-80">Closed</div>
               </div>
             </div>
             
@@ -293,7 +331,9 @@ export default function EventsPage() {
               
               const openInMonth = monthEvents.filter(f => f.isOpen).length
               const closingSoonInMonth = monthEvents.filter(f => f.isClosingSoon).length
-              const expiredInMonth = monthEvents.filter(f => f.isExpired).length
+              const completedInMonth = monthEvents.filter(f => f.isEventCompleted).length
+              const submissionsClosedInMonth = monthEvents.filter(f => f.isSubmissionsClosed).length
+              const deadlinePassedInMonth = monthEvents.filter(f => f.isExpired && !f.isEventCompleted && !f.isSubmissionsClosed).length
 
               return (
                 <div key={month} id={month.toLowerCase()}>
@@ -315,9 +355,19 @@ export default function EventsPage() {
                           {closingSoonInMonth} closing soon
                         </Badge>
                       )}
-                      {expiredInMonth > 0 && (
+                      {submissionsClosedInMonth > 0 && (
+                        <Badge className="bg-amber-50 text-amber-700 text-xs border border-amber-200">
+                          {submissionsClosedInMonth} submissions closed
+                        </Badge>
+                      )}
+                      {completedInMonth > 0 && (
+                        <Badge className="bg-gray-100 text-gray-500 text-xs border border-gray-200">
+                          {completedInMonth} completed
+                        </Badge>
+                      )}
+                      {deadlinePassedInMonth > 0 && (
                         <Badge className="bg-gray-100 text-gray-600 text-xs border border-gray-200">
-                          {expiredInMonth} closed
+                          {deadlinePassedInMonth} deadline passed
                         </Badge>
                       )}
                     </div>
