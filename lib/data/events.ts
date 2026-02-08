@@ -691,6 +691,30 @@ export const festivals: Festival[] = [
     category: "theatre",
     tags: ["USA", "Cleveland", "international"],
   },
+
+  // August Festivals
+  {
+    id: "colombo-intl-theatre-festival-2026",
+    name: "12th Colombo International Theatre Festival (CITF) 2026",
+    city: "Colombo",
+    country: "Sri Lanka",
+    languages: "Non-verbal or minimal dialogue preferred",
+    scale: "International",
+    duration: "7 days (22–28 Aug)",
+    month: "August",
+    dates: "22–28 August 2026",
+    submissionDeadline: "10 Feb 2026",
+    status: "open",
+    selectionProcess: "Application review by organizing committee",
+    eligibility: "International theatre groups & solo performers (Mono Drama format, 45–60 min for international; 15 min short play for South Asia)",
+    travelSupport: "Accommodation (4 nights/5 days), meals, local transport, performance venue, and publicity provided for up to 4 participants. International airfare, visa, insurance, and production costs must be covered by participants.",
+    description:
+      "An internationally recognized Mono Drama competitive festival hosted by Inter Act Art Theatre Institute, Sri Lanka. Since 2012, CITF has welcomed theatre practitioners from 80+ countries and 100+ theatre groups worldwide. Awards include Best Mono Drama, Best Mono Drama Actor, and Best Mono Drama Actress. Non-verbal or visual storytelling is strongly encouraged. Selected teams may also apply for parallel festivals in Chilaw (Sri Lanka), Makassar (Indonesia), or Assam (India). Applications require a script in English, 2-minute video trailer, YouTube/Vimeo link, 6 high-res production stills, director & playwright photos, technical requirements, 150-word synopsis, and 150-word director's note.",
+    link: "https://citf.lk/pdf/12th-CITF-Application-Final-2026.docx",
+    featured: true,
+    category: "competition",
+    tags: ["Sri Lanka", "mono drama", "international competition", "visual storytelling", "awards"],
+  },
 ]
 
 /**
