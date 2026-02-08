@@ -1,4 +1,4 @@
-import { getEventStatus, getDaysUntilDeadline, type EventStatus } from "@/lib/utils"
+import { getEventStatus, getDaysUntilDeadline, isEventCompleted, type EventStatus } from "@/lib/utils"
 
 /**
  * Event/Festival interface for scalable event management
@@ -43,6 +43,10 @@ export interface EnhancedFestival extends Festival {
   isExpired: boolean
   isClosingSoon: boolean
   isOpen: boolean
+  /** Whether the event dates themselves have fully passed */
+  isEventCompleted: boolean
+  /** Whether submissions are closed but event hasn't happened yet */
+  isSubmissionsClosed: boolean
   lastUpdated: string
 }
 
@@ -100,14 +104,18 @@ export function getScaleColor(scale: string): string {
 export function processEvent(festival: Festival): EnhancedFestival {
   const computedStatus = getEventStatus(festival.submissionDeadline, festival.status)
   const daysUntilDeadline = getDaysUntilDeadline(festival.submissionDeadline)
+  const eventCompleted = isEventCompleted(festival.dates)
+  const deadlinePassed = computedStatus === "past"
   
   return {
     ...festival,
     computedStatus,
     daysUntilDeadline,
-    isExpired: computedStatus === "past",
+    isExpired: deadlinePassed,
     isClosingSoon: computedStatus === "closing-soon",
     isOpen: computedStatus === "open" || computedStatus === "closing-soon",
+    isEventCompleted: eventCompleted,
+    isSubmissionsClosed: deadlinePassed && !eventCompleted,
     lastUpdated: new Date().toISOString(),
   }
 }
@@ -157,6 +165,8 @@ export function getEventStats(festivals: EnhancedFestival[]) {
     active: festivals.filter(f => f.isOpen).length,
     international: festivals.filter(f => f.scale === "International").length,
     featured: festivals.filter(f => f.featured).length,
+    completed: festivals.filter(f => f.isEventCompleted).length,
+    submissionsClosed: festivals.filter(f => f.isSubmissionsClosed).length,
   }
 }
 
@@ -339,6 +349,48 @@ export const festivals: Festival[] = [
   },
 
   // February Festivals
+  {
+    id: "colombo-intl-theatre-festival-2026",
+    name: "12th Colombo International Theatre Festival (CITF) 2026",
+    city: "Colombo",
+    country: "Sri Lanka",
+    languages: "Non-verbal or minimal dialogue preferred",
+    scale: "International",
+    duration: "7 days (22–28 Aug 2026)",
+    month: "February",
+    dates: "22–28 August 2026",
+    submissionDeadline: "10 Feb 2026",
+    status: "open",
+    selectionProcess: "Application review by organizing committee",
+    eligibility: "International theatre groups & solo performers. Long Play (International): 45–60 min Mono Drama, one actor on stage, non-verbal or minimal dialogue preferred. Short Play (South Asia only): max 15 min.",
+    travelSupport: "Accommodation (4 nights/5 days), meals, local transport, performance venue, publicity, workshops & networking sessions provided for up to 4 participants (including technicians). International airfare, visa, insurance, production costs, and artist payments must be covered by participants.",
+    description:
+      "An internationally recognized Mono Drama competitive festival hosted by Inter Act Art Theatre Institute, Sri Lanka. Since 2012, CITF has welcomed theatre practitioners from 80+ countries and 100+ theatre groups worldwide. Awards include Best Mono Drama, Best Mono Drama Actor, and Best Mono Drama Actress. Strong visual storytelling is encouraged. Selected teams may also apply for parallel festivals in Chilaw, Sri Lanka (29–31 Aug), Makassar, Indonesia (4–9 Sept), or Assam, India (25–29 Oct). Applications require: script in English, 2-minute video trailer, YouTube/Vimeo link (Google Drive not accepted), 6 high-res production stills, director & playwright photographs, technical requirements, 150-word synopsis, and 150-word director's note. Incomplete applications will be rejected. Nearest airport: Bandaranaike International Airport, Colombo. Climate in August: 28–34°C.",
+    link: "https://citf.lk/pdf/12th-CITF-Application-Final-2026.docx",
+    featured: true,
+    category: "competition",
+    tags: ["Sri Lanka", "mono drama", "international competition", "visual storytelling", "awards", "parallel festivals"],
+  },
+  {
+    id: "natsamrat-natya-utsav-2026",
+    name: "Natsamrat Natya Utsav 2026",
+    city: "New Delhi",
+    country: "India",
+    languages: "Hindi",
+    scale: "Regional",
+    duration: "9 days (Feb 28 – Mar 8)",
+    month: "February",
+    dates: "28 Feb – 8 Mar 2026",
+    submissionDeadline: "2 Feb 2026",
+    status: "open",
+    selectionProcess: "Open Call + Selection by Natsamrat Theatre Group",
+    eligibility: "Theatre Directors & Groups based in Delhi & NCR (play duration: 50–75 mins, studio format)",
+    description:
+      "Dedicated to Padmashree Late Shri D. P. Sinha Ji. A curated theatre festival by Abhinaypath celebrating meaningful stage work in an intimate studio setting at LTG Auditorium – The Blank Canvas Studio, Mandi House. Ticketed entry with 50-seat studio capacity. Festival offers performance venue access, 5 complimentary passes, publicity support, social media coverage, festival memento for the director, and certificates for all on-stage and backstage members. No TA/DA or honorarium provided. Contact: Shyam Kumar (Director – Natsamrat Theatre Group) at shyamkumaro8@yahoo.co.in or 9811232072 / 7982598635.",
+    link: "mailto:shyamkumaro8@yahoo.co.in?subject=Application for Natsamrat Natya Utsav 2026",
+    category: "theatre",
+    tags: ["Delhi-NCR", "studio format", "curated"],
+  },
   {
     id: "pflasterspektakel-2026",
     name: "Pflasterspektakel 2026",
@@ -661,6 +713,7 @@ export const festivals: Festival[] = [
     category: "theatre",
     tags: ["USA", "Cleveland", "international"],
   },
+
 ]
 
 /**
