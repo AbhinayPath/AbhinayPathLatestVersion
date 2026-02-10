@@ -19,6 +19,7 @@ import {
   Award,
   Facebook,
   ExternalLink,
+  FileText,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -46,6 +47,8 @@ interface Artist {
   youtube?: string
   auditionVideo?: string
   credential?: string
+  portfolio?: string
+  specialization?: string[]
 }
 
 const artists: Artist[] = [
@@ -270,7 +273,21 @@ const artists: Artist[] = [
     instagram: "https://www.instagram.com/imronniegupta",
     youtube: "https://youtube.com/@actorronniegupta",
     auditionVideo: "https://www.youtube.com/watch?v=FKI4VXtdxlA",
-    whatsapp: "9569049869",
+    whatsapp: "8467846216",
+  },
+  {
+    id: "saloni-gusain",
+    name: "Saloni Gusain",
+    image: "/images/artists/saloni-gusain.png",
+    location: "Bengaluru, Karnataka",
+    age: 23,
+    languages: ["Hindi", "English", "Kannada"],
+    interests: ["Acting", "Dance"],
+    specialization: ["Classical Dance", "Western Dance"],
+    bio: "Saloni Gusain is a 23-year-old Bangalore-based performer with a strong foundation in classical and western dance. Standing 5'6\", she is passionate about building a full-time career in acting and performance.",
+    instagram: "https://www.instagram.com/salonigusain09",
+    auditionVideo: "https://youtu.be/ULR_JFoN3Vg?si=O7w7TOybYMj4I0qV",
+    portfolio: "https://drive.google.com/file/d/1LVLb6jZPw_33xnwStxgi7KLtY-_P_Qq1/view?usp=sharing",
   },
 ]
 
@@ -812,6 +829,25 @@ export default function TheatreArtistsContent() {
                         </div>
                       </div>
 
+                      {/* Specialization */}
+                      {artist.specialization && artist.specialization.length > 0 && (
+                        <div className="space-y-2 sm:space-y-3">
+                          <h3 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                            Specialization
+                          </h3>
+                          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                            {artist.specialization.map((spec) => (
+                              <Badge
+                                key={spec}
+                                className="text-xs sm:text-sm px-2 sm:px-3 py-0.5 sm:py-1 bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
+                              >
+                                {spec}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Bio */}
                       <div className="space-y-2 sm:space-y-3">
                         <h3 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -830,6 +866,18 @@ export default function TheatreArtistsContent() {
                             View Full Profile
                           </Button>
                         </Link>
+                        {artist.portfolio && (
+                          <Link href={artist.portfolio} target="_blank" rel="noopener noreferrer">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="rounded-full bg-transparent text-xs sm:text-sm h-9 sm:h-11 border-amber-300 text-amber-700 hover:bg-amber-50"
+                            >
+                              <FileText className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+                              Portfolio
+                            </Button>
+                          </Link>
+                        )}
                         {artist.email && (
                           <Link href={`mailto:${artist.email}`}>
                             <Button
