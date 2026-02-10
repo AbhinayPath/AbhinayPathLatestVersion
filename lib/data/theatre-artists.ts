@@ -3,6 +3,7 @@
 // Photographer, Videographer) are managed in the Technical & Production Artists page
 export const THEATRE_ARTIST_SKILLS = [
   "Acting",
+  "Dance",
   "Direction",
   "Assistant Directing",
   "Singing",
@@ -59,6 +60,8 @@ export interface Artist {
   youtube?: string
   auditionVideo?: string
   credential?: string
+  portfolio?: string
+  specialization?: string[]
 }
 
 export const artists: Artist[] = [
@@ -292,11 +295,12 @@ export const artists: Artist[] = [
     location: "Bengaluru, Karnataka",
     age: 23,
     languages: ["Hindi", "English", "Kannada"],
-    email: "salonigusain09@gmail.com",
-    interests: ["Acting"],
-    bio: "Saloni Gusain is a 23-year-old Bangalore-based performer with a strong foundation in classical and western dance. Standing 5'6\", she is passionate about building a full-time career in acting and performance. With specializations in Classical Dance and Western Dance, Saloni brings a unique physicality and expressiveness to her stage work.",
+    interests: ["Acting", "Dance"],
+    specialization: ["Classical Dance", "Western Dance"],
+    bio: "Saloni Gusain is a 23-year-old Bangalore-based performer with a strong foundation in classical and western dance. Standing 5'6\", she is passionate about building a full-time career in acting and performance.",
     instagram: "https://www.instagram.com/salonigusain09",
     auditionVideo: "https://youtu.be/ULR_JFoN3Vg?si=O7w7TOybYMj4I0qV",
+    portfolio: "https://drive.google.com/file/d/1LVLb6jZPw_33xnwStxgi7KLtY-_P_Qq1/view?usp=sharing",
   },
 ]
 

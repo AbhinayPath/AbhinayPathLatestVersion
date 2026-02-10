@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, MapPin, Mail, Award, Globe } from "lucide-react"
+import { ArrowLeft, MapPin, Mail, Award, Globe, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -171,6 +171,18 @@ export default async function ArtistProfilePage({ params }: PageProps) {
                       </Button>
                     </a>
                   )}
+                  {artist.portfolio && (
+                    <a href={artist.portfolio} target="_blank" rel="noopener noreferrer">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="gap-2 border-amber-600/50 text-amber-500 hover:bg-amber-950/30 bg-transparent"
+                      >
+                        <FileText className="h-5 w-5" />
+                        Portfolio
+                      </Button>
+                    </a>
+                  )}
                 </div>
 
                 {/* Contact Info */}
@@ -217,6 +229,44 @@ export default async function ArtistProfilePage({ params }: PageProps) {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Specialization Section */}
+            {artist.specialization && artist.specialization.length > 0 && (
+              <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-semibold text-amber-500 mb-4">Specialization</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {artist.specialization.map((spec) => (
+                      <Badge
+                        key={spec}
+                        variant="secondary"
+                        className="bg-amber-100 text-amber-800 border border-amber-300 px-3 py-1"
+                      >
+                        {spec}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Portfolio Section */}
+            {artist.portfolio && (
+              <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-semibold text-amber-500 mb-4">Portfolio</h2>
+                  <a
+                    href={artist.portfolio}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 transition-colors font-medium"
+                  >
+                    <FileText className="h-5 w-5" />
+                    View Portfolio
+                  </a>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Languages Section */}
             <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
@@ -272,12 +322,20 @@ export default async function ArtistProfilePage({ params }: PageProps) {
                       Connect with {artist.name.split(" ")[0]} for theatre productions and opportunities.
                     </p>
                   </div>
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-3">
                     {artist.email && (
                       <a href={`mailto:${artist.email}`}>
                         <Button className="bg-amber-600 hover:bg-amber-700 text-white">
                           <Mail className="h-4 w-4 mr-2" />
                           Contact
+                        </Button>
+                      </a>
+                    )}
+                    {artist.portfolio && (
+                      <a href={artist.portfolio} target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" className="border-amber-600/50 text-amber-500 hover:bg-amber-950/20 bg-transparent">
+                          <FileText className="h-4 w-4 mr-2" />
+                          View Portfolio
                         </Button>
                       </a>
                     )}
