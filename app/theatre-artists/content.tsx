@@ -273,7 +273,7 @@ const artists: Artist[] = [
     instagram: "https://www.instagram.com/imronniegupta",
     youtube: "https://youtube.com/@actorronniegupta",
     auditionVideo: "https://www.youtube.com/watch?v=FKI4VXtdxlA",
-    whatsapp: "9569049869",
+    whatsapp: "8467846216",
   },
   {
     id: "saloni-gusain",
