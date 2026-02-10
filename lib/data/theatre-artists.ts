@@ -285,6 +285,19 @@ export const artists: Artist[] = [
     auditionVideo: "https://www.youtube.com/watch?v=FKI4VXtdxlA",
     whatsapp: "9569049869",
   },
+  {
+    id: "saloni-gusain",
+    name: "Saloni Gusain",
+    image: "/images/artists/saloni-gusain.png",
+    location: "Bengaluru, Karnataka",
+    age: 23,
+    languages: ["Hindi", "English", "Kannada"],
+    email: "salonigusain09@gmail.com",
+    interests: ["Acting"],
+    bio: "Saloni Gusain is a 23-year-old Bangalore-based performer with a strong foundation in classical and western dance. Standing 5'6\", she is passionate about building a full-time career in acting and performance. With specializations in Classical Dance and Western Dance, Saloni brings a unique physicality and expressiveness to her stage work.",
+    instagram: "https://www.instagram.com/salonigusain09",
+    auditionVideo: "https://youtu.be/ULR_JFoN3Vg?si=O7w7TOybYMj4I0qV",
+  },
 ]
 
 export function getArtistById(id: string): Artist | undefined {
