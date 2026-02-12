@@ -433,6 +433,27 @@ export const festivals: Festival[] = [
     category: "competition",
     tags: ["musical theatre", "competition", "cash prize"],
   },
+  {
+    id: "national-kalarippayattu-championship-2025-26",
+    name: "18th National Kalarippayattu Championship 2025\u201326",
+    city: "India (Venue TBA)",
+    country: "India",
+    languages: "Hindi / English / Malayalam",
+    scale: "National",
+    duration: "Championship event",
+    month: "February",
+    dates: "2025\u201326 season (dates TBA upon selection)",
+    submissionDeadline: "15 Feb 2026",
+    status: "open",
+    selectionProcess: "Entry form submission + selection by Indian Kalarippayattu Federation",
+    eligibility: "Movement Artists, Physical Theatre Performers, Martial Performers. Categories: Sub-Junior, Junior, Senior. Events include Chuvadukal, Meyppayattu, Chavittipongal (High Kick), Neduvadippayattu / Kettukari (Long Staff Fight), Kuruvadippayattu (Short Staff Fight), Urumiveesal (Flexible Sword), Urumiyum Parichayum (Sword & Shield), Valum Parichayum (Sword & Shield), Valum Valum (Sword & Sword), and Kaipporu (Unarmed Combat).",
+    description:
+      "The 18th National Kalarippayattu Championship organised by the Indian Kalarippayattu Federation. This prestigious national-level martial arts competition features events across Sub-Junior, Junior, and Senior categories, covering a wide range of traditional Kalarippayattu disciplines from foundational footwork (Chuvadukal) and body exercises (Meyppayattu) to armed combat forms including staff fighting, flexible sword, sword & shield combinations, and unarmed combat (Kaipporu). An excellent opportunity for movement artists, physical theatre performers, and martial performers to compete at the national stage. Registration deadline: 15 February 2026 (5 PM).",
+    link: "https://drive.google.com/file/d/1uNiaqhntLd9KoW5ZhgiTKXNLr7j2ElH9/view?usp=sharing",
+    featured: true,
+    category: "competition",
+    tags: ["Kalarippayattu", "martial arts", "physical theatre", "national championship", "movement arts"],
+  },
 
   // March Festivals
   {
