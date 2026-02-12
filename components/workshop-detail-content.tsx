@@ -37,6 +37,56 @@ interface Workshop {
 
 const workshops: Workshop[] = [
   {
+    id: 31,
+    title: "Prasanna's Acting Workshop \u2014 Mysore (8-Day Residential)",
+    trainer: "Sri Prasanna & Rajneesh Bisht",
+    institution: "Indian Theatre Foundation / IIET Mysore",
+    location: "Mysore",
+    state: "Karnataka",
+    date: "2\u201309 Apr 2026",
+    time: "9 AM \u2013 6 PM daily",
+    description:
+      "An 8-day intensive residential acting workshop led by Sri Prasanna and Rajneesh Bisht, designed for serious actors who want to deepen their craft. Training covers Improvisation, Voice & Communication, Ensemble Work, Character Exploration, and Performance Presence.",
+    registrationLink: "https://www.indiantheatrefoundation.org/acting-workshop/",
+    price: "\u20B920,000",
+    contact: "Via website",
+    email: "Via website",
+    eligibility: "Serious actors looking to deepen craft",
+    venue: "IIET, Mysore, Karnataka",
+    fullDetails: {
+      description:
+        "An 8-day intensive residential acting workshop designed for serious actors who want to deepen their craft. Led by the acclaimed Sri Prasanna and Rajneesh Bisht, this programme takes place at IIET Mysore and offers immersive training across core performance disciplines. The workshop runs from April 2\u20139, with sessions from 9 AM to 6 PM daily. April 9 features a Certificate & Feedback session (till 5 PM). One day includes an outdoor Mysore exploration excursion. Smoking and alcohol are strictly prohibited on campus. Selected participants will be contacted after applying.",
+      keyHighlights: [
+        "8-day intensive residential programme",
+        "Led by Sri Prasanna & Rajneesh Bisht",
+        "Accommodation with separate dorms for men and women",
+        "Breakfast, Lunch, Tea/Coffee included (Dinner self-managed)",
+        "One outdoor Mysore exploration day",
+        "Certificate & personalised feedback on final day",
+        "Strict no-smoking, no-alcohol campus policy",
+      ],
+      curriculum: [
+        "Improvisation \u2014 spontaneity, instinct, and in-the-moment creation",
+        "Voice & Communication \u2014 projection, diction, emotional tone",
+        "Ensemble Work \u2014 trust, collaboration, group dynamics",
+        "Character Exploration \u2014 building layered, believable characters",
+        "Performance Presence \u2014 stage confidence and audience connection",
+        "Outdoor Mysore exploration (one day)",
+        "Certificate & Feedback session (April 9, till 5 PM)",
+      ],
+      duration: "8 days (2\u20139 April 2026)",
+      medium: "Hindi / English",
+      courseFee: "\u20B920,000 (includes accommodation, breakfast, lunch, tea/coffee, certificate)",
+      certification: "Certificate & Personalised Feedback from Indian Theatre Foundation",
+      contactInfo: [
+        "Website: https://www.indiantheatrefoundation.org/acting-workshop/",
+        "Organiser: Indian Theatre Foundation / IIET Mysore",
+      ],
+      venue: "IIET, Mysore, Karnataka",
+      organizer: "Indian Theatre Foundation / IIET Mysore",
+    },
+  },
+  {
     id: 30,
     title: "Rangakarmee Kolkata — Act. Create. Transform. 3-Month Weekend Acting Workshop",
     trainer: "Rangakarmee Faculty",
