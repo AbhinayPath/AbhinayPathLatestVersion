@@ -454,6 +454,27 @@ export const festivals: Festival[] = [
     category: "competition",
     tags: ["Kalarippayattu", "martial arts", "physical theatre", "national championship", "movement arts"],
   },
+  {
+    id: "vaanam-art-festival-2026",
+    name: "VAANAM Art Festival 2026 \u2013 Dalit History Month",
+    city: "India (Venue TBA)",
+    country: "India",
+    languages: "Open to all Indian languages",
+    scale: "National",
+    duration: "Festival (dates TBA upon selection)",
+    month: "February",
+    dates: "2026 (Festival dates TBA \u2013 Dalit History Month)",
+    submissionDeadline: "25 Feb 2026",
+    status: "open",
+    selectionProcess: "Open call for theatre entries. Shortlisted plays will be announced before end of February. Selected entries will be notified by the end of February.",
+    eligibility: "Theatre groups, directors, playwrights, and independent artists. Bold plays exploring unheard voices \u2013 stories that resist, question, and inspire.",
+    description:
+      "VAANAM Art Festival 2026 celebrates Dalit History Month with a bold call for theatre entries. The festival seeks plays that centre unheard voices \u2014 stories that resist, question, and inspire. Your play. Your politics. Your stage. This is a platform for theatre makers committed to social justice, Ambedkarite thought, and counter-narratives. Limited slots available. Shortlisted plays will be announced before the end of February, and selected entries will be notified directly. Contact: dhammatheatrefestival@gmail.com",
+    link: "mailto:dhammatheatrefestival@gmail.com?subject=Theatre Entry \u2013 VAANAM Art Festival 2026",
+    featured: true,
+    category: "theatre",
+    tags: ["Dalit History Month", "social justice", "bold theatre", "counter-narratives", "political theatre"],
+  },
 
   // March Festivals
   {
