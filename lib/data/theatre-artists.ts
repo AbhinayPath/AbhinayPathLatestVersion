@@ -302,6 +302,20 @@ export const artists: Artist[] = [
     auditionVideo: "https://youtu.be/ULR_JFoN3Vg?si=O7w7TOybYMj4I0qV",
     portfolio: "https://drive.google.com/file/d/1LVLb6jZPw_33xnwStxgi7KLtY-_P_Qq1/view?usp=sharing",
   },
+  {
+    id: "sangeeta-bali",
+    name: "Sangeeta Bali",
+    image: "/images/artists/sangeeta-bali.jpg",
+    location: "Delhi NCR",
+    age: 50,
+    languages: ["Hindi", "Punjabi"],
+    interests: ["Acting"],
+    bio: "Sangeeta Bali is a passionate actor with 10+ years of experience across theatre and media. Drawn to meaningful, emotionally driven roles, she brings maturity, strong emotional depth, realism and authenticity to characters across films, web series, short films, and digital content.",
+    instagram: "https://www.instagram.com/balisagi?igsh=OXUwM3k4cGRuZmI2",
+    whatsapp: "9958301301",
+    auditionVideo: "https://drive.google.com/file/d/1__PsI0PE8ljA045ItbTckNm7iIAwKncL/view?usp=drivesdk",
+    portfolio: "https://drive.google.com/file/d/12OIv7CpTOZHDicf8fw7j2rZYrifwBcgb/view?usp=drivesdk",
+  },
 ]
 
 export function getArtistById(id: string): Artist | undefined {
