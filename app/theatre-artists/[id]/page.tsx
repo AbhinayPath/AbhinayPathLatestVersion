@@ -287,6 +287,94 @@ export default async function ArtistProfilePage({ params }: PageProps) {
               </CardContent>
             </Card>
 
+            {/* Selected Work Section */}
+            {artist.selectedWork && artist.selectedWork.length > 0 && (
+              <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-semibold text-amber-500 mb-4">Selected Work</h2>
+                  <div className="grid gap-4">
+                    {artist.selectedWork.map((url: string, index: number) => {
+                      const isYouTube = url.includes("youtu.be/") || url.includes("youtube.com/watch")
+                      if (isYouTube) {
+                        const videoId = url.includes("watch?v=")
+                          ? url.split("watch?v=")[1].split("&")[0]
+                          : url.includes("youtu.be/")
+                            ? url.split("youtu.be/")[1].split("?")[0]
+                            : ""
+                        return (
+                          <div key={index} className="relative w-full aspect-video rounded-lg overflow-hidden bg-black/20">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${videoId}`}
+                              title={`${artist.name} - Selected Work ${index + 1}`}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
+                            />
+                          </div>
+                        )
+                      }
+                      return (
+                        <a
+                          key={index}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 transition-colors font-medium"
+                        >
+                          <FileText className="h-5 w-5" />
+                          Selected Work {index + 1}
+                        </a>
+                      )
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Audition Clips Section */}
+            {artist.auditionClips && artist.auditionClips.length > 0 && (
+              <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-semibold text-amber-500 mb-4">Audition Clips</h2>
+                  <div className="grid gap-4">
+                    {artist.auditionClips.map((url: string, index: number) => {
+                      const isYouTube = url.includes("youtu.be/") || url.includes("youtube.com/watch")
+                      if (isYouTube) {
+                        const videoId = url.includes("watch?v=")
+                          ? url.split("watch?v=")[1].split("&")[0]
+                          : url.includes("youtu.be/")
+                            ? url.split("youtu.be/")[1].split("?")[0]
+                            : ""
+                        return (
+                          <div key={index} className="relative w-full aspect-video rounded-lg overflow-hidden bg-black/20">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${videoId}`}
+                              title={`${artist.name} - Audition Clip ${index + 1}`}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
+                            />
+                          </div>
+                        )
+                      }
+                      return (
+                        <a
+                          key={index}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 transition-colors font-medium"
+                        >
+                          <FileText className="h-5 w-5" />
+                          Audition Clip {index + 1}
+                        </a>
+                      )
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Audition Video Section */}
             {artist.auditionVideo && (
               <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">

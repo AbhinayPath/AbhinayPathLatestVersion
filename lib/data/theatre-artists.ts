@@ -59,6 +59,8 @@ export interface Artist {
   whatsapp?: string
   youtube?: string
   auditionVideo?: string
+  selectedWork?: string[]
+  auditionClips?: string[]
   credential?: string
   portfolio?: string
   specialization?: string[]
@@ -314,6 +316,15 @@ export const artists: Artist[] = [
     instagram: "https://www.instagram.com/balisagi?igsh=OXUwM3k4cGRuZmI2",
     whatsapp: "9958301301",
     auditionVideo: "https://drive.google.com/file/d/1__PsI0PE8ljA045ItbTckNm7iIAwKncL/view?usp=drivesdk",
+    selectedWork: [
+      "https://youtu.be/jRICbMdrLQI?si=6qe99145c8eJUhyc",
+      "https://youtu.be/2e7EqsV8hrk?si=i2od4PFfGDmDtDTj",
+      "https://youtu.be/62MSwXyr0W0?si=gyLFQ4hLnnBONSMp",
+    ],
+    auditionClips: [
+      "https://drive.google.com/file/d/1__PsI0PE8ljA045ItbTckNm7iIAwKncL/view?usp=drivesdk",
+      "https://drive.google.com/file/d/1NxqLVtplfB1lIEHeAJbpUHml6XWRE39Q/view?usp=drivesdk",
+    ],
     portfolio: "https://drive.google.com/file/d/12OIv7CpTOZHDicf8fw7j2rZYrifwBcgb/view?usp=drivesdk",
   },
 ]
