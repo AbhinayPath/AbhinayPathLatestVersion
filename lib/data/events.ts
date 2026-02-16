@@ -498,6 +498,28 @@ export const festivals: Festival[] = [
     category: "theatre",
     tags: ["awards", "professional", "prestigious"],
   },
+  {
+    id: "maas-intl-theatre-festival-2026",
+    name: "3rd MAAS International Theatre Festival 2026",
+    city: "Lahore",
+    country: "Pakistan",
+    languages: "Non-verbal / English preferred (subtitles required for other languages)",
+    scale: "International",
+    duration: "Festival (October 2026, exact dates TBA)",
+    month: "March",
+    dates: "October 2026 (exact dates to be announced)",
+    submissionDeadline: "31 Mar 2026",
+    status: "open",
+    selectionProcess: "Application review by Maas Foundation. Selection announcement: 20 April 2026. Priority given to non-verbal performances, English-language productions, and innovative/experimental theatre.",
+    eligibility: "International theatre groups and solo performers. Categories: Theatre for Young Audiences, Theatre for Adults, Monodrama, Sensory Theatre, Mime, Contemporary/Experimental Theatre. Performance duration: 40\u201375 minutes. Content must be culturally appropriate for presentation in Pakistan.",
+    travelSupport: "Hospitality provided for up to 8 members (performers + crew): local transportation in Lahore, shared accommodation, three meals per day, performance venue, publicity, workshops & networking. International travel, visa fees, shipping, insurance, and production expenses to be covered by participants. Visa support documents provided by host.",
+    description:
+      "The MAAS International Theatre Festival (MITF), organised by the Maas Foundation, is an international platform bringing together theatre practitioners from across the world. The festival encourages diverse theatrical expressions, innovation, and cross-cultural collaboration. Applications are open across six categories: Theatre for Young Audiences, Theatre for Adults, Monodrama, Sensory Theatre, Mime, and Contemporary/Experimental Theatre. Each production performs once (morning or evening slot) and must adapt to the available stage and technical facilities. Applicants must submit: Artist/Company CV, English-translated script (Word format), technical rider, and production information. If selected and the performance language is not English, English subtitles must be provided. Festival may record performances for archival and promotional use. Selected teams must submit passport copies before invitation letters are issued. In case of withdrawal, teams must inform at least 60 days before the festival.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSe5jqX02QwgO1HcVqA8-PTqbCQ-nV3q8anBr3579hZYRpRF4A/viewform",
+    featured: true,
+    category: "theatre",
+    tags: ["international", "experimental", "monodrama", "mime", "sensory theatre", "cross-cultural", "Pakistan"],
+  },
 
   // May Festivals
   {
