@@ -315,7 +315,6 @@ export const artists: Artist[] = [
     bio: "Sangeeta Bali is a passionate actor with 10+ years of experience across theatre and media. Drawn to meaningful, emotionally driven roles, she brings maturity, strong emotional depth, realism and authenticity to characters across films, web series, short films, and digital content.",
     instagram: "https://www.instagram.com/balisagi?igsh=OXUwM3k4cGRuZmI2",
     whatsapp: "9958301301",
-    auditionVideo: "https://drive.google.com/file/d/1__PsI0PE8ljA045ItbTckNm7iIAwKncL/view?usp=drivesdk",
     selectedWork: [
       "https://youtu.be/jRICbMdrLQI?si=6qe99145c8eJUhyc",
       "https://youtu.be/2e7EqsV8hrk?si=i2od4PFfGDmDtDTj",
