@@ -46,6 +46,8 @@ interface Artist {
   whatsapp?: string
   youtube?: string
   auditionVideo?: string
+  selectedWork?: string[]
+  auditionClips?: string[]
   credential?: string
   portfolio?: string
   specialization?: string[]
@@ -271,8 +273,8 @@ const artists: Artist[] = [
     interests: ["Acting", "Direction"],
     bio: "Theatre practitioner with experience in 5 stage productions including Aakhen (Narration), Toba Tek Singh (by Saadat Hasan Manto), Chiththi, and Chaturthi Shreni (by Tarana Parveen). Actively involved in acting and direction, with a passion for meaningful storytelling.",
     instagram: "https://www.instagram.com/imronniegupta",
-    youtube: "https://youtube.com/@actorronniegupta",
-    auditionVideo: "https://www.youtube.com/watch?v=FKI4VXtdxlA",
+    youtube: "https://www.youtube.com/@ActorRonnieGupta_26",
+    auditionVideo: "https://youtu.be/p7KSW-U1pEk",
     whatsapp: "8467846216",
   },
   {
@@ -288,6 +290,28 @@ const artists: Artist[] = [
     instagram: "https://www.instagram.com/salonigusain09",
     auditionVideo: "https://youtu.be/ULR_JFoN3Vg?si=O7w7TOybYMj4I0qV",
     portfolio: "https://drive.google.com/file/d/1LVLb6jZPw_33xnwStxgi7KLtY-_P_Qq1/view?usp=sharing",
+  },
+  {
+    id: "sangeeta-bali",
+    name: "Sangeeta Bali",
+    image: "/images/artists/sangeeta-bali.jpg",
+    location: "Delhi NCR",
+    age: 50,
+    languages: ["Hindi", "Punjabi"],
+    interests: ["Acting"],
+    bio: "Sangeeta Bali is a passionate actor with 10+ years of experience across theatre and media. Drawn to meaningful, emotionally driven roles, she brings maturity, strong emotional depth, realism and authenticity to characters across films, web series, short films, and digital content.",
+    instagram: "https://www.instagram.com/balisagi?igsh=OXUwM3k4cGRuZmI2",
+    whatsapp: "9958301301",
+    selectedWork: [
+      "https://youtu.be/jRICbMdrLQI?si=6qe99145c8eJUhyc",
+      "https://youtu.be/2e7EqsV8hrk?si=i2od4PFfGDmDtDTj",
+      "https://youtu.be/62MSwXyr0W0?si=gyLFQ4hLnnBONSMp",
+    ],
+    auditionClips: [
+      "https://drive.google.com/file/d/1__PsI0PE8ljA045ItbTckNm7iIAwKncL/view?usp=drivesdk",
+      "https://drive.google.com/file/d/1NxqLVtplfB1lIEHeAJbpUHml6XWRE39Q/view?usp=drivesdk",
+    ],
+    portfolio: "https://drive.google.com/file/d/12OIv7CpTOZHDicf8fw7j2rZYrifwBcgb/view?usp=drivesdk",
   },
 ]
 
