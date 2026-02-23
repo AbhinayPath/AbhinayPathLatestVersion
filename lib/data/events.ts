@@ -520,6 +520,27 @@ export const festivals: Festival[] = [
     category: "theatre",
     tags: ["international", "experimental", "monodrama", "mime", "sensory theatre", "cross-cultural", "Pakistan"],
   },
+  {
+    id: "aawaaz-dhanak-2026",
+    name: "AAWAAZ \u2014 Street Play Competition | Dhanak\u201926",
+    city: "Thiruvananthapuram",
+    country: "India (Kerala)",
+    languages: "Hindi / English / Malayalam (open to all Indian languages)",
+    scale: "National",
+    duration: "Single day (22 Mar 2026)",
+    month: "March",
+    dates: "22 March 2026, 4:00 PM IST",
+    submissionDeadline: "6 Mar 2026",
+    status: "open",
+    selectionProcess: "Online registration via Unstop. Selected teams will be notified after the registration deadline closes on 6 March 2026 at 12:00 AM IST.",
+    eligibility: "Open to all college theatre groups and emerging performers across India. Teams must perform a street play (Nukkad Natak) centred on themes of social relevance \u2014 addressing issues that matter to communities and using theatre as a voice for change.",
+    description:
+      "AAWAAZ is a street play (Nukkad Natak) competition organised as part of Dhanak\u201926, the cultural festival of IIST (Indian Institute of Space Science and Technology), Kerala. The competition invites college theatre groups and emerging performers from across India to use the power of street theatre to address pressing social issues. AAWAAZ believes theatre is a voice for change \u2014 a platform where stories of resistance, awareness, and hope come alive in public spaces. Perform at the IIST Campus in Thiruvananthapuram and showcase socially impactful work on a national platform. Registration deadline: 6 March 2026 at 12:00 AM IST. Event: 22 March 2026 at 4:00 PM IST.",
+    link: "https://unstop.com/competitions/1635271/register",
+    featured: true,
+    category: "competition",
+    tags: ["street play", "Nukkad Natak", "college", "social relevance", "IIST", "Kerala", "competition"],
+  },
 
   // May Festivals
   {
