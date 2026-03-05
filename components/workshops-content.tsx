@@ -564,7 +564,7 @@ const workshops: Workshop[] = [
     eligibility: "Open to all",
     venue: "Hardwicke School Campus, J.L.B. Road, Mysuru (IIET)",
     includes: "Accommodation + 2 meals/day + Certificate",
-    category: "Institutional Programs",
+    category: "Institutional and Residency Program",
     tags: ["Institutional Training", "Residency"],
     expiresOn: "2026-01-29",
   },
@@ -588,7 +588,7 @@ const workshops: Workshop[] = [
     eligibility: "Age 18–60, 12th pass",
     venue: "NSD Mumbai Centre",
     includes: "NSD Certificate upon completion",
-    category: "Institutional Programs",
+    category: "Institutional and Residency Program",
     tags: ["Institutional Training", "Long-term Course"],
   },
   {
@@ -923,7 +923,7 @@ const categories = [
   { id: "Voice & Speech", name: "Voice & Speech", icon: "🗣" },
   { id: "Direction & Dramaturgy", name: "Direction & Dramaturgy", icon: "🎬" },
   { id: "Design & Production", name: "Design & Production", icon: "🎨" },
-  { id: "Institutional Programs", name: "Institutional Programs", icon: "🏛" },
+  { id: "Institutional and Residency Program", name: "Institutional and Residency Program", icon: "🏛" },
   { id: "Fellowship & Seminars", name: "Fellowship & Seminars", icon: "🎓" },
 ]
 
