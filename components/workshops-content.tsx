@@ -931,6 +931,30 @@ const workshops: Workshop[] = [
     tags: ["Residency"],
     expiresOn: "2026-03-25", // Application deadline
   },
+  {
+    id: 37,
+    title: "JUST ACT – Acting Workshop",
+    trainer: "Mukesh Chhabra Casting",
+    institution: "Mukesh Chhabra Casting",
+    location: "Delhi",
+    state: "Delhi",
+    country: "India",
+    date: "25–29 March 2026",
+    time: "5 days",
+    description:
+      "A professional acting workshop that introduces participants to acting techniques, camera performance basics, and practical exercises with industry mentors.",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLScyajBTAtWiRw451x6SyTsUec_C8n9_WbUZbOrzG4lAxZ64qQ/viewform",
+    featured: true,
+    price: "Contact organizer for fees",
+    contact: "Via Mukesh Chhabra Casting",
+    email: "Via registration form",
+    eligibility: "Open to aspiring actors",
+    venue: "Delhi, India",
+    includes: "5-day intensive training with industry mentors",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-29", // Workshop end date
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
