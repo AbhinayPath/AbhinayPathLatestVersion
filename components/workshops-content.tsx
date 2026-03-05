@@ -1161,65 +1161,7 @@ function WorkshopsContent() {
       {/* Workshop Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {filteredWorkshops.map((workshop) => (
-          <Link
-            key={workshop.id}
-            href={`/workshops/${workshop.id}`}
-            className="group block rounded-xl border bg-card p-6 shadow-sm transition-all hover:shadow-md hover:border-primary"
-          >
-            <div className="space-y-4">
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {workshop.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    <Tag className="mr-1 h-3 w-3" />
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-balance group-hover:text-primary transition-colors line-clamp-2">
-                {workshop.title}
-              </h3>
-
-              {/* Details */}
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-start gap-2">
-                  <Calendar className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="line-clamp-1">{workshop.date}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="line-clamp-1">
-                    {workshop.location}, {workshop.state}
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="line-clamp-1">{workshop.time}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <IndianRupee className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="font-semibold text-foreground line-clamp-1">{workshop.price}</span>
-                </div>
-              </div>
-
-              {/* Institution */}
-              <div className="flex items-center gap-2 text-sm">
-                <BookOpen className="h-4 w-4 text-primary" />
-                <span className="font-medium line-clamp-1">{workshop.institution}</span>
-              </div>
-
-              {/* View Details Button */}
-              <Button
-                variant="outline"
-                className="w-full group-hover:bg-primary group-hover:text-primary-foreground bg-transparent"
-              >
-                View Details
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          </Link>
+          <WorkshopCard key={workshop.id} workshop={workshop} />
         ))}
       </div>
 
