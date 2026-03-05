@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Calendar, Clock, Mail, Phone, Check, ExternalLink, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { ShareWorkshopButton } from "@/components/share-workshop-button"
 
 interface Workshop {
   id: number
@@ -1475,7 +1476,17 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{workshop.title}</h1>
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold">{workshop.title}</h1>
+              <ShareWorkshopButton
+                workshopId={workshop.id}
+                workshopTitle={workshop.title}
+                workshopDescription={workshop.fullDetails.description}
+                variant="button"
+                size="default"
+                shareType="workshop"
+              />
+            </div>
             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />

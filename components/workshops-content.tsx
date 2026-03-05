@@ -13,6 +13,7 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { BookOpen, Calendar, MapPin, Clock, IndianRupee, ExternalLink, Tag } from "lucide-react"
+import { ShareWorkshopButton } from "@/components/share-workshop-button"
 
 // Verified workshops data
 interface Workshop {
@@ -924,10 +925,17 @@ function WorkshopsContent() {
         <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-3 text-gray-800">
           Training & <span className="text-primary">Education</span>
         </h1>
-        <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto">
+        <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto mb-4">
           Enhance your skills with professional training and education sessions led by renowned theater professionals
           from across the country.
         </p>
+        <div className="flex justify-center">
+          <ShareWorkshopButton
+            variant="button"
+            size="sm"
+            shareType="page"
+          />
+        </div>
       </div>
 
       {/* Mobile Search */}
