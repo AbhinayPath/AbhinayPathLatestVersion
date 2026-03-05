@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, MapPin, CheckCircle, Star } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { ShareWorkshopButton } from "@/components/share-workshop-button"
 
 interface WorkshopCardProps {
   workshop: {
@@ -63,9 +64,20 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
             Featured
           </div>
         )}
-        <div className="absolute top-3 right-3 z-10 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
-          <CheckCircle className="h-3 w-3" />
-          Verified
+        <div className="absolute top-3 right-3 z-10 flex items-center gap-2">
+          <ShareWorkshopButton
+            workshopId={workshop.id}
+            workshopTitle={workshop.title}
+            workshopDescription={workshop.description}
+            workshopImage={imageSrc}
+            variant="icon"
+            size="sm"
+            shareType="workshop"
+          />
+          <div className="bg-white/90 backdrop-blur-sm text-primary text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+            <CheckCircle className="h-3 w-3" />
+            Verified
+          </div>
         </div>
         <div
           className={`absolute inset-0 ${isParadoxStudios || isThreadsTales ? "bg-white" : isIIET ? "bg-gray-900" : "bg-gray-200"}`}

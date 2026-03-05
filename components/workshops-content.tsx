@@ -13,6 +13,7 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { BookOpen, Calendar, MapPin, Clock, IndianRupee, ExternalLink, Tag } from "lucide-react"
+import { ShareWorkshopButton } from "@/components/share-workshop-button"
 
 // Verified workshops data
 interface Workshop {
@@ -563,7 +564,7 @@ const workshops: Workshop[] = [
     eligibility: "Open to all",
     venue: "Hardwicke School Campus, J.L.B. Road, Mysuru (IIET)",
     includes: "Accommodation + 2 meals/day + Certificate",
-    category: "Institutional Programs",
+    category: "Institution & Residency",
     tags: ["Institutional Training", "Residency"],
     expiresOn: "2026-01-29",
   },
@@ -587,7 +588,7 @@ const workshops: Workshop[] = [
     eligibility: "Age 18–60, 12th pass",
     venue: "NSD Mumbai Centre",
     includes: "NSD Certificate upon completion",
-    category: "Institutional Programs",
+    category: "Institution & Residency",
     tags: ["Institutional Training", "Long-term Course"],
   },
   {
@@ -809,6 +810,151 @@ const workshops: Workshop[] = [
     travelSupport: true,
     expiresOn: "2026-02-13", // Application deadline
   },
+  {
+    id: 32,
+    title: "Alpine Fellowship Theatre Prize 2026",
+    trainer: "Alpine Fellowship",
+    institution: "Alpine Fellowship",
+    location: "Online",
+    state: "",
+    country: "International",
+    date: "Deadline: 1 May 2026",
+    time: "Online submission",
+    description:
+      "International playwriting competition inviting playwrights worldwide to submit an original play responding to the theme 'Joy.' Significant cash prizes: First Prize: £3,000, Second Prize: £1,000, Third Prize: £1,000. Open to playwrights aged 18 or above.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://alpinefellowship.com/theatre-prize",
+    featured: true,
+    price: "£10 entry fee per submission",
+    contact: "Via Alpine Fellowship website",
+    email: "Via Alpine Fellowship website",
+    eligibility: "Playwrights aged 18 or above",
+    venue: "Online / International",
+    category: "Fellowship & Seminars",
+    tags: ["Playwriting Competition", "International", "Prize Money", "Theatre Prize"],
+    mode: "Online",
+    expiresOn: "2026-05-01", // Application deadline
+  },
+  {
+    id: 33,
+    title: "Intensive Course in Improvised Theatre",
+    trainer: "Improv Lore",
+    institution: "Improv Lore",
+    location: "Bengaluru",
+    state: "Karnataka",
+    country: "India",
+    date: "7–8 & 14–15 March 2026",
+    time: "4 sessions (~12 hours)",
+    description:
+      "A practical improvisation workshop designed to help performers develop spontaneity, quick thinking, and collaborative stage presence through improv games and performance exercises.",
+    registrationLink: "https://in.bookmyshow.com/events/intensive-course-in-improvised-theatre/ET00479740",
+    featured: true,
+    price: "Contact organizer for fees",
+    contact: "Via BookMyShow",
+    email: "Via booking platform",
+    eligibility: "Age 18+",
+    venue: "Bengaluru, India",
+    includes: "4 sessions of intensive improv training",
+    category: "Movement & Physical Theatre",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-15", // Workshop end date
+  },
+  {
+    id: 34,
+    title: "Basic Theatre Workshop",
+    trainer: "Yours Truly Theatre",
+    institution: "Yours Truly Theatre",
+    location: "Bengaluru",
+    state: "Karnataka",
+    country: "India",
+    date: "11–26 April 2026 (weekends)",
+    time: "4 sessions",
+    description:
+      "A beginner-friendly theatre workshop covering improvisation, character development, and stage expression. Participants explore performance basics through weekend sessions and collaborative exercises.",
+    registrationLink: "https://in.bookmyshow.com/events/basic-theatre-workshop/ET00484596",
+    featured: true,
+    price: "Contact organizer for fees",
+    contact: "Via BookMyShow",
+    email: "Via booking platform",
+    eligibility: "Age 16+",
+    venue: "Bengaluru, India",
+    includes: "4 weekend sessions",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-04-26", // Workshop end date
+  },
+  {
+    id: 35,
+    title: "Serendipity Arts Residency 2026",
+    trainer: "Serendipity Arts Foundation",
+    institution: "Serendipity Arts Foundation",
+    location: "New Delhi",
+    state: "Delhi",
+    country: "India",
+    date: "3-month program (Apply by 11 March 2026)",
+    time: "Full-time residency",
+    description:
+      "A three-month interdisciplinary residency supporting artists to develop research-based creative projects. Theatre and performance practitioners are encouraged to apply.",
+    registrationLink: "https://serendipityarts.org/workshop/serendipity-arts-residency-2026/",
+    featured: true,
+    price: "Funded residency",
+    contact: "Via Serendipity Arts Foundation",
+    email: "Via official portal",
+    eligibility: "Emerging artists and creative practitioners",
+    venue: "New Delhi, India",
+    includes: "3-month residency support",
+    category: "Institution & Residency",
+    tags: ["Residency"],
+    expiresOn: "2026-03-11", // Application deadline
+  },
+  {
+    id: 36,
+    title: "Residency at ITI (Intercultural Theatre Institute) – Open Call 2026",
+    trainer: "Intercultural Theatre Institute",
+    institution: "Intercultural Theatre Institute",
+    location: "Singapore",
+    state: "",
+    country: "Singapore",
+    date: "Period 1: May–Jul 2026 | Period 2: Aug–Oct 2026",
+    time: "3 months per cycle",
+    description:
+      "A residency for independent theatre artists to conduct practice-based research and experimental performance development within an intercultural theatre environment. Access to ITI Studio 5, interaction with international students and faculty.",
+    registrationLink: "https://iti.edu.sg/community/residency/2026-open-call/",
+    featured: true,
+    price: "No stipend (access to facilities provided)",
+    contact: "Via ITI website",
+    email: "Via official portal",
+    eligibility: "Singapore citizens, permanent residents, or work-pass holders interested in practice research",
+    venue: "Singapore",
+    includes: "Studio access (20 hrs/week), faculty interaction, public sharing opportunity",
+    category: "Institution & Residency",
+    tags: ["Residency"],
+    expiresOn: "2026-03-25", // Application deadline
+  },
+  {
+    id: 37,
+    title: "JUST ACT – Acting Workshop",
+    trainer: "Mukesh Chhabra Casting",
+    institution: "Mukesh Chhabra Casting",
+    location: "Delhi",
+    state: "Delhi",
+    country: "India",
+    date: "25–29 March 2026",
+    time: "5 days",
+    description:
+      "A professional acting workshop that introduces participants to acting techniques, camera performance basics, and practical exercises with industry mentors.",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLScyajBTAtWiRw451x6SyTsUec_C8n9_WbUZbOrzG4lAxZ64qQ/viewform",
+    featured: true,
+    price: "Contact organizer for fees",
+    contact: "Via Mukesh Chhabra Casting",
+    email: "Via registration form",
+    eligibility: "Open to aspiring actors",
+    venue: "Delhi, India",
+    includes: "5-day intensive training with industry mentors",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-29", // Workshop end date
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
@@ -849,7 +995,7 @@ const categories = [
   { id: "Voice & Speech", name: "Voice & Speech", icon: "🗣" },
   { id: "Direction & Dramaturgy", name: "Direction & Dramaturgy", icon: "🎬" },
   { id: "Design & Production", name: "Design & Production", icon: "🎨" },
-  { id: "Institutional Programs", name: "Institutional Programs", icon: "🏛" },
+  { id: "Institution & Residency", name: "Institution & Residency", icon: "🏛" },
   { id: "Fellowship & Seminars", name: "Fellowship & Seminars", icon: "🎓" },
 ]
 
@@ -924,10 +1070,17 @@ function WorkshopsContent() {
         <h1 className="font-playfair text-3xl md:text-5xl font-bold mb-3 text-gray-800">
           Training & <span className="text-primary">Education</span>
         </h1>
-        <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto">
+        <p className="text-gray-600 text-sm md:text-base max-w-xl mx-auto mb-4">
           Enhance your skills with professional training and education sessions led by renowned theater professionals
           from across the country.
         </p>
+        <div className="flex justify-center">
+          <ShareWorkshopButton
+            variant="button"
+            size="sm"
+            shareType="page"
+          />
+        </div>
       </div>
 
       {/* Mobile Search */}
@@ -1128,65 +1281,7 @@ function WorkshopsContent() {
       {/* Workshop Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {filteredWorkshops.map((workshop) => (
-          <Link
-            key={workshop.id}
-            href={`/workshops/${workshop.id}`}
-            className="group block rounded-xl border bg-card p-6 shadow-sm transition-all hover:shadow-md hover:border-primary"
-          >
-            <div className="space-y-4">
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {workshop.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    <Tag className="mr-1 h-3 w-3" />
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-balance group-hover:text-primary transition-colors line-clamp-2">
-                {workshop.title}
-              </h3>
-
-              {/* Details */}
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-start gap-2">
-                  <Calendar className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="line-clamp-1">{workshop.date}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="line-clamp-1">
-                    {workshop.location}, {workshop.state}
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="line-clamp-1">{workshop.time}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <IndianRupee className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <span className="font-semibold text-foreground line-clamp-1">{workshop.price}</span>
-                </div>
-              </div>
-
-              {/* Institution */}
-              <div className="flex items-center gap-2 text-sm">
-                <BookOpen className="h-4 w-4 text-primary" />
-                <span className="font-medium line-clamp-1">{workshop.institution}</span>
-              </div>
-
-              {/* View Details Button */}
-              <Button
-                variant="outline"
-                className="w-full group-hover:bg-primary group-hover:text-primary-foreground bg-transparent"
-              >
-                View Details
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          </Link>
+          <WorkshopCard key={workshop.id} workshop={workshop} />
         ))}
       </div>
 

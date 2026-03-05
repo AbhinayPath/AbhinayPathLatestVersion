@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { MapPin, Calendar, Clock, Mail, Phone, Check, ExternalLink, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { ShareWorkshopButton } from "@/components/share-workshop-button"
 
 interface Workshop {
   id: number
@@ -1439,6 +1440,329 @@ const workshops: Workshop[] = [
       organizer: "Villa Albertine",
     },
   },
+  {
+    id: 32,
+    title: "Alpine Fellowship Theatre Prize 2026",
+    trainer: "Alpine Fellowship",
+    institution: "Alpine Fellowship",
+    location: "Online",
+    state: "International",
+    date: "Deadline: 1 May 2026",
+    time: "Online submission",
+    description:
+      "International playwriting competition inviting playwrights worldwide to submit an original play responding to the theme 'Joy.' Significant cash prizes for winning entries.",
+    registrationLink: "https://alpinefellowship.com/theatre-prize",
+    price: "£10 entry fee per submission",
+    contact: "Via Alpine Fellowship website",
+    email: "Via Alpine Fellowship website",
+    eligibility: "Playwrights aged 18 or above",
+    venue: "Online / International",
+    fullDetails: {
+      description:
+        "The Alpine Fellowship Theatre Prize 2026 invites playwrights worldwide to submit an original play responding to the theme 'Joy.' This prestigious international playwriting competition recognizes outstanding theatrical writing and awards significant cash prizes to the top entries. Open to playwrights aged 18 or above, the competition welcomes submissions in English with no minimum or maximum length requirement. Multiple entries are permitted (separate submission required for each). Use of AI or generative writing tools is strictly prohibited. Applicants must include a brief summary of their writing experience along with their submission.",
+      keyHighlights: [
+        "Theme: 'Joy' — submit an original play responding to this theme",
+        "First Prize: £3,000",
+        "Second Prize: £1,000",
+        "Third Prize: £1,000",
+        "Open to playwrights aged 18 or above",
+        "No minimum or maximum play length requirement",
+        "Multiple entries permitted (separate submission for each)",
+        "Entry fee: £10 per submission",
+        "Deadline: 1 May 2026",
+      ],
+      curriculum: [
+        "Original playwriting responding to the theme 'Joy'",
+        "Entries must be written in English",
+        "No length restrictions — freedom to explore your vision",
+        "Include brief summary of writing experience with submission",
+        "AI or generative writing tools not permitted",
+        "Professional recognition through prestigious international competition",
+      ],
+      duration: "Submission period open until 1 May 2026",
+      medium: "English",
+      courseFee: "£10 entry fee per submission",
+      certification: "Alpine Fellowship Theatre Prize recognition and cash prizes for winners",
+      contactInfo: [
+        "Website: https://alpinefellowship.com/theatre-prize",
+        "Submission deadline: 1 May 2026",
+        "Entry fee: £10 per submission",
+        "Organizer: Alpine Fellowship",
+      ],
+      venue: "Online / International submission",
+      organizer: "Alpine Fellowship",
+    },
+  },
+  {
+    id: 33,
+    title: "Intensive Course in Improvised Theatre",
+    trainer: "Improv Lore",
+    institution: "Improv Lore",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "7–8 & 14–15 March 2026",
+    time: "4 sessions (~12 hours)",
+    description:
+      "A practical improvisation workshop designed to help performers develop spontaneity, quick thinking, and collaborative stage presence through improv games and performance exercises.",
+    registrationLink: "https://in.bookmyshow.com/events/intensive-course-in-improvised-theatre/ET00479740",
+    price: "Contact organizer for fees",
+    contact: "Via BookMyShow",
+    email: "Via booking platform",
+    eligibility: "Age 18+",
+    venue: "Bengaluru, India",
+    fullDetails: {
+      description:
+        "The Intensive Course in Improvised Theatre by Improv Lore is a practical workshop designed to help performers develop spontaneity, quick thinking, and collaborative stage presence. Through a series of improv games and performance exercises, participants will learn the fundamental principles of improvisation including 'Yes, And', active listening, scene building, and character creation. The workshop spans 4 sessions over 2 weekends, providing approximately 12 hours of intensive hands-on training in the art of improvisational theatre.",
+      keyHighlights: [
+        "4 intensive sessions over 2 weekends (7–8 & 14–15 March 2026)",
+        "Approximately 12 hours of hands-on improv training",
+        "Learn foundational improv principles: 'Yes, And', active listening, scene building",
+        "Develop spontaneity and quick thinking skills",
+        "Build collaborative stage presence",
+        "Practice through improv games and performance exercises",
+        "Character creation and scene work",
+        "Suitable for beginners and intermediate performers",
+      ],
+      curriculum: [
+        "Introduction to improvisation fundamentals",
+        "'Yes, And' principle and acceptance exercises",
+        "Active listening and ensemble awareness",
+        "Scene building and narrative structure",
+        "Character creation and physicality",
+        "Improv games and short-form exercises",
+        "Long-form improvisation basics",
+        "Performance and showcase preparation",
+      ],
+      duration: "4 sessions (~12 hours) over 2 weekends",
+      medium: "English",
+      courseFee: "Contact organizer for fees (Book via BookMyShow)",
+      certification: "Certificate of participation from Improv Lore",
+      contactInfo: [
+        "Organizer: Improv Lore",
+        "Booking: BookMyShow",
+        "Location: Bengaluru, Karnataka, India",
+        "Registration: Open until seats are filled",
+      ],
+      venue: "Bengaluru, India",
+      organizer: "Improv Lore",
+    },
+  },
+  {
+    id: 34,
+    title: "Basic Theatre Workshop",
+    trainer: "Yours Truly Theatre",
+    institution: "Yours Truly Theatre",
+    location: "Bengaluru",
+    state: "Karnataka",
+    date: "11–26 April 2026 (weekends)",
+    time: "4 sessions",
+    description:
+      "A beginner-friendly theatre workshop covering improvisation, character development, and stage expression. Participants explore performance basics through weekend sessions and collaborative exercises.",
+    registrationLink: "https://in.bookmyshow.com/events/basic-theatre-workshop/ET00484596",
+    price: "Contact organizer for fees",
+    contact: "Via BookMyShow",
+    email: "Via booking platform",
+    eligibility: "Age 16+",
+    venue: "Bengaluru, India",
+    fullDetails: {
+      description:
+        "The Basic Theatre Workshop by Yours Truly Theatre is a beginner-friendly program designed to introduce participants to the fundamentals of theatre performance. Over 4 weekend sessions from April 11-26, 2026, participants will explore improvisation techniques, character development, and stage expression through collaborative exercises and hands-on practice. This workshop is perfect for anyone aged 16+ who wants to discover their creative potential and build confidence in performance.",
+      keyHighlights: [
+        "4 weekend sessions (11–26 April 2026)",
+        "Beginner-friendly curriculum",
+        "Improvisation techniques and games",
+        "Character development exercises",
+        "Stage expression and presence",
+        "Collaborative group exercises",
+        "Suitable for ages 16+",
+        "No prior experience required",
+      ],
+      curriculum: [
+        "Introduction to theatre fundamentals",
+        "Warm-up exercises and ensemble building",
+        "Improvisation games and techniques",
+        "Character creation and development",
+        "Voice and diction basics",
+        "Stage movement and expression",
+        "Scene work and performance practice",
+        "Final showcase preparation",
+      ],
+      duration: "4 sessions over weekends (11–26 April 2026)",
+      medium: "English / Hindi",
+      courseFee: "Contact organizer for fees (Book via BookMyShow)",
+      certification: "Certificate of participation from Yours Truly Theatre",
+      contactInfo: [
+        "Organizer: Yours Truly Theatre",
+        "Booking: BookMyShow",
+        "Location: Bengaluru, Karnataka, India",
+        "Registration: Open until seats are filled",
+      ],
+      venue: "Bengaluru, India",
+      organizer: "Yours Truly Theatre",
+    },
+  },
+  {
+    id: 35,
+    title: "Serendipity Arts Residency 2026",
+    trainer: "Serendipity Arts Foundation",
+    institution: "Serendipity Arts Foundation",
+    location: "New Delhi",
+    state: "Delhi",
+    date: "3-month program (Apply by 11 March 2026)",
+    time: "Full-time residency",
+    description:
+      "A three-month interdisciplinary residency supporting artists to develop research-based creative projects. Theatre and performance practitioners are encouraged to apply.",
+    registrationLink: "https://serendipityarts.org/workshop/serendipity-arts-residency-2026/",
+    price: "Funded residency",
+    contact: "Via Serendipity Arts Foundation",
+    email: "Via official portal",
+    eligibility: "Emerging artists and creative practitioners",
+    venue: "New Delhi, India",
+    fullDetails: {
+      description:
+        "The Serendipity Arts Residency 2026 is a three-month interdisciplinary residency program designed to support emerging artists and creative practitioners in developing research-based creative projects. Theatre and performance practitioners are particularly encouraged to apply. The residency provides a nurturing environment for artists to explore new ideas, collaborate with peers, and develop their artistic practice. Based in New Delhi, this program offers participants the opportunity to engage with India's vibrant contemporary arts scene while receiving mentorship and resources to bring their creative visions to life.",
+      keyHighlights: [
+        "3-month interdisciplinary residency program",
+        "Support for research-based creative projects",
+        "Theatre and performance practitioners encouraged",
+        "Based in New Delhi, India",
+        "Funded residency with support for artists",
+        "Mentorship and professional development",
+        "Collaboration opportunities with fellow residents",
+        "Application deadline: 11 March 2026",
+      ],
+      curriculum: [
+        "Research and development of creative projects",
+        "Interdisciplinary collaboration and exchange",
+        "Mentorship sessions with established artists",
+        "Studio practice and experimentation",
+        "Public presentations and showcases",
+        "Professional development workshops",
+        "Networking with arts community",
+        "Final project presentation",
+      ],
+      duration: "3 months",
+      medium: "English / Hindi",
+      courseFee: "Funded residency (no fee for selected artists)",
+      certification: "Residency completion certificate from Serendipity Arts Foundation",
+      contactInfo: [
+        "Organizer: Serendipity Arts Foundation",
+        "Location: New Delhi, India",
+        "Application deadline: 11 March 2026",
+        "Website: serendipityarts.org",
+      ],
+      venue: "New Delhi, India",
+      organizer: "Serendipity Arts Foundation",
+    },
+  },
+  {
+    id: 36,
+    title: "Residency at ITI (Intercultural Theatre Institute) – Open Call 2026",
+    trainer: "Intercultural Theatre Institute",
+    institution: "Intercultural Theatre Institute",
+    location: "Singapore",
+    state: "",
+    date: "Period 1: May–Jul 2026 | Period 2: Aug–Oct 2026",
+    time: "3 months per cycle",
+    description:
+      "A residency for independent theatre artists to conduct practice-based research and experimental performance development within an intercultural theatre environment.",
+    registrationLink: "https://iti.edu.sg/community/residency/2026-open-call/",
+    price: "No stipend (access to facilities provided)",
+    contact: "Via ITI website",
+    email: "Via official portal",
+    eligibility: "Singapore citizens, permanent residents, or work-pass holders interested in practice research",
+    venue: "Singapore",
+    fullDetails: {
+      description:
+        "The Residency at the Intercultural Theatre Institute offers independent theatre artists the opportunity to conduct practice-based research and experimental performance development within an intercultural theatre environment. Founded in 2000 by playwright Kuo Pao Kun and director T. Sasitharan, ITI focuses on intercultural theatre practice combining Asian and contemporary performance traditions. The program provides space, dialogue, and collaboration opportunities with ITI students and faculty. Artists can use the residency to explore performance creation, devising and process-based theatre research, interdisciplinary collaboration, and community engagement activities such as workshops, script readings, open sessions, and training jams.",
+      keyHighlights: [
+        "3-month residency cycle (Period 1: May–Jul 2026 | Period 2: Aug–Oct 2026)",
+        "1 artist or artist group selected per period",
+        "Access to ITI Studio 5 rehearsal space",
+        "Up to 20 hours of studio use per week",
+        "Interaction with ITI international students and faculty",
+        "Community events including forums and workshops",
+        "Public sharing or work-in-progress presentation at end of residency",
+        "Application deadline: 25 March 2026",
+      ],
+      curriculum: [
+        "Performance creation and work development",
+        "Devising and process-based theatre research",
+        "Interdisciplinary collaboration and experimentation",
+        "Community engagement activities",
+        "Document and journal research process",
+        "Participate in ITI events or training observations",
+        "Public sharing or work-in-progress presentation",
+      ],
+      duration: "3 months per residency cycle",
+      medium: "English",
+      courseFee: "No stipend provided; access to facilities included",
+      certification: "Residency completion from Intercultural Theatre Institute",
+      contactInfo: [
+        "Organizer: Intercultural Theatre Institute",
+        "Location: Singapore",
+        "Application deadline: 25 March 2026",
+        "Website: iti.edu.sg",
+        "Note: Program does not provide visas or work passes",
+      ],
+      venue: "Singapore",
+      organizer: "Intercultural Theatre Institute",
+    },
+  },
+  {
+    id: 37,
+    title: "JUST ACT – Acting Workshop",
+    trainer: "Mukesh Chhabra Casting",
+    institution: "Mukesh Chhabra Casting",
+    location: "Delhi",
+    state: "Delhi",
+    date: "25–29 March 2026",
+    time: "5 days",
+    description:
+      "A professional acting workshop that introduces participants to acting techniques, camera performance basics, and practical exercises with industry mentors.",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLScyajBTAtWiRw451x6SyTsUec_C8n9_WbUZbOrzG4lAxZ64qQ/viewform",
+    price: "Contact organizer for fees",
+    contact: "Via Mukesh Chhabra Casting",
+    email: "Via registration form",
+    eligibility: "Open to aspiring actors",
+    venue: "Delhi, India",
+    fullDetails: {
+      description:
+        "JUST ACT is a professional acting workshop organized by Mukesh Chhabra Casting, one of India's leading casting agencies. This 5-day intensive program introduces participants to acting techniques, camera performance basics, and practical exercises guided by industry mentors. Participants will learn the fundamentals of screen acting, audition techniques, and how to prepare for professional casting calls. The workshop provides hands-on experience with camera work and offers insights into the film and television industry from experienced professionals.",
+      keyHighlights: [
+        "5-day intensive acting workshop (25–29 March 2026)",
+        "Organized by Mukesh Chhabra Casting",
+        "Acting techniques and camera performance basics",
+        "Practical exercises with industry mentors",
+        "Screen acting and audition preparation",
+        "Insights into the film and television industry",
+        "Limited seats available",
+        "Location: Delhi, India",
+      ],
+      curriculum: [
+        "Introduction to acting fundamentals",
+        "Camera performance techniques",
+        "Audition preparation and presentation",
+        "Scene work and character development",
+        "Improvisation exercises",
+        "Industry insights and career guidance",
+        "Practical exercises with feedback",
+        "Final showcase or mock auditions",
+      ],
+      duration: "5 days (25–29 March 2026)",
+      medium: "Hindi / English",
+      courseFee: "Contact organizer for fees",
+      certification: "Certificate of participation from Mukesh Chhabra Casting",
+      contactInfo: [
+        "Organizer: Mukesh Chhabra Casting",
+        "Location: Delhi, India",
+        "Registration: Via Google Form",
+        "Note: Limited seats – early application recommended",
+      ],
+      venue: "Delhi, India",
+      organizer: "Mukesh Chhabra Casting",
+    },
+  },
 ]
 
 export default function WorkshopDetailContent({ id }: { id: number }) {
@@ -1475,7 +1799,17 @@ export default function WorkshopDetailContent({ id }: { id: number }) {
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{workshop.title}</h1>
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold">{workshop.title}</h1>
+              <ShareWorkshopButton
+                workshopId={workshop.id}
+                workshopTitle={workshop.title}
+                workshopDescription={workshop.fullDetails.description}
+                variant="button"
+                size="default"
+                shareType="workshop"
+              />
+            </div>
             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
