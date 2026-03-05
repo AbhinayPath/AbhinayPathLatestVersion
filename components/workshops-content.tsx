@@ -907,6 +907,30 @@ const workshops: Workshop[] = [
     tags: ["Residency"],
     expiresOn: "2026-03-11", // Application deadline
   },
+  {
+    id: 36,
+    title: "Residency at ITI (Intercultural Theatre Institute) – Open Call 2026",
+    trainer: "Intercultural Theatre Institute",
+    institution: "Intercultural Theatre Institute",
+    location: "Singapore",
+    state: "",
+    country: "Singapore",
+    date: "Period 1: May–Jul 2026 | Period 2: Aug–Oct 2026",
+    time: "3 months per cycle",
+    description:
+      "A residency for independent theatre artists to conduct practice-based research and experimental performance development within an intercultural theatre environment. Access to ITI Studio 5, interaction with international students and faculty.",
+    registrationLink: "https://iti.edu.sg/community/residency/2026-open-call/",
+    featured: true,
+    price: "No stipend (access to facilities provided)",
+    contact: "Via ITI website",
+    email: "Via official portal",
+    eligibility: "Singapore citizens, permanent residents, or work-pass holders interested in practice research",
+    venue: "Singapore",
+    includes: "Studio access (20 hrs/week), faculty interaction, public sharing opportunity",
+    category: "Institution & Residency",
+    tags: ["Residency"],
+    expiresOn: "2026-03-25", // Application deadline
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
