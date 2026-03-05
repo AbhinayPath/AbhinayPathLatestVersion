@@ -544,6 +544,27 @@ export const festivals: Festival[] = [
 
   // May Festivals
   {
+    id: "youthplays-new-voices-2026",
+    name: "YouthPLAYS New Voices One-Act Competition 2026",
+    city: "Online",
+    country: "USA (International Submissions Welcome)",
+    languages: "English",
+    scale: "International",
+    duration: "Submission period (Deadline: 1 May 2026)",
+    month: "May",
+    dates: "Deadline: 1 May 2026",
+    submissionDeadline: "1 May 2026",
+    status: "open",
+    selectionProcess: "Submissions reviewed by YouthPLAYS editorial team. Winners announced after the deadline.",
+    eligibility: "Playwrights 19 years old or younger (as of 1 May 2026). Original unpublished non-musical one-act play, 10\u201340 minutes (minimum 10 pages), single author only, one submission per playwright, minimum 2 characters. Plays should be suitable for school productions and feature youth characters in prominent roles. Previously produced plays allowed if not committed to publication elsewhere.",
+    description:
+      "YouthPLAYS invites young playwrights to submit original one-act plays for the 16th New Voices Competition, encouraging new writing for young actors and school productions. Winner receives $250 cash prize plus publication and licensing by YouthPLAYS. Runner-up receives $100 cash prize. Submit a PDF script including title page with playwright and school details, cast of characters page, and script in standard format (12-point font, page numbers) through the YouthPLAYS portal.",
+    link: "https://www.youthplays.com/submit_play.php",
+    featured: true,
+    category: "competition",
+    tags: ["playwriting", "youth", "one-act", "competition", "publication", "prize money", "international"],
+  },
+  {
     id: "outnow-2026",
     name: "OUTNOW! Festival 2026",
     city: "Bremen",
