@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { Share2, Copy, Check } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Share2, Copy, Check, X, MessageSquare, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -10,14 +10,46 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
 
 interface ShareWorkshopButtonProps {
   workshopId?: number
   workshopTitle?: string
   workshopDescription?: string
+  workshopImage?: string
   variant?: "icon" | "button"
   size?: "sm" | "default"
   shareType?: "workshop" | "page"
+}
+
+// Simple analytics tracking function
+const trackShare = (platform: string, workshopId?: number, workshopTitle?: string) => {
+  // Log share event for analytics
+  if (typeof window !== "undefined") {
+    const shareEvent = {
+      event: "workshop_share",
+      platform,
+      workshopId,
+      workshopTitle,
+      timestamp: new Date().toISOString(),
+      url: window.location.href,
+    }
+    // Store in localStorage for basic analytics tracking
+    const shares = JSON.parse(localStorage.getItem("workshop_shares") || "[]")
+    shares.push(shareEvent)
+    localStorage.setItem("workshop_shares", JSON.stringify(shares.slice(-100))) // Keep last 100 shares
+    
+    // Console log for debugging/monitoring
+    console.log("[AbhinayPath] Share tracked:", shareEvent)
+  }
 }
 
 const WhatsAppIcon = () => (
@@ -60,11 +92,15 @@ export function ShareWorkshopButton({
   workshopId,
   workshopTitle,
   workshopDescription,
+  workshopImage,
   variant = "icon",
   size = "sm",
   shareType = "workshop",
 }: ShareWorkshopButtonProps) {
   const [copied, setCopied] = useState(false)
+  const [showCustomizeModal, setShowCustomizeModal] = useState(false)
+  const [customMessage, setCustomMessage] = useState("")
+  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null)
 
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://abhinaypath.com"
   
@@ -72,59 +108,78 @@ export function ShareWorkshopButton({
     ? `${baseUrl}/workshops/${workshopId}`
     : `${baseUrl}/workshops`
   
-  const shareText = shareType === "workshop" && workshopTitle
+  const defaultShareText = shareType === "workshop" && workshopTitle
     ? `Check out "${workshopTitle}" - a theatre workshop on AbhinayPath!${workshopDescription ? `\n\n${workshopDescription.slice(0, 100)}...` : ""}`
     : "Discover theatre workshops and training programs on AbhinayPath - India's Premier Platform for Theatre!"
 
+  // Initialize custom message with default text
+  useEffect(() => {
+    setCustomMessage(defaultShareText)
+  }, [defaultShareText])
+
+  const getShareText = () => customMessage || defaultShareText
+
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(shareUrl)
+      await navigator.clipboard.writeText(`${getShareText()}\n\n${shareUrl}`)
       setCopied(true)
+      trackShare("copy", workshopId, workshopTitle)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
       console.error("Failed to copy:", err)
     }
   }
 
-  const shareToWhatsApp = () => {
-    const url = `https://wa.me/?text=${encodeURIComponent(`${shareText}\n\n${shareUrl}`)}`
-    window.open(url, "_blank")
+  const openCustomizeModal = (platform: string) => {
+    setSelectedPlatform(platform)
+    setShowCustomizeModal(true)
   }
 
-  const shareToFacebook = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`
-    window.open(url, "_blank")
+  const executeShare = (platform: string, withCustomMessage = false) => {
+    const text = withCustomMessage ? getShareText() : defaultShareText
+    trackShare(platform, workshopId, workshopTitle)
+    
+    switch (platform) {
+      case "whatsapp":
+        window.open(`https://wa.me/?text=${encodeURIComponent(`${text}\n\n${shareUrl}`)}`, "_blank")
+        break
+      case "facebook":
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(text)}`, "_blank")
+        break
+      case "twitter":
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, "_blank")
+        break
+      case "telegram":
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`, "_blank")
+        break
+      case "linkedin":
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, "_blank")
+        break
+      case "instagram":
+        navigator.clipboard.writeText(`${text}\n\n${shareUrl}`).then(() => {
+          setCopied(true)
+          setTimeout(() => setCopied(false), 2000)
+          window.open("https://www.instagram.com/", "_blank")
+        })
+        break
+    }
+    setShowCustomizeModal(false)
   }
 
-  const shareToTwitter = () => {
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`
-    window.open(url, "_blank")
-  }
-
-  const shareToTelegram = () => {
-    const url = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`
-    window.open(url, "_blank")
-  }
-
-  const shareToLinkedIn = () => {
-    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
-    window.open(url, "_blank")
-  }
-
-  const shareToInstagram = () => {
-    navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-      window.open("https://www.instagram.com/", "_blank")
-    })
-  }
+  const shareToWhatsApp = () => openCustomizeModal("whatsapp")
+  const shareToFacebook = () => openCustomizeModal("facebook")
+  const shareToTwitter = () => openCustomizeModal("twitter")
+  const shareToTelegram = () => openCustomizeModal("telegram")
+  const shareToLinkedIn = () => openCustomizeModal("linkedin")
+  const shareToInstagram = () => openCustomizeModal("instagram")
 
   const nativeShare = async () => {
     if (navigator.share) {
       try {
+        trackShare("native", workshopId, workshopTitle)
         await navigator.share({
           title: shareType === "workshop" ? workshopTitle || "Theatre Workshop" : "Theatre Workshops",
-          text: shareText,
+          text: getShareText(),
           url: shareUrl,
         })
       } catch (err) {
@@ -137,6 +192,18 @@ export function ShareWorkshopButton({
 
   const buttonSize = size === "sm" ? "h-7 w-7 sm:h-8 sm:w-8" : "h-8 w-8 sm:h-10 sm:w-10"
   const iconSize = size === "sm" ? "h-3.5 w-3.5 sm:h-4 sm:w-4" : "h-4 w-4 sm:h-5 sm:w-5"
+
+  const getPlatformName = (platform: string) => {
+    const names: Record<string, string> = {
+      whatsapp: "WhatsApp",
+      facebook: "Facebook",
+      twitter: "X (Twitter)",
+      telegram: "Telegram",
+      linkedin: "LinkedIn",
+      instagram: "Instagram",
+    }
+    return names[platform] || platform
+  }
 
   return (
     <DropdownMenu>
@@ -210,6 +277,117 @@ export function ShareWorkshopButton({
           </>
         )}
       </DropdownMenuContent>
+
+      {/* Customize Message Modal */}
+      <Dialog open={showCustomizeModal} onOpenChange={setShowCustomizeModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <MessageSquare className="h-5 w-5 text-primary" />
+              Share to {selectedPlatform && getPlatformName(selectedPlatform)}
+            </DialogTitle>
+            <DialogDescription>
+              Customize your message before sharing. Add a personal note to make it more engaging!
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            {/* Preview Card */}
+            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+              <div className="flex items-start gap-3">
+                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="h-8 w-8 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-semibold text-sm text-gray-900 truncate">
+                    {workshopTitle || "Theatre Workshops"}
+                  </h4>
+                  <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                    {workshopDescription?.slice(0, 80) || "Discover amazing theatre workshops and training programs"}...
+                  </p>
+                  <p className="text-xs text-primary mt-1 truncate">{shareUrl}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Custom Message Input */}
+            <div className="space-y-2">
+              <Label htmlFor="customMessage" className="text-sm font-medium">
+                Your Message
+              </Label>
+              <Textarea
+                id="customMessage"
+                value={customMessage}
+                onChange={(e) => setCustomMessage(e.target.value)}
+                placeholder="Add your personal message..."
+                className="min-h-[100px] resize-none"
+                maxLength={500}
+              />
+              <p className="text-xs text-gray-500 text-right">
+                {customMessage.length}/500 characters
+              </p>
+            </div>
+
+            {/* Quick Templates */}
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">Quick Templates</Label>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-7"
+                  onClick={() => setCustomMessage(`Hey! Check out this amazing theatre workshop: "${workshopTitle}" - I think you'd love it!`)}
+                >
+                  Recommend to friend
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-7"
+                  onClick={() => setCustomMessage(`Looking to improve your acting skills? This workshop might be perfect: "${workshopTitle}"`)}
+                >
+                  Skill improvement
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-7"
+                  onClick={() => setCustomMessage(defaultShareText)}
+                >
+                  Reset to default
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-2 justify-end">
+            <Button
+              variant="outline"
+              onClick={() => setShowCustomizeModal(false)}
+              className="text-sm"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => selectedPlatform && executeShare(selectedPlatform, false)}
+              className="text-sm"
+            >
+              Share Default
+            </Button>
+            <Button
+              onClick={() => selectedPlatform && executeShare(selectedPlatform, true)}
+              className="text-sm bg-primary hover:bg-primary/90"
+            >
+              Share with Custom Message
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </DropdownMenu>
   )
 }

@@ -69,6 +69,7 @@ export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCar
             workshopId={workshop.id}
             workshopTitle={workshop.title}
             workshopDescription={workshop.description}
+            workshopImage={imageSrc}
             variant="icon"
             size="sm"
             shareType="workshop"
