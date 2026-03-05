@@ -423,30 +423,6 @@ const workshops: Workshop[] = [
     expiresOn: "2026-01-18",
   },
   {
-    id: 33,
-    title: "FTII / CFOL — Natya-Shastra Workshop: Basics of Acting (Mumbai)",
-    trainer: "FTII Faculty",
-    institution: "Film and Television Institute of India (FTII) – Centre for Open Learning",
-    location: "Mumbai",
-    state: "Maharashtra",
-    country: "India",
-    date: "12–18 April 2026",
-    time: "Full day (7 days)",
-    description:
-      "A week-long acting workshop exploring performance techniques inspired by the Natya-Shastra. Participants will learn fundamentals of acting, expression, character work, and stage performance through structured training.",
-    registrationLink: "https://ftii.ac.in/p/vtwa/natyasashtra-workshop-basics-of-acting-in-mumbai-12-18-april-2026",
-    featured: true,
-    price: "Contact FTII for fees",
-    contact: "020-25580085",
-    email: "info.cfol@ftii.ac.in",
-    eligibility: "Age 18+, Indian nationality, Minimum qualification: 12th pass (10th pass in exceptional cases)",
-    venue: "Mumbai, India",
-    includes: "7-day intensive training + FTII Certificate",
-    category: "Acting & Performance",
-    tags: ["Short-term Workshop"],
-    expiresOn: "2026-04-18", // Workshop end date
-  },
-  {
     id: 6,
     title: "Moving Parts (Arambol, Goa) — Body & Performance Course: Part Two",
     trainer: "Moving Parts",
@@ -858,6 +834,30 @@ const workshops: Workshop[] = [
     tags: ["Playwriting Competition", "International", "Prize Money", "Theatre Prize"],
     mode: "Online",
     expiresOn: "2026-05-01", // Application deadline
+  },
+  {
+    id: 33,
+    title: "Intensive Course in Improvised Theatre",
+    trainer: "Improv Lore",
+    institution: "Improv Lore",
+    location: "Bengaluru",
+    state: "Karnataka",
+    country: "India",
+    date: "7–8 & 14–15 March 2026",
+    time: "4 sessions (~12 hours)",
+    description:
+      "A practical improvisation workshop designed to help performers develop spontaneity, quick thinking, and collaborative stage presence through improv games and performance exercises.",
+    registrationLink: "https://in.bookmyshow.com/events/intensive-course-in-improvised-theatre/ET00479740",
+    featured: true,
+    price: "Contact organizer for fees",
+    contact: "Via BookMyShow",
+    email: "Via booking platform",
+    eligibility: "Age 18+",
+    venue: "Bengaluru, India",
+    includes: "4 sessions of intensive improv training",
+    category: "Movement & Physical Theatre",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-03-15", // Workshop end date
   },
 ]
 
