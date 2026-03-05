@@ -6,7 +6,7 @@ import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Analytics } from "@vercel/analytics/react"
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,7 +41,7 @@ export default function RootLayout({
               <Navbar />
             </Suspense>
             <main className="flex-1">{children}</main>
-            <Analytics />
+            
             <Footer />
           </div>
         </ThemeProvider>
