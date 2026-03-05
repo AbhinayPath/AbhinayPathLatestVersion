@@ -859,6 +859,30 @@ const workshops: Workshop[] = [
     tags: ["Short-term Workshop"],
     expiresOn: "2026-03-15", // Workshop end date
   },
+  {
+    id: 34,
+    title: "Basic Theatre Workshop",
+    trainer: "Yours Truly Theatre",
+    institution: "Yours Truly Theatre",
+    location: "Bengaluru",
+    state: "Karnataka",
+    country: "India",
+    date: "11–26 April 2026 (weekends)",
+    time: "4 sessions",
+    description:
+      "A beginner-friendly theatre workshop covering improvisation, character development, and stage expression. Participants explore performance basics through weekend sessions and collaborative exercises.",
+    registrationLink: "https://in.bookmyshow.com/events/basic-theatre-workshop/ET00484596",
+    featured: true,
+    price: "Contact organizer for fees",
+    contact: "Via BookMyShow",
+    email: "Via booking platform",
+    eligibility: "Age 16+",
+    venue: "Bengaluru, India",
+    includes: "4 weekend sessions",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-04-26", // Workshop end date
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
