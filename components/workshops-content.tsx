@@ -444,7 +444,7 @@ const workshops: Workshop[] = [
     includes: "7-day intensive training + FTII Certificate",
     category: "Acting & Performance",
     tags: ["Short-term Workshop"],
-    expiresOn: "2026-03-02", // Application deadline
+    expiresOn: "2026-04-18", // Workshop end date
   },
   {
     id: 6,
