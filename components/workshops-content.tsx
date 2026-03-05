@@ -810,6 +810,31 @@ const workshops: Workshop[] = [
     travelSupport: true,
     expiresOn: "2026-02-13", // Application deadline
   },
+  {
+    id: 27,
+    title: "Alpine Fellowship Theatre Prize 2026",
+    trainer: "Alpine Fellowship",
+    institution: "Alpine Fellowship",
+    location: "Online",
+    state: "",
+    country: "International",
+    date: "Deadline: 1 May 2026",
+    time: "Online submission",
+    description:
+      "International playwriting competition inviting playwrights worldwide to submit an original play responding to the theme 'Joy.' Significant cash prizes: First Prize: £3,000, Second Prize: £1,000, Third Prize: £1,000. Open to playwrights aged 18 or above.",
+    image: "/images/acting-workshop.png",
+    registrationLink: "https://alpinefellowship.com/theatre-prize",
+    featured: true,
+    price: "£10 entry fee per submission",
+    contact: "Via Alpine Fellowship website",
+    email: "Via Alpine Fellowship website",
+    eligibility: "Playwrights aged 18 or above",
+    venue: "Online / International",
+    category: "Fellowship & Seminars",
+    tags: ["Playwriting Competition", "International", "Prize Money", "Theatre Prize"],
+    mode: "Online",
+    expiresOn: "2026-05-01", // Application deadline
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
