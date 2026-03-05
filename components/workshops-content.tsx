@@ -811,7 +811,7 @@ const workshops: Workshop[] = [
     expiresOn: "2026-02-13", // Application deadline
   },
   {
-    id: 27,
+    id: 32,
     title: "Alpine Fellowship Theatre Prize 2026",
     trainer: "Alpine Fellowship",
     institution: "Alpine Fellowship",
