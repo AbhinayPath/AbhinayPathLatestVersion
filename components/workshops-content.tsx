@@ -883,6 +883,30 @@ const workshops: Workshop[] = [
     tags: ["Short-term Workshop"],
     expiresOn: "2026-04-26", // Workshop end date
   },
+  {
+    id: 35,
+    title: "Serendipity Arts Residency 2026",
+    trainer: "Serendipity Arts Foundation",
+    institution: "Serendipity Arts Foundation",
+    location: "New Delhi",
+    state: "Delhi",
+    country: "India",
+    date: "3-month program (Apply by 11 March 2026)",
+    time: "Full-time residency",
+    description:
+      "A three-month interdisciplinary residency supporting artists to develop research-based creative projects. Theatre and performance practitioners are encouraged to apply.",
+    registrationLink: "https://serendipityarts.org/workshop/serendipity-arts-residency-2026/",
+    featured: true,
+    price: "Funded residency",
+    contact: "Via Serendipity Arts Foundation",
+    email: "Via official portal",
+    eligibility: "Emerging artists and creative practitioners",
+    venue: "New Delhi, India",
+    includes: "3-month residency support",
+    category: "Institution & Residency",
+    tags: ["Residency"],
+    expiresOn: "2026-03-11", // Application deadline
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
