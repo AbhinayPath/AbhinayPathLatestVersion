@@ -293,23 +293,46 @@ export default async function ArtistProfilePage({ params }: PageProps) {
                 <CardContent className="p-6">
                   <h2 className="text-xl font-semibold text-amber-500 mb-4">Selected Work</h2>
                   <div className="grid gap-4">
-                    {artist.selectedWork.map((url: string, index: number) => {
-                      const isYouTube = url.includes("youtu.be/") || url.includes("youtube.com/watch")
+                    {artist.selectedWork.map((item: string | { title: string; url: string }, index: number) => {
+                      const url = typeof item === "string" ? item : item.url
+                      const title = typeof item === "string" ? `Selected Work ${index + 1}` : item.title
+                      const isYouTube = url.includes("youtu.be/") || url.includes("youtube.com/watch") || url.includes("youtube.com/playlist")
                       if (isYouTube) {
+                        const isPlaylist = url.includes("playlist?list=")
+                        if (isPlaylist) {
+                          const playlistId = url.split("list=")[1]?.split("&")[0]
+                          return (
+                            <div key={index} className="space-y-2">
+                              <h3 className="text-sm font-medium text-amber-400">{title}</h3>
+                              <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-black/20">
+                                <iframe
+                                  src={`https://www.youtube.com/embed/videoseries?list=${playlistId}`}
+                                  title={`${artist.name} - ${title}`}
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                  allowFullScreen
+                                  className="absolute inset-0 w-full h-full"
+                                />
+                              </div>
+                            </div>
+                          )
+                        }
                         const videoId = url.includes("watch?v=")
                           ? url.split("watch?v=")[1].split("&")[0]
                           : url.includes("youtu.be/")
                             ? url.split("youtu.be/")[1].split("?")[0]
                             : ""
                         return (
-                          <div key={index} className="relative w-full aspect-video rounded-lg overflow-hidden bg-black/20">
-                            <iframe
-                              src={`https://www.youtube.com/embed/${videoId}`}
-                              title={`${artist.name} - Selected Work ${index + 1}`}
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              allowFullScreen
-                              className="absolute inset-0 w-full h-full"
-                            />
+                          <div key={index} className="space-y-2">
+                            <h3 className="text-sm font-medium text-amber-400">{title}</h3>
+                            <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-black/20">
+                              <iframe
+                                src={`https://www.youtube.com/embed/${videoId}`}
+                                title={`${artist.name} - ${title}`}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                              />
+                            </div>
                           </div>
                         )
                       }
@@ -322,7 +345,7 @@ export default async function ArtistProfilePage({ params }: PageProps) {
                           className="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 transition-colors font-medium"
                         >
                           <FileText className="h-5 w-5" />
-                          Selected Work {index + 1}
+                          {title}
                         </a>
                       )
                     })}

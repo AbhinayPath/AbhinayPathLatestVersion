@@ -340,8 +340,8 @@ export const artists: Artist[] = [
     credential: "University Gold Medalist (M.A. Music, University of Mumbai) | CCRT Senior Scholar (Ministry of Culture, GOI) | Professional Diploma in Music Therapy",
     specialization: ["Hindustani Classical Vocal", "Thumri", "Ghazal", "Indian Light Music", "Musical Theatre Vocals", "Vocal Arrangement"],
     selectedWork: [
-      "https://www.youtube.com/playlist?list=PLC2j6WYVwKN06HRy7IS-MbadfXwNxXIhU",
-      "https://www.youtube.com/playlist?list=PLC2j6WYVwKN134IEneU2P93wtdmYvCJFd",
+      { title: "Indian ragas - performance", url: "https://www.youtube.com/playlist?list=PLC2j6WYVwKN06HRy7IS-MbadfXwNxXIhU" },
+      { title: "Educational - Insight of Indian Music", url: "https://www.youtube.com/playlist?list=PLC2j6WYVwKN134IEneU2P93wtdmYvCJFd" },
     ],
   },
 ]
