@@ -326,6 +326,24 @@ export const artists: Artist[] = [
     ],
     portfolio: "https://drive.google.com/file/d/12OIv7CpTOZHDicf8fw7j2rZYrifwBcgb/view?usp=drivesdk",
   },
+  {
+    id: "sneha-hegde",
+    name: "Sneha Hegde",
+    image: "/images/artists/sneha-hegde.jpg",
+    location: "Bengaluru, Karnataka",
+    languages: ["Hindi", "English"],
+    email: "",
+    interests: ["Singing", "Music"],
+    bio: "Sneha Hegde is a distinguished Hindustani classical vocalist with over 15 years of rigorous training and extensive stage experience. Trained in the revered Guru–Shishya tradition under the tutelage of Dr. Alka Deo Marulkar, she brings together the rich musical influences of the Jaipur, Kirana, and Gwalior traditions in her practice. Her repertoire spans Hindustani Classical Vocal, Thumri, Ghazal, Indian Light Music, musical theatre vocals, and vocal arrangement for thematic presentations. A University Gold Medalist in M.A. Music from the University of Mumbai, she is also a recipient of the prestigious CCRT Senior Scholarship from the Ministry of Culture, Government of India. Her cross-cultural collaboration with the Buryat Opera Theatre, Russia has earned her international recognition. As a founding partner of Ajivasan Music Academy's Bengaluru branch, she mentors students across India, USA, Australia, Germany, and other regions. Sneha has performed at prestigious venues including the Shilparamam Cultural Meet in Hyderabad and has delivered Hindustani classical recitals across Mumbai, Bengaluru, Punjab, and Pune. She served as lead vocalist and vocal arranger for the musical theatre production Premiidoscope in Pune. Her expertise extends to conducting voice training workshops, lecture-demonstrations, and masterclasses, making her an ideal artist for curated cultural performances, musical theatre collaborations, and institutional events through Abhinayपथ.",
+    instagram: "https://www.instagram.com/snehaa_hegde_satanakeri",
+    youtube: "http://www.youtube.com/@snehahegde965",
+    credential: "University Gold Medalist (M.A. Music, University of Mumbai) | CCRT Senior Scholar (Ministry of Culture, GOI) | Professional Diploma in Music Therapy",
+    specialization: ["Hindustani Classical Vocal", "Thumri", "Ghazal", "Indian Light Music", "Musical Theatre Vocals", "Vocal Arrangement"],
+    selectedWork: [
+      { title: "Indian ragas - performance", url: "https://www.youtube.com/playlist?list=PLC2j6WYVwKN06HRy7IS-MbadfXwNxXIhU" },
+      { title: "Educational - Insight of Indian Music", url: "https://www.youtube.com/playlist?list=PLC2j6WYVwKN134IEneU2P93wtdmYvCJFd" },
+    ],
+  },
 ]
 
 export function getArtistById(id: string): Artist | undefined {
