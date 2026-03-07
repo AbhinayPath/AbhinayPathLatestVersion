@@ -313,6 +313,23 @@ const artists: Artist[] = [
     ],
     portfolio: "https://drive.google.com/file/d/12OIv7CpTOZHDicf8fw7j2rZYrifwBcgb/view?usp=drivesdk",
   },
+  {
+    id: "sneha-hegde",
+    name: "Sneha Hegde",
+    image: "/images/artists/sneha-hegde.jpg",
+    location: "Bengaluru, Karnataka",
+    languages: ["Hindi", "English"],
+    interests: ["Singing", "Music"],
+    bio: "Sneha Hegde is a distinguished Hindustani classical vocalist with over 15 years of rigorous training and extensive stage experience. Trained in the revered Guru–Shishya tradition under Dr. Alka Deo Marulkar, she brings together influences of the Jaipur, Kirana, and Gwalior traditions. University Gold Medalist (M.A. Music, University of Mumbai) and CCRT Senior Scholar. She has collaborated with Buryat Opera Theatre, Russia and performed at Shilparamam Cultural Meet, Hyderabad. Lead vocalist for musical theatre production Premiidoscope in Pune. Founding partner of Ajivasan Music Academy's Bengaluru branch, mentoring students across India, USA, Australia, and Germany.",
+    instagram: "https://www.instagram.com/snehaa_hegde_satanakeri",
+    youtube: "http://www.youtube.com/@snehahegde965",
+    credential: "University Gold Medalist (M.A. Music) | CCRT Senior Scholar (Ministry of Culture, GOI)",
+    specialization: ["Hindustani Classical Vocal", "Thumri", "Ghazal", "Indian Light Music", "Musical Theatre Vocals", "Vocal Arrangement"],
+    selectedWork: [
+      "https://www.youtube.com/playlist?list=PLC2j6WYVwKN06HRy7IS-MbadfXwNxXIhU",
+      "https://www.youtube.com/playlist?list=PLC2j6WYVwKN134IEneU2P93wtdmYvCJFd",
+    ],
+  },
 ]
 
 // Parse location to extract city, state, and country
