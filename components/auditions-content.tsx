@@ -12,7 +12,6 @@ import AuditionBanner from "@/components/audition-banner"
 
 export default function AuditionsContent() {
   const [auditions, setAuditions] = useState<any[]>([])
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
   const [filters, setFilters] = useState({
   
     search: "",
@@ -22,18 +21,6 @@ export default function AuditionsContent() {
     experience: "all",
   })
   const [loader,setLoader] = useState(true)
-
-  const toggleExpand = (id: string) => {
-    setExpandedIds(prev => {
-      const newSet = new Set(prev)
-      if (newSet.has(id)) {
-        newSet.delete(id)
-      } else {
-        newSet.add(id)
-      }
-      return newSet
-    })
-  }
 
   useEffect(() => {
     async function fetchAuditions() {
@@ -188,11 +175,10 @@ export default function AuditionsContent() {
       {!loader ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredAuditions.length > 0 ? (
           filteredAuditions.map((audition) => {
-            const isExpanded = expandedIds.has(audition.id);
             return (
             <div
               key={audition.id}
-              className="bg-white rounded-lg   overflow-hidden flex flex-col h-full card-hover"
+              className="bg-white rounded-lg overflow-hidden flex flex-col h-full card-hover shadow-sm border border-gray-100"
             >
               <div className="relative h-48 w-full">
                 <Image src="/images/auditions-stage.png" alt={audition.title} fill className="object-cover" />
@@ -213,131 +199,50 @@ export default function AuditionsContent() {
               </div>
               <div className="p-6 flex-1 flex flex-col space-y-4">
                 {/* Title */}
-                <h3 className="font-playfair text-xl sm:text-2xl font-bold text-gray-900 break-words">
+                <h3 className="font-playfair text-xl font-bold text-gray-900 break-words line-clamp-1">
                   {audition.title || "Opportunity Title"}
                 </h3>
 
                 {/* Deadline and Location Detail */}
                 <div className="flex items-start sm:items-center gap-2 text-sm text-gray-600 flex-wrap">
                   {audition.deadline && (
-                    <>
+                    <div className="flex items-center gap-1">
                       <CalendarIcon className="h-4 w-4 flex-shrink-0" />
-                      <span className="break-words">Deadline: {new Date(audition.deadline).toLocaleDateString()}</span>
-                    </>
+                      <span className="break-words">{new Date(audition.deadline).toLocaleDateString()}</span>
+                    </div>
                   )}
-                  {audition.location_mode === "city" && audition.venue && (
-                    <>
+                  {audition.location_mode === "city" && (
+                    <div className="flex items-center gap-1">
                       <span className="hidden sm:inline">•</span>
-                      <span className="break-words w-full sm:w-auto">{audition.venue}</span>
-                    </>
+                      <MapPin className="h-4 w-4 flex-shrink-0 text-gray-400" />
+                      <span className="truncate">{audition.city || "City"}</span>
+                    </div>
                   )}
-                  {audition.location_mode === "online" && audition.platform && (
-                    <>
+                  {audition.location_mode === "online" && (
+                    <div className="flex items-center gap-1">
                       <span className="hidden sm:inline">•</span>
-                      <span className="break-words w-full sm:w-auto">{audition.platform}</span>
-                    </>
+                      <span className="truncate">Online</span>
+                    </div>
                   )}
                 </div>
 
-                {/* Other Audition Details (Description) */}
-                <div className="space-y-1">
-                  <h4 className="text-sm font-semibold text-gray-900">Description</h4>
-                  <div className="prose prose-sm max-w-none">
-                    {audition.description ? (
-                      <div className="text-gray-700 text-sm sm:text-base break-words min-w-full [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 space-y-2"
-                        dangerouslySetInnerHTML={{ __html: audition.description }} />
-                    ) : (
-                      <p className="text-gray-700 text-sm sm:text-base break-words">No description provided.</p>
-                    )}
-                  </div>
+                {/* Short Description Snippet */}
+                <div className="text-gray-600 text-sm line-clamp-3 overflow-hidden">
+                  {audition.description ? (
+                    <div dangerouslySetInnerHTML={{ __html: audition.description }} className="prose-snippet" />
+                  ) : (
+                    <p>No description provided.</p>
+                  )}
                 </div>
 
-                <Button 
-                  variant="ghost" 
-                  onClick={() => toggleExpand(audition.id)}
-                  className="w-full mt-2 text-primary hover:bg-purple-50 hover:text-purple-700 transition-colors"
-                >
-                  {isExpanded ? "Hide Details" : "More Details"}
-                </Button>
-
-                {/* Expanded Content View */}
-                {isExpanded && (
-                  <div className="animate-in slide-in-from-top-2 fade-in duration-300 space-y-4 pt-2">
-                    {/* Requirements */}
-                    {(audition.gender_preference !== "any" || audition.age_min || audition.age_max || (Array.isArray(audition.languages) && audition.languages.length > 0) || audition.experience_required || audition.roles_needed) && (
-                      <div className="space-y-2 pt-4 border-t">
-                        <h4 className="text-sm font-semibold text-gray-900">Requirements & Roles</h4>
-                        {audition.roles_needed ? (
-                          <div className="prose prose-sm max-w-none text-gray-700 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 space-y-2 mb-4"
-                            dangerouslySetInnerHTML={{ __html: audition.roles_needed }} />
-                        ) : (
-                          <div className="mb-2" />
-                        )}
-                        <div className="flex flex-wrap gap-2">
-                          {audition.gender_preference && audition.gender_preference !== "any" && (
-                            <Badge variant="outline" className="capitalize text-xs">
-                              {String(audition.gender_preference).replace("-", " ")}
-                            </Badge>
-                          )}
-                          {(audition.age_min || audition.age_max) && (
-                            <Badge variant="outline" className="text-xs">
-                              Age: {audition.age_min || "?"}–{audition.age_max || "?"}
-                            </Badge>
-                          )}
-                          {Array.isArray(audition.languages) && audition.languages.length > 0 && (
-                            <Badge variant="outline" className="text-xs">
-                              Languages Required: {audition.languages.join(", ")}
-                            </Badge>
-                          )}
-                          {audition.experience_required && (
-                            <Badge variant="outline" className="capitalize text-xs">
-                              {`Experience: ${audition.experience_required}`}
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Pay */}
-                    <div className="flex items-center gap-2 text-sm pt-4 border-t">
-                      <IndianRupee className="h-4 w-4 text-gray-600 flex-shrink-0" />
-                      <span className="text-gray-900 font-medium break-words">
-                        {audition.pay_type === "not-specified" && "Not specified"}
-                        {audition.pay_type === "free" && "Free"}
-                        {audition.pay_type === "stipend" && (audition.pay_amount ? `Stipend: ₹${audition.pay_amount}` : "Stipend")}
-                        {audition.pay_type === "paid" && (audition.pay_amount ? `Paid: ₹${audition.pay_amount}` : "Paid")}
-                      </span>
-                    </div>
-
-                    {/* Contact Option conditionally */}
-                    {audition.application_method === "whatsapp" && audition.contact_info && (
-                      <div className="pt-4 border-t flex flex-col gap-1 items-start sm:items-center sm:justify-center text-sm text-gray-600">
-                        <span className="font-medium">Apply via WhatsApp at:</span>
-                        <span className="font-mono bg-green-50 text-green-700 px-3 py-1 rounded-full border border-green-200">{audition.contact_info}</span>
-                      </div>
-                    )}
-                    
-                    {audition.application_method === "email" && audition.contact_info && (
-                      <div className="pt-4 border-t flex flex-col gap-1 items-start sm:items-center sm:justify-center text-sm text-gray-600">
-                        <span className="font-medium">Apply via Email at:</span>
-                        <span className="font-mono bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-200 break-all">{audition.contact_info}</span>
-                      </div>
-                    )}
-
-                    {/* CTA */}
-                    <div className="flex justify-end mt-auto pt-4">
-                      <Link href={`/auditions/${audition.id}`} className="w-full">
-                        <Button className="w-full rounded-lg h-12 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-sm sm:text-base touch-manipulation">
-                          {audition.application_method === "platform"
-                            ? "Apply on Abhinayपथ"
-                            : audition.application_method === "whatsapp"
-                              ? "Apply via WhatsApp"
-                              : "Apply via Email"}
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                )}
+                {/* CTA */}
+                <div className="mt-auto pt-4 border-t">
+                  <Link href={`/auditions/${audition.id}`} className="w-full">
+                    <Button variant="outline" className="w-full rounded-lg h-10 border-purple-200 text-purple-700 hover:bg-purple-50 hover:text-purple-800 transition-all font-medium">
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           );
