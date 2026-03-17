@@ -24,7 +24,7 @@ import {
   Globe,
   Briefcase,
   Users,
-  DollarSign,
+  IndianRupee,
   Eye,
   Camera,
   CheckCircle2,
@@ -32,12 +32,22 @@ import {
   AlertCircle,
   Sparkles,
   Loader2,
+  Plus,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import Link from "next/link"
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { INDIAN_STATES } from "@/lib/types/talent"
+import dynamic from 'next/dynamic'
+import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import draftToHtml from 'draftjs-to-html'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
+  { ssr: false }
+)
 
 const LANGUAGES = [
   "Hindi",
@@ -55,7 +65,7 @@ const LANGUAGES = [
 export default function PostOpportunityPage() {
   const router = useRouter()
   const supabase = createClientComponentClient()
-  
+
   // Form state
   const [title, setTitle] = useState("")
   const [type, setType] = useState("")
@@ -64,9 +74,12 @@ export default function PostOpportunityPage() {
   const [city, setCity] = useState("")
   const [venue, setVenue] = useState("")
   const [platform, setPlatform] = useState("")
-  const [description, setDescription] = useState("")
+  const [descriptionState, setDescriptionState] = useState(
+    () => EditorState.createEmpty()
+  )
   const [applicationMethod, setApplicationMethod] = useState("platform")
-  const [contactInfo, setContactInfo] = useState("")
+  const [whatsappNumber, setWhatsappNumber] = useState("+91")
+  const [emailAddress, setEmailAddress] = useState("")
 
   // Pincode + State/City dropdowns
   const [pincode, setPincode] = useState("")
@@ -79,8 +92,10 @@ export default function PostOpportunityPage() {
   const [isPincodeLoading, setIsPincodeLoading] = useState(false)
 
   // Advanced fields
-  const [advancedOpen, setAdvancedOpen] = useState(false)
-  const [rolesNeeded, setRolesNeeded] = useState("")
+  const [advancedOpen, setAdvancedOpen] = useState(true)
+  const [rolesRequirement, setRolesRequirement] = useState(
+    () => EditorState.createEmpty()
+  )
   const [genderPreference, setGenderPreference] = useState("any")
   const [ageMin, setAgeMin] = useState("")
   const [ageMax, setAgeMax] = useState("")
@@ -88,7 +103,6 @@ export default function PostOpportunityPage() {
   const [experience, setExperience] = useState("")
   const [payType, setPayType] = useState("not-specified")
   const [payAmount, setPayAmount] = useState("")
-  const [visibility, setVisibility] = useState("public")
 
   // Media request
   const [requestPhotos, setRequestPhotos] = useState(false)
@@ -120,12 +134,13 @@ export default function PostOpportunityPage() {
   }, [])
 
   useEffect(() => {
+    const hasDescription = descriptionState.getCurrentContent().hasText()
     const requiredFields = [
       title,
       type,
       deadline,
       locationMode === "city" ? (selectedState && city) : true,
-      description,
+      hasDescription,
       applicationMethod,
       consent1,
       consent2,
@@ -134,7 +149,7 @@ export default function PostOpportunityPage() {
     const completed = requiredFields.filter(Boolean).length
     const total = requiredFields.length
     setProgress((completed / total) * 100)
-  }, [title, type, deadline, selectedState, city, description, applicationMethod, consent1, consent2, locationMode])
+  }, [title, type, deadline, selectedState, city, descriptionState, applicationMethod, consent1, consent2, locationMode])
 
   // Load states initially
   useEffect(() => {
@@ -228,7 +243,7 @@ export default function PostOpportunityPage() {
   }
 
   const isFormValid = () => {
-    if (!title || !type || !deadline || !description || !consent1 || !consent2) return false
+    if (!title || !type || !deadline || !descriptionState.getCurrentContent().hasText() || !consent1 || !consent2) return false
     if (locationMode === "city" && (!selectedState || !city)) return false
     if ((payType === "stipend" || payType === "paid") && !payAmount) return false
     if (ageMin && ageMax && Number(ageMin) > Number(ageMax)) return false
@@ -246,7 +261,7 @@ export default function PostOpportunityPage() {
     try {
       // Check if user is authenticated
       const { data: { user }, error: authError } = await supabase.auth.getUser()
-      
+
       if (authError || !user) {
         toast.error("Please log in to post an opportunity")
         router.push('/auth/login')
@@ -257,7 +272,7 @@ export default function PostOpportunityPage() {
       const opportunityData = {
         title,
         type,
-        description,
+        description: draftToHtml(convertToRaw(descriptionState.getCurrentContent())),
         deadline: deadline?.toISOString(),
         location_mode: locationMode,
         state: locationMode === 'city' ? selectedState : null,
@@ -265,8 +280,8 @@ export default function PostOpportunityPage() {
         venue: locationMode === 'city' ? venue : null,
         platform: locationMode === 'online' ? platform : null,
         application_method: applicationMethod,
-        contact_info: contactInfo,
-        roles_needed: rolesNeeded,
+        contact_info: applicationMethod === 'whatsapp' ? whatsappNumber : applicationMethod === 'email' ? emailAddress : null,
+        roles_needed: draftToHtml(convertToRaw(rolesRequirement.getCurrentContent())),
         gender_preference: genderPreference,
         age_min: ageMin ? parseInt(ageMin) : null,
         age_max: ageMax ? parseInt(ageMax) : null,
@@ -274,7 +289,6 @@ export default function PostOpportunityPage() {
         experience_required: experience,
         pay_type: payType,
         pay_amount: payAmount ? parseFloat(payAmount) : null,
-        visibility,
         request_photos: requestPhotos,
         photo_helper_text: photoHelperText,
         request_videos: requestVideos,
@@ -298,10 +312,10 @@ export default function PostOpportunityPage() {
       }
 
       toast.success("Opportunity published successfully!")
-      
-      // Redirect to the opportunity page or dashboard
-      router.push(`/opportunities/${result.opportunity.id}`)
-      
+
+      // Redirect to the auditions page
+      router.push(`/auditions`)
+
     } catch (error) {
       console.error('Error publishing opportunity:', error)
       toast.error(error instanceof Error ? error.message : 'Failed to publish opportunity')
@@ -316,7 +330,7 @@ export default function PostOpportunityPage() {
     try {
       // Check if user is authenticated
       const { data: { user }, error: authError } = await supabase.auth.getUser()
-      
+
       if (authError || !user) {
         toast.error("Please log in to save a draft")
         router.push('/auth/login')
@@ -327,7 +341,7 @@ export default function PostOpportunityPage() {
       const opportunityData = {
         title: title || 'Untitled Opportunity',
         type: type || 'job',
-        description: description || '',
+        description: draftToHtml(convertToRaw(descriptionState.getCurrentContent())),
         deadline: deadline?.toISOString(),
         location_mode: locationMode,
         state: locationMode === 'city' ? selectedState : null,
@@ -335,8 +349,8 @@ export default function PostOpportunityPage() {
         venue: locationMode === 'city' ? venue : null,
         platform: locationMode === 'online' ? platform : null,
         application_method: applicationMethod,
-        contact_info: contactInfo,
-        roles_needed: rolesNeeded,
+        contact_info: applicationMethod === 'whatsapp' ? whatsappNumber : applicationMethod === 'email' ? emailAddress : null,
+        roles_needed: draftToHtml(convertToRaw(rolesRequirement.getCurrentContent())),
         gender_preference: genderPreference,
         age_min: ageMin ? parseInt(ageMin) : null,
         age_max: ageMax ? parseInt(ageMax) : null,
@@ -344,7 +358,6 @@ export default function PostOpportunityPage() {
         experience_required: experience,
         pay_type: payType,
         pay_amount: payAmount ? parseFloat(payAmount) : null,
-        visibility,
         request_photos: requestPhotos,
         photo_helper_text: photoHelperText,
         request_videos: requestVideos,
@@ -368,7 +381,7 @@ export default function PostOpportunityPage() {
       }
 
       toast.success("Draft saved successfully!")
-      
+
     } catch (error) {
       console.error('Error saving draft:', error)
       toast.error(error instanceof Error ? error.message : 'Failed to save draft')
@@ -446,7 +459,7 @@ export default function PostOpportunityPage() {
                   </Label>
                   <Input
                     id="title"
-                    placeholder="e.g., Lead Actor for Feature Film"
+                    placeholder="e.g., Nukkad Natak Audition "
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500 h-11 sm:h-10 text-base sm:text-sm"
@@ -557,7 +570,7 @@ export default function PostOpportunityPage() {
                         </div>
                       </div>
                     </div>
-                
+
                     {/* Venue */}
                     <div className="space-y-2">
                       <Label htmlFor="venue" className="text-sm font-medium">
@@ -571,7 +584,7 @@ export default function PostOpportunityPage() {
                         className="rounded-lg h-11 sm:h-10"
                       />
                     </div>
-                
+
                     {/* State Dropdown (searchable) */}
                     <div className="space-y-2">
                       <Label className="text-sm font-medium">
@@ -600,7 +613,7 @@ export default function PostOpportunityPage() {
                         </SelectContent>
                       </Select>
                     </div>
-                
+
                     {/* City Dropdown (searchable, disabled until state selected) */}
                     <div className="space-y-2">
                       <Label className="text-sm font-medium">
@@ -650,13 +663,20 @@ export default function PostOpportunityPage() {
                   <Label htmlFor="description" className="text-sm font-medium">
                     Description <span className="text-red-500">*</span>
                   </Label>
-                  <Textarea
-                    id="description"
-                    placeholder="What to prepare, key dates, audition flow..."
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="rounded-lg min-h-[100px] sm:min-h-[120px] resize-none text-base sm:text-sm"
-                  />
+                  <div className="border rounded-md p-2 bg-white min-h-[200px]">
+                    <Editor
+                      editorState={descriptionState}
+                      onEditorStateChange={setDescriptionState}
+                      placeholder="What to prepare, key dates, audition flow..."
+                      editorClassName="px-3 min-h-[150px]"
+                      toolbar={{
+                        options: ['inline', 'blockType', 'list', 'link', 'history'],
+                        inline: {
+                          options: ['bold', 'italic', 'underline'],
+                        },
+                      }}
+                    />
+                  </div>
                 </div>
 
                 {/* Application Method - Mobile Optimized */}
@@ -683,12 +703,6 @@ export default function PostOpportunityPage() {
                         Email
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-gray-50 transition-colors touch-manipulation">
-                      <RadioGroupItem value="external" id="external-method" />
-                      <Label htmlFor="external-method" className="flex-1 cursor-pointer text-sm">
-                        External Form
-                      </Label>
-                    </div>
                   </RadioGroup>
                 </div>
 
@@ -702,18 +716,28 @@ export default function PostOpportunityPage() {
                       </Button>
                     </CollapsibleTrigger>
                     <CollapsibleContent className="pt-3">
-                      <Input
-                        placeholder={
-                          applicationMethod === "whatsapp"
-                            ? "WhatsApp number"
-                            : applicationMethod === "email"
-                              ? "Email address"
-                              : "Form URL"
-                        }
-                        value={contactInfo}
-                        onChange={(e) => setContactInfo(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
+                      {applicationMethod === "whatsapp" ? (
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">WhatsApp Number <span className="text-red-500">*</span></Label>
+                          <Input
+                            placeholder="e.g. +919876543210"
+                            value={whatsappNumber}
+                            onChange={(e) => setWhatsappNumber(e.target.value)}
+                            className="rounded-lg h-11 sm:h-10 font-mono"
+                          />
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">Email Address <span className="text-red-500">*</span></Label>
+                          <Input
+                            type="email"
+                            placeholder="e.g. hello@example.com"
+                            value={emailAddress}
+                            onChange={(e) => setEmailAddress(e.target.value)}
+                            className="rounded-lg h-11 sm:h-10"
+                          />
+                        </div>
+                      )}
                     </CollapsibleContent>
                   </Collapsible>
                 )}
@@ -736,18 +760,25 @@ export default function PostOpportunityPage() {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <CardContent className="pt-4 sm:pt-6 px-4 sm:px-6 space-y-4 sm:space-y-5">
-                    {/* Roles Needed */}
-                    <div className="space-y-2">
-                      <Label htmlFor="roles" className="text-sm font-medium">
-                        Roles Needed
+                    {/* Roles and requirement */}
+                    <div className="space-y-3">
+                      <Label className="text-sm font-medium">
+                        Roles and requirement
                       </Label>
-                      <Input
-                        id="roles"
-                        placeholder="e.g., 2 Female (20–25), 1 Male (30–40)"
-                        value={rolesNeeded}
-                        onChange={(e) => setRolesNeeded(e.target.value)}
-                        className="rounded-lg h-11 sm:h-10"
-                      />
+                      <div className="border rounded-md p-2 bg-white min-h-[200px]">
+                        <Editor
+                          editorState={rolesRequirement}
+                          onEditorStateChange={setRolesRequirement}
+                          placeholder="List out the roles and requirements here..."
+                          editorClassName="px-3 min-h-[150px]"
+                          toolbar={{
+                            options: ['inline', 'blockType', 'list', 'link', 'history'],
+                            inline: {
+                              options: ['bold', 'italic', 'underline'],
+                            },
+                          }}
+                        />
+                      </div>
                     </div>
 
                     {/* Gender Preference */}
@@ -809,8 +840,8 @@ export default function PostOpportunityPage() {
                                 ? "bg-purple-600 text-white shadow-md"
                                 : "bg-gray-100 text-gray-700 hover:bg-gray-200",
                               !selectedLanguages.includes(lang) &&
-                                selectedLanguages.length >= 4 &&
-                                "opacity-40 cursor-not-allowed",
+                              selectedLanguages.length >= 4 &&
+                              "opacity-40 cursor-not-allowed",
                             )}
                             disabled={!selectedLanguages.includes(lang) && selectedLanguages.length >= 4}
                           >
@@ -864,29 +895,6 @@ export default function PostOpportunityPage() {
                       )}
                     </div>
 
-                    {/* Visibility - Mobile Optimized */}
-                    <div className="space-y-3">
-                      <Label className="text-sm font-medium">Visibility</Label>
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                        <Button
-                          type="button"
-                          variant={visibility === "public" ? "default" : "outline"}
-                          className="rounded-lg h-11 sm:h-10 text-sm touch-manipulation"
-                          onClick={() => setVisibility("public")}
-                        >
-                          <Eye className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
-                          Public
-                        </Button>
-                        <Button
-                          type="button"
-                          variant={visibility === "unlisted" ? "default" : "outline"}
-                          className="rounded-lg h-11 sm:h-10 text-sm touch-manipulation"
-                          onClick={() => setVisibility("unlisted")}
-                        >
-                          Unlisted
-                        </Button>
-                      </div>
-                    </div>
                   </CardContent>
                 </CollapsibleContent>
               </Card>
@@ -1020,7 +1028,7 @@ export default function PostOpportunityPage() {
                   </>
                 )}
               </Button>
-              
+
               {/* <Button
                 onClick={handleSaveDraft}
                 disabled={isDraft || isPublishing}
@@ -1171,17 +1179,29 @@ export default function PostOpportunityPage() {
                   )}
                 </div>
 
-                {/* Description */}
-                <div className="prose prose-sm max-w-none">
-                  <p className="text-gray-700 line-clamp-4 text-sm sm:text-base break-words">
-                    {description || "Description will appear here..."}
-                  </p>
+                {/* Other Audition Details (Description) */}
+                <div className="space-y-1">
+                  <h4 className="text-sm font-semibold text-gray-900">Description</h4>
+                  <div className="prose prose-sm max-w-none">
+                    {descriptionState.getCurrentContent().hasText() ? (
+                      <div className="text-gray-700 text-sm sm:text-base break-words min-w-full [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 space-y-2"
+                        dangerouslySetInnerHTML={{ __html: draftToHtml(convertToRaw(descriptionState.getCurrentContent())) }} />
+                    ) : (
+                      <p className="text-gray-700 text-sm sm:text-base break-words">Description will appear here...</p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Requirements */}
-                {(genderPreference !== "any" || ageMin || ageMax || selectedLanguages.length > 0 || experience) && (
+                {(genderPreference !== "any" || ageMin || ageMax || selectedLanguages.length > 0 || experience || rolesRequirement.getCurrentContent().hasText()) && (
                   <div className="space-y-2 pt-4 border-t">
-                    <h4 className="text-sm font-semibold text-gray-900">Requirements</h4>
+                    <h4 className="text-sm font-semibold text-gray-900">Requirements & Roles</h4>
+                    {rolesRequirement.getCurrentContent().hasText() ? (
+                      <div className="prose prose-sm max-w-none text-gray-700 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 space-y-2 mb-4"
+                        dangerouslySetInnerHTML={{ __html: draftToHtml(convertToRaw(rolesRequirement.getCurrentContent())) }} />
+                    ) : (
+                      <div className="mb-2" />
+                    )}
                     <div className="flex flex-wrap gap-2">
                       {genderPreference !== "any" && (
                         <Badge variant="outline" className="capitalize text-xs">
@@ -1193,14 +1213,14 @@ export default function PostOpportunityPage() {
                           Age: {ageMin || "?"}–{ageMax || "?"}
                         </Badge>
                       )}
-                      {selectedLanguages.map((lang) => (
-                        <Badge key={lang} variant="outline" className="text-xs">
-                          {lang}
+                      {selectedLanguages.length > 0 && (
+                        <Badge variant="outline" className="text-xs">
+                          Languages Required: {selectedLanguages.join(", ")}
                         </Badge>
-                      ))}
+                      )}
                       {experience && (
                         <Badge variant="outline" className="capitalize text-xs">
-                          {experience}
+                          {`Experience: ${experience}`}
                         </Badge>
                       )}
                     </div>
@@ -1209,7 +1229,7 @@ export default function PostOpportunityPage() {
 
                 {/* Pay */}
                 <div className="flex items-center gap-2 text-sm pt-4 border-t">
-                  <DollarSign className="h-4 w-4 text-gray-600 flex-shrink-0" />
+                  <IndianRupee className="h-4 w-4 text-gray-600 flex-shrink-0" />
                   <span className="text-gray-900 font-medium break-words">
                     {payType === "not-specified" && "Not specified"}
                     {payType === "free" && "Free"}
@@ -1218,23 +1238,22 @@ export default function PostOpportunityPage() {
                   </span>
                 </div>
 
+                {/* Contact Option in Preview */}
+                {applicationMethod === "whatsapp" && whatsappNumber && (
+                  <div className="pt-4 border-t flex flex-col gap-1 items-center justify-center text-sm text-gray-600">
+                    <span className="font-medium">Apply via WhatsApp at:</span>
+                    <span className="font-mono bg-green-50 text-green-700 px-3 py-1 rounded-full border border-green-200">{whatsappNumber}</span>
+                  </div>
+                )}
+
                 {/* CTA */}
                 <Button className="w-full rounded-lg h-12 mt-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-sm sm:text-base touch-manipulation">
                   {applicationMethod === "platform"
                     ? "Apply on Abhinayपथ"
                     : applicationMethod === "whatsapp"
                       ? "Apply via WhatsApp"
-                      : applicationMethod === "email"
-                        ? "Apply via Email"
-                        : "Apply via External Form"}
+                      : "Apply via Email"}
                 </Button>
-
-                {/* Visibility Badge */}
-                <div className="flex justify-center pt-4">
-                  <Badge variant="outline" className="text-xs capitalize">
-                    Visibility: {visibility}
-                  </Badge>
-                </div>
               </CardContent>
             </Card>
 

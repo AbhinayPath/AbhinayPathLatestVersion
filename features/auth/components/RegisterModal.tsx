@@ -128,6 +128,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
                 placeholder="Enter your password"
                 {...register("password")}
                 className="pr-10"

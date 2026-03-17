@@ -22,19 +22,24 @@ type Audition = {
   date: string
   contactType: "email" | "phone" | "whatsapp"
   contact: string,
+  contact_info: string,
+  application_method: string,
   experience_required: string,
   city: string
-
-
+  // Added to fetch organisation linked to the opportunity creator
+  created_by: string
 }
 import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase-browser"
 import { toast } from "@/components/ui/use-toast"
 
-export default function AuditionDetailContent({ audition }: { audition: Audition }) {
+export default function AuditionDetailContent({ audition, organisation }: { audition: Audition, organisation?: any | null }) {
   const [hasAlreadyApplied, setHasAlreadyApplied] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isLoading,setIsLoading] = useState(true)
+  // Organisation state (no longer used; organisation is provided via server-side props)
+  const [organisationState, setOrganisationState] = useState<any | null>(null)
+  const [orgLoadingState, setOrgLoadingState] = useState(false)
 
   useEffect(() => {
     const checkAlreadyApplied = async () => {
@@ -42,12 +47,12 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
         setIsLoading(true)
         const user = await supabase.auth.getUser()
         const userId = user?.data?.user?.id
-        if (!userId) return
+        if (!userId || !audition?.id) return
         const { data: existing } = await supabase
-          .from("audition_applications")
+          .from("audition_registrations")
           .select("id")
           .eq("user_id", userId)
-          .eq("audition_id", audition.id)
+          .eq("opportunity_id", audition.id)
           .maybeSingle()
         if (existing) setHasAlreadyApplied(true)
       } catch (err) {
@@ -57,7 +62,32 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
       }
     }
     checkAlreadyApplied()
-  }, [audition.id])
+  }, [audition?.id])
+
+  // Fetch organisation linked to the opportunity creator
+  // Organisation is provided via server-side props on page load; no client-side fetch needed.
+  // useEffect(() => {
+  //   const fetchOrganisation = async () => {
+  //     try {
+  //       setOrgLoadingState(true)
+  //       if (!audition?.created_by) return
+  //       const res = await fetch(`/api/organisations?userId=${audition.created_by}`)
+  //       if (!res.ok) throw new Error('Failed to fetch organisation')
+  //       const data = await res.json()
+  //       if (Array.isArray(data.organisations) && data.organisations.length > 0) {
+  //         setOrganisationState(data.organisations[0])
+  //       } else {
+  //         setOrganisationState(null)
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching organisation:', error)
+  //       setOrganisationState(null)
+  //     } finally {
+  //       setOrgLoadingState(false)
+  //     }
+  //   }
+  //   fetchOrganisation()
+  // }, [audition?.created_by])
 
   const handleApply = async () => {
     setLoading(true)
@@ -73,10 +103,10 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
       }
       // Prevent duplicate applications
       const { data: existing } = await supabase
-        .from("audition_applications")
+        .from("audition_registrations")
         .select("id")
         .eq("user_id", userId)
-        .eq("audition_id", audition.id)
+        .eq("opportunity_id", audition.id)
         .maybeSingle()
       if (existing) {
         toast({ title: "You’ve already applied.", variant: "destructive" })
@@ -84,9 +114,9 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
         setLoading(false)
         return
       }
-      const { error } = await supabase.from("audition_applications").insert({
+      const { error } = await supabase.from("audition_registrations").insert({
         user_id: userId,
-        audition_id: audition.id
+        opportunity_id: audition.id
         
       })
       if (error) {
@@ -198,8 +228,8 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
               <div className="flex items-start">
                 <Building className="h-5 w-5 text-gray-500 mt-0.5 mr-3" />
                 <div>
-                  <p className="font-medium text-gray-700">Production Company</p>
-                  <p className="text-gray-800">{audition.company}</p>
+                  <p className="font-medium text-gray-700">Organisation</p>
+                  <p className="text-gray-800">{organisation?.name || audition.company}</p>
                 </div>
               </div>
          
@@ -255,9 +285,27 @@ export default function AuditionDetailContent({ audition }: { audition: Audition
               <div className="pt-4 mt-4 border-t border-gray-200">
                 {isLoading ? (
                   <p>...loading</p>
+                ) : audition.application_method === "whatsapp" ? (
+                  <Button asChild className="w-full rounded-md bg-green-500 hover:bg-green-600 border-none">
+                    <a
+                      href={`https://wa.me/${audition.contact_info}?text=${encodeURIComponent("Hi, I want to apply for this audition")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageSquare className="mr-2 h-4 w-4" /> Apply via WhatsApp
+                    </a>
+                  </Button>
+                ) : audition.application_method === "email" ? (
+                  <Button asChild className="w-full rounded-md">
+                    <a
+                      href={`mailto:${audition.contact_info}?subject=${encodeURIComponent("Application for Audition")}&body=${encodeURIComponent("Hello I want to apply")}`}
+                    >
+                      <Mail className="mr-2 h-4 w-4" /> Apply via Email
+                    </a>
+                  </Button>
                 ) : !hasAlreadyApplied ? (
                   <Button className="w-full rounded-md" onClick={handleApply} disabled={loading}>
-                    {loading ? "Applying..." : "Apply Now"}
+                    {loading ? "Applying..." : "Apply on Abhinaypath"}
                   </Button>
                 ) : (
                   <p className="text-green-600 font-medium text-center">You’ve already applied</p>

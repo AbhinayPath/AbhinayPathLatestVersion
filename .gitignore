@@ -25,3 +25,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+scripts/create-workshops-schema.sql
+scripts/create-opportunities-schema.sql
+scripts/create-organisations-schema.sql

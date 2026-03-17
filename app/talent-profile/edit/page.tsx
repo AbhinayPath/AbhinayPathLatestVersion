@@ -16,7 +16,7 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { ContactInfoDialog } from '@/components/ui/contact-info-dialog'
 
 export default function EditTalentProfilePage() {
-  const { user } = useAuth()
+  const { user, profile: authProfile } = useAuth()
   const router = useRouter()
   const [profile, setProfile] = useState<TalentProfile | null>(null)
   const [experience, setExperience] = useState<any[]>([])
@@ -197,6 +197,15 @@ export default function EditTalentProfilePage() {
       return
     }
 
+    if (authProfile && authProfile.type !== 'artist') {
+      toast.error('Access Denied', {
+        description: 'Only artists can edit the talent profile.',
+        duration: 5000,
+      })
+      router.push('/')
+      return
+    }
+
     const fetchProfile = async () => {
       try {
         setError(null)
@@ -267,8 +276,10 @@ export default function EditTalentProfilePage() {
       }
     }
 
-    fetchProfile()
-  }, [user, router, supabase])
+    if (authProfile?.type === 'artist') {
+      fetchProfile()
+    }
+  }, [user, authProfile, router, supabase])
 
   if (loading) {
     return (

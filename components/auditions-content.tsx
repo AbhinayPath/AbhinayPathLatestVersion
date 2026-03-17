@@ -7,11 +7,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Search, Filter, MapPin, Calendar } from "lucide-react"
+import { Search, Filter, MapPin, CalendarIcon, Calendar, IndianRupee } from "lucide-react"
 import AuditionBanner from "@/components/audition-banner"
 
 export default function AuditionsContent() {
-  const [auditions, setAuditions] = useState([])
+  const [auditions, setAuditions] = useState<any[]>([])
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
   const [filters, setFilters] = useState({
   
     search: "",
@@ -22,7 +23,17 @@ export default function AuditionsContent() {
   })
   const [loader,setLoader] = useState(true)
 
-  
+  const toggleExpand = (id: string) => {
+    setExpandedIds(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(id)) {
+        newSet.delete(id)
+      } else {
+        newSet.add(id)
+      }
+      return newSet
+    })
+  }
 
   useEffect(() => {
     async function fetchAuditions() {
@@ -176,7 +187,9 @@ export default function AuditionsContent() {
       {/* Audition Cards */}
       {!loader ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredAuditions.length > 0 ? (
-          filteredAuditions.map((audition) => (
+          filteredAuditions.map((audition) => {
+            const isExpanded = expandedIds.has(audition.id);
+            return (
             <div
               key={audition.id}
               className="bg-white rounded-lg   overflow-hidden flex flex-col h-full card-hover"
@@ -198,44 +211,17 @@ export default function AuditionsContent() {
                   </div>
                 )}
               </div>
-              <div className="p-6 flex-1 flex flex-col space-y-3">
-                {/* Meta: Type and Location */}
-                <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap mb-3">
-                  {audition.type && (
-                    <Badge variant="secondary" className="capitalize text-xs">
-                      {String(audition.type).replace("-", " ")}
-                    </Badge>
-                  )}
-                  {(audition.location_mode === "city" ? audition.city : audition.location_mode === "online") && (
-                    <>
-                      <span>•</span>
-                      <span className="flex items-center gap-1">
-                        {audition.location_mode === "city" ? (
-                          <>
-                            <MapPin className="h-3 w-3 flex-shrink-0" />
-                            <span className="truncate">{audition.city || "City"}</span>
-                          </>
-                        ) : (
-                          <>
-                            {/* Globe icon intentionally omitted to keep imports minimal */}
-                            Online
-                          </>
-                        )}
-                      </span>
-                    </>
-                  )}
-                </div>
-
+              <div className="p-6 flex-1 flex flex-col space-y-4">
                 {/* Title */}
-                <h3 className="font-playfair text-xl font-bold text-gray-900 break-words mb-2">
+                <h3 className="font-playfair text-xl sm:text-2xl font-bold text-gray-900 break-words">
                   {audition.title || "Opportunity Title"}
                 </h3>
 
-                {/* Deadline and Venue/Platform */}
-                <div className="flex items-start gap-2 text-sm text-gray-600 flex-wrap mb-3">
+                {/* Deadline and Location Detail */}
+                <div className="flex items-start sm:items-center gap-2 text-sm text-gray-600 flex-wrap">
                   {audition.deadline && (
                     <>
-                      <Calendar className="h-4 w-4 flex-shrink-0" />
+                      <CalendarIcon className="h-4 w-4 flex-shrink-0" />
                       <span className="break-words">Deadline: {new Date(audition.deadline).toLocaleDateString()}</span>
                     </>
                   )}
@@ -253,66 +239,109 @@ export default function AuditionsContent() {
                   )}
                 </div>
 
-                {/* Description snippet */}
-                {audition.description && (
-                  <p className="text-gray-700 line-clamp-3 text-sm break-words mb-3">
-                    {audition.description}
-                  </p>
-                )}
+                {/* Other Audition Details (Description) */}
+                <div className="space-y-1">
+                  <h4 className="text-sm font-semibold text-gray-900">Description</h4>
+                  <div className="prose prose-sm max-w-none">
+                    {audition.description ? (
+                      <div className="text-gray-700 text-sm sm:text-base break-words min-w-full [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 space-y-2"
+                        dangerouslySetInnerHTML={{ __html: audition.description }} />
+                    ) : (
+                      <p className="text-gray-700 text-sm sm:text-base break-words">No description provided.</p>
+                    )}
+                  </div>
+                </div>
 
-                {/* Requirements */}
-                {(audition.gender_preference !== "any" || audition.age_min || audition.age_max || (Array.isArray(audition.languages) && audition.languages.length > 0) || audition.experience_required) && (
-                  <div className="space-y-2 pt-3">
-                    <h4 className="text-sm font-semibold text-gray-900">Requirements</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {audition.gender_preference && audition.gender_preference !== "any" && (
-                        <Badge variant="outline" className="capitalize text-xs">
-                          {String(audition.gender_preference).replace("-", " ")}
-                        </Badge>
-                      )}
-                      {(audition.age_min || audition.age_max) && (
-                        <Badge variant="outline" className="text-xs">
-                          Age: {audition.age_min || "?"}–{audition.age_max || "?"}
-                        </Badge>
-                      )}
-                      {Array.isArray(audition.languages) && audition.languages.map((lang: string) => (
-                        <Badge key={lang} variant="outline" className="text-xs">
-                          {lang}
-                        </Badge>
-                      ))}
-                      {audition.experience_required && (
-                        <Badge variant="outline" className="capitalize text-xs">
-                          {audition.experience_required}
-                        </Badge>
-                      )}
+                <Button 
+                  variant="ghost" 
+                  onClick={() => toggleExpand(audition.id)}
+                  className="w-full mt-2 text-primary hover:bg-purple-50 hover:text-purple-700 transition-colors"
+                >
+                  {isExpanded ? "Hide Details" : "More Details"}
+                </Button>
+
+                {/* Expanded Content View */}
+                {isExpanded && (
+                  <div className="animate-in slide-in-from-top-2 fade-in duration-300 space-y-4 pt-2">
+                    {/* Requirements */}
+                    {(audition.gender_preference !== "any" || audition.age_min || audition.age_max || (Array.isArray(audition.languages) && audition.languages.length > 0) || audition.experience_required || audition.roles_needed) && (
+                      <div className="space-y-2 pt-4 border-t">
+                        <h4 className="text-sm font-semibold text-gray-900">Requirements & Roles</h4>
+                        {audition.roles_needed ? (
+                          <div className="prose prose-sm max-w-none text-gray-700 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 space-y-2 mb-4"
+                            dangerouslySetInnerHTML={{ __html: audition.roles_needed }} />
+                        ) : (
+                          <div className="mb-2" />
+                        )}
+                        <div className="flex flex-wrap gap-2">
+                          {audition.gender_preference && audition.gender_preference !== "any" && (
+                            <Badge variant="outline" className="capitalize text-xs">
+                              {String(audition.gender_preference).replace("-", " ")}
+                            </Badge>
+                          )}
+                          {(audition.age_min || audition.age_max) && (
+                            <Badge variant="outline" className="text-xs">
+                              Age: {audition.age_min || "?"}–{audition.age_max || "?"}
+                            </Badge>
+                          )}
+                          {Array.isArray(audition.languages) && audition.languages.length > 0 && (
+                            <Badge variant="outline" className="text-xs">
+                              Languages Required: {audition.languages.join(", ")}
+                            </Badge>
+                          )}
+                          {audition.experience_required && (
+                            <Badge variant="outline" className="capitalize text-xs">
+                              {`Experience: ${audition.experience_required}`}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Pay */}
+                    <div className="flex items-center gap-2 text-sm pt-4 border-t">
+                      <IndianRupee className="h-4 w-4 text-gray-600 flex-shrink-0" />
+                      <span className="text-gray-900 font-medium break-words">
+                        {audition.pay_type === "not-specified" && "Not specified"}
+                        {audition.pay_type === "free" && "Free"}
+                        {audition.pay_type === "stipend" && (audition.pay_amount ? `Stipend: ₹${audition.pay_amount}` : "Stipend")}
+                        {audition.pay_type === "paid" && (audition.pay_amount ? `Paid: ₹${audition.pay_amount}` : "Paid")}
+                      </span>
+                    </div>
+
+                    {/* Contact Option conditionally */}
+                    {audition.application_method === "whatsapp" && audition.contact_info && (
+                      <div className="pt-4 border-t flex flex-col gap-1 items-start sm:items-center sm:justify-center text-sm text-gray-600">
+                        <span className="font-medium">Apply via WhatsApp at:</span>
+                        <span className="font-mono bg-green-50 text-green-700 px-3 py-1 rounded-full border border-green-200">{audition.contact_info}</span>
+                      </div>
+                    )}
+                    
+                    {audition.application_method === "email" && audition.contact_info && (
+                      <div className="pt-4 border-t flex flex-col gap-1 items-start sm:items-center sm:justify-center text-sm text-gray-600">
+                        <span className="font-medium">Apply via Email at:</span>
+                        <span className="font-mono bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-200 break-all">{audition.contact_info}</span>
+                      </div>
+                    )}
+
+                    {/* CTA */}
+                    <div className="flex justify-end mt-auto pt-4">
+                      <Link href={`/auditions/${audition.id}`} className="w-full">
+                        <Button className="w-full rounded-lg h-12 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-sm sm:text-base touch-manipulation">
+                          {audition.application_method === "platform"
+                            ? "Apply on Abhinayपथ"
+                            : audition.application_method === "whatsapp"
+                              ? "Apply via WhatsApp"
+                              : "Apply via Email"}
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 )}
-
-                {/* Pay */}
-                {(audition.pay_type || audition.pay_amount) && (
-                  <div className="flex items-center gap-2 text-sm pt-3 text-gray-900 font-medium">
-                    {/* Using text only to avoid adding new icon imports */}
-                    <span>
-                      {audition.pay_type === "not-specified" && "Not specified"}
-                      {audition.pay_type === "free" && "Free"}
-                      {audition.pay_type === "stipend" && (audition.pay_amount ? `Stipend: ₹${audition.pay_amount}` : "Stipend")}
-                      {audition.pay_type === "paid" && (audition.pay_amount ? `Paid: ₹${audition.pay_amount}` : "Paid")}
-                    </span>
-                  </div>
-                )}
-
-                {/* CTA */}
-                <div className="flex justify-end mt-auto pt-4">
-                  <Link href={`/auditions/${audition.id}`}>
-                    <Button size="sm" className="rounded-md">
-                      More Details
-                    </Button>
-                  </Link>
-                </div>
               </div>
             </div>
-          ))
+          );
+        })
         ) : (
           <div className="col-span-full text-center py-12">
             <p className="text-gray-500 mb-4">No auditions match your current filters.</p>

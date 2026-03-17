@@ -2,6 +2,7 @@
 import { z } from "zod";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import {
     Building2,
     MapPin,
@@ -26,7 +27,8 @@ import { CORE_AREAS, ORGANIZATION_TYPES, PRIMARY_LANGUAGES } from "@/constants/o
 import { MultiSelect } from "@/components/multi-select";
 import { registrationSchema } from "../schema/registrationschema";
 import { organisationEnhancedProfileSchema } from "../schema/organisationenhancedprofileschema";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { createClient } from "@supabase/supabase-js";
 
 export const mergedOrganisationSchema = registrationSchema.merge(organisationEnhancedProfileSchema);
 
@@ -43,6 +45,8 @@ export function MergedOrganisationForm({
     initialData: MergedOrganisationFormData;
     profileId: string;
 }) {
+    const [pincode, setPincode] = useState("");
+    const [isPincodeLoading, setIsPincodeLoading] = useState(false);
     const [productionImagePreviews, setProductionImagePreviews] = useState<{
         [key: number]: { url: string; isExisting: boolean }[];
     }>({});
@@ -57,7 +61,7 @@ export function MergedOrganisationForm({
         formState: { errors },
     } = useForm<MergedOrganisationFormData>({
         resolver: zodResolver(mergedOrganisationSchema),
-        defaultValues: {
+        defaultValues: initialData || {
             organisation_name: "",
             organisation_types: [],
             city: "",
@@ -76,9 +80,11 @@ export function MergedOrganisationForm({
         },
     });
 
+    const hasInitialized = useRef(false);
+
     // Initialize form with existing data and set up image previews
     useEffect(() => {
-        if (initialData) {
+        if (initialData && !hasInitialized.current) {
             console.log("initialData", initialData);
             reset(initialData);
             
@@ -95,8 +101,71 @@ export function MergedOrganisationForm({
                 });
                 setProductionImagePreviews(previews);
             }
+            hasInitialized.current = true;
         }
     }, [initialData, reset]);
+
+    // Auto-fill state/city on valid 6-digit pincode
+    useEffect(() => {
+        async function tryAutofill() {
+            const six = pincode.replace(/\D/g, "");
+            if (six.length !== 6) return;
+            
+            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
+            const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
+            if (!supabaseUrl || !supabaseAnonKey) return;
+
+            setIsPincodeLoading(true);
+            try {
+                const client = createClient(supabaseUrl, supabaseAnonKey);
+                // First try matching pincode as text
+                let { data, error } = await client
+                    .from("pincodes")
+                    .select("city, state")
+                    .eq("pincode", six)
+                    .limit(1);
+
+                if (error) {
+                    console.error("Pincode lookup error (text):", error);
+                }
+
+                let row: any | null = Array.isArray(data) && data.length > 0 ? data[0] : null;
+
+                // Fallback: try numeric column if text match fails
+                if (!row) {
+                    const parsed = parseInt(six, 10);
+                    if (!Number.isNaN(parsed)) {
+                        const res2 = await client
+                            .from("pincodes")
+                            .select("city, state")
+                            .eq("pincode_int", parsed)
+                            .limit(1);
+                        if (res2.error) {
+                            console.error("Pincode lookup error (int):", res2.error);
+                        }
+                        row = Array.isArray(res2.data) && res2.data.length > 0 ? res2.data[0] : null;
+                    }
+                }
+
+                if (row) {
+                    const stateValue = (row.state || "").trim();
+                    const cityValue = (row.city || "").trim();
+                    
+                    setValue("state", stateValue, { shouldValidate: true, shouldDirty: true });
+                    setValue("city", cityValue, { shouldValidate: true, shouldDirty: true });
+                    setValue("country", "India", { shouldValidate: true, shouldDirty: true });
+                    toast.success("Location auto-filled!");
+                } else {
+                    toast.error("Pincode not found");
+                }
+            } catch (err) {
+                console.error("Error fetching pincode:", err);
+            } finally {
+                setIsPincodeLoading(false);
+            }
+        }
+        tryAutofill();
+    }, [pincode, setValue]);
 
     const {
         fields: keyPeopleFields,
@@ -228,12 +297,28 @@ export function MergedOrganisationForm({
                     />
                 </FormField>
 
-                <div className="grid gap-6 md:grid-cols-3">
-                    <FormField label="City" error={errors.city?.message} required>
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <FormField label="Pincode" error={errors.city?.message}>
                         <div className="relative">
                             <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                            <Input id="city" placeholder="City" className="pl-10" {...register("city")} />
+                            <Input 
+                                id="pincode" 
+                                placeholder="6-digit pincode" 
+                                className="pl-10" 
+                                value={pincode}
+                                onChange={(e) => setPincode(e.target.value)}
+                                maxLength={6}
+                            />
+                            {isPincodeLoading && (
+                                <div className="absolute inset-y-0 right-3 flex items-center">
+                                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                                </div>
+                            )}
                         </div>
+                    </FormField>
+
+                    <FormField label="City" error={errors.city?.message} required>
+                        <Input id="city" placeholder="City" {...register("city")} />
                     </FormField>
 
                     <FormField label="State/Province" error={errors.state?.message} required>

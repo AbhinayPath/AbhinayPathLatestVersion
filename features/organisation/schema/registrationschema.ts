@@ -23,7 +23,7 @@ export const registrationSchema = z.object({
   instagram: urlSchema,
   short_description: z
     .string()
-    .max(300, "Short description must be less than 300 characters")
+    .max(500, "Short description must be less than 500 characters")
     .optional(),
 });
 

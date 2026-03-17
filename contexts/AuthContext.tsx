@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User } from '@supabase/supabase-js';
 import { getSupabaseBrowserClient } from '@/lib/supabase';
-import getPostLoginRedirect from '@/features/auth/components/LoginForm';
 import { useRouter } from 'next/navigation';
 
 interface Profile {
@@ -59,10 +58,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           const data = await res.json();
           setUser(data.user);
           setProfile(data.profile);
-          if (!data.profile.is_completed) {
-            const redirectPath = getPostLoginRedirect(data.profile);
-            router.push(redirectPath);
-          }
         } else {
           setUser(null);
           setProfile(null);

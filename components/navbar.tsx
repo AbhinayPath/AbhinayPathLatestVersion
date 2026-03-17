@@ -123,7 +123,13 @@ export default function Navbar() {
 
         {/* Auth Buttons */}
         <div className="hidden lg:flex items-center gap-4">
-          {user ? (
+          {loading ? (
+            <div className="flex items-center gap-4">
+              <div className="h-10 w-16 animate-pulse bg-gray-200 rounded-md" />
+              <div className="h-10 w-24 animate-pulse bg-gray-200 rounded-full" />
+              <div className="h-10 w-[150px] animate-pulse bg-gray-200 rounded-full" />
+            </div>
+          ) : user ? (
             <>
               <Link href="/post-opportunity">
                 <Button
@@ -199,7 +205,13 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="pt-4 border-t mt-2">
-              {user ? (
+              {loading ? (
+                <div className="space-y-2">
+                  <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md" />
+                  <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md" />
+                  <div className="h-[60px] w-full animate-pulse bg-gray-200 rounded-full" />
+                </div>
+              ) : user ? (
                 <div className="space-y-2">
                   <Link href="/post-opportunity" onClick={toggleMenu}>
                     <Button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">

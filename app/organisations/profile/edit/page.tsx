@@ -11,7 +11,7 @@ export default function OrganisationProfilePage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [initialData, setInitialData] = useState<any>(null);
     const router = useRouter();
-    
+
     useEffect(() => {
         const fetchOrganisation = async () => {
             try {
@@ -150,25 +150,15 @@ export default function OrganisationProfilePage() {
         )
     }
 
-    if (!initialData) {
-        return (
-            <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-purple-50 flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-muted-foreground">
-                        No organization data found.
-                    </p>
-                </div>
-            </div>
-        )
-    }
     const transformedData = transformApiDataToFormData(initialData);
+
     return (
         <div className="container mx-auto py-8">
             <MergedOrganisationForm
                 handleFormSubmit={handleFormSubmit}
                 isSubmitting={isSubmitting}
                 initialData={transformedData}
-                profileId={initialData?.profile_id}
+                profileId={initialData?.organisation?.profile_id || initialData?.profile_id || ''}
             />
         </div>
     );
@@ -176,6 +166,27 @@ export default function OrganisationProfilePage() {
 
 // Add this helper function where you're calling MergedOrganisationForm
 function transformApiDataToFormData(apiData: any) {
+    if (!apiData || !apiData.organisation) {
+        return {
+            organisation_name: '',
+            organisation_types: [],
+            city: '',
+            state: '',
+            country: '',
+            primary_languages: [],
+            core_work: [],
+            contact_email: '',
+            instagram: '',
+            short_description: '',
+            founded_year: '',
+            website: '',
+            youtube: '',
+            keyPeople: [],
+            pastProductions: [],
+            imagesToDelete: []
+        } as any;
+    }
+
     return {
         organisation_name: apiData.organisation.organisation_name || '',
         organisation_types: apiData.organisation.organisation_types || [],
@@ -192,12 +203,12 @@ function transformApiDataToFormData(apiData: any) {
         youtube: apiData.organisation.youtube || '',
         // Transform key people
         keyPeople: (apiData.organisation.organisation_key_people || []).map((person: any) => ({
-            name: person.name,
-            role: person.role
+            name: person.name || '',
+            role: person.role || ''
         })),
         // Transform past productions
         pastProductions: (apiData.organisation.organisation_past_productions || []).map((prod: any) => ({
-            name: prod.name,
+            name: prod.name || '',
             videoUrl: prod.video_url || '',
             imageUrls: prod.image_urls || [],
             images: [] // New files will be added here

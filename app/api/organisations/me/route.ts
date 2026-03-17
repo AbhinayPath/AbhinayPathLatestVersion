@@ -36,10 +36,13 @@ export async function GET() {
       .single();
 
 
-    if (orgError || !organisation) {
+    if (orgError) {
+      if (orgError.code === 'PGRST116') {
+        // Not found, which is fine if they haven't created it yet
+        return NextResponse.json({ organisation: null });
+      }
       throw new Error("Organisation not found for profile");
     }
-
 
     return NextResponse.json({ organisation });
   } catch (error) {
@@ -90,20 +93,6 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: "Profile not found" }, { status: 404 });
     }
 
-    // Check if organisation exists
-    const { data: organisation, error: orgError } = await supabase
-      .from("organisation_profiles")
-      .select("profile_id")
-      .eq("profile_id", profile.id)
-      .single();
-
-    if (orgError || !organisation) {
-      return NextResponse.json(
-        { error: "Organisation not found" },
-        { status: 404 }
-      );
-    }
-
     // Parse form data
     const dataStr = formData.get("data") as string;
     const data = JSON.parse(dataStr);
@@ -139,7 +128,8 @@ export async function PUT(req: NextRequest) {
     // 2. Update organisation profile
     const { error: updateOrgError } = await supabase
       .from("organisation_profiles")
-      .update({
+      .upsert({
+        profile_id: profile.id,
         organisation_name: data.organisation_name,
         organisation_types: data.organisation_types,
         city: data.city,
@@ -153,8 +143,7 @@ export async function PUT(req: NextRequest) {
         founded_year: data.founded_year,
         website: data.website,
         youtube: data.youtube,
-      })
-      .eq("profile_id", profile.id);
+      });
 
     if (updateOrgError) {
       console.error("Error updating organisation:", updateOrgError);
