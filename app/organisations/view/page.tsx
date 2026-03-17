@@ -1,7 +1,7 @@
 import { MapPin, Mail, Instagram, Globe, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getSupabaseServerClientForRouteHandler } from "@/lib/supabase-server";
+import { getSupabaseServerComponentClient } from "@/lib/supabase-server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { OrganisationData, OrganisationProfileView } from "@/features/organisation/components/OrganisationProfileView";
@@ -25,7 +25,7 @@ interface Organisation {
 }
 
 async function getOrganisationProfile(): Promise<Organisation | null> {
-  const supabase = await getSupabaseServerClientForRouteHandler();
+  const supabase = await getSupabaseServerComponentClient();
 
   const {
     data: { user },

@@ -1,19 +1,13 @@
 // DEPRECATED: Use lib/supabase-browser.ts for client/browser code and lib/supabase-server.ts for App Router/server code.
 // This file is kept for legacy reasons only. Do not import from here.
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { createClient, SupabaseClient } from "@supabase/supabase-js"
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import type { NextRequest } from 'next/server';
 
 // Create a single supabase client for the browser
 const createBrowserClient = (): SupabaseClient => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error("Missing Supabase environment variables")
-  }
-
-  return createClient(supabaseUrl, supabaseAnonKey)
+  return createClientComponentClient();
 }
 
 // Create a singleton instance for client-side
