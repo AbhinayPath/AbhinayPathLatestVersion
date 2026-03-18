@@ -1,8 +1,62 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, Construction } from "lucide-react"
+import Link from "next/link"
 
-export default function AboutPage() {
+// ===========================================
+// TEMPORARY DEACTIVATION FLAG
+// Set to false to reactivate the About page
+// ===========================================
+const IS_PAGE_DEACTIVATED = true
+
+function MaintenancePage() {
+  return (
+    <div className="container py-16 md:py-24">
+      <div className="max-w-2xl mx-auto text-center">
+        <div className="mb-8">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-amber-100 mb-6">
+            <Construction className="h-10 w-10 text-amber-600" />
+          </div>
+          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-[#2D1A54]">
+            Page Under Maintenance
+          </h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#2D1A54] to-[#7E1F2E] mx-auto mb-8"></div>
+        </div>
+
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 md:p-12 rounded-xl border-2 border-amber-200 mb-8">
+          <p className="text-lg md:text-xl leading-relaxed text-gray-700 mb-6">
+            The About page is currently unavailable as we are making improvements to enhance your experience.
+          </p>
+          <p className="text-base text-gray-600">
+            We apologize for any inconvenience. Please check back soon or explore other sections of Abhinayपथ.
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/">
+            <Button
+              size="lg"
+              className="rounded-full bg-[#2D1A54] hover:bg-[#231544] text-white px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
+            >
+              Return to Home
+            </Button>
+          </Link>
+          <Link href="/contact">
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full border-2 border-[#7E1F2E] text-[#7E1F2E] hover:bg-[#7E1F2E] hover:text-white px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
+            >
+              Contact Us
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function AboutContent() {
   return (
     <div className="container py-16 md:py-24">
       <div className="max-w-4xl mx-auto">
@@ -215,4 +269,13 @@ export default function AboutPage() {
       </div>
     </div>
   )
+}
+
+export default function AboutPage() {
+  // Toggle this flag to reactivate the page
+  if (IS_PAGE_DEACTIVATED) {
+    return <MaintenancePage />
+  }
+
+  return <AboutContent />
 }
