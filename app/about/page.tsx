@@ -7,7 +7,7 @@ import Link from "next/link"
 // TEMPORARY DEACTIVATION FLAG
 // Set to false to reactivate the About page
 // ===========================================
-const IS_PAGE_DEACTIVATED = true
+const IS_PAGE_DEACTIVATED = false
 
 function MaintenancePage() {
   return (
