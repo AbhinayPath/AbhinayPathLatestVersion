@@ -6,6 +6,7 @@ import "./globals.css"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from "@/components/analytics"
 
 
 const inter = Inter({
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
+        <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light">
           <div className="flex min-h-screen flex-col">
             <Suspense fallback={<div className="h-16 border-b bg-background/95 backdrop-blur"></div>}>

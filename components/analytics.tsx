@@ -1,46 +1,68 @@
-"use client"
+import Script from "next/script"
 
-import { useEffect, useState } from "react"
+// Google Analytics component using Next.js Script for proper loading
+export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
+  if (!measurementId) return null
 
-export function PlausibleAnalytics({ domain }: { domain: string }) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-    // Load Plausible script dynamically after mount
-    if (typeof window !== "undefined" && domain) {
-      const script = document.createElement("script")
-      script.defer = true
-      script.setAttribute("data-domain", domain)
-      script.src = "https://plausible.io/js/script.js"
-      document.head.appendChild(script)
-
-      return () => {
-        // Cleanup on unmount
-        if (script.parentNode) {
-          script.parentNode.removeChild(script)
-        }
-      }
-    }
-  }, [domain])
-
-  return null
+  return (
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${measurementId}', {
+            page_path: window.location.pathname,
+          });
+        `}
+      </Script>
+    </>
+  )
 }
 
-export function PostHogAnalytics({ apiKey }: { apiKey: string }) {
-  useEffect(() => {
-    // Initialize PostHog
-    if (typeof window !== "undefined") {
-      import("posthog-js").then((posthog) => {
-        posthog.default.init(apiKey, {
-          api_host: "https://app.posthog.com",
-          loaded: (ph) => {
-            if (process.env.NODE_ENV === "development") ph.opt_out_capturing()
-          },
-        })
-      })
-    }
-  }, [apiKey])
+// Plausible Analytics using Next.js Script
+export function PlausibleAnalytics({ domain }: { domain: string }) {
+  if (!domain) return null
 
-  return null
+  return (
+    <Script
+      defer
+      data-domain={domain}
+      src="https://plausible.io/js/script.js"
+      strategy="afterInteractive"
+    />
+  )
+}
+
+// PostHog Analytics using Next.js Script
+export function PostHogAnalytics({ apiKey }: { apiKey: string }) {
+  if (!apiKey) return null
+
+  return (
+    <Script id="posthog-analytics" strategy="afterInteractive">
+      {`
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('${apiKey}', {api_host: 'https://app.posthog.com'});
+      `}
+    </Script>
+  )
+}
+
+// Combined Analytics wrapper - add to layout.tsx
+export function Analytics() {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN
+  const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
+
+  return (
+    <>
+      {gaId && <GoogleAnalytics measurementId={gaId} />}
+      {plausibleDomain && <PlausibleAnalytics domain={plausibleDomain} />}
+      {posthogKey && <PostHogAnalytics apiKey={posthogKey} />}
+    </>
+  )
 }
