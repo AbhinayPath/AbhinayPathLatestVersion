@@ -2,45 +2,27 @@
 
 import { useEffect, useState } from "react"
 
-export function PlausibleAnalytics({ domain }: { domain: string }) {
-  const [mounted, setMounted] = useState(false)
+// Analytics wrapper that only loads Vercel Analytics in production environments
+// Completely avoids loading the analytics module in v0 preview to prevent script tag warnings
+export function Analytics() {
+  const [AnalyticsComponent, setAnalyticsComponent] = useState<React.ComponentType | null>(null)
 
   useEffect(() => {
-    setMounted(true)
-    // Load Plausible script dynamically after mount
-    if (typeof window !== "undefined" && domain) {
-      const script = document.createElement("script")
-      script.defer = true
-      script.setAttribute("data-domain", domain)
-      script.src = "https://plausible.io/js/script.js"
-      document.head.appendChild(script)
+    // Check if running in v0 preview environment
+    const isV0Preview = 
+      window.location.hostname.includes("vusercontent.net") || 
+      window.location.hostname.includes("v0.dev") ||
+      window.location.hostname === "localhost"
 
-      return () => {
-        // Cleanup on unmount
-        if (script.parentNode) {
-          script.parentNode.removeChild(script)
-        }
-      }
-    }
-  }, [domain])
-
-  return null
-}
-
-export function PostHogAnalytics({ apiKey }: { apiKey: string }) {
-  useEffect(() => {
-    // Initialize PostHog
-    if (typeof window !== "undefined") {
-      import("posthog-js").then((posthog) => {
-        posthog.default.init(apiKey, {
-          api_host: "https://app.posthog.com",
-          loaded: (ph) => {
-            if (process.env.NODE_ENV === "development") ph.opt_out_capturing()
-          },
-        })
+    // Only load analytics in production (deployed to Vercel)
+    if (!isV0Preview) {
+      import("@vercel/analytics/react").then((mod) => {
+        setAnalyticsComponent(() => mod.Analytics)
       })
     }
-  }, [apiKey])
+  }, [])
 
-  return null
+  if (!AnalyticsComponent) return null
+
+  return <AnalyticsComponent />
 }
