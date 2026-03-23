@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Share2, Copy, Check, X, MessageSquare, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -28,6 +28,22 @@ interface ShareWorkshopButtonProps {
   variant?: "icon" | "button"
   size?: "sm" | "default"
   shareType?: "workshop" | "page"
+}
+
+// Hook to detect mobile devices
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640 || "ontouchstart" in window)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  return isMobile
 }
 
 // Simple analytics tracking function
@@ -101,6 +117,8 @@ export function ShareWorkshopButton({
   const [showCustomizeModal, setShowCustomizeModal] = useState(false)
   const [customMessage, setCustomMessage] = useState("")
   const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null)
+  const [isOpen, setIsOpen] = useState(false)
+  const isMobile = useIsMobile()
 
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://abhinaypath.com"
   
@@ -133,6 +151,7 @@ export function ShareWorkshopButton({
   const openCustomizeModal = (platform: string) => {
     setSelectedPlatform(platform)
     setShowCustomizeModal(true)
+    setIsOpen(false)
   }
 
   const executeShare = (platform: string, withCustomMessage = false) => {
@@ -166,17 +185,50 @@ export function ShareWorkshopButton({
     setShowCustomizeModal(false)
   }
 
-  const shareToWhatsApp = () => openCustomizeModal("whatsapp")
-  const shareToFacebook = () => openCustomizeModal("facebook")
-  const shareToTwitter = () => openCustomizeModal("twitter")
-  const shareToTelegram = () => openCustomizeModal("telegram")
-  const shareToLinkedIn = () => openCustomizeModal("linkedin")
-  const shareToInstagram = () => openCustomizeModal("instagram")
+  // Direct share functions for quick access on mobile
+  const directShare = useCallback((platform: string) => {
+    const text = defaultShareText
+    trackShare(platform, workshopId, workshopTitle)
+    setIsOpen(false)
+    
+    switch (platform) {
+      case "whatsapp":
+        window.open(`https://wa.me/?text=${encodeURIComponent(`${text}\n\n${shareUrl}`)}`, "_blank")
+        break
+      case "facebook":
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(text)}`, "_blank")
+        break
+      case "twitter":
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, "_blank")
+        break
+      case "telegram":
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`, "_blank")
+        break
+      case "linkedin":
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, "_blank")
+        break
+      case "instagram":
+        navigator.clipboard.writeText(`${text}\n\n${shareUrl}`).then(() => {
+          setCopied(true)
+          setTimeout(() => setCopied(false), 2000)
+          window.open("https://www.instagram.com/", "_blank")
+        })
+        break
+    }
+  }, [defaultShareText, shareUrl, workshopId, workshopTitle])
+
+  const shareToWhatsApp = () => isMobile ? directShare("whatsapp") : openCustomizeModal("whatsapp")
+  const shareToFacebook = () => isMobile ? directShare("facebook") : openCustomizeModal("facebook")
+  const shareToTwitter = () => isMobile ? directShare("twitter") : openCustomizeModal("twitter")
+  const shareToTelegram = () => isMobile ? directShare("telegram") : openCustomizeModal("telegram")
+  const shareToLinkedIn = () => isMobile ? directShare("linkedin") : openCustomizeModal("linkedin")
+  const shareToInstagram = () => isMobile ? directShare("instagram") : openCustomizeModal("instagram")
 
   const nativeShare = async () => {
     if (navigator.share) {
       try {
         trackShare("native", workshopId, workshopTitle)
+        setIsOpen(false)
         await navigator.share({
           title: shareType === "workshop" ? workshopTitle || "Theatre Workshop" : "Theatre Workshops",
           text: getShareText(),
@@ -190,8 +242,11 @@ export function ShareWorkshopButton({
     }
   }
 
-  const buttonSize = size === "sm" ? "h-7 w-7 sm:h-8 sm:w-8" : "h-8 w-8 sm:h-10 sm:w-10"
-  const iconSize = size === "sm" ? "h-3.5 w-3.5 sm:h-4 sm:w-4" : "h-4 w-4 sm:h-5 sm:w-5"
+  // Mobile-optimized touch targets (minimum 44x44px for accessibility)
+  const buttonSize = size === "sm" 
+    ? "h-10 w-10 min-h-[44px] min-w-[44px] sm:h-8 sm:w-8 sm:min-h-0 sm:min-w-0" 
+    : "h-11 w-11 min-h-[44px] min-w-[44px] sm:h-10 sm:w-10 sm:min-h-0 sm:min-w-0"
+  const iconSize = size === "sm" ? "h-4 w-4 sm:h-4 sm:w-4" : "h-5 w-5 sm:h-5 sm:w-5"
 
   const getPlatformName = (platform: string) => {
     const names: Record<string, string> = {
@@ -205,98 +260,142 @@ export function ShareWorkshopButton({
     return names[platform] || platform
   }
 
+  // Check if native share is available
+  const hasNativeShare = typeof navigator !== "undefined" && navigator.share
+
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         {variant === "icon" ? (
           <Button
             size="icon"
             variant="outline"
-            className={`rounded-full bg-white/90 hover:bg-white border-gray-200 shadow-sm ${buttonSize}`}
+            className={`rounded-full bg-white/90 hover:bg-white active:bg-gray-100 border-gray-200 shadow-sm touch-manipulation ${buttonSize}`}
             title={shareType === "workshop" ? "Share Workshop" : "Share Workshops Page"}
+            aria-label={shareType === "workshop" ? "Share Workshop" : "Share Workshops Page"}
           >
             <Share2 className={`${iconSize} text-gray-600`} />
           </Button>
         ) : (
           <Button 
-            size="lg" 
             variant="outline" 
-            className="rounded-lg border-2 border-primary text-primary hover:bg-primary/10 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-6 font-semibold"
+            className="rounded-lg border-2 border-primary text-primary hover:bg-primary/10 active:bg-primary/20 text-sm sm:text-base h-11 sm:h-12 px-4 sm:px-6 font-semibold touch-manipulation min-h-[44px]"
           >
             <Share2 className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-            {shareType === "workshop" ? "Share Workshop" : "Share Page"}
+            <span className="whitespace-nowrap">{shareType === "workshop" ? "Share" : "Share Page"}</span>
           </Button>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-52 sm:w-56">
-        <DropdownMenuItem onClick={shareToWhatsApp} className="cursor-pointer text-xs sm:text-sm">
+      <DropdownMenuContent 
+        align="end" 
+        className="w-56 sm:w-56 max-h-[70vh] overflow-y-auto"
+        sideOffset={8}
+      >
+        {/* Native share option first on mobile for better UX */}
+        {hasNativeShare && isMobile && (
+          <>
+            <DropdownMenuItem 
+              onClick={nativeShare} 
+              className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation font-medium text-primary"
+            >
+              <Share2 className="h-5 w-5" />
+              <span className="ml-3">Share via...</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
+        <DropdownMenuItem 
+          onClick={shareToWhatsApp} 
+          className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+        >
           <WhatsAppIcon />
-          <span className="ml-2">WhatsApp</span>
+          <span className="ml-3">WhatsApp</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareToInstagram} className="cursor-pointer text-xs sm:text-sm">
+        <DropdownMenuItem 
+          onClick={shareToInstagram} 
+          className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+        >
           <InstagramIcon />
-          <span className="ml-2">Instagram</span>
+          <span className="ml-3">Instagram</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareToFacebook} className="cursor-pointer text-xs sm:text-sm">
+        <DropdownMenuItem 
+          onClick={shareToFacebook} 
+          className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+        >
           <FacebookIcon />
-          <span className="ml-2">Facebook</span>
+          <span className="ml-3">Facebook</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareToTwitter} className="cursor-pointer text-xs sm:text-sm">
+        <DropdownMenuItem 
+          onClick={shareToTwitter} 
+          className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+        >
           <XTwitterIcon />
-          <span className="ml-2">X (Twitter)</span>
+          <span className="ml-3">X (Twitter)</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareToTelegram} className="cursor-pointer text-xs sm:text-sm">
+        <DropdownMenuItem 
+          onClick={shareToTelegram} 
+          className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+        >
           <TelegramIcon />
-          <span className="ml-2">Telegram</span>
+          <span className="ml-3">Telegram</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareToLinkedIn} className="cursor-pointer text-xs sm:text-sm">
+        <DropdownMenuItem 
+          onClick={shareToLinkedIn} 
+          className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+        >
           <LinkedInIcon />
-          <span className="ml-2">LinkedIn</span>
+          <span className="ml-3">LinkedIn</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={copyToClipboard} className="cursor-pointer text-xs sm:text-sm">
+        <DropdownMenuItem 
+          onClick={copyToClipboard} 
+          className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+        >
           {copied ? (
             <>
-              <Check className="h-4 w-4 text-green-500" />
-              <span className="ml-2 text-green-500">Copied!</span>
+              <Check className="h-5 w-5 text-green-500" />
+              <span className="ml-3 text-green-500 font-medium">Copied!</span>
             </>
           ) : (
             <>
-              <Copy className="h-4 w-4" />
-              <span className="ml-2">Copy Link</span>
+              <Copy className="h-5 w-5" />
+              <span className="ml-3">Copy Link</span>
             </>
           )}
         </DropdownMenuItem>
-        {typeof navigator !== "undefined" && navigator.share && (
+        {hasNativeShare && !isMobile && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={nativeShare} className="cursor-pointer text-xs sm:text-sm">
-              <Share2 className="h-4 w-4" />
-              <span className="ml-2">More Options...</span>
+            <DropdownMenuItem 
+              onClick={nativeShare} 
+              className="cursor-pointer text-sm py-3 px-3 min-h-[44px] touch-manipulation"
+            >
+              <Share2 className="h-5 w-5" />
+              <span className="ml-3">More Options...</span>
             </DropdownMenuItem>
           </>
         )}
       </DropdownMenuContent>
 
-      {/* Customize Message Modal */}
+      {/* Customize Message Modal - Desktop only */}
       <Dialog open={showCustomizeModal} onOpenChange={setShowCustomizeModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="w-[calc(100%-2rem)] max-w-md mx-auto max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-primary" />
-              Share to {selectedPlatform && getPlatformName(selectedPlatform)}
+            <DialogTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <MessageSquare className="h-5 w-5 text-primary flex-shrink-0" />
+              <span>Share to {selectedPlatform && getPlatformName(selectedPlatform)}</span>
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-sm">
               Customize your message before sharing. Add a personal note to make it more engaging!
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4 py-4">
+          <div className="space-y-4 py-2 sm:py-4">
             {/* Preview Card */}
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <div className="flex items-start gap-3">
-                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="h-8 w-8 text-primary" />
+            <div className="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="font-semibold text-sm text-gray-900 truncate">
@@ -320,7 +419,7 @@ export function ShareWorkshopButton({
                 value={customMessage}
                 onChange={(e) => setCustomMessage(e.target.value)}
                 placeholder="Add your personal message..."
-                className="min-h-[100px] resize-none"
+                className="min-h-[80px] sm:min-h-[100px] resize-none text-sm"
                 maxLength={500}
               />
               <p className="text-xs text-gray-500 text-right">
@@ -336,7 +435,7 @@ export function ShareWorkshopButton({
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="text-xs h-7"
+                  className="text-xs h-8 sm:h-7 touch-manipulation"
                   onClick={() => setCustomMessage(`Hey! Check out this amazing theatre workshop: "${workshopTitle}" - I think you'd love it!`)}
                 >
                   Recommend to friend
@@ -345,7 +444,7 @@ export function ShareWorkshopButton({
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="text-xs h-7"
+                  className="text-xs h-8 sm:h-7 touch-manipulation"
                   onClick={() => setCustomMessage(`Looking to improve your acting skills? This workshop might be perfect: "${workshopTitle}"`)}
                 >
                   Skill improvement
@@ -354,7 +453,7 @@ export function ShareWorkshopButton({
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="text-xs h-7"
+                  className="text-xs h-8 sm:h-7 touch-manipulation"
                   onClick={() => setCustomMessage(defaultShareText)}
                 >
                   Reset to default
@@ -363,25 +462,25 @@ export function ShareWorkshopButton({
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex gap-2 justify-end">
+          {/* Action Buttons - Stacked on mobile */}
+          <div className="flex flex-col sm:flex-row gap-2 sm:justify-end pt-2">
             <Button
               variant="outline"
               onClick={() => setShowCustomizeModal(false)}
-              className="text-sm"
+              className="text-sm h-10 sm:h-9 touch-manipulation order-3 sm:order-1"
             >
               Cancel
             </Button>
             <Button
               variant="outline"
               onClick={() => selectedPlatform && executeShare(selectedPlatform, false)}
-              className="text-sm"
+              className="text-sm h-10 sm:h-9 touch-manipulation order-2"
             >
               Share Default
             </Button>
             <Button
               onClick={() => selectedPlatform && executeShare(selectedPlatform, true)}
-              className="text-sm bg-primary hover:bg-primary/90"
+              className="text-sm h-10 sm:h-9 bg-primary hover:bg-primary/90 touch-manipulation order-1 sm:order-3"
             >
               Share with Custom Message
             </Button>
