@@ -69,7 +69,7 @@ export default function JoinCommunityPage() {
             </a>
 
             <a
-              href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp"
+              href="https://chat.whatsapp.com/D2KB8C1km7pEMGDAKQdMh9"
               target="_blank"
               rel="noopener noreferrer"
               className="group"
@@ -252,7 +252,7 @@ export default function JoinCommunityPage() {
               </div>
               <h3 className="font-bold text-2xl mb-3">Join WhatsApp Group</h3>
               <p className="text-gray-800 mb-6">Connect directly with the community for updates and networking.</p>
-              <a href="https://chat.whatsapp.com/FNMVzWZsM6K3bt4DJZzvUp" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.whatsapp.com/D2KB8C1km7pEMGDAKQdMh9" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="w-full rounded-full bg-green-600 hover:bg-green-700 text-white">
                   Join WhatsApp Group <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
