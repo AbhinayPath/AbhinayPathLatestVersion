@@ -979,6 +979,30 @@ const workshops: Workshop[] = [
     tags: ["Short-term Workshop"],
     expiresOn: "2026-04-01", // Workshop date
   },
+  {
+    id: 39,
+    title: "Playful Connections III – Clowning Workshop",
+    trainer: "Workshop Facilitator",
+    institution: "Independent",
+    location: "Bangalore",
+    state: "Karnataka",
+    country: "India",
+    date: "April 4 & 5, 2026 (Sat–Sun)",
+    time: "10 AM – 5 PM",
+    description:
+      "A 2-day immersive workshop exploring clowning, play, and human connection through the red nose. No performance, no pressure — just play. Experience clowning & red nose work, theatre games & improvisation, deep connection & spontaneity, and letting go of overthinking.",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSdsHS_tEjHJumXokYw9YgIZREChYn_hjKXq2ntkIk9MdHBerw/viewform",
+    featured: false,
+    price: "₹1500 – ₹2500+ (Sliding Scale)",
+    contact: "Via registration form",
+    email: "Via registration form",
+    eligibility: "16+ | Beginners welcome",
+    venue: "Banashankari, Bangalore",
+    includes: "Clowning, red nose work, theatre games, improvisation, connection exercises",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-04-05", // Last day of workshop
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
