@@ -955,6 +955,54 @@ const workshops: Workshop[] = [
     tags: ["Short-term Workshop"],
     expiresOn: "2026-03-29", // Workshop end date
   },
+  {
+    id: 38,
+    title: "Tomfoolery! – Comedy & Theatre Games Workshop",
+    trainer: "Shivam",
+    institution: "What If Productions",
+    location: "Bangalore",
+    state: "Karnataka",
+    country: "India",
+    date: "Wednesday, April 1, 2026",
+    time: "7:30 PM – 9:00 PM",
+    description:
+      "A playful, beginner-friendly workshop exploring improvisation, theatre games, and clowning-inspired exercises. All about play — no pressure, no performance anxiety. Just show up, say 'Yes!', and be part of the ensemble.",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSePYaZ45OKb6JNAzV7-HKpjVMVBL0ZCaSMWPE7ZWOkg5wxPgg/viewform",
+    featured: false,
+    price: "Pay What You Like",
+    contact: "Via What If Productions",
+    email: "Via registration form",
+    eligibility: "Beginners welcome, 16+",
+    venue: "Beku – Cafe Bakery Bookstore, JP Nagar, Bangalore",
+    includes: "Theatre games, improvisation, clowning exercises, ensemble activities",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-04-01", // Workshop date
+  },
+  {
+    id: 39,
+    title: "Playful Connections III – Clowning Workshop",
+    trainer: "Workshop Facilitator",
+    institution: "Independent",
+    location: "Bangalore",
+    state: "Karnataka",
+    country: "India",
+    date: "April 4 & 5, 2026 (Sat–Sun)",
+    time: "10 AM – 5 PM",
+    description:
+      "A 2-day immersive workshop exploring clowning, play, and human connection through the red nose. No performance, no pressure — just play. Experience clowning & red nose work, theatre games & improvisation, deep connection & spontaneity, and letting go of overthinking.",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSdsHS_tEjHJumXokYw9YgIZREChYn_hjKXq2ntkIk9MdHBerw/viewform",
+    featured: false,
+    price: "₹1500 – ₹2500+ (Sliding Scale)",
+    contact: "Via registration form",
+    email: "Via registration form",
+    eligibility: "16+ | Beginners welcome",
+    venue: "Banashankari, Bangalore",
+    includes: "Clowning, red nose work, theatre games, improvisation, connection exercises",
+    category: "Acting & Performance",
+    tags: ["Short-term Workshop"],
+    expiresOn: "2026-04-05", // Last day of workshop
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
