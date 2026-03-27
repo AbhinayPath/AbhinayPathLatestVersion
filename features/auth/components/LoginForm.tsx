@@ -164,20 +164,10 @@ export function LoginForm() {
 
 
 export default function getPostLoginRedirect(profile: Profile): string {
-    if (profile.is_completed) {
-        return "/";
+    if (profile.type === "organisation") {
+        return profile.is_completed ? "/organisation/dashboard" : "/onboarding/organisation";
     }
-    switch (profile.type) {
-        case "organisation":
-            return "/onboarding/organisation";
-
-        case "artist":
-            return "/talent-profile";
-
-        case "technician":
-            return "/technician-profile";
-
-        default:
-            return "/";
-    }
+    
+    // For artists and technicians, redirect to the unified user dashboard
+    return "/dashboard";
 }
