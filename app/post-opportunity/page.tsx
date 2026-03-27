@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect, Suspense } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -40,7 +40,7 @@ import Link from "next/link"
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { INDIAN_STATES } from "@/lib/types/talent"
 import dynamic from 'next/dynamic'
-import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import { EditorState, convertToRaw, ContentState, convertFromHTML } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
@@ -62,9 +62,15 @@ const LANGUAGES = [
   "Punjabi",
 ]
 
-export default function PostOpportunityPage() {
+function PostOpportunityInner() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const opportunityId = searchParams.get("id")
   const supabase = createClientComponentClient()
+
+  const [isEditing, setIsEditing] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
+
 
   // Form state
   const [title, setTitle] = useState("")
@@ -125,13 +131,92 @@ export default function PostOpportunityPage() {
   // Calculate progress
   const [progress, setProgress] = useState(0)
 
+  // Fetch existing data if editing
+  useEffect(() => {
+    if (opportunityId) {
+      const fetchOpportunityData = async () => {
+        try {
+          setIsFetching(true)
+          const { data, error } = await supabase
+            .from('opportunities')
+            .select('*')
+            .eq('id', opportunityId)
+            .single()
+
+          if (error) throw error
+          if (data) {
+            setTitle(data.title || "")
+            setType(data.type || "")
+            if (data.deadline) setDeadline(new Date(data.deadline))
+            setLocationMode(data.location_mode || "city")
+            if (data.location_mode === 'city') {
+              setSelectedState(data.state || "")
+              setCity(data.city || "")
+              setVenue(data.venue || "")
+            } else {
+              setPlatform(data.platform || "")
+            }
+            
+            if (data.description) {
+              const blocksFromHTML = convertFromHTML(data.description)
+              const state = ContentState.createFromBlockArray(
+                blocksFromHTML.contentBlocks,
+                blocksFromHTML.entityMap,
+              )
+              setDescriptionState(EditorState.createWithContent(state))
+            }
+
+            setApplicationMethod(data.application_method || "platform")
+            if (data.application_method === 'whatsapp') setWhatsappNumber(data.contact_info || "")
+            if (data.application_method === 'email') setEmailAddress(data.contact_info || "")
+
+            if (data.roles_needed) {
+              const blocksFromHTML = convertFromHTML(data.roles_needed)
+              const state = ContentState.createFromBlockArray(
+                blocksFromHTML.contentBlocks,
+                blocksFromHTML.entityMap,
+              )
+              setRolesRequirement(EditorState.createWithContent(state))
+            }
+
+            setGenderPreference(data.gender_preference || "any")
+            setAgeMin(data.age_min?.toString() || "")
+            setAgeMax(data.age_max?.toString() || "")
+            setSelectedLanguages(data.languages || [])
+            setExperience(data.experience_required || "")
+            setPayType(data.pay_type || "not-specified")
+            setPayAmount(data.pay_amount?.toString() || "")
+            setRequestPhotos(data.request_photos || false)
+            setPhotoHelperText(data.photo_helper_text || "")
+            setRequestVideos(data.request_videos || false)
+            setVideoHelperText(data.video_helper_text || "")
+            
+            setIsEditing(true)
+            setConsent1(true)
+            setConsent2(true)
+          }
+        } catch (error) {
+          console.error("Error fetching opportunity data:", error)
+          toast.error("Failed to load audition data")
+        } finally {
+          setIsFetching(false)
+        }
+      }
+      fetchOpportunityData()
+    }
+  }, [opportunityId, supabase])
+
   // Handle initial loading
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (!opportunityId) {
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+      return () => clearTimeout(timer)
+    } else if (!isFetching) {
       setIsLoading(false)
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [])
+    }
+  }, [opportunityId, isFetching])
 
   useEffect(() => {
     const hasDescription = descriptionState.getCurrentContent().hasText()
@@ -296,13 +381,13 @@ export default function PostOpportunityPage() {
         status: 'published'
       }
 
-      // Make API call to create opportunity
+      // Make API call to create or update opportunity
       const response = await fetch('/api/opportunities', {
-        method: 'POST',
+        method: isEditing ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(opportunityData),
+        body: JSON.stringify(isEditing ? { ...opportunityData, id: opportunityId } : opportunityData),
       })
 
       const result = await response.json()
@@ -311,7 +396,7 @@ export default function PostOpportunityPage() {
         throw new Error(result.error || 'Failed to publish opportunity')
       }
 
-      toast.success("Opportunity published successfully!")
+      toast.success(isEditing ? "Opportunity updated successfully!" : "Opportunity published successfully!")
 
       // Redirect to the auditions page
       router.push(`/auditions`)
@@ -1024,7 +1109,7 @@ export default function PostOpportunityPage() {
                 ) : (
                   <>
                     <CheckCircle2 className="mr-2 h-5 w-5 flex-shrink-0" />
-                    Publish Opportunity
+                    {isEditing ? 'Update Opportunity' : 'Publish Opportunity'}
                   </>
                 )}
               </Button>
@@ -1289,5 +1374,17 @@ export default function PostOpportunityPage() {
         </footer>
       </div>
     </div>
+  )
+}
+
+export default function PostOpportunityPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex h-screen items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
+      </div>
+    }>
+      <PostOpportunityInner />
+    </Suspense>
   )
 }
