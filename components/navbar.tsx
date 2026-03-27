@@ -16,8 +16,8 @@ import { useAuthActions } from "@/hooks/useAuthActions"
 
 const PROFILE_EDIT_CONFIG = {
   artist: {
-    label: "Edit Talent Profile",
-    editRoute: "/talent-profile",
+    label: "Dashboard",
+    editRoute: "/dashboard",
   },
   organisation: {
     label: "Dashboard",
@@ -79,15 +79,16 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ];
 
-  // Add Dashboard for casting directors
-
-  const navItemsWithDashboard: NavItem[] =
-    user && user.user_metadata?.profession?.toLowerCase() === "director"
-      ? [
-        ...navItems,
-        { name: "Dashboard", href: "/casting" },
-      ]
-      : navItems;
+  let navItemsWithDashboard: NavItem[] = [...navItems];
+  if (user) {
+    if (user.user_metadata?.profession?.toLowerCase() === "director") {
+      navItemsWithDashboard.push({ name: "Dashboard", href: "/casting" });
+    } else if (profile?.type !== "organisation") {
+      navItemsWithDashboard.push({ name: "Dashboard", href: "/dashboard" });
+    } else if (profile?.type === "organisation") {
+      navItemsWithDashboard.push({ name: "Dashboard", href: "/organisation/dashboard" });
+    }
+  }
   const editProfileConfig = profile?.type
     ? PROFILE_EDIT_CONFIG[profile?.type]
     : null;
@@ -131,15 +132,17 @@ export default function Navbar() {
             </div>
           ) : user ? (
             <>
-              <Link href="/post-opportunity">
-                <Button
-                  size="sm"
-                  className="rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg"
-                >
-                  <Plus className="h-4 w-4 mr-1" />
-                  Post Opportunity
-                </Button>
-              </Link>
+              {profile?.type === 'organisation' && (
+                <Link href="/post-opportunity">
+                  <Button
+                    size="sm"
+                    className="rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg"
+                  >
+                    <Plus className="h-4 w-4 mr-1" />
+                    Post Opportunity
+                  </Button>
+                </Link>
+              )}
               <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
                 <DropdownMenuTrigger asChild>
                   <div className="cursor-pointer">
@@ -193,7 +196,7 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="lg:hidden border-t">
           <div className="container py-4 flex flex-col gap-4">
-            {navItems.map((item) => (
+            {navItemsWithDashboard.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -213,12 +216,14 @@ export default function Navbar() {
                 </div>
               ) : user ? (
                 <div className="space-y-2">
-                  <Link href="/post-opportunity" onClick={toggleMenu}>
-                    <Button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
-                      <Plus className="mr-2 h-4 w-4" />
-                      Post Opportunity
-                    </Button>
-                  </Link>
+                  {profile?.type === 'organisation' && (
+                    <Link href="/post-opportunity" onClick={toggleMenu}>
+                      <Button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
+                        <Plus className="mr-2 h-4 w-4" />
+                        Post Opportunity
+                      </Button>
+                    </Link>
+                  )}
                   <Button
                     variant="outline"
                     onClick={() => {
