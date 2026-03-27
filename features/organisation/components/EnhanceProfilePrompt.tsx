@@ -1,15 +1,6 @@
-import { Sparkles, ArrowRight, Clock, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
-const EnhanceProfilePrompt = ({organisationName}: {organisationName: string}) => {
-  const router =useRouter();
-  const handleEnhance = () => {
-    router.push("/organisations/profile/edit#enhanced-profile");
-  };
-  const handleSkip = () => {
-    router.push("/organisations/view");
-  };
+
+const EnhanceProfilePrompt = ({ organisationName }: { organisationName: string }) => {
 
   return (
     <div className="bg-background flex items-center justify-center p-6">
@@ -49,61 +40,14 @@ const EnhanceProfilePrompt = ({organisationName}: {organisationName: string}) =>
           </div>
 
           {/* Enhance Prompt */}
-          <div className="bg-gradient-to-br from-gold/10 to-gold/5 border border-gold/20 rounded-xl p-6 space-y-4">
-            <div className="flex items-center justify-center gap-2 text-accent-foreground">
-              <Sparkles className="w-5 h-5 text-gold" />
-              <span className="font-medium">Enhance Your Profile</span>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Add more details to increase visibility and attract more opportunities on Abhinaypath.
-            </p>
-            <ul className="text-sm text-left space-y-2">
-              <li className="flex items-center gap-2">
-                <ChevronRight className="w-4 h-4 text-gold" />
-                <span>Founded year & website</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <ChevronRight className="w-4 h-4 text-gold" />
-                <span>Key team members</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <ChevronRight className="w-4 h-4 text-gold" />
-                <span>Past productions & gallery</span>
-              </li>
-            </ul>
-          </div>
+
 
           {/* Actions */}
-          <div className="space-y-3 pt-2">
-            <Button
-              onClick={handleEnhance}
-              className="w-full h-12 text-base font-medium rounded-xl group"
-            >
-              <Sparkles className="mr-2 w-5 h-5" />
-              Enhance Profile Now
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            
-            <Button
-              variant="ghost"
-              onClick={handleSkip}
-              className="w-full h-12 text-muted-foreground hover:text-foreground"
-            >
-              <Clock className="mr-2 w-4 h-4" />
-              I'll do this later
-            </Button>
-          </div>
+
         </div>
 
         {/* Quick Link */}
-        <p className="text-center text-sm text-muted-foreground mt-6">
-          You can always update your profile from the{" "}
-          <button
-            className="text-primary hover:underline"
-          >
-            profile settings
-          </button>
-        </p>
+
       </div>
     </div>
   );

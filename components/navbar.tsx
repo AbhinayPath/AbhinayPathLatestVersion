@@ -20,8 +20,8 @@ const PROFILE_EDIT_CONFIG = {
     editRoute: "/talent-profile",
   },
   organisation: {
-    label: "Edit Organisation Profile",
-    editRoute: "/organisations/profile/edit",
+    label: "Dashboard",
+    editRoute: "/organisation/dashboard",
   },
   technician: {
     label: "Edit technician Profile",

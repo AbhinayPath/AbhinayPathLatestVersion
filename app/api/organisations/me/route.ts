@@ -265,6 +265,12 @@ export async function PUT(req: NextRequest) {
       }
     }
 
+    // 5. Update profile completion percentage
+    await supabase
+      .from("profiles")
+      .update({ completion_percentage: 55 })
+      .eq("id", profile.id);
+
     console.log("=== Update successful ===");
     return NextResponse.json({ success: true });
   } catch (error) {
