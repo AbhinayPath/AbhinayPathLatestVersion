@@ -820,6 +820,30 @@ export const festivals: Festival[] = [
     tags: ["USA", "Cleveland", "international"],
   },
 
+  // Script & Playwriting Competition
+  {
+    id: "inciting-incident-2026",
+    name: "Inciting Incident – Script & Playwriting Competition 2026",
+    city: "Online",
+    country: "International",
+    languages: "All languages accepted (English preferred)",
+    scale: "International",
+    duration: "Ongoing submissions",
+    month: "May",
+    dates: "2026 (Multiple deadlines)",
+    submissionDeadline: "31 May 2026",
+    status: "open",
+    selectionProcess: "Submission review via FilmFreeway",
+    eligibility: "Open to writers worldwide. Accepted formats: Short Screenplays, Feature Screenplays, Short Scripts, Plays (up to ~15 pages)",
+    registrationFee: "Paid submission (fee varies by deadline tier)",
+    description:
+      "An international writing competition inviting storytellers to submit screenplays, short scripts, and plays centered around powerful narrative turning points — the 'inciting incident.' Ideal for theatre writers, playwrights, aspiring screenwriters, actors exploring writing, directors developing original scripts, and storytellers interested in narrative craft. Winners receive official selections, category-wise awards, recognition from industry professionals, and exposure within the writing community.",
+    link: "https://filmfreeway.com/IncitingIncident-1",
+    featured: false,
+    category: "competition",
+    tags: ["playwriting", "screenwriting", "script competition", "international", "FilmFreeway"],
+  },
+
 ]
 
 /**
