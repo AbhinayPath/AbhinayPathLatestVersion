@@ -1003,6 +1003,30 @@ const workshops: Workshop[] = [
     tags: ["Short-term Workshop"],
     expiresOn: "2026-04-05", // Last day of workshop
   },
+  {
+    id: 40,
+    title: "InteRussia Theatre Arts Fellowship 2026",
+    trainer: "GITIS Faculty & Russian Theatre Professionals",
+    institution: "InteRussia Programme (Gorchakov Fund, GITIS & TV BRICS)",
+    location: "Moscow",
+    state: "Moscow",
+    country: "Russia",
+    date: "24 Aug – 3 Oct 2026 (~6 weeks)",
+    time: "Full-time Program",
+    description:
+      "A fully funded international theatre fellowship in Moscow offering actors from BRICS+ countries an immersive experience in Russian theatre practices, workshops, and performance exposure. Includes round-trip travel, accommodation, scholarship, and access to leading Moscow theatres.",
+    registrationLink: "https://interussia.com/announce_en/tpost/yler4o9cj1-call-for-applications-interussia-theatre",
+    featured: true,
+    price: "Fully Funded (Meals & Insurance not included)",
+    contact: "InteRussia Programme",
+    email: "Via registration portal",
+    eligibility: "Age 21-35, BRICS+ countries, Theatre/Film students or young professionals, English B2+",
+    venue: "Moscow, Russia (GITIS & partner venues)",
+    includes: "Round-trip travel, accommodation, scholarship (~45,000 rubles), workshops, theatre access",
+    category: "Fellowship & Seminars",
+    tags: ["Fellowship", "International"],
+    expiresOn: "2026-05-31", // Application deadline
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
