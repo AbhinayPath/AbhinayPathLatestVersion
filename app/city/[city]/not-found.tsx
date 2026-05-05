@@ -18,7 +18,7 @@ export default function CityNotFound() {
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {SUPPORTED_CITIES.slice(0, 10).map((city) => (
             <Button key={city.slug} variant="outline" size="sm" asChild>
-              <Link href={`/${city.slug}/theatre-workshops`}>{city.name}</Link>
+              <Link href={`/city/${city.slug}/theatre-workshops`}>{city.name}</Link>
             </Button>
           ))}
         </div>

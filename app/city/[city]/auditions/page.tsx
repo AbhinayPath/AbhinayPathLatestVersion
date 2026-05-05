@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title,
       description,
-      url: `https://www.abhinaypath.com/${citySlug}/auditions`,
+      url: `https://www.abhinaypath.com/city/${citySlug}/auditions`,
       siteName: "AbhinayPath",
       type: "website",
       images: [
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
     },
     alternates: {
-      canonical: `https://www.abhinaypath.com/${citySlug}/auditions`,
+      canonical: `https://www.abhinaypath.com/city/${citySlug}/auditions`,
     },
   }
 }
@@ -97,8 +97,8 @@ export default async function CityAuditionsPage({ params }: PageProps) {
   const faqSchema = generateFAQSchema(faqs)
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: "https://www.abhinaypath.com" },
-    { name: city.name, url: `https://www.abhinaypath.com/${citySlug}` },
-    { name: "Auditions", url: `https://www.abhinaypath.com/${citySlug}/auditions` },
+    { name: city.name, url: `https://www.abhinaypath.com/city/${citySlug}` },
+    { name: "Auditions", url: `https://www.abhinaypath.com/city/${citySlug}/auditions` },
   ])
 
   // Get other cities for internal linking
@@ -132,7 +132,9 @@ export default async function CityAuditionsPage({ params }: PageProps) {
               </li>
               <ChevronRight className="h-4 w-4 mx-2" />
               <li>
-                <span className="text-foreground">{city.name}</span>
+                <Link href={`/city/${citySlug}`} className="hover:text-primary transition-colors">
+                  {city.name}
+                </Link>
               </li>
               <ChevronRight className="h-4 w-4 mx-2" />
               <li>
@@ -258,10 +260,10 @@ export default async function CityAuditionsPage({ params }: PageProps) {
               </h2>
               <div className="flex flex-wrap gap-3">
                 <Button variant="outline" asChild>
-                  <Link href={`/${citySlug}/theatre-workshops`}>Workshops in {city.name}</Link>
+                  <Link href={`/city/${citySlug}/theatre-workshops`}>Workshops in {city.name}</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link href={`/${citySlug}/theatre-festivals`}>Festivals in {city.name}</Link>
+                  <Link href={`/city/${citySlug}/theatre-festivals`}>Festivals in {city.name}</Link>
                 </Button>
               </div>
             </div>
@@ -274,7 +276,7 @@ export default async function CityAuditionsPage({ params }: PageProps) {
               <div className="flex flex-wrap gap-3">
                 {otherCities.map((otherCity) => (
                   <Button key={otherCity.slug} variant="outline" size="sm" asChild>
-                    <Link href={`/${otherCity.slug}/auditions`}>
+                    <Link href={`/city/${otherCity.slug}/auditions`}>
                       {otherCity.name}
                     </Link>
                   </Button>

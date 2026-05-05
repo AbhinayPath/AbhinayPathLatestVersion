@@ -10,7 +10,6 @@ import {
   generateOrganizationSchema,
   generateBreadcrumbSchema,
   SUPPORTED_CITIES,
-  CATEGORIES,
 } from "@/lib/seo-utils"
 
 interface PageProps {
@@ -40,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title,
       description,
-      url: `https://www.abhinaypath.com/${citySlug}`,
+      url: `https://www.abhinaypath.com/city/${citySlug}`,
       siteName: "AbhinayPath",
       type: "website",
     },
@@ -50,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
     },
     alternates: {
-      canonical: `https://www.abhinaypath.com/${citySlug}`,
+      canonical: `https://www.abhinaypath.com/city/${citySlug}`,
     },
   }
 }
@@ -67,7 +66,7 @@ export default async function CityLandingPage({ params }: PageProps) {
   const organizationSchema = generateOrganizationSchema()
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: "https://www.abhinaypath.com" },
-    { name: city.name, url: `https://www.abhinaypath.com/${citySlug}` },
+    { name: city.name, url: `https://www.abhinaypath.com/city/${citySlug}` },
   ])
 
   // Get other cities for internal linking
@@ -78,22 +77,22 @@ export default async function CityLandingPage({ params }: PageProps) {
       title: "Theatre Workshops",
       description: `Find acting classes, theatre training programs, and skill development workshops in ${city.name}.`,
       icon: Theater,
-      href: `/${citySlug}/theatre-workshops`,
-      color: "bg-blue-50 text-blue-700",
+      href: `/city/${citySlug}/theatre-workshops`,
+      color: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
     },
     {
       title: "Auditions",
       description: `Discover theatre and film auditions, casting calls, and performance opportunities in ${city.name}.`,
       icon: Sparkles,
-      href: `/${citySlug}/auditions`,
-      color: "bg-purple-50 text-purple-700",
+      href: `/city/${citySlug}/auditions`,
+      color: "bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300",
     },
     {
       title: "Theatre Festivals",
       description: `Explore theatre festivals, drama competitions, and cultural events happening in ${city.name}.`,
       icon: Calendar,
-      href: `/${citySlug}/theatre-festivals`,
-      color: "bg-amber-50 text-amber-700",
+      href: `/city/${citySlug}/theatre-festivals`,
+      color: "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
     },
   ]
 
@@ -185,7 +184,7 @@ export default async function CityLandingPage({ params }: PageProps) {
             <div className="flex flex-wrap justify-center gap-3">
               {otherCities.map((otherCity) => (
                 <Button key={otherCity.slug} variant="outline" size="sm" asChild>
-                  <Link href={`/${otherCity.slug}`}>{otherCity.name}</Link>
+                  <Link href={`/city/${otherCity.slug}`}>{otherCity.name}</Link>
                 </Button>
               ))}
             </div>

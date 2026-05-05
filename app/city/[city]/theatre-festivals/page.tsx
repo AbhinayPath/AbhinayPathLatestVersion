@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ChevronRight, MapPin, Calendar, Clock, ExternalLink } from "lucide-react"
+import { ChevronRight, MapPin, Calendar, Globe, Clock, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   getCityBySlug,
   getAllCitySlugs,
@@ -17,11 +18,10 @@ import {
   CATEGORIES,
   SUPPORTED_CITIES,
   matchesCity,
-  type FAQ,
 } from "@/lib/seo-utils"
 
-// Import workshops data (we'll extract this from the component)
-import { getWorkshopsData } from "@/lib/data/workshops-data"
+// Import festivals data
+import { festivals as allFestivals, STATUS_CONFIG, getScaleColor } from "@/lib/data/events"
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "City Not Found | AbhinayPath" }
   }
 
-  const category = CATEGORIES["theatre-workshops"]
+  const category = CATEGORIES["theatre-festivals"]
   const title = generateSEOTitle(city.name, category)
   const description = generateMetaDescription(city.name, category)
 
@@ -51,15 +51,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title,
       description,
-      url: `https://www.abhinaypath.com/${citySlug}/theatre-workshops`,
+      url: `https://www.abhinaypath.com/city/${citySlug}/theatre-festivals`,
       siteName: "AbhinayPath",
       type: "website",
       images: [
         {
-          url: "https://www.abhinaypath.com/images/acting-workshop.png",
+          url: "https://www.abhinaypath.com/images/events-hero.png",
           width: 1200,
           height: 630,
-          alt: `Theatre Workshops in ${city.name}`,
+          alt: `Theatre Festivals in ${city.name}`,
         },
       ],
     },
@@ -69,12 +69,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
     },
     alternates: {
-      canonical: `https://www.abhinaypath.com/${citySlug}/theatre-workshops`,
+      canonical: `https://www.abhinaypath.com/city/${citySlug}/theatre-festivals`,
     },
   }
 }
 
-export default async function CityWorkshopsPage({ params }: PageProps) {
+export default async function CityFestivalsPage({ params }: PageProps) {
   const { city: citySlug } = await params
   const city = getCityBySlug(citySlug)
 
@@ -82,23 +82,22 @@ export default async function CityWorkshopsPage({ params }: PageProps) {
     notFound()
   }
 
-  const category = CATEGORIES["theatre-workshops"]
-  const allWorkshops = getWorkshopsData()
+  const category = CATEGORIES["theatre-festivals"]
 
-  // Filter workshops by city (server-side)
-  const cityWorkshops = allWorkshops.filter((workshop) => matchesCity(workshop.location, citySlug))
+  // Filter festivals by city (server-side)
+  const cityFestivals = allFestivals.filter((festival) => matchesCity(festival.city, citySlug))
 
   // Generate SEO content
-  const seoIntro = generateSEOIntro(city.name, "theatre-workshops")
-  const faqs = generateFAQs(city.name, "theatre-workshops")
+  const seoIntro = generateSEOIntro(city.name, "theatre-festivals")
+  const faqs = generateFAQs(city.name, "theatre-festivals")
 
   // Generate structured data
   const organizationSchema = generateOrganizationSchema()
   const faqSchema = generateFAQSchema(faqs)
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: "https://www.abhinaypath.com" },
-    { name: city.name, url: `https://www.abhinaypath.com/${citySlug}` },
-    { name: "Theatre Workshops", url: `https://www.abhinaypath.com/${citySlug}/theatre-workshops` },
+    { name: city.name, url: `https://www.abhinaypath.com/city/${citySlug}` },
+    { name: "Theatre Festivals", url: `https://www.abhinaypath.com/city/${citySlug}/theatre-festivals` },
   ])
 
   // Get other cities for internal linking
@@ -132,11 +131,13 @@ export default async function CityWorkshopsPage({ params }: PageProps) {
               </li>
               <ChevronRight className="h-4 w-4 mx-2" />
               <li>
-                <span className="text-foreground">{city.name}</span>
+                <Link href={`/city/${citySlug}`} className="hover:text-primary transition-colors">
+                  {city.name}
+                </Link>
               </li>
               <ChevronRight className="h-4 w-4 mx-2" />
               <li>
-                <span className="text-foreground font-medium">Theatre Workshops</span>
+                <span className="text-foreground font-medium">Theatre Festivals</span>
               </li>
             </ol>
           </div>
@@ -146,7 +147,7 @@ export default async function CityWorkshopsPage({ params }: PageProps) {
         <section className="bg-gradient-to-b from-primary/5 to-background py-12 md:py-16">
           <div className="container mx-auto px-4">
             <h1 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Theatre Workshops in {city.name}
+              Theatre Festivals &amp; Events in {city.name}
             </h1>
             <p className="text-lg text-muted-foreground max-w-4xl leading-relaxed">
               {seoIntro}
@@ -154,67 +155,72 @@ export default async function CityWorkshopsPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Workshop Listings */}
+        {/* Festival Listings */}
         <section className="py-12">
           <div className="container mx-auto px-4">
             <h2 className="font-playfair text-2xl md:text-3xl font-bold mb-8">
-              {cityWorkshops.length > 0
-                ? `${cityWorkshops.length} Workshop${cityWorkshops.length !== 1 ? "s" : ""} in ${city.name}`
-                : `No Active Workshops in ${city.name}`}
+              {cityFestivals.length > 0
+                ? `${cityFestivals.length} Festival${cityFestivals.length !== 1 ? "s" : ""} in ${city.name}`
+                : `No Upcoming Festivals in ${city.name}`}
             </h2>
 
-            {cityWorkshops.length > 0 ? (
+            {cityFestivals.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cityWorkshops.map((workshop) => (
-                  <Card key={workshop.id} className="hover:shadow-lg transition-shadow">
-                    <CardHeader>
-                      <CardTitle className="line-clamp-2 text-lg">{workshop.title}</CardTitle>
-                      <CardDescription>{workshop.institution}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
-                        <span>
-                          {workshop.location}, {workshop.state}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
-                        <span>{workshop.date}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
-                        <span>{workshop.time}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground line-clamp-2">
-                        {workshop.description}
-                      </p>
-                      <div className="flex items-center justify-between pt-2">
-                        <span className="font-semibold text-primary">{workshop.price}</span>
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" asChild>
-                            <Link href={`/workshops/${workshop.id}`}>Details</Link>
-                          </Button>
-                          <Button size="sm" asChild>
-                            <Link href={workshop.registrationLink} target="_blank">
-                              Register <ExternalLink className="h-3 w-3 ml-1" />
+                {cityFestivals.map((festival) => {
+                  const statusConfig = STATUS_CONFIG[festival.status] || STATUS_CONFIG.open
+                  const scaleColor = getScaleColor(festival.scale)
+
+                  return (
+                    <Card key={festival.id} className="hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <Badge className={statusConfig.color}>{statusConfig.shortLabel}</Badge>
+                          <Badge className={scaleColor}>{festival.scale}</Badge>
+                        </div>
+                        <CardTitle className="line-clamp-2 text-lg">{festival.name}</CardTitle>
+                        <CardDescription>{festival.country}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+                          <span>{festival.city}</span>
+                        </div>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
+                          <span>{festival.dates}</span>
+                        </div>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
+                          <span>Deadline: {festival.submissionDeadline}</span>
+                        </div>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Globe className="h-4 w-4 mr-2 flex-shrink-0" />
+                          <span>{festival.languages}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {festival.description}
+                        </p>
+                        <div className="pt-2">
+                          <Button size="sm" className="w-full" asChild>
+                            <Link href={festival.link} target="_blank">
+                              Learn More <ExternalLink className="h-3 w-3 ml-1" />
                             </Link>
                           </Button>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      </CardContent>
+                    </Card>
+                  )
+                })}
               </div>
             ) : (
               <Card className="text-center py-12">
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    No workshops are currently scheduled in {city.name}. Check back soon or explore
-                    workshops in other cities.
+                    No festivals are currently scheduled in {city.name}. Check back soon or explore
+                    festivals in other cities and countries.
                   </p>
                   <Button asChild>
-                    <Link href="/workshops">View All Workshops</Link>
+                    <Link href="/events">View All Festivals</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -253,10 +259,10 @@ export default async function CityWorkshopsPage({ params }: PageProps) {
               </h2>
               <div className="flex flex-wrap gap-3">
                 <Button variant="outline" asChild>
-                  <Link href={`/${citySlug}/auditions`}>Auditions in {city.name}</Link>
+                  <Link href={`/city/${citySlug}/theatre-workshops`}>Workshops in {city.name}</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link href={`/${citySlug}/theatre-festivals`}>Festivals in {city.name}</Link>
+                  <Link href={`/city/${citySlug}/auditions`}>Auditions in {city.name}</Link>
                 </Button>
               </div>
             </div>
@@ -264,18 +270,18 @@ export default async function CityWorkshopsPage({ params }: PageProps) {
             {/* Other Cities */}
             <div>
               <h2 className="font-playfair text-2xl font-bold mb-6">
-                Theatre Workshops in Other Cities
+                Theatre Festivals in Other Cities
               </h2>
               <div className="flex flex-wrap gap-3">
                 {otherCities.map((otherCity) => (
                   <Button key={otherCity.slug} variant="outline" size="sm" asChild>
-                    <Link href={`/${otherCity.slug}/theatre-workshops`}>
+                    <Link href={`/city/${otherCity.slug}/theatre-festivals`}>
                       {otherCity.name}
                     </Link>
                   </Button>
                 ))}
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href="/workshops">View All Cities</Link>
+                  <Link href="/events">View All Festivals</Link>
                 </Button>
               </div>
             </div>
