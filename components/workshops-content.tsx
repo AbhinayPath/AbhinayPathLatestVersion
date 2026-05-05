@@ -1363,6 +1363,89 @@ function WorkshopsContent() {
           <p className="text-muted-foreground">No workshops found in this category.</p>
         </div>
       )}
+
+      {/* SEO Content Section */}
+      <section className="mt-16 pt-12 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-playfair text-2xl md:text-3xl font-bold mb-6 text-gray-800">
+            About Theatre Workshops in India
+          </h2>
+          <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-4">
+            <p>
+              India has a rich tradition of theatre and performing arts, with workshops and training programs available across major cities including Mumbai, Delhi, Bangalore, Chennai, Kolkata, Hyderabad, and Pune. Whether you are a beginner looking to explore acting or an experienced performer seeking to refine your craft, AbhinayPath connects you with the best theatre workshops and acting classes in India.
+            </p>
+            <p>
+              Our curated selection includes workshops from prestigious institutions like the National School of Drama (NSD), Film and Television Institute of India (FTII), and renowned independent trainers. From method acting and improvisation to voice modulation and movement training, find comprehensive programs that suit your learning goals and schedule.
+            </p>
+            <p>
+              Many workshops offer certificates recognized in the industry, making them valuable for both hobbyists and aspiring professional actors. Weekend workshops, intensive residential programs, and online acting classes provide flexible options for learners across India.
+            </p>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="mt-12">
+            <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-gray-800">
+              Frequently Asked Questions About Theatre Workshops
+            </h3>
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  What types of acting workshops are available in India?
+                </h4>
+                <p className="text-gray-600">
+                  India offers diverse acting workshops including method acting, Stanislavski technique, physical theatre, improvisation, voice and speech training, camera acting for film/TV, and traditional Indian theatre forms like Natyashastra. Workshops range from weekend intensives to month-long residential programs.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  How much do theatre workshops cost in India?
+                </h4>
+                <p className="text-gray-600">
+                  Workshop fees vary widely based on duration, institution, and trainer reputation. Short weekend workshops may cost Rs 2,000-10,000, while intensive month-long programs from institutions like FTII or NSD can range from Rs 15,000-50,000. Some workshops offer scholarships or early bird discounts.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  Which cities in India have the best theatre workshop opportunities?
+                </h4>
+                <p className="text-gray-600">
+                  Mumbai, Delhi, and Bangalore are major theatre hubs with numerous workshops throughout the year. Mumbai offers many film-oriented acting classes, while Delhi has strong connections to traditional theatre through NSD. Pune, Kolkata, Chennai, and Hyderabad also have vibrant theatre communities with regular training opportunities.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  Do I need prior experience to join acting workshops?
+                </h4>
+                <p className="text-gray-600">
+                  Many workshops welcome beginners with no prior experience. Look for workshops labeled as introductory or foundation level. However, some advanced workshops may require basic theatre experience or prior training. Always check the eligibility criteria before registering.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Internal Links for SEO */}
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <h3 className="font-semibold text-gray-800 mb-4">Explore More Opportunities</h3>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/auditions" className="text-[#7E1F2E] hover:underline text-sm">
+                Theatre Auditions in India
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/events" className="text-[#7E1F2E] hover:underline text-sm">
+                Theatre Festivals 2026
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/theatre-artists" className="text-[#7E1F2E] hover:underline text-sm">
+                Connect with Theatre Artists
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/admissions" className="text-[#7E1F2E] hover:underline text-sm">
+                Drama School Admissions
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

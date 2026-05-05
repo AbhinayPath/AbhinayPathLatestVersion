@@ -1,0 +1,31 @@
+# AbhinayPath Robots.txt
+# https://abhinaypath.com
+
+User-agent: *
+Allow: /
+
+# Core pages - high priority
+Allow: /
+Allow: /workshops
+Allow: /auditions
+Allow: /events
+Allow: /theatre-artists
+Allow: /production-backstage
+Allow: /admissions
+Allow: /about
+Allow: /contact
+Allow: /join-community
+
+# City-specific pages
+Allow: /city/
+
+# Block admin and API routes
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://abhinaypath.com/sitemap.xml
