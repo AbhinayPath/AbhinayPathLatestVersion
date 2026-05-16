@@ -19,7 +19,7 @@ export default function Navbar() {
     { name: "Theatre Festivals", href: "/events" },
     { name: "Theatre Artists", href: "/theatre-artists" },
     { name: "Technical & Production Artists", href: "/production-backstage" },
-    { name: "Blog", href: "/blog" },
+    { name: "Mentorship", href: "/admissions" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ]
