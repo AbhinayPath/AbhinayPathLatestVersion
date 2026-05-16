@@ -363,12 +363,10 @@ export default function CollaborationsPage() {
               Our Evolution
             </Badge>
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-              What This Means for AbhinayPath
+              Bridging Stage and Community
             </h2>
             <p className="text-gray-400 text-lg leading-relaxed">
-              These collaborations mark AbhinayPath's evolution from a digital theatre platform into a cultural
-              programming partner. We help institutions discover credible productions, help theatre groups access
-              meaningful stages, and help audiences experience live theatre with context and depth.
+              We help institutions discover credible productions, help theatre groups access meaningful stages, and help audiences experience live theatre with context and depth.
             </p>
           </div>
         </div>
