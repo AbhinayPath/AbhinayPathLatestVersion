@@ -16,6 +16,7 @@ import {
   Globe,
   Play,
   ExternalLink,
+  MessageCircle,
 } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -369,6 +370,75 @@ export default function CollaborationsPage() {
               programming partner. We help institutions discover credible productions, help theatre groups access
               meaningful stages, and help audiences experience live theatre with context and depth.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* WhatsApp CTA Sections */}
+      <section className="py-20 md:py-28 bg-[#0d0d14]">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* For Theatre Groups */}
+            <Card className="bg-[#12121a] border-white/10 p-8 md:p-10 hover:border-amber-500/30 transition-all">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <Clapperboard className="h-6 w-6 text-amber-400" />
+                  </div>
+                  <span className="text-amber-400 text-sm font-medium uppercase tracking-wider">For Theatre Groups</span>
+                </div>
+                <h3 className="font-playfair text-2xl md:text-3xl font-bold text-white">
+                  Have a production you want to present?
+                </h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Collaborate with AbhinayPath to bring your play to institutions, cultural venues, and new audiences.
+                </p>
+                <Link
+                  href="https://wa.me/919876543210?text=Hi%20AbhinayPath%2C%20we%20are%20a%20theatre%20group%20interested%20in%20collaboration."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    size="lg"
+                    className="w-full rounded-full bg-[#25D366] text-white hover:bg-[#20bd5a] text-base px-6 py-5 h-auto font-medium transition-all hover:scale-105"
+                  >
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    Discuss Your Production on WhatsApp
+                  </Button>
+                </Link>
+              </div>
+            </Card>
+
+            {/* For Institutions */}
+            <Card className="bg-[#12121a] border-white/10 p-8 md:p-10 hover:border-purple-500/30 transition-all">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+                    <Users className="h-6 w-6 text-purple-400" />
+                  </div>
+                  <span className="text-purple-400 text-sm font-medium uppercase tracking-wider">For Institutions</span>
+                </div>
+                <h3 className="font-playfair text-2xl md:text-3xl font-bold text-white">
+                  Looking to host a theatre experience?
+                </h3>
+                <p className="text-gray-400 leading-relaxed">
+                  We curate meaningful theatre evenings for institutions, clubs, universities, and communities.
+                </p>
+                <Link
+                  href="https://wa.me/919876543210?text=Hi%20AbhinayPath%2C%20we%20are%20interested%20in%20hosting%20a%20theatre%20experience."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    size="lg"
+                    className="w-full rounded-full bg-[#25D366] text-white hover:bg-[#20bd5a] text-base px-6 py-5 h-auto font-medium transition-all hover:scale-105"
+                  >
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    Talk to Us on WhatsApp
+                  </Button>
+                </Link>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
