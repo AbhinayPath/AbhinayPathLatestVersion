@@ -63,11 +63,11 @@ This document outlines a comprehensive SEO strategy to position AbhinayPath as I
 ## 2. City-Specific SEO Pages
 
 ### 2.1 URL Structure
-```
+\`\`\`
 /city/[city-slug]/theatre-workshops
 /city/[city-slug]/auditions
 /city/[city-slug]/theatre-festivals
-```
+\`\`\`
 
 ### 2.2 Supported Cities (20 Major Indian Cities)
 Mumbai, Delhi, Bangalore, Chennai, Kolkata, Hyderabad, Pune, Ahmedabad, Jaipur, Lucknow, Chandigarh, Bhopal, Indore, Kochi, Thiruvananthapuram, Guwahati, Patna, Bhubaneswar, Vadodara, Mysore
