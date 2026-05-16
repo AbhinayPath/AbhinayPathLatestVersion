@@ -16,6 +16,7 @@ export default function Navbar() {
   }
 
   const navItems = [
+    { name: "Collaborations", href: "/collaborations" },
     { name: "Theatre Festivals", href: "/events" },
     { name: "Theatre Artists", href: "/theatre-artists" },
     { name: "Technical & Production Artists", href: "/production-backstage" },

@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Award, Calendar, GraduationCap, Sparkles } from "lucide-react"
+import { ArrowRight, Award, Calendar, GraduationCap, Sparkles, Clapperboard, Handshake, MapPin, CalendarDays } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 // import { PlausibleAnalytics } from "@/components/analytics"
@@ -31,12 +31,12 @@ export default function Home() {
             </p>
             <div className="pt-4 space-y-4">
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/auditions" className="flex-1">
+                <Link href="/collaborations" className="flex-1">
                   <Button
                     size="lg"
                     className="w-full rounded-full bg-[#F5A623] text-[#2D1A54] hover:bg-[#e69b1e] text-lg px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
                   >
-                    View Auditions <ArrowRight className="ml-2 h-5 w-5" />
+                    Explore Collaborations <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
                 <Link href="/workshops" className="flex-1">
@@ -45,7 +45,7 @@ export default function Home() {
                     variant="outline"
                     className="w-full rounded-full border-2 border-white text-white hover:bg-white hover:text-[#2D1A54] text-lg px-8 py-6 h-auto font-medium transition-all bg-transparent"
                   >
-                    Training & Education <ArrowRight className="ml-2 h-5 w-5" />
+                    Discover Workshops <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
               </div>
@@ -177,6 +177,117 @@ export default function Home() {
                 </Link>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Collaborations & Productions Section */}
+      <section className="py-20 md:py-28 bg-[#0a0a0f] text-white">
+        <div className="container">
+          <div className="text-center mb-16">
+            <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30 hover:bg-amber-500/30 mb-4">
+              <Handshake className="h-3.5 w-3.5 mr-1" />
+              Recent Collaborations
+            </Badge>
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-white">
+              Recent Collaborations & Productions
+            </h2>
+            <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+              AbhinayPath collaborates with institutions and theatre groups to curate meaningful live theatre experiences.
+            </p>
+          </div>
+
+          {/* Collaboration Partner Strip */}
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 mb-12 py-6 border-y border-white/10">
+            <div className="flex items-center gap-2 text-gray-400">
+              <span className="text-sm">In collaboration with:</span>
+            </div>
+            <span className="text-white font-medium">Indian Heritage Academy</span>
+            <span className="text-gray-600">|</span>
+            <span className="text-white font-medium">Azim Premji University</span>
+            <span className="text-gray-600">|</span>
+            <span className="text-white font-medium">Kahe Vidushak Foundation</span>
+          </div>
+
+          {/* Production Cards */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Goodbye Calendar */}
+            <Card className="bg-[#12121a] border-white/10 overflow-hidden hover:border-amber-500/30 transition-all group">
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src="/images/goodbye-calendar-poster.png"
+                  alt="Goodbye Calendar"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12121a] via-[#12121a]/50 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30 mb-3">English</Badge>
+                  <h3 className="font-playfair text-2xl font-bold text-white mb-2">Goodbye Calendar</h3>
+                  <div className="space-y-1 text-gray-400 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Clapperboard className="h-3.5 w-3.5 text-amber-500" />
+                      <span>Directed by Srinivas Beesetty</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-3.5 w-3.5 text-amber-500" />
+                      <span>Indian Heritage Academy, Bengaluru</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CalendarDays className="h-3.5 w-3.5 text-amber-500" />
+                      <span>11 April, 6:30 PM</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Sakal Jaani He Naath */}
+            <Card className="bg-[#12121a] border-white/10 overflow-hidden hover:border-amber-500/30 transition-all group">
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src="/images/sakal-jaani-poster.jpeg"
+                  alt="Sakal Jaani He Naath"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12121a] via-[#12121a]/50 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30 mb-3">Hindi / Folk Musical</Badge>
+                  <h3 className="font-playfair text-2xl font-bold text-white mb-2">Sakal Jaani He Naath</h3>
+                  <div className="space-y-1 text-gray-400 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Clapperboard className="h-3.5 w-3.5 text-amber-500" />
+                      <span>Directed by Srinivas Beesetty</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-3.5 w-3.5 text-amber-500" />
+                      <span>Indian Heritage Academy, Bengaluru</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CalendarDays className="h-3.5 w-3.5 text-amber-500" />
+                      <span>2 May, 6:30 PM</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    <Badge variant="outline" className="text-amber-400 border-amber-500/30 text-xs">Play of the Year</Badge>
+                    <Badge variant="outline" className="text-amber-400 border-amber-500/30 text-xs">30+ Shows</Badge>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* View All Button */}
+          <div className="text-center">
+            <Link href="/collaborations">
+              <Button
+                size="lg"
+                className="rounded-full bg-amber-500 text-black hover:bg-amber-400 text-lg px-8 py-6 h-auto font-medium transition-transform hover:scale-105"
+              >
+                View Collaborations <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
