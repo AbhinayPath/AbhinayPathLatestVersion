@@ -375,7 +375,7 @@ export default function CollaborationsPage() {
       </section>
 
       {/* WhatsApp CTA Sections */}
-      <section className="py-20 md:py-28 bg-[#0d0d14]">
+      <section id="partner" className="py-20 md:py-28 bg-[#0d0d14]">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* For Theatre Groups */}
@@ -444,7 +444,7 @@ export default function CollaborationsPage() {
       </section>
 
       {/* CTA Section */}
-      <section id="partner" className="py-20 md:py-28 bg-gradient-to-b from-[#0a0a0f] to-[#1a1a2e] relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-[#0a0a0f] to-[#1a1a2e] relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 right-20 w-72 h-72 bg-amber-500/30 rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
