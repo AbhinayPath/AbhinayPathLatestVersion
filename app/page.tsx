@@ -292,58 +292,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Coming Soon Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-r from-[#2D1A54]/5 to-[#F5A623]/5">
-        <div className="container">
-          <div className="text-center mb-16">
-            <Badge className="bg-[#2D1A54]/10 text-[#2D1A54] hover:bg-[#2D1A54]/20 mb-4">
-              <Sparkles className="h-3.5 w-3.5 mr-1" />
-              More Features Coming
-            </Badge>
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 text-gradient">
-              More Features on the Horizon
-            </h2>
-            <p className="text-gray-800 max-w-3xl mx-auto text-lg">
-              More tools coming soon. Join Abhinayपथ for early access.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: "Networking Platform",
-                description: "Connect with fellow artists, directors, and producers to collaborate on projects.",
-                icon: "👥",
-              },
-              {
-                title: "Backstage Opportunities",
-                description: "Find jobs in production, costume design, set design, and more.",
-                icon: "🎭",
-              },
-              {
-                title: "Resources Library",
-                description: "Access scripts, monologues, and educational materials for your practice.",
-                icon: "📚",
-              },
-              {
-                title: "Artist Profiles",
-                description: "Create your professional portfolio to showcase your work and get discovered.",
-                icon: "🌟",
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all border border-gray-100 transform transition-transform hover:-translate-y-2"
-              >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="font-bold text-xl mb-3">{feature.title}</h3>
-                <p className="text-gray-800">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 md:py-28 bg-gradient-to-r from-[#2D1A54] via-[#4A2A82] to-[#2D1A54] text-white relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20">
