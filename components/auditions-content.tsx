@@ -1500,6 +1500,89 @@ export default function AuditionsContent() {
           </div>
         )}
       </div>
+
+      {/* SEO Content Section */}
+      <section className="mt-16 pt-12 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-playfair text-2xl md:text-3xl font-bold mb-6 text-gray-800">
+            About Theatre Auditions in India
+          </h2>
+          <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-4">
+            <p>
+              The Indian theatre scene is vibrant and constantly seeking fresh talent. From prestigious theatre groups in Mumbai and Delhi to emerging companies in Bangalore, Chennai, and Kolkata, auditions happen throughout the year for stage plays, musicals, street theatre, and experimental productions.
+            </p>
+            <p>
+              AbhinayPath curates verified audition listings from reputable theatre companies, production houses, and independent directors. Whether you are looking for paid professional roles, passion projects, or opportunities to gain experience, our platform connects aspiring and established actors with the right opportunities.
+            </p>
+            <p>
+              Theatre auditions in India range from open calls to invitation-only sessions. Many theatre groups also conduct year-round auditions to build their ensemble. Stay updated with our listings to never miss an opportunity to showcase your talent.
+            </p>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="mt-12">
+            <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-gray-800">
+              Frequently Asked Questions About Theatre Auditions
+            </h3>
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  How do I prepare for a theatre audition in India?
+                </h4>
+                <p className="text-gray-600">
+                  Prepare 2-3 contrasting monologues (one classical, one contemporary), practice cold reading skills, dress in neutral colors that allow movement, arrive 15 minutes early, and bring multiple copies of your resume with a recent headshot. Research the theatre group and production beforehand.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  Do theatre auditions in India pay actors?
+                </h4>
+                <p className="text-gray-600">
+                  Payment varies widely. Professional theatre groups like Prithvi Theatre, NSD Repertory, and commercial productions typically pay per show or a monthly stipend. Many independent and experimental productions may offer nominal honorariums. Always clarify compensation during the audition or callback stage.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  What are the best cities for theatre auditions in India?
+                </h4>
+                <p className="text-gray-600">
+                  Mumbai leads with the most theatre auditions due to its large theatre community. Delhi-NCR follows with strong government-supported theatre. Bangalore has a growing English theatre scene. Kolkata, Chennai, Pune, and Hyderabad also have active theatre communities with regular auditions.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  Can beginners with no experience apply for theatre auditions?
+                </h4>
+                <p className="text-gray-600">
+                  Yes, many theatre groups welcome fresh talent. Look for auditions marked as open to all experience levels or specifically seeking newcomers. Consider joining amateur theatre groups or taking acting workshops first to build confidence and basic skills.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Internal Links for SEO */}
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <h3 className="font-semibold text-gray-800 mb-4">Explore More Opportunities</h3>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/workshops" className="text-[#7E1F2E] hover:underline text-sm">
+                Acting Workshops in India
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/events" className="text-[#7E1F2E] hover:underline text-sm">
+                Theatre Festivals 2026
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/theatre-artists" className="text-[#7E1F2E] hover:underline text-sm">
+                Connect with Theatre Artists
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/production-backstage" className="text-[#7E1F2E] hover:underline text-sm">
+                Technical Theatre Jobs
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
