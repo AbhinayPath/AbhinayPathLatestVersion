@@ -79,7 +79,7 @@ const productions = [
 const partnerLogos = [
   { name: "AbhinayPath", logo: "/images/abhinaypath-full-logo.jpeg" },
   { name: "Azim Premji University", logo: "/images/azim-premji-university-logo.png" },
-  { name: "Indian Heritage Academy", logo: "/placeholder.svg?height=60&width=120" },
+  { name: "Indian Heritage Academy", logo: "/images/indian-heritage-academy-logo.png" },
   { name: "Kahe Vidushak Foundation", logo: "/placeholder.svg?height=60&width=120" },
 ]
 
