@@ -392,7 +392,7 @@ export default function CollaborationsPage() {
                   Collaborate with AbhinayPath to bring your play to institutions, cultural venues, and new audiences.
                 </p>
                 <Link
-                  href="https://wa.me/919876543210?text=Hi%20AbhinayPath%2C%20we%20are%20a%20theatre%20group%20interested%20in%20collaboration."
+                  href="https://wa.me/917843847071?text=Hi%20AbhinayPath%2C%20we%20are%20a%20theatre%20group%20interested%20in%20collaboration."
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -423,7 +423,7 @@ export default function CollaborationsPage() {
                   We curate meaningful theatre evenings for institutions, clubs, universities, and communities.
                 </p>
                 <Link
-                  href="https://wa.me/919876543210?text=Hi%20AbhinayPath%2C%20we%20are%20interested%20in%20hosting%20a%20theatre%20experience."
+                  href="https://wa.me/917843847071?text=Hi%20AbhinayPath%2C%20we%20are%20interested%20in%20hosting%20a%20theatre%20experience."
                   target="_blank"
                   rel="noopener noreferrer"
                 >
