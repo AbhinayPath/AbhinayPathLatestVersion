@@ -85,7 +85,7 @@ const partnerLogos = [
 
 export default function CollaborationsPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0a0a0f]">
+    <div className="flex flex-col min-h-screen bg-[#0a0a0f] scroll-smooth">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#0a0a0f] to-[#0a0a0f]" />
@@ -108,15 +108,15 @@ export default function CollaborationsPage() {
               cultural, academic, and community spaces.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-              <Link href="#productions">
+              <a href="#productions">
                 <Button
                   size="lg"
                   className="rounded-full bg-amber-500 text-black hover:bg-amber-400 text-lg px-8 py-6 h-auto font-medium transition-all hover:scale-105"
                 >
                   Explore Productions <Clapperboard className="ml-2 h-5 w-5" />
                 </Button>
-              </Link>
-              <Link href="#partner">
+              </a>
+              <a href="#partner">
                 <Button
                   size="lg"
                   variant="outline"
@@ -124,7 +124,7 @@ export default function CollaborationsPage() {
                 >
                   Partner With Us <Handshake className="ml-2 h-5 w-5" />
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
