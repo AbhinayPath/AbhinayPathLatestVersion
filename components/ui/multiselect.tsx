@@ -64,6 +64,8 @@ export function MultiSelect({
   const [searchValue, setSearchValue] = React.useState("")
   const [customValue, setCustomValue] = React.useState("")
 
+  const safeSelected = Array.isArray(selected) ? selected : []
+
   const filteredOptions = React.useMemo(() => {
     if (!searchValue) return options
     return options.filter((option) =>
@@ -72,32 +74,32 @@ export function MultiSelect({
   }, [options, searchValue])
 
   const handleSelect = (value: string) => {
-    const newSelected = selected.includes(value)
-      ? selected.filter((item) => item !== value)
-      : [...selected, value]
+    const newSelected = safeSelected.includes(value)
+      ? safeSelected.filter((item) => item !== value)
+      : [...safeSelected, value]
     onChange(newSelected)
   }
 
   const handleRemove = (value: string) => {
-    onChange(selected.filter((item) => item !== value))
+    onChange(safeSelected.filter((item) => item !== value))
   }
 
   const handleAddCustom = () => {
-    if (customValue.trim() && onAddCustom && !selected.includes(customValue.trim())) {
+    if (customValue.trim() && onAddCustom && !safeSelected.includes(customValue.trim())) {
       onAddCustom(customValue.trim())
-      onChange([...selected, customValue.trim()])
+      onChange([...safeSelected, customValue.trim()])
       setCustomValue("")
     }
   }
 
-  const selectedLabels = selected.map(value => {
+  const selectedLabels = safeSelected.map(value => {
     const option = options.find(opt => opt.value === value)
     return option ? option.label : value
   })
 
   return (
     <div className={cn("w-full", className)}>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} onOpenChange={setOpen} modal={true}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
@@ -105,19 +107,19 @@ export function MultiSelect({
             aria-expanded={open}
             className={cn(
               "w-full justify-between min-h-[40px] h-auto p-2",
-              selected.length === 0 && "text-muted-foreground",
+              safeSelected.length === 0 && "text-muted-foreground",
               disabled && "opacity-50 cursor-not-allowed"
             )}
             disabled={disabled}
           >
             <div className="flex flex-wrap gap-1 flex-1">
-              {selected.length === 0 ? (
+              {safeSelected.length === 0 ? (
                 <span className="text-sm">{placeholder}</span>
               ) : (
                 <>
                   {selectedLabels.slice(0, 2).map((label, index) => (
                     <Badge
-                      key={selected[index]}
+                      key={safeSelected[index]}
                       variant="secondary"
                       className="text-xs px-2 py-0.5 bg-primary/10 text-primary border-primary/20"
                     >
@@ -125,7 +127,7 @@ export function MultiSelect({
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
-                          handleRemove(selected[index])
+                          handleRemove(safeSelected[index])
                         }}
                         className="ml-1 hover:text-primary/70"
                       >
@@ -133,9 +135,9 @@ export function MultiSelect({
                       </button>
                     </Badge>
                   ))}
-                  {selected.length > 2 && (
+                  {safeSelected.length > 2 && (
                     <Badge variant="outline" className="text-xs px-2 py-0.5">
-                      +{selected.length - 2} more
+                      +{safeSelected.length - 2} more
                     </Badge>
                   )}
                 </>
@@ -202,7 +204,7 @@ export function MultiSelect({
                       <div
                         className={cn(
                           "flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                          selected.includes(option.value)
+                          safeSelected.includes(option.value)
                             ? "bg-primary text-primary-foreground"
                             : "opacity-50 [&_svg]:invisible"
                         )}

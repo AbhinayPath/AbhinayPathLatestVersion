@@ -40,12 +40,18 @@ export interface TalentProfile {
   headshot_urls?: string[]
   portfolio_videos?: string[]
   portfolio_images?: string[]
+  cover_image_url?: string
   
   // Social Media & Links
   instagram_url?: string
   youtube_url?: string
+  facebook_url?: string
   website_url?: string
   imdb_url?: string
+  github_link?: string
+  linkedin_link?: string
+  portfolio_website?: string
+  x_link?: string
   
   // Professional Details
   represented_by?: string
@@ -78,6 +84,8 @@ export interface TalentEducation {
   field_of_study?: string
   start_year?: number
   end_year?: number
+  start_date?: string
+  end_date?: string
   currently_studying?: boolean
   description?: string
   created_at?: string

@@ -27,43 +27,68 @@ export async function GET(request: NextRequest) {
 
     if (oppsError) throw oppsError
 
-    const oppIds = userOpps.map(opp => opp.id)
-    const oppMap = userOpps.reduce((acc, opp) => {
-      acc[opp.id] = opp.title
-      return acc
-    }, {} as Record<string, string>)
+    // Get all workshop IDs created by this user
+    const { data: userWorkshops, error: workshopsError } = await supabase
+      .from('workshops')
+      .select('id, title')
+      .eq('created_by', user.id)
 
-    if (oppIds.length === 0) {
+    if (workshopsError) throw workshopsError
+
+    const oppIds = userOpps.map(opp => opp.id)
+    const workshopIds = userWorkshops.map(w => w.id)
+
+    const titleMap = {
+      ...userOpps.reduce((acc, opp) => ({ ...acc, [opp.id]: opp.title }), {} as Record<string, string>),
+      ...userWorkshops.reduce((acc, w) => ({ ...acc, [w.id]: w.title }), {} as Record<string, string>)
+    }
+
+    if (oppIds.length === 0 && workshopIds.length === 0) {
       return NextResponse.json({ applicants: [] })
     }
 
-    // Build query for registrations
-    let query = supabase
+    // Build query for audition registrations
+    let auditionQuery = supabase
       .from('audition_registrations')
-      .select(`
-        id,
-        user_id,
-        opportunity_id,
-        status,
-        created_at
-      `)
+      .select(`id, user_id, opportunity_id, status, created_at`)
       .in('opportunity_id', oppIds)
-      .order('created_at', { ascending: false })
 
     if (opportunityId) {
-      query = query.eq('opportunity_id', opportunityId)
+      auditionQuery = auditionQuery.eq('opportunity_id', opportunityId)
     }
 
-    const { data: registrations, error: regError } = await query
+    // Build query for workshop registrations
+    let workshopQuery = supabase
+      .from('workshop_registrations')
+      .select(`id, user_id, workshop_id, status, created_at`)
+      .in('workshop_id', workshopIds)
 
-    if (regError) throw regError
+    if (opportunityId) {
+      workshopQuery = workshopQuery.eq('workshop_id', opportunityId)
+    }
 
-    if (!registrations || registrations.length === 0) {
+    const [
+      { data: audRegistrations, error: audError },
+      { data: workshopRegistrations, error: workshopError }
+    ] = await Promise.all([
+      oppIds.length > 0 ? auditionQuery : Promise.resolve({ data: [], error: null }),
+      workshopIds.length > 0 ? workshopQuery : Promise.resolve({ data: [], error: null })
+    ])
+
+    if (audError) throw audError
+    if (workshopError) throw workshopError
+
+    const allRegistrations = [
+      ...(audRegistrations || []).map(r => ({ ...r, entity_id: r.opportunity_id, type: 'audition' })),
+      ...(workshopRegistrations || []).map(r => ({ ...r, entity_id: r.workshop_id, type: 'workshop' }))
+    ].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+
+    if (allRegistrations.length === 0) {
       return NextResponse.json({ applicants: [] })
     }
 
     // Get unique user IDs to fetch profile data
-    const userIds = Array.from(new Set(registrations.map(r => r.user_id)))
+    const userIds = Array.from(new Set(allRegistrations.map(r => r.user_id)))
 
     // Fetch talent profiles for these users
     let talentQuery = supabase
@@ -107,7 +132,7 @@ export async function GET(request: NextRequest) {
     }, {} as Record<string, any>)
 
     // Map registrations with profile data
-    const applicants = registrations
+    const applicants = allRegistrations
       .map(reg => {
         const talentProfile = talentMap[reg.user_id]
         const baseProfile = baseMap[reg.user_id]
@@ -130,10 +155,11 @@ export async function GET(request: NextRequest) {
           user_name: mappedName,
           email: email,
           phone_number: talentProfile?.phone || 'N/A',
-          applied_audition: oppMap[reg.opportunity_id] || 'Unknown Audition',
+          applied_audition: titleMap[reg.entity_id] || 'Unknown',
           application_status: reg.status,
           applied_date: reg.created_at,
-          opportunity_id: reg.opportunity_id,
+          opportunity_id: reg.entity_id,
+          opportunity_type: reg.type,
           profile: talentProfile || null
         }
       })

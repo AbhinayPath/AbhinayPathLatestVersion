@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClientForRouteHandler } from "@/lib/supabase-server";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 // GET - Fetch talent profiles (with optional filters)
 export async function GET(request: NextRequest) {
   try {
@@ -60,7 +62,16 @@ export async function POST(request: NextRequest) {
     // Add user_id to profile data
     const profileData = {
       ...profile,
-      user_id: user.id
+      user_id: user.id,
+      date_of_birth: profile.date_of_birth === "" ? null : profile.date_of_birth,
+      profile_image_url: profile.profile_image_url === "" ? null : profile.profile_image_url,
+      cover_image_url: profile.cover_image_url === "" ? null : profile.cover_image_url,
+      portfolio_images: profile.portfolio_images || [],
+      portfolio_videos: profile.portfolio_videos || []
+    }
+    
+    if (!profileData.id) {
+      delete profileData.id;
     }
 
     // 1. Create the main talent profile
@@ -81,8 +92,10 @@ export async function POST(request: NextRequest) {
     if (education && education.length > 0) {
       const educationData = education
         .filter((edu: any) => edu.institution || edu.degree) // Only insert if has data
-        .map((edu: any) => ({
+        .map(({ id, profile_id, created_at, ...edu }: any) => ({
           ...edu,
+          start_date: edu.start_date === "" ? null : edu.start_date,
+          end_date: edu.end_date === "" ? null : edu.end_date,
           talent_profile_id: profileId
         }));
 
@@ -102,8 +115,10 @@ export async function POST(request: NextRequest) {
     if (experience && experience.length > 0) {
       const experienceData = experience
         .filter((exp: any) => exp.project_title || exp.role) // Only insert if has data
-        .map((exp: any) => ({
+        .map(({ id, profile_id, created_at, ...exp }: any) => ({
           ...exp,
+          start_date: exp.start_date === "" ? null : exp.start_date,
+          end_date: exp.end_date === "" ? null : exp.end_date,
           talent_profile_id: profileId
         }));
 
@@ -122,9 +137,10 @@ export async function POST(request: NextRequest) {
     // 4. Insert training records if any
     if (training && training.length > 0) {
       const trainingData = training
-        .filter((train: any) => train.program_name || train.instructor) // Only insert if has data
-        .map((train: any) => ({
+        .map(({ id, profile_id, created_at, program_name, ...train }: any) => ({
           ...train,
+          start_date: train.start_date === "" ? null : train.start_date,
+          end_date: train.end_date === "" ? null : train.end_date,
           talent_profile_id: profileId
         }));
 
@@ -135,7 +151,7 @@ export async function POST(request: NextRequest) {
 
         if (trainingError) {
           console.error('Error creating training records:', trainingError);
-          // Continue execution, don't fail the whole request
+          return NextResponse.json({ error: 'Failed to save certifications: ' + trainingError.message }, { status: 500 });
         }
       }
     }
@@ -144,7 +160,7 @@ export async function POST(request: NextRequest) {
     if (media && media.length > 0) {
       const mediaData = media
         .filter((file: any) => file.url) // Only insert if has URL
-        .map((file: any) => ({
+        .map(({ id, profile_id, created_at, ...file }: any) => ({
           ...file,
           talent_profile_id: profileId
         }));
@@ -216,10 +232,24 @@ export async function PUT(request: NextRequest) {
 
     const profileId = profile.id;
 
+    // Remove relationship fields that shouldn't be updated directly on the talent_profiles table
+    const profileDataToUpdate = { 
+      ...profile,
+      date_of_birth: profile.date_of_birth === "" ? null : profile.date_of_birth,
+      profile_image_url: profile.profile_image_url === "" ? null : profile.profile_image_url,
+      cover_image_url: profile.cover_image_url === "" ? null : profile.cover_image_url,
+      portfolio_images: profile.portfolio_images || [],
+      portfolio_videos: profile.portfolio_videos || []
+    };
+    delete profileDataToUpdate.education_records;
+    delete profileDataToUpdate.experience_records;
+    delete profileDataToUpdate.training_records;
+    delete profileDataToUpdate.media_files;
+
     // 1. Update the main talent profile
     const { data: updatedProfile, error: profileError } = await supabase
       .from('talent_profiles')
-      .update(profile)
+      .update(profileDataToUpdate)
       .eq('id', profileId)
       .select()
       .single();
@@ -241,8 +271,10 @@ export async function PUT(request: NextRequest) {
       if (education.length > 0) {
         const educationData = education
           .filter((edu: any) => edu.institution || edu.degree)
-          .map((edu: any) => ({
+          .map(({ id, profile_id, created_at, ...edu }: any) => ({
             ...edu,
+            start_date: edu.start_date === "" ? null : edu.start_date,
+            end_date: edu.end_date === "" ? null : edu.end_date,
             talent_profile_id: profileId
           }));
 
@@ -270,8 +302,10 @@ export async function PUT(request: NextRequest) {
       if (experience.length > 0) {
         const experienceData = experience
           .filter((exp: any) => exp.project_title || exp.role)
-          .map((exp: any) => ({
+          .map(({ id, profile_id, created_at, ...exp }: any) => ({
             ...exp,
+            start_date: exp.start_date === "" ? null : exp.start_date,
+            end_date: exp.end_date === "" ? null : exp.end_date,
             talent_profile_id: profileId
           }));
 
@@ -290,17 +324,23 @@ export async function PUT(request: NextRequest) {
     // 4. Update training records
     if (training !== undefined) {
       // Delete existing training records
-      await supabase
+      const { error: deleteError } = await supabase
         .from('training_records')
         .delete()
         .eq('talent_profile_id', profileId);
+      
+      if (deleteError) {
+        console.error('Error deleting training records:', deleteError);
+        return NextResponse.json({ error: 'Failed to update certifications' }, { status: 500 });
+      }
 
       // Insert new training records
       if (training.length > 0) {
         const trainingData = training
-          .filter((train: any) => train.program_name || train.instructor)
-          .map((train: any) => ({
+          .map(({ id, profile_id, created_at, program_name, ...train }: any) => ({
             ...train,
+            start_date: train.start_date === "" ? null : train.start_date,
+            end_date: train.end_date === "" ? null : train.end_date,
             talent_profile_id: profileId
           }));
 
@@ -311,6 +351,7 @@ export async function PUT(request: NextRequest) {
 
           if (trainingError) {
             console.error('Error updating training records:', trainingError);
+            return NextResponse.json({ error: 'Failed to save certifications: ' + trainingError.message }, { status: 500 });
           }
         }
       }
@@ -328,7 +369,7 @@ export async function PUT(request: NextRequest) {
       if (media.length > 0) {
         const mediaData = media
           .filter((file: any) => file.url)
-          .map((file: any) => ({
+          .map(({ id, profile_id, created_at, ...file }: any) => ({
             ...file,
             talent_profile_id: profileId
           }));

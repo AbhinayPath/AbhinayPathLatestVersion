@@ -4,9 +4,9 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Calendar, MapPin, Users, Phone, Mail, Clock, GraduationCap, CheckCircle } from "lucide-react"
-import WorkshopBanner from "@/components/workshop-banner"
-
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { ArrowLeft, Calendar, MapPin, Users, Phone, Mail, Clock, GraduationCap, CheckCircle, CalendarIcon, IndianRupee, Building, MessageSquare } from "lucide-react"
 
 export default function WorkshopDetailContent({ id }: { id: String }) {
 
@@ -25,8 +25,8 @@ export default function WorkshopDetailContent({ id }: { id: String }) {
         const viewWorkshop = {
           id: api.id,
           title: api.title,
-          trainer: '',
-          institution: '',
+          trainer: api.trainer || '',
+          institution: api.institution || '',
           location: api.city || (api.platform ? `Online (${api.platform})` : 'Online'),
           state: api.location_mode === 'online' ? 'All India' : api.state || '',
           date: firstSession ? new Date(firstSession.session_date).toLocaleDateString() : '',
@@ -89,393 +89,217 @@ export default function WorkshopDetailContent({ id }: { id: String }) {
   }
 
   return (
-    <div className="container py-6 md:py-12">
-      <Link href="/workshops" className="inline-flex items-center text-primary hover:underline mb-4 md:mb-6">
-        <ArrowLeft className="mr-2 h-4 w-4" />
-        Back to Workshops
-      </Link>
+    <div className="container py-8 sm:py-12 bg-gray-50 min-h-screen">
+      <div className="max-w-4xl mx-auto">
+        <Link href="/workshops" className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium mb-8 transition-colors group">
+          <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Workshops
+        </Link>
 
-      {/* <WorkshopBanner /> */}
+        <Card className="overflow-hidden border-none shadow-xl bg-white rounded-2xl">
+          <div className="relative h-64 sm:h-96 w-full">
+            <Image
+              src={workshop.image || "/images/acting-workshop.png"}
+              alt={workshop.title}
+              fill
+              className="object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement
+                target.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <div className="relative h-48 md:h-64 w-full">
-          <Image
-            src={workshop.image || "/images/acting-workshop.png"}
-            alt={workshop.title}
-            fill
-            className="object-cover"
-            onError={(e) => {
-              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
-            }}
-          />
-          {workshop.featured && (
-            <div className="absolute top-4 right-4 bg-secondary text-black px-3 py-1 rounded-full flex items-center">
-              <CheckCircle className="h-4 w-4 mr-1" />
-              Featured Workshop
+            {workshop.featured && (
+              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-green-700 text-xs font-bold px-4 py-2 rounded-full flex items-center shadow-lg border border-green-100">
+                <CheckCircle className="h-4 w-4 mr-1.5 fill-green-50" />
+                VERIFIED WORKSHOP
+              </div>
+            )}
+
+            <div className="absolute bottom-6 left-6 right-6">
+              <div className="flex flex-wrap gap-2 mb-3">
+                <Badge className="bg-purple-600/90 hover:bg-purple-600 border-none px-3 py-1 text-xs">
+                  Workshop
+                </Badge>
+                {workshop.institution && (
+                  <Badge className="bg-amber-500/90 hover:bg-amber-500 border-none px-3 py-1 text-xs">
+                    {workshop.institution}
+                  </Badge>
+                )}
+              </div>
+              <h1 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-md">
+                {workshop.title}
+              </h1>
+              {workshop.trainer && (
+                <p className="text-white/90 font-medium mt-2">By {workshop.trainer}</p>
+              )}
             </div>
-          )}
-        </div>
-
-        <div className="p-4 md:p-8">
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="badge-primary">Workshop</span>
-            {workshop.institution && <span className="badge-outline">{workshop.institution}</span>}
           </div>
 
-          <h1 className="font-playfair text-2xl md:text-3xl font-bold mb-2 md:mb-4">{workshop.title}</h1>
-          {workshop.trainer && (
-  <p className="text-primary font-medium mb-4 md:mb-6">By {workshop.trainer}</p>
-)}
-          <div className="mb-6 md:mb-8">
+          <CardContent className="p-6 sm:p-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-8">
 
+                {/* Meta Row */}
+                <div className="flex flex-wrap items-center gap-6 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                  <div className="flex items-center text-gray-700">
+                    <CalendarIcon className="h-5 w-5 mr-3 text-purple-500" />
+                    <div>
+                      <p className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Dates</p>
+                      <p className="font-medium">{workshop.date || "Not Specified"}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center text-gray-700">
+                    <Clock className="h-5 w-5 mr-3 text-purple-500" />
+                    <div>
+                      <p className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Time</p>
+                      <p className="font-medium">{workshop.time || "Not Specified"}</p>
+                    </div>
+                  </div>
 
-                        <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Workshop Details</h2>
-            <p className="text-gray-600 text-sm md:text-base">{workshop.description}</p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-2 md:gap-6 mb-6 md:mb-8">
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
-            <div>
-              <div className="space-y-3 md:space-y-4">
-                
-                
-                <div className="flex items-start">
-                  <MapPin className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                  <div>
-                    <p className="font-medium">Location</p>
-                    <p className="text-gray-600 text-sm md:text-base">
-                      {workshop.fullDetails?.venue || workshop.location}
-                    </p>
+                  <div className="flex items-center text-gray-700">
+                    <MapPin className="h-5 w-5 mr-3 text-purple-500" />
+                    <div>
+                      <p className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Location</p>
+                      <p className="font-medium">
+                        {workshop.fullDetails?.venue || workshop.location}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start">
-                  <Calendar className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                  <div>
-                    <p className="font-medium">Dates</p>
-                    <p className="text-gray-600 text-sm md:text-base">{workshop.date}</p>
+                {/* Description */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <div className="h-6 w-1 bg-purple-600 rounded-full" />
+                    <h2 className="text-2xl font-bold text-gray-900 font-playfair">Workshop Details</h2>
+                  </div>
+                  <div className="prose prose-purple max-w-none text-gray-700 leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 space-y-3">
+                    {workshop.description ? (
+                      <div className="whitespace-pre-line">{workshop.description}</div>
+                    ) : (
+                      <p className="italic text-gray-500">No description provided.</p>
+                    )}
                   </div>
                 </div>
 
-                <div className="flex items-start">
-                  <Clock className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                  <div>
-                    <p className="font-medium">Time</p>
-                    <p className="text-gray-600 text-sm md:text-base">{workshop.time}</p>
-                  </div>
-                </div>
-
-                {workshop.price && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">₹</span>
+                {/* Requirements & Roles (Other Details) */}
+                {(workshop.ageGroup || workshop.eligibility || workshop.fullDetails?.duration || workshop.fullDetails?.format) && (
+                  <div className="space-y-6 pt-8 border-t border-gray-100">
+                    <div className="flex items-center gap-2">
+                      <div className="h-6 w-1 bg-purple-600 rounded-full" />
+                      <h2 className="text-2xl font-bold text-gray-900 font-playfair">Additional Information</h2>
                     </div>
-                    <div>
-                      <p className="font-medium">Fee</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.price}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.ageGroup && (
-                  <div className="flex items-start">
-                    <Users className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Age Group</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.ageGroup}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.eligibility && (
-                  <div className="flex items-start">
-                    <GraduationCap className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Eligibility</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.eligibility}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.duration && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">⏱️</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Duration</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.duration}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.format && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">🖥️</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Format</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.format}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.organizer && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">🏢</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Organizers</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.organizer}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.includes && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">✅</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Includes</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.includes}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.upcomingWebinar && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">📺</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Upcoming Webinar</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.upcomingWebinar}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.medium && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">🗣️</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Medium</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.medium}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.capacity && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">👥</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Capacity</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.capacity}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.topic && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">📚</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Topic</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.topic}</p>
-                    </div>
-                  </div>
-                )}
-
-                {workshop.fullDetails?.prerequisites && (
-                  <div className="flex items-start">
-                    <div className="h-5 w-5 mr-2 flex items-center justify-center text-primary mt-0.5">
-                      <span className="font-bold">📋</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Prerequisites</p>
-                      <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.prerequisites}</p>
+                    
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {workshop.fullDetails?.duration && (
+                        <Badge variant="secondary" className="px-4 py-2 bg-gray-100 text-gray-700 border-none text-sm">
+                          Duration: {workshop.fullDetails.duration}
+                        </Badge>
+                      )}
+                      {workshop.fullDetails?.format && (
+                        <Badge variant="secondary" className="px-4 py-2 bg-gray-100 text-gray-700 border-none text-sm">
+                          Format: {workshop.fullDetails.format}
+                        </Badge>
+                      )}
+                      {workshop.ageGroup && (
+                        <Badge variant="secondary" className="px-4 py-2 bg-gray-100 text-gray-700 border-none text-sm">
+                          Age Group: {workshop.ageGroup}
+                        </Badge>
+                      )}
+                      {workshop.eligibility && (
+                        <Badge variant="secondary" className="px-4 py-2 bg-gray-100 text-gray-700 border-none text-sm">
+                          Eligibility: {workshop.eligibility}
+                        </Badge>
+                      )}
+                      {workshop.fullDetails?.capacity && (
+                        <Badge variant="secondary" className="px-4 py-2 bg-gray-100 text-gray-700 border-none text-sm">
+                          Capacity: {workshop.fullDetails.capacity}
+                        </Badge>
+                      )}
                     </div>
                   </div>
                 )}
               </div>
-            </div>
 
-            <div>
-              {workshop.fullDetails?.curriculum && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Curriculum</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.curriculum.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
+              {/* Sidebar Action Card */}
+              <div className="lg:col-span-1">
+                <div className="p-8 bg-purple-50 rounded-2xl border border-purple-100 flex flex-col items-center text-center space-y-8 sticky top-24 shadow-sm h-fit">
+                  {/* Workshop Summary */}
+                  <div className="space-y-4 w-full">
+                    <h3 className="text-xs font-bold text-purple-900 uppercase tracking-widest">Workshop Summary</h3>
+                    <div className="w-full border-t border-purple-200/50"></div>
+
+                    <div className="space-y-4 w-full">
+                      <div className="flex flex-col items-center gap-3">
+                        <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm text-purple-600">
+                          <Building className="h-6 w-6" />
+                        </div>
+                        <p className="font-bold text-gray-900 text-lg leading-tight">
+                          Hosted by {workshop.institution || workshop.trainer || "Reputed Institution"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-2">
+                      <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center shadow-sm text-purple-600 mb-1">
+                        <IndianRupee className="h-5 w-5" />
+                      </div>
+                      <p className="font-semibold text-gray-900 px-5">
+                        {workshop.price}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="w-full border-t border-purple-200/50"></div>
+
+                  {/* Action Button */}
+                  <div className="w-full flex justify-center pt-2">
+                    {workshop.registrationLink && (
+                      <Button asChild className="w-full h-12 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold shadow-md border-none transition-all hover:scale-[1.05] active:scale-95 mx-auto">
+                        <a href={workshop.registrationLink} target="_blank" rel="noopener noreferrer">
+                          Register Now
+                        </a>
+                      </Button>
+                    )}
+                  </div>
+                  
+                  {/* Contact Info */}
+                  <div className="w-full pt-4">
+                    <p className="text-[10px] font-bold text-purple-900 uppercase tracking-widest mb-3">Contact Info</p>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {workshop.contact && workshop.contact !== "Via website" && (
+                        <a
+                          href={`https://wa.me/91${workshop.contact.replace(/\D/g, "")}`}
+                          className="flex items-center gap-2 bg-green-500 text-white px-3 py-2 rounded-md hover:bg-green-600 transition-colors text-sm"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Phone className="h-4 w-4" />
+                          WhatsApp
+                        </a>
+                      )}
+
+                      {workshop.email && (
+                        <a
+                          href={`mailto:${workshop.email}`}
+                          className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
+                        >
+                          <Mail className="h-4 w-4" />
+                          Email
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
                 </div>
-              )}
-
-              {workshop.fullDetails?.methodology && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Methodology</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.methodology.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.eligibilityCriteria && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Eligibility Criteria</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.eligibilityCriteria.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.mentors && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Mentors</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.mentors.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.careerOpportunities && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Career Opportunities</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.careerOpportunities.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.applicationProcess && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Application Process</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.applicationProcess.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.contactInfo && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Contact Information</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.contactInfo.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.techRequirements && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Technical Requirements</h2>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-600 text-sm md:text-base">
-                    {workshop.fullDetails.techRequirements.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {workshop.fullDetails?.takeaways && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Takeaways</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.takeaways}</p>
-                </div>
-              )}
-
-              {workshop.fullDetails?.certification && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Certification</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.certification}</p>
-                </div>
-              )}
-
-              {workshop.fullDetails?.aboutInstructor && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">About the Instructor</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.aboutInstructor}</p>
-                </div>
-              )}
-
-              {workshop.fullDetails?.additionalInfo && (
-                <div className="mb-5">
-                  <h2 className="font-playfair text-lg md:text-xl font-bold mb-3">Additional Information</h2>
-                  <p className="text-gray-600 text-sm md:text-base">{workshop.fullDetails.additionalInfo}</p>
-                </div>
-              )}
-            </div>
-          </div>
-           
-          <div className="border-t pt-4 md:pt-6">
-            <h2 className="font-playfair text-lg md:text-xl font-bold mb-3 md:mb-4">Contact Information</h2>
-            <div className="flex flex-col md:flex-row md:items-center gap-4">
-              <div>
-                <p className="font-medium">Institution</p>
-                <p className="text-gray-600 text-sm md:text-base">{workshop.institution}</p>
-              </div>
-
-              <div className="flex flex-wrap gap-2 md:ml-auto">
-                {workshop.contact && workshop.contact !== "Via website" && (
-                  <a
-                    href={`https://wa.me/91${workshop.contact.replace(/\D/g, "")}`}
-                    className="flex items-center gap-2 bg-green-500 text-white px-3 py-2 rounded-md hover:bg-green-600 transition-colors text-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Phone className="h-4 w-4" />
-                    WhatsApp
-                  </a>
-                )}
-
-                {workshop.email && (
-                  <a
-                    href={`mailto:${workshop.email}`}
-                    className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
-                  >
-                    <Mail className="h-4 w-4" />
-                    Email
-                  </a>
-                )}
-
-                {workshop.instagram && (
-                  <a
-                    href={`https://instagram.com/${workshop.instagram.replace("@", "")}`}
-                    className="flex items-center gap-2 bg-pink-500 text-white px-3 py-2 rounded-md hover:bg-pink-600 transition-colors text-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                    Instagram
-                  </a>
-                )}
               </div>
             </div>
-          </div>
-           </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Calendar } from "@/components/ui/calendar"
+import { CustomDatePicker } from "@/components/ui/custom-date-picker"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
 import {
@@ -576,29 +576,11 @@ function PostOpportunityInner() {
                   <Label className="text-sm font-medium">
                     Deadline <span className="text-red-500">*</span>
                   </Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-full justify-start text-left font-normal rounded-lg h-11 sm:h-10",
-                          !deadline && "text-muted-foreground",
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-                        <span className="truncate">{deadline ? format(deadline, "PPP") : "Pick a date"}</span>
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={deadline}
-                        onSelect={setDeadline}
-                        disabled={(date) => date < new Date()}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
+                  <CustomDatePicker
+                    value={deadline}
+                    onChange={(date) => setDeadline(date as Date)}
+                    minDate={new Date()}
+                  />
                 </div>
 
                 {/* Location Mode - Mobile Optimized */}

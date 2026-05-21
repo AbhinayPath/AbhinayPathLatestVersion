@@ -13,14 +13,13 @@ import AuditionBanner from "@/components/audition-banner"
 export default function AuditionsContent() {
   const [auditions, setAuditions] = useState<any[]>([])
   const [filters, setFilters] = useState({
-  
     search: "",
     city: "all",
     state: "all",
     category: "all",
     experience: "all",
   })
-  const [loader,setLoader] = useState(true)
+  const [loader, setLoader] = useState(true)
 
   useEffect(() => {
     async function fetchAuditions() {
@@ -42,11 +41,12 @@ export default function AuditionsContent() {
     fetchAuditions()
   }, [])
 
-  const filteredAuditions = auditions.filter((audition) => {
+  const filteredAuditions = (auditions || []).filter((audition: any) => {
+    if (!audition) return false;
     return (
       (filters.search === "" ||
-        audition.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-        audition.description.toLowerCase().includes(filters.search.toLowerCase())) &&
+        (audition.title || "").toLowerCase().includes(filters.search.toLowerCase()) ||
+        (audition.description || "").toLowerCase().includes(filters.search.toLowerCase())) &&
       (filters.city === "all" || filters.city === "" || audition.city === filters.city) &&
       (filters.state === "all" || filters.state === "" || audition.state === filters.state) &&
       (filters.category === "all" || filters.category === "" || audition.type === filters.category) &&
@@ -68,10 +68,10 @@ export default function AuditionsContent() {
     })
   }
 
-  const states = [...new Set(auditions.map((a) => (a.state ?? "").trim()).filter(Boolean))].sort()
-  const categories = [...new Set(auditions.map((a) => (a.type ?? "").trim()).filter(Boolean))].sort()
-  const cities = [...new Set(auditions.map((a) => (a.city ?? "").trim()).filter(Boolean))].sort()
-  const experienceLevels = [...new Set(auditions.map((a) => (a.experience_required ?? "").trim()).filter(Boolean))].sort()
+  const states = [...new Set((auditions || []).map((a: any) => (a?.state ?? "").trim()).filter(Boolean))].sort()
+  const categories = [...new Set((auditions || []).map((a: any) => (a?.type ?? "").trim()).filter(Boolean))].sort()
+  const cities = [...new Set((auditions || []).map((a: any) => (a?.city ?? "").trim()).filter(Boolean))].sort()
+  const experienceLevels = [...new Set((auditions || []).map((a: any) => (a?.experience_required ?? "").trim()).filter(Boolean))].sort()
 
   return (
     <div className="container py-12">

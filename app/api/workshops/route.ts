@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
       sessions = [],
       locationMode = 'city',
       city,
-     state,
+      state,
       venue,
       platform,
       feeType = 'free',
@@ -90,15 +90,12 @@ export async function POST(request: NextRequest) {
     if (!sessions || sessions.length === 0) {
       return NextResponse.json({ error: 'At least one session is required' }, { status: 400 })
     }
-    const firstSession = sessions[0]
-    if (!firstSession?.date || !firstSession?.startTime || !firstSession?.duration) {
-      return NextResponse.json({ error: 'First session must include date, startTime and duration' }, { status: 400 })
-    }
+
     if (locationMode === 'city' && !city) {
       return NextResponse.json({ error: 'City is required for in-city workshops' }, { status: 400 })
     }
-   if (locationMode === 'city' && !state) {
-     return NextResponse.json({ error: 'State is required for in-city workshops' }, { status: 400 })
+    if (locationMode === 'city' && !state) {
+      return NextResponse.json({ error: 'State is required for in-city workshops' }, { status: 400 })
 
     }
     if (locationMode === 'online' && !platform) {
@@ -115,7 +112,7 @@ export async function POST(request: NextRequest) {
       description,
       location_mode: locationMode,
       city: city || null,
-   state: state || null,
+      state: state || null,
       venue: venue || null,
       platform: platform || null,
       fee_type: feeType,
@@ -185,7 +182,7 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { id, ...updateData } = body
+    const { id, sessions, ...updateData } = body
     if (!id) {
       return NextResponse.json({ error: 'Workshop ID is required' }, { status: 400 })
     }
@@ -208,6 +205,34 @@ export async function PUT(request: NextRequest) {
     if (error) {
       console.error('Error updating workshop:', error)
       return NextResponse.json({ error: 'Failed to update workshop' }, { status: 500 })
+    }
+
+    if (sessions && Array.isArray(sessions)) {
+      // Clear existing sessions
+      const { error: deleteError } = await supabase
+        .from('workshop_sessions')
+        .delete()
+        .eq('workshop_id', id)
+
+      if (deleteError) {
+        console.error('Error deleting old sessions:', deleteError)
+      } else if (sessions.length > 0) {
+        // Insert new sessions
+        const sessionsData = sessions.map((session: any) => ({
+          workshop_id: id,
+          session_date: new Date(session.date).toISOString().slice(0, 10),
+          start_time: session.startTime,
+          duration: session.duration
+        }))
+
+        const { error: insertError } = await supabase
+          .from('workshop_sessions')
+          .insert(sessionsData)
+
+        if (insertError) {
+          console.error('Error inserting new sessions:', insertError)
+        }
+      }
     }
 
     return NextResponse.json({ workshop })

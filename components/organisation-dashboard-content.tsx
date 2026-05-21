@@ -55,6 +55,10 @@ interface DashboardStats {
   total_applications_received: number
   active_auditions: number
   closed_auditions: number
+  total_workshops_created: number
+  total_workshop_applications: number
+  active_workshops: number
+  closed_workshops: number
 }
 
 interface Applicant {
@@ -66,6 +70,7 @@ interface Applicant {
   application_status: string
   applied_date: string
   opportunity_id: string
+  opportunity_type?: 'audition' | 'workshop'
   profile: any // Full profile data
 }
 
@@ -78,11 +83,24 @@ interface Audition {
   created_at: string
 }
 
+interface Workshop {
+  id: string
+  title: string
+  type: string
+  status: string
+  registration_deadline: string
+  created_at: string
+  location_mode: string
+  city?: string
+  platform?: string
+}
+
 export default function OrganisationDashboardContent({ user, profile }: { user: any, profile: any }) {
   const [activeTab, setActiveTab] = useState("overview")
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [applicants, setApplicants] = useState<Applicant[]>([])
   const [auditions, setAuditions] = useState<Audition[]>([])
+  const [workshops, setWorkshops] = useState<Workshop[]>([])
   const [loading, setLoading] = useState(true)
   const [profileData, setProfileData] = useState<any>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -138,6 +156,18 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
     }
   }, [user.id])
 
+  const fetchWorkshops = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/workshops?userId=${user.id}&limit=50&status=all`)
+      if (res.ok) {
+        const data = await res.json()
+        setWorkshops(data.workshops || [])
+      }
+    } catch (error) {
+      console.error("Failed to fetch workshops", error)
+    }
+  }, [user.id])
+
   const fetchProfile = useCallback(async () => {
     try {
       const res = await fetch("/api/organisations/me")
@@ -157,12 +187,13 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
         fetchStats(),
         fetchApplicants(),
         fetchAuditions(),
+        fetchWorkshops(),
         fetchProfile()
       ])
       setLoading(false)
     }
     init()
-  }, [fetchStats, fetchApplicants, fetchAuditions, fetchProfile])
+  }, [fetchStats, fetchApplicants, fetchAuditions, fetchWorkshops, fetchProfile])
 
   const openApplicantDetails = (applicant: Applicant) => {
     setSelectedApplicant(applicant)
@@ -209,7 +240,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
 
       if (!res.ok) throw new Error("Failed to update profile")
       
-      toast.success("Profile updated successfully!")
+      toast.success("Profile updated successfully!");
       fetchProfile()
     } catch (error: any) {
       toast.error(error.message || "Something went wrong")
@@ -232,6 +263,23 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
       }
     } catch (error) {
       toast.error("Error deleting audition")
+    }
+  }
+
+  const handleDeleteWorkshop = async (id: string, title: string) => {
+    if (!confirm(`Are you sure you want to delete "${title}"?`)) return
+    
+    try {
+      const res = await fetch(`/api/workshops?id=${id}`, { method: 'DELETE' })
+      if (res.ok) {
+        toast.success("Workshop deleted")
+        fetchWorkshops()
+        fetchStats()
+      } else {
+        throw new Error("Failed to delete")
+      }
+    } catch (error) {
+      toast.error("Error deleting workshop")
     }
   }
 
@@ -289,12 +337,15 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
       </div>
 
       <Tabs defaultValue="overview" onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="bg-white border p-1 rounded-xl shadow-sm w-full md:w-auto h-auto grid grid-cols-2 md:grid-cols-4">
+        <TabsList className="bg-white border p-1 rounded-xl shadow-sm w-full md:w-auto h-auto grid grid-cols-2 md:grid-cols-5">
           <TabsTrigger value="overview" className="rounded-lg py-2.5 data-[state=active]:bg-purple-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all">
             <LayoutDashboard className="h-4 w-4 mr-2 transition-colors" /> Overview
           </TabsTrigger>
           <TabsTrigger value="auditions" className="rounded-lg py-2.5 data-[state=active]:bg-purple-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all">
             <Briefcase className="h-4 w-4 mr-2 transition-colors" /> Auditions
+          </TabsTrigger>
+          <TabsTrigger value="workshops" className="rounded-lg py-2.5 data-[state=active]:bg-purple-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all">
+            <Briefcase className="h-4 w-4 mr-2 transition-colors" /> Workshops
           </TabsTrigger>
           <TabsTrigger value="applicants" className="rounded-lg py-2.5 data-[state=active]:bg-purple-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all">
             <Users className="h-4 w-4 mr-2 transition-colors" /> Applicants
@@ -330,6 +381,30 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
               value={stats?.closed_auditions || 0} 
               icon={<XCircle className="h-6 w-6 text-orange-600" />} 
               bgColor="bg-orange-50"
+            />
+            <StatsCard 
+              title="Total Workshops" 
+              value={stats?.total_workshops_created || 0} 
+              icon={<Briefcase className="h-6 w-6 text-indigo-600" />} 
+              bgColor="bg-indigo-50"
+            />
+            <StatsCard 
+              title="Workshop Apps" 
+              value={stats?.total_workshop_applications || 0} 
+              icon={<Users className="h-6 w-6 text-pink-600" />} 
+              bgColor="bg-pink-50"
+            />
+            <StatsCard 
+              title="Active Workshops" 
+              value={stats?.active_workshops || 0} 
+              icon={<CheckCircle2 className="h-6 w-6 text-teal-600" />} 
+              bgColor="bg-teal-50"
+            />
+            <StatsCard 
+              title="Closed Workshops" 
+              value={stats?.closed_workshops || 0} 
+              icon={<XCircle className="h-6 w-6 text-rose-600" />} 
+              bgColor="bg-rose-50"
             />
           </div>
 
@@ -460,6 +535,87 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
           </Card>
         </TabsContent>
 
+        {/* Workshops Section */}
+        <TabsContent value="workshops" className="space-y-4">
+          <Card className="rounded-2xl shadow-sm border-none overflow-hidden">
+            <CardHeader className="bg-white border-b border-gray-50 flex flex-row items-center justify-between pb-4">
+              <div>
+                <CardTitle className="text-xl">Manage Workshops</CardTitle>
+                <CardDescription>Track and manage your posted workshops</CardDescription>
+              </div>
+              <Button asChild variant="outline" className="text-purple-600 border-purple-200 hover:bg-purple-50">
+                <Link href="/post-workshop">
+                  <Plus className="h-4 w-4 mr-2" /> Post Workshop
+                </Link>
+              </Button>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm border-collapse">
+                  <thead className="bg-gray-50/80 text-gray-500 uppercase text-[10px] font-bold tracking-wider">
+                    <tr>
+                      <th className="px-6 py-4">Title</th>
+                      <th className="px-6 py-4">Status</th>
+                      <th className="px-6 py-4">Deadline</th>
+                      <th className="px-6 py-4">Applications</th>
+                      <th className="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-50">
+                    {workshops.map((ws) => (
+                      <tr key={ws.id} className="hover:bg-gray-50/30 transition-colors">
+                        <td className="px-6 py-4 font-bold text-gray-900">{ws.title}</td>
+                        <td className="px-6 py-4">
+                          <Badge className={ws.status === 'published' ? 'bg-green-100 text-green-700 border-none' : 'bg-gray-100 text-gray-700 border-none'}>
+                            {ws.status}
+                          </Badge>
+                        </td>
+                        <td className="px-6 py-4 text-gray-500 flex items-center gap-1.5 whitespace-nowrap">
+                          {ws.registration_deadline ? (
+                            <>
+                              <Calendar className="h-3.5 w-3.5" />
+                              {new Date(ws.registration_deadline).toLocaleDateString()}
+                            </>
+                          ) : "No deadline"}
+                        </td>
+                        <td className="px-6 py-4">
+                           <Badge variant="secondary" className="bg-purple-50 text-purple-700 border-none px-2.5">
+                             View Applicants
+                           </Badge>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex items-center justify-end gap-2">
+                            <Button variant="ghost" size="icon" asChild className="text-blue-600 hover:text-blue-700 hover:bg-blue-50">
+                              <Link href={`/workshops/${ws.id}`} target="_blank">
+                                <ExternalLink className="h-4 w-4" />
+                              </Link>
+                            </Button>
+                            <Button variant="ghost" size="icon" className="text-gray-600 hover:text-purple-600" asChild>
+                              <Link href={`/post-workshop?id=${ws.id}`}>
+                                <Edit className="h-4 w-4" />
+                              </Link>
+                            </Button>
+                            <Button variant="ghost" size="icon" className="text-red-500 hover:bg-red-50" onClick={() => handleDeleteWorkshop(ws.id, ws.title)}>
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {workshops.length === 0 && (
+                      <tr>
+                        <td colSpan={5} className="px-6 py-12 text-center text-gray-500 bg-gray-50/20">
+                          No workshops posted yet
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         {/* Applicants Section */}
         <TabsContent value="applicants" className="space-y-6">
           <Card className="rounded-2xl shadow-sm border-none">
@@ -480,16 +636,23 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                 <div className="flex items-center gap-2">
                   <Filter className="h-4 w-4 text-gray-500" />
                   <select 
-                    className="h-10 px-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="h-10 px-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 max-w-[200px]"
                     onChange={(e) => {
                       setAuditionFilter(e.target.value)
                       fetchApplicants(applicantSearch, e.target.value)
                     }}
                   >
-                    <option value="all">All Auditions</option>
-                    {auditions.map(aud => (
-                      <option key={aud.id} value={aud.id}>{aud.title}</option>
-                    ))}
+                    <option value="all">All Opportunities</option>
+                    <optgroup label="Auditions">
+                      {auditions.map(aud => (
+                        <option key={aud.id} value={aud.id}>{aud.title}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Workshops">
+                      {workshops.map(ws => (
+                        <option key={ws.id} value={ws.id}>{ws.title}</option>
+                      ))}
+                    </optgroup>
                   </select>
                 </div>
               </div>
@@ -501,7 +664,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                       <tr>
                         <th className="px-6 py-4">Applicant</th>
                         <th className="px-6 py-4">Contact</th>
-                        <th className="px-6 py-4">Applied Audition</th>
+                        <th className="px-6 py-4">Opportunity</th>
                         <th className="px-6 py-4">Date</th>
                         <th className="px-6 py-4">Status</th>
                         <th className="px-6 py-4 text-right">Actions</th>
@@ -527,7 +690,14 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            <span className="text-gray-700 font-medium">{app.applied_audition}</span>
+                            <div className="flex flex-col items-start gap-1">
+                              <span className="text-gray-700 font-medium">{app.applied_audition}</span>
+                              {app.opportunity_type && (
+                                <Badge variant="outline" className="text-[9px] uppercase border-gray-200 text-gray-500 px-1 py-0 shadow-none">
+                                  {app.opportunity_type}
+                                </Badge>
+                              )}
+                            </div>
                           </td>
                           <td className="px-6 py-4 text-gray-500 text-xs">
                             {new Date(app.applied_date).toLocaleDateString()}
@@ -677,7 +847,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                     <StarIcon className="h-4 w-4 text-purple-600" /> Acting Skills
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {selectedApplicant?.profile?.acting_skills?.length > 0 ? (
+                    {selectedApplicant?.profile?.acting_skills && selectedApplicant.profile.acting_skills.length > 0 ? (
                       selectedApplicant.profile.acting_skills.map((skill: string) => (
                         <Badge key={skill} variant="secondary" className="bg-blue-50 text-blue-700 border-none">{skill}</Badge>
                       ))
@@ -692,7 +862,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                     <MusicIcon className="h-4 w-4 text-purple-600" /> Dance Styles
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {selectedApplicant?.profile?.dance_styles?.length > 0 ? (
+                    {selectedApplicant?.profile?.dance_styles && selectedApplicant.profile.dance_styles.length > 0 ? (
                       selectedApplicant.profile.dance_styles.map((style: string) => (
                         <Badge key={style} variant="secondary" className="bg-pink-50 text-pink-700 border-none">{style}</Badge>
                       ))
@@ -710,7 +880,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                     <Languages className="h-4 w-4 text-purple-600" /> Languages
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {selectedApplicant?.profile?.languages?.length > 0 ? (
+                    {selectedApplicant?.profile?.languages && selectedApplicant.profile.languages.length > 0 ? (
                       selectedApplicant.profile.languages.map((lang: string) => (
                         <Badge key={lang} variant="secondary" className="bg-green-50 text-green-700 border-none">{lang}</Badge>
                       ))
@@ -725,7 +895,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                     <FilmIcon className="h-4 w-4 text-purple-600" /> Preferred Roles
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {selectedApplicant?.profile?.preferred_roles?.length > 0 ? (
+                    {selectedApplicant?.profile?.preferred_roles && selectedApplicant.profile.preferred_roles.length > 0 ? (
                       selectedApplicant.profile.preferred_roles.map((role: string) => (
                         <Badge key={role} variant="secondary" className="bg-amber-50 text-amber-700 border-none">{role}</Badge>
                       ))
@@ -737,13 +907,13 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
               </section>
 
               {/* Portfolio Media */}
-              {(selectedApplicant?.profile?.portfolio_images?.length > 0 || selectedApplicant?.profile?.portfolio_videos?.length > 0) && (
+              {((selectedApplicant?.profile?.portfolio_images && selectedApplicant.profile.portfolio_images.length > 0) || (selectedApplicant?.profile?.portfolio_videos && selectedApplicant.profile.portfolio_videos.length > 0)) && (
                 <section className="space-y-4">
                   <h3 className="font-bold text-gray-900 border-b pb-1 flex items-center gap-2">
                     <Video className="h-4 w-4 text-purple-600" /> Portfolio Media
                   </h3>
                   
-                  {selectedApplicant?.profile?.portfolio_images?.length > 0 && (
+                  {selectedApplicant?.profile?.portfolio_images && selectedApplicant.profile.portfolio_images.length > 0 && (
                     <div className="space-y-2">
                       <p className="text-xs font-semibold text-gray-500 uppercase">Images</p>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -756,7 +926,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                     </div>
                   )}
 
-                  {selectedApplicant?.profile?.portfolio_videos?.length > 0 && (
+                  {selectedApplicant?.profile?.portfolio_videos && selectedApplicant.profile.portfolio_videos.length > 0 && (
                     <div className="space-y-2">
                       <p className="text-xs font-semibold text-gray-500 uppercase">Videos</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
