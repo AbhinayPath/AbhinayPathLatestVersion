@@ -109,10 +109,10 @@ export async function GET(request: NextRequest) {
     const { data: talentProfiles, error: talentError } = await talentQuery
     if (talentError) throw talentError
 
-    // Fetch base profiles for fallback
+    // Fetch base profiles for fallback and to get user details
     const { data: baseProfiles, error: baseError } = await supabase
       .from('profiles')
-      .select('user_id, email')
+      .select('user_id, email, full_name, first_name, last_name')
       .in('user_id', userIds)
 
     if (baseError) throw baseError
@@ -139,10 +139,22 @@ export async function GET(request: NextRequest) {
 
         if (!talentProfile && search) return null // Filtered out by search
 
-        // Map Name: Full name -> First + Last -> Email prefix
+        // Map Name Priority: 
+        // 1. Talent Profile full_name
+        // 2. Talent Profile first + last
+        // 3. Base Profile full_name
+        // 4. Base Profile first + last
+        // 5. Email prefix
+        // 6. Unknown User
         let mappedName = talentProfile?.full_name
         if (!mappedName && (talentProfile?.first_name || talentProfile?.last_name)) {
           mappedName = `${talentProfile.first_name || ''} ${talentProfile.last_name || ''}`.trim()
+        }
+        if (!mappedName) {
+          mappedName = baseProfile?.full_name
+        }
+        if (!mappedName && (baseProfile?.first_name || baseProfile?.last_name)) {
+          mappedName = `${baseProfile.first_name || ''} ${baseProfile.last_name || ''}`.trim()
         }
 
         const email = talentProfile?.email || baseProfile?.email || 'N/A'

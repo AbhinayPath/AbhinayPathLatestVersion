@@ -3,13 +3,14 @@ import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    console.log("opportunity_id",params.id);
+    const awaitedParams = await params;
+    const { id } = awaitedParams;
+    console.log("opportunity_id", id);
 
     const supabase = await getSupabaseServerClientForRouteHandler()
-    const { id } = params
     
 
     if (!id) {
@@ -71,11 +72,12 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const awaitedParams = await params;
+    const { id } = awaitedParams;
     const supabase = await getSupabaseServerClientForRouteHandler()
-    const { id } = params
     
     if (!id) {
       return NextResponse.json(
@@ -137,11 +139,12 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const awaitedParams = await params;
+    const { id } = awaitedParams;
     const supabase = await getSupabaseServerClientForRouteHandler()
-    const { id } = params
     
     if (!id) {
       return NextResponse.json(

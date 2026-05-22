@@ -442,12 +442,22 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
               <CardContent className="p-0">
                 <div className="divide-y divide-gray-50 text-sm">
                   {applicants.slice(0, 5).map((app) => (
-                    <div key={app.id} className="flex items-center gap-4 p-4 hover:bg-gray-50/50 transition-colors">
-                      <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">
+                    <div 
+                      key={app.id} 
+                      className="flex items-center gap-4 p-4 hover:bg-gray-50/80 transition-all cursor-pointer border-b border-gray-50 last:border-none"
+                      onClick={() => openApplicantDetails(app as Applicant)}
+                    >
+                      <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0 border border-purple-200 shadow-sm">
                         {app.user_name.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-bold text-gray-900 truncate">{app.user_name}</p>
+                        <Link 
+                          href={`/talent-directory/${app.profile?.user_id || '#'}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="font-bold text-gray-900 truncate hover:text-purple-600 transition-colors"
+                        >
+                          {app.user_name}
+                        </Link>
                         <p className="text-xs text-gray-500 truncate mt-0.5">Applied for: {app.applied_audition}</p>
                       </div>
                       <div className="text-right shrink-0">
@@ -678,7 +688,12 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                               <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-xs">
                                 {app.user_name.charAt(0)}
                               </div>
-                              <span className="font-bold text-gray-900">{app.user_name}</span>
+                              <Link 
+                                href={`/talent-directory/${app.profile?.user_id || '#'}`}
+                                className="font-bold text-gray-900 hover:text-purple-600 transition-colors"
+                              >
+                                {app.user_name}
+                              </Link>
                             </div>
                           </td>
                           <td className="px-6 py-4 space-y-1">

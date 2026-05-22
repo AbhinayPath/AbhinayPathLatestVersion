@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const awaitedParams = await params;
+    const id = awaitedParams.id;
     const supabase = await getSupabaseServerClientForRouteHandler()
-    const id = params.id
 
     const { data: workshop, error } = await supabase
       .from('workshops')
@@ -24,15 +25,17 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const awaitedParams = await params;
+    const id = awaitedParams.id;
     const supabase = await getSupabaseServerClientForRouteHandler()
+    
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const id = params.id
     const body = await request.json()
 
     const {

@@ -2,8 +2,9 @@ import { Suspense } from "react"
 import AuditionDetailContent from "@/components/audition-detail-content"
 import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
 
-export default async function AuditionDetailPage({ params }: { params: { id: string } }) {
-  const { id } = params
+export default async function AuditionDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const awaitedParams = await params
+  const { id } = awaitedParams
 
   // Fetch opportunity (audition)
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/opportunities/${id}`, { cache: 'no-store' })
