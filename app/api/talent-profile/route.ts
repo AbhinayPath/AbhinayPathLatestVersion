@@ -8,6 +8,26 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: NextRequest) {
   try {
     const supabase = await getSupabaseServerClientForRouteHandler();
+    const { searchParams } = new URL(request.url);
+    const published = searchParams.get('published');
+
+    if (published === 'true') {
+      // Fetch all published profiles for the directory
+      const { data, error } = await supabase
+        .from('talent_profiles')
+        .select(`
+          *,
+          media_files(*)
+        `)
+        .eq('published', true);
+
+      if (error) {
+        console.error('Error fetching published talent profiles:', error);
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
+
+      return NextResponse.json(data || []);
+    }
 
     // Get the authenticated user
     const { data: { user }, error: authError } = await supabase.auth.getUser();

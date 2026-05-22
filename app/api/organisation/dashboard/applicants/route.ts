@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
+import { getSupabaseServerClientForRouteHandler, getSupabaseAdminClient } from '@/lib/supabase-server'
 
 export async function GET(request: NextRequest) {
   try {
     const supabase = await getSupabaseServerClientForRouteHandler()
+    const adminSupabase = await getSupabaseAdminClient()
 
     // Get the current user
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -19,13 +20,23 @@ export async function GET(request: NextRequest) {
     const opportunityId = searchParams.get('opportunityId')
     const search = searchParams.get('search')
 
-    // Get all opportunity IDs created by this user
+    // Get all opportunity IDs created by this user from 'opportunities' table
     const { data: userOpps, error: oppsError } = await supabase
       .from('opportunities')
       .select('id, title')
       .eq('created_by', user.id)
 
     if (oppsError) throw oppsError
+
+    // Also check the legacy 'auditions' table
+    const { data: legacyAuditions, error: legacyError } = await supabase
+      .from('auditions')
+      .select('id, title')
+      .eq('created_by', user.id)
+
+    if (legacyError) {
+      console.error('Error fetching legacy auditions:', legacyError)
+    }
 
     // Get all workshop IDs created by this user
     const { data: userWorkshops, error: workshopsError } = await supabase
@@ -35,11 +46,12 @@ export async function GET(request: NextRequest) {
 
     if (workshopsError) throw workshopsError
 
-    const oppIds = userOpps.map(opp => opp.id)
+    const allAuditionOpps = [...(userOpps || []), ...(legacyAuditions || [])]
+    const oppIds = allAuditionOpps.map(opp => opp.id)
     const workshopIds = userWorkshops.map(w => w.id)
 
     const titleMap = {
-      ...userOpps.reduce((acc, opp) => ({ ...acc, [opp.id]: opp.title }), {} as Record<string, string>),
+      ...allAuditionOpps.reduce((acc, opp) => ({ ...acc, [opp.id]: opp.title }), {} as Record<string, string>),
       ...userWorkshops.reduce((acc, w) => ({ ...acc, [w.id]: w.title }), {} as Record<string, string>)
     }
 
@@ -90,8 +102,8 @@ export async function GET(request: NextRequest) {
     // Get unique user IDs to fetch profile data
     const userIds = Array.from(new Set(allRegistrations.map(r => r.user_id)))
 
-    // Fetch talent profiles for these users
-    let talentQuery = supabase
+    // Fetch talent profiles for these users using Admin client to bypass RLS
+    let talentQuery = adminSupabase
       .from('talent_profiles')
       .select(`
         user_id, full_name, first_name, last_name, email, phone, 
@@ -109,15 +121,15 @@ export async function GET(request: NextRequest) {
     const { data: talentProfiles, error: talentError } = await talentQuery
     if (talentError) throw talentError
 
-    // Fetch base profiles for fallback and to get user details
-    const { data: baseProfiles, error: baseError } = await supabase
+    // Fetch base profiles for fallback and to get user details using Admin client
+    const { data: baseProfiles, error: baseError } = await adminSupabase
       .from('profiles')
-      .select('user_id, email, full_name, first_name, last_name')
+      .select('user_id, email')
       .in('user_id', userIds)
 
     if (baseError) throw baseError
 
-    const talentMap = talentProfiles.reduce((acc, p) => {
+    const talentMap = (talentProfiles || []).reduce((acc, p) => {
       // Prioritize profiles with names if there are duplicates for the same user
       const existing = acc[p.user_id]
       if (!existing || (!existing.full_name && p.full_name) || (!existing.first_name && p.first_name)) {
@@ -126,7 +138,7 @@ export async function GET(request: NextRequest) {
       return acc
     }, {} as Record<string, any>)
 
-    const baseMap = baseProfiles.reduce((acc, p) => {
+    const baseMap = (baseProfiles || []).reduce((acc, p) => {
       acc[p.user_id] = p
       return acc
     }, {} as Record<string, any>)

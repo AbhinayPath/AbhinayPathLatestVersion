@@ -105,14 +105,12 @@ export default function AuditionDetailContent({ audition, organisation }: { audi
   const handleApply = async () => {
     setLoading(true)
     try {
-      // use singleton
-      // const supabase = getSupabaseBrowserClient()
       const user = await supabase.auth.getUser()
       const userId = user?.data?.user?.id
       if (!userId) {
         toast({ title: "Please login to apply.", variant: "destructive" })
         setLoading(false)
-        return
+        return false // Return false to indicate failure
       }
       // Prevent duplicate applications
       const { data: existing } = await supabase
@@ -122,26 +120,39 @@ export default function AuditionDetailContent({ audition, organisation }: { audi
         .eq("opportunity_id", audition.id)
         .maybeSingle()
       if (existing) {
-        toast({ title: "You’ve already applied.", variant: "destructive" })
+        // If already applied, we don't need to insert but we can return true
         setHasAlreadyApplied(true)
         setLoading(false)
-        return
+        return true
       }
       const { error } = await supabase.from("audition_registrations").insert({
         user_id: userId,
         opportunity_id: audition.id
-
       })
       if (error) {
         toast({ title: "Failed to apply. Try again.", variant: "destructive" })
+        return false
       } else {
         toast({ title: "Successfully applied!", variant: "default" })
         setHasAlreadyApplied(true)
+        return true
       }
     } catch (err) {
       toast({ title: "Failed to apply. Try again.", variant: "destructive" })
+      return false
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleExternalApply = async (type: 'whatsapp' | 'email') => {
+    const success = await handleApply();
+    if (success) {
+      if (type === 'whatsapp') {
+        window.open(`https://wa.me/${audition.contact_info}?text=${encodeURIComponent(`Hi, I saw your audition titled "${audition.title}" on AbhinayPath and I'm interested in applying.`)}`, '_blank');
+      } else {
+        window.location.href = `mailto:${audition.contact_info}?subject=${encodeURIComponent(`Application for: ${audition.title}`)}&body=${encodeURIComponent("Hello,\n\nI would like to apply for the audition. Please find my profile attached.")}`;
+      }
     }
   }
 
@@ -340,14 +351,12 @@ export default function AuditionDetailContent({ audition, organisation }: { audi
                           <p className="text-[10px] text-green-600 font-bold mb-1 uppercase tracking-wider">WhatsApp Contact</p>
                           <p className="font-mono text-green-700 font-bold text-base">{audition.contact_info}</p>
                         </div>
-                        <Button asChild className="h-12 px-10 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold border-none shadow-md transition-all hover:scale-[1.05] active:scale-95">
-                          <a
-                            href={`https://wa.me/${audition.contact_info}?text=${encodeURIComponent(`Hi, I saw your audition titled "${audition.title}" on AbhinayPath and I'm interested in applying.`)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <MessageSquare className="mr-2 h-5 w-5" /> Apply on AbhinayPath
-                          </a>
+                        <Button 
+                          className="h-12 px-10 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold border-none shadow-md transition-all hover:scale-[1.05] active:scale-95"
+                          onClick={() => handleExternalApply('whatsapp')}
+                          disabled={loading}
+                        >
+                          <MessageSquare className="mr-2 h-5 w-5" /> {loading ? "Processing..." : "Apply on WhatsApp"}
                         </Button>
                       </div>
                     ) : audition.application_method === "email" ? (
@@ -356,12 +365,12 @@ export default function AuditionDetailContent({ audition, organisation }: { audi
                           <p className="text-[10px] text-blue-600 font-bold mb-1 uppercase tracking-wider">Email Contact</p>
                           <p className="font-mono text-blue-700 font-bold truncate text-base">{audition.contact_info}</p>
                         </div>
-                        <Button asChild className="h-12 px-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold shadow-md border-none transition-all hover:scale-[1.05] active:scale-95">
-                          <a
-                            href={`mailto:${audition.contact_info}?subject=${encodeURIComponent(`Application for: ${audition.title}`)}&body=${encodeURIComponent("Hello,\n\nI would like to apply for the audition. Please find my profile attached.")}`}
-                          >
-                            <Mail className="mr-2 h-5 w-5" /> Apply on AbhinayPath
-                          </a>
+                        <Button 
+                          className="h-12 px-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold shadow-md border-none transition-all hover:scale-[1.05] active:scale-95"
+                          onClick={() => handleExternalApply('email')}
+                          disabled={loading}
+                        >
+                          <Mail className="mr-2 h-5 w-5" /> {loading ? "Processing..." : "Apply via Email"}
                         </Button>
                       </div>
                     ) : !hasAlreadyApplied ? (

@@ -13,6 +13,7 @@ interface TalentProfile {
   id: string;
   first_name: string;
   last_name: string;
+  full_name: string;
   location: string;
   bio: string;
   experience_level: string;
@@ -47,29 +48,38 @@ export default function TalentDirectoryPage() {
       const response = await fetch('/api/talent-profile?published=true');
       if (response.ok) {
         const data = await response.json();
-        setProfiles(data);
+        setProfiles(Array.isArray(data) ? data : []);
       }
     } catch (error) {
       console.error('Error fetching talent profiles:', error);
+      setProfiles([]);
     } finally {
       setLoading(false);
     }
   };
 
   const filterProfiles = () => {
-    let filtered = profiles;
+    if (!Array.isArray(profiles)) {
+      setFilteredProfiles([]);
+      return;
+    }
+
+    let filtered = [...profiles];
 
     if (searchTerm) {
+      const term = searchTerm.toLowerCase();
       filtered = filtered.filter(profile =>
-        `${profile.first_name} ${profile.last_name}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        profile.bio?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        profile.skills?.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()))
+        (profile.full_name || '').toLowerCase().includes(term) ||
+        `${profile.first_name || ''} ${profile.last_name || ''}`.toLowerCase().includes(term) ||
+        profile.bio?.toLowerCase().includes(term) ||
+        profile.skills?.some(skill => skill?.toLowerCase().includes(term))
       );
     }
 
     if (locationFilter) {
+      const loc = locationFilter.toLowerCase();
       filtered = filtered.filter(profile =>
-        profile.location?.toLowerCase().includes(locationFilter.toLowerCase())
+        profile.location?.toLowerCase().includes(loc)
       );
     }
 
@@ -80,9 +90,10 @@ export default function TalentDirectoryPage() {
     }
 
     if (skillsFilter) {
+      const skillTerm = skillsFilter.toLowerCase();
       filtered = filtered.filter(profile =>
         profile.skills?.some(skill => 
-          skill.toLowerCase().includes(skillsFilter.toLowerCase())
+          skill?.toLowerCase().includes(skillTerm)
         )
       );
     }
@@ -97,8 +108,13 @@ export default function TalentDirectoryPage() {
     return primaryImage?.file_url || mediaFiles?.[0]?.file_url;
   };
 
-  const getInitials = (firstName: string, lastName: string) => {
-    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  const getInitials = (profile: TalentProfile) => {
+    if (profile.full_name) {
+      const parts = profile.full_name.split(' ');
+      if (parts.length >= 2) return `${parts[0].charAt(0)}${parts[1].charAt(0)}`.toUpperCase();
+      return parts[0].charAt(0).toUpperCase();
+    }
+    return `${(profile.first_name || 'U').charAt(0)}${(profile.last_name || '').charAt(0)}`.toUpperCase();
   };
 
   if (loading) {
@@ -187,7 +203,7 @@ export default function TalentDirectoryPage() {
       {/* Results Count */}
       <div className="flex items-center justify-between">
         <p className="text-muted-foreground">
-          {filteredProfiles.length} talent{filteredProfiles.length !== 1 ? 's' : ''} found
+          {filteredProfiles?.length || 0} talent{filteredProfiles?.length !== 1 ? 's' : ''} found
         </p>
         <div className="flex items-center gap-2">
           <Filter className="h-4 w-4" />
@@ -197,22 +213,22 @@ export default function TalentDirectoryPage() {
 
       {/* Talent Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProfiles.map((profile) => (
+        {filteredProfiles?.map((profile) => (
           <Card key={profile.id} className="group hover:shadow-lg transition-shadow duration-200">
             <CardHeader>
               <div className="flex items-center space-x-4">
                 <Avatar className="w-16 h-16">
                   <AvatarImage 
                     src={getPrimaryImage(profile.media_files)} 
-                    alt={`${profile.first_name} ${profile.last_name}`}
+                    alt={profile.full_name || `${profile.first_name || ''} ${profile.last_name || ''}`}
                   />
                   <AvatarFallback>
-                    {getInitials(profile.first_name, profile.last_name)}
+                    {getInitials(profile)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
                   <CardTitle className="text-lg">
-                    {profile.first_name} {profile.last_name}
+                    {profile.full_name || `${profile.first_name || 'Anonymous'} ${profile.last_name || ''}`}
                   </CardTitle>
                   {profile.location && (
                     <div className="flex items-center text-sm text-muted-foreground">

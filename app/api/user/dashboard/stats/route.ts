@@ -25,11 +25,25 @@ export async function GET(request: NextRequest) {
       throw error
     }
 
+    const { data: workshopRegistrations, error: workshopError } = await supabase
+      .from('workshop_registrations')
+      .select('status')
+      .eq('user_id', user.id)
+
+    if (workshopError) {
+      console.error('Error fetching workshop registrations:', workshopError)
+    }
+
+    const allRegistrations = [
+      ...(registrations || []),
+      ...(workshopRegistrations || [])
+    ]
+
     // Calculate metrics
-    const total_auditions_applied = registrations?.length || 0
-    const active_applications = registrations?.filter(r => r.status && r.status !== 'rejected').length || 0
-    const shortlisted_applications = registrations?.filter(r => r.status === 'shortlisted').length || 0
-    const rejected_applications = registrations?.filter(r => r.status === 'rejected').length || 0
+    const total_auditions_applied = allRegistrations.length
+    const active_applications = allRegistrations.filter(r => r.status && r.status !== 'rejected').length
+    const shortlisted_applications = allRegistrations.filter(r => r.status === 'shortlisted').length
+    const rejected_applications = allRegistrations.filter(r => r.status === 'rejected').length
 
     return NextResponse.json({
       metrics: {

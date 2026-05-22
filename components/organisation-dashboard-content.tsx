@@ -30,6 +30,7 @@ import { toast } from "sonner"
 import { MergedOrganisationForm } from "@/features/organisation/components/MergedOrganisationForm"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { supabase } from "@/lib/supabase-browser"
 import {
   Dialog,
   DialogContent,
@@ -146,15 +147,32 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
 
   const fetchAuditions = useCallback(async () => {
     try {
-      const res = await fetch(`/api/opportunities?userId=${user.id}&limit=50&status=all`)
-      if (res.ok) {
-        const data = await res.json()
-        setAuditions(data.opportunities || [])
-      }
+      const user = await supabase.auth.getUser()
+      const userId = user?.data?.user?.id
+      if (!userId) return
+
+      // Fetch from both opportunities and legacy auditions
+      const [oppsRes, legacyRes] = await Promise.all([
+        supabase
+          .from('opportunities')
+          .select('*')
+          .eq('created_by', userId),
+        supabase
+          .from('auditions')
+          .select('*')
+          .eq('created_by', userId)
+      ])
+
+      const allAuditions = [
+        ...(oppsRes.data || []),
+        ...(legacyRes.data || [])
+      ].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+
+      setAuditions(allAuditions)
     } catch (error) {
       console.error("Failed to fetch auditions", error)
     }
-  }, [user.id])
+  }, [])
 
   const fetchWorkshops = useCallback(async () => {
     try {
@@ -448,7 +466,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                       onClick={() => openApplicantDetails(app as Applicant)}
                     >
                       <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0 border border-purple-200 shadow-sm">
-                        {app.user_name.charAt(0)}
+                        {(app.user_name || 'U').charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <Link 
@@ -456,7 +474,7 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                           onClick={(e) => e.stopPropagation()}
                           className="font-bold text-gray-900 truncate hover:text-purple-600 transition-colors"
                         >
-                          {app.user_name}
+                          {app.user_name || 'Unknown User'}
                         </Link>
                         <p className="text-xs text-gray-500 truncate mt-0.5">Applied for: {app.applied_audition}</p>
                       </div>
@@ -686,13 +704,13 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
                               <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-xs">
-                                {app.user_name.charAt(0)}
+                                {(app.user_name || 'U').charAt(0)}
                               </div>
                               <Link 
                                 href={`/talent-directory/${app.profile?.user_id || '#'}`}
                                 className="font-bold text-gray-900 hover:text-purple-600 transition-colors"
                               >
-                                {app.user_name}
+                                {app.user_name || 'Unknown User'}
                               </Link>
                             </div>
                           </td>
@@ -778,10 +796,10 @@ export default function OrganisationDashboardContent({ user, profile }: { user: 
                 />
               ) : (
                 <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-lg border-2 border-purple-100">
-                  {selectedApplicant?.user_name.charAt(0)}
+                  {(selectedApplicant?.user_name || 'U').charAt(0)}
                 </div>
               )}
-              {selectedApplicant?.user_name}
+              {selectedApplicant?.user_name || 'Unknown User'}
             </DialogTitle>
             <DialogDescription>
               Applicant details for {selectedApplicant?.applied_audition}
