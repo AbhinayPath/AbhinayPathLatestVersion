@@ -1,8 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Calendar, Clock, MapPin, CheckCircle, Star } from "lucide-react"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { CalendarIcon, MapPin, Clock, Star } from "lucide-react"
 
 interface WorkshopCardProps {
   workshop: {
@@ -23,96 +22,84 @@ interface WorkshopCardProps {
 }
 
 export default function WorkshopCard({ workshop, variant = "full" }: WorkshopCardProps) {
-  const isCompact = variant === "compact"
-  const isMobile = useMediaQuery("(max-width: 640px)")
-
   return (
     <div
-      className={`theater-card flex flex-col h-full rounded-xl overflow-hidden transition-all duration-300 
-      shadow-sm hover:shadow-md transform hover:-translate-y-1 bg-white 
-      ${workshop.featured ? "border-2 border-secondary" : "border border-gray-100"}`}
+      className={`bg-white rounded-lg overflow-hidden flex flex-col h-full card-hover shadow-sm border ${
+        workshop.featured ? "border-purple-200" : "border-gray-100"
+      }`}
     >
-      <div className="relative h-48 w-full overflow-hidden group">
+      <div className="relative h-48 w-full group">
+        <Image
+          src="/images/acting-workshop.png"
+          alt={workshop.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+          priority={workshop.featured}
+          onError={(e) => {
+            e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
+          }}
+        />
         {workshop.featured && (
-          <div className="absolute top-3 left-3 z-10 bg-secondary text-black text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
-            <Star className="h-3 w-3 fill-black" />
-            Featured
+          <div className="absolute top-2 right-2 badge-verified">
+            <span className="flex items-center">
+              <Star className="w-3 h-3 mr-1 fill-current" />
+              Featured
+            </span>
           </div>
         )}
-        <div className="absolute top-3 right-3 z-10 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
-          <CheckCircle className="h-3 w-3" />
-          Verified
-        </div>
-        <div className="absolute inset-0 bg-gray-200">
-          <Image
-            src="/images/acting-workshop.png"
-            alt={workshop.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            priority={workshop.featured}
-            onError={(e) => {
-              // Fallback to a placeholder if image fails to load
-              e.currentTarget.src = "/placeholder.svg?height=300&width=500&text=Acting+Workshop"
-            }}
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-          <p className="text-white font-medium text-sm truncate">{workshop.institution}</p>
-          <h3 className="font-playfair text-xl font-bold text-white line-clamp-2 flex items-center">
-            {workshop.title}
-            {workshop.featured && (
-              <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-primary">
-                Featured
-              </span>
-            )}
-          </h3>
-        </div>
       </div>
 
-      <div className="p-4 sm:p-5 flex-1 flex flex-col">
-        <p className="text-primary font-medium text-sm mb-3 flex items-center">
-          <span className="inline-block w-5 h-5 bg-primary/10 rounded-full mr-2 flex items-center justify-center">
-            <span className="text-primary text-xs">👤</span>
-          </span>
-          <span className="truncate">By {workshop.trainer}</span>
+      <div className="p-6 flex-1 flex flex-col space-y-4">
+        {/* Title */}
+        <h3 className="font-playfair text-xl font-bold text-gray-900 break-words line-clamp-2">
+          {workshop.title || "Workshop Title"}
+        </h3>
+        
+        {/* Subtitle / Trainer */}
+        <p className="text-purple-600 font-medium text-sm truncate">
+          By {workshop.trainer}
         </p>
 
-        <div className="flex items-center text-sm text-gray-600 mb-3 bg-gray-50 px-3 py-2 rounded-lg">
-          <MapPin className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
-          <span className="truncate">
-            {workshop.location}, {workshop.state}
-          </span>
-        </div>
-
-        {!isCompact && !isMobile && (
-          <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-2 leading-relaxed">{workshop.description}</p>
-        )}
-
-        <div className="flex flex-col gap-2 mb-3 mt-auto">
-          <div className="flex items-center text-sm bg-gray-50 px-3 py-2 rounded-lg">
-            <Calendar className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
-            <span className="text-gray-700 truncate">{workshop.date}</span>
+        {/* Details: Date, Location, Time */}
+        <div className="flex items-start sm:items-center gap-2 text-sm text-gray-600 flex-wrap">
+          <div className="flex items-center gap-1">
+            <CalendarIcon className="h-4 w-4 flex-shrink-0" />
+            <span className="break-words">{workshop.date}</span>
           </div>
-          <div className="flex items-center text-sm">
-            <Clock className="h-4 w-4 mr-2 text-gray-500 flex-shrink-0" />
-            <span className="text-gray-700 truncate">{workshop.time}</span>
+          <div className="flex items-center gap-1">
+            <span className="hidden sm:inline">•</span>
+            <Clock className="h-4 w-4 flex-shrink-0 text-gray-400" />
+            <span className="truncate">{workshop.time}</span>
           </div>
-          <div className="flex items-center text-sm font-medium mt-1">
-            <span className="text-primary bg-primary/10 px-3 py-1 rounded-full">{workshop.price}</span>
+          <div className="flex items-center gap-1">
+            <span className="hidden sm:inline">•</span>
+            <MapPin className="h-4 w-4 flex-shrink-0 text-gray-400" />
+            <span className="truncate">
+              {workshop.location}{workshop.location !== "Online" ? `, ${workshop.state}` : ""}
+            </span>
           </div>
         </div>
 
-        <div className="flex justify-between pt-3 border-t border-gray-100">
-          <Link href={`/workshops/${workshop.id}`} className="flex-1 mr-2">
-            <Button variant="outline" size="sm" className="w-full rounded-full text-sm h-9 font-medium">
-              Details
-            </Button>
-          </Link>
-          <Link href={workshop.registrationLink} target="_blank" className="flex-1">
-            <Button size="sm" className="w-full rounded-full text-sm h-9 font-medium">
-              Register
+        {/* Description Snippet */}
+        <div className="text-gray-600 text-sm line-clamp-3 overflow-hidden flex-1">
+          {workshop.description ? (
+            <p className="whitespace-pre-line leading-relaxed">{workshop.description}</p>
+          ) : (
+            <p>No description provided.</p>
+          )}
+        </div>
+
+        {/* Price Tag */}
+        <div className="flex items-center text-sm font-medium pt-2">
+          <span className="text-purple-700 bg-purple-50 px-3 py-1 rounded-md border border-purple-100">{workshop.price}</span>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-auto pt-4 border-t">
+          <Link href={`/workshops/${workshop.id}`} className="w-full">
+            <Button variant="outline" className="w-full rounded-lg h-10 border-purple-200 text-purple-700 hover:bg-purple-50 hover:text-purple-800 transition-all font-medium">
+              View Details
             </Button>
           </Link>
         </div>

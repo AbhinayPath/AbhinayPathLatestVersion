@@ -24,6 +24,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=NSD",
     applicationLink: "https://nsd.gov.in/admissions",
     featured: true,
+    requirements: ["Graduate degree", "Theater experience"],
   },
   {
     id: 2,
@@ -37,6 +38,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=FTII",
     applicationLink: "https://ftii.ac.in",
     featured: true,
+    requirements: ["Selection through written test", "Interview performance"],
   },
   {
     id: 3,
@@ -51,6 +53,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=Theater Teacher",
     applicationLink: "https://prithvitheatre.org/careers",
     featured: false,
+    requirements: ["5+ years teaching experience", "Theater background"],
   },
   {
     id: 4,
@@ -65,6 +68,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=Assistant",
     applicationLink: "https://aadyamtheatre.com/jobs",
     featured: false,
+    requirements: ["Fresh graduates welcome", "Theater background"],
   },
   {
     id: 5,
@@ -78,6 +82,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=SAC",
     applicationLink: "https://srcpa.in",
     featured: true,
+    requirements: ["High school graduation", "Passion for acting"],
   },
   {
     id: 6,
@@ -92,6 +97,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=Production Manager",
     applicationLink: "https://jagrititheatre.com/work-with-us",
     featured: false,
+    requirements: ["Technical knowledge", "Team management skills"],
   },
   {
     id: 7,
@@ -106,6 +112,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=DSM",
     applicationLink: "https://dramaschoolmumbai.in",
     featured: true,
+    requirements: ["Graduate degree", "Acting audition"],
   },
   {
     id: 8,
@@ -120,6 +127,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=Lighting",
     applicationLink: "https://ncpamumbai.com/careers",
     featured: false,
+    requirements: ["Portfolio required", "Previous experience"],
   },
   {
     id: 9,
@@ -133,6 +141,7 @@ const opportunities = [
     image: "/placeholder.svg?height=300&width=500&text=Drama Instructor",
     applicationLink: "https://rangashankara.org/jobs",
     featured: false,
+    requirements: ["Experience with children", "Weekend availability"],
   },
 ]
 

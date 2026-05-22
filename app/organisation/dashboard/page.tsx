@@ -3,7 +3,7 @@ import { getSupabaseServerComponentClient } from '@/lib/supabase-server'
 import OrganisationDashboardContent from '@/components/organisation-dashboard-content'
 
 export default async function OrganisationDashboardPage() {
-  const supabase = getSupabaseServerComponentClient()
+  const supabase = await getSupabaseServerComponentClient()
   
   const { data: { user }, error: authError } = await supabase.auth.getUser()
   

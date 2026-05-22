@@ -25,7 +25,7 @@ interface Organisation {
 }
 
 async function getOrganisationProfile(): Promise<Organisation | null> {
-  const supabase = await getSupabaseServerComponentClient();
+  const supabase = await getSupabaseServerComponentClient()
 
   const {
     data: { user },

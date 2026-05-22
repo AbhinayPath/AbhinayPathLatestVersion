@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect, Suspense } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -14,8 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { CustomDatePicker } from "@/components/ui/custom-date-picker"
 import { format } from "date-fns"
 import {
   CalendarIcon,
@@ -66,8 +65,13 @@ interface WorkshopSession {
   duration: string
 }
 
-export default function PostWorkshopPage() {
+function PostWorkshopInner() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const workshopId = searchParams.get("id")
+
+  const [isEditing, setIsEditing] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
 
   // Core Fields
   const [title, setTitle] = useState("")
@@ -250,6 +254,57 @@ export default function PostWorkshopPage() {
     tryAutofill()
   }, [pincode])
 
+  useEffect(() => {
+    if (!workshopId) return
+
+    async function fetchWorkshop() {
+      setIsEditing(true)
+      setIsFetching(true)
+      try {
+        const res = await fetch(`/api/workshops/${workshopId}`)
+        if (res.ok) {
+          const { workshop } = await res.json()
+          setTitle(workshop.title || "")
+          setDescription(workshop.description || "")
+          setLocationMode(workshop.location_mode || "city")
+          setCity(workshop.city || "")
+          setSelectedState(workshop.state || "")
+          setVenue(workshop.venue || "")
+          setPlatform(workshop.platform || "")
+          setFeeType(workshop.fee_type || "free")
+          setFeeAmount(workshop.fee_amount?.toString() || "")
+          setFeeNote(workshop.fee_note || "")
+          setCoverImagePreview(workshop.cover_image || "")
+          setRegistrationLink(workshop.registration_link || "")
+          setContactMethod(workshop.contact_method || "whatsapp")
+          setWhatsappNumber(workshop.whatsapp_number || "")
+          setEmail(workshop.email || "")
+          setSkillLevel(workshop.skill_level || "open-to-all")
+          setSelectedLanguages(workshop.languages || [])
+          setCapacity(workshop.capacity?.toString() || "")
+          setTargetAudience(workshop.target_audience || "")
+          if (workshop.registration_deadline) {
+            setRegistrationDeadline(new Date(workshop.registration_deadline))
+          }
+          if (workshop.workshop_sessions && workshop.workshop_sessions.length > 0) {
+            setSessions(workshop.workshop_sessions.map((s: any) => ({
+              id: s.id || Math.random().toString(),
+              date: new Date(s.date),
+              startTime: s.start_time,
+              duration: s.end_time || ""
+            })))
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch workshop", err)
+        toast.error("Failed to load workshop details")
+      } finally {
+        setIsFetching(false)
+      }
+    }
+    fetchWorkshop()
+  }, [workshopId])
+
   const toggleLanguage = (lang: string) => {
     if (selectedLanguages.includes(lang)) {
       setSelectedLanguages(selectedLanguages.filter((l) => l !== lang))
@@ -330,21 +385,18 @@ export default function PostWorkshopPage() {
         coverImageUrl = uploadData.url
       }
 
-      const payload = {
+      let payload: any = {
         title,
+        sessions: sessions.map((s) => ({
+          date: s.date ? format(s.date, "yyyy-MM-dd") : null,
+          startTime: s.startTime,
+          duration: s.duration,
+        })),
         description,
-        sessions: sessions
-          .map((s) => ({
-            date: s.date ? format(s.date as Date, "yyyy-MM-dd") : null,
-            startTime: s.startTime,
-            duration: s.duration,
-          }))
-          .filter((s) => s.date),
         locationMode,
-        state: locationMode === "city" ? selectedState : null,
         city: locationMode === "city" ? city : null,
-        pincode: locationMode === "city" ? pincode : null,
-        venue,
+        state: locationMode === "city" ? selectedState : null,
+        venue: locationMode === "city" ? venue : null,
         platform: locationMode === "online" ? platform : null,
         feeType,
         feeAmount: feeType === "paid" ? feeAmount : null,
@@ -366,8 +418,12 @@ export default function PostWorkshopPage() {
         status: "published",
       }
 
+      if (isEditing) {
+        payload.id = workshopId
+      }
+
       const res = await fetch("/api/workshops", {
-        method: "POST",
+        method: isEditing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       })
@@ -376,7 +432,7 @@ export default function PostWorkshopPage() {
         throw new Error(data?.error || "Failed to create workshop")
       }
 
-      toast.success("Workshop posted successfully!")
+      toast.success(isEditing ? "Workshop updated successfully!" : "Workshop posted successfully!")
       router.push(`/workshops/${data.workshop.id}`)
     } catch (err: any) {
       console.error("Publish workshop failed:", err)
@@ -405,7 +461,7 @@ export default function PostWorkshopPage() {
               <Badge variant="secondary" className="text-xs font-medium px-2 sm:px-3 py-1">
                 AP
               </Badge>
-              <h1 className="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Post Workshop</h1>
+              <h1 className="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">{isEditing ? "Edit Workshop" : "Post Workshop"}</h1>
               <Badge variant="outline" className="text-xs px-2 sm:px-3 py-1">
                 All times IST
               </Badge>
@@ -486,31 +542,11 @@ export default function PostWorkshopPage() {
 
                         <div className="space-y-2">
                           <Label className="text-xs">Date</Label>
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <Button
-                                variant="outline"
-                                className={cn(
-                                  "w-full justify-start text-left font-normal h-11 sm:h-10 text-sm",
-                                  !session.date && "text-muted-foreground",
-                                )}
-                              >
-                                <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-                                <span className="truncate">
-                                  {session.date ? format(session.date, "PPP") : "Pick a date"}
-                                </span>
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0" align="start">
-                              <Calendar
-                                mode="single"
-                                selected={session.date}
-                                onSelect={(date) => updateSession(session.id, "date", date)}
-                                disabled={(date) => date < new Date()}
-                                initialFocus
-                              />
-                            </PopoverContent>
-                          </Popover>
+                          <CustomDatePicker
+                            value={session.date}
+                            onChange={(date) => updateSession(session.id, "date", date as Date)}
+                            minDate={new Date()}
+                          />
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
@@ -886,31 +922,11 @@ export default function PostWorkshopPage() {
                 {/* Registration Deadline */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Registration Deadline</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-full justify-start text-left font-normal h-11 sm:h-10",
-                          !registrationDeadline && "text-muted-foreground",
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-                        <span className="truncate">
-                          {registrationDeadline ? format(registrationDeadline, "PPP") : "Pick a date"}
-                        </span>
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={registrationDeadline}
-                        onSelect={setRegistrationDeadline}
-                        disabled={(date) => date < new Date()}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
+                  <CustomDatePicker
+                    value={registrationDeadline}
+                    onChange={(date) => setRegistrationDeadline(date as Date)}
+                    minDate={new Date()}
+                  />
                 </div>
 
                 {/* Target Audience */}
@@ -1255,5 +1271,13 @@ export default function PostWorkshopPage() {
         </footer>
       </div>
     </div>
+  )
+}
+
+export default function PostWorkshopPage() {
+  return (
+    <Suspense fallback={<div className="flex h-screen items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-purple-600" /></div>}>
+      <PostWorkshopInner />
+    </Suspense>
   )
 }

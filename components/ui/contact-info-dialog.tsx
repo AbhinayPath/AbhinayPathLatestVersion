@@ -4,7 +4,7 @@ import * as React from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Mail, Phone, MapPin, Globe, Instagram, Facebook, Youtube } from "lucide-react"
+import { Mail, Phone, MapPin, Globe, Instagram, Facebook, Youtube, Github, Linkedin, Twitter } from "lucide-react"
 import { TalentProfile } from "@/lib/types/talent"
 
 interface ContactInfoDialogProps {
@@ -78,19 +78,7 @@ export function ContactInfoDialog({ profile, children }: ContactInfoDialogProps)
                   </a>
                 </Button>
               )}
-              {profile.facebook_url && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className="h-8 px-3"
-                >
-                  <a href={profile.facebook_url} target="_blank" rel="noopener noreferrer">
-                    <Facebook className="h-3 w-3 mr-1" />
-                    Facebook
-                  </a>
-                </Button>
-              )}
+
               {profile.youtube_url && (
                 <Button
                   variant="outline"
@@ -101,6 +89,58 @@ export function ContactInfoDialog({ profile, children }: ContactInfoDialogProps)
                   <a href={profile.youtube_url} target="_blank" rel="noopener noreferrer">
                     <Youtube className="h-3 w-3 mr-1" />
                     YouTube
+                  </a>
+                </Button>
+              )}
+              {profile.github_link && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="h-8 px-3"
+                >
+                  <a href={profile.github_link} target="_blank" rel="noopener noreferrer">
+                    <Github className="h-3 w-3 mr-1" />
+                    GitHub
+                  </a>
+                </Button>
+              )}
+              {profile.linkedin_link && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="h-8 px-3"
+                >
+                  <a href={profile.linkedin_link} target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="h-3 w-3 mr-1" />
+                    LinkedIn
+                  </a>
+                </Button>
+              )}
+              {profile.x_link && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="h-8 px-3"
+                >
+                  <a href={profile.x_link} target="_blank" rel="noopener noreferrer">
+                    <Twitter className="h-3 w-3 mr-1" />
+                    X
+                  </a>
+                </Button>
+              )}
+              {profile.portfolio_website && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="h-8 px-3"
+                >
+                  <a href={profile.portfolio_website} target="_blank" rel="noopener noreferrer">
+                    <Globe className="h-3 w-3 mr-1" />
+                    Portfolio
                   </a>
                 </Button>
               )}

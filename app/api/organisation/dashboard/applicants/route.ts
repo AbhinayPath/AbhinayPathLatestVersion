@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
+import { getSupabaseServerClientForRouteHandler, getSupabaseAdminClient } from '@/lib/supabase-server'
 
 export async function GET(request: NextRequest) {
   try {
     const supabase = await getSupabaseServerClientForRouteHandler()
+    const adminSupabase = await getSupabaseAdminClient()
 
     // Get the current user
     const { data: { user }, error: authError } = await supabase.auth.getUser()
@@ -19,7 +20,7 @@ export async function GET(request: NextRequest) {
     const opportunityId = searchParams.get('opportunityId')
     const search = searchParams.get('search')
 
-    // Get all opportunity IDs created by this user
+    // Get all opportunity IDs created by this user from 'opportunities' table
     const { data: userOpps, error: oppsError } = await supabase
       .from('opportunities')
       .select('id, title')
@@ -27,46 +28,82 @@ export async function GET(request: NextRequest) {
 
     if (oppsError) throw oppsError
 
-    const oppIds = userOpps.map(opp => opp.id)
-    const oppMap = userOpps.reduce((acc, opp) => {
-      acc[opp.id] = opp.title
-      return acc
-    }, {} as Record<string, string>)
+    // Also check the legacy 'auditions' table
+    const { data: legacyAuditions, error: legacyError } = await supabase
+      .from('auditions')
+      .select('id, title')
+      .eq('created_by', user.id)
 
-    if (oppIds.length === 0) {
+    if (legacyError) {
+      console.error('Error fetching legacy auditions:', legacyError)
+    }
+
+    // Get all workshop IDs created by this user
+    const { data: userWorkshops, error: workshopsError } = await supabase
+      .from('workshops')
+      .select('id, title')
+      .eq('created_by', user.id)
+
+    if (workshopsError) throw workshopsError
+
+    const allAuditionOpps = [...(userOpps || []), ...(legacyAuditions || [])]
+    const oppIds = allAuditionOpps.map(opp => opp.id)
+    const workshopIds = userWorkshops.map(w => w.id)
+
+    const titleMap = {
+      ...allAuditionOpps.reduce((acc, opp) => ({ ...acc, [opp.id]: opp.title }), {} as Record<string, string>),
+      ...userWorkshops.reduce((acc, w) => ({ ...acc, [w.id]: w.title }), {} as Record<string, string>)
+    }
+
+    if (oppIds.length === 0 && workshopIds.length === 0) {
       return NextResponse.json({ applicants: [] })
     }
 
-    // Build query for registrations
-    let query = supabase
+    // Build query for audition registrations
+    let auditionQuery = supabase
       .from('audition_registrations')
-      .select(`
-        id,
-        user_id,
-        opportunity_id,
-        status,
-        created_at
-      `)
+      .select(`id, user_id, opportunity_id, status, created_at`)
       .in('opportunity_id', oppIds)
-      .order('created_at', { ascending: false })
 
     if (opportunityId) {
-      query = query.eq('opportunity_id', opportunityId)
+      auditionQuery = auditionQuery.eq('opportunity_id', opportunityId)
     }
 
-    const { data: registrations, error: regError } = await query
+    // Build query for workshop registrations
+    let workshopQuery = supabase
+      .from('workshop_registrations')
+      .select(`id, user_id, workshop_id, status, created_at`)
+      .in('workshop_id', workshopIds)
 
-    if (regError) throw regError
+    if (opportunityId) {
+      workshopQuery = workshopQuery.eq('workshop_id', opportunityId)
+    }
 
-    if (!registrations || registrations.length === 0) {
+    const [
+      { data: audRegistrations, error: audError },
+      { data: workshopRegistrations, error: workshopError }
+    ] = await Promise.all([
+      oppIds.length > 0 ? auditionQuery : Promise.resolve({ data: [], error: null }),
+      workshopIds.length > 0 ? workshopQuery : Promise.resolve({ data: [], error: null })
+    ])
+
+    if (audError) throw audError
+    if (workshopError) throw workshopError
+
+    const allRegistrations = [
+      ...(audRegistrations || []).map(r => ({ ...r, entity_id: r.opportunity_id, type: 'audition' })),
+      ...(workshopRegistrations || []).map(r => ({ ...r, entity_id: r.workshop_id, type: 'workshop' }))
+    ].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+
+    if (allRegistrations.length === 0) {
       return NextResponse.json({ applicants: [] })
     }
 
     // Get unique user IDs to fetch profile data
-    const userIds = Array.from(new Set(registrations.map(r => r.user_id)))
+    const userIds = Array.from(new Set(allRegistrations.map(r => r.user_id)))
 
-    // Fetch talent profiles for these users
-    let talentQuery = supabase
+    // Fetch talent profiles for these users using Admin client to bypass RLS
+    let talentQuery = adminSupabase
       .from('talent_profiles')
       .select(`
         user_id, full_name, first_name, last_name, email, phone, 
@@ -84,15 +121,15 @@ export async function GET(request: NextRequest) {
     const { data: talentProfiles, error: talentError } = await talentQuery
     if (talentError) throw talentError
 
-    // Fetch base profiles for fallback
-    const { data: baseProfiles, error: baseError } = await supabase
+    // Fetch base profiles for fallback and to get user details using Admin client
+    const { data: baseProfiles, error: baseError } = await adminSupabase
       .from('profiles')
       .select('user_id, email')
       .in('user_id', userIds)
 
     if (baseError) throw baseError
 
-    const talentMap = talentProfiles.reduce((acc, p) => {
+    const talentMap = (talentProfiles || []).reduce((acc, p) => {
       // Prioritize profiles with names if there are duplicates for the same user
       const existing = acc[p.user_id]
       if (!existing || (!existing.full_name && p.full_name) || (!existing.first_name && p.first_name)) {
@@ -101,23 +138,35 @@ export async function GET(request: NextRequest) {
       return acc
     }, {} as Record<string, any>)
 
-    const baseMap = baseProfiles.reduce((acc, p) => {
+    const baseMap = (baseProfiles || []).reduce((acc, p) => {
       acc[p.user_id] = p
       return acc
     }, {} as Record<string, any>)
 
     // Map registrations with profile data
-    const applicants = registrations
+    const applicants = allRegistrations
       .map(reg => {
         const talentProfile = talentMap[reg.user_id]
         const baseProfile = baseMap[reg.user_id]
 
         if (!talentProfile && search) return null // Filtered out by search
 
-        // Map Name: Full name -> First + Last -> Email prefix
+        // Map Name Priority: 
+        // 1. Talent Profile full_name
+        // 2. Talent Profile first + last
+        // 3. Base Profile full_name
+        // 4. Base Profile first + last
+        // 5. Email prefix
+        // 6. Unknown User
         let mappedName = talentProfile?.full_name
         if (!mappedName && (talentProfile?.first_name || talentProfile?.last_name)) {
           mappedName = `${talentProfile.first_name || ''} ${talentProfile.last_name || ''}`.trim()
+        }
+        if (!mappedName) {
+          mappedName = baseProfile?.full_name
+        }
+        if (!mappedName && (baseProfile?.first_name || baseProfile?.last_name)) {
+          mappedName = `${baseProfile.first_name || ''} ${baseProfile.last_name || ''}`.trim()
         }
 
         const email = talentProfile?.email || baseProfile?.email || 'N/A'
@@ -130,10 +179,11 @@ export async function GET(request: NextRequest) {
           user_name: mappedName,
           email: email,
           phone_number: talentProfile?.phone || 'N/A',
-          applied_audition: oppMap[reg.opportunity_id] || 'Unknown Audition',
+          applied_audition: titleMap[reg.entity_id] || 'Unknown',
           application_status: reg.status,
           applied_date: reg.created_at,
-          opportunity_id: reg.opportunity_id,
+          opportunity_id: reg.entity_id,
+          opportunity_type: reg.type,
           profile: talentProfile || null
         }
       })

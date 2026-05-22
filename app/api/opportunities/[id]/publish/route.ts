@@ -3,11 +3,12 @@ import { getSupabaseServerClientForRouteHandler } from '@/lib/supabase-server'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const awaitedParams = await params;
+    const { id } = awaitedParams;
     const supabase = await getSupabaseServerClientForRouteHandler()
-    const { id } = params
     
     if (!id) {
       return NextResponse.json(
