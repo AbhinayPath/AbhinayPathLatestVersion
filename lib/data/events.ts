@@ -844,6 +844,102 @@ export const festivals: Festival[] = [
     tags: ["playwriting", "screenwriting", "script competition", "international", "FilmFreeway"],
   },
 
+  // Experimental Film & Moving Image Art
+  {
+    id: "experimenta-2026",
+    name: "Experimenta 2026 - International Festival for Experimental Film & Moving Image Art",
+    city: "Bangalore",
+    country: "India",
+    languages: "All languages (English subtitles required for non-English films)",
+    scale: "International",
+    duration: "Multi-day (December 2026)",
+    month: "December",
+    dates: "December 2026",
+    submissionDeadline: "5 Jul 2026",
+    status: "open",
+    selectionProcess: "Curatorial selection by festival committee",
+    eligibility: "Filmmakers from 60+ Asian countries (including diaspora). Films completed after January 1, 2025. Duration up to 80 minutes.",
+    registrationFee: "Free (No submission fee)",
+    description:
+      "The 13th edition of Experimenta, India's premier curated, independent, artist-run festival for experimental film and moving image art. Seeking films that challenge conventional cinema and extend parameters of genre and form. Fiction, non-fiction, hybrid, or experimental works welcome. Free submission and free attendance for all.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSeiD_iqx161m25CkKgfueohhQGyeJOhVRUepKm9l8GX-QUcqA/formResponse",
+    featured: true,
+    category: "mixed",
+    tags: ["experimental film", "moving image art", "Asia-wide", "free submission", "Bangalore"],
+  },
+
+  // Theatre Competition
+  {
+    id: "jhankriti-2026",
+    name: "Jhankriti 2026 — Theatre Competition",
+    city: "Online / Bengaluru",
+    country: "India",
+    languages: "All Indian languages",
+    scale: "National",
+    duration: "Multi-round online competition",
+    month: "July",
+    dates: "July 2026",
+    submissionDeadline: "31 Jul 2026",
+    status: "open",
+    selectionProcess: "Online video submission; selected participants are informed by email for further rounds",
+    eligibility: "Young performers aged 8-12 and 13-18 years, schools, institutions, solo performers, and theatre groups within the eligible age bracket. Solo: 1 participant. Group: Minimum 4, maximum 10 participants.",
+    registrationFee: "Free",
+    description:
+      "Jhankriti 2026 is a national theatre competition organized by World Forum for Art and Culture. Open to young performers in two age categories (8-12 and 13-18 years). Formats include Ek Paatri / Solo Acting and Group Theatre. Maximum 5-minute pre-recorded video submission. Winners receive certificates, mentoring opportunities, performance opportunities, and cash prizes.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSf-MLxJid_kMa7Wh_ZnrQqJBTkm2glFXKcPiIw_wzJYCxKGyQ/viewform",
+    featured: true,
+    category: "theatre",
+    tags: ["theatre competition", "solo acting", "group theatre", "youth", "online", "free registration"],
+  },
+
+  // International Theatre Festival for Children and Young Audiences
+  {
+    id: "assitej-world-congress-2027",
+    name: "22nd ASSITEJ World Congress 2027 — Open Call for Performances",
+    city: "Suwon",
+    country: "South Korea",
+    languages: "International / Multilingual",
+    scale: "International",
+    duration: "22 July – 1 August 2027",
+    month: "May",
+    dates: "22 July – 1 August 2027",
+    submissionDeadline: "29 May 2026",
+    status: "open",
+    selectionProcess: "Online application through official ASSITEJ application form",
+    eligibility: "Theatre companies, performance groups, artists, and productions creating work for children and young audiences",
+    registrationFee: "Contact organizer",
+    description:
+      "The 22nd ASSITEJ World Congress brings together theatre makers from around the world who create performances for children and young audiences. Hosted by ASSITEJ Korea and ASSITEJ International in Suwon, South Korea. This prestigious international gathering offers performance opportunities, networking, and cultural exchange for artists dedicated to young audience theatre.",
+    link: "https://assitej-international.org/events/assitej-artistic-gatherings-and-world-congresses/22nd-assitej-world-congress-open-call-for-performances/application-form-en/",
+    featured: true,
+    category: "theatre",
+    tags: ["children theatre", "young audiences", "international", "world congress", "ASSITEJ", "South Korea"],
+  },
+
+  // Playwriting Prize
+  {
+    id: "climate-playwriting-prize-2026",
+    name: "Climate Playwriting Prize 2026 — Shakespeare's Globe",
+    city: "London",
+    country: "UK",
+    languages: "English",
+    scale: "International",
+    duration: "Application period: June – September 2026",
+    month: "September",
+    dates: "September 2026",
+    submissionDeadline: "1 Sep 2026",
+    status: "open",
+    selectionProcess: "Reader panel creates longlist, associate partner panel selects shortlist, final jury selects winner",
+    eligibility: "UK and UK-based playwrights writing full-length English-language plays (70+ minutes) that engage meaningfully with the climate crisis. Writers should have some professional experience in theatre, radio, screen, script development, R&D, scratch performances, commissions, or talent development schemes.",
+    registrationFee: "Free",
+    description:
+      "The Climate Playwriting Prize 2026, presented by Shakespeare's Globe and funded by Climate Spring, awards £15,000 to a UK or UK-based playwright for a full-length play engaging with the climate crisis. Plays may be in early draft or development. Winner receives dramaturgical support, industry exposure, and possible production pathway through Shakespeare's Globe or another theatre partner. Submit: Play PDF, CV, 300-word synopsis, and 300-word note on approach to climate subject matter.",
+    link: "https://action.shakespearesglobe.com/climate-mailing-list",
+    featured: true,
+    category: "mixed",
+    tags: ["playwriting prize", "climate theatre", "new writing", "Shakespeare's Globe", "UK", "£15,000 prize"],
+  },
+
 ]
 
 /**
