@@ -844,6 +844,30 @@ export const festivals: Festival[] = [
     tags: ["playwriting", "screenwriting", "script competition", "international", "FilmFreeway"],
   },
 
+  // Experimental Film & Moving Image Art
+  {
+    id: "experimenta-2026",
+    name: "Experimenta 2026 - International Festival for Experimental Film & Moving Image Art",
+    city: "Bangalore",
+    country: "India",
+    languages: "All languages (English subtitles required for non-English films)",
+    scale: "International",
+    duration: "Multi-day (December 2026)",
+    month: "December",
+    dates: "December 2026",
+    submissionDeadline: "5 Jul 2026",
+    status: "open",
+    selectionProcess: "Curatorial selection by festival committee",
+    eligibility: "Filmmakers from 60+ Asian countries (including diaspora). Films completed after January 1, 2025. Duration up to 80 minutes.",
+    registrationFee: "Free (No submission fee)",
+    description:
+      "The 13th edition of Experimenta, India's premier curated, independent, artist-run festival for experimental film and moving image art. Seeking films that challenge conventional cinema and extend parameters of genre and form. Fiction, non-fiction, hybrid, or experimental works welcome. Free submission and free attendance for all.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSeiD_iqx161m25CkKgfueohhQGyeJOhVRUepKm9l8GX-QUcqA/formResponse",
+    featured: true,
+    category: "mixed",
+    tags: ["experimental film", "moving image art", "Asia-wide", "free submission", "Bangalore"],
+  },
+
 ]
 
 /**
