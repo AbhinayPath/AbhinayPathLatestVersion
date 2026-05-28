@@ -916,6 +916,30 @@ export const festivals: Festival[] = [
     tags: ["children theatre", "young audiences", "international", "world congress", "ASSITEJ", "South Korea"],
   },
 
+  // Playwriting Prize
+  {
+    id: "climate-playwriting-prize-2026",
+    name: "Climate Playwriting Prize 2026 — Shakespeare's Globe",
+    city: "London",
+    country: "UK",
+    languages: "English",
+    scale: "International",
+    duration: "Application period: June – September 2026",
+    month: "September",
+    dates: "September 2026",
+    submissionDeadline: "1 Sep 2026",
+    status: "open",
+    selectionProcess: "Reader panel creates longlist, associate partner panel selects shortlist, final jury selects winner",
+    eligibility: "UK and UK-based playwrights writing full-length English-language plays (70+ minutes) that engage meaningfully with the climate crisis. Writers should have some professional experience in theatre, radio, screen, script development, R&D, scratch performances, commissions, or talent development schemes.",
+    registrationFee: "Free",
+    description:
+      "The Climate Playwriting Prize 2026, presented by Shakespeare's Globe and funded by Climate Spring, awards £15,000 to a UK or UK-based playwright for a full-length play engaging with the climate crisis. Plays may be in early draft or development. Winner receives dramaturgical support, industry exposure, and possible production pathway through Shakespeare's Globe or another theatre partner. Submit: Play PDF, CV, 300-word synopsis, and 300-word note on approach to climate subject matter.",
+    link: "https://action.shakespearesglobe.com/climate-mailing-list",
+    featured: true,
+    category: "mixed",
+    tags: ["playwriting prize", "climate theatre", "new writing", "Shakespeare's Globe", "UK", "£15,000 prize"],
+  },
+
 ]
 
 /**
