@@ -892,6 +892,30 @@ export const festivals: Festival[] = [
     tags: ["theatre competition", "solo acting", "group theatre", "youth", "online", "free registration"],
   },
 
+  // International Theatre Festival for Children and Young Audiences
+  {
+    id: "assitej-world-congress-2027",
+    name: "22nd ASSITEJ World Congress 2027 — Open Call for Performances",
+    city: "Suwon",
+    country: "South Korea",
+    languages: "International / Multilingual",
+    scale: "International",
+    duration: "22 July – 1 August 2027",
+    month: "May",
+    dates: "22 July – 1 August 2027",
+    submissionDeadline: "29 May 2026",
+    status: "open",
+    selectionProcess: "Online application through official ASSITEJ application form",
+    eligibility: "Theatre companies, performance groups, artists, and productions creating work for children and young audiences",
+    registrationFee: "Contact organizer",
+    description:
+      "The 22nd ASSITEJ World Congress brings together theatre makers from around the world who create performances for children and young audiences. Hosted by ASSITEJ Korea and ASSITEJ International in Suwon, South Korea. This prestigious international gathering offers performance opportunities, networking, and cultural exchange for artists dedicated to young audience theatre.",
+    link: "https://assitej-international.org/events/assitej-artistic-gatherings-and-world-congresses/22nd-assitej-world-congress-open-call-for-performances/application-form-en/",
+    featured: true,
+    category: "theatre",
+    tags: ["children theatre", "young audiences", "international", "world congress", "ASSITEJ", "South Korea"],
+  },
+
 ]
 
 /**
