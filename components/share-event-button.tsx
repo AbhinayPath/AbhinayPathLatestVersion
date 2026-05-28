@@ -67,7 +67,7 @@ export function ShareEventButton({
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://theaterlink.com"
   
   const shareUrl = shareType === "event" && eventId 
-    ? `${baseUrl}/events#${eventId}`
+    ? `${baseUrl}/events/${eventId}`
     : `${baseUrl}/events`
   
   const shareText = shareType === "event" && eventName
