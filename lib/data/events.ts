@@ -868,6 +868,30 @@ export const festivals: Festival[] = [
     tags: ["experimental film", "moving image art", "Asia-wide", "free submission", "Bangalore"],
   },
 
+  // Theatre Competition
+  {
+    id: "jhankriti-2026",
+    name: "Jhankriti 2026 — Theatre Competition",
+    city: "Online / Bengaluru",
+    country: "India",
+    languages: "All Indian languages",
+    scale: "National",
+    duration: "Multi-round online competition",
+    month: "July",
+    dates: "July 2026",
+    submissionDeadline: "31 Jul 2026",
+    status: "open",
+    selectionProcess: "Online video submission; selected participants are informed by email for further rounds",
+    eligibility: "Young performers aged 8-12 and 13-18 years, schools, institutions, solo performers, and theatre groups within the eligible age bracket. Solo: 1 participant. Group: Minimum 4, maximum 10 participants.",
+    registrationFee: "Free",
+    description:
+      "Jhankriti 2026 is a national theatre competition organized by World Forum for Art and Culture. Open to young performers in two age categories (8-12 and 13-18 years). Formats include Ek Paatri / Solo Acting and Group Theatre. Maximum 5-minute pre-recorded video submission. Winners receive certificates, mentoring opportunities, performance opportunities, and cash prizes.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSf-MLxJid_kMa7Wh_ZnrQqJBTkm2glFXKcPiIw_wzJYCxKGyQ/viewform",
+    featured: true,
+    category: "theatre",
+    tags: ["theatre competition", "solo acting", "group theatre", "youth", "online", "free registration"],
+  },
+
 ]
 
 /**
