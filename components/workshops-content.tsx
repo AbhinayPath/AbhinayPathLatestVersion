@@ -2071,6 +2071,30 @@ const workshops: Workshop[] = [
     tags: ["Residency", "International"],
     expiresOn: "2026-12-31",
   },
+  {
+    id: 85,
+    title: "Logo — 2026 Flaherty Fellowship",
+    trainer: "Flaherty Film Seminar Faculty",
+    institution: "Flaherty Film Seminar",
+    location: "New York",
+    state: "New York",
+    country: "United States",
+    date: "October 7–10, 2026",
+    time: "Full program (3 days)",
+    description:
+      "🎬 The 2026 Flaherty Fellowship provides an immersive experience for emerging filmmakers and media artists. Join 15 in-person and 15 online fellows for intensive engagement with cutting-edge documentary and experimental cinema. Open to researchers, filmmakers, and practitioners aged 21+ committed to community engagement and innovative media practice.",
+    registrationLink: "https://flahertyny.org/fellow/",
+    featured: true,
+    price: "Fellowship (fully funded)",
+    contact: "Flaherty Film Seminar",
+    email: "info@flahertyny.org",
+    eligibility: "Age 21+, active in research, filmmaking, or related project-based work, demonstrated commitment to community engagement, not received in-person fellowship in past 5 years, available for full duration October 7-10, 2026",
+    venue: "New York City (in-person) / Online",
+    includes: "3-day intensive fellowship program, access to screenings and seminars, networking with international film professionals",
+    category: "Fellowship & Seminars",
+    tags: ["Fellowship", "Documentary", "International", "Film"],
+    expiresOn: "2026-10-10",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
