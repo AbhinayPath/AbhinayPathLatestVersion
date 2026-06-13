@@ -2095,6 +2095,30 @@ const workshops: Workshop[] = [
     tags: ["Fellowship", "Documentary", "International", "Film"],
     expiresOn: "2026-10-10",
   },
+  {
+    id: 86,
+    title: "The Inlaks-Attakkalari Dance Studentship 2026",
+    trainer: "Attakkalari Centre for Movement Arts",
+    institution: "Attakkalari Centre for Movement Arts",
+    location: "Bangalore",
+    state: "Karnataka",
+    country: "India",
+    date: "Year-round",
+    time: "Full-time program",
+    description:
+      "The Inlaks-Attakkalari Dance Studentship provides a fully-funded scholarship for the Diploma in Movement Arts and Pedagogy. Candidates must clear the audition before applying. This studentship offers comprehensive training in contemporary and classical movement arts with a focus on pedagogy.",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSeyTznJM0svRtRhae7-1BVQYUAOTcitjTmPugB18Hf3ucE9tQ/viewform",
+    featured: true,
+    price: "Fully funded scholarship",
+    contact: "Attakkalari Centre for Movement Arts",
+    email: "attakkalari@attakkalari.org",
+    eligibility: "Must clear audition (register: https://forms.gle/QPEE3cuDvETtAZAP8) before applying for scholarship",
+    venue: "Attakkalari Centre for Movement Arts, Bangalore, India",
+    includes: "Full Diploma in Movement Arts and Pedagogy, Scholarship coverage, Professional training",
+    category: "Fellowship & Seminars",
+    tags: ["Scholarship", "Dance", "Pedagogy", "India", "Movement Arts"],
+    expiresOn: "2026-08-31",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
