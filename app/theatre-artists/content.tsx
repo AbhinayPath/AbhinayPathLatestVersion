@@ -340,7 +340,9 @@ const artists: Artist[] = [
     interests: ["Acting"],
     bio: "Dheeraj Raghav is a freelance theatre artist based in Delhi, specializing in comedy performances. With a passion for the craft and a keen sense of humor, he brings vibrant energy to the stage.",
     whatsapp: "8920919500",
-    auditionVideo: "https://youtu.be/lIFbT_eFH74?si=7KH4L0c0xdRn2B43",
+    auditionClips: [
+      "https://www.youtube.com/watch?v=lIFbT_eFH74",
+    ],
     selectedWork: [
       "https://youtu.be/ATCCXu0wmjg?si=qivXNOTSzEbiy0KX",
     ],
