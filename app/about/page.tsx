@@ -269,7 +269,7 @@ function AboutContent() {
               <p className="text-white/90 mb-6">
                 Bring your productions to institutions and new audiences.
               </p>
-              <a href="https://wa.me/919810000000" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/917843847071" target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
                   className="rounded-full bg-amber-500 hover:bg-amber-600 text-[#2D1A54] px-6 h-auto font-medium transition-transform hover:scale-105"
