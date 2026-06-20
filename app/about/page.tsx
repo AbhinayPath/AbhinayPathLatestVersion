@@ -175,9 +175,77 @@ function AboutContent() {
         </div>
       </section>
 
-      {/* FOUNDER SECTION */}
+      {/* LEARNING FROM PRACTITIONERS */}
       <section className="container py-16 md:py-24">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-center text-[#2D1A54]">
+            Learning From Practitioners
+          </h2>
+          <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-12">
+            Abhinayपथ continues to evolve through conversations with theatre practitioners, educators, directors, and
+            cultural leaders who have devoted their lives to the art. These interactions help us understand the
+            ecosystem more deeply and continue building with humility and curiosity.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="relative aspect-[3/4]">
+                <Image
+                  src="/images/prasanna-heggodu.jpeg"
+                  alt="Conversation with Prasanna Heggodu"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-playfair text-xl font-bold text-[#2D1A54] mb-1">Prasanna Heggodu</h3>
+                <p className="text-sm font-medium text-[#7E1F2E] mb-3">Theatre director and playwright</p>
+                <p className="text-gray-700">A conversation on theatre ecosystems and cultural spaces.</p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="relative aspect-[3/4]">
+                <Image
+                  src="/images/rati-shankar-tripathi.jpeg"
+                  alt="Meeting with Dr. Rati Shankar Tripathi"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-playfair text-xl font-bold text-[#2D1A54] mb-1">Dr. Rati Shankar Tripathi</h3>
+                <p className="text-sm font-medium text-[#7E1F2E] mb-3">
+                  Chairman, Bhartendu Natya Academy, Lucknow
+                </p>
+                <p className="text-gray-700">Discussing artistic practice and strengthening theatre communities.</p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="relative aspect-[3/4]">
+                <Image
+                  src="/images/zafer-mohiuddin.jpeg"
+                  alt="Discussion with Zafer Mohiuddin"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-playfair text-xl font-bold text-[#2D1A54] mb-1">Zafer Mohiuddin</h3>
+                <p className="text-sm font-medium text-[#7E1F2E] mb-3">
+                  Actor, Director and Founder, Karnataka State Rajyotsava Awardee 2025
+                </p>
+                <p className="text-gray-700">Exchanging ideas on audiences, theatre, and ecosystem building.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOUNDER SECTION */}
+      <section className="bg-gradient-to-br from-[#2D1A54]/5 to-[#7E1F2E]/5 py-16 md:py-24">
+        <div className="max-w-4xl mx-auto container">
           <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-8 text-[#2D1A54]">Built by an artist and engineer</h2>
           <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
             <p>
