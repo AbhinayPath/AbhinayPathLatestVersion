@@ -232,5 +232,5 @@ function AboutContent() {
 }
 
 export default function AboutPage() {
-  return <AboutContent()>
+  return <AboutContent />
 }
