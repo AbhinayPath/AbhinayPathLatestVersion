@@ -123,11 +123,8 @@ function AboutContent() {
         <div className="max-w-4xl mx-auto">
           <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-12 text-center text-[#2D1A54]">Our Vision</h2>
           <div className="mb-12">
-            <p className="text-lg text-gray-700 text-center mb-8">
-              <span className="line-through text-gray-400">India&apos;s LinkedIn for theatre.</span>
-            </p>
             <p className="text-lg md:text-xl font-semibold text-center text-[#2D1A54] mb-8">
-              Instead, building a connected theatre ecosystem.
+              Building a connected theatre ecosystem.
             </p>
           </div>
           <div className="bg-[#2D1A54] text-white p-8 md:p-12 rounded-lg">
