@@ -4177,6 +4177,58 @@ const workshops: Workshop[] = [
       additionalInfo: "Candidates must clear the audition before applying for the scholarship. Audition registration is available at https://forms.gle/QPEE3cuDvETtAZAP8. For detailed course information, please download the brochure from the official website.",
     },
   },
+  {
+    id: 87,
+    title: "Advanced Series for Professional Actors",
+    trainer: "BJAS Faculty",
+    institution: "Barry John Acting Studio",
+    location: "Mumbai",
+    state: "Maharashtra",
+    date: "03 Aug 2026 onwards",
+    time: "Mon–Fri, 9:00 AM – 5:00 PM",
+    description:
+      "An advanced-level intensive for professional and BJAS-alumni actors, focused on scene work, character depth, and audition-ready technique. Auditions required for non-BJAS alumni.",
+    registrationLink: "https://bjas.in/admissions/",
+    featured: false,
+    price: "Not published — contact for details",
+    contact: "Barry John Acting Studio",
+    email: "admissions@bjas.in",
+    eligibility: "Professional actors / BJAS alumni (auditions required for non-alumni)",
+    venue: "Mumbai",
+    fullDetails: {
+      description:
+        "An advanced-level intensive for professional and BJAS-alumni actors at Barry John Acting Studio in Mumbai. This specialized program focuses on scene work, character depth, and developing audition-ready techniques. The workshop runs for 4 months from August 3, 2026, with classes held Monday through Friday from 9:00 AM to 5:00 PM. Auditions are required for non-BJAS alumni applicants.",
+      keyHighlights: [
+        "Advanced acting techniques for professionals",
+        "Intensive scene work and character analysis",
+        "Audition preparation and readiness",
+        "Expert BJAS Faculty",
+        "4-month structured program",
+        "Monday–Friday full-time commitment",
+        "Professional networking opportunities",
+      ],
+      curriculum: [
+        "Advanced scene study and analysis",
+        "Character development and psychology",
+        "Audition technique and preparation",
+        "Script interpretation",
+        "On-camera and stage performance",
+        "Ensemble work with professionals",
+        "Industry presentations",
+      ],
+      duration: "4 months (starting 3 Aug 2026)",
+      medium: "English",
+      courseFee: "Not published — contact for details",
+      certification: "Barry John Acting Studio Certificate",
+      contactInfo: [
+        "Website: https://bjas.in/",
+        "Admissions: admissions@bjas.in",
+        "Registration: https://bjas.in/admissions/",
+      ],
+      venue: "Barry John Acting Studio, Mumbai, Maharashtra, India",
+      organizer: "Barry John Acting Studio",
+    },
+  },
 ]
 
 export default function WorkshopDetailContent({ id }: { id: number }) {
