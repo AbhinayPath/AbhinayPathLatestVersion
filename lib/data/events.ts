@@ -778,6 +778,27 @@ export const festivals: Festival[] = [
 
   // July Festivals
   {
+    id: "inter-collegiate-state-level-theatre-festival-2026",
+    name: "Inter-Collegiate State Level Theatre Festival",
+    city: "Jayanagar, Bangalore",
+    country: "India (Karnataka)",
+    languages: "Kannada",
+    scale: "Regional",
+    duration: "5 days",
+    month: "July",
+    dates: "20–24 July 2026",
+    submissionDeadline: "Open Call",
+    status: "open",
+    selectionProcess: "Open Call + Registration",
+    eligibility: "College theatre groups",
+    registrationFee: "Yet to be announced",
+    description:
+      "A state-level theatre festival celebrating college theatre groups in Karnataka. Organized by Yuvaka Sangha, this festival provides a platform for emerging college theatre talent to showcase their work. To apply or for more information, contact: 9008182342.",
+    link: "tel:9008182342",
+    category: "competition",
+    tags: ["Karnataka", "college", "state-level", "open call"],
+  },
+  {
     id: "china-childrens-theatre-2026",
     name: "China Children's Theatre Festival 2026",
     city: "Beijing",
