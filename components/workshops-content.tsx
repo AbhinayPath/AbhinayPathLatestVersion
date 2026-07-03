@@ -2239,6 +2239,30 @@ const workshops: Workshop[] = [
     mode: "Offline",
     expiresOn: "2026-08-21",
   },
+  {
+    id: 92,
+    title: "Workshop on AI in Cinema",
+    trainer: "FTII Faculty",
+    institution: "FTII, Pune",
+    location: "New Mumbai",
+    state: "Maharashtra",
+    country: "India",
+    date: "13–23 Jul 2026",
+    time: "Hybrid Mode",
+    description:
+      "An FTII workshop exploring AI-based tools in filmmaking and visual storytelling, in hybrid (in-person + online) format.",
+    registrationLink: "https://ftii.ac.in/courses",
+    featured: false,
+    price: "Not published — contact for details",
+    contact: "FTII, Pune",
+    email: "courses@ftii.ac.in",
+    eligibility: "Film students, professionals, and enthusiasts interested in AI applications",
+    venue: "New Mumbai",
+    category: "Design & Production",
+    tags: ["AI", "Filmmaking", "Visual Storytelling", "Technology", "Hybrid"],
+    mode: "Hybrid",
+    expiresOn: "2026-07-23",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
