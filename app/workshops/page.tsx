@@ -62,7 +62,7 @@ const workshopCollectionSchema = {
     "@type": "ItemList",
     name: "Acting Workshops Collection",
     description: "List of theatre and acting workshops available in India",
-    numberOfItems: 40,
+    numberOfItems: 48,
   },
   breadcrumb: {
     "@type": "BreadcrumbList",
