@@ -2191,6 +2191,30 @@ const workshops: Workshop[] = [
     mode: "Offline",
     expiresOn: "2026-11-07",
   },
+  {
+    id: 90,
+    title: "Fitzmaurice Voicework® & Vāchikā — 6-Day India Intensive",
+    trainer: "Mallika Prasad",
+    institution: "Vāchikā Voicework",
+    location: "Andheri West, Mumbai",
+    state: "Maharashtra",
+    country: "India",
+    date: "11–16 Aug 2026",
+    time: "10:00 AM – 5:00 PM",
+    description:
+      "A 6-day intensive in Fitzmaurice Voicework® exploring breath, resonance, alignment, and release, led by Mallika Prasad — NSD alumna and Head of South Asia for the Fitzmaurice Institute. Includes text, speech-work, and song.",
+    registrationLink: "https://forms.gle/oQfe8xDc4aCXg1jY7",
+    featured: true,
+    price: "Shared upon selection",
+    contact: "Vāchikā Voicework",
+    email: "contact@vachika.in",
+    eligibility: "All levels welcome, especially performers and voice practitioners",
+    venue: "Andheri West, Mumbai",
+    category: "Voice & Speech",
+    tags: ["Intensive", "Voicework", "Fitzmaurice", "Voice Training", "6-day"],
+    mode: "Offline",
+    expiresOn: "2026-08-16",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
