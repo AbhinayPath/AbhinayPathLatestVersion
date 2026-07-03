@@ -2142,6 +2142,29 @@ const workshops: Workshop[] = [
     tags: ["Advanced", "Professional", "Intensive"],
     expiresOn: "2026-12-03",
   },
+  {
+    id: 88,
+    title: "Weekend Theatre Course",
+    trainer: "BJAS Faculty",
+    institution: "Barry John Acting Studio",
+    location: "Delhi",
+    state: "Delhi",
+    country: "India",
+    date: "08 Aug 2026 onwards",
+    time: "Sat–Sun, 3:00 PM – 6:00 PM",
+    description:
+      "An introduction to acting and theatre with a strong personal-development focus, structured as a part-time weekend course for beginners and working professionals.",
+    registrationLink: "https://bjas.in/admissions/",
+    featured: false,
+    price: "Not published — contact for details",
+    contact: "Barry John Acting Studio",
+    email: "admissions@bjas.in",
+    eligibility: "Beginners to intermediate, working professionals welcome",
+    venue: "Delhi",
+    category: "Acting & Performance",
+    tags: ["Weekend Course", "Beginner-friendly", "Part-time"],
+    expiresOn: "2026-11-08",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
