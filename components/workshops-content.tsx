@@ -2263,6 +2263,30 @@ const workshops: Workshop[] = [
     mode: "Hybrid",
     expiresOn: "2026-07-23",
   },
+  {
+    id: 93,
+    title: "Foundation Course in Screenplay Writing",
+    trainer: "FTII Faculty",
+    institution: "FTII, Pune",
+    location: "Weekend & Online",
+    state: "Maharashtra",
+    country: "India",
+    date: "01 Aug – 11 Oct 2026",
+    time: "Weekend / Online",
+    description:
+      "A foundation-level screenplay writing course from FTII, delivered over weekends and online across roughly ten weeks.",
+    registrationLink: "https://ftii.ac.in/courses",
+    featured: false,
+    price: "Not published — contact for details",
+    contact: "FTII, Pune",
+    email: "courses@ftii.ac.in",
+    eligibility: "Beginners interested in screenplay writing and filmmaking",
+    venue: "Online & Weekend",
+    category: "Direction & Dramaturgy",
+    tags: ["Screenplay", "Writing", "Foundation", "Weekend", "Online"],
+    mode: "Hybrid",
+    expiresOn: "2026-10-11",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
