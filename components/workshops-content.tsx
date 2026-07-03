@@ -2140,6 +2140,7 @@ const workshops: Workshop[] = [
     venue: "Mumbai",
     category: "Acting & Performance",
     tags: ["Advanced", "Professional", "Intensive"],
+    mode: "In-person",
     expiresOn: "2026-12-03",
   },
   {
@@ -2163,6 +2164,7 @@ const workshops: Workshop[] = [
     venue: "Delhi",
     category: "Acting & Performance",
     tags: ["Weekend Course", "Beginner-friendly", "Part-time"],
+    mode: "In-person",
     expiresOn: "2026-11-08",
   },
 ]
