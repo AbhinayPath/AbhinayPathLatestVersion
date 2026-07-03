@@ -862,6 +862,29 @@ export const festivals: Festival[] = [
     tags: ["USA", "Cleveland", "international"],
   },
 
+  // August Festivals
+  {
+    id: "theatre-india-company-solo-act-2026",
+    name: "Theatre India Company's Solo Act Competition 2026",
+    city: "Pune, Maharashtra",
+    country: "India",
+    languages: "Hindi, English & Regional",
+    scale: "National",
+    duration: "Competition",
+    month: "August",
+    dates: "Event: 30th August 2026",
+    submissionDeadline: "15th August 2026",
+    status: "open",
+    selectionProcess: "Online Submission via Google Form",
+    eligibility: "Anyone",
+    entryFee: "₹500 per entry",
+    description:
+      "Theatre India Company's Solo Act Competition 2026 is a national-level competition celebrating individual theatrical performances. Performers can submit their solo acts in Hindi, English, or regional languages. The competition takes place online with submissions accepted until August 15th, 2026, and the event held on August 30th. Winners will be announced with prizes for outstanding performances.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSd04uRYB9vLOCasUXsxjv8-E9U8uUwr6XFzQNBBlJNPkLo6Vw/viewform",
+    category: "competition",
+    tags: ["India", "solo-act", "national", "online-submission", "Pune"],
+  },
+
   // Script & Playwriting Competition
   {
     id: "inciting-incident-2026",
