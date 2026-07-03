@@ -617,6 +617,30 @@ const workshops: Workshop[] = [
     category: "Acting & Performance",
     tags: ["Theatre Training", "Short-term Workshop"],
   },
+  {
+    id: 27,
+    title: "Advanced Series for Professional Actors",
+    trainer: "BJAS Faculty",
+    institution: "Barry John Acting Studio",
+    location: "Mumbai",
+    state: "Maharashtra",
+    country: "India",
+    date: "03 Aug 2026 onwards",
+    time: "Mon–Fri, 9:00 AM – 5:00 PM",
+    description:
+      "An advanced-level intensive for professional and BJAS-alumni actors, focused on scene work, character depth, and audition-ready technique. Auditions required for non-BJAS alumni.",
+    registrationLink: "https://bjas.in/admissions/",
+    featured: false,
+    price: "Not published — contact for details",
+    contact: "Barry John Acting Studio",
+    email: "admissions@bjas.in",
+    eligibility: "Professional actors / BJAS alumni (auditions required for non-alumni)",
+    venue: "Mumbai",
+    category: "Acting & Performance",
+    tags: ["Advanced", "Professional", "Intensive"],
+    mode: "In-person",
+    expiresOn: "2026-12-03",
+  },
 ]
 
 // Get all workshops (optionally filter out expired ones)
