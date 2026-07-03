@@ -778,6 +778,48 @@ export const festivals: Festival[] = [
 
   // July Festivals
   {
+    id: "rang-beej-2026",
+    name: "RANG BEEJ 2026",
+    city: "Odisha",
+    country: "India",
+    languages: "Hindi, English & Regional",
+    scale: "Regional",
+    duration: "Open Call",
+    month: "July",
+    dates: "Deadline: 8th July 2026",
+    submissionDeadline: "8th July 2026",
+    status: "open",
+    selectionProcess: "Online Submission",
+    eligibility: "Anyone",
+    entryFee: "Free",
+    description:
+      "RANG BEEJ 2026 is an exciting open call for performing artists organized by Mirror Theatre Odisha. Featuring three categories: Monologue (in Hindi, English & Regional languages), Dialogue Act (Film), and Open Category. Winners will receive exciting gifts and prizes. Submit your entries online by July 8th, 2026.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScSNKRuBqGRP_FAprGNAQOx2PV2vywEHl5FtNtr1B21ntB1Ng/viewform",
+    category: "competition",
+    tags: ["Odisha", "open-call", "free", "online", "monologue", "dialogue"],
+  },
+  {
+    id: "inter-collegiate-state-level-theatre-festival-2026",
+    name: "Inter-Collegiate State Level Theatre Festival",
+    city: "Jayanagar, Bangalore",
+    country: "India (Karnataka)",
+    languages: "Kannada",
+    scale: "Regional",
+    duration: "5 days",
+    month: "July",
+    dates: "20–24 July 2026",
+    submissionDeadline: "Open Call",
+    status: "open",
+    selectionProcess: "Open Call + Registration",
+    eligibility: "College theatre groups",
+    registrationFee: "Yet to be announced",
+    description:
+      "A state-level theatre festival celebrating college theatre groups in Karnataka. Organized by Yuvaka Sangha, this festival provides a platform for emerging college theatre talent to showcase their work. To apply or for more information, contact: 9008182342.",
+    link: "tel:9008182342",
+    category: "competition",
+    tags: ["Karnataka", "college", "state-level", "open call"],
+  },
+  {
     id: "china-childrens-theatre-2026",
     name: "China Children's Theatre Festival 2026",
     city: "Beijing",
@@ -818,6 +860,29 @@ export const festivals: Festival[] = [
     link: "https://www.borderlightcle.org/",
     category: "theatre",
     tags: ["USA", "Cleveland", "international"],
+  },
+
+  // August Festivals
+  {
+    id: "theatre-india-company-solo-act-2026",
+    name: "Theatre India Company's Solo Act Competition 2026",
+    city: "Pune, Maharashtra",
+    country: "India",
+    languages: "Hindi, English & Regional",
+    scale: "National",
+    duration: "Competition",
+    month: "August",
+    dates: "Event: 30th August 2026",
+    submissionDeadline: "15th August 2026",
+    status: "open",
+    selectionProcess: "Online Submission via Google Form",
+    eligibility: "Anyone",
+    entryFee: "₹500 per entry",
+    description:
+      "Theatre India Company's Solo Act Competition 2026 is a national-level competition celebrating individual theatrical performances. Performers can submit their solo acts in Hindi, English, or regional languages. The competition takes place online with submissions accepted until August 15th, 2026, and the event held on August 30th. Winners will be announced with prizes for outstanding performances.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSd04uRYB9vLOCasUXsxjv8-E9U8uUwr6XFzQNBBlJNPkLo6Vw/viewform",
+    category: "competition",
+    tags: ["India", "solo-act", "national", "online-submission", "Pune"],
   },
 
   // Script & Playwriting Competition
