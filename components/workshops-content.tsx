@@ -2167,6 +2167,30 @@ const workshops: Workshop[] = [
     mode: "In-person",
     expiresOn: "2026-11-08",
   },
+  {
+    id: 89,
+    title: "Advanced Acting Course (Camera & Theatre)",
+    trainer: "NSD & FTII Alumni",
+    institution: "Five Senses Theatre",
+    location: "Andheri West, Mumbai",
+    state: "Maharashtra",
+    country: "India",
+    date: "08 Jul 2026 – 07 Nov 2026",
+    time: "Regular Batch, 7:00 PM – 10:00 PM",
+    description:
+      "An advanced technique-building workshop covering in-depth script analysis, characterization, and scene construction, led by NSD and FTII alumni, with both stage and camera work.",
+    registrationLink: "https://www.fivesensestheatre.com/admission/",
+    featured: false,
+    price: "On application",
+    contact: "Five Senses Theatre",
+    email: "admissions@fivesensestheatre.com",
+    eligibility: "Intermediate to advanced actors",
+    venue: "Andheri West, Mumbai",
+    category: "Acting & Performance",
+    tags: ["Advanced", "Camera Work", "Theatre", "Script Analysis"],
+    mode: "Offline",
+    expiresOn: "2026-11-07",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
