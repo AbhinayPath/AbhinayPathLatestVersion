@@ -778,6 +778,27 @@ export const festivals: Festival[] = [
 
   // July Festivals
   {
+    id: "rang-beej-2026",
+    name: "RANG BEEJ 2026",
+    city: "Odisha",
+    country: "India",
+    languages: "Hindi, English & Regional",
+    scale: "Regional",
+    duration: "Open Call",
+    month: "July",
+    dates: "Deadline: 8th July 2026",
+    submissionDeadline: "8th July 2026",
+    status: "open",
+    selectionProcess: "Online Submission",
+    eligibility: "Anyone",
+    entryFee: "Free",
+    description:
+      "RANG BEEJ 2026 is an exciting open call for performing artists organized by Mirror Theatre Odisha. Featuring three categories: Monologue (in Hindi, English & Regional languages), Dialogue Act (Film), and Open Category. Winners will receive exciting gifts and prizes. Submit your entries online by July 8th, 2026.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScSNKRuBqGRP_FAprGNAQOx2PV2vywEHl5FtNtr1B21ntB1Ng/viewform",
+    category: "competition",
+    tags: ["Odisha", "open-call", "free", "online", "monologue", "dialogue"],
+  },
+  {
     id: "inter-collegiate-state-level-theatre-festival-2026",
     name: "Inter-Collegiate State Level Theatre Festival",
     city: "Jayanagar, Bangalore",
