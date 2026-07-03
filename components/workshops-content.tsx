@@ -2215,6 +2215,30 @@ const workshops: Workshop[] = [
     mode: "Offline",
     expiresOn: "2026-08-16",
   },
+  {
+    id: 91,
+    title: "International Physical Theatre Workshop (Meyerhold / Chekhov / Stanislavski)",
+    trainer: "Sergei & Gennadiy Ostrenko",
+    institution: "NIPAI (New International Performing Arts Institute)",
+    location: "Berlin",
+    state: "Berlin",
+    country: "Germany",
+    date: "17–21 Aug 2026",
+    time: "10:30 AM – 6:00 PM",
+    description:
+      "A selective 5-day, 28-hour intensive blending Meyerhold Biomechanics, Chekhov Psychological Gesture, and Stanislavski Physical Action. For professional and pre-professional performers, directors, and movement practitioners. Selection based on CV.",
+    registrationLink: "https://www.nipai.org/directing-acting-dance-programs/apply-form-workshops",
+    featured: true,
+    price: "€350–450 (early bird pricing)",
+    contact: "NIPAI (New International Performing Arts Institute)",
+    email: "admissions@nipai.org",
+    eligibility: "Professional and pre-professional performers, directors, movement practitioners (selection based on CV)",
+    venue: "Berlin, Germany",
+    category: "Movement & Physical Theatre",
+    tags: ["International", "Physical Theatre", "Intensive", "Selective", "5-day"],
+    mode: "Offline",
+    expiresOn: "2026-08-21",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
