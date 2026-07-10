@@ -104,8 +104,7 @@ export default function CollaborationsPage() {
               Curating meaningful theatre experiences with institutions, artists, and audiences.
             </h1>
             <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              AbhinayPath works with institutions and theatre groups to bring carefully selected live performances into
-              cultural, academic, and community spaces.
+              AbhinayPath collaborates with theatre groups, cultural institutions, festivals and educational organisations to bring meaningful theatre experiences to new audiences across India.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <a href="#productions">
