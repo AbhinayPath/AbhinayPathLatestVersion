@@ -34,6 +34,23 @@ export const metadata: Metadata = {
 
 const productions = [
   {
+    id: "waiting-for-naseer",
+    title: "Waiting for Naseer",
+    language: "Hindi and English",
+    duration: "90 minutes",
+    director: "Srinivas Beesetty",
+    performers: ["Maulik Pandey", "Maahir Mohiuddin", "Naman Roy", "Chaitali Das"],
+    productionBy: "Kahe Vidushak Foundation",
+    venue: "Bangalore International Centre, Bangalore",
+    date: "8 July, 2026 | 7:00 PM – 8:30 PM",
+    poster: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/waiting%20for%20naseer_poster2-ed26FIWBFb3htoCzQYVCasBDgnSEt2.jpeg",
+    eventLink: "https://bangaloreinternationalcentre.org/event/waiting-for-naseer/",
+    ageRating: "14+",
+    synopsis:
+      "A philosophical comedy by Kahe Vidushak Foundation, following two actors whose endless wait for Naseeruddin Shah becomes a meditation on ambition, friendship, artistic longing and the life of a performer.",
+    partners: ["Bangalore International Centre", "JSW Group", "J&T", "Kahe Vidushak Foundation"],
+  },
+  {
     id: "goodbye-calendar",
     title: "Goodbye Calendar",
     language: "English",
@@ -78,6 +95,8 @@ const productions = [
 
 const partnerLogos = [
   { name: "AbhinayPath", logo: "/images/abhinaypath-full-logo.jpeg" },
+  { name: "Bangalore International Centre", logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BIC%20logo-oc40mKAb061hDcJaNrVGgVcj4qdu2L.avif" },
+  { name: "JSW Group", logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/jsw%20logo-CLacJu0Fo4F0fgJ6QP7SJ57eOVRQ5T.jpg" },
   { name: "Azim Premji University", logo: "/images/azim-premji-university-logo.png" },
   { name: "Indian Heritage Academy", logo: "/images/indian-heritage-academy-logo.png" },
   { name: "Kahe Vidushak Foundation", logo: "/images/kahe-vidushak-foundation-logo.png" },
@@ -104,8 +123,7 @@ export default function CollaborationsPage() {
               Curating meaningful theatre experiences with institutions, artists, and audiences.
             </h1>
             <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              AbhinayPath works with institutions and theatre groups to bring carefully selected live performances into
-              cultural, academic, and community spaces.
+              AbhinayPath collaborates with theatre groups, cultural institutions, festivals and educational organisations to bring meaningful theatre experiences to new audiences across India.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <a href="#productions">
@@ -154,22 +172,39 @@ export default function CollaborationsPage() {
         </div>
       </section>
 
-      {/* Featured Institutional Collaboration */}
+      {/* Featured Institutional Collaborations */}
       <section className="py-20 md:py-28">
         <div className="container">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
-              <Award className="h-3.5 w-3.5 mr-1" />
-              Featured Collaboration
-            </Badge>
-            <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-              Presented with Indian Heritage Academy, supported by Azim Premji University
-            </h2>
-            <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
-              AbhinayPath collaborated with Indian Heritage Academy and Azim Premji University to present curated
-              theatre productions at IHA, Koramangala, Bengaluru — bringing meaningful live theatre to academic and
-              cultural communities.
-            </p>
+          <div className="max-w-4xl mx-auto text-center space-y-12">
+            {/* BIC & JSW Collaboration */}
+            <div className="space-y-6 pb-12 border-b border-white/10">
+              <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                <Award className="h-3.5 w-3.5 mr-1" />
+                New Partnership
+              </Badge>
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                Collaborating with Bangalore International Centre & JSW Group
+              </h2>
+              <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
+                AbhinayPath has partnered with Bangalore International Centre and JSW Group to expand meaningful theatre experiences and bring quality productions to new audiences. This collaboration presents "Waiting for Naseer," a philosophical comedy exploring ambition, friendship, and artistic longing.
+              </p>
+            </div>
+
+            {/* IHA Collaboration */}
+            <div className="space-y-6">
+              <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                <Award className="h-3.5 w-3.5 mr-1" />
+                Established Partnership
+              </Badge>
+              <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                Presented with Indian Heritage Academy, supported by Azim Premji University
+              </h2>
+              <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
+                AbhinayPath collaborated with Indian Heritage Academy and Azim Premji University to present curated
+                theatre productions at IHA, Koramangala, Bengaluru — bringing meaningful live theatre to academic and
+                cultural communities.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -232,6 +267,21 @@ export default function CollaborationsPage() {
                         <div className="flex items-center gap-2">
                           <Users className="h-4 w-4 text-amber-500" />
                           <span>Performed by {production.performer}</span>
+                        </div>
+                      )}
+                      {production.performers && production.performers.length > 0 && (
+                        <div className="flex items-start gap-2">
+                          <Users className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm">Cast:</p>
+                            <p className="text-sm">{production.performers.join(", ")}</p>
+                          </div>
+                        </div>
+                      )}
+                      {production.ageRating && (
+                        <div className="flex items-center gap-2">
+                          <Award className="h-4 w-4 text-amber-500" />
+                          <span>Age {production.ageRating}</span>
                         </div>
                       )}
                       {production.duration && (
