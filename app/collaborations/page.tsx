@@ -38,7 +38,7 @@ const productions = [
     title: "Waiting for Naseer",
     language: "Hindi and English",
     duration: "90 minutes",
-    director: "Naman Roy, Maulik Pandey",
+    director: "Srinivas Beesetty",
     performers: ["Maulik Pandey", "Maahir Mohiuddin", "Naman Roy", "Chaitali Das"],
     productionBy: "Kahe Vidushak Foundation",
     venue: "Bangalore International Centre, Bangalore",
