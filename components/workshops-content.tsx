@@ -2287,6 +2287,30 @@ const workshops: Workshop[] = [
     mode: "Hybrid",
     expiresOn: "2026-10-11",
   },
+  {
+    id: 94,
+    title: "Government Fellowship for Theatre & Performing Artists",
+    trainer: "Ministry of Culture, Government of India",
+    institution: "Ministry of Culture, Government of India",
+    location: "New Delhi",
+    state: "Delhi",
+    country: "India",
+    date: "Applications deadline: 31 July 2026",
+    time: "Offline submission",
+    description:
+      "Senior and Junior Fellowship Scheme 2026–27 offering financial support for research-oriented or performance-related projects in theatre and cultural fields. Junior Fellowship: ₹10,000/month (up to 2 years). Senior Fellowship: ₹20,000/month (up to 2 years). Project-based fellowship for academics, creative research, and performances.",
+    registrationLink: "https://culture.gov.in/files/downloads_document/Application%20Form%20for%20Junior%20Fellowship%20Scheme_16062026.pdf",
+    featured: false,
+    price: "Fellowship amount: ₹10,000–₹20,000 per month",
+    contact: "Director, CCRT, Ministry of Culture",
+    email: "fellowships@culture.gov.in",
+    eligibility: "Junior: 25–40 years (born 1 Apr 1986 - 31 Mar 2001); Senior: Above 40 years (born on/before 1 Apr 1986)",
+    venue: "New Delhi (submission); Project-based (flexible)",
+    category: "Fellowship & Seminars",
+    tags: ["Government Fellowship", "Research", "Performance", "Project-based", "2-year", "Senior & Junior"],
+    mode: "Offline",
+    expiresOn: "2026-07-31",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
