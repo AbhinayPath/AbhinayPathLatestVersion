@@ -2311,6 +2311,30 @@ const workshops: Workshop[] = [
     mode: "Offline",
     expiresOn: "2026-07-31",
   },
+  {
+    id: 95,
+    title: "Scholarship for Young Theatre Artists 2026–27",
+    trainer: "Ministry of Culture, Government of India",
+    institution: "Ministry of Culture, Government of India",
+    location: "New Delhi",
+    state: "Delhi",
+    country: "India",
+    date: "Applications deadline: 31 July 2026",
+    time: "Offline submission",
+    description:
+      "Scholarship for Young Theatre Artists (SYA) Scheme 2026–27 offering ₹5,000 per month for 2 years to emerging theatre professionals. 400 total scholarships available. Open to Indian artists with at least 5 years training in acting, direction, mime, and other specialized theatre areas. Age eligibility: Born between 1 April 2001 and 31 March 2008.",
+    registrationLink: "https://culture.gov.in/files/downloads_document/Application_Form_for_SYA_Scheme_2026-27_15062026.pdf",
+    featured: false,
+    price: "₹5,000 per month for 2 years",
+    contact: "Director, Centre for Cultural Resources and Training (CCRT)",
+    email: "sya@culture.gov.in",
+    eligibility: "Born between 1 April 2001 - 31 March 2008; Indian nationals; Minimum 5 years training under Guru or recognised institution; Advanced training seekers (not beginners)",
+    venue: "New Delhi (CCRT office)",
+    category: "Fellowship & Seminars",
+    tags: ["Young Artists", "Scholarship", "Acting", "Direction", "Mime", "2-year"],
+    mode: "Offline",
+    expiresOn: "2026-07-31",
+  },
 ]
 
 // Filter out expired workshops - this runs on every render for real-time updates
