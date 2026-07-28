@@ -4679,6 +4679,17 @@ const workshops: Workshop[] = [
         address: "Director, Centre for Cultural Resources and Training (CCRT), 15-A, Sector 7, Dwarka, New Delhi – 110075, India",
         envelopeLabel: "Write on envelope: 'Application for SYA Scheme 2026–27'",
       },
+      curriculum: [
+        "Advanced acting techniques and performance",
+        "Advanced direction and staging",
+        "Advanced mime and physical theatre",
+        "Specialized theatre disciplines",
+        "Character development and interpretation",
+        "Performance portfolio development",
+        "Professional theatre practice",
+      ],
+      duration: "2 years",
+      medium: "Hindi / English",
       courseFee: "₹5,000 per month for 2 years (No application fee)",
       certification: "Government Scholarship Certificate from Ministry of Culture",
       contactInfo: [
