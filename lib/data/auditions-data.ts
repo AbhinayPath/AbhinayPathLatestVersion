@@ -272,34 +272,6 @@ const auditions: Audition[] = [
       venue: "Chennai Theatre Academy",
     },
   },
-  {
-    id: 11,
-    title: "Hyderabad Film & Theatre Auditions",
-    type: "Film/Theater",
-    location: "Hyderabad",
-    state: "Telangana",
-    date: "Ongoing",
-    director: "Various",
-    description:
-      "Auditions for both film and theatre projects in Hyderabad. With the growing Telugu film industry and vibrant theatre scene, opportunities are expanding.",
-    company: "Hyderabad Artists Network",
-    companyLink: "https://example.com/hyderabad-arts",
-    contact: "Contact via website",
-    contactType: "website",
-    experience: "All Levels",
-    verified: true,
-    image: "/images/auditions-stage.png",
-    requirements: [
-      "Telugu/Hindi/English proficiency",
-      "Based in Hyderabad",
-      "Flexible availability",
-    ],
-    roles: ["Film roles", "Theatre roles", "Web series"],
-    applicationProcess: "Apply through network portal or attend open auditions.",
-    auditionDetails: {
-      venue: "Film Nagar, Hyderabad",
-    },
-  },
 ]
 
 // Get all auditions
