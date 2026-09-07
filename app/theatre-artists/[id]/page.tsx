@@ -232,11 +232,11 @@ export default async function ArtistProfilePage({ params }: PageProps) {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   {[
-                    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Pt_Ballesh_receving_Padmashri_award-UmFjjAV8Dj3XIQ1UgxJhF25KO2jI80.jpg", alt: "Pandit Ballesh receiving the Padma Shri", caption: "Padma Shri recognition" },
-                    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/krishna-solo-fj0gG021uWutUdkNH60osPDfGA9KzR.avif", alt: "Dr. Krishna Ballesh Bhajantri in traditional attire", caption: "The next generation of the tradition" },
+                    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Pt_Ballesh_receving_Padmashri_award-UmFjjAV8Dj3XIQ1UgxJhF25KO2jI80.jpg", alt: "Pandit Ballesh receiving the Padma Shri", caption: "Padma Shri recognition", contain: true },
+                    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/krishna-solo-fj0gG021uWutUdkNH60osPDfGA9KzR.avif", alt: "Dr. Krishna Ballesh Bhajantri in traditional attire", caption: "The next generation of the tradition", contain: false },
                   ].map((photo) => (
                     <figure key={photo.src} className="group overflow-hidden rounded-xl border border-amber-900/20 bg-card">
-                      <div className="relative aspect-[4/3] overflow-hidden"><Image src={photo.src} alt={photo.alt} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" /></div>
+                      <div className="relative aspect-[4/3] overflow-hidden bg-muted"><Image src={photo.src} alt={photo.alt} fill className={`${photo.contain ? "object-contain" : "object-cover"} transition-transform duration-500 group-hover:scale-105`} sizes="(max-width: 640px) 100vw, 50vw" /></div>
                       <figcaption className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground"><Camera className="h-4 w-4 text-amber-500" />{photo.caption}</figcaption>
                     </figure>
                   ))}
