@@ -28,7 +28,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { ShareProfileButton } from "@/components/share-profile-button"
-import { THEATRE_ARTIST_SKILLS, normalizeSkill, getNormalizedSkills } from "@/lib/data/theatre-artists"
+import { THEATRE_ARTIST_SKILLS, normalizeSkill, getNormalizedSkills, getArtistById } from "@/lib/data/theatre-artists"
 import { TheatreArtistCTABanner } from "@/components/theatre-artist-cta-banner"
 
 interface Artist {
@@ -424,6 +424,7 @@ export default function TheatreArtistsContent() {
 
   const hasActiveFilters = Object.values(filters).some((value) => value !== "")
   const activeFilterCount = Object.values(filters).filter((value) => value !== "").length
+  const featuredArtist = getArtistById("pandit-ballesh-bhajantri")
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background">
@@ -446,6 +447,48 @@ export default function TheatreArtistsContent() {
           </div>
         </div>
       </section>
+
+      {/* Featured artist partner */}
+      {featuredArtist && (
+        <section className="px-4 pb-10 sm:pb-14">
+          <div className="container">
+            <Card className="overflow-hidden border-primary/20 bg-card shadow-xl">
+              <div className="grid md:grid-cols-5">
+                <div className="relative min-h-[260px] md:col-span-2 md:min-h-[360px]">
+                  <Image
+                    src={featuredArtist.image}
+                    alt={`${featuredArtist.name} performing shehnai`}
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  <span className="absolute bottom-4 left-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-primary backdrop-blur">
+                    Featured Artist Partner
+                  </span>
+                </div>
+                <div className="flex flex-col justify-center gap-5 p-6 sm:p-8 md:col-span-3 md:p-10">
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Curated musical collaboration</p>
+                    <h2 className="font-playfair text-2xl font-bold leading-tight text-balance sm:text-3xl">Hindustani Classical Vocal &amp; Shehnai</h2>
+                    <p className="text-lg font-medium text-foreground">Pandit Dr. S. Ballesh Bhajantri &amp; Dr. Krishna Ballesh Bhajantri</p>
+                  </div>
+                  <p className="max-w-2xl text-sm leading-6 text-muted-foreground">A distinguished father-son duo bringing the living tradition of Hindustani music and shehnai to cultural institutions, festivals, universities, and intimate heritage evenings.</p>
+                  <div className="flex flex-wrap gap-2">
+                    {featuredArtist.specialization?.slice(0, 3).map((format) => (
+                      <Badge key={format} variant="secondary">{format}</Badge>
+                    ))}
+                  </div>
+                  <Link href={`/theatre-artists/${featuredArtist.id}`} className="w-fit">
+                    <Button className="gap-2">Explore the artist profile <ExternalLink className="h-4 w-4" /></Button>
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+      )}
 
       {/* CTA Banner */}
       <TheatreArtistCTABanner />
