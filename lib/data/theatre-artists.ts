@@ -345,6 +345,18 @@ export const artists: Artist[] = [
     ],
   },
   {
+    id: "pandit-ballesh-bhajantri",
+    name: "Pandit Dr. S. Ballesh Bhajantri & Dr. Krishna Ballesh Bhajantri",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/jalandhar-harivallabh-december-perfoming-sammelan-jalandhar-december_ec245372-ab9b-11e5-bc4d-302034fae57a-UPZMxc706gpwb1WwhXlLQ81xpmkl4n.jpg",
+    location: "India",
+    whatsapp: "7843847071",
+    languages: ["Hindi", "Kannada", "English"],
+    interests: ["Singing", "Music"],
+    bio: "Abhinayपथ is honoured to feature the distinguished father-son duo Pandit Dr. S. Ballesh Bhajantri and Dr. Krishna Ballesh Bhajantri as artist partners for curated musical concerts, lecture-demonstrations, cultural evenings, and institution-facing programs. Pandit Dr. S. Ballesh Bhajantri is a Padma Shri awardee, internationally reputed shehnai maestro, Hindustani classical vocalist, playback musician, ghazal and bhajan singer who carries forward the great shehnai tradition of Bharat Ratna Ustad Bismillah Khan. Dr. Krishna Ballesh Bhajantri is a Kalaimamani awardee, Hindustani classical vocalist and shehnai artiste, continuing the family’s rich musical legacy across classical, devotional, semi-classical and collaborative formats. Available formats include pure Hindustani classical shehnai and vocal recitals, shehnai and vocal jugalbandi, ghazal, bhajan, Sufi and Qawwali evenings, lecture-demonstrations on the shehnai tradition, and heritage music concerts for institutions, cultural centres and corporate audiences. Through this collaboration, Abhinayपथ aims to take the living tradition of Hindustani music and shehnai to wider audiences across cultural institutions, universities, schools, festivals, public platforms and community spaces.",
+    credential: "Featured Artist Partner — Hindustani Classical Vocal & Shehnai",
+    specialization: ["Hindustani Classical Vocal", "Shehnai", "Jugalbandi", "Ghazal & Bhajan", "Lecture-Demonstration"],
+  },
+  {
     id: "dheeraj-raghav",
     name: "Dheeraj Raghav",
     image: "/images/artists/dheeraj-raghav.jpg",
