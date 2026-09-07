@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, MapPin, Mail, Award, Globe, FileText } from "lucide-react"
+import { ArrowLeft, MapPin, Mail, Award, Globe, FileText, Music2, Camera, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -70,6 +70,20 @@ export default async function ArtistProfilePage({ params }: PageProps) {
   if (!artist) {
     notFound()
   }
+
+  const isFeaturedPartner = artist.id === "pandit-ballesh-bhajantri"
+  const awards = [
+    { title: "Padma Shri", detail: "India's prestigious civilian honour", recipient: "Pandit Dr. S. Ballesh Bhajantri" },
+    { title: "Kalaimamani", detail: "State honour for excellence in the arts", recipient: "Dr. Krishna Ballesh Bhajantri" },
+  ]
+  const performanceFormats = [
+    "Hindustani classical vocal recital",
+    "Shehnai recital",
+    "Vocal and shehnai jugalbandi",
+    "Ghazal, bhajan, Sufi and Qawwali evenings",
+    "Lecture-demonstration on the shehnai tradition",
+    "Heritage concerts for institutions and festivals",
+  ]
 
   return (
     <main className="min-h-screen bg-background">
@@ -204,13 +218,51 @@ export default async function ArtistProfilePage({ params }: PageProps) {
 
           {/* Right column - Details */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Bio Section */}
-            <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
-              <CardContent className="p-6">
-                <h2 className="text-xl font-semibold text-amber-500 mb-4">About</h2>
-                <p className="text-muted-foreground leading-relaxed">{artist.bio}</p>
-              </CardContent>
-            </Card>
+            {isFeaturedPartner ? (
+              <>
+                <Card className="overflow-hidden border-amber-700/30 bg-gradient-to-br from-amber-950/20 via-background to-background shadow-lg">
+                  <CardContent className="p-6 sm:p-8">
+                    <div className="mb-5 flex items-center gap-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500/15 text-amber-500"><Star className="h-5 w-5" /></span>
+                      <div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-500">Featured artist partner</p><h2 className="mt-1 text-2xl font-semibold text-foreground">A musical legacy in two voices</h2></div>
+                    </div>
+                    <p className="text-muted-foreground leading-7">A father-son duo carrying the Hindustani classical vocal and shehnai tradition into contemporary cultural programs. Their work brings virtuosity, devotion, and a deep connection to Indian musical heritage to every stage.</p>
+                  </CardContent>
+                </Card>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {[
+                    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Pt_Ballesh_receving_Padmashri_award-UmFjjAV8Dj3XIQ1UgxJhF25KO2jI80.jpg", alt: "Pandit Ballesh receiving the Padma Shri", caption: "Padma Shri recognition" },
+                    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/krishna-solo-fj0gG021uWutUdkNH60osPDfGA9KzR.avif", alt: "Dr. Krishna Ballesh Bhajantri in traditional attire", caption: "The next generation of the tradition" },
+                  ].map((photo) => (
+                    <figure key={photo.src} className="group overflow-hidden rounded-xl border border-amber-900/20 bg-card">
+                      <div className="relative aspect-[4/3] overflow-hidden"><Image src={photo.src} alt={photo.alt} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" /></div>
+                      <figcaption className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground"><Camera className="h-4 w-4 text-amber-500" />{photo.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+
+                <Card className="border-amber-700/30 bg-card">
+                  <CardContent className="p-6 sm:p-8">
+                    <div className="mb-6 flex items-center gap-3"><Award className="h-6 w-6 text-amber-500" /><h2 className="text-xl font-semibold text-foreground">Honours & recognition</h2></div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {awards.map((award) => <div key={award.title} className="rounded-lg border border-amber-900/20 bg-amber-950/10 p-4"><p className="text-xl font-semibold text-amber-500">{award.title}</p><p className="mt-1 text-sm font-medium text-foreground">{award.recipient}</p><p className="mt-2 text-sm text-muted-foreground">{award.detail}</p></div>)}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
+                  <CardContent className="p-6 sm:p-8">
+                    <div className="mb-5 flex items-center gap-3"><Music2 className="h-6 w-6 text-amber-500" /><h2 className="text-xl font-semibold text-foreground">Available formats</h2></div>
+                    <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2">{performanceFormats.map((format) => <div key={format} className="flex items-start gap-3 text-sm leading-6 text-muted-foreground"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />{format}</div>)}</div>
+                  </CardContent>
+                </Card>
+              </>
+            ) : (
+              <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
+                <CardContent className="p-6"><h2 className="mb-4 text-xl font-semibold text-amber-500">About</h2><p className="leading-relaxed text-muted-foreground">{artist.bio}</p></CardContent>
+              </Card>
+            )}
 
             {/* Skills Section */}
             <Card className="border-amber-900/20 bg-gradient-to-b from-amber-950/10 to-background">
