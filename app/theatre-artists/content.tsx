@@ -437,8 +437,8 @@ export default function TheatreArtistsContent() {
               <span>Meet Our Community</span>
             </div>
             <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-balance leading-tight">
-              Theatre Artists
-            </h1>
+          Performing Artists
+        </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground text-pretty max-w-2xl mx-auto px-2">
               Discover the talented individuals who bring stories to life on stage. Each artist brings their unique
               voice, passion, and dedication to the art of theatre.
